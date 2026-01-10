@@ -1,6 +1,6 @@
 {
   "values": [
-    "clayium:clay_ore",
-    "minecraft:clay"
+    "minecraft:clay",
+    "clayium:clay_ore"
   ]
 }

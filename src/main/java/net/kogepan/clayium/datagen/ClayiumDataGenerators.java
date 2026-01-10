@@ -1,21 +1,16 @@
 package net.kogepan.clayium.datagen;
 
 import net.kogepan.clayium.Clayium;
-import net.kogepan.clayium.datagen.loot.ClayOreLootTableSubProvider;
 import net.kogepan.clayium.datagen.tags.ClayiumBlockTagsProvider;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.loot.LootTableProvider;
-import net.minecraft.world.level.storage.loot.parameters.LootContextParamSets;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-import java.util.List;
-import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 @EventBusSubscriber(modid = Clayium.MODID)
@@ -27,11 +22,6 @@ public class ClayiumDataGenerators {
         CompletableFuture<HolderLookup.Provider> registries = event.getLookupProvider();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         PackOutput output = generator.getPackOutput();
-
-        generator.addProvider(event.includeServer(), new LootTableProvider(output, Set.of(), List.of(
-                new LootTableProvider.SubProviderEntry(
-                        ClayOreLootTableSubProvider::new, LootContextParamSets.BLOCK)),
-                registries));
 
         generator.addProvider(
                 event.includeServer(),
