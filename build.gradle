@@ -3,6 +3,7 @@ plugins {
     id 'maven-publish'
     id 'net.neoforged.moddev' version '2.0.138'
     id 'idea'
+    id 'com.diffplug.spotless' version '8.1.0'
 }
 
 tasks.named('wrapper', Wrapper).configure {
@@ -184,5 +185,20 @@ idea {
     module {
         downloadSources = true
         downloadJavadoc = true
+    }
+}
+
+spotless {
+    java {
+        target 'src/main/java/**/*.java'
+
+        def orderFile = file("$rootDir/spotless/spotless.importorder")
+        def formatFile = file("$rootDir/spotless/spotless.eclipseformat.xml")
+
+        toggleOffOn()
+        importOrderFile(orderFile)
+        removeUnusedImports('cleanthat-javaparser-unnecessaryimport')
+        endWithNewline()
+        eclipse('4.38').configFile(formatFile)
     }
 }
