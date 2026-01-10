@@ -1,0 +1,13 @@
+{
+  "itemGroup.clayium": "Example Mod Tab",
+  "block.clayium.example_block": "Example Block",
+  "item.clayium.example_item": "Example Item",
+
+  "clayium.configuration.title": "Clayium Configs",
+  "clayium.configuration.section.clayium.common.toml": "Clayium Configs",
+  "clayium.configuration.section.clayium.common.toml.title": "Clayium Configs",
+  "clayium.configuration.items": "Item List",
+  "clayium.configuration.logDirtBlock": "Log Dirt Block",
+  "clayium.configuration.magicNumberIntroduction": "Magic Number Text",
+  "clayium.configuration.magicNumber": "Magic Number"
+}
