@@ -1,7 +1,6 @@
 {
-  "itemGroup.clayium": "Example Mod Tab",
-  "block.clayium.example_block": "Example Block",
-  "item.clayium.example_item": "Example Item",
+  "itemGroup.clayium": "Clayium",
+  "block.clayium.clay_ore": "Clay Ore",
 
   "clayium.configuration.title": "Clayium Configs",
   "clayium.configuration.section.clayium.common.toml": "Clayium Configs",
