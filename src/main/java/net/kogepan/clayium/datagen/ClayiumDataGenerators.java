@@ -35,9 +35,11 @@ public class ClayiumDataGenerators {
 
         generator.addProvider(
                 event.includeServer(),
-                new ClayiumBlockTagsProvider(generator.getPackOutput(), registries, existingFileHelper));
+                new ClayiumBlockTagsProvider(output, registries, existingFileHelper));
 
         generator.addProvider(event.includeClient(),
-                new ClayiumBlockStateProvider(generator.getPackOutput(), existingFileHelper));
+                new ClayiumBlockStateProvider(output, existingFileHelper));
+        generator.addProvider(event.includeClient(),
+                new ClayiumItemModelProvider(output, existingFileHelper));
     }
 }
