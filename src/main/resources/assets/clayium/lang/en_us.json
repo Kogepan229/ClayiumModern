@@ -1,6 +1,8 @@
 {
   "itemGroup.clayium": "Clayium",
+
   "block.clayium.clay_ore": "Clay Ore",
+  "block.clayium.clay_work_table": "Clay Work Table",
 
   "clayium.configuration.title": "Clayium Configs",
   "clayium.configuration.section.clayium.common.toml": "Clayium Configs",

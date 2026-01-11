@@ -1,4 +1,7 @@
-// 1.21.1	2026-01-10T22:27:22.435274	Block States: clayium
+// 1.21.1	2026-01-11T18:18:47.9480291	Block States: clayium
 8c126741808f10d1e9d2593574e9d1c5a16f1327 assets/clayium/blockstates/clay_ore.json
+4d2c37e21a584697986cce646cccd1fb2cf8c4ad assets/clayium/blockstates/clay_work_table.json
 4f707de7cd7d0eb061ba1cc8c0b476b7d78d5252 assets/clayium/models/block/clay_ore.json
+9ae1d29ca4e20f6efe101a311297900e8513ad93 assets/clayium/models/block/clay_work_table.json
 fbbdc8988166ea1864225430ece143761b54b9d1 assets/clayium/models/item/clay_ore.json
+15fd4af28c382a718c1227f304571da330b7f00b assets/clayium/models/item/clay_work_table.json

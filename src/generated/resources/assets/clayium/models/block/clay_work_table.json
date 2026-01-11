@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "clayium:block/clay_work_table",
+    "side": "clayium:block/clay_work_table_side"
+  }
+}

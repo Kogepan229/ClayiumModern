@@ -1,5 +1,6 @@
 package net.kogepan.clayium;
 
+import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumItems;
 
@@ -53,6 +54,7 @@ public class Clayium {
 
         ClayiumItems.ITEMS.register(modEventBus);
         ClayiumBlocks.BLOCKS.register(modEventBus);
+        ClayiumBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);

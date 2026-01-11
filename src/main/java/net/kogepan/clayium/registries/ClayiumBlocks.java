@@ -2,6 +2,7 @@ package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blocks.ClayOre;
+import net.kogepan.clayium.blocks.ClayWorkTableBlock;
 
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -21,4 +22,7 @@ public class ClayiumBlocks {
     }
 
     public static final DeferredBlock<ClayOre> CLAY_ORE = register("clay_ore", ClayOre::new);
+
+    public static final DeferredBlock<ClayWorkTableBlock> CLAY_WORK_TABLE = register("clay_work_table",
+            ClayWorkTableBlock::new);
 }
