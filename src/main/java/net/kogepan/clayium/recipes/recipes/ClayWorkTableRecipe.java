@@ -1,5 +1,11 @@
 package net.kogepan.clayium.recipes.recipes;
 
+import net.kogepan.clayium.client.ldlib.elements.CLabel;
+import net.kogepan.clayium.client.ldlib.elements.ClayWorkTableButton;
+import net.kogepan.clayium.client.ldlib.elements.ItemSlotXEI;
+import net.kogepan.clayium.client.ldlib.elements.LargeItemSlot;
+import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
+import net.kogepan.clayium.client.ldlib.textures.ClayWorkTableButtonTextures;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.ItemIngredientStack;
@@ -12,7 +18,19 @@ import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.Level;
 
+import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
+import com.lowdragmc.lowdraglib2.gui.ui.UI;
+import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
+import com.lowdragmc.lowdraglib2.gui.ui.data.Horizontal;
+import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
+import com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager;
+import com.lowdragmc.lowdraglib2.integration.xei.IngredientIO;
+import org.appliedenergistics.yoga.YogaAlign;
+import org.appliedenergistics.yoga.YogaFlexDirection;
+import org.appliedenergistics.yoga.YogaJustify;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public class ClayWorkTableRecipe implements Recipe<SingleRecipeInput> {
 
@@ -87,5 +105,60 @@ public class ClayWorkTableRecipe implements Recipe<SingleRecipeInput> {
     @NotNull
     public RecipeType<?> getType() {
         return ClayiumRecipeTypes.CLAY_WORK_TABLE_RECIPE_TYPE.get();
+    }
+
+    public static final int WIDTH = 174;
+    public static final int HEIGHT = 70;
+
+    private UIElement createWorkTableButton(ClayWorkTableButtonTextures.ButtonTexture texture, int index) {
+        UIElement uiElement = new UIElement();
+        uiElement.layout(layout -> layout.height(16 + 9).marginTop(-9).setJustifyContent(YogaJustify.FLEX_END));
+
+        if (this.button == index) {
+            uiElement.addChild(new CLabel().setText(String.valueOf(this.cost))
+                    .textStyle(style -> style.textAlignHorizontal(Horizontal.CENTER))
+                    .layout(layout -> layout.width(16)));
+        }
+
+        ClayWorkTableButton button = new ClayWorkTableButton(texture);
+        button.setActive(this.button == index);
+
+        return uiElement.addChild(button);
+    }
+
+    public ModularUI createModularUI() {
+        var root = new UIElement().layout(layout -> layout
+                .width(WIDTH)
+                .height(HEIGHT)
+                .paddingAll(6)
+                .setJustifyContent(YogaJustify.CENTER));
+
+        root.addChild(new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW).paddingHorizontal(4))
+                .addChild(new LargeItemSlot(new ItemSlotXEI().xeiRecipeIngredient(IngredientIO.INPUT,
+                        this.ingredient.getIngredient(), this.ingredient.getAmount()))
+                        .layout(layout -> layout.marginTop(15)))
+                .addChild(new UIElement()
+                        .layout(layout -> layout.flexGrow(1).paddingHorizontal(0).setAlignItems(YogaAlign.CENTER))
+                        .addChild(new UIElement()
+                                .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW)
+                                        .setJustifyContent(YogaJustify.CENTER))
+                                .addChild(new ItemSlot()))
+                        .addChild(new ProgressArrow().layout(layout -> layout.width(80)))
+                        .addChild(new UIElement()
+                                .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW)
+                                        .setJustifyContent(YogaJustify.CENTER).marginTop(5))
+                                .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON1, 0))
+                                .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON2, 1))
+                                .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON3, 2))
+                                .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON4, 3))
+                                .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON5, 4))
+                                .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON6, 5))))
+                .addChild(new UIElement()
+                        .layout(layout -> layout.marginTop(15).gapAll(3).setAlignItems(YogaAlign.CENTER))
+                        .addChild(new LargeItemSlot(new ItemSlot().setItem(this.result)
+                                .xeiRecipeIngredient(IngredientIO.OUTPUT).xeiRecipeSlot()))
+                        .addChild(new ItemSlot().setItem(this.byproduct).xeiRecipeIngredient(IngredientIO.OUTPUT)
+                                .xeiRecipeSlot())));
+        return new ModularUI(UI.of(root, List.of(StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC))));
     }
 }

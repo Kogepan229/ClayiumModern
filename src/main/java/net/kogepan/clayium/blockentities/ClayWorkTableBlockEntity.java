@@ -1,6 +1,7 @@
 package net.kogepan.clayium.blockentities;
 
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
+import net.kogepan.clayium.client.ldlib.elements.ClayWorkTableButton;
 import net.kogepan.clayium.client.ldlib.elements.LargeItemSlot;
 import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
 import net.kogepan.clayium.client.ldlib.textures.ClayWorkTableButtonTextures;
@@ -17,22 +18,14 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.ItemStackHandler;
 
 import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
-import com.lowdragmc.lowdraglib2.gui.sync.bindings.IBindable;
-import com.lowdragmc.lowdraglib2.gui.sync.bindings.IDataConsumer;
-import com.lowdragmc.lowdraglib2.gui.sync.bindings.IDataProvider;
 import com.lowdragmc.lowdraglib2.gui.sync.bindings.impl.DataBindingBuilder;
 import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
 import com.lowdragmc.lowdraglib2.gui.ui.UI;
 import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
-import com.lowdragmc.lowdraglib2.gui.ui.elements.Button;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.inventory.InventorySlots;
-import com.lowdragmc.lowdraglib2.gui.ui.event.UIEventListener;
 import com.lowdragmc.lowdraglib2.gui.ui.event.UIEvents;
-import com.lowdragmc.lowdraglib2.gui.ui.rendering.GUIContext;
 import com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager;
-import com.lowdragmc.lowdraglib2.gui.util.ITickable;
-import com.lowdragmc.lowdraglib2.syncdata.ISubscription;
 import com.lowdragmc.lowdraglib2.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib2.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib2.syncdata.holder.blockentity.ISyncPersistRPCBlockEntity;
@@ -41,13 +34,9 @@ import lombok.Getter;
 import org.appliedenergistics.yoga.YogaAlign;
 import org.appliedenergistics.yoga.YogaFlexDirection;
 import org.appliedenergistics.yoga.YogaJustify;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersistRPCBlockEntity {
 
@@ -183,8 +172,8 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
         }
     }
 
-    private WorkTableButton createWorkTableButton(ClayWorkTableButtonTextures.ButtonTexture texture, int index) {
-        WorkTableButton button = new WorkTableButton(texture);
+    private ClayWorkTableButton createWorkTableButton(ClayWorkTableButtonTextures.ButtonTexture texture, int index) {
+        ClayWorkTableButton button = new ClayWorkTableButton(texture);
         button.bind(DataBindingBuilder.boolS2C(() -> validButtons.contains(index)).build());
         button.addServerEventListener(UIEvents.CLICK, e -> this.onClickButton(index));
         return button;
@@ -212,7 +201,7 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
                                 .layout(layout -> layout.width(80)))
                         .addChild(new UIElement()
                                 .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW)
-                                        .setJustifyContent(YogaJustify.CENTER).marginTop(4))
+                                        .setJustifyContent(YogaJustify.CENTER).marginTop(5))
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON1, 0))
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON2, 1))
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON3, 2))
@@ -228,71 +217,5 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
         root.addChild(new InventorySlots());
         return new ModularUI(UI.of(root, List.of(StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC))),
                 holder.player);
-    }
-
-    private static class WorkTableButton extends Button implements IBindable<Boolean>, IDataConsumer<Boolean> {
-
-        private final ClayWorkTableButtonTextures.ButtonTexture texture;
-
-        private final Map<IDataProvider<Boolean>, ISubscription> dataSources = new LinkedHashMap<>();
-
-        WorkTableButton(ClayWorkTableButtonTextures.ButtonTexture texture) {
-            super();
-            noText();
-            layout(l -> l.width(16).height(16));
-            buttonStyle(style -> style
-                    .baseTexture(texture.base)
-                    .hoverTexture(texture.hovered)
-                    .pressedTexture(texture.hovered));
-
-            this.texture = texture;
-        }
-
-        @Override
-        public void drawBackgroundAdditional(@NotNull GUIContext guiContext) {
-            if (this.isActive()) {
-                super.drawBackgroundAdditional(guiContext);
-            } else {
-                guiContext.drawTexture(texture.disabled, getPositionX(), getPositionY(), getSizeWidth(),
-                        getSizeHeight());
-            }
-        }
-
-        @Override
-        public UIElement bindDataSource(@NotNull IDataProvider<Boolean> dataProvider) {
-            UIEventListener tickableListener;
-            if (dataProvider instanceof ITickable tickable) {
-                tickableListener = e -> tickable.tick();
-                addEventListener(UIEvents.TICK, tickableListener);
-            } else {
-                tickableListener = null;
-            }
-            var subscription = dataProvider.registerListener(this::setActive, true);
-            if (tickableListener != null) {
-                subscription.andThen(() -> removeEventListener(UIEvents.TICK, tickableListener));
-            }
-            this.dataSources.put(dataProvider, subscription);
-            return this;
-        }
-
-        @Override
-        public UIElement unbindDataSource(@NotNull IDataProvider<Boolean> dataProvider) {
-            var removed = this.dataSources.remove(dataProvider);
-            if (removed != null) {
-                removed.unsubscribe();
-            }
-            return this;
-        }
-
-        @Override
-        public Boolean getValue() {
-            return this.isActive();
-        }
-
-        @Override
-        public WorkTableButton setValue(@Nullable Boolean value) {
-            this.setActive(value != null && value);
-            return this;
-        }
     }
 }

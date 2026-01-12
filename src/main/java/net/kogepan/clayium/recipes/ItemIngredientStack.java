@@ -8,6 +8,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 
 public class ItemIngredientStack {
@@ -23,7 +24,9 @@ public class ItemIngredientStack {
             (buf, s) -> s.to(buf),
             ItemIngredientStack::of);
 
+    @Getter
     private final Ingredient ingredient;
+    @Getter
     private final int amount;
 
     public ItemIngredientStack(Ingredient ingredient, int amount) {
@@ -46,10 +49,6 @@ public class ItemIngredientStack {
     public void to(RegistryFriendlyByteBuf buff) {
         Ingredient.CONTENTS_STREAM_CODEC.encode(buff, this.ingredient);
         buff.writeInt(this.amount);
-    }
-
-    public int getAmount() {
-        return this.amount;
     }
 
     public boolean test(@Nullable ItemStack stack) {

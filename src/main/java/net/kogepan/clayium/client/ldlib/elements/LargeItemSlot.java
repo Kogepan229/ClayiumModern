@@ -12,8 +12,12 @@ public class LargeItemSlot extends UIElement {
     private final ItemSlot itemSlot;
 
     public LargeItemSlot() {
+        this(new ItemSlot());
+    }
+
+    public LargeItemSlot(ItemSlot itemSlot) {
         super();
-        this.itemSlot = new ItemSlot();
+        this.itemSlot = itemSlot;
         this.itemSlot.style(style -> style.backgroundTexture(IGuiTexture.EMPTY));
 
         this.getLayout().width(24).height(24).paddingAll(3);
