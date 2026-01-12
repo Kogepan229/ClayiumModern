@@ -3,6 +3,7 @@ package net.kogepan.clayium.datagen;
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.datagen.recipes.ClayWorkTableRecipeProvider;
 import net.kogepan.clayium.datagen.tags.ClayiumBlockTagsProvider;
+import net.kogepan.clayium.datagen.tags.ClayiumItemTagsProvider;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
@@ -24,15 +25,22 @@ public class ClayiumDataGenerators {
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         PackOutput output = generator.getPackOutput();
 
-        generator.addProvider(
+        // Tags
+        ClayiumBlockTagsProvider blockTagsProvider = generator.addProvider(
                 event.includeServer(),
                 new ClayiumBlockTagsProvider(output, registries, existingFileHelper));
+        generator.addProvider(
+                event.includeServer(),
+                new ClayiumItemTagsProvider(output, registries, blockTagsProvider.contentsGetter(),
+                        existingFileHelper));
 
+        // Models
         generator.addProvider(event.includeClient(),
                 new ClayiumBlockStateProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(),
                 new ClayiumItemModelProvider(output, existingFileHelper));
 
+        // Recipes
         generator.addProvider(event.includeServer(), new ClayWorkTableRecipeProvider(output, registries));
     }
 }

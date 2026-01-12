@@ -1,6 +1,9 @@
-// 1.21.1	2026-01-12T01:42:30.8501793	Item Models: clayium
+// 1.21.1	2026-01-12T20:34:26.1664395	Item Models: clayium
 8dcd4a47f506ecdf1d599f7a9a08b4b561ebe7d9 assets/clayium/models/item/clay_pickaxe.json
+0ebf73c392bba22c62a85efc1d59e67d49a1347d assets/clayium/models/item/clay_rolling_pin.json
 17105fc6c6dbb682c30ffbdd9b84cf4b5ecd551a assets/clayium/models/item/clay_shovel.json
+87b4e92322b64633da7eac5253e9bd05e821b0ba assets/clayium/models/item/clay_slicer.json
+db6d79fbe8dba729bc84eef5c6d1e01e4a8a54a9 assets/clayium/models/item/clay_spatula.json
 756ea64eb1f8a1653150101f3b047256c00c896c assets/clayium/models/item/clay_steel_pickaxe.json
 edc01f279949b457b020665b6ab975837b54a65f assets/clayium/models/item/clay_steel_shovel.json
 1c86ca7a0fe90778bd28995de845d3ef3cb3ea64 assets/clayium/models/item/clay_stick.json

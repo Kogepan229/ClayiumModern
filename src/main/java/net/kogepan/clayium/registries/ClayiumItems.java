@@ -17,6 +17,13 @@ public class ClayiumItems {
 
     public static final DeferredItem<Item> CLAY_STICK = ITEMS.registerItem("clay_stick", Item::new);
 
+    public static final DeferredItem<Item> CLAY_ROLLING_PIN = ITEMS.registerItem("clay_rolling_pin",
+            p -> new Item(p.durability(60)));
+    public static final DeferredItem<Item> CLAY_SPATULA = ITEMS.registerItem("clay_spatula",
+            p -> new Item(p.durability(36)));
+    public static final DeferredItem<Item> CLAY_SLICER = ITEMS.registerItem("clay_slicer",
+            p -> new Item(p.durability(60)));
+
     public static final DeferredItem<Item> CLAY_PICKAXE = ITEMS.registerItem("clay_pickaxe", ClayPickaxe::new);
     public static final DeferredItem<Item> CLAY_STEEL_PICKAXE = ITEMS.registerItem("clay_steel_pickaxe",
             p -> new PickaxeItem(ClayToolTiers.CLAY_STEEL_PICKAXE,
