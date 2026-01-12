@@ -1,5 +1,7 @@
 package net.kogepan.clayium;
 
+import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
+import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumItems;
@@ -7,6 +9,7 @@ import net.kogepan.clayium.registries.ClayiumItems;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
@@ -55,6 +58,8 @@ public class Clayium {
         ClayiumItems.ITEMS.register(modEventBus);
         ClayiumBlocks.BLOCKS.register(modEventBus);
         ClayiumBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
+        ClayiumRecipeTypes.RECIPE_TYPES.register(modEventBus);
+        ClayiumRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
@@ -87,5 +92,9 @@ public class Clayium {
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    public static ResourceLocation id(String path) {
+        return ResourceLocation.fromNamespaceAndPath(MODID, path);
     }
 }

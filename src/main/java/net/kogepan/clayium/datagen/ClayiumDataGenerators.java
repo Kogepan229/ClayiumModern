@@ -1,6 +1,7 @@
 package net.kogepan.clayium.datagen;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.datagen.recipes.ClayWorkTableRecipeProvider;
 import net.kogepan.clayium.datagen.tags.ClayiumBlockTagsProvider;
 
 import net.minecraft.core.HolderLookup;
@@ -31,5 +32,7 @@ public class ClayiumDataGenerators {
                 new ClayiumBlockStateProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(),
                 new ClayiumItemModelProvider(output, existingFileHelper));
+
+        generator.addProvider(event.includeServer(), new ClayWorkTableRecipeProvider(output, registries));
     }
 }

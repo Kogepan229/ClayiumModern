@@ -15,6 +15,8 @@ public class ClayiumItems {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Clayium.MODID);
 
+    public static final DeferredItem<Item> CLAY_STICK = ITEMS.registerItem("clay_stick", Item::new);
+
     public static final DeferredItem<Item> CLAY_PICKAXE = ITEMS.registerItem("clay_pickaxe", ClayPickaxe::new);
     public static final DeferredItem<Item> CLAY_STEEL_PICKAXE = ITEMS.registerItem("clay_steel_pickaxe",
             p -> new PickaxeItem(ClayToolTiers.CLAY_STEEL_PICKAXE,
