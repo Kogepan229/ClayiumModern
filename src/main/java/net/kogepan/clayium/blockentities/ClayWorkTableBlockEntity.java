@@ -1,6 +1,5 @@
 package net.kogepan.clayium.blockentities;
 
-import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.client.ldlib.elements.LargeItemSlot;
 import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
@@ -8,6 +7,7 @@ import net.kogepan.clayium.client.ldlib.textures.ClayWorkTableButtonTextures;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
+import net.kogepan.clayium.registries.ClayiumTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -54,6 +54,7 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
     private static final int INGREDIENT_SLOT = 0;
     private static final int RESULT_SLOT = 1;
     private static final int BYPRODUCT_SLOT = 2;
+    private static final int TOOL_SLOT = 3;
 
     @Getter
     private final FieldManagedStorage syncStorage = new FieldManagedStorage(this);
@@ -115,7 +116,28 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
                         ingredient.getCount() >= r.getCost() &&
                         this.inventory.insertItem(RESULT_SLOT, r.getResult(), true).isEmpty() &&
                         this.inventory.insertItem(BYPRODUCT_SLOT, r.getByproduct(), true).isEmpty())
-                .map(ClayWorkTableRecipe::getButton).distinct().toList());
+                .map(ClayWorkTableRecipe::getButton).distinct().filter(this::checkTool).toList());
+    }
+
+    private boolean checkTool(int button) {
+        return switch (button) {
+            case 2, 3, 4, 5 -> {
+                ItemStack tool = this.inventory.getStackInSlot(TOOL_SLOT);
+                yield !tool.isEmpty() &&
+                        tool.is(button == 2 ? ClayiumTags.CLAY_ROLLING_PIN : ClayiumTags.CLAY_SLICER) &&
+                        tool.isDamageableItem() && tool.getMaxDamage() - tool.getDamageValue() >= 1;
+            }
+            default -> true;
+        };
+    }
+
+    private void hurtTool(int button) {
+        switch (button) {
+            case 2, 3, 4, 5 -> {
+                ItemStack tool = this.inventory.getStackInSlot(TOOL_SLOT);
+                tool.hurtAndBreak(1, getServerLevel(), null, item -> {});
+            }
+        }
     }
 
     private void onClickButton(int button) {
@@ -142,13 +164,15 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
 
             this.processingRecipeHolder = foundRecipeHolder.get();
             final var recipe = this.processingRecipeHolder.value();
-            this.validButtons.add(recipe.getButton());
+            this.progress++;
+            this.hurtTool(recipe.getButton());
             this.inventory.extractItem(INGREDIENT_SLOT, recipe.getIngredient().getAmount(), false);
-            this.progress++;
+            this.validButtons.add(recipe.getButton());
         } else {
-            this.progress++;
-
             final var recipe = this.processingRecipeHolder.value();
+            this.progress++;
+            this.hurtTool(recipe.getButton());
+
             if (this.progress == recipe.getCost()) {
                 this.inventory.insertItem(1, recipe.getResult().copy(), false);
                 validButtons.clear();
@@ -167,7 +191,6 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
     }
 
     public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
-        Clayium.LOGGER.info("Creating UI");
         var root = new UIElement().layout(layout -> layout
                 .paddingAll(6)
                 .setJustifyContent(YogaJustify.CENTER))
