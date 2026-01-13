@@ -9,13 +9,13 @@ import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumItems;
+import net.kogepan.clayium.utils.DroppableItemStackHandler;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.neoforged.neoforge.items.ItemStackHandler;
 
 import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
 import com.lowdragmc.lowdraglib2.gui.sync.bindings.impl.DataBindingBuilder;
@@ -48,8 +48,9 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
     @Getter
     private final FieldManagedStorage syncStorage = new FieldManagedStorage(this);
 
+    @Getter
     @Persisted(subPersisted = true)
-    private final ItemStackHandler inventory = new ItemStackHandler(4) {
+    private final DroppableItemStackHandler inventory = new DroppableItemStackHandler(4) {
 
         @Override
         protected void onContentsChanged(int slot) {

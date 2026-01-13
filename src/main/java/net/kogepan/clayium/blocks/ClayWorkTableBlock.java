@@ -9,6 +9,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
@@ -22,7 +23,11 @@ import org.jetbrains.annotations.Nullable;
 public class ClayWorkTableBlock extends Block implements EntityBlock, BlockUIMenuType.BlockUI {
 
     public ClayWorkTableBlock() {
-        super(BlockBehaviour.Properties.of());
+        super(BlockBehaviour.Properties.of()
+                .sound(SoundType.STONE)
+                .destroyTime(2.0f)
+                .explosionResistance(2.0f)
+                .requiresCorrectToolForDrops());
     }
 
     @Override
@@ -51,5 +56,18 @@ public class ClayWorkTableBlock extends Block implements EntityBlock, BlockUIMen
         }
 
         return null;
+    }
+
+    @Override
+    protected void onRemove(@NotNull BlockState state, Level level, @NotNull BlockPos pos, @NotNull BlockState newState,
+                            boolean movedByPiston) {
+        if (!level.isClientSide() && !newState.is(state.getBlock())) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof ClayWorkTableBlockEntity cbe) {
+                cbe.getInventory().dropContents(level, pos);
+            }
+        }
+
+        super.onRemove(state, level, pos, newState, movedByPiston);
     }
 }
