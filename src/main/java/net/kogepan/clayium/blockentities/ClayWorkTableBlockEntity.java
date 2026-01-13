@@ -8,7 +8,7 @@ import net.kogepan.clayium.client.ldlib.textures.ClayWorkTableButtonTextures;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
-import net.kogepan.clayium.registries.ClayiumTags;
+import net.kogepan.clayium.registries.ClayiumItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.ItemStack;
@@ -109,23 +109,27 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
     }
 
     private boolean checkTool(int button) {
+        if (button < 2) {
+            return true;
+        }
+
+        ItemStack tool = this.inventory.getStackInSlot(TOOL_SLOT);
+        if (tool.isEmpty() || !tool.isDamageableItem() || tool.getMaxDamage() - tool.getDamageValue() < 1) {
+            return false;
+        }
+
         return switch (button) {
-            case 2, 3, 4, 5 -> {
-                ItemStack tool = this.inventory.getStackInSlot(TOOL_SLOT);
-                yield !tool.isEmpty() &&
-                        tool.is(button == 2 ? ClayiumTags.CLAY_ROLLING_PIN : ClayiumTags.CLAY_SLICER) &&
-                        tool.isDamageableItem() && tool.getMaxDamage() - tool.getDamageValue() >= 1;
-            }
-            default -> true;
+            case 2 -> tool.is(ClayiumItems.CLAY_ROLLING_PIN);
+            case 3, 5 -> tool.is(ClayiumItems.CLAY_SPATULA) || tool.is(ClayiumItems.CLAY_SLICER);
+            case 4 -> tool.is(ClayiumItems.CLAY_SPATULA);
+            default -> false;
         };
     }
 
     private void hurtTool(int button) {
-        switch (button) {
-            case 2, 3, 4, 5 -> {
-                ItemStack tool = this.inventory.getStackInSlot(TOOL_SLOT);
-                tool.hurtAndBreak(1, getServerLevel(), null, item -> {});
-            }
+        if (button >= 2) {
+            ItemStack tool = this.inventory.getStackInSlot(TOOL_SLOT);
+            tool.hurtAndBreak(1, getServerLevel(), null, item -> {});
         }
     }
 

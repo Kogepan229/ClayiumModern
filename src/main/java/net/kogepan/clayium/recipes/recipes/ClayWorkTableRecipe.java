@@ -9,9 +9,11 @@ import net.kogepan.clayium.client.ldlib.textures.ClayWorkTableButtonTextures;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.ItemIngredientStack;
+import net.kogepan.clayium.registries.ClayiumItems;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -99,6 +101,16 @@ public record ClayWorkTableRecipe(@NotNull ItemIngredientStack ingredient,
                 .paddingAll(6)
                 .setJustifyContent(YogaJustify.CENTER));
 
+        ItemSlotXEI toolSlot = new ItemSlotXEI();
+
+        switch (this.button) {
+            case 2 -> toolSlot.xeiRecipeIngredient(IngredientIO.CATALYST, Ingredient.of(ClayiumItems.CLAY_ROLLING_PIN),
+                    1);
+            case 3, 5 -> toolSlot.xeiRecipeIngredient(IngredientIO.CATALYST,
+                    Ingredient.of(ClayiumItems.CLAY_SPATULA, ClayiumItems.CLAY_SLICER), 1);
+            case 4 -> toolSlot.xeiRecipeIngredient(IngredientIO.CATALYST, Ingredient.of(ClayiumItems.CLAY_SPATULA), 1);
+        }
+
         root.addChild(new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW).paddingHorizontal(4))
                 .addChild(new LargeItemSlot(new ItemSlotXEI().xeiRecipeIngredient(IngredientIO.INPUT,
                         this.ingredient.getIngredient(), this.ingredient.getAmount()))
@@ -108,7 +120,7 @@ public record ClayWorkTableRecipe(@NotNull ItemIngredientStack ingredient,
                         .addChild(new UIElement()
                                 .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW)
                                         .setJustifyContent(YogaJustify.CENTER))
-                                .addChild(new ItemSlot()))
+                                .addChild(toolSlot))
                         .addChild(new ProgressArrow().layout(layout -> layout.width(80)))
                         .addChild(new UIElement()
                                 .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW)
