@@ -80,7 +80,7 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
 
         if (level != null && !level.isClientSide()) {
             if (this.processingRecipeHolder != null) {
-                validButtons.add(this.processingRecipeHolder.value().getButton());
+                validButtons.add(this.processingRecipeHolder.value().button());
             } else {
                 this.checkValidRecipe();
             }
@@ -101,11 +101,11 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
                 .getAllRecipesFor(ClayiumRecipeTypes.CLAY_WORK_TABLE_RECIPE_TYPE.get());
 
         validButtons.addAll(recipes.stream().map(RecipeHolder::value)
-                .filter(r -> r.getIngredient().test(ingredient) &&
-                        ingredient.getCount() >= r.getCost() &&
-                        this.inventory.insertItem(RESULT_SLOT, r.getResult(), true).isEmpty() &&
-                        this.inventory.insertItem(BYPRODUCT_SLOT, r.getByproduct(), true).isEmpty())
-                .map(ClayWorkTableRecipe::getButton).distinct().filter(this::checkTool).toList());
+                .filter(r -> r.ingredient().test(ingredient) &&
+                        ingredient.getCount() >= r.cost() &&
+                        this.inventory.insertItem(RESULT_SLOT, r.result(), true).isEmpty() &&
+                        this.inventory.insertItem(BYPRODUCT_SLOT, r.byproduct(), true).isEmpty())
+                .map(ClayWorkTableRecipe::button).distinct().filter(this::checkTool).toList());
     }
 
     private boolean checkTool(int button) {
@@ -144,8 +144,8 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
             var foundRecipeHolder = recipes.stream()
                     .filter(holder -> {
                         var r = holder.value();
-                        return r.getIngredient().test(ingredient) && ingredient.getCount() >= r.getCost() &&
-                                r.getButton() == button;
+                        return r.ingredient().test(ingredient) && ingredient.getCount() >= r.cost() &&
+                                r.button() == button;
                     })
                     .findFirst();
 
@@ -154,16 +154,16 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
             this.processingRecipeHolder = foundRecipeHolder.get();
             final var recipe = this.processingRecipeHolder.value();
             this.progress++;
-            this.hurtTool(recipe.getButton());
-            this.inventory.extractItem(INGREDIENT_SLOT, recipe.getIngredient().getAmount(), false);
-            this.validButtons.add(recipe.getButton());
+            this.hurtTool(recipe.button());
+            this.inventory.extractItem(INGREDIENT_SLOT, recipe.ingredient().getAmount(), false);
+            this.validButtons.add(recipe.button());
         } else {
             final var recipe = this.processingRecipeHolder.value();
             this.progress++;
-            this.hurtTool(recipe.getButton());
+            this.hurtTool(recipe.button());
 
-            if (this.progress == recipe.getCost()) {
-                this.inventory.insertItem(1, recipe.getResult().copy(), false);
+            if (this.progress == recipe.cost()) {
+                this.inventory.insertItem(1, recipe.result().copy(), false);
                 validButtons.clear();
                 this.processingRecipeHolder = null;
                 this.progress = 0;
@@ -197,7 +197,7 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
                                 .addChild(new ItemSlot().bind(inventory, 3)))
                         .addChild(new ProgressArrow().bind(
                                 DataBindingBuilder.floatValS2C(() -> this.processingRecipeHolder != null ?
-                                        (float) progress / this.processingRecipeHolder.value().getCost() : 0).build())
+                                        (float) progress / this.processingRecipeHolder.value().cost() : 0).build())
                                 .layout(layout -> layout.width(80)))
                         .addChild(new UIElement()
                                 .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW)

@@ -32,46 +32,12 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class ClayWorkTableRecipe implements Recipe<SingleRecipeInput> {
-
-    private final ItemIngredientStack ingredient;
-    private final ItemStack result;
-    private final ItemStack byproduct;
-    private final int button;
-    private final int cost;
-
-    public ClayWorkTableRecipe(@NotNull ItemIngredientStack ingredient, @NotNull ItemStack result,
-                               @NotNull ItemStack byproduct, int button,
-                               int cost) {
-        this.ingredient = ingredient;
-        this.result = result;
-        this.byproduct = byproduct;
-        this.button = button;
-        this.cost = cost;
-    }
-
-    @NotNull
-    public ItemIngredientStack getIngredient() {
-        return this.ingredient;
-    }
-
-    @NotNull
-    public ItemStack getResult() {
-        return this.result;
-    }
-
-    @NotNull
-    public ItemStack getByproduct() {
-        return this.byproduct;
-    }
-
-    public int getButton() {
-        return this.button;
-    }
-
-    public int getCost() {
-        return this.cost;
-    }
+public record ClayWorkTableRecipe(@NotNull ItemIngredientStack ingredient,
+                                  @NotNull ItemStack result,
+                                  @NotNull ItemStack byproduct,
+                                  int button,
+                                  int cost)
+        implements Recipe<SingleRecipeInput> {
 
     @Override
     public boolean matches(@NotNull SingleRecipeInput input, @NotNull Level level) {

@@ -20,19 +20,19 @@ public class ClayWorkTableRecipeSerializer implements RecipeSerializer<ClayWorkT
     private static final Codec<Integer> BUTTON_CODEC = ExtraCodecs.intRange(0, 5);
 
     public static final MapCodec<ClayWorkTableRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-            ItemIngredientStack.CODEC.fieldOf("input_item").forGetter(ClayWorkTableRecipe::getIngredient),
-            ItemStack.CODEC.fieldOf("result").forGetter(ClayWorkTableRecipe::getResult),
-            ItemStack.CODEC.optionalFieldOf("byproduct", ItemStack.EMPTY).forGetter(ClayWorkTableRecipe::getByproduct),
-            BUTTON_CODEC.fieldOf("button").forGetter(ClayWorkTableRecipe::getButton),
-            ExtraCodecs.POSITIVE_INT.fieldOf("cost").forGetter(ClayWorkTableRecipe::getCost))
+            ItemIngredientStack.CODEC.fieldOf("input_item").forGetter(ClayWorkTableRecipe::ingredient),
+            ItemStack.CODEC.fieldOf("result").forGetter(ClayWorkTableRecipe::result),
+            ItemStack.CODEC.optionalFieldOf("byproduct", ItemStack.EMPTY).forGetter(ClayWorkTableRecipe::byproduct),
+            BUTTON_CODEC.fieldOf("button").forGetter(ClayWorkTableRecipe::button),
+            ExtraCodecs.POSITIVE_INT.fieldOf("cost").forGetter(ClayWorkTableRecipe::cost))
             .apply(instance, ClayWorkTableRecipe::new));
 
     public static final StreamCodec<RegistryFriendlyByteBuf, ClayWorkTableRecipe> STREAM_CODEC = StreamCodec.composite(
-            ItemIngredientStack.STREAM_CODEC, ClayWorkTableRecipe::getIngredient,
-            ItemStack.STREAM_CODEC, ClayWorkTableRecipe::getResult,
-            ItemStack.OPTIONAL_STREAM_CODEC, ClayWorkTableRecipe::getByproduct,
-            ByteBufCodecs.VAR_INT, ClayWorkTableRecipe::getButton,
-            ByteBufCodecs.VAR_INT, ClayWorkTableRecipe::getCost,
+            ItemIngredientStack.STREAM_CODEC, ClayWorkTableRecipe::ingredient,
+            ItemStack.STREAM_CODEC, ClayWorkTableRecipe::result,
+            ItemStack.OPTIONAL_STREAM_CODEC, ClayWorkTableRecipe::byproduct,
+            ByteBufCodecs.VAR_INT, ClayWorkTableRecipe::button,
+            ByteBufCodecs.VAR_INT, ClayWorkTableRecipe::cost,
             ClayWorkTableRecipe::new);
 
     @Override
