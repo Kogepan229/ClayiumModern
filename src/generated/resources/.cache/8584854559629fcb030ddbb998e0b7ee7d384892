@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-13T16:33:26.4031492	Item Models: clayium
+// 1.21.1	2026-01-13T16:55:46.3446428	Item Models: clayium
 983b1649c451b4f39994fae93b8907905f8be338 assets/clayium/models/item/clay_bearing.json
 21dc06c64aafd09d001c0754e94ddc7d159fc78d assets/clayium/models/item/clay_blade.json
 6c105a61dce021a6b3ec893ef18fd6691c0f79df assets/clayium/models/item/clay_cutting_head.json
@@ -42,6 +42,9 @@ e06b13edad972be3a8e65c0ac21eb2ab0e5f880e assets/clayium/models/item/dense_small_
 661637f796b0eb7ba41397715b37ed98ff850aec assets/clayium/models/item/dense_small_clay_ring.json
 35d8208cd1c90c25a2570abd8092c04d6dda120f assets/clayium/models/item/large_clay_ball.json
 e26c21f064c049bacdfcef49425d86a4348cb0cf assets/clayium/models/item/large_clay_plate.json
+87e2009b8e13cf789d2faef26340529320afe9b6 assets/clayium/models/item/raw_clay_rolling_pin.json
+f47b8e94b82d459d7c7d560e63aa61ff1a5a2806 assets/clayium/models/item/raw_clay_slicer.json
+f248316958024cb37e296db923a8deca48400b4b assets/clayium/models/item/raw_clay_spatula.json
 7f3c4e439f6904cf3ea328292b2b829a8ec23667 assets/clayium/models/item/short_clay_stick.json
 04b9bada2256e3eb284f06a0061a2821842d3779 assets/clayium/models/item/small_clay_disc.json
 7da03e88e9859b51cd047259ae744f0b0946f6bf assets/clayium/models/item/small_clay_ring.json

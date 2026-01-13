@@ -1,0 +1,14 @@
+{
+  "type": "clayium:clay_work_table",
+  "button": 5,
+  "cost": 7,
+  "input_item": {
+    "ingredient": {
+      "item": "clayium:clay_cylinder"
+    }
+  },
+  "result": {
+    "count": 8,
+    "id": "clayium:small_clay_disc"
+  }
+}

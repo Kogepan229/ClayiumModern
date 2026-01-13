@@ -1,0 +1,14 @@
+{
+  "type": "clayium:clay_work_table",
+  "button": 1,
+  "cost": 30,
+  "input_item": {
+    "ingredient": {
+      "item": "clayium:large_clay_ball"
+    }
+  },
+  "result": {
+    "count": 1,
+    "id": "clayium:clay_disc"
+  }
+}

@@ -14,6 +14,7 @@ import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipe;
 import dev.emi.emi.api.stack.EmiStack;
 
+import java.util.Comparator;
 import java.util.function.Function;
 
 @EmiEntrypoint
@@ -23,7 +24,12 @@ public class ClayiumEMIPlugin implements EmiPlugin {
     public void register(EmiRegistry registry) {
         registry.addCategory(EMIClayWorkTableRecipe.CATEGORY);
         registry.addWorkstation(EMIClayWorkTableRecipe.CATEGORY, EmiStack.of(ClayiumBlocks.CLAY_WORK_TABLE));
-        adaptRecipeType(registry, ClayiumRecipeTypes.CLAY_WORK_TABLE_RECIPE_TYPE.get(), EMIClayWorkTableRecipe::new);
+
+        registry.getRecipeManager().getAllRecipesFor(ClayiumRecipeTypes.CLAY_WORK_TABLE_RECIPE_TYPE.get())
+                .stream()
+                .sorted(Comparator.comparingInt(r -> r.value().button()))
+                .map(EMIClayWorkTableRecipe::new)
+                .forEach(registry::addRecipe);
     }
 
     private static <C extends RecipeInput, T extends Recipe<C>> void adaptRecipeType(EmiRegistry registry,

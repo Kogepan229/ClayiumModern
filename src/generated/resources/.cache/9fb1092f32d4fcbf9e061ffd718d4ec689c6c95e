@@ -1,2 +1,17 @@
-// 1.21.1	2026-01-12T19:34:25.0122666	Recipes
-9fd3b6ae853623e32735e265c76895802715c4eb data/clayium/recipe/clay_work_table/clay_stick.json
+// 1.21.1	2026-01-13T17:18:32.6713648	Recipes
+9848c6b0ab97dc2bf9f0aeb4151f5d080f9fb2c0 data/clayium/recipe/clay_work_table/0/clay_cylinder.json
+0338c3cbf445d81b9fff3e2e2034cdaa63454547 data/clayium/recipe/clay_work_table/0/clay_needle.json
+9fd3b6ae853623e32735e265c76895802715c4eb data/clayium/recipe/clay_work_table/0/clay_stick.json
+4a4ab75bdb2ba2e825976f8280409f3c8d91ba93 data/clayium/recipe/clay_work_table/0/large_clay_ball.json
+09836768b216650d5c3a41b2025b31734d1e4fe9 data/clayium/recipe/clay_work_table/1/clay_blade.json
+1bac71ecf8a2f336ff379db706ee4b5e39c12c14 data/clayium/recipe/clay_work_table/1/clay_disc.json
+4d3a1bc6f823bdb41edc039bea17a15cd64d1b8b data/clayium/recipe/clay_work_table/1/raw_clay_slicer.json
+2108d7a9b49645e68986cddf0b1a1a97c00e3d19 data/clayium/recipe/clay_work_table/2/clay_blade.json
+034a140f5a78f17a9db8d02eb886fd704ffce725 data/clayium/recipe/clay_work_table/2/clay_disc.json
+6bf2f4024e01a16985c59d54350b238c49343ba0 data/clayium/recipe/clay_work_table/2/large_clay_plate.json
+5b314e38ebc907cbf1d4bba7adc8beb2c10867b3 data/clayium/recipe/clay_work_table/2/raw_clay_slicer.json
+0f923049b11297ba86fa35b5ed1eab9d372760ca data/clayium/recipe/clay_work_table/3/clay_plate.json
+ba5329e78b976e6633018245173dd413d4aef66d data/clayium/recipe/clay_work_table/4/clay_ring.json
+726d478397bdafd43421d6bf4628eec3ec1a00b9 data/clayium/recipe/clay_work_table/4/small_clay_ring.json
+b9e661f63ecc59e0ab1355c61cece4dde9c3ab1d data/clayium/recipe/clay_work_table/5/clay_stick.json
+3ae8ba267f232276631bad56c31d250ac3522651 data/clayium/recipe/clay_work_table/5/small_clay_disc.json

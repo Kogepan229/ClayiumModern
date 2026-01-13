@@ -16,6 +16,15 @@ public class ClayiumItems {
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Clayium.MODID);
 
     // spotless:off
+
+    // Clay Tools
+    public static final DeferredItem<Item> RAW_CLAY_ROLLING_PIN = ITEMS.registerItem("raw_clay_rolling_pin", Item::new);
+    public static final DeferredItem<Item> RAW_CLAY_SPATULA = ITEMS.registerItem("raw_clay_spatula", Item::new);
+    public static final DeferredItem<Item> RAW_CLAY_SLICER = ITEMS.registerItem("raw_clay_slicer", Item::new);
+    public static final DeferredItem<Item> CLAY_ROLLING_PIN = ITEMS.registerItem("clay_rolling_pin", p -> new Item(p.durability(60)));
+    public static final DeferredItem<Item> CLAY_SPATULA = ITEMS.registerItem("clay_spatula", p -> new Item(p.durability(36)));
+    public static final DeferredItem<Item> CLAY_SLICER = ITEMS.registerItem("clay_slicer", p -> new Item(p.durability(60)));
+
     // Clay Materials
     public static final DeferredItem<Item> CLAY_PLATE = ITEMS.registerItem("clay_plate", Item::new);
     public static final DeferredItem<Item> CLAY_STICK = ITEMS.registerItem("clay_stick", Item::new);
@@ -58,14 +67,8 @@ public class ClayiumItems {
     public static final DeferredItem<Item> DENSE_CLAY_CUTTING_HEAD= ITEMS.registerItem("dense_clay_cutting_head", Item::new);
     public static final DeferredItem<Item> DENSE_CLAY_WHEEL= ITEMS.registerItem("dense_clay_wheel", Item::new);
     public static final DeferredItem<Item> DENSE_CLAY_DUST= ITEMS.registerItem("dense_clay_dust", Item::new);
-    // spotless:on
 
-    public static final DeferredItem<Item> CLAY_ROLLING_PIN = ITEMS.registerItem("clay_rolling_pin",
-            p -> new Item(p.durability(60)));
-    public static final DeferredItem<Item> CLAY_SPATULA = ITEMS.registerItem("clay_spatula",
-            p -> new Item(p.durability(36)));
-    public static final DeferredItem<Item> CLAY_SLICER = ITEMS.registerItem("clay_slicer",
-            p -> new Item(p.durability(60)));
+    // spotless:on
 
     public static final DeferredItem<Item> CLAY_PICKAXE = ITEMS.registerItem("clay_pickaxe", ClayPickaxe::new);
     public static final DeferredItem<Item> CLAY_STEEL_PICKAXE = ITEMS.registerItem("clay_steel_pickaxe",
