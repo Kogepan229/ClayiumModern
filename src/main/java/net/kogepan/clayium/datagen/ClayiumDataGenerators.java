@@ -2,6 +2,8 @@ package net.kogepan.clayium.datagen;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.datagen.loot.ClayiumLootTableProvider;
+import net.kogepan.clayium.datagen.models.ClayiumBlockModelProvider;
+import net.kogepan.clayium.datagen.models.ClayiumItemModelProvider;
 import net.kogepan.clayium.datagen.recipes.ClayWorkTableRecipeProvider;
 import net.kogepan.clayium.datagen.tags.ClayiumBlockTagsProvider;
 import net.kogepan.clayium.datagen.tags.ClayiumItemTagsProvider;
@@ -37,7 +39,7 @@ public class ClayiumDataGenerators {
 
         // Models
         generator.addProvider(event.includeClient(),
-                new ClayiumBlockStateProvider(output, existingFileHelper));
+                new ClayiumBlockModelProvider(output, existingFileHelper));
         generator.addProvider(event.includeClient(),
                 new ClayiumItemModelProvider(output, existingFileHelper));
 

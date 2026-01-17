@@ -1,12 +1,19 @@
 package net.kogepan.clayium;
 
+import net.kogepan.clayium.client.model.block.ClayContainerModel;
+import net.kogepan.clayium.client.model.block.ClayContainerModelLoader;
+
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.neoforged.api.distmarker.Dist;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 
@@ -29,5 +36,19 @@ public class ClayiumClient {
         // Some client setup code
         Clayium.LOGGER.info("HELLO FROM CLIENT SETUP");
         Clayium.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+    }
+
+    @SubscribeEvent
+    public static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event) {
+        event.register(ClayContainerModelLoader.ID, ClayContainerModelLoader.INSTANCE);
+    }
+
+    @SuppressWarnings({ "deprecation" })
+    @SubscribeEvent(priority = EventPriority.LOWEST)
+    public static void onAtlasStitched(TextureAtlasStitchedEvent event) {
+        TextureAtlas atlas = event.getAtlas();
+        if (atlas.location() == TextureAtlas.LOCATION_BLOCKS) {
+            ClayContainerModel.initSprites(atlas);
+        }
     }
 }

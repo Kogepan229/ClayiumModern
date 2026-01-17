@@ -1,3 +1,13 @@
-// 1.21.1	2026-01-13T19:44:24.8468027	Loot Tables
+// 1.21.1	2026-01-17T00:32:31.1991507	Loot Tables
+0897080755d66020606439b4962ffdbc984745df data/clayium/loot_table/blocks/bending_machine_1.json
+3fb7788ed2907cf9d728f21fc4e68560a14a9d30 data/clayium/loot_table/blocks/bending_machine_2.json
+8358e02ed6e078c85ac90a8e245b7d1c36114636 data/clayium/loot_table/blocks/bending_machine_3.json
+5f66e079a90848b59aa363b78df077aaf38c0663 data/clayium/loot_table/blocks/bending_machine_4.json
+e5458742e656f82e4c43cc6b624a7bed0e25e981 data/clayium/loot_table/blocks/bending_machine_5.json
+7d21b0bd7283ff48a44ccd35eb0abfa0786c559f data/clayium/loot_table/blocks/bending_machine_6.json
+f9ad3c23ccc3230377644375c8291223868699e6 data/clayium/loot_table/blocks/bending_machine_7.json
+a47ef4a519aa2f015e06b51e77bbcae2960b63c4 data/clayium/loot_table/blocks/bending_machine_8.json
+3a394b3c9de1182bd9725d513238da457330cd4f data/clayium/loot_table/blocks/bending_machine_9.json
 97bf0fefd2cc82ad71b870c24c8856aa9c556750 data/clayium/loot_table/blocks/clay_ore.json
 289f2435fb39b54cab3a9f657fc896b59a259580 data/clayium/loot_table/blocks/clay_work_table.json
+2c48557dcfe1511194ac935f3a6732246e8e8e14 data/clayium/loot_table/blocks/test_clay_container.json

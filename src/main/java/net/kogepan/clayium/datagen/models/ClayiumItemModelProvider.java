@@ -1,4 +1,4 @@
-package net.kogepan.clayium.datagen;
+package net.kogepan.clayium.datagen.models;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.registries.ClayiumItems;
