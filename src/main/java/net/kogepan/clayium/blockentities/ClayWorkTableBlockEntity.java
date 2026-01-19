@@ -12,12 +12,14 @@ import net.kogepan.clayium.registries.ClayiumItems;
 import net.kogepan.clayium.utils.DroppableItemStackHandler;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
+import com.lowdragmc.lowdraglib2.gui.slot.ItemHandlerSlot;
 import com.lowdragmc.lowdraglib2.gui.sync.bindings.impl.DataBindingBuilder;
 import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
 import com.lowdragmc.lowdraglib2.gui.ui.UI;
@@ -34,6 +36,7 @@ import lombok.Getter;
 import org.appliedenergistics.yoga.YogaAlign;
 import org.appliedenergistics.yoga.YogaFlexDirection;
 import org.appliedenergistics.yoga.YogaJustify;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -127,14 +130,14 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
         };
     }
 
-    private void hurtTool(int button) {
+    private void hurtTool(int button, @Nullable Player player) {
         if (button >= 2) {
             ItemStack tool = this.inventory.getStackInSlot(TOOL_SLOT);
-            tool.hurtAndBreak(1, getServerLevel(), null, item -> {});
+            tool.hurtAndBreak(1, getServerLevel(), player, item -> {});
         }
     }
 
-    private void onClickButton(int button) {
+    private void onClickButton(int button, @Nullable Player player) {
         if (level == null || !this.validButtons.contains(button)) return;
 
         if (this.processingRecipeHolder == null) {
@@ -159,13 +162,13 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
             this.processingRecipeHolder = foundRecipeHolder.get();
             final var recipe = this.processingRecipeHolder.value();
             this.progress++;
-            this.hurtTool(recipe.button());
+            this.hurtTool(recipe.button(), player);
             this.inventory.extractItem(INGREDIENT_SLOT, recipe.ingredient().getAmount(), false);
             this.validButtons.add(recipe.button());
         } else {
             final var recipe = this.processingRecipeHolder.value();
             this.progress++;
-            this.hurtTool(recipe.button());
+            this.hurtTool(recipe.button(), player);
 
             if (this.progress == recipe.cost()) {
                 this.inventory.insertItem(1, recipe.result().copy(), false);
@@ -180,7 +183,10 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
     private ClayWorkTableButton createWorkTableButton(ClayWorkTableButtonTextures.ButtonTexture texture, int index) {
         ClayWorkTableButton button = new ClayWorkTableButton(texture);
         button.bind(DataBindingBuilder.boolS2C(() -> validButtons.contains(index)).build());
-        button.addServerEventListener(UIEvents.CLICK, e -> this.onClickButton(index));
+        button.addServerEventListener(UIEvents.CLICK, e -> {
+            ModularUI ui = e.target.getModularUI();
+            this.onClickButton(index, ui != null ? ui.player : null);
+        });
         return button;
     }
 
@@ -215,8 +221,10 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON6, 5))))
                 .addChild(new UIElement()
                         .layout(layout -> layout.marginTop(15).gapAll(3).setAlignItems(YogaAlign.CENTER))
-                        .addChild(new LargeItemSlot().itemSlot(slot -> slot.bind(inventory, RESULT_SLOT)))
-                        .addChild(new ItemSlot().bind(inventory, BYPRODUCT_SLOT))));
+                        .addChild(new LargeItemSlot().itemSlot(
+                                slot -> slot.bind(new ItemHandlerSlot(inventory, RESULT_SLOT).setCanPlace(s -> false))))
+                        .addChild(new ItemSlot()
+                                .bind(new ItemHandlerSlot(inventory, BYPRODUCT_SLOT).setCanPlace(s -> false)))));
 
         root.addChild(new CLabel().setText("Inventory"));
         root.addChild(new InventorySlots());
