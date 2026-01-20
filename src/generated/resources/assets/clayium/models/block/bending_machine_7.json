@@ -1,8 +1,15 @@
 {
-  "parent": "clayium:block/front_overlay_all",
+  "base_model": {
+    "parent": "minecraft:block/cube_all",
+    "textures": {
+      "all": "clayium:block/tier/tier7"
+    }
+  },
   "loader": "clayium:clay_container_model_loader",
-  "textures": {
-    "all": "clayium:block/tier/tier7",
-    "overlay_front": "clayium:block/machine/bending_machine"
+  "overlay_model": {
+    "parent": "clayium:block/overlay",
+    "textures": {
+      "overlay_front": "clayium:block/machine/bending_machine"
+    }
   }
 }

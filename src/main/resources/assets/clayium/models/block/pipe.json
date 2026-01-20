@@ -1,0 +1,49 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": {
+    "pipe": "#all"
+  },
+  "multipart": [
+    {
+      "apply": {
+        "model": "modid:block/pipe/core"
+      }
+    },
+    {
+      "when": { "north": "true" },
+      "apply": {
+        "model": "modid:block/pipe/north"
+      }
+    },
+    {
+      "when": { "south": "true" },
+      "apply": {
+        "model": "modid:block/pipe/south"
+      }
+    },
+    {
+      "when": { "west": "true" },
+      "apply": {
+        "model": "modid:block/pipe/west"
+      }
+    },
+    {
+      "when": { "east": "true" },
+      "apply": {
+        "model": "modid:block/pipe/east"
+      }
+    },
+    {
+      "when": { "up": "true" },
+      "apply": {
+        "model": "modid:block/pipe/up"
+      }
+    },
+    {
+      "when": { "down": "true" },
+      "apply": {
+        "model": "modid:block/pipe/down"
+      }
+    }
+  ]
+}

@@ -2,6 +2,7 @@ package net.kogepan.clayium.client.model.block;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.blocks.TestClayContainerBlock;
 import net.kogepan.clayium.client.utils.StaticFaceBakery;
 import net.kogepan.clayium.utils.MachineIOMode;
 
@@ -33,6 +34,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ClayContainerModel implements IDynamicBakedModel {
 
@@ -61,9 +63,18 @@ public class ClayContainerModel implements IDynamicBakedModel {
     static final ModelProperty<BlockPos> MODEL_DATA_POS = new ModelProperty<>();
 
     private final BakedModel baseModel;
+    @Nullable
+    private final Map<Direction, BakedModel> bakedOverlayModels;
 
-    public ClayContainerModel(BakedModel base) {
+    private final BakedModel pipeCoreModel;
+    private final Map<Direction, BakedModel> pipeArmModels;
+
+    public ClayContainerModel(BakedModel base, @Nullable Map<Direction, BakedModel> overlays, BakedModel pipeCore,
+                              Map<Direction, BakedModel> pipeArms) {
         this.baseModel = base;
+        this.bakedOverlayModels = overlays;
+        this.pipeCoreModel = pipeCore;
+        this.pipeArmModels = pipeArms;
     }
 
     @Override
@@ -82,11 +93,33 @@ public class ClayContainerModel implements IDynamicBakedModel {
     public List<BakedQuad> getQuads(@Nullable BlockState blockState, @Nullable Direction direction,
                                     @NotNull RandomSource randomSource, @NotNull ModelData modelData,
                                     @Nullable RenderType renderType) {
-        List<BakedQuad> quads = new ArrayList<>(
-                this.baseModel.getQuads(blockState, direction, randomSource, modelData, renderType));
+        List<BakedQuad> quads;
 
-        if (renderType == RenderType.CUTOUT) {
-            renderOverlays(quads, direction, modelData);
+        if (blockState == null || !blockState.getValue(TestClayContainerBlock.PIPE)) {
+            quads = new ArrayList<>(
+                    this.baseModel.getQuads(blockState, direction, randomSource, modelData, renderType));
+
+            if (bakedOverlayModels != null) {
+                Direction facing = blockState != null ? blockState.getValue(TestClayContainerBlock.FACING) :
+                        Direction.NORTH;
+                quads.addAll(bakedOverlayModels.get(facing).getQuads(blockState, direction, randomSource, modelData,
+                        renderType));
+            }
+
+            if (renderType == RenderType.CUTOUT) {
+                renderOverlays(quads, direction, modelData);
+            }
+        } else {
+            quads = new ArrayList<>(
+                    this.pipeCoreModel.getQuads(blockState, direction, randomSource, modelData, renderType));
+
+            // 接続されている方向のアームを追加
+            for (Direction armDirection : Direction.values()) {
+                if (blockState.getValue(TestClayContainerBlock.getProperty(armDirection))) {
+                    quads.addAll(this.pipeArmModels.get(armDirection).getQuads(blockState, direction, randomSource,
+                            modelData, renderType));
+                }
+            }
         }
 
         return quads;
@@ -101,10 +134,10 @@ public class ClayContainerModel implements IDynamicBakedModel {
         BlockEntity be = level.getBlockEntity(pos);
         if (be instanceof ClayContainerBlockEntity container) {
             if (direction == null) {
-                for (Direction d : Direction.values()) {
-                    renderOutputOverlay(quads, container, d);
-                    renderInputOverlay(quads, container, d);
-                }
+                // for (Direction d : Direction.values()) {
+                // renderOutputOverlay(quads, container, d);
+                // renderInputOverlay(quads, container, d);
+                // }
             } else {
                 renderOutputOverlay(quads, container, direction);
                 renderInputOverlay(quads, container, direction);

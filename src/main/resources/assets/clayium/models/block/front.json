@@ -1,0 +1,16 @@
+{
+  "multipart": [
+    {
+      "when": { "pipe": "false" },
+      "apply": {
+        "model": "clayium:block/front_overlay_all"
+      }
+    },
+    {
+      "when": { "pipe": "true" },
+      "apply": {
+        "model": "clayium:block/pipe"
+      }
+    }
+  ]
+}

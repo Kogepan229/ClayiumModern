@@ -1,0 +1,16 @@
+{
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "from": [5, 5, 11],
+      "to":   [11, 11, 16],
+      "faces": {
+        "south": { "texture": "#pipe" },
+        "west":  { "texture": "#pipe" },
+        "east":  { "texture": "#pipe" },
+        "up":    { "texture": "#pipe" },
+        "down":  { "texture": "#pipe" }
+      }
+    }
+  ]
+}

@@ -1,7 +1,0 @@
-{
-  "parent": "minecraft:block/cube_all",
-  "loader": "clayium:clay_container_model_loader",
-  "textures": {
-    "all": "clayium:block/test_clay_container"
-  }
-}

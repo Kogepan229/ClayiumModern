@@ -15,6 +15,9 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 public class ClayiumBlockModelProvider extends BlockStateProvider {
 
     private static final ResourceLocation FRONT_OVERLAY_ALL_MODEL = Clayium.id("block/front_overlay_all");
+    private static final ResourceLocation FRONT_MODEL = Clayium.id("block/front");
+    private static final ResourceLocation OVERLAY_MODEL = Clayium.id("block/overlay");
+    private static final ResourceLocation MACHINE_MODEL = Clayium.id("block/machine");
 
     private static final ResourceLocation[] TIER_BASE_TEXTURES;
     static {
@@ -49,23 +52,44 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
                 makeId("block/clay_work_table_side"),
                 makeId("block/clay_work_table")));
 
-        simpleBlockWithItem(ClayiumBlocks.TEST_CLAY_CONTAINER.get(),
-                models().cubeAll(ClayiumBlocks.TEST_CLAY_CONTAINER.getId().getPath(),
-                        blockTexture(ClayiumBlocks.TEST_CLAY_CONTAINER.get()))
-                        .customLoader(ClayContainerModelBuilder::new).end());
+        // simpleBlockWithItem(ClayiumBlocks.TEST_CLAY_CONTAINER.get(),
+        // models().cubeAll(ClayiumBlocks.TEST_CLAY_CONTAINER.getId().getPath(),
+        // blockTexture(ClayiumBlocks.TEST_CLAY_CONTAINER.get()))
+        // .customLoader(ClayContainerModelBuilder::new).end());
 
         for (var entry : ClayiumBlocks.BENDING_MACHINE_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), BENDING_MACHINE_TEXTURES);
         }
     }
 
+    // private void registerSingleMachine(Block block, int tier, ResourceLocation overlay) {
+    // BlockModelBuilder model = models()
+    // .withExistingParent(BuiltInRegistries.BLOCK.getKey(block).getPath(), FRONT_OVERLAY_ALL_MODEL)
+    // .texture("all", TIER_BASE_TEXTURES[tier - 1])
+    // .texture("overlay_front", overlay)
+    // .customLoader(ClayContainerModelBuilder::new).end();
+    // this.horizontalBlock(block, model);
+    // this.simpleBlockItem(block, model);
+    // }
+
     private void registerSingleMachine(Block block, int tier, ResourceLocation overlay) {
-        BlockModelBuilder model = models()
-                .withExistingParent(BuiltInRegistries.BLOCK.getKey(block).getPath(), FRONT_OVERLAY_ALL_MODEL)
-                .texture("all", TIER_BASE_TEXTURES[tier - 1])
-                .texture("overlay_front", overlay)
-                .customLoader(ClayContainerModelBuilder::new).end();
-        this.horizontalBlock(block, model);
+        BlockModelBuilder model = models().getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
+                .customLoader(ClayContainerModelBuilder::new)
+                .baseModel(models().nested().parent(models().getExistingFile(models().mcLoc("block/cube_all")))
+                        .texture("all", TIER_BASE_TEXTURES[tier - 1]))
+                .overlayModel(models().nested().parent(models().getExistingFile(OVERLAY_MODEL)).texture("overlay_front",
+                        overlay))
+                .end();
+
+        // BlockModelBuilder model = models()
+        // .withExistingParent(BuiltInRegistries.BLOCK.getKey(block).getPath(), FRONT_OVERLAY_ALL_MODEL)
+        // .texture("all", TIER_BASE_TEXTURES[tier - 1])
+        // .texture("overlay_front", overlay)
+        // .customLoader(ClayContainerModelBuilder::new)
+        // .baseModel()
+        // .end();
+        // this.horizontalBlock(block, model);
+        simpleBlock(block, model);
         this.simpleBlockItem(block, model);
     }
 }

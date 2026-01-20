@@ -1,19 +1,7 @@
 {
   "variants": {
-    "facing=east": {
-      "model": "clayium:block/bending_machine_3",
-      "y": 90
-    },
-    "facing=north": {
+    "": {
       "model": "clayium:block/bending_machine_3"
-    },
-    "facing=south": {
-      "model": "clayium:block/bending_machine_3",
-      "y": 180
-    },
-    "facing=west": {
-      "model": "clayium:block/bending_machine_3",
-      "y": 270
     }
   }
 }

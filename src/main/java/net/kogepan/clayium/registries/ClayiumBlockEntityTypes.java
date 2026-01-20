@@ -10,6 +10,9 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ClayiumBlockEntityTypes {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister
@@ -22,9 +25,13 @@ public class ClayiumBlockEntityTypes {
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TestClayContainerBlockEntity>> TEST_CLAY_CONTAINER_BLOCK_ENTITY = BLOCK_ENTITY_TYPES
             .register("test_clay_container_block_entity",
-                    () -> BlockEntityType.Builder
-                            .of(TestClayContainerBlockEntity::new,
-                                    ClayiumBlocks.BENDING_MACHINE_BLOCKS.values().stream().map(DeferredHolder::get)
-                                            .toArray(Block[]::new))
-                            .build(null));
+                    () -> {
+                        List<Block> blocks = new ArrayList<>(ClayiumBlocks.BENDING_MACHINE_BLOCKS.values().stream()
+                                .map(DeferredHolder::get).toList());
+                        blocks.add(ClayiumBlocks.TEST_CLAY_CONTAINER.get());
+                        return BlockEntityType.Builder
+                                .of(TestClayContainerBlockEntity::new,
+                                        blocks.toArray(Block[]::new))
+                                .build(null);
+                    });
 }
