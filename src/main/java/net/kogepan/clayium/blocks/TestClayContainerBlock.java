@@ -204,8 +204,20 @@ public class TestClayContainerBlock extends Block implements EntityBlock {
         return super.getShape(state, level, pos, context);
     }
 
+    @Override
+    @NotNull
+    protected VoxelShape getOcclusionShape(@NotNull BlockState state, @NotNull BlockGetter level,
+                                           @NotNull BlockPos pos) {
+        return state.getValue(PIPE) ? Shapes.empty() : super.getOcclusionShape(state, level, pos);
+    }
+
+    @Override
+    protected boolean useShapeForLightOcclusion(@NotNull BlockState state) {
+        return state.getValue(PIPE);
+    }
+
     @Nullable
-    private Direction getHitArm(Vec3 hit, BlockPos pos) {
+    private Direction getHitArm(@NotNull Vec3 hit, @NotNull BlockPos pos) {
         Vec3 local = hit.subtract(pos.getX(), pos.getY(), pos.getZ());
 
         if (ARM_NORTH.bounds().contains(local)) return Direction.NORTH;

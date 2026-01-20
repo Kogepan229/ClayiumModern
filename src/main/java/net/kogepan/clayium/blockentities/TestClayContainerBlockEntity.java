@@ -24,7 +24,7 @@ public class TestClayContainerBlockEntity extends ClayContainerBlockEntity {
         this.outputModes.setMode(Direction.DOWN, MachineIOMode.FIRST);
 
         if (level != null && level.isClientSide()) {
-            level.sendBlockUpdated(pos, blockState, blockState, Block.UPDATE_IMMEDIATE);
+            level.sendBlockUpdated(pos, blockState, blockState, Block.UPDATE_IMMEDIATE | Block.UPDATE_ALL);
         }
     }
 
