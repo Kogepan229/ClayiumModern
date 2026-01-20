@@ -55,6 +55,7 @@ neoForge {
             client()
             gameDirectory = project.file("run/client")
 
+            jvmArguments = ["-XX:+AllowEnhancedClassRedefinition"]
             // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
@@ -62,6 +63,8 @@ neoForge {
         server {
             server()
             gameDirectory = project.file("run/server")
+
+            jvmArguments = ["-XX:+AllowEnhancedClassRedefinition"]
             programArgument '--nogui'
             systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
         }
