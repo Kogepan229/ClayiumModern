@@ -94,10 +94,16 @@ public class ClayContainerModel implements IDynamicBakedModel {
                 renderOverlays(quads, direction, modelData);
             }
         } else {
-            quads = new ArrayList<>(
-                    this.pipeCoreModel.getQuads(blockState, direction, randomSource, modelData, renderType));
+            quads = new ArrayList<>();
 
-            // 接続されている方向のアームを追加
+            // Core
+            for (var quad : this.pipeCoreModel.getQuads(blockState, direction, randomSource, modelData, renderType)) {
+                if (!blockState.getValue(TestClayContainerBlock.getProperty(quad.getDirection()))) {
+                    quads.add(quad);
+                }
+            }
+
+            // Side cubes
             for (Direction armDirection : Direction.values()) {
                 if (blockState.getValue(TestClayContainerBlock.getProperty(armDirection))) {
                     quads.addAll(this.pipeArmModels.get(armDirection).getQuads(blockState, direction, randomSource,
