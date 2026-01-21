@@ -1,7 +1,10 @@
 package net.kogepan.clayium;
 
-import net.kogepan.clayium.client.model.block.ClayContainerModel;
+import net.kogepan.clayium.client.model.ModelTextures;
+import net.kogepan.clayium.client.model.PipeOverlayQuads;
 import net.kogepan.clayium.client.model.block.ClayContainerModelLoader;
+import net.kogepan.clayium.client.renderer.PipedMachineIoRenderer;
+import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlas;
@@ -12,6 +15,7 @@ import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
+import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
@@ -48,7 +52,15 @@ public class ClayiumClient {
     public static void onAtlasStitched(TextureAtlasStitchedEvent event) {
         TextureAtlas atlas = event.getAtlas();
         if (atlas.location() == TextureAtlas.LOCATION_BLOCKS) {
-            ClayContainerModel.initSprites(atlas);
+            ModelTextures.initSprites(atlas);
+            PipeOverlayQuads.initialize(atlas);
         }
+    }
+
+    @SubscribeEvent
+    public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerBlockEntityRenderer(
+                ClayiumBlockEntityTypes.TEST_CLAY_CONTAINER_BLOCK_ENTITY.get(),
+                PipedMachineIoRenderer::new);
     }
 }

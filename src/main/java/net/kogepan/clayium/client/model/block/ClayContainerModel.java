@@ -1,20 +1,18 @@
 package net.kogepan.clayium.client.model.block;
 
-import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blocks.TestClayContainerBlock;
+import net.kogepan.clayium.client.model.ModelTextures;
 import net.kogepan.clayium.client.utils.StaticFaceBakery;
 import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.BlockAndTintGetter;
@@ -38,23 +36,9 @@ import java.util.Map;
 
 public class ClayContainerModel implements IDynamicBakedModel {
 
-    public static final ResourceLocation OUTPUT_1_OVERLAY = Clayium.id("block/overlay/output_1");
-    public static final ResourceLocation INPUT_1_OVERLAY = Clayium.id("block/overlay/input_1");
-    public static final ResourceLocation INPUT_CE_OVERLAY = Clayium.id("block/overlay/input_ce");
-
-    private static @Nullable TextureAtlasSprite overlaySpriteOutput1;
-    private static @Nullable TextureAtlasSprite overlaySpriteInput1;
-    private static @Nullable TextureAtlasSprite overlaySpriteInputCE;
-
-    public static void initSprites(TextureAtlas atlas) {
-        overlaySpriteOutput1 = atlas.getSprite(OUTPUT_1_OVERLAY);
-        overlaySpriteInput1 = atlas.getSprite(INPUT_1_OVERLAY);
-        overlaySpriteInputCE = atlas.getSprite(INPUT_CE_OVERLAY);
-    }
-
-    private static final AABB OUTPUT_OVERLAY_AABB = new AABB(-0.001f, -0.001f, -0.001f,
+    private static final AABB EXPORT_OVERLAY_AABB = new AABB(-0.001f, -0.001f, -0.001f,
             1.001f, 1.001f, 1.001f);
-    private static final AABB INPUT_OVERLAY_AABB = new AABB(-0.002f, -0.002f, -0.002f,
+    private static final AABB IMPORT_OVERLAY_AABB = new AABB(-0.002f, -0.002f, -0.002f,
             1.002f, 1.002f, 1.002f);
 
     private static final ChunkRenderTypeSet RENDER_TYPES = ChunkRenderTypeSet.of(RenderType.CUTOUT);
@@ -139,34 +123,27 @@ public class ClayContainerModel implements IDynamicBakedModel {
                 // renderInputOverlay(quads, container, d);
                 // }
             } else {
-                renderOutputOverlay(quads, container, direction);
-                renderInputOverlay(quads, container, direction);
+                renderExportOverlay(quads, container, direction);
+                renderImportOverlay(quads, container, direction);
             }
         }
     }
 
-    private static void renderOutputOverlay(@NotNull List<BakedQuad> quads, @NotNull ClayContainerBlockEntity container,
+    private static void renderExportOverlay(@NotNull List<BakedQuad> quads, @NotNull ClayContainerBlockEntity container,
                                             @NotNull Direction direction) {
-        MachineIOMode outputMode = container.getOutputMode(direction);
-        var overlay = switch (outputMode) {
-            case FIRST -> overlaySpriteOutput1;
-            default -> null;
-        };
+        MachineIOMode exportMode = container.getOutputMode(direction);
+        TextureAtlasSprite overlay = ModelTextures.getOverlayExportSprite(exportMode);
         if (overlay != null) {
-            quads.add(StaticFaceBakery.bakeFace(OUTPUT_OVERLAY_AABB, direction, overlay));
+            quads.add(StaticFaceBakery.bakeFace(EXPORT_OVERLAY_AABB, direction, overlay));
         }
     }
 
-    private static void renderInputOverlay(@NotNull List<BakedQuad> quads, @NotNull ClayContainerBlockEntity container,
-                                           @NotNull Direction direction) {
-        MachineIOMode inputMode = container.getInputMode(direction);
-        var overlay = switch (inputMode) {
-            case FIRST -> overlaySpriteInput1;
-            case CE -> overlaySpriteInputCE;
-            default -> null;
-        };
+    private static void renderImportOverlay(@NotNull List<BakedQuad> quads, @NotNull ClayContainerBlockEntity container,
+                                            @NotNull Direction direction) {
+        MachineIOMode importMode = container.getInputMode(direction);
+        TextureAtlasSprite overlay = ModelTextures.getOverlayImportSprite(importMode);
         if (overlay != null) {
-            quads.add(StaticFaceBakery.bakeFace(INPUT_OVERLAY_AABB, direction, overlay));
+            quads.add(StaticFaceBakery.bakeFace(IMPORT_OVERLAY_AABB, direction, overlay));
         }
     }
 

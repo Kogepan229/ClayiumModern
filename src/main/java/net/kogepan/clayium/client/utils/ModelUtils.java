@@ -112,4 +112,64 @@ public class ModelUtils {
                 targetSprite,
                 sourceQuad.isShade());
     }
+
+    /**
+     * Get UV coordinates for a cube face.
+     * Based on ClayiumUnofficial's ModelUtils.getUvInt method.
+     *
+     * @param cubePos    The position/direction of the cube (e.g., Direction.NORTH for a north-facing cube)
+     * @param sideOfCube The face of the cube to get UV for
+     * @return Array of 4 floats: [uMin, vMin, uMax, vMax]
+     * @throws IllegalArgumentException if sideOfCube == cubePos.opposite (invisible face)
+     */
+    public static float[] getUvFloat(@NotNull Direction cubePos, @NotNull Direction sideOfCube) {
+        if (cubePos == sideOfCube) {
+            return new float[] { 5f, 5f, 11f, 11f };
+        }
+
+        return switch (cubePos) {
+            case DOWN -> new float[] { 5f, 11f, 11f, 16f };
+            case UP -> new float[] { 5f, 0f, 11f, 5f };
+            case NORTH -> switch (sideOfCube) {
+                case UP -> new float[] { 5f, 0f, 11f, 5f };
+                case DOWN -> new float[] { 5f, 11f, 11f, 16f };
+                case WEST -> new float[] { 0f, 5f, 5f, 11f };
+                case EAST -> new float[] { 11f, 5f, 16f, 11f };
+                default -> throw new IllegalArgumentException("Invalid side of cube: " + sideOfCube);
+            };
+            case SOUTH -> switch (sideOfCube) {
+                case UP -> new float[] { 5f, 11f, 11f, 16f };
+                case DOWN -> new float[] { 5f, 0f, 11f, 5f };
+                case WEST -> new float[] { 11f, 5f, 16f, 11f };
+                case EAST -> new float[] { 0f, 5f, 5f, 11f };
+                default -> throw new IllegalArgumentException("Invalid side of cube: " + sideOfCube);
+            };
+            case WEST -> switch (sideOfCube) {
+                case UP, DOWN -> new float[] { 0f, 5f, 5f, 11f };
+                case NORTH -> new float[] { 11f, 5f, 16f, 11f };
+                case SOUTH -> new float[] { 0f, 5f, 5f, 11f };
+                default -> throw new IllegalArgumentException("Invalid side of cube: " + sideOfCube);
+            };
+            case EAST -> switch (sideOfCube) {
+                case UP, DOWN -> new float[] { 11f, 5f, 16f, 11f };
+                case NORTH -> new float[] { 0f, 5f, 5f, 11f };
+                case SOUTH -> new float[] { 11f, 5f, 16f, 11f };
+                default -> throw new IllegalArgumentException("Invalid side of cube: " + sideOfCube);
+            };
+        };
+    }
+
+    /**
+     * Simple pair class for internal use.
+     */
+    public static class Pair<A, B> {
+
+        public final A first;
+        public final B second;
+
+        public Pair(A first, B second) {
+            this.first = first;
+            this.second = second;
+        }
+    }
 }
