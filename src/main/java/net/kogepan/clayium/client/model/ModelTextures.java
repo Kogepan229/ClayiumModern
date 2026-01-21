@@ -15,6 +15,7 @@ import java.util.Map;
 public class ModelTextures {
 
     private static final ResourceLocation OVERLAY_IMPORT_PIPE_1 = Clayium.id("block/overlay/import_pipe_1");
+    private static final ResourceLocation OVERLAY_IMPORT_PIPE_CE = Clayium.id("block/overlay/import_pipe_ce");
     private static final ResourceLocation OVERLAY_EXPORT_PIPE_1 = Clayium.id("block/overlay/export_pipe_1");
 
     private static final ResourceLocation OVERLAY_IMPORT_1 = Clayium.id("block/overlay/import_1");
@@ -55,7 +56,7 @@ public class ModelTextures {
             case FIRST -> OVERLAY_IMPORT_PIPE_1;
             case SECOND -> null;
             case ALL -> null;
-            case CE -> null;
+            case CE -> OVERLAY_IMPORT_PIPE_CE;
         };
     }
 
