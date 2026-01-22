@@ -1,5 +1,6 @@
 package net.kogepan.clayium;
 
+import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
@@ -14,12 +15,15 @@ import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -61,6 +65,8 @@ public class Clayium {
         ClayiumRecipeTypes.RECIPE_TYPES.register(modEventBus);
         ClayiumRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
+        modEventBus.addListener(this::registerCapacilities);
+
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
 
@@ -92,6 +98,15 @@ public class Clayium {
     public void onServerStarting(ServerStartingEvent event) {
         // Do something when the server starts
         LOGGER.info("HELLO from server starting");
+    }
+
+    public void registerCapacilities(RegisterCapabilitiesEvent event) {
+        for (DeferredHolder<BlockEntityType<?>, ?> type : ClayiumBlockEntityTypes.CLAY_CONTAINER_BLOCK_ENTITY_TYPES) {
+            event.registerBlockEntity(
+                    Capabilities.ItemHandler.BLOCK,
+                    type.get(),
+                    (blockEntity, side) -> ((ClayContainerBlockEntity) blockEntity).getExposedItemHandler(side));
+        }
     }
 
     public static ResourceLocation id(String path) {

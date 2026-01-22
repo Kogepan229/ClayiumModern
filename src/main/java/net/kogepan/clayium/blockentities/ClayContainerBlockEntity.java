@@ -64,7 +64,8 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         this.inputModes.setMode(direction, next);
         if (level != null && !level.isClientSide()) {
             setChanged();
-            level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
+            level.invalidateCapabilities(this.worldPosition);
+            level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(),
                     Block.UPDATE_ALL | Block.UPDATE_KNOWN_SHAPE);
         }
     }
@@ -81,6 +82,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         this.outputModes.setMode(direction, next);
         if (level != null && !level.isClientSide()) {
             setChanged();
+            level.invalidateCapabilities(this.worldPosition);
             level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
                     Block.UPDATE_ALL | Block.UPDATE_KNOWN_SHAPE);
         }
