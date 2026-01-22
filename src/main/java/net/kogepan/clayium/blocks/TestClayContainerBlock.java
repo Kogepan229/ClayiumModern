@@ -8,6 +8,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -82,6 +83,19 @@ public class TestClayContainerBlock extends Block implements EntityBlock {
     }
 
     @Override
+    public void setPlacedBy(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state,
+                            @Nullable LivingEntity placer, @NotNull ItemStack stack) {
+        super.setPlacedBy(level, pos, state, placer, stack);
+
+        if (!level.isClientSide()) {
+            BlockEntity be = level.getBlockEntity(pos);
+            if (be instanceof TestClayContainerBlockEntity container) {
+                container.onPlacedByServer(placer, stack);
+            }
+        }
+    }
+
+    @Override
     @Nullable
     public BlockState getStateForPlacement(BlockPlaceContext context) {
         return this.defaultBlockState()
@@ -105,9 +119,9 @@ public class TestClayContainerBlock extends Block implements EntityBlock {
     protected ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, @NotNull Level level,
                                               @NotNull BlockPos pos, @NotNull Player player,
                                               @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
-        // if (level.isClientSide()) {
-        // return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        // }
+        if (level.isClientSide()) {
+            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
+        }
 
         if (stack.is(ClayiumItems.CLAY_ROLLING_PIN)) {
             BlockEntity be = level.getBlockEntity(pos);
@@ -125,6 +139,7 @@ public class TestClayContainerBlock extends Block implements EntityBlock {
         }
         if (stack.is(ClayiumItems.CLAY_SPATULA)) {
             this.togglePipe(level, pos, state);
+            return ItemInteractionResult.SUCCESS;
         }
 
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
@@ -156,10 +171,12 @@ public class TestClayContainerBlock extends Block implements EntityBlock {
             }
             level.setBlock(pos, state, Block.UPDATE_CLIENTS);
         } else {
-            level.setBlock(pos, state.setValue(PIPE, true), Block.UPDATE_NONE);
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof ClayContainerBlockEntity container) {
-                container.updatePipeConnections();
+                state = state.setValue(PIPE, true);
+                state = container.updatePipeConnectionState(state);
+
+                level.setBlock(pos, state, Block.UPDATE_ALL);
             }
         }
     }
@@ -189,19 +206,13 @@ public class TestClayContainerBlock extends Block implements EntityBlock {
             return super.getShape(state, level, pos, context);
         }
 
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof ClayContainerBlockEntity container) {
-            VoxelShape shape = CORE;
-
-            for (Direction dir : Direction.values()) {
-                if (container.canConnectTo(dir)) {
-                    shape = Shapes.or(shape, getArmShape(dir));
-                }
+        VoxelShape shape = CORE;
+        for (Direction direction : Direction.values()) {
+            if (state.getValue(getProperty(direction))) {
+                shape = Shapes.or(shape, getArmShape(direction));
             }
-            return shape;
         }
-
-        return super.getShape(state, level, pos, context);
+        return shape;
     }
 
     @Override

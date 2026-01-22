@@ -7,11 +7,19 @@ import net.kogepan.clayium.utils.MachineIOModes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.protocol.Packet;
+import net.minecraft.network.protocol.game.ClientGamePacketListener;
+import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.wrapper.RangedWrapper;
@@ -19,6 +27,9 @@ import net.neoforged.neoforge.items.wrapper.RangedWrapper;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_EXPORT;
+import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_IMPORT;
 
 public abstract class ClayContainerBlockEntity extends BlockEntity {
 
@@ -41,7 +52,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         return this.outputModes.getMode(direction);
     }
 
-    public MachineIOMode cycleInputMode(@NotNull Direction direction) {
+    public void cycleInputMode(@NotNull Direction direction) {
         MachineIOMode current = this.inputModes.getMode(direction);
         MachineIOMode next;
         if (current == MachineIOMode.NONE) {
@@ -51,15 +62,14 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         }
 
         this.inputModes.setMode(direction, next);
-        if (level != null && level.isClientSide()) {
+        if (level != null && !level.isClientSide()) {
+            setChanged();
             level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
-                    Block.UPDATE_IMMEDIATE);
+                    Block.UPDATE_ALL | Block.UPDATE_KNOWN_SHAPE);
         }
-
-        return next;
     }
 
-    public MachineIOMode cycleOutputMode(@NotNull Direction direction) {
+    public void cycleOutputMode(@NotNull Direction direction) {
         MachineIOMode current = this.outputModes.getMode(direction);
         MachineIOMode next;
         if (current == MachineIOMode.NONE) {
@@ -69,12 +79,11 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         }
 
         this.outputModes.setMode(direction, next);
-        if (level != null && level.isClientSide()) {
+        if (level != null && !level.isClientSide()) {
+            setChanged();
             level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
-                    Block.UPDATE_IMMEDIATE);
+                    Block.UPDATE_ALL | Block.UPDATE_KNOWN_SHAPE);
         }
-
-        return next;
     }
 
     protected abstract IItemHandlerModifiable getInputInventory();
@@ -118,12 +127,9 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         return false;
     }
 
-    public void updatePipeConnections() {
-        if (this.level == null) return;
-
-        BlockState state = this.getBlockState();
+    public BlockState updatePipeConnectionState(BlockState state) {
         if (!state.getValue(TestClayContainerBlock.PIPE)) {
-            return;
+            return state;
         }
 
         for (Direction direction : Direction.values()) {
@@ -132,8 +138,65 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
                     this.canConnectTo(direction));
         }
 
-        level.setBlock(this.getBlockPos(), state, Block.UPDATE_IMMEDIATE);
-        level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
-                Block.UPDATE_ALL);
+        return state;
+    }
+
+    public void onPlacedByServer(@Nullable LivingEntity placer, ItemStack stack) {
+        this.setChanged();
+
+        if (this.level != null) {
+            BlockState state = getBlockState();
+            this.level.sendBlockUpdated(
+                    this.getBlockPos(),
+                    state,
+                    state,
+                    Block.UPDATE_CLIENTS);
+        }
+    }
+
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
+        tag.put("inputModes", this.inputModes.serializeNBT(provider));
+        tag.put("outputModes", this.outputModes.serializeNBT(provider));
+    }
+
+    @Override
+    protected void loadAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
+        if (tag.contains("inputModes")) {
+            this.inputModes.deserializeNBT(provider, tag.getCompound("inputModes"));
+        }
+        if (tag.contains("outputModes")) {
+            this.outputModes.deserializeNBT(provider, tag.getCompound("outputModes"));
+        }
+        if (this.level != null && this.level.isClientSide()) {
+            this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
+                    Block.UPDATE_NONE);
+        }
+    }
+
+    @Override
+    @NotNull
+    public CompoundTag getUpdateTag(@NotNull HolderLookup.Provider provider) {
+        CompoundTag tag = super.getUpdateTag(provider);
+        tag.put("inputModes", this.inputModes.serializeNBT(provider));
+        tag.put("outputModes", this.outputModes.serializeNBT(provider));
+        return tag;
+    }
+
+    @Override
+    @Nullable
+    public Packet<ClientGamePacketListener> getUpdatePacket() {
+        return ClientboundBlockEntityDataPacket.create(this);
+    }
+
+    @Override
+    @NotNull
+    public ModelData getModelData() {
+        return ModelData.builder()
+                .with(MODEL_DATA_IMPORT, this.inputModes)
+                .with(MODEL_DATA_EXPORT, this.outputModes)
+                .build();
     }
 }

@@ -1,22 +1,18 @@
 package net.kogepan.clayium.client.model.block;
 
-import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blocks.TestClayContainerBlock;
 import net.kogepan.clayium.client.model.ModelTextures;
 import net.kogepan.clayium.client.utils.StaticFaceBakery;
-import net.kogepan.clayium.utils.MachineIOMode;
+import net.kogepan.clayium.utils.MachineIOModes;
 
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.BakedModel;
-import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.ItemDisplayContext;
-import net.minecraft.world.level.BlockAndTintGetter;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 import net.neoforged.api.distmarker.Dist;
@@ -43,8 +39,8 @@ public class ClayContainerModel implements IDynamicBakedModel {
 
     private static final ChunkRenderTypeSet RENDER_TYPES = ChunkRenderTypeSet.of(RenderType.CUTOUT);
 
-    static final ModelProperty<BlockAndTintGetter> MODEL_DATA_LEVEL = new ModelProperty<>();
-    static final ModelProperty<BlockPos> MODEL_DATA_POS = new ModelProperty<>();
+    public static final ModelProperty<MachineIOModes> MODEL_DATA_IMPORT = new ModelProperty<>();
+    public static final ModelProperty<MachineIOModes> MODEL_DATA_EXPORT = new ModelProperty<>();
 
     private final BakedModel baseModel;
     @Nullable
@@ -59,17 +55,6 @@ public class ClayContainerModel implements IDynamicBakedModel {
         this.bakedOverlayModels = overlays;
         this.pipeCoreModel = pipeCore;
         this.pipeArmModels = pipeArms;
-    }
-
-    @Override
-    @NotNull
-    public ModelData getModelData(@NotNull BlockAndTintGetter level, @NotNull BlockPos pos, @NotNull BlockState state,
-                                  @NotNull ModelData modelData) {
-        ModelData.Builder builder = modelData.derive()
-                .with(MODEL_DATA_LEVEL, level)
-                .with(MODEL_DATA_POS, pos);
-
-        return builder.build();
     }
 
     @Override
@@ -117,37 +102,27 @@ public class ClayContainerModel implements IDynamicBakedModel {
 
     private void renderOverlays(@NotNull List<BakedQuad> quads, @Nullable Direction direction,
                                 @NotNull ModelData modelData) {
-        BlockAndTintGetter level = modelData.get(MODEL_DATA_LEVEL);
-        BlockPos pos = modelData.get(MODEL_DATA_POS);
-        if (level == null || pos == null) return;
+        if (direction == null) return;
 
-        BlockEntity be = level.getBlockEntity(pos);
-        if (be instanceof ClayContainerBlockEntity container) {
-            if (direction == null) {
-                // for (Direction d : Direction.values()) {
-                // renderOutputOverlay(quads, container, d);
-                // renderInputOverlay(quads, container, d);
-                // }
-            } else {
-                renderExportOverlay(quads, container, direction);
-                renderImportOverlay(quads, container, direction);
-            }
-        }
+        MachineIOModes importModes = modelData.get(MODEL_DATA_IMPORT);
+        MachineIOModes exportModes = modelData.get(MODEL_DATA_EXPORT);
+        if (importModes == null || exportModes == null) return;
+
+        renderExportOverlay(quads, exportModes, direction);
+        renderImportOverlay(quads, importModes, direction);
     }
 
-    private static void renderExportOverlay(@NotNull List<BakedQuad> quads, @NotNull ClayContainerBlockEntity container,
+    private static void renderExportOverlay(@NotNull List<BakedQuad> quads, @NotNull MachineIOModes exportModes,
                                             @NotNull Direction direction) {
-        MachineIOMode exportMode = container.getOutputMode(direction);
-        TextureAtlasSprite overlay = ModelTextures.getOverlayExportSprite(exportMode);
+        TextureAtlasSprite overlay = ModelTextures.getOverlayExportSprite(exportModes.getMode(direction));
         if (overlay != null) {
             quads.add(StaticFaceBakery.bakeFace(EXPORT_OVERLAY_AABB, direction, overlay));
         }
     }
 
-    private static void renderImportOverlay(@NotNull List<BakedQuad> quads, @NotNull ClayContainerBlockEntity container,
+    private static void renderImportOverlay(@NotNull List<BakedQuad> quads, @NotNull MachineIOModes importModes,
                                             @NotNull Direction direction) {
-        MachineIOMode importMode = container.getInputMode(direction);
-        TextureAtlasSprite overlay = ModelTextures.getOverlayImportSprite(importMode);
+        TextureAtlasSprite overlay = ModelTextures.getOverlayImportSprite(importModes.getMode(direction));
         if (overlay != null) {
             quads.add(StaticFaceBakery.bakeFace(IMPORT_OVERLAY_AABB, direction, overlay));
         }
