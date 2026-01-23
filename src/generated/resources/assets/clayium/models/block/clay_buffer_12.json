@@ -1,0 +1,9 @@
+{
+  "base_model": {
+    "parent": "minecraft:block/cube_all",
+    "textures": {
+      "all": "clayium:block/tier/tier12"
+    }
+  },
+  "loader": "clayium:clay_container_model_loader"
+}

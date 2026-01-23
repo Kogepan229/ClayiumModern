@@ -44,7 +44,7 @@ public class ClayWorkTableBlock extends Block implements EntityBlock, BlockUIMen
             return InteractionResult.SUCCESS;
         } else if (player instanceof ServerPlayer serverPlayer) {
             BlockUIMenuType.openUI(serverPlayer, pos);
-            return InteractionResult.CONSUME;
+            return InteractionResult.SUCCESS;
         }
         return InteractionResult.PASS;
     }

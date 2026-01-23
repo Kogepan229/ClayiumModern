@@ -1,6 +1,7 @@
 package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.blockentities.ClayBufferBlockEntity;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.ClayWorkTableBlockEntity;
 import net.kogepan.clayium.blockentities.TestClayContainerBlockEntity;
@@ -39,6 +40,13 @@ public class ClayiumBlockEntityTypes {
                                 blocks.toArray(Block[]::new))
                         .build(null);
             });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ClayBufferBlockEntity>> CLAY_BUFFER_BLOCK_ENTITY = registerClayContainer(
+            "clay_buffer_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(ClayBufferBlockEntity::new, ClayiumBlocks.CLAY_BUFFERS.values().stream()
+                            .map(DeferredHolder::get).toArray(Block[]::new))
+                    .build(null));
 
     private static <
             T extends ClayContainerBlockEntity> DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> registerClayContainer(

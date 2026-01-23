@@ -1,6 +1,6 @@
 package net.kogepan.clayium.client.model.block;
 
-import net.kogepan.clayium.blocks.TestClayContainerBlock;
+import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.client.model.ModelTextures;
 import net.kogepan.clayium.client.utils.StaticFaceBakery;
 import net.kogepan.clayium.utils.MachineIOModes;
@@ -64,12 +64,12 @@ public class ClayContainerModel implements IDynamicBakedModel {
                                     @Nullable RenderType renderType) {
         List<BakedQuad> quads;
 
-        if (blockState == null || !blockState.getValue(TestClayContainerBlock.PIPE)) {
+        if (blockState == null || !blockState.getValue(ClayContainerBlock.PIPE)) {
             quads = new ArrayList<>(
                     this.baseModel.getQuads(blockState, direction, randomSource, modelData, renderType));
 
             if (bakedOverlayModels != null) {
-                Direction facing = blockState != null ? blockState.getValue(TestClayContainerBlock.FACING) :
+                Direction facing = blockState != null ? blockState.getValue(ClayContainerBlock.FACING) :
                         Direction.NORTH;
                 quads.addAll(bakedOverlayModels.get(facing).getQuads(blockState, direction, randomSource, modelData,
                         renderType));
@@ -83,14 +83,14 @@ public class ClayContainerModel implements IDynamicBakedModel {
 
             // Core
             for (var quad : this.pipeCoreModel.getQuads(blockState, direction, randomSource, modelData, renderType)) {
-                if (!blockState.getValue(TestClayContainerBlock.getProperty(quad.getDirection()))) {
+                if (!blockState.getValue(ClayContainerBlock.getProperty(quad.getDirection()))) {
                     quads.add(quad);
                 }
             }
 
             // Side cubes
             for (Direction armDirection : Direction.values()) {
-                if (blockState.getValue(TestClayContainerBlock.getProperty(armDirection))) {
+                if (blockState.getValue(ClayContainerBlock.getProperty(armDirection))) {
                     quads.addAll(this.pipeArmModels.get(armDirection).getQuads(blockState, direction, randomSource,
                             modelData, renderType));
                 }

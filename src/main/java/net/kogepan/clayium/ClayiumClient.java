@@ -1,5 +1,6 @@
 package net.kogepan.clayium;
 
+import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.client.model.ModelTextures;
 import net.kogepan.clayium.client.model.PipeOverlayQuads;
 import net.kogepan.clayium.client.model.block.ClayContainerModelLoader;
@@ -8,6 +9,7 @@ import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -20,6 +22,7 @@ import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.registries.DeferredHolder;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = Clayium.MODID, dist = Dist.CLIENT)
@@ -58,9 +61,12 @@ public class ClayiumClient {
     }
 
     @SubscribeEvent
+    @SuppressWarnings("unchecked")
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
-        event.registerBlockEntityRenderer(
-                ClayiumBlockEntityTypes.TEST_CLAY_CONTAINER_BLOCK_ENTITY.get(),
-                PipedMachineIoRenderer::new);
+        for (DeferredHolder<BlockEntityType<?>, ?> holder : ClayiumBlockEntityTypes.CLAY_CONTAINER_BLOCK_ENTITY_TYPES) {
+            event.registerBlockEntityRenderer(
+                    (BlockEntityType<? extends ClayContainerBlockEntity>) holder.get(),
+                    PipedMachineIoRenderer::new);
+        }
     }
 }

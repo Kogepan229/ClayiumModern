@@ -6,7 +6,9 @@ import net.kogepan.clayium.registries.ClayiumItems;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
@@ -21,6 +23,8 @@ import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntityTicker;
+import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -33,10 +37,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
+import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
+import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class TestClayContainerBlock extends Block implements EntityBlock {
+public class ClayContainerBlock extends Block implements EntityBlock, BlockUIMenuType.BlockUI {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty PIPE = BooleanProperty.create("pipe");
@@ -55,8 +61,12 @@ public class TestClayContainerBlock extends Block implements EntityBlock {
     public static final VoxelShape ARM_UP = Block.box(5, 11, 5, 11, 16, 11);
     public static final VoxelShape ARM_DOWN = Block.box(5, 0, 5, 11, 5, 11);
 
-    public TestClayContainerBlock() {
+    public int tier;
+
+    public ClayContainerBlock(int tier) {
         super(BlockBehaviour.Properties.of().dynamicShape());
+        this.tier = tier;
+
         this.registerDefaultState(this.stateDefinition.any()
                 .setValue(FACING, Direction.NORTH)
                 .setValue(PIPE, false)
@@ -89,7 +99,7 @@ public class TestClayContainerBlock extends Block implements EntityBlock {
 
         if (!level.isClientSide()) {
             BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof TestClayContainerBlockEntity container) {
+            if (be instanceof ClayContainerBlockEntity container) {
                 container.onPlacedByServer(placer, stack);
             }
         }
@@ -145,6 +155,29 @@ public class TestClayContainerBlock extends Block implements EntityBlock {
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
     }
 
+    @Override
+    @NotNull
+    protected InteractionResult useWithoutItem(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos,
+                                               @NotNull Player player, @NotNull BlockHitResult hitResult) {
+        if (level.isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+        if (player instanceof ServerPlayer serverPlayer) {
+            BlockUIMenuType.openUI(serverPlayer, pos);
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
+    }
+
+    @Override
+    public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
+        if (holder.player.level().getBlockEntity(holder.pos) instanceof ClayContainerBlockEntity entity) {
+            return entity.createUI(holder);
+        }
+
+        return null;
+    }
+
     @NotNull
     private Direction getHitDirection(@NotNull BlockState state, @NotNull BlockPos pos,
                                       @NotNull BlockHitResult hitResult) {
@@ -166,7 +199,7 @@ public class TestClayContainerBlock extends Block implements EntityBlock {
             state = state.setValue(PIPE, false);
             for (Direction direction : Direction.values()) {
                 state = state.setValue(
-                        TestClayContainerBlock.getProperty(direction),
+                        ClayContainerBlock.getProperty(direction),
                         false);
             }
             level.setBlock(pos, state, Block.UPDATE_CLIENTS);
@@ -261,5 +294,16 @@ public class TestClayContainerBlock extends Block implements EntityBlock {
             case UP -> ARM_UP;
             case DOWN -> ARM_DOWN;
         };
+    }
+
+    @SuppressWarnings("unchecked")
+    public static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(
+                                                                                                         @NotNull Level level,
+                                                                                                         @NotNull BlockEntityType<A> givenType,
+                                                                                                         @NotNull BlockEntityType<E> expectedType,
+                                                                                                         @Nullable BlockEntityTicker<? super E> serverTicker,
+                                                                                                         @Nullable BlockEntityTicker<? super E> clientTicker) {
+        return givenType == expectedType ?
+                level.isClientSide() ? (BlockEntityTicker<A>) clientTicker : (BlockEntityTicker<A>) serverTicker : null;
     }
 }

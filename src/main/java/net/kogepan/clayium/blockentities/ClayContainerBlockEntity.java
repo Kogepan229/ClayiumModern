@@ -1,6 +1,7 @@
 package net.kogepan.clayium.blockentities;
 
-import net.kogepan.clayium.blocks.TestClayContainerBlock;
+import net.kogepan.clayium.blockentities.trait.ClayContainerTrait;
+import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.inventory.MachineIOInventoryWrapper;
 import net.kogepan.clayium.utils.MachineIOMode;
 import net.kogepan.clayium.utils.MachineIOModes;
@@ -12,21 +13,32 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.model.data.ModelData;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.wrapper.RangedWrapper;
 
+import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
+import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
 import lombok.Getter;
+import org.jetbrains.annotations.MustBeInvokedByOverriders;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import java.util.EnumMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_EXPORT;
 import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_IMPORT;
@@ -37,9 +49,64 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     protected final MachineIOModes inputModes = new MachineIOModes();
     @Getter
     protected final MachineIOModes outputModes = new MachineIOModes();
+    protected final List<MachineIOMode> validInputModes;
+    protected final List<MachineIOMode> validOutputModes;
 
-    public ClayContainerBlockEntity(BlockEntityType<?> type, BlockPos pos, BlockState blockState) {
+    protected final Map<String, ClayContainerTrait> traits = new LinkedHashMap<>();
+
+    protected final Map<@NotNull Direction, BlockCapabilityCache<IItemHandler, @Nullable Direction>> neighborsItemHandlerCache = new EnumMap<>(
+            Direction.class);
+
+    public ClayContainerBlockEntity(@NotNull BlockEntityType<?> type, @NotNull BlockPos pos,
+                                    @NotNull BlockState blockState,
+                                    @NotNull List<MachineIOMode> validInputModes,
+                                    @NotNull List<MachineIOMode> validOutputModes) {
         super(type, pos, blockState);
+
+        assert !validInputModes.isEmpty();
+        assert !validOutputModes.isEmpty();
+        this.validInputModes = validInputModes;
+        this.validOutputModes = validOutputModes;
+    }
+
+    public static void tick(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state,
+                            @NotNull ClayContainerBlockEntity blockEntity) {
+        blockEntity.tick();
+    }
+
+    @MustBeInvokedByOverriders
+    protected void tick() {
+        this.traits.values().forEach(ClayContainerTrait::tick);
+    }
+
+    @Override
+    public void onLoad() {
+        if (level instanceof ServerLevel serverLevel) {
+            for (Direction direction : Direction.values()) {
+                BlockCapabilityCache<IItemHandler, @Nullable Direction> cache = BlockCapabilityCache.create(
+                        Capabilities.ItemHandler.BLOCK,
+                        serverLevel,
+                        worldPosition.relative(direction),
+                        direction.getOpposite());
+                this.neighborsItemHandlerCache.put(direction, cache);
+            }
+        }
+    }
+
+    public void addTrait(ClayContainerTrait trait) {
+        this.traits.put(trait.id, trait);
+    }
+
+    public void initDefaultRoutes() {
+        this.inputModes.setMode(Direction.UP, MachineIOMode.FIRST);
+        this.inputModes.setMode(this.getBlockState().getValue(ClayContainerBlock.FACING).getOpposite(),
+                MachineIOMode.CE);
+        this.outputModes.setMode(Direction.DOWN, MachineIOMode.FIRST);
+    }
+
+    @Nullable
+    public IItemHandler getNeighborItemHandler(@NotNull Direction direction) {
+        return this.neighborsItemHandlerCache.get(direction).getCapability();
     }
 
     @NotNull
@@ -54,17 +121,13 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
 
     public void cycleInputMode(@NotNull Direction direction) {
         MachineIOMode current = this.inputModes.getMode(direction);
-        MachineIOMode next;
-        if (current == MachineIOMode.NONE) {
-            next = MachineIOMode.FIRST;
-        } else {
-            next = MachineIOMode.NONE;
-        }
+        int currentIndex = this.validInputModes.indexOf(current);
+        MachineIOMode next = this.validInputModes.get((currentIndex + 1) % this.validInputModes.size());
 
         this.inputModes.setMode(direction, next);
         if (level != null && !level.isClientSide()) {
             setChanged();
-            level.invalidateCapabilities(this.worldPosition);
+            this.invalidateItemHandlerCapability();
             level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(),
                     Block.UPDATE_ALL | Block.UPDATE_KNOWN_SHAPE);
         }
@@ -72,17 +135,13 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
 
     public void cycleOutputMode(@NotNull Direction direction) {
         MachineIOMode current = this.outputModes.getMode(direction);
-        MachineIOMode next;
-        if (current == MachineIOMode.NONE) {
-            next = MachineIOMode.FIRST;
-        } else {
-            next = MachineIOMode.NONE;
-        }
+        int currentIndex = this.validOutputModes.indexOf(current);
+        MachineIOMode next = this.validOutputModes.get((currentIndex + 1) % this.validOutputModes.size());
 
         this.outputModes.setMode(direction, next);
         if (level != null && !level.isClientSide()) {
             setChanged();
-            level.invalidateCapabilities(this.worldPosition);
+            this.invalidateItemHandlerCapability();
             level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
                     Block.UPDATE_ALL | Block.UPDATE_KNOWN_SHAPE);
         }
@@ -116,27 +175,26 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         }
     }
 
+    protected void invalidateItemHandlerCapability() {
+        if (level != null) {
+            level.invalidateCapabilities(this.worldPosition);
+        }
+    }
+
     public boolean canConnectTo(Direction direction) {
         if (this.level == null) return false;
 
-        BlockPos target = this.getBlockPos().relative(direction);
-
-        BlockEntity be = level.getBlockEntity(target);
-        if (be != null) {
-            return this.level.getCapability(Capabilities.ItemHandler.BLOCK, target, direction.getOpposite()) != null;
-        }
-
-        return false;
+        return this.getNeighborItemHandler(direction) != null;
     }
 
     public BlockState updatePipeConnectionState(BlockState state) {
-        if (!state.getValue(TestClayContainerBlock.PIPE)) {
+        if (!state.getValue(ClayContainerBlock.PIPE)) {
             return state;
         }
 
         for (Direction direction : Direction.values()) {
             state = state.setValue(
-                    TestClayContainerBlock.getProperty(direction),
+                    ClayContainerBlock.getProperty(direction),
                     this.canConnectTo(direction));
         }
 
@@ -144,6 +202,8 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     }
 
     public void onPlacedByServer(@Nullable LivingEntity placer, ItemStack stack) {
+        this.initDefaultRoutes();
+
         this.setChanged();
 
         if (this.level != null) {
@@ -173,6 +233,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
             this.outputModes.deserializeNBT(provider, tag.getCompound("outputModes"));
         }
         if (this.level != null && this.level.isClientSide()) {
+            this.requestModelDataUpdate();
             this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
                     Block.UPDATE_NONE);
         }
@@ -201,4 +262,6 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
                 .with(MODEL_DATA_EXPORT, this.outputModes)
                 .build();
     }
+
+    abstract public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder);
 }

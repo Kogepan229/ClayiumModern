@@ -1,7 +1,7 @@
 package net.kogepan.clayium.client.renderer;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
-import net.kogepan.clayium.blocks.TestClayContainerBlock;
+import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.client.model.PipeOverlayQuads;
 import net.kogepan.clayium.client.utils.ModelUtils;
 import net.kogepan.clayium.utils.MachineIOMode;
@@ -45,16 +45,14 @@ public class PipedMachineIoRenderer implements BlockEntityRenderer<ClayContainer
         if (!isPipingTool(heldItem)) return;
 
         var state = blockEntity.getBlockState();
-        if (!state.getValue(TestClayContainerBlock.PIPE)) {
+        if (!state.getValue(ClayContainerBlock.PIPE)) {
             return;
         }
-
-        poseStack.pushPose();
 
         // Render IO icons for each connected side
         for (Direction side : Direction.values()) {
             // Check if this side is connected
-            var property = TestClayContainerBlock.getProperty(side);
+            var property = ClayContainerBlock.getProperty(side);
             if (!state.getValue(property)) continue;
 
             MachineIOMode importMode = blockEntity.getInputMode(side);
@@ -71,8 +69,6 @@ public class PipedMachineIoRenderer implements BlockEntityRenderer<ClayContainer
                 renderSideIconWithBakedQuad(poseStack, buffer, side, exportQuad, packedLight, packedOverlay);
             }
         }
-
-        poseStack.popPose();
     }
 
     /**

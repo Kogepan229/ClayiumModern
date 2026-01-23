@@ -1,4 +1,4 @@
-package net.kogepan.clayium.utils;
+package net.kogepan.clayium.inventory;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;

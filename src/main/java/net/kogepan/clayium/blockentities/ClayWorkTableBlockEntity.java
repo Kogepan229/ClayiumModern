@@ -5,11 +5,11 @@ import net.kogepan.clayium.client.ldlib.elements.ClayWorkTableButton;
 import net.kogepan.clayium.client.ldlib.elements.LargeItemSlot;
 import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
 import net.kogepan.clayium.client.ldlib.textures.ClayWorkTableButtonTextures;
+import net.kogepan.clayium.inventory.DroppableItemStackHandler;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumItems;
-import net.kogepan.clayium.utils.DroppableItemStackHandler;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
