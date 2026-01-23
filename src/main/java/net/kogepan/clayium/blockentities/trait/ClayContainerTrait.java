@@ -2,6 +2,9 @@ package net.kogepan.clayium.blockentities.trait;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+
 import org.jetbrains.annotations.NotNull;
 
 public abstract class ClayContainerTrait {
@@ -16,4 +19,8 @@ public abstract class ClayContainerTrait {
     }
 
     abstract public void tick();
+
+    public void saveAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {}
+
+    public void loadAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {}
 }

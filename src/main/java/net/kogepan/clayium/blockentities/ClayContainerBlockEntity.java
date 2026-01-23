@@ -221,6 +221,15 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         super.saveAdditional(tag, provider);
         tag.put("inputModes", this.inputModes.serializeNBT(provider));
         tag.put("outputModes", this.outputModes.serializeNBT(provider));
+
+        // Save trait data
+        for (ClayContainerTrait trait : this.traits.values()) {
+            CompoundTag traitTag = new CompoundTag();
+            trait.saveAdditional(traitTag, provider);
+            if (!traitTag.isEmpty()) {
+                tag.put(trait.id, traitTag);
+            }
+        }
     }
 
     @Override
@@ -232,6 +241,15 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         if (tag.contains("outputModes")) {
             this.outputModes.deserializeNBT(provider, tag.getCompound("outputModes"));
         }
+
+        // Load trait data
+        for (ClayContainerTrait trait : this.traits.values()) {
+            if (tag.contains(trait.id)) {
+                CompoundTag traitTag = tag.getCompound(trait.id);
+                trait.loadAdditional(traitTag, provider);
+            }
+        }
+
         if (this.level != null && this.level.isClientSide()) {
             this.requestModelDataUpdate();
             this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
