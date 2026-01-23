@@ -4,6 +4,17 @@
   "block.clayium.clay_ore": "Clay Ore",
   "block.clayium.clay_work_table": "Clay Work Table",
 
+  "block.clayium.clay_buffer_4": "Basic Buffer",
+  "block.clayium.clay_buffer_5": "Advanced Buffer",
+  "block.clayium.clay_buffer_6": "Precision Buffer",
+  "block.clayium.clay_buffer_7": "Clay Steel Buffer",
+  "block.clayium.clay_buffer_8": "Clayium Buffer",
+  "block.clayium.clay_buffer_9": "Ultimate Buffer",
+  "block.clayium.clay_buffer_10": "Antimatter Buffer",
+  "block.clayium.clay_buffer_11": "Pure Antimatter Buffer",
+  "block.clayium.clay_buffer_12": "OEC Buffer",
+  "block.clayium.clay_buffer_13": "OPA Buffer",
+
   "clayium.configuration.title": "Clayium Configs",
   "clayium.configuration.section.clayium.common.toml": "Clayium Configs",
   "clayium.configuration.section.clayium.common.toml.title": "Clayium Configs",
