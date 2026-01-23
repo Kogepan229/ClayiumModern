@@ -24,6 +24,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ClayEnergyHolder extends ClayContainerTrait implements IClayEnergyHolder {
 
+    public static final String TRAIT_ID = "clayEnergyHolder";
+
     private final ClayiumItemStackHandler backingEcSlotHandler;
     private final FilteredItemHandlerModifiable energizedClayItemHandler;
 
@@ -31,7 +33,7 @@ public class ClayEnergyHolder extends ClayContainerTrait implements IClayEnergyH
     private int ceSlotStackLimit = 1;
 
     public ClayEnergyHolder(@NotNull ClayContainerBlockEntity blockEntity) {
-        super(blockEntity, "clayEnergyHolder");
+        super(blockEntity, TRAIT_ID);
         this.backingEcSlotHandler = new ClayiumItemStackHandler(blockEntity, 1) {
 
             @Override

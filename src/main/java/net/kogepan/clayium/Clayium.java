@@ -1,6 +1,9 @@
 package net.kogepan.clayium;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
+import net.kogepan.clayium.capability.ClayiumCapabilities;
+import net.kogepan.clayium.capability.IClayEnergyHolder;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
@@ -106,6 +109,15 @@ public class Clayium {
                     Capabilities.ItemHandler.BLOCK,
                     type.get(),
                     (blockEntity, side) -> ((ClayContainerBlockEntity) blockEntity).getExposedItemHandler(side));
+
+            event.registerBlockEntity(
+                    ClayiumCapabilities.CLAY_ENERGY_HOLDER,
+                    type.get(),
+                    (blockEntity, side) -> {
+                        ClayContainerBlockEntity container = (ClayContainerBlockEntity) blockEntity;
+                        var trait = container.getTrait(ClayEnergyHolder.TRAIT_ID);
+                        return trait instanceof IClayEnergyHolder ? (IClayEnergyHolder) trait : null;
+                    });
         }
     }
 

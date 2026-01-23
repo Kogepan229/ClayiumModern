@@ -97,6 +97,11 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         this.traits.put(trait.id, trait);
     }
 
+    @Nullable
+    public ClayContainerTrait getTrait(String id) {
+        return this.traits.get(id);
+    }
+
     public void initDefaultRoutes() {
         this.inputModes.setMode(Direction.UP, MachineIOMode.FIRST);
         this.inputModes.setMode(this.getBlockState().getValue(ClayContainerBlock.FACING).getOpposite(),
