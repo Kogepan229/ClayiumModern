@@ -52,11 +52,7 @@ public class ClayEnergyHolder extends ClayContainerTrait implements IClayEnergyH
         };
         this.energizedClayItemHandler = new FilteredItemHandlerModifiable(
                 this.backingEcSlotHandler,
-                stack -> {
-                    // TODO: Check if stack has ENERGIZED_CLAY capability
-                    // For now, we'll need to implement this check when IClayEnergyProvider is available
-                    return false; // Placeholder
-                });
+                stack -> CEUtils.getItemEnergy(stack) > 0);
     }
 
     @Override
@@ -120,11 +116,11 @@ public class ClayEnergyHolder extends ClayContainerTrait implements IClayEnergyH
         ItemStack stack = this.energizedClayItemHandler.getStackInSlot(0);
         if (stack.isEmpty()) return;
 
-        // TODO: Get IClayEnergyProvider capability from stack
-        // IClayEnergyProvider ceProvider = stack.getCapability(ClayiumCapabilities.ENERGIZED_CLAY, null);
-        // if (ceProvider == null) return;
-        // this.clayEnergy += ceProvider.getClayEnergy();
-        // this.energizedClayItemHandler.extractItem(0, 1, false);
+        long energy = CEUtils.getItemEnergy(stack);
+        if (energy > 0) {
+            this.clayEnergy += energy;
+            this.energizedClayItemHandler.extractItem(0, 1, false);
+        }
     }
 
     @Override

@@ -6,9 +6,13 @@ import net.kogepan.clayium.client.model.PipeOverlayQuads;
 import net.kogepan.clayium.client.model.block.ClayContainerModelLoader;
 import net.kogepan.clayium.client.renderer.PipedMachineIoRenderer;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
+import net.kogepan.clayium.utils.CEUtils;
 
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.EventPriority;
@@ -22,6 +26,7 @@ import net.neoforged.neoforge.client.event.ModelEvent;
 import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
+import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
@@ -67,6 +72,19 @@ public class ClayiumClient {
             event.registerBlockEntityRenderer(
                     (BlockEntityType<? extends ClayContainerBlockEntity>) holder.get(),
                     PipedMachineIoRenderer::new);
+        }
+    }
+
+    @SubscribeEvent
+    public static void onTooltip(ItemTooltipEvent event) {
+        ItemStack stack = event.getItemStack();
+
+        long ce = CEUtils.getItemEnergy(stack);
+
+        if (ce > 0) {
+            event.getToolTip().add(
+                    Component.literal("CE: " + CEUtils.formatCE(ce))
+                            .withStyle(ChatFormatting.GRAY));
         }
     }
 }

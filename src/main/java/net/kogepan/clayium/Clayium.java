@@ -8,6 +8,7 @@ import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumBlocks;
+import net.kogepan.clayium.registries.ClayiumDataMaps;
 import net.kogepan.clayium.registries.ClayiumItems;
 
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -31,6 +32,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import com.mojang.logging.LogUtils;
 import org.slf4j.Logger;
@@ -69,6 +71,7 @@ public class Clayium {
         ClayiumRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
 
         modEventBus.addListener(this::registerCapacilities);
+        modEventBus.addListener(this::registerDataMapTypes);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
@@ -119,6 +122,10 @@ public class Clayium {
                         return trait instanceof IClayEnergyHolder ? (IClayEnergyHolder) trait : null;
                     });
         }
+    }
+
+    public void registerDataMapTypes(RegisterDataMapTypesEvent event) {
+        event.register(ClayiumDataMaps.CLAY_ENERGY);
     }
 
     public static ResourceLocation id(String path) {

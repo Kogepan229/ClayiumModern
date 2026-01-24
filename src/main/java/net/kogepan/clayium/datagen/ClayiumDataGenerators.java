@@ -48,5 +48,8 @@ public class ClayiumDataGenerators {
 
         // Recipes
         generator.addProvider(event.includeServer(), new ClayiumRecipeProvider(output, registries));
+
+        // Data Maps
+        generator.addProvider(event.includeServer(), new ClayiumDataMapProvider(output, registries));
     }
 }

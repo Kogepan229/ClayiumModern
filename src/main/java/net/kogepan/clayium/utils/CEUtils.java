@@ -1,5 +1,9 @@
 package net.kogepan.clayium.utils;
 
+import net.kogepan.clayium.registries.ClayiumDataMaps;
+
+import net.minecraft.world.item.ItemStack;
+
 /**
  * Utility class for Clay Energy unit conversions and constants.
  *
@@ -129,5 +133,18 @@ public final class CEUtils {
         } else {
             return (d / 1000) + "." + (d / 100 % 10) + (d / 10 % 10) + (d % 10) + CE_NUMERALS[p];
         }
+    }
+
+    /**
+     * Gets the Clay Energy of an item stack using Data Maps.
+     *
+     * @param stack The item stack to check
+     * @return The Clay Energy value (internal long), or 0 if not defined
+     */
+    public static long getItemEnergy(ItemStack stack) {
+        if (stack.isEmpty())
+            return 0;
+        Long energy = stack.getItemHolder().getData(ClayiumDataMaps.CLAY_ENERGY);
+        return energy != null ? energy : 0;
     }
 }
