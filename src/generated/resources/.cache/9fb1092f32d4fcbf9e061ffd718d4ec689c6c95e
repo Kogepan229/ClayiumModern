@@ -1,4 +1,6 @@
-// 1.21.1	2026-01-13T17:18:32.6713648	Recipes
+// 1.21.1	2026-01-24T18:16:27.8036776	Recipes
+be8547688bc410092872a34d08c58797081ff28f data/clayium/recipe/bending_machine/clay_place.json
+b6058132045c72f735862c0ea0769eb2797b3b87 data/clayium/recipe/bending_machine/large_clay_place.json
 9848c6b0ab97dc2bf9f0aeb4151f5d080f9fb2c0 data/clayium/recipe/clay_work_table/0/clay_cylinder.json
 0338c3cbf445d81b9fff3e2e2034cdaa63454547 data/clayium/recipe/clay_work_table/0/clay_needle.json
 9fd3b6ae853623e32735e265c76895802715c4eb data/clayium/recipe/clay_work_table/0/clay_stick.json

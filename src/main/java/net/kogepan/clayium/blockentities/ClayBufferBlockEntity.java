@@ -40,13 +40,6 @@ public class ClayBufferBlockEntity extends ClayContainerBlockEntity {
         super(ClayiumBlockEntityTypes.CLAY_BUFFER_BLOCK_ENTITY.get(), pos, blockState,
                 List.of(MachineIOMode.NONE, MachineIOMode.ALL), List.of(MachineIOMode.NONE, MachineIOMode.ALL));
 
-        int tier;
-        if (blockState.getBlock() instanceof ClayContainerBlock containerBlock) {
-            tier = containerBlock.tier;
-        } else {
-            throw new RuntimeException("Invalid block!");
-        }
-
         this.inventoryRowSize = switch (tier) {
             case 4, 5, 6, 7 -> tier - 3;
             case 8 -> 4;
@@ -71,12 +64,12 @@ public class ClayBufferBlockEntity extends ClayContainerBlockEntity {
     }
 
     @Override
-    protected IItemHandlerModifiable getInputInventory() {
+    public IItemHandlerModifiable getInputInventory() {
         return this.itemInventory;
     }
 
     @Override
-    protected IItemHandlerModifiable getOutputInventory() {
+    public IItemHandlerModifiable getOutputInventory() {
         return this.itemInventory;
     }
 

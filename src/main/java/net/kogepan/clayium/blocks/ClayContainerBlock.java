@@ -1,7 +1,6 @@
 package net.kogepan.clayium.blocks;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
-import net.kogepan.clayium.blockentities.TestClayContainerBlockEntity;
 import net.kogepan.clayium.registries.ClayiumItems;
 
 import net.minecraft.core.BlockPos;
@@ -42,7 +41,7 @@ import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public class ClayContainerBlock extends Block implements EntityBlock, BlockUIMenuType.BlockUI {
+public abstract class ClayContainerBlock extends Block implements EntityBlock, BlockUIMenuType.BlockUI {
 
     public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty PIPE = BooleanProperty.create("pipe");
@@ -76,12 +75,6 @@ public class ClayContainerBlock extends Block implements EntityBlock, BlockUIMen
                 .setValue(WEST, false)
                 .setValue(UP, false)
                 .setValue(DOWN, false));
-    }
-
-    @Override
-    @Nullable
-    public BlockEntity newBlockEntity(@NotNull BlockPos blockPos, @NotNull BlockState blockState) {
-        return new TestClayContainerBlockEntity(blockPos, blockState);
     }
 
     @Override

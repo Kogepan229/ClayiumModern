@@ -52,6 +52,8 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     protected final List<MachineIOMode> validInputModes;
     protected final List<MachineIOMode> validOutputModes;
 
+    public final int tier;
+
     protected final Map<String, ClayContainerTrait> traits = new LinkedHashMap<>();
 
     protected final Map<@NotNull Direction, BlockCapabilityCache<IItemHandler, @Nullable Direction>> neighborsItemHandlerCache = new EnumMap<>(
@@ -67,6 +69,12 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         assert !validOutputModes.isEmpty();
         this.validInputModes = validInputModes;
         this.validOutputModes = validOutputModes;
+
+        if (blockState.getBlock() instanceof ClayContainerBlock containerBlock) {
+            tier = containerBlock.tier;
+        } else {
+            throw new RuntimeException("Invalid block!");
+        }
     }
 
     public static void tick(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state,
@@ -91,6 +99,8 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
                 this.neighborsItemHandlerCache.put(direction, cache);
             }
         }
+
+        this.traits.values().forEach(ClayContainerTrait::onLoad);
     }
 
     public void addTrait(ClayContainerTrait trait) {
@@ -102,12 +112,19 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         return this.traits.get(id);
     }
 
-    public void initDefaultRoutes() {
-        this.inputModes.setMode(Direction.UP, MachineIOMode.FIRST);
-        this.inputModes.setMode(this.getBlockState().getValue(ClayContainerBlock.FACING).getOpposite(),
-                MachineIOMode.CE);
-        this.outputModes.setMode(Direction.DOWN, MachineIOMode.FIRST);
+    public void notifyItemInputInventoryChanged() {
+        for (ClayContainerTrait trait : this.traits.values()) {
+            trait.notifyItemInputInventoryChanged();
+        }
     }
+
+    public void notifyItemOutputInventoryChanged() {
+        for (ClayContainerTrait trait : this.traits.values()) {
+            trait.notifyItemOutputInventoryChanged();
+        }
+    }
+
+    public void initDefaultRoutes() {}
 
     @Nullable
     public IItemHandler getNeighborItemHandler(@NotNull Direction direction) {
@@ -152,9 +169,9 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         }
     }
 
-    protected abstract IItemHandlerModifiable getInputInventory();
+    public abstract IItemHandlerModifiable getInputInventory();
 
-    protected abstract IItemHandlerModifiable getOutputInventory();
+    public abstract IItemHandlerModifiable getOutputInventory();
 
     @Nullable
     public IItemHandler getExposedItemHandler(@Nullable Direction side) {

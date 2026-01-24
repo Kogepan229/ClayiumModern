@@ -1,6 +1,7 @@
 package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.blocks.BendingMachineBlock;
 import net.kogepan.clayium.blocks.ClayBufferBlock;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.blocks.ClayOre;
@@ -51,14 +52,12 @@ public class ClayiumBlocks {
     public static final DeferredBlock<ClayWorkTableBlock> CLAY_WORK_TABLE = register("clay_work_table",
             ClayWorkTableBlock::new);
 
-    public static final DeferredBlock<ClayContainerBlock> TEST_CLAY_CONTAINER = register("test_clay_container",
-            () -> new ClayContainerBlock(1));
-
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> BENDING_MACHINE_BLOCKS;
     static {
         Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
         for (int i = 1; i <= 9; i++) {
-            map.put(i, registerTiered("bending_machine", i, ClayContainerBlock::new));
+            if (i == 8) continue;
+            map.put(i, registerTiered("bending_machine", i, BendingMachineBlock::new));
         }
         BENDING_MACHINE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }

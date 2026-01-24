@@ -1,0 +1,21 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 2,
+  "duration": 2,
+  "inputs": [
+    {
+      "amount": 4,
+      "ingredient": {
+        "item": "clayium:clay_plate"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:large_clay_plate"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:bending_machine"
+}

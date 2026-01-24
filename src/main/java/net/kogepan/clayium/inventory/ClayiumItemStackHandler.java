@@ -9,7 +9,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 
 public class ClayiumItemStackHandler extends ItemStackHandler {
 
-    private final ClayContainerBlockEntity blockEntity;
+    protected final ClayContainerBlockEntity blockEntity;
 
     public ClayiumItemStackHandler(ClayContainerBlockEntity blockEntity) {
         super(1);

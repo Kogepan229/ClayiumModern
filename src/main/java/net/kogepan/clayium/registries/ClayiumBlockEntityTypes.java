@@ -4,7 +4,7 @@ import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.ClayBufferBlockEntity;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.ClayWorkTableBlockEntity;
-import net.kogepan.clayium.blockentities.TestClayContainerBlockEntity;
+import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -29,14 +29,13 @@ public class ClayiumBlockEntityTypes {
                     () -> BlockEntityType.Builder.of(ClayWorkTableBlockEntity::new, ClayiumBlocks.CLAY_WORK_TABLE.get())
                             .build(null));
 
-    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<TestClayContainerBlockEntity>> TEST_CLAY_CONTAINER_BLOCK_ENTITY = registerClayContainer(
-            "test_clay_container_block_entity",
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BendingMachineBlockEntity>> BENDING_MACHINE_BLOCK_ENTITY = registerClayContainer(
+            "bending_machine_block_entity",
             () -> {
                 List<Block> blocks = new ArrayList<>(ClayiumBlocks.BENDING_MACHINE_BLOCKS.values().stream()
                         .map(DeferredHolder::get).toList());
-                blocks.add(ClayiumBlocks.TEST_CLAY_CONTAINER.get());
                 return BlockEntityType.Builder
-                        .of(TestClayContainerBlockEntity::new,
+                        .of(BendingMachineBlockEntity::new,
                                 blocks.toArray(Block[]::new))
                         .build(null);
             });

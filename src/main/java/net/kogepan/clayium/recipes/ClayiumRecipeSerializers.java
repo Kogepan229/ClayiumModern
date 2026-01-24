@@ -2,7 +2,9 @@ package net.kogepan.clayium.recipes;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
+import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.recipes.serializers.ClayWorkTableRecipeSerializer;
+import net.kogepan.clayium.recipes.serializers.MachineRecipeSerializer;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -16,4 +18,7 @@ public class ClayiumRecipeSerializers {
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<ClayWorkTableRecipe>> CLAY_WORK_TABLE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
             .register("clay_work_table", ClayWorkTableRecipeSerializer::new);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MachineRecipe>> MACHINE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
+            .register("machine", MachineRecipeSerializer::new);
 }

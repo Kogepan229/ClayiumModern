@@ -2,7 +2,6 @@
   "values": [
     "clayium:clay_ore",
     "clayium:clay_work_table",
-    "clayium:test_clay_container",
     "clayium:bending_machine_1",
     "clayium:bending_machine_2",
     "clayium:bending_machine_3",
@@ -10,7 +9,6 @@
     "clayium:bending_machine_5",
     "clayium:bending_machine_6",
     "clayium:bending_machine_7",
-    "clayium:bending_machine_8",
     "clayium:bending_machine_9",
     "clayium:clay_buffer_4",
     "clayium:clay_buffer_5",

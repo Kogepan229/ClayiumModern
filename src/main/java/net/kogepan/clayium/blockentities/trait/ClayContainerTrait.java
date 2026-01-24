@@ -20,6 +20,12 @@ public abstract class ClayContainerTrait {
 
     abstract public void tick();
 
+    public void onLoad() {}
+
+    public void notifyItemInputInventoryChanged() {}
+
+    public void notifyItemOutputInventoryChanged() {}
+
     public void saveAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {}
 
     public void loadAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {}
