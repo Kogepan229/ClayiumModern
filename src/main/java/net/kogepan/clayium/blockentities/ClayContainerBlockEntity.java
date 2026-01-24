@@ -2,6 +2,7 @@ package net.kogepan.clayium.blockentities;
 
 import net.kogepan.clayium.blockentities.trait.ClayContainerTrait;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.inventory.MachineIOInventoryWrapper;
 import net.kogepan.clayium.utils.MachineIOMode;
 import net.kogepan.clayium.utils.MachineIOModes;
@@ -30,7 +31,12 @@ import net.neoforged.neoforge.items.wrapper.RangedWrapper;
 
 import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
 import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
+import com.lowdragmc.lowdraglib2.gui.ui.UI;
+import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
+import com.lowdragmc.lowdraglib2.gui.ui.elements.inventory.InventorySlots;
+import com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager;
 import lombok.Getter;
+import org.appliedenergistics.yoga.YogaJustify;
 import org.jetbrains.annotations.MustBeInvokedByOverriders;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -303,5 +309,21 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
                 .build();
     }
 
-    abstract public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder);
+    protected abstract void createMainUI(BlockUIMenuType.BlockUIHolder holder, UIElement root);
+
+    public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
+        var root = new UIElement().layout(layout -> layout
+                .paddingAll(6)
+                .setJustifyContent(YogaJustify.CENTER))
+                .addClass("panel_bg");
+        root.addChild(
+                new CLabel().setText(this.getBlockState().getBlock().getName().getString()));
+
+        this.createMainUI(holder, root);
+
+        root.addChild(new CLabel().setText("Inventory"));
+        root.addChild(new InventorySlots());
+        return new ModularUI(UI.of(root, List.of(StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC))),
+                holder.player);
+    }
 }

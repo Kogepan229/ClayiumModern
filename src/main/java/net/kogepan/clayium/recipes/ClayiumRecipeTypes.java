@@ -32,9 +32,6 @@ public class ClayiumRecipeTypes {
     public static final DeferredHolder<RecipeType<?>, RecipeType<ClayWorkTableRecipe>> CLAY_WORK_TABLE_RECIPE_TYPE = RECIPE_TYPES
             .register("clay_work_table", RecipeType::simple);
 
-    public static final DeferredHolder<RecipeType<?>, RecipeType<MachineRecipe>> MACHINE_RECIPE_TYPE = RECIPE_TYPES
-            .register("machine", RecipeType::simple);
-
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> BENDING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
             "bending_machine", 1, 1);
 }

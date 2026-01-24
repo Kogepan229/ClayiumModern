@@ -2,7 +2,6 @@ package net.kogepan.clayium.blockentities;
 
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
-import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.utils.MachineIOMode;
@@ -17,12 +16,8 @@ import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
 import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
 import com.lowdragmc.lowdraglib2.gui.slot.ItemHandlerSlot;
-import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
-import com.lowdragmc.lowdraglib2.gui.ui.UI;
 import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
-import com.lowdragmc.lowdraglib2.gui.ui.elements.inventory.InventorySlots;
-import com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager;
 import org.appliedenergistics.yoga.YogaFlexDirection;
 import org.appliedenergistics.yoga.YogaJustify;
 import org.jetbrains.annotations.NotNull;
@@ -95,14 +90,7 @@ public class ClayBufferBlockEntity extends ClayContainerBlockEntity {
     }
 
     @Override
-    public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
-        var root = new UIElement().layout(layout -> layout
-                .paddingAll(6)
-                .setJustifyContent(YogaJustify.CENTER))
-                .addClass("panel_bg");
-        root.addChild(
-                new CLabel().setText(this.getBlockState().getBlock().getName().getString()));
-
+    protected void createMainUI(BlockUIMenuType.BlockUIHolder holder, UIElement root) {
         UIElement slotsElement = new UIElement().layout(layout -> layout.setJustifyContent(YogaJustify.CENTER));
         root.addChild(slotsElement);
         for (int row = 0; row < this.inventoryRowSize; row++) {
@@ -114,10 +102,5 @@ public class ClayBufferBlockEntity extends ClayContainerBlockEntity {
                         .bind(new ItemHandlerSlot(this.itemInventory, col + row * this.inventoryColumnSize)));
             }
         }
-
-        root.addChild(new CLabel().setText("Inventory"));
-        root.addChild(new InventorySlots());
-        return new ModularUI(UI.of(root, List.of(StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC))),
-                holder.player);
     }
 }

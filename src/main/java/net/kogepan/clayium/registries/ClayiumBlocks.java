@@ -1,11 +1,11 @@
 package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
-import net.kogepan.clayium.blocks.BendingMachineBlock;
 import net.kogepan.clayium.blocks.ClayBufferBlock;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.blocks.ClayOre;
 import net.kogepan.clayium.blocks.ClayWorkTableBlock;
+import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Rarity;

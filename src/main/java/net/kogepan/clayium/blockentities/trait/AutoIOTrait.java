@@ -26,10 +26,12 @@ public abstract class AutoIOTrait extends ClayContainerTrait {
     protected AutoIOTrait(@NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer) {
         super(blockEntity, "autoIoHandler");
         this.tier = tier;
-        this.importInterval = TierUtils.getBufferAutoImportInterval(tier);
-        this.exportInterval = TierUtils.getBufferAutoExportInterval(tier);
-        this.importMax = TierUtils.getBufferAutoImportMax(tier);
-        this.exportMax = TierUtils.getBufferAutoExportMax(tier);
+        this.importInterval = isBuffer ? TierUtils.getBufferAutoImportInterval(tier) :
+                TierUtils.getMachineAutoImportInterval(tier);
+        this.exportInterval = isBuffer ? TierUtils.getBufferAutoExportInterval(tier) :
+                TierUtils.getMachineAutoExportInterval(tier);
+        this.importMax = isBuffer ? TierUtils.getBufferAutoImportMax(tier) : TierUtils.getMachineAutoImportMax(tier);
+        this.exportMax = isBuffer ? TierUtils.getBufferAutoExportMax(tier) : TierUtils.getMachineAutoExportMax(tier);
     }
 
     @Override

@@ -1,6 +1,6 @@
 package net.kogepan.clayium.blockentities;
 
-import net.kogepan.clayium.blockentities.trait.AbstractRecipeLogic;
+import net.kogepan.clayium.blockentities.trait.EnergyRecipeLogic;
 import net.kogepan.clayium.recipes.SimpleMachineRecipeType;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 
@@ -8,8 +8,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 
-import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
-import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
 import org.jetbrains.annotations.NotNull;
 
 public abstract class SimpleMachineBlockEntity extends WorkableClayContainerBlockEntity {
@@ -22,12 +20,7 @@ public abstract class SimpleMachineBlockEntity extends WorkableClayContainerBloc
                 getValidOutputModes(recipeType.getMaxOutputSize()),
                 recipeType.getMaxInputSize(),
                 recipeType.getMaxOutputSize(),
-                (be) -> new AbstractRecipeLogic(be, recipeType),
+                (be) -> new EnergyRecipeLogic(be, recipeType, be.energyHolder),
                 recipeType);
-    }
-
-    @Override
-    public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
-        return null;
     }
 }

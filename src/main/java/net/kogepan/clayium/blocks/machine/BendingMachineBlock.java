@@ -1,7 +1,8 @@
-package net.kogepan.clayium.blocks;
+package net.kogepan.clayium.blocks.machine;
 
 import net.kogepan.clayium.blockentities.ClayBufferBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
+import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 
 import net.minecraft.core.BlockPos;

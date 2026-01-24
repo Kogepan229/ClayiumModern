@@ -15,6 +15,15 @@
   "block.clayium.clay_buffer_12": "OEC Buffer",
   "block.clayium.clay_buffer_13": "OPA Buffer",
 
+  "block.clayium.bending_machine_1": "Clay Bending Machine",
+  "block.clayium.bending_machine_2": "Dense Clay Bending Machine",
+  "block.clayium.bending_machine_3": "Simple Bending Machine",
+  "block.clayium.bending_machine_4": "Basic Bending Machine",
+  "block.clayium.bending_machine_5": "Advanced Bending Machine",
+  "block.clayium.bending_machine_6": "Precision Bending Machine",
+  "block.clayium.bending_machine_7": "Clay Steel Bending Machine",
+  "block.clayium.bending_machine_9": "Ultimate Bending Machine",
+
   "clayium.configuration.title": "Clayium Configs",
   "clayium.configuration.section.clayium.common.toml": "Clayium Configs",
   "clayium.configuration.section.clayium.common.toml.title": "Clayium Configs",

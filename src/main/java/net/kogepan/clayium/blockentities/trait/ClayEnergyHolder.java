@@ -2,6 +2,8 @@ package net.kogepan.clayium.blockentities.trait;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.capability.IClayEnergyHolder;
+import net.kogepan.clayium.client.ldlib.elements.CLabel;
+import net.kogepan.clayium.client.ldlib.textures.ButtonTextures;
 import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
 import net.kogepan.clayium.inventory.FilteredItemHandlerModifiable;
 import net.kogepan.clayium.utils.CEUtils;
@@ -10,11 +12,18 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.IItemHandler;
 
+import com.lowdragmc.lowdraglib2.gui.sync.bindings.impl.DataBindingBuilder;
+import com.lowdragmc.lowdraglib2.gui.sync.bindings.impl.SupplierDataSource;
+import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
+import com.lowdragmc.lowdraglib2.gui.ui.elements.BindableValue;
+import com.lowdragmc.lowdraglib2.gui.ui.elements.Button;
+import com.lowdragmc.lowdraglib2.gui.ui.event.UIEvents;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -128,5 +137,38 @@ public class ClayEnergyHolder extends ClayContainerTrait implements IClayEnergyH
         if (tag.contains("clayEnergy")) {
             clayEnergy = tag.getLong("clayEnergy");
         }
+    }
+
+    private void onClickEnergyButton() {
+        this.addEnergy(1);
+    }
+
+    private String getFormattedEnergyText() {
+        return CEUtils.formatCE(this.clayEnergy);
+    }
+
+    public CLabel createEnergyTextUIElement() {
+        CLabel label = new CLabel();
+        label
+                .bindDataSource(SupplierDataSource.of(() -> Component.literal(getFormattedEnergyText())))
+                .addChild(new BindableValue<Long>().bind(DataBindingBuilder.longValS2C(() -> this.clayEnergy)
+                        .remoteSetter((energy) -> this.clayEnergy = energy).build()));
+        return label;
+    }
+
+    public UIElement createEnergyButtonElement() {
+        return new Button()
+                .noText()
+                .buttonStyle(style -> style
+                        .baseTexture(ButtonTextures.CE_BUTTON.base)
+                        .hoverTexture(ButtonTextures.CE_BUTTON.hovered)
+                        .pressedTexture(ButtonTextures.CE_BUTTON.hovered))
+                .layout(l -> l.width(16).height(16))
+                .addEventListener(UIEvents.CLICK, e -> {
+                    // this.onClickEnergyButton();
+                })
+                .addServerEventListener(UIEvents.CLICK, e -> {
+                    this.onClickEnergyButton();
+                });
     }
 }

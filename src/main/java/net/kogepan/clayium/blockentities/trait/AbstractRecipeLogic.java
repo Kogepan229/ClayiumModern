@@ -1,6 +1,7 @@
 package net.kogepan.clayium.blockentities.trait;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.utils.TransferUtils;
 
@@ -12,13 +13,15 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 
+import com.lowdragmc.lowdraglib2.gui.sync.bindings.impl.DataBindingBuilder;
+import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AbstractRecipeLogic extends ClayContainerTrait {
+public abstract class AbstractRecipeLogic extends ClayContainerTrait {
 
     public static final String TRAIT_ID = "recipeLogic";
 
@@ -155,10 +158,9 @@ public class AbstractRecipeLogic extends ClayContainerTrait {
                     ItemStack machineStack = machineInventory.getStackInSlot(i);
                     if (machineStack.isEmpty() || !machineStack.is(stackToConsume.getItem())) continue;
 
-                    machineInventory.extractItem(i, machineStack.getCount(), false);
-                    stackToConsume.setCount(stackToConsume.getCount() - machineStack.getCount());
+                    ItemStack extracted = machineInventory.extractItem(i, stackToConsume.getCount(), false);
+                    stackToConsume.setCount(stackToConsume.getCount() - extracted.getCount());
                     if (stackToConsume.isEmpty()) {
-                        machineInventory.setStackInSlot(i, ItemStack.EMPTY);
                         break;
                     }
                 }
@@ -174,9 +176,7 @@ public class AbstractRecipeLogic extends ClayContainerTrait {
         return this.canProgress = true;
     }
 
-    protected boolean drawEnergy(long amount, boolean simulate) {
-        return false;
-    }
+    protected abstract boolean drawEnergy(long amount, boolean simulate);
 
     protected long getProgressPerTick() {
         return 1;
@@ -206,5 +206,15 @@ public class AbstractRecipeLogic extends ClayContainerTrait {
         for (ItemStack stack : this.processingRecipeHolder.value().copyOutputs()) {
             ItemHandlerHelper.insertItem(outputInventory, stack, false);
         }
+        this.processingRecipeHolder = null;
+    }
+
+    public UIElement createProgressUIElement() {
+        return new ProgressArrow()
+                .bind(DataBindingBuilder
+                        .floatValS2C(() -> this.processingRecipeHolder != null ?
+                                (float) this.currentProgress / this.processingRecipeHolder.value().duration() : 0)
+                        .build())
+                .layout(layout -> layout.width(22));
     }
 }

@@ -4,6 +4,7 @@ import net.kogepan.clayium.blockentities.trait.AbstractRecipeLogic;
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.client.ldlib.textures.SlotTextures;
 import net.kogepan.clayium.inventory.NotifiableItemStackHandler;
 import net.kogepan.clayium.utils.MachineIOMode;
 
@@ -14,6 +15,13 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
+import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
+import com.lowdragmc.lowdraglib2.gui.slot.ItemHandlerSlot;
+import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
+import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
+import org.appliedenergistics.yoga.YogaAlign;
+import org.appliedenergistics.yoga.YogaFlexDirection;
+import org.appliedenergistics.yoga.YogaJustify;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -25,6 +33,8 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
     protected final NotifiableItemStackHandler outputItemInventory;
 
     protected final RecipeType<?> recipeType;
+    protected final AbstractRecipeLogic recipeLogic;
+    protected final ClayEnergyHolder energyHolder;
 
     public WorkableClayContainerBlockEntity(@NotNull BlockEntityType<?> type,
                                             @NotNull BlockPos pos,
@@ -39,10 +49,12 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
         this.inputItemInventory = new NotifiableItemStackHandler(this, inputSize, true);
         this.outputItemInventory = new NotifiableItemStackHandler(this, outputSize, false);
         this.recipeType = recipeType;
+        this.energyHolder = new ClayEnergyHolder(this);
+        this.recipeLogic = recipeLogicProvider.apply(this);
 
         this.addTrait(new AutoIOTrait.Combined(this, this.tier, false));
-        this.addTrait(new ClayEnergyHolder(this));
-        this.addTrait(recipeLogicProvider.apply(this));
+        this.addTrait(this.energyHolder);
+        this.addTrait(this.recipeLogic);
     }
 
     @Override
@@ -86,5 +98,50 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
             return VALID_OUTPUT_MODES_LISTS.get(slots);
         }
         return VALID_OUTPUT_MODES_LISTS.getLast();
+    }
+
+    @Override
+    protected void createMainUI(BlockUIMenuType.BlockUIHolder holder, UIElement root) {
+        UIElement centerUI = new UIElement()
+                .layout(layout -> layout.marginTop(12).flexDirection(YogaFlexDirection.ROW)
+                        .setJustifyContent(YogaJustify.CENTER));
+
+        UIElement inputSlotContainer = new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW));
+        if (this.inputItemInventory.getSlots() == 1) {
+            inputSlotContainer.addChild(new ItemSlot().bind(new ItemHandlerSlot(this.inputItemInventory, 0)));
+        } else if (this.inputItemInventory.getSlots() == 2) {
+            inputSlotContainer.addChild(new ItemSlot().bind(new ItemHandlerSlot(this.inputItemInventory, 0))
+                    .style(style -> style.backgroundTexture(SlotTextures.INPUT_SLOT_1)));
+            inputSlotContainer.addChild(new ItemSlot().bind(new ItemHandlerSlot(this.inputItemInventory, 1))
+                    .style(style -> style.backgroundTexture(SlotTextures.INPUT_SLOT_2)));
+        }
+
+        UIElement outputSlotContainer = new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW));
+        if (this.outputItemInventory.getSlots() == 1) {
+            outputSlotContainer.addChild(
+                    new ItemSlot().bind(new ItemHandlerSlot(this.outputItemInventory, 0).setCanPlace((s) -> false)));
+        } else if (this.outputItemInventory.getSlots() == 2) {
+            outputSlotContainer.addChild(
+                    new ItemSlot().bind(new ItemHandlerSlot(this.outputItemInventory, 0).setCanPlace((s) -> false))
+                            .style(style -> style.backgroundTexture(SlotTextures.OUTPUT_SLOT_1)));
+            outputSlotContainer.addChild(
+                    new ItemSlot().bind(new ItemHandlerSlot(this.outputItemInventory, 1).setCanPlace((s) -> false))
+                            .style(style -> style.backgroundTexture(SlotTextures.OUTPUT_SLOT_2)));
+        }
+
+        centerUI.layout(layout -> layout.marginBottom(4))
+                .addChild(inputSlotContainer)
+                .addChild(this.recipeLogic.createProgressUIElement().layout(layout -> layout.marginHorizontal(8)))
+                .addChild(outputSlotContainer);
+
+        UIElement mainUI = new UIElement();
+        mainUI.addChild(centerUI);
+        if (this.tier < 3) {
+            mainUI.addChild(new UIElement().layout(layout -> layout.height(0).alignItems(YogaAlign.CENTER))
+                    .addChild(this.energyHolder.createEnergyButtonElement()));
+        }
+        mainUI.addChild(this.energyHolder.createEnergyTextUIElement().textStyle(style -> style.adaptiveWidth(true)));
+
+        root.addChild(mainUI);
     }
 }
