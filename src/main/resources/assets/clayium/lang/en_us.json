@@ -3,6 +3,19 @@
 
   "block.clayium.clay_ore": "Clay Ore",
   "block.clayium.clay_work_table": "Clay Work Table",
+  "block.clayium.compressed_clay_0": "Dense Clay",
+  "block.clayium.compressed_clay_1": "Compressed Clay",
+  "block.clayium.compressed_clay_2": "Industrial Clay",
+  "block.clayium.compressed_clay_3": "Advanced Industrial Clay",
+  "block.clayium.compressed_clay_4": "Energetic Clay",
+  "block.clayium.compressed_clay_5": "Compressed Energetic Clay",
+  "block.clayium.compressed_clay_6": "Double Compressed Energetic Clay",
+  "block.clayium.compressed_clay_7": "Triple Compressed Energetic Clay",
+  "block.clayium.compressed_clay_8": "Quadruple Compressed Energetic Clay",
+  "block.clayium.compressed_clay_9": "Quintuple Compressed Energetic Clay",
+  "block.clayium.compressed_clay_10": "Sextuple Compressed Energetic Clay",
+  "block.clayium.compressed_clay_11": "Septuple Compressed Energetic Clay",
+  "block.clayium.compressed_clay_12": "Octuple Compressed Energetic Clay",
 
   "block.clayium.clay_buffer_4": "Basic Buffer",
   "block.clayium.clay_buffer_5": "Advanced Buffer",
@@ -23,6 +36,8 @@
   "block.clayium.bending_machine_6": "Precision Bending Machine",
   "block.clayium.bending_machine_7": "Clay Steel Bending Machine",
   "block.clayium.bending_machine_9": "Ultimate Bending Machine",
+
+  "tooltip.clayium.tier":  "Tier %d",
 
   "clayium.configuration.title": "Clayium Configs",
   "clayium.configuration.section.clayium.common.toml": "Clayium Configs",

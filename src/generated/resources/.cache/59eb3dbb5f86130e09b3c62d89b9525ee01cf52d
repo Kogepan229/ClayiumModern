@@ -1,4 +1,4 @@
-// 1.21.1	2026-01-24T18:16:27.80318	Loot Tables
+// 1.21.1	2026-01-25T01:13:35.9203895	Loot Tables
 0897080755d66020606439b4962ffdbc984745df data/clayium/loot_table/blocks/bending_machine_1.json
 3fb7788ed2907cf9d728f21fc4e68560a14a9d30 data/clayium/loot_table/blocks/bending_machine_2.json
 8358e02ed6e078c85ac90a8e245b7d1c36114636 data/clayium/loot_table/blocks/bending_machine_3.json
@@ -19,3 +19,16 @@ fb58c91e13f995d6926b4ad8fe513dcbe4bc681f data/clayium/loot_table/blocks/clay_buf
 ec9af6a3af10ed5e08cbf972be3f5dcdebcd7479 data/clayium/loot_table/blocks/clay_buffer_9.json
 97bf0fefd2cc82ad71b870c24c8856aa9c556750 data/clayium/loot_table/blocks/clay_ore.json
 289f2435fb39b54cab3a9f657fc896b59a259580 data/clayium/loot_table/blocks/clay_work_table.json
+efe05ca1f333eecc7287c172a048eaab190218ea data/clayium/loot_table/blocks/compressed_clay_0.json
+d7c2670a000302abdde701e7630c78faacdc46f3 data/clayium/loot_table/blocks/compressed_clay_1.json
+51d8bb65ccf87e3b6684722a04f67408dd3cda8f data/clayium/loot_table/blocks/compressed_clay_10.json
+93c6b9520d8f1fd503b0952fb96931b73a2815a2 data/clayium/loot_table/blocks/compressed_clay_11.json
+fbfb8697e3f2d9d169391063cca575bf3c5fe87a data/clayium/loot_table/blocks/compressed_clay_12.json
+3dfb8e5b54b2fc6be444992764ccc84ab43a233f data/clayium/loot_table/blocks/compressed_clay_2.json
+040727eb88cdaecd04d783713bceeb21183736ef data/clayium/loot_table/blocks/compressed_clay_3.json
+d4f92fb9ad7839ac9d597b76d39fee2d5e1d765d data/clayium/loot_table/blocks/compressed_clay_4.json
+54eca1cce2ac9fa0fe4b1c316ebc190c756ad455 data/clayium/loot_table/blocks/compressed_clay_5.json
+82752695ecf0cf2a1960dddeaca90126fdd6b565 data/clayium/loot_table/blocks/compressed_clay_6.json
+4b89e7272e1b268b3018bb8361dc0b269324a15b data/clayium/loot_table/blocks/compressed_clay_7.json
+4abe7b9e66ecd800c978ce630b7f5ba26ee271b1 data/clayium/loot_table/blocks/compressed_clay_8.json
+6f99308ed29f7e88c02ec5f5818f31fe8bc6b41d data/clayium/loot_table/blocks/compressed_clay_9.json

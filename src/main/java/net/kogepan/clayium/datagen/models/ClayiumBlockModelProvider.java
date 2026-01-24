@@ -51,6 +51,10 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
                 makeId("block/clay_work_table_side"),
                 makeId("block/clay_work_table")));
 
+        for (var entry : ClayiumBlocks.COMPRESSED_CLAYS.values()) {
+            simpleBlockAndItem(entry.get());
+        }
+
         for (var entry : ClayiumBlocks.CLAY_BUFFERS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), null);
         }

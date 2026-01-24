@@ -6,10 +6,12 @@ import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.blocks.ClayOre;
 import net.kogepan.clayium.blocks.ClayWorkTableBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
+import net.kogepan.clayium.items.blockitem.TieredBlockItem;
 
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -34,20 +36,30 @@ public class ClayiumBlocks {
     private static <B extends Block> DeferredBlock<B> registerTiered(String name, final int tier,
                                                                      Function<Integer, ? extends B> func) {
         assert tier >= 0;
-        DeferredBlock<B> block = BLOCKS.register(name + "_" + tier, () -> func.apply(tier));
+        name = name + "_" + tier;
 
-        Item.Properties properties = new Item.Properties();
-        switch (tier) {
-            case 4, 5, 6, 7 -> properties.rarity(Rarity.UNCOMMON);
-            case 8, 9, 10, 11 -> properties.rarity(Rarity.RARE);
-            case 12, 13 -> properties.rarity(Rarity.EPIC);
-        }
-        ClayiumItems.ITEMS.registerSimpleBlockItem(block, properties);
+        DeferredBlock<B> block = BLOCKS.register(name, () -> func.apply(tier));
+        ClayiumItems.ITEMS.register(name, (r) -> new TieredBlockItem(block.get(), new Item.Properties(), tier));
 
         return block;
     }
 
+    private static DeferredBlock<Block> registerCompressedClay(int tier) {
+        DeferredBlock<Block> block = registerTiered("compressed_clay", tier,
+                (t) -> new Block(BlockBehaviour.Properties.of().destroyTime(1)
+                        .explosionResistance(1).sound(SoundType.GRAVEL).requiresCorrectToolForDrops()));
+        COMPRESSED_CLAYS.put(tier, block);
+        return block;
+    }
+
     public static final DeferredBlock<ClayOre> CLAY_ORE = register("clay_ore", ClayOre::new);
+
+    public static final Int2ObjectMap<DeferredBlock<Block>> COMPRESSED_CLAYS = new Int2ObjectOpenHashMap<>();
+    static {
+        for (int i = 0; i <= 12; i++) {
+            registerCompressedClay(i);
+        }
+    }
 
     public static final DeferredBlock<ClayWorkTableBlock> CLAY_WORK_TABLE = register("clay_work_table",
             ClayWorkTableBlock::new);

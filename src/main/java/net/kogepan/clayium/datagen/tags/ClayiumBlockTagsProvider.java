@@ -34,6 +34,12 @@ public class ClayiumBlockTagsProvider extends BlockTagsProvider {
 
     private void addEffectiveTools() {
         for (var block : ClayiumBlocks.BLOCKS.getEntries()) {
+
+            if (ClayiumBlocks.COMPRESSED_CLAYS.containsValue(block)) {
+                tag(BlockTags.MINEABLE_WITH_SHOVEL).add(block.get());
+                continue;
+            }
+
             tag(BlockTags.MINEABLE_WITH_PICKAXE).add(block.get());
         }
     }
