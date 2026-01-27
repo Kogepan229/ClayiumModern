@@ -23,5 +23,7 @@ run
 runs
 run-data
 .cursor
+.serena
+.vscode
 
 repo
