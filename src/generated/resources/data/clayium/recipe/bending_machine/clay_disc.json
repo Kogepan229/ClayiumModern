@@ -1,19 +1,18 @@
 {
   "type": "clayium:machine",
   "ce_per_tick": 1,
-  "duration": 4,
+  "duration": 2,
   "inputs": [
     {
-      "amount": 4,
       "ingredient": {
-        "item": "clayium:clay_plate"
+        "item": "clayium:large_clay_ball"
       }
     }
   ],
   "outputs": [
     {
       "count": 1,
-      "id": "clayium:large_clay_plate"
+      "id": "clayium:clay_disc"
     }
   ],
   "recipe_tier": 0,

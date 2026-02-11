@@ -4,16 +4,15 @@
   "duration": 4,
   "inputs": [
     {
-      "amount": 4,
       "ingredient": {
-        "item": "clayium:clay_plate"
+        "item": "clayium:clay_cylinder"
       }
     }
   ],
   "outputs": [
     {
-      "count": 1,
-      "id": "clayium:large_clay_plate"
+      "count": 2,
+      "id": "clayium:clay_blade"
     }
   ],
   "recipe_tier": 0,

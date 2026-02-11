@@ -1,6 +1,13 @@
-// 1.21.1	2026-01-24T18:16:27.8036776	Recipes
+// 1.21.1	2026-02-11T22:08:22.329664657	Recipes
+e9c00f76819a03d83ea99bea7eabf9911dcab1e1 data/clayium/recipe/bending_machine/clay_blade.json
+b367a89cc9ff71154bc99f8b34e5bf5969f550e9 data/clayium/recipe/bending_machine/clay_disc.json
 be8547688bc410092872a34d08c58797081ff28f data/clayium/recipe/bending_machine/clay_place.json
-b6058132045c72f735862c0ea0769eb2797b3b87 data/clayium/recipe/bending_machine/large_clay_place.json
+3ed5fb81f897c441819b792dfb0ea6e2a4d7b177 data/clayium/recipe/bending_machine/dense_clay_blade.json
+571117dc979c4b4d0424ad2c4d0ff243db6127e0 data/clayium/recipe/bending_machine/dense_clay_plate.json
+038a45c026b1600f81da8ae512b0e5783766d820 data/clayium/recipe/bending_machine/dense_large_clay_place.json
+58d16f42cce9f4f0164b9cbab4382534ed7c6607 data/clayium/recipe/bending_machine/large_clay_place.json
+52cdab9c0e483613b7dfaab796ac3c9f94183fac data/clayium/recipe/bending_machine/raw_clay_slicer.json
+3e40175bead2473b219779df98cf4b6bc79241f6 data/clayium/recipe/bending_machine/small_clay_disc.json
 9848c6b0ab97dc2bf9f0aeb4151f5d080f9fb2c0 data/clayium/recipe/clay_work_table/0/clay_cylinder.json
 0338c3cbf445d81b9fff3e2e2034cdaa63454547 data/clayium/recipe/clay_work_table/0/clay_needle.json
 9fd3b6ae853623e32735e265c76895802715c4eb data/clayium/recipe/clay_work_table/0/clay_stick.json

@@ -4,16 +4,15 @@
   "duration": 4,
   "inputs": [
     {
-      "amount": 4,
       "ingredient": {
-        "item": "clayium:clay_plate"
+        "item": "clayium:compressed_clay_0"
       }
     }
   ],
   "outputs": [
     {
       "count": 1,
-      "id": "clayium:large_clay_plate"
+      "id": "clayium:dense_clay_plate"
     }
   ],
   "recipe_tier": 0,
