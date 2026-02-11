@@ -2,6 +2,7 @@ package net.kogepan.clayium.integration.emi;
 
 import net.kogepan.clayium.integration.XEIMachineRecipeCategory;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
+import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 
 import net.minecraft.world.item.crafting.Recipe;
@@ -40,7 +41,12 @@ public class ClayiumEMIPlugin implements EmiPlugin {
             }
             registry.getRecipeManager().getAllRecipesFor(ClayiumRecipeTypes.BENDING_MACHINE_RECIPE_TYPE.get())
                     .stream()
-                    .sorted(Comparator.comparingInt(r -> r.value().recipeTier()))
+                    .sorted(Comparator
+                            .<RecipeHolder<MachineRecipe>>comparingInt(r -> r.value().recipeTier())
+                            .thenComparingLong(r -> {
+                                MachineRecipe recipe = r.value();
+                                return recipe.duration() * recipe.cePerTick();
+                            }))
                     .map((holder) -> new EMIMachineRecipe(emiCategory, holder))
                     .forEach(registry::addRecipe);
         }
