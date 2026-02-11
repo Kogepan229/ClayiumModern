@@ -1,5 +1,6 @@
 package net.kogepan.clayium.integration.emi;
 
+import net.kogepan.clayium.integration.XEIMachineRecipeCategory;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 
@@ -24,12 +25,25 @@ public class ClayiumEMIPlugin implements EmiPlugin {
     public void register(EmiRegistry registry) {
         registry.addCategory(EMIClayWorkTableRecipe.CATEGORY);
         registry.addWorkstation(EMIClayWorkTableRecipe.CATEGORY, EmiStack.of(ClayiumBlocks.CLAY_WORK_TABLE));
-
         registry.getRecipeManager().getAllRecipesFor(ClayiumRecipeTypes.CLAY_WORK_TABLE_RECIPE_TYPE.get())
                 .stream()
                 .sorted(Comparator.comparingInt(r -> r.value().button()))
                 .map(EMIClayWorkTableRecipe::new)
                 .forEach(registry::addRecipe);
+
+        for (XEIMachineRecipeCategory category : XEIMachineRecipeCategory.getCategories()) {
+            EMIMachineRecipe.EMIMachineRecipeCategory emiCategory = new EMIMachineRecipe.EMIMachineRecipeCategory(
+                    category);
+            registry.addCategory(emiCategory);
+            for (var block : category.getWorkstations()) {
+                registry.addWorkstation(emiCategory, EmiStack.of(block));
+            }
+            registry.getRecipeManager().getAllRecipesFor(ClayiumRecipeTypes.BENDING_MACHINE_RECIPE_TYPE.get())
+                    .stream()
+                    .sorted(Comparator.comparingInt(r -> r.value().recipeTier()))
+                    .map((holder) -> new EMIMachineRecipe(emiCategory, holder))
+                    .forEach(registry::addRecipe);
+        }
     }
 
     private static <C extends RecipeInput, T extends Recipe<C>> void adaptRecipeType(EmiRegistry registry,

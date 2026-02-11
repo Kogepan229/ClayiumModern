@@ -30,7 +30,7 @@ public class SimpleMachineRecipeType<T extends Recipe<?>> implements RecipeType<
     public static <T extends Recipe<?>> SimpleMachineRecipeType<T> create(ResourceLocation name, final int maxInputSize,
                                                                           final int maxOutputSize) {
         final String toString = name.toString();
-        return new SimpleMachineRecipeType<T>(name, maxInputSize, maxOutputSize) {
+        return new SimpleMachineRecipeType<>(name, maxInputSize, maxOutputSize) {
 
             @Override
             public String toString() {

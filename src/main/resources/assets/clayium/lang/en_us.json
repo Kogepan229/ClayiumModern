@@ -39,6 +39,8 @@
 
   "tooltip.clayium.tier":  "Tier %d",
 
+  "xei.clayium.tier": "Tier: %d",
+
   "clayium.configuration.title": "Clayium Configs",
   "clayium.configuration.section.clayium.common.toml": "Clayium Configs",
   "clayium.configuration.section.clayium.common.toml.title": "Clayium Configs",

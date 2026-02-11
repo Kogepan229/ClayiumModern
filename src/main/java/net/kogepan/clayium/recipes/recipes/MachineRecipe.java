@@ -1,17 +1,35 @@
 package net.kogepan.clayium.recipes.recipes;
 
+import net.kogepan.clayium.client.ldlib.elements.CLabel;
+import net.kogepan.clayium.client.ldlib.elements.ItemSlotXEI;
+import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
+import net.kogepan.clayium.client.ldlib.textures.XEITextures;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ItemIngredientStack;
 import net.kogepan.clayium.recipes.SimpleMachineRecipeType;
 import net.kogepan.clayium.recipes.inputs.MachineRecipeInput;
+import net.kogepan.clayium.utils.CEUtils;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
+import com.lowdragmc.lowdraglib2.gui.sync.bindings.impl.SupplierDataSource;
+import com.lowdragmc.lowdraglib2.gui.texture.IGuiTexture;
+import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
+import com.lowdragmc.lowdraglib2.gui.ui.UI;
+import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
+import com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager;
+import com.lowdragmc.lowdraglib2.integration.xei.IngredientIO;
+import org.appliedenergistics.yoga.YogaFlexDirection;
+import org.appliedenergistics.yoga.YogaJustify;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -150,5 +168,58 @@ public record MachineRecipe(
     @NotNull
     public RecipeType<?> getType() {
         return recipeType;
+    }
+
+    public static final int WIDTH = 174;
+    public static final int HEIGHT = 70;
+    private static final int PROGRESS_ARROW_WIDTH = 20;
+
+    public ModularUI createModularUI() {
+        var root = new UIElement().layout(layout -> layout
+                .width(WIDTH)
+                .height(HEIGHT)
+                .paddingAll(6)
+                .setJustifyContent(YogaJustify.CENTER));
+
+        root.addChild(new UIElement().layout(layout -> layout.width(28).height(11))
+                .style(style -> style.backgroundTexture(XEITextures.BADGE)));
+
+        UIElement inputContainer = new UIElement()
+                .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW).width(69).height(18)
+                        .setJustifyContent(YogaJustify.FLEX_END))
+                .style(style -> style.background(XEITextures.SLOT));
+        UIElement outputContainer = new UIElement()
+                .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW).width(69).height(18))
+                .style(style -> style.background(XEITextures.SLOT));
+
+        for (ItemIngredientStack input : this.inputs) {
+            inputContainer.addChild(new ItemSlotXEI().xeiRecipeIngredient(IngredientIO.INPUT,
+                    input.getIngredient(), input.getAmount()).style(style -> style.background(IGuiTexture.EMPTY)));
+        }
+
+        for (ItemStack output : this.outputs) {
+            outputContainer.addChild(new ItemSlotXEI().xeiRecipeIngredient(IngredientIO.OUTPUT,
+                    Ingredient.of(output), output.getCount()).style(style -> style.background(IGuiTexture.EMPTY)));
+        }
+
+        root.addChild(new UIElement()
+                .layout(layout -> layout.marginTop(3).gapAll(3).flexDirection(YogaFlexDirection.ROW))
+                .addChild(inputContainer)
+                .addChild(new ProgressArrow().bindDataSource(SupplierDataSource
+                        .of(() -> {
+                            ClientLevel level = Minecraft.getInstance().level;
+                            final long clientTick = level != null ? level.getGameTime() : 0;
+                            final int threshold = PROGRESS_ARROW_WIDTH * 2;
+                            return (float) (clientTick % threshold) / threshold;
+                        }))
+                        .layout(layout -> layout.width(PROGRESS_ARROW_WIDTH)))
+                .addChild(outputContainer));
+
+        root.addChild(new UIElement().layout(layout -> layout.marginTop(3))
+                .addChild(new CLabel().setText(Component.translatable("xei.clayium.tier", this.recipeTier)))
+                .addChild(new CLabel().setText(String.format("%s/t ✕ %st = %s", CEUtils.formatCE(this.cePerTick),
+                        this.duration, CEUtils.formatCE(this.cePerTick * this.duration)))));
+
+        return new ModularUI(UI.of(root, List.of(StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC))));
     }
 }
