@@ -37,7 +37,15 @@
   "block.clayium.bending_machine_7": "Clay Steel Bending Machine",
   "block.clayium.bending_machine_9": "Ultimate Bending Machine",
 
+  "block.clayium.waterwheel_1": "Basic Water Wheel",
+  "block.clayium.waterwheel_2": "Advanced Water Wheel",
+
   "tooltip.clayium.tier":  "Tier %d",
+
+  "gui.clayium.inventory": "Inventory",
+  "gui.clayium.waterwheel.progress": "Progress: %d",
+  "gui.clayium.waterwheel.durability": "Durability: %d",
+  "gui.clayium.waterwheel.water": "Water: %d",
 
   "xei.clayium.tier": "Tier: %d",
 

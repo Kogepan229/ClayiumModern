@@ -13,6 +13,7 @@ public class ClayContainerModelBuilder extends CustomLoaderBuilder<BlockModelBui
 
     BlockModelBuilder baseModel;
     BlockModelBuilder overlayModel;
+    boolean rotateVertical = false;
 
     public ClayContainerModelBuilder(BlockModelBuilder parent, ExistingFileHelper existingFileHelper) {
         super(ClayContainerModelLoader.ID, parent, existingFileHelper, false);
@@ -28,6 +29,11 @@ public class ClayContainerModelBuilder extends CustomLoaderBuilder<BlockModelBui
         return this;
     }
 
+    public ClayContainerModelBuilder rotateVertical(boolean rotateVertical) {
+        this.rotateVertical = rotateVertical;
+        return this;
+    }
+
     @Override
     @NotNull
     public JsonObject toJson(@NotNull JsonObject json) {
@@ -40,6 +46,10 @@ public class ClayContainerModelBuilder extends CustomLoaderBuilder<BlockModelBui
 
         if (overlayModel != null) {
             json.add("overlay_model", overlayModel.toJson());
+        }
+
+        if (rotateVertical) {
+            json.addProperty("rotate_vertical", true);
         }
 
         return json;

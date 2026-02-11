@@ -54,8 +54,11 @@ public class ClayBufferBlockEntity extends ClayContainerBlockEntity {
 
     @Override
     public void initDefaultRoutes() {
-        this.inputModes.setMode(this.getBlockState().getValue(ClayContainerBlock.FACING).getOpposite(),
-                MachineIOMode.ALL);
+        BlockState blockState = this.getBlockState();
+        if (blockState.getBlock() instanceof ClayContainerBlock containerBlock) {
+            this.inputModes.setMode(blockState.getValue(containerBlock.getFacingProperty()).getOpposite(),
+                    MachineIOMode.ALL);
+        }
     }
 
     @Override

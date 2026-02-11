@@ -60,8 +60,11 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
     @Override
     public void initDefaultRoutes() {
         this.inputModes.setMode(Direction.UP, MachineIOMode.ALL);
-        this.inputModes.setMode(this.getBlockState().getValue(ClayContainerBlock.FACING).getOpposite(),
-                MachineIOMode.CE);
+        BlockState blockState = this.getBlockState();
+        if (blockState.getBlock() instanceof ClayContainerBlock containerBlock) {
+            this.inputModes.setMode(blockState.getValue(containerBlock.getFacingProperty()).getOpposite(),
+                    MachineIOMode.CE);
+        }
         this.outputModes.setMode(Direction.DOWN, MachineIOMode.ALL);
     }
 

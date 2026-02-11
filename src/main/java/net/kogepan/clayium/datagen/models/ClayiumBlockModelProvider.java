@@ -26,7 +26,8 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         }
     }
 
-    private static final ResourceLocation BENDING_MACHINE_TEXTURES = Clayium.id("block/machine/bending_machine");
+    private static final ResourceLocation BENDING_MACHINE_TEXTURE = Clayium.id("block/machine/bending_machine");
+    private static final ResourceLocation WATERWHEEL_TEXTURE = Clayium.id("block/machine/waterwheel");
 
     public ClayiumBlockModelProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, Clayium.MODID, exFileHelper);
@@ -60,11 +61,20 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         }
 
         for (var entry : ClayiumBlocks.BENDING_MACHINE_BLOCKS.int2ObjectEntrySet()) {
-            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), BENDING_MACHINE_TEXTURES);
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), BENDING_MACHINE_TEXTURE);
+        }
+
+        for (var entry : ClayiumBlocks.WATERWHEELS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), WATERWHEEL_TEXTURE, true);
         }
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay) {
+        registerSingleMachine(block, tier, overlay, false);
+    }
+
+    private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,
+                                       boolean rotateVertical) {
         ClayContainerModelBuilder builder = models().getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
                 .customLoader(ClayContainerModelBuilder::new)
                 .baseModel(models().nested().parent(models().getExistingFile(models().mcLoc("block/cube_all")))
@@ -74,6 +84,10 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
             builder.overlayModel(
                     models().nested().parent(models().getExistingFile(OVERLAY_MODEL)).texture("overlay_front",
                             overlay));
+        }
+
+        if (rotateVertical) {
+            builder.rotateVertical(true);
         }
 
         BlockModelBuilder model = builder.end();

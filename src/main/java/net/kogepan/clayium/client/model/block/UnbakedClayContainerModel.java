@@ -36,10 +36,16 @@ public class UnbakedClayContainerModel implements IUnbakedGeometry<UnbakedClayCo
     private final BlockModel base;
     @Nullable
     private final BlockModel overlay;
+    private final boolean rotateVertical;
 
     public UnbakedClayContainerModel(BlockModel base, @Nullable BlockModel overlay) {
+        this(base, overlay, false);
+    }
+
+    public UnbakedClayContainerModel(BlockModel base, @Nullable BlockModel overlay, boolean rotateVertical) {
         this.base = base;
         this.overlay = overlay;
+        this.rotateVertical = rotateVertical;
     }
 
     @Override
@@ -61,6 +67,15 @@ public class UnbakedClayContainerModel implements IUnbakedGeometry<UnbakedClayCo
                     ModelUtils.rotateModel(this.overlay, baker, spriteGetter, context.getRootTransform(), 180));
             bakedOverlays.put(Direction.EAST,
                     ModelUtils.rotateModel(this.overlay, baker, spriteGetter, context.getRootTransform(), 270));
+
+            if (this.rotateVertical) {
+                bakedOverlays.put(Direction.UP,
+                        ModelUtils.rotateModelVertical(this.overlay, baker, spriteGetter, context.getRootTransform(),
+                                -90));
+                bakedOverlays.put(Direction.DOWN,
+                        ModelUtils.rotateModelVertical(this.overlay, baker, spriteGetter, context.getRootTransform(),
+                                90));
+            }
         }
 
         BakedModel pipeCore = new BakedPipeModel(bakedBase, baker.bake(PIPE_CORE_MODEL, modelState, spriteGetter));

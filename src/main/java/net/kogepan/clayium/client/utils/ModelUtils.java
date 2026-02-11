@@ -42,6 +42,30 @@ public class ModelUtils {
         return model.bake(baker, spriteGetter, rotatedState);
     }
 
+    /**
+     * Rotate a model vertically (around X axis) for UP/DOWN directions.
+     *
+     * @param model        The model to rotate
+     * @param baker        The model baker
+     * @param spriteGetter The sprite getter function
+     * @param root         The root transformation
+     * @param degree       The rotation degree (positive for DOWN, negative for UP)
+     * @return The rotated baked model
+     */
+    public static BakedModel rotateModelVertical(@NotNull BlockModel model, @NotNull ModelBaker baker,
+                                                 @NotNull Function<Material, TextureAtlasSprite> spriteGetter,
+                                                 @NotNull Transformation root, float degree) {
+        Quaternionf rotation = new Quaternionf(root.getLeftRotation());
+        rotation.mul(Axis.XP.rotationDegrees(degree));
+        ModelState rotatedState = new SimpleModelState(new Transformation(
+                root.getTranslation(),
+                rotation,
+                root.getScale(),
+                root.getRightRotation()));
+
+        return model.bake(baker, spriteGetter, rotatedState);
+    }
+
     public static BakedQuad remapQuadUVToRange(
                                                @NotNull BakedQuad sourceQuad,
                                                @NotNull BakedQuad targetQuad,

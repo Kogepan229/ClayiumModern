@@ -5,6 +5,7 @@ import net.kogepan.clayium.blockentities.ClayBufferBlockEntity;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.ClayWorkTableBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
+import net.kogepan.clayium.blockentities.machine.WaterwheelBlockEntity;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -46,6 +47,17 @@ public class ClayiumBlockEntityTypes {
                     .of(ClayBufferBlockEntity::new, ClayiumBlocks.CLAY_BUFFERS.values().stream()
                             .map(DeferredHolder::get).toArray(Block[]::new))
                     .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WaterwheelBlockEntity>> WATERWHEEL_BLOCK_ENTITY = registerClayContainer(
+            "waterwheel_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.WATERWHEELS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(WaterwheelBlockEntity::new,
+                                blocks.toArray(Block[]::new))
+                        .build(null);
+            });
 
     private static <
             T extends ClayContainerBlockEntity> DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> registerClayContainer(

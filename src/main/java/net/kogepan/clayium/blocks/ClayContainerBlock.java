@@ -17,6 +17,7 @@ import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.DirectionalBlock;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.HorizontalDirectionalBlock;
 import net.minecraft.world.level.block.Mirror;
@@ -43,7 +44,6 @@ import org.jetbrains.annotations.Nullable;
 
 public abstract class ClayContainerBlock extends Block implements EntityBlock, BlockUIMenuType.BlockUI {
 
-    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
     public static final BooleanProperty PIPE = BooleanProperty.create("pipe");
     public static final BooleanProperty NORTH = BlockStateProperties.NORTH;
     public static final BooleanProperty SOUTH = BlockStateProperties.SOUTH;
@@ -67,7 +67,7 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
         this.tier = tier;
 
         this.registerDefaultState(this.stateDefinition.any()
-                .setValue(FACING, Direction.NORTH)
+                .setValue(this.getFacingProperty(), Direction.NORTH)
                 .setValue(PIPE, false)
                 .setValue(NORTH, false)
                 .setValue(SOUTH, false)
@@ -77,9 +77,13 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
                 .setValue(DOWN, false));
     }
 
+    public DirectionProperty getFacingProperty() {
+        return HorizontalDirectionalBlock.FACING;
+    }
+
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(FACING).add(PIPE);
+        builder.add(this.getFacingProperty()).add(PIPE);
         for (Direction direction : Direction.values()) {
             builder.add(getProperty(direction));
         }
@@ -100,21 +104,38 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
 
     @Override
     @Nullable
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
+    public BlockState getStateForPlacement(@NotNull BlockPlaceContext context) {
+        DirectionProperty facing = this.getFacingProperty();
+
+        if (facing == DirectionalBlock.FACING) {
+            Direction direction = context.getNearestLookingDirection();
+
+            if (direction != Direction.UP && direction != Direction.DOWN) {
+                direction = direction.getOpposite();
+            }
+
+            return this.defaultBlockState()
+                    .setValue(this.getFacingProperty(), direction);
+        }
+
         return this.defaultBlockState()
-                .setValue(FACING, context.getHorizontalDirection().getOpposite());
+                .setValue(this.getFacingProperty(), context.getHorizontalDirection().getOpposite());
     }
 
     @Override
     @NotNull
     public BlockState rotate(BlockState state, Rotation rotation) {
-        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+        DirectionProperty facingProperty = state.getBlock() instanceof ClayContainerBlock containerBlock ?
+                containerBlock.getFacingProperty() : this.getFacingProperty();
+        return state.setValue(facingProperty, rotation.rotate(state.getValue(facingProperty)));
     }
 
     @Override
     @NotNull
     public BlockState mirror(@NotNull BlockState state, Mirror mirror) {
-        return this.rotate(state, mirror.getRotation(state.getValue(FACING)));
+        DirectionProperty facingProperty = state.getBlock() instanceof ClayContainerBlock containerBlock ?
+                containerBlock.getFacingProperty() : this.getFacingProperty();
+        return this.rotate(state, mirror.getRotation(state.getValue(facingProperty)));
     }
 
     @Override

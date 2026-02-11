@@ -24,6 +24,7 @@ public class ClayContainerModelLoader implements IGeometryLoader<UnbakedClayCont
                                           @NotNull JsonDeserializationContext context) throws JsonParseException {
         BlockModel base = null;
         BlockModel overlay = null;
+        boolean rotateVertical = false;
 
         if (json.has("base_model")) {
             base = context.deserialize(json.getAsJsonObject("base_model"), BlockModel.class);
@@ -31,10 +32,13 @@ public class ClayContainerModelLoader implements IGeometryLoader<UnbakedClayCont
         if (json.has("overlay_model")) {
             overlay = context.deserialize(json.getAsJsonObject("overlay_model"), BlockModel.class);
         }
+        if (json.has("rotate_vertical")) {
+            rotateVertical = json.get("rotate_vertical").getAsBoolean();
+        }
         if (base == null) {
             throw new JsonParseException("ClayContainerModel dosen't have 'base_model'");
         }
 
-        return new UnbakedClayContainerModel(base, overlay);
+        return new UnbakedClayContainerModel(base, overlay, rotateVertical);
     }
 }

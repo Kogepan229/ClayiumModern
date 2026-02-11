@@ -69,8 +69,10 @@ public class ClayContainerModel implements IDynamicBakedModel {
                     this.baseModel.getQuads(blockState, direction, randomSource, modelData, renderType));
 
             if (bakedOverlayModels != null) {
-                Direction facing = blockState != null ? blockState.getValue(ClayContainerBlock.FACING) :
-                        Direction.NORTH;
+                Direction facing = Direction.NORTH;
+                if (blockState != null && blockState.getBlock() instanceof ClayContainerBlock containerBlock) {
+                    facing = blockState.getValue(containerBlock.getFacingProperty());
+                }
                 quads.addAll(bakedOverlayModels.get(facing).getQuads(blockState, direction, randomSource, modelData,
                         renderType));
             }
