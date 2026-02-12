@@ -6,6 +6,7 @@ import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.blocks.ClayOre;
 import net.kogepan.clayium.blocks.ClayWorkTableBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
+import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
 import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
 import net.kogepan.clayium.items.blockitem.TieredBlockItem;
 
@@ -91,5 +92,14 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("waterwheel", i, WaterwheelBlock::new));
         }
         WATERWHEELS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> COBBLESTONE_GENERATORS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 1; i <= 7; i++) {
+            map.put(i, registerTiered("cobblestone_generator", i, CobblestoneGeneratorBlock::new));
+        }
+        COBBLESTONE_GENERATORS = Int2ObjectMaps.unmodifiable(map);
     }
 }

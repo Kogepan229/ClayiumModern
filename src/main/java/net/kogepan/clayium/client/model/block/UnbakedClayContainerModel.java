@@ -71,10 +71,10 @@ public class UnbakedClayContainerModel implements IUnbakedGeometry<UnbakedClayCo
             if (this.rotateVertical) {
                 bakedOverlays.put(Direction.UP,
                         ModelUtils.rotateModelVertical(this.overlay, baker, spriteGetter, context.getRootTransform(),
-                                -90));
+                                90));
                 bakedOverlays.put(Direction.DOWN,
                         ModelUtils.rotateModelVertical(this.overlay, baker, spriteGetter, context.getRootTransform(),
-                                90));
+                                -90));
             }
         }
 

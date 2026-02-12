@@ -21,6 +21,13 @@
     "clayium:clay_buffer_12",
     "clayium:clay_buffer_13",
     "clayium:waterwheel_1",
-    "clayium:waterwheel_2"
+    "clayium:waterwheel_2",
+    "clayium:cobblestone_generator_1",
+    "clayium:cobblestone_generator_2",
+    "clayium:cobblestone_generator_3",
+    "clayium:cobblestone_generator_4",
+    "clayium:cobblestone_generator_5",
+    "clayium:cobblestone_generator_6",
+    "clayium:cobblestone_generator_7"
   ]
 }

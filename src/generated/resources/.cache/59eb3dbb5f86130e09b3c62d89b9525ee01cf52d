@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-12T01:43:52.797137965	Loot Tables
+// 1.21.1	2026-02-12T15:41:00.750993282	Loot Tables
 0897080755d66020606439b4962ffdbc984745df data/clayium/loot_table/blocks/bending_machine_1.json
 3fb7788ed2907cf9d728f21fc4e68560a14a9d30 data/clayium/loot_table/blocks/bending_machine_2.json
 8358e02ed6e078c85ac90a8e245b7d1c36114636 data/clayium/loot_table/blocks/bending_machine_3.json
@@ -19,6 +19,13 @@ fb58c91e13f995d6926b4ad8fe513dcbe4bc681f data/clayium/loot_table/blocks/clay_buf
 ec9af6a3af10ed5e08cbf972be3f5dcdebcd7479 data/clayium/loot_table/blocks/clay_buffer_9.json
 97bf0fefd2cc82ad71b870c24c8856aa9c556750 data/clayium/loot_table/blocks/clay_ore.json
 289f2435fb39b54cab3a9f657fc896b59a259580 data/clayium/loot_table/blocks/clay_work_table.json
+e5ecea24145919f4cd7bc4f32528d2882d689d9a data/clayium/loot_table/blocks/cobblestone_generator_1.json
+cf122298a0d0f420b646a39a4cb1f8a3904879d1 data/clayium/loot_table/blocks/cobblestone_generator_2.json
+4f4deaaa3a1ecb12063d64418cc3efb3fa4ff78e data/clayium/loot_table/blocks/cobblestone_generator_3.json
+c012ddb6db075494d8dccb9b66fb3bedfc979be2 data/clayium/loot_table/blocks/cobblestone_generator_4.json
+39ad66c9eb4646e17ace13b822e5e92859cfdddd data/clayium/loot_table/blocks/cobblestone_generator_5.json
+17f375ef48a9e3aa872dd330c9d111dcd5600d27 data/clayium/loot_table/blocks/cobblestone_generator_6.json
+c28c80ed9a751fb8b1f0068885bd96e15f0f34c9 data/clayium/loot_table/blocks/cobblestone_generator_7.json
 efe05ca1f333eecc7287c172a048eaab190218ea data/clayium/loot_table/blocks/compressed_clay_0.json
 d7c2670a000302abdde701e7630c78faacdc46f3 data/clayium/loot_table/blocks/compressed_clay_1.json
 51d8bb65ccf87e3b6684722a04f67408dd3cda8f data/clayium/loot_table/blocks/compressed_clay_10.json

@@ -28,6 +28,8 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
 
     private static final ResourceLocation BENDING_MACHINE_TEXTURE = Clayium.id("block/machine/bending_machine");
     private static final ResourceLocation WATERWHEEL_TEXTURE = Clayium.id("block/machine/waterwheel");
+    private static final ResourceLocation COBBLESTONE_GENERATOR_TEXTURE = Clayium
+            .id("block/machine/cobblestone_generator");
 
     public ClayiumBlockModelProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, Clayium.MODID, exFileHelper);
@@ -66,6 +68,10 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
 
         for (var entry : ClayiumBlocks.WATERWHEELS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), WATERWHEEL_TEXTURE, true);
+        }
+
+        for (var entry : ClayiumBlocks.COBBLESTONE_GENERATORS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), COBBLESTONE_GENERATOR_TEXTURE, true);
         }
     }
 

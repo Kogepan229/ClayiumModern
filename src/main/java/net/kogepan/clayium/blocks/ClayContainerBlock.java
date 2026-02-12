@@ -110,12 +110,8 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
         if (facing == DirectionalBlock.FACING) {
             Direction direction = context.getNearestLookingDirection();
 
-            if (direction != Direction.UP && direction != Direction.DOWN) {
-                direction = direction.getOpposite();
-            }
-
             return this.defaultBlockState()
-                    .setValue(this.getFacingProperty(), direction);
+                    .setValue(this.getFacingProperty(), direction.getOpposite());
         }
 
         return this.defaultBlockState()

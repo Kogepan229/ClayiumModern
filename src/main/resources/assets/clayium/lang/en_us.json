@@ -40,12 +40,21 @@
   "block.clayium.waterwheel_1": "Basic Water Wheel",
   "block.clayium.waterwheel_2": "Advanced Water Wheel",
 
+  "block.clayium.cobblestone_generator_1": "Clay Cobblestone Generator",
+  "block.clayium.cobblestone_generator_2": "Dense Clay Cobblestone Generator",
+  "block.clayium.cobblestone_generator_3": "Simple Cobblestone Generator",
+  "block.clayium.cobblestone_generator_4": "Basic Cobblestone Generator",
+  "block.clayium.cobblestone_generator_5": "Advanced Cobblestone Generator",
+  "block.clayium.cobblestone_generator_6": "Precision Cobblestone Generator",
+  "block.clayium.cobblestone_generator_7": "Clay Steel Cobblestone Generator",
+
   "tooltip.clayium.tier":  "Tier %d",
 
   "gui.clayium.inventory": "Inventory",
   "gui.clayium.waterwheel.progress": "Progress: %d",
   "gui.clayium.waterwheel.durability": "Durability: %d",
   "gui.clayium.waterwheel.water": "Water: %d",
+  "gui.clayium.cobblestone_generator.progress": "Progress: %d",
 
   "xei.clayium.tier": "Tier: %d",
 
