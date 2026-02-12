@@ -29,6 +29,8 @@ repositories {
     maven { url = "https://maven.blamejared.com/" }
     // Jade
     maven { url = "https://api.modrinth.com/maven" }
+    // CurseForge mods via CurseMaven
+    maven { url = "https://cursemaven.com" }
 }
 
 base {
@@ -173,6 +175,8 @@ dependencies {
     }
 
     localRuntime("maven.modrinth:jade:${jade_version}")
+
+//    localRuntime("curse.maven:x-ray-java-edition-1266195:7341071")
 
     // lombok
     compileOnly("org.projectlombok:lombok:${lombok_version}")

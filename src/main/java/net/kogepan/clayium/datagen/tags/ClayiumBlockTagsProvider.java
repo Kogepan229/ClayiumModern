@@ -27,7 +27,9 @@ public class ClayiumBlockTagsProvider extends BlockTagsProvider {
     protected void addTags(@NotNull HolderLookup.Provider provider) {
         tag(ClayiumTags.CLAY_TOOLS_BONUS_BLOCK)
                 .add(Blocks.CLAY)
-                .add(ClayiumBlocks.CLAY_ORE.get());
+                .add(ClayiumBlocks.CLAY_ORE.get())
+                .add(ClayiumBlocks.DENSE_CLAY_ORE.get())
+                .add(ClayiumBlocks.LARGE_DENSE_CLAY_ORE.get());
 
         addEffectiveTools();
     }

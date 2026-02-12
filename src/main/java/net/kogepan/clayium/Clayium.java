@@ -9,6 +9,7 @@ import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumDataMaps;
+import net.kogepan.clayium.registries.ClayiumFeatures;
 import net.kogepan.clayium.registries.ClayiumItems;
 
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -69,6 +70,7 @@ public class Clayium {
         ClayiumBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
         ClayiumRecipeTypes.RECIPE_TYPES.register(modEventBus);
         ClayiumRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+        ClayiumFeatures.FEATURES.register(modEventBus);
 
         modEventBus.addListener(this::registerCapacilities);
         modEventBus.addListener(this::registerDataMapTypes);

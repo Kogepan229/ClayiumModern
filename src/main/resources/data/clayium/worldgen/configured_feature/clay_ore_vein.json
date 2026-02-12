@@ -1,0 +1,9 @@
+{
+  "type": "clayium:clay_ore_vein",
+  "config": {
+    "normal_size": 24,
+    "dense_size": 10,
+    "large_dense_chance": 0.5
+  }
+}
+

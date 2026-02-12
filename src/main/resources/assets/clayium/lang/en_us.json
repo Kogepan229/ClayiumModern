@@ -2,6 +2,8 @@
   "itemGroup.clayium": "Clayium",
 
   "block.clayium.clay_ore": "Clay Ore",
+  "block.clayium.dense_clay_ore": "Dense Clay Ore",
+  "block.clayium.large_dense_clay_ore": "Large Dense Clay Ore",
   "block.clayium.clay_work_table": "Clay Work Table",
   "block.clayium.compressed_clay_0": "Dense Clay",
   "block.clayium.compressed_clay_1": "Compressed Clay",

@@ -55,6 +55,18 @@ public class ClayiumBlocks {
     }
 
     public static final DeferredBlock<ClayOre> CLAY_ORE = register("clay_ore", ClayOre::new);
+    public static final DeferredBlock<Block> DENSE_CLAY_ORE = register("dense_clay_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .destroyTime(3.0f)
+                    .explosionResistance(5.0f)
+                    .sound(SoundType.STONE)
+                    .requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> LARGE_DENSE_CLAY_ORE = register("large_dense_clay_ore",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .destroyTime(3.0f)
+                    .explosionResistance(5.0f)
+                    .sound(SoundType.STONE)
+                    .requiresCorrectToolForDrops()));
 
     public static final Int2ObjectMap<DeferredBlock<Block>> COMPRESSED_CLAYS = new Int2ObjectOpenHashMap<>();
     static {

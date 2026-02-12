@@ -1,6 +1,8 @@
 {
   "values": [
     "minecraft:clay",
-    "clayium:clay_ore"
+    "clayium:clay_ore",
+    "clayium:dense_clay_ore",
+    "clayium:large_dense_clay_ore"
   ]
 }

@@ -48,6 +48,8 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     @Override
     protected void registerStatesAndModels() {
         simpleBlockAndItem(ClayiumBlocks.CLAY_ORE.get());
+        simpleBlockAndItem(ClayiumBlocks.DENSE_CLAY_ORE.get());
+        simpleBlockAndItem(ClayiumBlocks.LARGE_DENSE_CLAY_ORE.get());
 
         simpleBlockWithItem(ClayiumBlocks.CLAY_WORK_TABLE.get(), models().cubeColumn(
                 ClayiumBlocks.CLAY_WORK_TABLE.getId().getPath(),

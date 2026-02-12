@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-12T16:17:00.228443572	Block States: clayium
+// 1.21.1	2026-02-12T19:32:44.777505764	Block States: clayium
 59a8cbf5691d0619fce4e61af85d4b071774605e assets/clayium/blockstates/bending_machine_1.json
 cf427b0b7f1ae41b9380716a7ab0c338538ef482 assets/clayium/blockstates/bending_machine_2.json
 9538b1e630d00520a414396e1e83890096ec04a7 assets/clayium/blockstates/bending_machine_3.json
@@ -39,6 +39,8 @@ b887c32d4881e590c87f4ddcc5fa7107a285ee1f assets/clayium/blockstates/compressed_c
 aafaaac338817bdffa80fa8a024efe68f16cda16 assets/clayium/blockstates/compressed_clay_7.json
 e03c01332458f9345eec899a36935c1260ddabd7 assets/clayium/blockstates/compressed_clay_8.json
 48c5bc987bff8e439ff5a4db75b41cbba52c538b assets/clayium/blockstates/compressed_clay_9.json
+3de122146683385805c38ccb20eb8b846de71f0e assets/clayium/blockstates/dense_clay_ore.json
+f0921fc5e8b394e2ed97799c3fd93119ec511ed7 assets/clayium/blockstates/large_dense_clay_ore.json
 489b0c5eeb6e92020dfa096242637fac74fcc656 assets/clayium/blockstates/waterwheel_1.json
 0f3bbd28410acd3c79c41240d19a4d168e63eeac assets/clayium/blockstates/waterwheel_2.json
 34159bff4160e78c9e6828607bcab37fa1f5ea59 assets/clayium/models/block/bending_machine_1.json
@@ -81,6 +83,8 @@ dcbcac6eeb24f899c03c81913f1df04ea65561e2 assets/clayium/models/block/compressed_
 e82bfdacde8e12527d991faee20cd0112105e292 assets/clayium/models/block/compressed_clay_7.json
 33d30a10aa315a436513644207fae373bcefd2ff assets/clayium/models/block/compressed_clay_8.json
 f87690e252db5c7cb935c84f134a3ea2b7640277 assets/clayium/models/block/compressed_clay_9.json
+94a428ac082898e65d999d5116bc13b412ccb86a assets/clayium/models/block/dense_clay_ore.json
+a6a9c6c37b9f6d0b3850b06108f0ac11f9fe774f assets/clayium/models/block/large_dense_clay_ore.json
 831261a7dedb0e75e024968782037d00ca6ac19b assets/clayium/models/block/waterwheel_1.json
 692af5d109827760cf477bfb7d0ff5742a9fe4f3 assets/clayium/models/block/waterwheel_2.json
 d90468f5ffd59da72beb686c5ac5b6c032177bca assets/clayium/models/item/bending_machine_1.json
@@ -123,5 +127,7 @@ dbe74f40559e3a555f091192f14c172ee6ba734e assets/clayium/models/item/compressed_c
 188546ed3505cb599b13524f440fb54e20c2ddd3 assets/clayium/models/item/compressed_clay_7.json
 faa9c06b53044b767131cc215ac8586d3239e0d1 assets/clayium/models/item/compressed_clay_8.json
 5371d70fc04a1b572b91e5640de0c706614fe8f9 assets/clayium/models/item/compressed_clay_9.json
+454b4894b9433b0fe713802c18e3ecc368b30750 assets/clayium/models/item/dense_clay_ore.json
+62a459d2d49090936d2c1c57bbe28cf6b834e78b assets/clayium/models/item/large_dense_clay_ore.json
 4b3a5e677bc8f6c4f7f607990b2bc0bca4104485 assets/clayium/models/item/waterwheel_1.json
 42ee1af804b8f6ab2e24edd67a0e8681d2168bb1 assets/clayium/models/item/waterwheel_2.json
