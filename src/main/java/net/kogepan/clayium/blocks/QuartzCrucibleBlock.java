@@ -1,13 +1,15 @@
 package net.kogepan.clayium.blocks;
 
 import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
-import net.kogepan.clayium.registries.ClayiumItems;
+import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
+import net.kogepan.clayium.recipes.recipes.QuartzCrucibleRecipe;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -28,14 +30,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Quartz Crucible: purifies impure silicon ingots into silicon ingots. Drop impure silicon ingots
- * into the block, wait for the process (30 seconds per ingot), then drop a string to collect silicon
- * ingots. Max 9 ingots at once.
+ * Quartz Crucible: processes items according to JSON recipes. Drop input items into the block,
+ * wait for the configured time (ticks per unit), then drop the catalyst item to collect results.
+ * Max 9 units at once. Recipes define input, catalyst, result, and duration (ticks per unit).
  */
 public class QuartzCrucibleBlock extends Block implements EntityBlock {
 
     public static final int MAX_LEVEL = 9;
-    public static final int TICKS_PER_INGOT = 600; // 30 seconds at 20 TPS
 
     public static final IntegerProperty LEVEL = IntegerProperty.create("level", 0, MAX_LEVEL);
 
@@ -106,35 +107,47 @@ public class QuartzCrucibleBlock extends Block implements EntityBlock {
             return;
         }
 
-        if (stack.is(ClayiumItems.IMPURE_SILICON_INGOT.get())) {
-            int currentLevel = state.getValue(LEVEL);
-            if (currentLevel >= MAX_LEVEL) {
-                return;
-            }
-            stack.shrink(1);
-            if (stack.isEmpty()) {
-                itemEntity.discard();
-            }
-            crucible.addIngot();
-            level.setBlock(pos, state.setValue(LEVEL, currentLevel + 1), Block.UPDATE_ALL);
-            return;
-        }
-
-        if (stack.is(Items.STRING)) {
-            int currentLevel = state.getValue(LEVEL);
-            if (currentLevel <= 0) {
-                return;
-            }
-            if (crucible.getProgress() >= TICKS_PER_INGOT * currentLevel) {
+        // Try input: find a recipe that accepts this item as input
+        int currentLevel = state.getValue(LEVEL);
+        if (currentLevel < MAX_LEVEL) {
+            for (RecipeHolder<QuartzCrucibleRecipe> holder : level.getRecipeManager()
+                    .getAllRecipesFor(ClayiumRecipeTypes.QUARTZ_CRUCIBLE_RECIPE_TYPE.get())) {
+                QuartzCrucibleRecipe recipe = holder.value();
+                if (!recipe.input().test(stack)) {
+                    continue;
+                }
+                // Same recipe type required if we already started
+                ResourceLocation currentStoredId = crucible.getCurrentRecipeId();
+                if (crucible.getIngotQuantity() > 0 && currentStoredId != null &&
+                        !currentStoredId.equals(holder.id())) {
+                    continue;
+                }
                 stack.shrink(1);
                 if (stack.isEmpty()) {
                     itemEntity.discard();
                 }
-                crucible.reset();
-                ItemStack result = new ItemStack(ClayiumItems.SILICON_INGOT.get(), currentLevel);
-                Block.popResource(level, pos, result);
-                level.setBlock(pos, state.setValue(LEVEL, 0), Block.UPDATE_ALL);
+                if (crucible.getIngotQuantity() == 0) {
+                    crucible.setRecipeAndAddIngot(holder);
+                } else {
+                    crucible.addIngot();
+                }
+                level.setBlock(pos, state.setValue(LEVEL, currentLevel + 1), Block.UPDATE_ALL);
+                return;
             }
+        }
+
+        // Try catalyst: current recipe must use this item as catalyst and progress must be complete
+        QuartzCrucibleRecipe recipe = crucible.getCurrentRecipe();
+        if (recipe != null && currentLevel > 0 && recipe.catalyst().test(stack) &&
+                crucible.getProgress() >= crucible.getRequiredTicks()) {
+            stack.shrink(1);
+            if (stack.isEmpty()) {
+                itemEntity.discard();
+            }
+            ItemStack result = recipe.getResultForQuantity(crucible.getIngotQuantity());
+            Block.popResource(level, pos, result);
+            crucible.reset();
+            level.setBlock(pos, state.setValue(LEVEL, 0), Block.UPDATE_ALL);
         }
     }
 }

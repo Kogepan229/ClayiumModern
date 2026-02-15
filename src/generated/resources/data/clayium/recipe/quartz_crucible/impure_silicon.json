@@ -1,0 +1,14 @@
+{
+  "type": "clayium:quartz_crucible",
+  "catalyst": {
+    "item": "minecraft:string"
+  },
+  "duration": 600,
+  "input": {
+    "item": "clayium:impure_silicon_ingot"
+  },
+  "result": {
+    "count": 1,
+    "id": "clayium:silicon_ingot"
+  }
+}

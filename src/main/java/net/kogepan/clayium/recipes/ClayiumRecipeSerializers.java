@@ -3,8 +3,10 @@ package net.kogepan.clayium.recipes;
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
+import net.kogepan.clayium.recipes.recipes.QuartzCrucibleRecipe;
 import net.kogepan.clayium.recipes.serializers.ClayWorkTableRecipeSerializer;
 import net.kogepan.clayium.recipes.serializers.MachineRecipeSerializer;
+import net.kogepan.clayium.recipes.serializers.QuartzCrucibleRecipeSerializer;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -21,4 +23,7 @@ public class ClayiumRecipeSerializers {
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MachineRecipe>> MACHINE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
             .register("machine", MachineRecipeSerializer::new);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<QuartzCrucibleRecipe>> QUARTZ_CRUCIBLE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
+            .register("quartz_crucible", QuartzCrucibleRecipeSerializer::new);
 }
