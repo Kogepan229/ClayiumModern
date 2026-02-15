@@ -60,8 +60,16 @@ public final class ColoredIngotTints {
     }
 
     static {
-        // Colors from ClayiumUnofficial CMaterials (impureSilicon / silicon)
         register(ClayiumItems.IMPURE_SILICON_INGOT, 0xFF978F98, 0xFF533764, 0xFFA9A5A5);
-        register(ClayiumItems.SILICON_INGOT, 0xFF281C28, 0xFF191919, 0xFFFFFFFF);
+        register(ClayiumItems.SILICON_INGOT, 0xFF281C28, 0xFF060406, 0xFFFFFFFF);
+        register(ClayiumItems.SILICONE_INGOT, 0xFFD2D2D2, 0xFFB4B4B4, 0xFFF0F0F0);
+        register(ClayiumItems.ALUMINIUM_INGOT, 0xFFBEC8CA, 0xFF1F2121, 0xFFFFFFFF);
+        register(ClayiumItems.IMPURE_ALUMINIUM_INGOT, 0xFFBEC8CA, 0xFF78783C, 0xFFDCDCDC);
+        register(ClayiumItems.CLAY_STEEL_INGOT, 0xFF8890AD, 0xFF16181C, 0xFFFFFFFF);
+        register(ClayiumItems.CLAYIUM_INGOT, 0xFF5AF0D2, 0xFF3F4855, 0xFFFFCDC8);
+        register(ClayiumItems.ULTIMATE_ALLOY_INGOT, 0xFF55CD55, 0xFF0E220E, 0xFFF5A0FF);
+        register(ClayiumItems.IMPURE_ULTIMATE_ALLOY_INGOT, 0xFF55CD55, 0xFFF5FFFF, 0xFFF5A0FF);
+        register(ClayiumItems.AZ91D_ALLOY_INGOT, 0xFF828C87, 0xFF0A280A, 0xFFFFFFFF);
+        register(ClayiumItems.ZK60A_ALLOY_INGOT, 0xFF4B5550, 0xFF0A280A, 0xFFFFFFFF);
     }
 }

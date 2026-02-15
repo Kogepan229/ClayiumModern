@@ -73,8 +73,71 @@ public class ClayiumItems {
     public static final DeferredItem<Item> ADVANCED_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("advanced_industrial_clay_plate", Item::new);
     public static final DeferredItem<Item> LARGE_ADVANCED_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("large_advanced_industrial_clay_plate", Item::new);
 
+    // Antimatter dust (3-layer tinted)
+    public static final DeferredItem<Item> ANTIMATTER_DUST = ITEMS.registerItem("antimatter_dust", Item::new);
+    public static final DeferredItem<Item> PURE_ANTIMATTER_DUST = ITEMS.registerItem("pure_antimatter_dust", Item::new);
+    public static final DeferredItem<Item> OCTUPLE_PURE_ANTIMATTER_DUST = ITEMS.registerItem("octuple_pure_antimatter_dust", Item::new);
+
     public static final DeferredItem<Item> IMPURE_SILICON_INGOT = ITEMS.registerItem("impure_silicon_ingot", Item::new);
     public static final DeferredItem<Item> SILICON_INGOT = ITEMS.registerItem("silicon_ingot", Item::new);
+
+    // Additional ingots (3-layer tinted)
+    public static final DeferredItem<Item> SILICONE_INGOT = ITEMS.registerItem("silicone_ingot", Item::new);
+    public static final DeferredItem<Item> ALUMINIUM_INGOT = ITEMS.registerItem("aluminium_ingot", Item::new);
+    public static final DeferredItem<Item> IMPURE_ALUMINIUM_INGOT = ITEMS.registerItem("impure_aluminium_ingot", Item::new);
+    public static final DeferredItem<Item> CLAY_STEEL_INGOT = ITEMS.registerItem("clay_steel_ingot", Item::new);
+    public static final DeferredItem<Item> CLAYIUM_INGOT = ITEMS.registerItem("clayium_ingot", Item::new);
+    public static final DeferredItem<Item> ULTIMATE_ALLOY_INGOT = ITEMS.registerItem("ultimate_alloy_ingot", Item::new);
+    public static final DeferredItem<Item> IMPURE_ULTIMATE_ALLOY_INGOT = ITEMS.registerItem("impure_ultimate_alloy_ingot", Item::new);
+    public static final DeferredItem<Item> AZ91D_ALLOY_INGOT = ITEMS.registerItem("az91d_alloy_ingot", Item::new);
+    public static final DeferredItem<Item> ZK60A_ALLOY_INGOT = ITEMS.registerItem("zk60a_alloy_ingot", Item::new);
+
+    // Antimatter matter (gem) - right after ingots
+    public static final DeferredItem<Item> ANTIMATTER_MATTER = ITEMS.registerItem("antimatter_matter", Item::new);
+    public static final DeferredItem<Item> PURE_ANTIMATTER_MATTER = ITEMS.registerItem("pure_antimatter_matter", Item::new);
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_1 = ITEMS.registerItem("compressed_pure_antimatter_1", Item::new);
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_2 = ITEMS.registerItem("compressed_pure_antimatter_2", Item::new);
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_3 = ITEMS.registerItem("compressed_pure_antimatter_3", Item::new);
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_4 = ITEMS.registerItem("compressed_pure_antimatter_4", Item::new);
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_5 = ITEMS.registerItem("compressed_pure_antimatter_5", Item::new);
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_6 = ITEMS.registerItem("compressed_pure_antimatter_6", Item::new);
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_7 = ITEMS.registerItem("compressed_pure_antimatter_7", Item::new);
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_8 = ITEMS.registerItem("compressed_pure_antimatter_8", Item::new);
+
+    // Plates with dedicated texture (Impure Silicon)
+    public static final DeferredItem<Item> IMPURE_SILICON_PLATE = ITEMS.registerItem("impure_silicon_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_IMPURE_SILICON_PLATE = ITEMS.registerItem("large_impure_silicon_plate", Item::new);
+
+    // Plates with 3-layer tint (plate_base/dark/light or largeplate_*)
+    public static final DeferredItem<Item> SILICONE_PLATE = ITEMS.registerItem("silicone_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_SILICONE_PLATE = ITEMS.registerItem("large_silicone_plate", Item::new);
+    public static final DeferredItem<Item> SILICON_PLATE = ITEMS.registerItem("silicon_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_SILICON_PLATE = ITEMS.registerItem("large_silicon_plate", Item::new);
+    public static final DeferredItem<Item> ALUMINIUM_PLATE = ITEMS.registerItem("aluminium_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_ALUMINIUM_PLATE = ITEMS.registerItem("large_aluminium_plate", Item::new);
+    public static final DeferredItem<Item> IMPURE_ALUMINIUM_PLATE = ITEMS.registerItem("impure_aluminium_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_IMPURE_ALUMINIUM_PLATE = ITEMS.registerItem("large_impure_aluminium_plate", Item::new);
+    public static final DeferredItem<Item> CLAY_STEEL_PLATE = ITEMS.registerItem("clay_steel_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_CLAY_STEEL_PLATE = ITEMS.registerItem("large_clay_steel_plate", Item::new);
+    public static final DeferredItem<Item> CLAYIUM_PLATE = ITEMS.registerItem("clayium_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_CLAYIUM_PLATE = ITEMS.registerItem("large_clayium_plate", Item::new);
+    public static final DeferredItem<Item> ULTIMATE_ALLOY_PLATE = ITEMS.registerItem("ultimate_alloy_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_ULTIMATE_ALLOY_PLATE = ITEMS.registerItem("large_ultimate_alloy_plate", Item::new);
+    // Antimatter tier (10): plate, large plate
+    public static final DeferredItem<Item> ANTIMATTER_PLATE = ITEMS.registerItem("antimatter_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_ANTIMATTER_PLATE = ITEMS.registerItem("large_antimatter_plate", Item::new);
+    // Pure Antimatter tier (11): plate, large plate
+    public static final DeferredItem<Item> PURE_ANTIMATTER_PLATE = ITEMS.registerItem("pure_antimatter_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_PURE_ANTIMATTER_PLATE = ITEMS.registerItem("large_pure_antimatter_plate", Item::new);
+    public static final DeferredItem<Item> OCTUPLE_ENERGETIC_CLAY_PLATE = ITEMS.registerItem("octuple_energetic_clay_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_OCTUPLE_ENERGETIC_CLAY_PLATE = ITEMS.registerItem("large_octuple_energetic_clay_plate", Item::new);
+    // Octuple Pure Antimatter (OPA) tier (13): plate, large plate
+    public static final DeferredItem<Item> OCTUPLE_PURE_ANTIMATTER_PLATE = ITEMS.registerItem("octuple_pure_antimatter_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_OCTUPLE_PURE_ANTIMATTER_PLATE = ITEMS.registerItem("large_octuple_pure_antimatter_plate", Item::new);
+    public static final DeferredItem<Item> AZ91D_ALLOY_PLATE = ITEMS.registerItem("az91d_alloy_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_AZ91D_ALLOY_PLATE = ITEMS.registerItem("large_az91d_alloy_plate", Item::new);
+    public static final DeferredItem<Item> ZK60A_ALLOY_PLATE = ITEMS.registerItem("zk60a_alloy_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_ZK60A_ALLOY_PLATE = ITEMS.registerItem("large_zk60a_alloy_plate", Item::new);
 
     // spotless:on
 

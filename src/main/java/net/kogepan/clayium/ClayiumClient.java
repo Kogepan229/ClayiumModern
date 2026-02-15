@@ -57,6 +57,21 @@ public class ClayiumClient {
                         (stack, tintIndex) -> ColoredIngotTints.getColor(holder, tintIndex),
                         holder.get());
             }
+            for (var holder : ColoredPlateTints.getRegisteredHolders()) {
+                itemColors.register(
+                        (stack, tintIndex) -> ColoredPlateTints.getColor(holder, tintIndex),
+                        holder.get());
+            }
+            for (var holder : ColoredDustTints.getRegisteredHolders()) {
+                itemColors.register(
+                        (stack, tintIndex) -> ColoredDustTints.getColor(holder, tintIndex),
+                        holder.get());
+            }
+            for (var holder : ColoredMatterTints.getRegisteredHolders()) {
+                itemColors.register(
+                        (stack, tintIndex) -> ColoredMatterTints.getColor(holder, tintIndex),
+                        holder.get());
+            }
         });
     }
 
