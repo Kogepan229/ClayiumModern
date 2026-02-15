@@ -5,9 +5,11 @@ import net.kogepan.clayium.blocks.ClayBufferBlock;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.blocks.ClayOre;
 import net.kogepan.clayium.blocks.ClayWorkTableBlock;
+import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
 import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
+import net.kogepan.clayium.items.blockitem.QuartzCrucibleBlockItem;
 import net.kogepan.clayium.items.blockitem.TieredBlockItem;
 
 import net.minecraft.world.item.Item;
@@ -46,12 +48,11 @@ public class ClayiumBlocks {
         return block;
     }
 
-    private static DeferredBlock<Block> registerCompressedClay(int tier) {
+    private static void registerCompressedClay(int tier) {
         DeferredBlock<Block> block = registerTiered("compressed_clay", tier,
                 (t) -> new Block(BlockBehaviour.Properties.of().destroyTime(1)
                         .explosionResistance(1).sound(SoundType.GRAVEL).requiresCorrectToolForDrops()));
         COMPRESSED_CLAYS.put(tier, block);
-        return block;
     }
 
     public static final DeferredBlock<ClayOre> CLAY_ORE = register("clay_ore", ClayOre::new);
@@ -78,14 +79,11 @@ public class ClayiumBlocks {
     public static final DeferredBlock<ClayWorkTableBlock> CLAY_WORK_TABLE = register("clay_work_table",
             ClayWorkTableBlock::new);
 
-    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> BENDING_MACHINE_BLOCKS;
+    public static final DeferredBlock<QuartzCrucibleBlock> QUARTZ_CRUCIBLE = BLOCKS.register("quartz_crucible",
+            QuartzCrucibleBlock::new);
     static {
-        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
-        for (int i = 1; i <= 9; i++) {
-            if (i == 8) continue;
-            map.put(i, registerTiered("bending_machine", i, BendingMachineBlock::new));
-        }
-        BENDING_MACHINE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+        ClayiumItems.ITEMS.register("quartz_crucible",
+                () -> new QuartzCrucibleBlockItem(QUARTZ_CRUCIBLE.get(), new Item.Properties()));
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayBufferBlock>> CLAY_BUFFERS;
@@ -95,6 +93,16 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("clay_buffer", i, ClayBufferBlock::new));
         }
         CLAY_BUFFERS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> BENDING_MACHINE_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 1; i <= 9; i++) {
+            if (i == 8) continue;
+            map.put(i, registerTiered("bending_machine", i, BendingMachineBlock::new));
+        }
+        BENDING_MACHINE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> WATERWHEELS;

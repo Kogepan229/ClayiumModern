@@ -10,6 +10,7 @@ import net.kogepan.clayium.utils.CEUtils;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
@@ -48,6 +49,15 @@ public class ClayiumClient {
         // Some client setup code
         Clayium.LOGGER.info("HELLO FROM CLIENT SETUP");
         Clayium.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
+
+        event.enqueueWork(() -> {
+            ItemColors itemColors = Minecraft.getInstance().getItemColors();
+            for (var holder : ColoredIngotTints.getRegisteredHolders()) {
+                itemColors.register(
+                        (stack, tintIndex) -> ColoredIngotTints.getColor(holder, tintIndex),
+                        holder.get());
+            }
+        });
     }
 
     @SubscribeEvent

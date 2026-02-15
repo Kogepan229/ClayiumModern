@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "Q": {
+      "item": "minecraft:quartz"
+    }
+  },
+  "pattern": [
+    "Q Q",
+    "Q Q",
+    "QQQ"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:quartz_crucible"
+  }
+}

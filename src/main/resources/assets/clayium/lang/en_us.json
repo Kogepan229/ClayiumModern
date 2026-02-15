@@ -49,7 +49,12 @@
   "block.clayium.cobblestone_generator_5": "Advanced Cobblestone Generator",
   "block.clayium.cobblestone_generator_6": "Precision Cobblestone Generator",
   "block.clayium.cobblestone_generator_7": "Clay Steel Cobblestone Generator",
+  "block.clayium.quartz_crucible": "Quartz Crucible",
 
+  "item.clayium.impure_silicon_ingot": "Impure Silicon Ingot",
+  "item.clayium.silicon_ingot": "Silicon Ingot",
+
+  "tooltip.clayium.quartz_crucible": "Purifies impure silicon. Drop Impure Silicon Ingots, wait, then drop a String to collect Silicon Ingots.",
   "tooltip.clayium.tier":  "Tier %d",
 
   "gui.clayium.inventory": "Inventory",

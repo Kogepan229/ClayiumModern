@@ -56,6 +56,10 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
                 makeId("block/clay_work_table_side"),
                 makeId("block/clay_work_table")));
 
+        // Quartz Crucible: blockstate is in main (multipart: empty + level_1..9). Item uses empty model.
+        ModelFile quartzCrucibleItemModel = models().getExistingFile(Clayium.id("block/quartz_crucible/base"));
+        simpleBlockItem(ClayiumBlocks.QUARTZ_CRUCIBLE.get(), quartzCrucibleItemModel);
+
         for (var entry : ClayiumBlocks.COMPRESSED_CLAYS.values()) {
             simpleBlockAndItem(entry.get());
         }

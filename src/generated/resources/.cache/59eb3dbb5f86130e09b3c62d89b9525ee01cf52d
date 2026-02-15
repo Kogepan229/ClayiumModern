@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-12T19:32:44.780817697	Loot Tables
+// 1.21.1	2026-02-12T20:18:28.815882185	Loot Tables
 0897080755d66020606439b4962ffdbc984745df data/clayium/loot_table/blocks/bending_machine_1.json
 3fb7788ed2907cf9d728f21fc4e68560a14a9d30 data/clayium/loot_table/blocks/bending_machine_2.json
 8358e02ed6e078c85ac90a8e245b7d1c36114636 data/clayium/loot_table/blocks/bending_machine_3.json
@@ -41,5 +41,6 @@ d4f92fb9ad7839ac9d597b76d39fee2d5e1d765d data/clayium/loot_table/blocks/compress
 6f99308ed29f7e88c02ec5f5818f31fe8bc6b41d data/clayium/loot_table/blocks/compressed_clay_9.json
 04d49b5724b4f6f75e8156dc177c8970e133ac31 data/clayium/loot_table/blocks/dense_clay_ore.json
 4f977e91fd1a23ccb931077c55f086e5a3ddda13 data/clayium/loot_table/blocks/large_dense_clay_ore.json
+2f3748ca83c05d13bcbd4becc7afc8e06a7301dd data/clayium/loot_table/blocks/quartz_crucible.json
 863d0d65464e9edf00c3a3f86b440b8f0799fdcb data/clayium/loot_table/blocks/waterwheel_1.json
 5170c767f373a17a79fd4bdba2c158510ac3db70 data/clayium/loot_table/blocks/waterwheel_2.json

@@ -1,4 +1,5 @@
-// 1.21.1	2026-02-11T22:08:22.329664657	Recipes
+// 1.21.1	2026-02-12T20:18:28.816644519	Recipes
+8ecc70c9b249bb84cc1e6864effb8ceda68323ff data/clayium/advancement/recipes/misc/quartz_crucible.json
 e9c00f76819a03d83ea99bea7eabf9911dcab1e1 data/clayium/recipe/bending_machine/clay_blade.json
 b367a89cc9ff71154bc99f8b34e5bf5969f550e9 data/clayium/recipe/bending_machine/clay_disc.json
 be8547688bc410092872a34d08c58797081ff28f data/clayium/recipe/bending_machine/clay_place.json
@@ -24,3 +25,4 @@ ba5329e78b976e6633018245173dd413d4aef66d data/clayium/recipe/clay_work_table/4/c
 726d478397bdafd43421d6bf4628eec3ec1a00b9 data/clayium/recipe/clay_work_table/4/small_clay_ring.json
 b9e661f63ecc59e0ab1355c61cece4dde9c3ab1d data/clayium/recipe/clay_work_table/5/clay_stick.json
 3ae8ba267f232276631bad56c31d250ac3522651 data/clayium/recipe/clay_work_table/5/small_clay_disc.json
+2a034ca19c22d2ffc84dd6c28891621a12a33ed5 data/clayium/recipe/quartz_crucible.json

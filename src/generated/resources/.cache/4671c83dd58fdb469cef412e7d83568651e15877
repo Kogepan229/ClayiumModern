@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-12T19:32:44.777505764	Block States: clayium
+// 1.21.1	2026-02-15T18:04:04.611634757	Block States: clayium
 59a8cbf5691d0619fce4e61af85d4b071774605e assets/clayium/blockstates/bending_machine_1.json
 cf427b0b7f1ae41b9380716a7ab0c338538ef482 assets/clayium/blockstates/bending_machine_2.json
 9538b1e630d00520a414396e1e83890096ec04a7 assets/clayium/blockstates/bending_machine_3.json
@@ -129,5 +129,6 @@ faa9c06b53044b767131cc215ac8586d3239e0d1 assets/clayium/models/item/compressed_c
 5371d70fc04a1b572b91e5640de0c706614fe8f9 assets/clayium/models/item/compressed_clay_9.json
 454b4894b9433b0fe713802c18e3ecc368b30750 assets/clayium/models/item/dense_clay_ore.json
 62a459d2d49090936d2c1c57bbe28cf6b834e78b assets/clayium/models/item/large_dense_clay_ore.json
+9af2ddd51604e14111db8c8f70664e3ddbde107f assets/clayium/models/item/quartz_crucible.json
 4b3a5e677bc8f6c4f7f607990b2bc0bca4104485 assets/clayium/models/item/waterwheel_1.json
 42ee1af804b8f6ab2e24edd67a0e8681d2168bb1 assets/clayium/models/item/waterwheel_2.json

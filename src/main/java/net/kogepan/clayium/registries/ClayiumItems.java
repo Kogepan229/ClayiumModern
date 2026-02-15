@@ -68,6 +68,9 @@ public class ClayiumItems {
     public static final DeferredItem<Item> DENSE_CLAY_WHEEL= ITEMS.registerItem("dense_clay_wheel", Item::new);
     public static final DeferredItem<Item> DENSE_CLAY_DUST= ITEMS.registerItem("dense_clay_dust", Item::new);
 
+    public static final DeferredItem<Item> IMPURE_SILICON_INGOT = ITEMS.registerItem("impure_silicon_ingot", Item::new);
+    public static final DeferredItem<Item> SILICON_INGOT = ITEMS.registerItem("silicon_ingot", Item::new);
+
     // spotless:on
 
     public static final DeferredItem<Item> CLAY_PICKAXE = ITEMS.registerItem("clay_pickaxe", ClayPickaxe::new);

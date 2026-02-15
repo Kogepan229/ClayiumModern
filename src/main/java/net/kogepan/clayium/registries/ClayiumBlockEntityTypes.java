@@ -4,6 +4,7 @@ import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.ClayBufferBlockEntity;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.ClayWorkTableBlockEntity;
+import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CobblestoneGeneratorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.WaterwheelBlockEntity;
@@ -29,6 +30,12 @@ public class ClayiumBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ClayWorkTableBlockEntity>> CLAY_WORK_TABLE_BLOCK_ENTITY = BLOCK_ENTITY_TYPES
             .register("clay_work_table_entity",
                     () -> BlockEntityType.Builder.of(ClayWorkTableBlockEntity::new, ClayiumBlocks.CLAY_WORK_TABLE.get())
+                            .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<QuartzCrucibleBlockEntity>> QUARTZ_CRUCIBLE_BLOCK_ENTITY = BLOCK_ENTITY_TYPES
+            .register("quartz_crucible_block_entity",
+                    () -> BlockEntityType.Builder
+                            .of(QuartzCrucibleBlockEntity::new, ClayiumBlocks.QUARTZ_CRUCIBLE.get())
                             .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BendingMachineBlockEntity>> BENDING_MACHINE_BLOCK_ENTITY = registerClayContainer(
