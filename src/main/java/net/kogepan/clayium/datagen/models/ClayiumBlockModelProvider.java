@@ -30,6 +30,13 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation WATERWHEEL_TEXTURE = Clayium.id("block/machine/waterwheel");
     private static final ResourceLocation COBBLESTONE_GENERATOR_TEXTURE = Clayium
             .id("block/machine/cobblestone_generator");
+    private static final ResourceLocation WIRE_DRAWING_MACHINE_TEXTURE = Clayium
+            .id("block/machine/wire_drawing_machine");
+    private static final ResourceLocation PIPE_DRAWING_MACHINE_TEXTURE = Clayium
+            .id("block/machine/pipe_drawing_machine");
+    private static final ResourceLocation CUTTING_MACHINE_TEXTURE = Clayium.id("block/machine/cutting_machine");
+    private static final ResourceLocation LATHE_TEXTURE = Clayium.id("block/machine/lathe");
+    private static final ResourceLocation MILLING_MACHINE_TEXTURE = Clayium.id("block/machine/milling_machine");
 
     public ClayiumBlockModelProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, Clayium.MODID, exFileHelper);
@@ -70,6 +77,21 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
 
         for (var entry : ClayiumBlocks.BENDING_MACHINE_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), BENDING_MACHINE_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.WIRE_DRAWING_MACHINE_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), WIRE_DRAWING_MACHINE_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.PIPE_DRAWING_MACHINE_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), PIPE_DRAWING_MACHINE_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.CUTTING_MACHINE_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CUTTING_MACHINE_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.LATHE_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), LATHE_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.MILLING_MACHINE_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), MILLING_MACHINE_TEXTURE);
         }
 
         for (var entry : ClayiumBlocks.WATERWHEELS.int2ObjectEntrySet()) {

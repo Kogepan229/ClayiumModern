@@ -1,0 +1,15 @@
+{
+  "base_model": {
+    "parent": "minecraft:block/cube_all",
+    "textures": {
+      "all": "clayium:block/tier/tier4"
+    }
+  },
+  "loader": "clayium:clay_container_model_loader",
+  "overlay_model": {
+    "parent": "clayium:block/overlay",
+    "textures": {
+      "overlay_front": "clayium:block/machine/wire_drawing_machine"
+    }
+  }
+}

@@ -8,7 +8,12 @@ import net.kogepan.clayium.blocks.ClayWorkTableBlock;
 import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
+import net.kogepan.clayium.blocks.machine.CuttingMachineBlock;
+import net.kogepan.clayium.blocks.machine.LatheBlock;
+import net.kogepan.clayium.blocks.machine.MillingMachineBlock;
+import net.kogepan.clayium.blocks.machine.PipeDrawingMachineBlock;
 import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
+import net.kogepan.clayium.blocks.machine.WireDrawingMachineBlock;
 import net.kogepan.clayium.items.blockitem.QuartzCrucibleBlockItem;
 import net.kogepan.clayium.items.blockitem.TieredBlockItem;
 
@@ -103,6 +108,51 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("bending_machine", i, BendingMachineBlock::new));
         }
         BENDING_MACHINE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> WIRE_DRAWING_MACHINE_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 1; i <= 4; i++) {
+            map.put(i, registerTiered("wire_drawing_machine", i, WireDrawingMachineBlock::new));
+        }
+        WIRE_DRAWING_MACHINE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> PIPE_DRAWING_MACHINE_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 1; i <= 4; i++) {
+            map.put(i, registerTiered("pipe_drawing_machine", i, PipeDrawingMachineBlock::new));
+        }
+        PIPE_DRAWING_MACHINE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CUTTING_MACHINE_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 1; i <= 4; i++) {
+            map.put(i, registerTiered("cutting_machine", i, CuttingMachineBlock::new));
+        }
+        CUTTING_MACHINE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> LATHE_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 1; i <= 4; i++) {
+            map.put(i, registerTiered("lathe", i, LatheBlock::new));
+        }
+        LATHE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> MILLING_MACHINE_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i : new int[] { 1, 3, 4 }) {
+            map.put(i, registerTiered("milling_machine", i, MillingMachineBlock::new));
+        }
+        MILLING_MACHINE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> WATERWHEELS;

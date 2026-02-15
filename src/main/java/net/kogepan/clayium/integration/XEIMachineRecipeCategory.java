@@ -45,6 +45,16 @@ public class XEIMachineRecipeCategory {
 
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.BENDING_MACHINE_RECIPE_TYPE,
                 ClayiumBlocks.BENDING_MACHINE_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.WIRE_DRAWING_MACHINE_RECIPE_TYPE,
+                ClayiumBlocks.WIRE_DRAWING_MACHINE_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.PIPE_DRAWING_MACHINE_RECIPE_TYPE,
+                ClayiumBlocks.PIPE_DRAWING_MACHINE_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.CUTTING_MACHINE_RECIPE_TYPE,
+                ClayiumBlocks.CUTTING_MACHINE_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.LATHE_RECIPE_TYPE,
+                ClayiumBlocks.LATHE_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.MILLING_MACHINE_RECIPE_TYPE,
+                ClayiumBlocks.MILLING_MACHINE_BLOCKS.values()));
 
         return categories;
     }

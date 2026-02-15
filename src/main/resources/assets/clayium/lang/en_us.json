@@ -39,6 +39,30 @@
   "block.clayium.bending_machine_7": "Clay Steel Bending Machine",
   "block.clayium.bending_machine_9": "Ultimate Bending Machine",
 
+  "block.clayium.wire_drawing_machine_1": "Clay Wire Drawing Machine",
+  "block.clayium.wire_drawing_machine_2": "Dense Clay Wire Drawing Machine",
+  "block.clayium.wire_drawing_machine_3": "Simple Wire Drawing Machine",
+  "block.clayium.wire_drawing_machine_4": "Basic Wire Drawing Machine",
+
+  "block.clayium.pipe_drawing_machine_1": "Clay Pipe Drawing Machine",
+  "block.clayium.pipe_drawing_machine_2": "Dense Clay Pipe Drawing Machine",
+  "block.clayium.pipe_drawing_machine_3": "Simple Pipe Drawing Machine",
+  "block.clayium.pipe_drawing_machine_4": "Basic Pipe Drawing Machine",
+
+  "block.clayium.cutting_machine_1": "Clay Cutting Machine",
+  "block.clayium.cutting_machine_2": "Dense Clay Cutting Machine",
+  "block.clayium.cutting_machine_3": "Simple Cutting Machine",
+  "block.clayium.cutting_machine_4": "Basic Cutting Machine",
+
+  "block.clayium.lathe_1": "Clay Lathe",
+  "block.clayium.lathe_2": "Dense Clay Lathe",
+  "block.clayium.lathe_3": "Simple Lathe",
+  "block.clayium.lathe_4": "Basic Lathe",
+
+  "block.clayium.milling_machine_1": "Clay Milling Machine",
+  "block.clayium.milling_machine_3": "Simple Milling Machine",
+  "block.clayium.milling_machine_4": "Basic Milling Machine",
+
   "block.clayium.waterwheel_1": "Basic Water Wheel",
   "block.clayium.waterwheel_2": "Advanced Water Wheel",
 

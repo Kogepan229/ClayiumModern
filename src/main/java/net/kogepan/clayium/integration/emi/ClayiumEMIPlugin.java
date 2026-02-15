@@ -39,7 +39,7 @@ public class ClayiumEMIPlugin implements EmiPlugin {
             for (var block : category.getWorkstations()) {
                 registry.addWorkstation(emiCategory, EmiStack.of(block));
             }
-            registry.getRecipeManager().getAllRecipesFor(ClayiumRecipeTypes.BENDING_MACHINE_RECIPE_TYPE.get())
+            registry.getRecipeManager().getAllRecipesFor(category.getRecipeType())
                     .stream()
                     .sorted(Comparator
                             .<RecipeHolder<MachineRecipe>>comparingInt(r -> r.value().recipeTier())

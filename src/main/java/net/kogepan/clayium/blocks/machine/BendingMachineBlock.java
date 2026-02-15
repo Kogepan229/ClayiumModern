@@ -1,6 +1,6 @@
 package net.kogepan.clayium.blocks.machine;
 
-import net.kogepan.clayium.blockentities.ClayBufferBlockEntity;
+import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
@@ -32,6 +32,6 @@ public class BendingMachineBlock extends ClayContainerBlock {
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(@NotNull Level level, @NotNull BlockState state,
                                                                   @NotNull BlockEntityType<T> type) {
         return createTickerHelper(level, type, ClayiumBlockEntityTypes.BENDING_MACHINE_BLOCK_ENTITY.get(),
-                ClayBufferBlockEntity::tick, null);
+                ClayContainerBlockEntity::tick, null);
     }
 }

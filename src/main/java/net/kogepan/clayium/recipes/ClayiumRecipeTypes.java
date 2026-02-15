@@ -34,4 +34,14 @@ public class ClayiumRecipeTypes {
 
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> BENDING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
             "bending_machine", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> WIRE_DRAWING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
+            "wire_drawing_machine", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> PIPE_DRAWING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
+            "pipe_drawing_machine", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> CUTTING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
+            "cutting_machine", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> LATHE_RECIPE_TYPE = registerSimpleMachineType(
+            "lathe", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> MILLING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
+            "milling_machine", 1, 1);
 }

@@ -7,7 +7,12 @@ import net.kogepan.clayium.blockentities.ClayWorkTableBlockEntity;
 import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CobblestoneGeneratorBlockEntity;
+import net.kogepan.clayium.blockentities.machine.CuttingMachineBlockEntity;
+import net.kogepan.clayium.blockentities.machine.LatheBlockEntity;
+import net.kogepan.clayium.blockentities.machine.MillingMachineBlockEntity;
+import net.kogepan.clayium.blockentities.machine.PipeDrawingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.WaterwheelBlockEntity;
+import net.kogepan.clayium.blockentities.machine.WireDrawingMachineBlockEntity;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.level.block.Block;
@@ -75,6 +80,56 @@ public class ClayiumBlockEntityTypes {
                 return BlockEntityType.Builder
                         .of(CobblestoneGeneratorBlockEntity::new,
                                 blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<WireDrawingMachineBlockEntity>> WIRE_DRAWING_MACHINE_BLOCK_ENTITY = registerClayContainer(
+            "wire_drawing_machine_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.WIRE_DRAWING_MACHINE_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(WireDrawingMachineBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<PipeDrawingMachineBlockEntity>> PIPE_DRAWING_MACHINE_BLOCK_ENTITY = registerClayContainer(
+            "pipe_drawing_machine_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.PIPE_DRAWING_MACHINE_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(PipeDrawingMachineBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CuttingMachineBlockEntity>> CUTTING_MACHINE_BLOCK_ENTITY = registerClayContainer(
+            "cutting_machine_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.CUTTING_MACHINE_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(CuttingMachineBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LatheBlockEntity>> LATHE_BLOCK_ENTITY = registerClayContainer(
+            "lathe_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.LATHE_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(LatheBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MillingMachineBlockEntity>> MILLING_MACHINE_BLOCK_ENTITY = registerClayContainer(
+            "milling_machine_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.MILLING_MACHINE_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(MillingMachineBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
 
