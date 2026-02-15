@@ -68,6 +68,11 @@ public class ClayiumItems {
     public static final DeferredItem<Item> DENSE_CLAY_WHEEL= ITEMS.registerItem("dense_clay_wheel", Item::new);
     public static final DeferredItem<Item> DENSE_CLAY_DUST= ITEMS.registerItem("dense_clay_dust", Item::new);
 
+    public static final DeferredItem<Item> INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("industrial_clay_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("large_industrial_clay_plate", Item::new);
+    public static final DeferredItem<Item> ADVANCED_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("advanced_industrial_clay_plate", Item::new);
+    public static final DeferredItem<Item> LARGE_ADVANCED_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("large_advanced_industrial_clay_plate", Item::new);
+
     public static final DeferredItem<Item> IMPURE_SILICON_INGOT = ITEMS.registerItem("impure_silicon_ingot", Item::new);
     public static final DeferredItem<Item> SILICON_INGOT = ITEMS.registerItem("silicon_ingot", Item::new);
 

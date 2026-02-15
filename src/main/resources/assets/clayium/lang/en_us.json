@@ -75,6 +75,10 @@
   "block.clayium.cobblestone_generator_7": "Clay Steel Cobblestone Generator",
   "block.clayium.quartz_crucible": "Quartz Crucible",
 
+  "item.clayium.industrial_clay_plate": "Industrial Clay Plate",
+  "item.clayium.large_industrial_clay_plate": "Large Industrial Clay Plate",
+  "item.clayium.advanced_industrial_clay_plate": "Advanced Industrial Clay Plate",
+  "item.clayium.large_advanced_industrial_clay_plate": "Large Advanced Industrial Clay Plate",
   "item.clayium.impure_silicon_ingot": "Impure Silicon Ingot",
   "item.clayium.silicon_ingot": "Silicon Ingot",
 
