@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1,
+  "duration": 4,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:dense_clay_pipe"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 4,
+      "id": "clayium:dense_clay_stick"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:wire_drawing_machine"
+}

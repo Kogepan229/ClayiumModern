@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1,
+  "duration": 3,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:clay_cylinder"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 2,
+      "id": "clayium:clay_pipe"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:pipe_drawing_machine"
+}

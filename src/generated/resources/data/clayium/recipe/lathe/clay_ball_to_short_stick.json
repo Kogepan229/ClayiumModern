@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1,
+  "duration": 1,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "minecraft:clay_ball"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:short_clay_stick"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:lathe"
+}

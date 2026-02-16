@@ -23,6 +23,11 @@ public class ClayiumRecipeProvider extends RecipeProvider {
     protected void buildRecipes(RecipeOutput recipeOutput) {
         ClayWorkTableRecipeProvider.buildRecipes(recipeOutput);
         BendingMachineRecipeProvider.buildRecipes(recipeOutput);
+        WireDrawingMachineRecipeProvider.buildRecipes(recipeOutput);
+        PipeDrawingMachineRecipeProvider.buildRecipes(recipeOutput);
+        CuttingMachineRecipeProvider.buildRecipes(recipeOutput);
+        LatheRecipeProvider.buildRecipes(recipeOutput);
+        MillingMachineRecipeProvider.buildRecipes(recipeOutput);
         QuartzCrucibleRecipeProvider.buildRecipes(recipeOutput);
 
         // Quartz Crucible

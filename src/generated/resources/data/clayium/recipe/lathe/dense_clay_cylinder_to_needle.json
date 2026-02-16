@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1,
+  "duration": 6,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:dense_clay_cylinder"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:dense_clay_needle"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:lathe"
+}

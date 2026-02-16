@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1,
+  "duration": 1,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:clay_stick"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 2,
+      "id": "clayium:short_clay_stick"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:cutting_machine"
+}

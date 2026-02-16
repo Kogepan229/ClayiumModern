@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1,
+  "duration": 4,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:dense_clay_cylinder"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 8,
+      "id": "clayium:dense_small_clay_disc"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:cutting_machine"
+}
