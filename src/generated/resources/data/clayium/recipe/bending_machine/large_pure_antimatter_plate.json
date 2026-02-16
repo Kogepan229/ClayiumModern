@@ -1,0 +1,21 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100000000,
+  "duration": 40,
+  "inputs": [
+    {
+      "amount": 4,
+      "ingredient": {
+        "item": "clayium:pure_antimatter_plate"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:large_pure_antimatter_plate"
+    }
+  ],
+  "recipe_tier": 9,
+  "recipe_type": "clayium:bending_machine"
+}

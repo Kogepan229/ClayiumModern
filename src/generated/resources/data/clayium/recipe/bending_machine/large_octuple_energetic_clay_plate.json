@@ -1,0 +1,21 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1000000000,
+  "duration": 40,
+  "inputs": [
+    {
+      "amount": 4,
+      "ingredient": {
+        "item": "clayium:octuple_energetic_clay_plate"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:large_octuple_energetic_clay_plate"
+    }
+  ],
+  "recipe_tier": 9,
+  "recipe_type": "clayium:bending_machine"
+}

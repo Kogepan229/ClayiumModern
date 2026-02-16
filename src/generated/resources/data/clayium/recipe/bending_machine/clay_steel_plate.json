@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100,
+  "duration": 60,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:clay_steel_ingot"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:clay_steel_plate"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:bending_machine"
+}
