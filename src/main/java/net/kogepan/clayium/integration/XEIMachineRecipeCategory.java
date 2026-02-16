@@ -55,6 +55,10 @@ public class XEIMachineRecipeCategory {
                 ClayiumBlocks.LATHE_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.MILLING_MACHINE_RECIPE_TYPE,
                 ClayiumBlocks.MILLING_MACHINE_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.CLAY_CONDENSER_RECIPE_TYPE,
+                ClayiumBlocks.CLAY_CONDENSER_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.GRINDER_RECIPE_TYPE,
+                ClayiumBlocks.GRINDER_BLOCKS.values()));
 
         return categories;
     }

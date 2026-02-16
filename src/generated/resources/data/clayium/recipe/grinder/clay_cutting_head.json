@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1,
+  "duration": 27,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:clay_cutting_head"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 9,
+      "id": "clayium:clay_dust"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:grinder"
+}

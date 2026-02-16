@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1,
+  "duration": 48,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:dense_clay_spindle"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 4,
+      "id": "clayium:dense_clay_dust"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:grinder"
+}

@@ -48,4 +48,8 @@ public class ClayiumRecipeTypes {
             "lathe", 1, 1);
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> MILLING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
             "milling_machine", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> CLAY_CONDENSER_RECIPE_TYPE = registerSimpleMachineType(
+            "clay_condenser", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> GRINDER_RECIPE_TYPE = registerSimpleMachineType(
+            "grinder", 1, 1);
 }

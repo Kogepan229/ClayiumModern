@@ -1,0 +1,21 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10,
+  "duration": 4,
+  "inputs": [
+    {
+      "amount": 9,
+      "ingredient": {
+        "item": "clayium:compressed_clay_1"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:compressed_clay_2"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:clay_condenser"
+}

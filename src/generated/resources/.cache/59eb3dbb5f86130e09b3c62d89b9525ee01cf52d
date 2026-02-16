@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-15T18:51:37.103611817	Loot Tables
+// 1.21.1	2026-02-16T21:10:38.242952362	Loot Tables
 0897080755d66020606439b4962ffdbc984745df data/clayium/loot_table/blocks/bending_machine_1.json
 3fb7788ed2907cf9d728f21fc4e68560a14a9d30 data/clayium/loot_table/blocks/bending_machine_2.json
 8358e02ed6e078c85ac90a8e245b7d1c36114636 data/clayium/loot_table/blocks/bending_machine_3.json
@@ -17,6 +17,11 @@ d209de3dd87edc7710484568e521c2cf02260edf data/clayium/loot_table/blocks/clay_buf
 fb58c91e13f995d6926b4ad8fe513dcbe4bc681f data/clayium/loot_table/blocks/clay_buffer_7.json
 5a92a971e30d30f3e8c5904a2926a4ed9e6a989b data/clayium/loot_table/blocks/clay_buffer_8.json
 ec9af6a3af10ed5e08cbf972be3f5dcdebcd7479 data/clayium/loot_table/blocks/clay_buffer_9.json
+63cebe7d79f741178ff9bb4e0662c4d92b83e119 data/clayium/loot_table/blocks/clay_condenser_10.json
+238ead084bc1cad05d56223d254f72d023fc22d7 data/clayium/loot_table/blocks/clay_condenser_2.json
+1751687a7b0de7a4ac8a9ac3e6e3ceec4f888084 data/clayium/loot_table/blocks/clay_condenser_3.json
+8401b8d87f33c291a3aadc2997465a97dc7e0d2c data/clayium/loot_table/blocks/clay_condenser_4.json
+ee86f26ada6e224f8e7fee211694bea2d653e0e3 data/clayium/loot_table/blocks/clay_condenser_5.json
 97bf0fefd2cc82ad71b870c24c8856aa9c556750 data/clayium/loot_table/blocks/clay_ore.json
 289f2435fb39b54cab3a9f657fc896b59a259580 data/clayium/loot_table/blocks/clay_work_table.json
 e5ecea24145919f4cd7bc4f32528d2882d689d9a data/clayium/loot_table/blocks/cobblestone_generator_1.json
@@ -44,6 +49,12 @@ ba07f3e2b5abc4fa805ecff5d07476d341a89d08 data/clayium/loot_table/blocks/cutting_
 a7489255f3887915b91d04d14b0e7a7efd0bfb6b data/clayium/loot_table/blocks/cutting_machine_3.json
 f919a364f3e0348dcdcfe5c0f915540543835e3e data/clayium/loot_table/blocks/cutting_machine_4.json
 04d49b5724b4f6f75e8156dc177c8970e133ac31 data/clayium/loot_table/blocks/dense_clay_ore.json
+407ade45ad583e9936261ddc86c2a5a71f2f7f2c data/clayium/loot_table/blocks/grinder_10.json
+76dec2974b86ffec6b6a6c5c017431ccd14e7508 data/clayium/loot_table/blocks/grinder_2.json
+a3bf31ca7174eada18906b5f1df52646f4162dd1 data/clayium/loot_table/blocks/grinder_3.json
+bbb860d1e21d8e2d46ae3958df56feb739b7f085 data/clayium/loot_table/blocks/grinder_4.json
+c4bc086c9348e122a5e884fe9d62dbc6e539df40 data/clayium/loot_table/blocks/grinder_5.json
+b8de2e847afe808615318524bf931907c03cefcb data/clayium/loot_table/blocks/grinder_6.json
 4f977e91fd1a23ccb931077c55f086e5a3ddda13 data/clayium/loot_table/blocks/large_dense_clay_ore.json
 5a813f520e03d5f5db49f206163b12cdeec9b002 data/clayium/loot_table/blocks/lathe_1.json
 7dd534db941044ab16a9aa0b43a5e78d00d5b1d9 data/clayium/loot_table/blocks/lathe_2.json

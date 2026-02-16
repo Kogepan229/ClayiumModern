@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1,
+  "duration": 12,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:large_clay_plate"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 4,
+      "id": "clayium:clay_dust"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:grinder"
+}
