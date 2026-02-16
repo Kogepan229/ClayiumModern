@@ -1,20 +1,20 @@
 {
   "type": "clayium:machine",
-  "ce_per_tick": 10,
-  "duration": 10,
+  "ce_per_tick": 1000,
+  "duration": 100,
   "inputs": [
     {
       "ingredient": {
-        "item": "minecraft:gravel"
+        "item": "minecraft:blaze_rod"
       }
     }
   ],
   "outputs": [
     {
-      "count": 1,
-      "id": "minecraft:sand"
+      "count": 5,
+      "id": "minecraft:blaze_powder"
     }
   ],
-  "recipe_tier": 0,
+  "recipe_tier": 5,
   "recipe_type": "clayium:grinder"
 }

@@ -1,18 +1,18 @@
 {
   "type": "clayium:machine",
-  "ce_per_tick": 10,
-  "duration": 10,
+  "ce_per_tick": 1,
+  "duration": 3,
   "inputs": [
     {
       "ingredient": {
-        "item": "minecraft:gravel"
+        "item": "minecraft:stone"
       }
     }
   ],
   "outputs": [
     {
       "count": 1,
-      "id": "minecraft:sand"
+      "id": "minecraft:cobblestone"
     }
   ],
   "recipe_tier": 0,

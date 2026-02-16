@@ -8,8 +8,15 @@ import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumItems;
 import net.kogepan.clayium.utils.CEUtils;
 
+import net.minecraft.core.registries.Registries;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.ItemTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
 
 import org.jetbrains.annotations.NotNull;
@@ -22,6 +29,13 @@ public class GrinderRecipeProvider {
                                long duration, int tier) {
         MachineRecipe machineRecipe = new MachineRecipe(ClayiumRecipeTypes.GRINDER_RECIPE_TYPE.get(),
                 List.of(ItemIngredientStack.of(ingredient)), List.of(result), duration, energy, tier);
+        output.accept(Clayium.id("grinder/" + name), machineRecipe, null);
+    }
+
+    private static void create(RecipeOutput output, String name, ItemIngredientStack input, ItemStack result,
+                               long energy, long duration, int tier) {
+        MachineRecipe machineRecipe = new MachineRecipe(ClayiumRecipeTypes.GRINDER_RECIPE_TYPE.get(),
+                List.of(input), List.of(result), duration, energy, tier);
         output.accept(Clayium.id("grinder/" + name), machineRecipe, null);
     }
 
@@ -159,11 +173,35 @@ public class GrinderRecipeProvider {
         create(recipeOutput, "zk60a_alloy_ingot", ClayiumItems.ZK60A_ALLOY_INGOT.toStack(),
                 ClayiumItems.ZK60A_ALLOY_DUST.toStack(), CEUtils.ONE_MILLI_CE, 20, 4);
 
-        // Vanilla compatibility
+        //// Vanilla compatibility
+        create(recipeOutput, "stone_to_cobblestone", Blocks.STONE.asItem().getDefaultInstance(),
+                Blocks.COBBLESTONE.asItem().getDefaultInstance(), CEUtils.TEN_MICRO_CE, 3, 0);
         create(recipeOutput, "cobblestone_to_gravel", Blocks.COBBLESTONE.asItem().getDefaultInstance(),
                 Blocks.GRAVEL.asItem().getDefaultInstance(), CEUtils.TEN_MICRO_CE, 10, 0);
         create(recipeOutput, "gravel_to_sand", Blocks.GRAVEL.asItem().getDefaultInstance(),
-                Blocks.SAND.asItem().getDefaultInstance(), CEUtils.TEN_MICRO_CE, 10, 2);
+                Blocks.SAND.asItem().getDefaultInstance(), CEUtils.TEN_MICRO_CE * 10, 10, 0);
+
+        // Sandstone
+        TagKey<Item> sandstoneUncoloredTag = TagKey.create(Registries.ITEM, ResourceLocation.parse("c:sandstone/uncolored_blocks"));
+        create(recipeOutput, "sandstone_to_sand",
+                ItemIngredientStack.of(Ingredient.of(sandstoneUncoloredTag), 3),
+                new ItemStack(Blocks.SAND.asItem(), 4), CEUtils.TEN_MICRO_CE * 10, 100, 3);
+        TagKey<Item> sandstoneRedTag = TagKey.create(Registries.ITEM, ResourceLocation.parse("c:sandstone/red_blocks"));
+        create(recipeOutput, "red_sandstone_to_sand",
+                ItemIngredientStack.of(Ingredient.of(sandstoneRedTag), 3),
+                new ItemStack(Blocks.RED_SAND.asItem(), 4), CEUtils.TEN_MICRO_CE * 10, 100, 3);
+
+        // Wool/carpet/blaze/bone/melon
+        create(recipeOutput, "wool_to_string", ItemIngredientStack.of(Ingredient.of(ItemTags.WOOL), 1),
+                new ItemStack(Items.STRING, 4), CEUtils.ONE_MILLI_CE * 10, 100, 5);
+        create(recipeOutput, "carpet_to_string", ItemIngredientStack.of(Ingredient.of(ItemTags.WOOL_CARPETS), 1),
+                new ItemStack(Items.STRING, 2), CEUtils.ONE_MILLI_CE * 10, 100, 5);
+        create(recipeOutput, "blaze_rod_to_powder", Items.BLAZE_ROD.getDefaultInstance(),
+                new ItemStack(Items.BLAZE_POWDER, 5), CEUtils.ONE_MILLI_CE * 10, 100, 5);
+        create(recipeOutput, "bone_to_bone_meal", Items.BONE.getDefaultInstance(),
+                new ItemStack(Items.BONE_MEAL, 5), CEUtils.ONE_MILLI_CE * 10, 100, 5);
+        create(recipeOutput, "melon_block_to_melon", Blocks.MELON.asItem().getDefaultInstance(),
+                new ItemStack(Items.MELON_SLICE, 9), CEUtils.ONE_MILLI_CE * 10, 100, 5);
 
         // spotless:on
     }

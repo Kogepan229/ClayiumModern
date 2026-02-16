@@ -1,20 +1,21 @@
 {
   "type": "clayium:machine",
   "ce_per_tick": 10,
-  "duration": 10,
+  "duration": 100,
   "inputs": [
     {
+      "amount": 3,
       "ingredient": {
-        "item": "minecraft:gravel"
+        "tag": "c:sandstone/uncolored_blocks"
       }
     }
   ],
   "outputs": [
     {
-      "count": 1,
+      "count": 4,
       "id": "minecraft:sand"
     }
   ],
-  "recipe_tier": 0,
+  "recipe_tier": 3,
   "recipe_type": "clayium:grinder"
 }
