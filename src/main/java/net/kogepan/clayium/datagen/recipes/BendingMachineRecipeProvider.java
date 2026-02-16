@@ -43,8 +43,10 @@ public class BendingMachineRecipeProvider {
 
         // Tier 2
         create(recipeOutput, "industrial_clay_plate", ClayiumBlocks.COMPRESSED_CLAYS.get(2).asItem().getDefaultInstance(), ClayiumItems.INDUSTRIAL_CLAY_PLATE.toStack(), CEUtils.TEN_MICRO_CE * 2, 4, 2);
+        create(recipeOutput, "industrial_clay_plate_from_dust", ClayiumItems.INDUSTRIAL_CLAY_DUST.toStack(4), ClayiumItems.INDUSTRIAL_CLAY_PLATE.toStack(), CEUtils.TEN_MICRO_CE * 2, 4, 2);
         create(recipeOutput, "large_industrial_clay_plate", ClayiumItems.INDUSTRIAL_CLAY_PLATE.toStack(4), ClayiumItems.LARGE_INDUSTRIAL_CLAY_PLATE.toStack(), CEUtils.TEN_MICRO_CE * 2, 8, 2);
         create(recipeOutput, "advanced_industrial_clay_plate", ClayiumBlocks.COMPRESSED_CLAYS.get(3).asItem().getDefaultInstance(), ClayiumItems.ADVANCED_INDUSTRIAL_CLAY_PLATE.toStack(), CEUtils.TEN_MICRO_CE * 4, 4, 2);
+        create(recipeOutput, "advanced_industrial_clay_plate_from_dust", ClayiumItems.ADVANCED_INDUSTRIAL_CLAY_DUST.toStack(4), ClayiumItems.ADVANCED_INDUSTRIAL_CLAY_PLATE.toStack(), CEUtils.TEN_MICRO_CE * 4, 4, 2);
         create(recipeOutput, "large_advanced_industrial_clay_plate", ClayiumItems.ADVANCED_INDUSTRIAL_CLAY_PLATE.toStack(4), ClayiumItems.LARGE_ADVANCED_INDUSTRIAL_CLAY_PLATE.toStack(), CEUtils.TEN_MICRO_CE * 4, 8, 2);
 
         // Tier 4

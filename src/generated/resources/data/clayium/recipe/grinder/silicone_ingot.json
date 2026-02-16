@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100,
+  "duration": 4,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:silicone_ingot"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:silicone_dust"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:grinder"
+}

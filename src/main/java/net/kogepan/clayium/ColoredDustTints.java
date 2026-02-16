@@ -63,5 +63,28 @@ public final class ColoredDustTints {
         register(ClayiumItems.PURE_ANTIMATTER_DUST, pureAntimatter[0], pureAntimatter[1], pureAntimatter[2]);
         register(ClayiumItems.OCTUPLE_PURE_ANTIMATTER_DUST, octuplePureAntimatter[0], octuplePureAntimatter[1],
                 octuplePureAntimatter[2]);
+
+        // Material dusts (same colors as corresponding plates in ColoredPlateTints)
+        int[] impureSilicon = { 0xFF281C28, 0xFF060406, 0xFFFFFFFF };
+        int[] silicon = { 0xFF281C28, 0xFF060406, 0xFFFFFFFF };
+        int[] silicone = { 0xFFD2D2D2, 0xFFB4B4B4, 0xFFF0F0F0 };
+        int[] aluminium = { 0xFFBEC8CA, 0xFF1F2121, 0xFFFFFFFF };
+        int[] impureAluminium = { 0xFFBEC8CA, 0xFF78783C, 0xFFDCDCDC };
+        int[] claySteel = { 0xFF8890AD, 0xFF16181C, 0xFFFFFFFF };
+        int[] clayium = { 0xFF5AF0D2, 0xFF3F4855, 0xFFFFCDC8 };
+        int[] ultimateAlloy = { 0xFF55CD55, 0xFF0E220E, 0xFFF5A0FF };
+        int[] az91d = { 0xFF828C87, 0xFF0A280A, 0xFFFFFFFF };
+        int[] zk60a = { 0xFF4B5550, 0xFF0A280A, 0xFFFFFFFF };
+
+        register(ClayiumItems.IMPURE_SILICON_DUST, impureSilicon[0], impureSilicon[1], impureSilicon[2]);
+        register(ClayiumItems.SILICON_DUST, silicon[0], silicon[1], silicon[2]);
+        register(ClayiumItems.SILICONE_DUST, silicone[0], silicone[1], silicone[2]);
+        register(ClayiumItems.ALUMINIUM_DUST, aluminium[0], aluminium[1], aluminium[2]);
+        register(ClayiumItems.IMPURE_ALUMINIUM_DUST, impureAluminium[0], impureAluminium[1], impureAluminium[2]);
+        register(ClayiumItems.CLAY_STEEL_DUST, claySteel[0], claySteel[1], claySteel[2]);
+        register(ClayiumItems.CLAYIUM_DUST, clayium[0], clayium[1], clayium[2]);
+        register(ClayiumItems.ULTIMATE_ALLOY_DUST, ultimateAlloy[0], ultimateAlloy[1], ultimateAlloy[2]);
+        register(ClayiumItems.AZ91D_ALLOY_DUST, az91d[0], az91d[1], az91d[2]);
+        register(ClayiumItems.ZK60A_ALLOY_DUST, zk60a[0], zk60a[1], zk60a[2]);
     }
 }

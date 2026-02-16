@@ -5,6 +5,7 @@ import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.ItemIngredientStack;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.registries.ClayiumBlocks;
+import net.kogepan.clayium.registries.ClayiumItems;
 import net.kogepan.clayium.utils.CEUtils;
 
 import net.minecraft.data.recipes.RecipeOutput;
@@ -27,7 +28,21 @@ public class ClayCondenserRecipeProvider {
     public static void buildRecipes(@NotNull RecipeOutput recipeOutput) {
         // spotless:off
 
-        // Tier 0
+        // Tier 0 - Shard to block (4 shards -> 1 block)
+        create(recipeOutput, "compressed_clay_shard_to_block",
+                ClayiumItems.COMPRESSED_CLAY_SHARD.toStack(4),
+                ClayiumBlocks.COMPRESSED_CLAYS.get(1).asItem().getDefaultInstance(),
+                CEUtils.TEN_MICRO_CE, 3, 0);
+        create(recipeOutput, "industrial_clay_shard_to_block",
+                ClayiumItems.INDUSTRIAL_CLAY_SHARD.toStack(4),
+                ClayiumBlocks.COMPRESSED_CLAYS.get(2).asItem().getDefaultInstance(),
+                CEUtils.TEN_MICRO_CE, 6, 0);
+        create(recipeOutput, "advanced_industrial_clay_shard_to_block",
+                ClayiumItems.ADVANCED_INDUSTRIAL_CLAY_SHARD.toStack(4),
+                ClayiumBlocks.COMPRESSED_CLAYS.get(3).asItem().getDefaultInstance(),
+                CEUtils.TEN_MICRO_CE, 9, 0);
+
+        // Tier 0 - Block condensation
         create(recipeOutput, "clay_to_compressed_0", new ItemStack(Blocks.CLAY, 9),
                 ClayiumBlocks.COMPRESSED_CLAYS.get(0).asItem().getDefaultInstance(), CEUtils.TEN_MICRO_CE, 4, 0);
         create(recipeOutput, "compressed_0_to_1",

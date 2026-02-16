@@ -1,0 +1,21 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 4,
+  "duration": 4,
+  "inputs": [
+    {
+      "amount": 4,
+      "ingredient": {
+        "item": "clayium:advanced_industrial_clay_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:advanced_industrial_clay_plate"
+    }
+  ],
+  "recipe_tier": 2,
+  "recipe_type": "clayium:bending_machine"
+}

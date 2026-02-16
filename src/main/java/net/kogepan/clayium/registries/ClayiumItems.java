@@ -15,15 +15,38 @@ public class ClayiumItems {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(Clayium.MODID);
 
+    public static final DeferredItem<Item> CLAY_PICKAXE = ITEMS.registerItem("clay_pickaxe", ClayPickaxe::new);
+    public static final DeferredItem<Item> CLAY_STEEL_PICKAXE = ITEMS.registerItem("clay_steel_pickaxe",
+            p -> new PickaxeItem(ClayToolTiers.CLAY_STEEL_PICKAXE,
+                    p.attributes(PickaxeItem.createAttributes(ClayToolTiers.CLAY_STEEL_PICKAXE, 4.0f, -2.8f))));
+    public static final DeferredItem<ShovelItem> CLAY_SHOVEL = ITEMS.registerItem("clay_shovel", ClayShovel::new);
+    public static final DeferredItem<ShovelItem> CLAY_STEEL_SHOVEL = ITEMS.registerItem("clay_steel_shovel",
+            p -> new ShovelItem(ClayToolTiers.CLAY_STEEL_SHOVEL,
+                    p.attributes(ShovelItem.createAttributes(ClayToolTiers.CLAY_STEEL_SHOVEL, 3.0f, -3.0f))));
+
     // spotless:off
 
     // Clay Tools
-    public static final DeferredItem<Item> RAW_CLAY_ROLLING_PIN = ITEMS.registerItem("raw_clay_rolling_pin", Item::new);
-    public static final DeferredItem<Item> RAW_CLAY_SPATULA = ITEMS.registerItem("raw_clay_spatula", Item::new);
-    public static final DeferredItem<Item> RAW_CLAY_SLICER = ITEMS.registerItem("raw_clay_slicer", Item::new);
     public static final DeferredItem<Item> CLAY_ROLLING_PIN = ITEMS.registerItem("clay_rolling_pin", p -> new Item(p.durability(60)));
     public static final DeferredItem<Item> CLAY_SPATULA = ITEMS.registerItem("clay_spatula", p -> new Item(p.durability(36)));
     public static final DeferredItem<Item> CLAY_SLICER = ITEMS.registerItem("clay_slicer", p -> new Item(p.durability(60)));
+
+    // Circuits and boards
+    public static final DeferredItem<Item> CLAY_CIRCUIT_BOARD = ITEMS.registerItem("clay_circuit_board", Item::new);
+    public static final DeferredItem<Item> CEE_BOARD = ITEMS.registerItem("cee_board", Item::new);
+    public static final DeferredItem<Item> CLAY_CIRCUIT = ITEMS.registerItem("clay_circuit", Item::new);
+    public static final DeferredItem<Item> SIMPLE_CIRCUIT = ITEMS.registerItem("simple_circuit", Item::new);
+    public static final DeferredItem<Item> CEE_CIRCUIT = ITEMS.registerItem("cee_circuit", Item::new);
+    public static final DeferredItem<Item> BASIC_CIRCUIT = ITEMS.registerItem("basic_circuit", Item::new);
+    public static final DeferredItem<Item> ADVANCED_CIRCUIT = ITEMS.registerItem("advanced_circuit", Item::new);
+    public static final DeferredItem<Item> PRECISION_CIRCUIT = ITEMS.registerItem("precision_circuit", Item::new);
+    public static final DeferredItem<Item> INTEGRATED_CIRCUIT = ITEMS.registerItem("integrated_circuit", Item::new);
+    public static final DeferredItem<Item> CLAY_CORE = ITEMS.registerItem("clay_core", Item::new);
+
+    // Raw Clay Tools
+    public static final DeferredItem<Item> RAW_CLAY_ROLLING_PIN = ITEMS.registerItem("raw_clay_rolling_pin", Item::new);
+    public static final DeferredItem<Item> RAW_CLAY_SPATULA = ITEMS.registerItem("raw_clay_spatula", Item::new);
+    public static final DeferredItem<Item> RAW_CLAY_SLICER = ITEMS.registerItem("raw_clay_slicer", Item::new);
 
     // Clay Materials
     public static final DeferredItem<Item> CLAY_PLATE = ITEMS.registerItem("clay_plate", Item::new);
@@ -68,10 +91,28 @@ public class ClayiumItems {
     public static final DeferredItem<Item> DENSE_CLAY_WHEEL= ITEMS.registerItem("dense_clay_wheel", Item::new);
     public static final DeferredItem<Item> DENSE_CLAY_DUST= ITEMS.registerItem("dense_clay_dust", Item::new);
 
+    public static final DeferredItem<Item> COMPRESSED_CLAY_SHARD = ITEMS.registerItem("compressed_clay_shard", Item::new);
+    public static final DeferredItem<Item> INDUSTRIAL_CLAY_SHARD = ITEMS.registerItem("industrial_clay_shard", Item::new);
+    public static final DeferredItem<Item> ADVANCED_INDUSTRIAL_CLAY_SHARD = ITEMS.registerItem("advanced_industrial_clay_shard", Item::new);
+
+    public static final DeferredItem<Item> INDUSTRIAL_CLAY_DUST = ITEMS.registerItem("industrial_clay_dust", Item::new);
+    public static final DeferredItem<Item> ADVANCED_INDUSTRIAL_CLAY_DUST = ITEMS.registerItem("advanced_industrial_clay_dust", Item::new);
     public static final DeferredItem<Item> INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("industrial_clay_plate", Item::new);
     public static final DeferredItem<Item> LARGE_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("large_industrial_clay_plate", Item::new);
     public static final DeferredItem<Item> ADVANCED_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("advanced_industrial_clay_plate", Item::new);
     public static final DeferredItem<Item> LARGE_ADVANCED_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("large_advanced_industrial_clay_plate", Item::new);
+
+    // Material dusts (3-layer tinted; grinder output from ingots)
+    public static final DeferredItem<Item> IMPURE_SILICON_DUST = ITEMS.registerItem("impure_silicon_dust", Item::new);
+    public static final DeferredItem<Item> SILICON_DUST = ITEMS.registerItem("silicon_dust", Item::new);
+    public static final DeferredItem<Item> SILICONE_DUST = ITEMS.registerItem("silicone_dust", Item::new);
+    public static final DeferredItem<Item> ALUMINIUM_DUST = ITEMS.registerItem("aluminium_dust", Item::new);
+    public static final DeferredItem<Item> IMPURE_ALUMINIUM_DUST = ITEMS.registerItem("impure_aluminium_dust", Item::new);
+    public static final DeferredItem<Item> CLAY_STEEL_DUST = ITEMS.registerItem("clay_steel_dust", Item::new);
+    public static final DeferredItem<Item> CLAYIUM_DUST = ITEMS.registerItem("clayium_dust", Item::new);
+    public static final DeferredItem<Item> ULTIMATE_ALLOY_DUST = ITEMS.registerItem("ultimate_alloy_dust", Item::new);
+    public static final DeferredItem<Item> AZ91D_ALLOY_DUST = ITEMS.registerItem("az91d_alloy_dust", Item::new);
+    public static final DeferredItem<Item> ZK60A_ALLOY_DUST = ITEMS.registerItem("zk60a_alloy_dust", Item::new);
 
     // Antimatter dust (3-layer tinted)
     public static final DeferredItem<Item> ANTIMATTER_DUST = ITEMS.registerItem("antimatter_dust", Item::new);
@@ -140,13 +181,4 @@ public class ClayiumItems {
     public static final DeferredItem<Item> LARGE_ZK60A_ALLOY_PLATE = ITEMS.registerItem("large_zk60a_alloy_plate", Item::new);
 
     // spotless:on
-
-    public static final DeferredItem<Item> CLAY_PICKAXE = ITEMS.registerItem("clay_pickaxe", ClayPickaxe::new);
-    public static final DeferredItem<Item> CLAY_STEEL_PICKAXE = ITEMS.registerItem("clay_steel_pickaxe",
-            p -> new PickaxeItem(ClayToolTiers.CLAY_STEEL_PICKAXE,
-                    p.attributes(PickaxeItem.createAttributes(ClayToolTiers.CLAY_STEEL_PICKAXE, 4.0f, -2.8f))));
-    public static final DeferredItem<ShovelItem> CLAY_SHOVEL = ITEMS.registerItem("clay_shovel", ClayShovel::new);
-    public static final DeferredItem<ShovelItem> CLAY_STEEL_SHOVEL = ITEMS.registerItem("clay_steel_shovel",
-            p -> new ShovelItem(ClayToolTiers.CLAY_STEEL_SHOVEL,
-                    p.attributes(ShovelItem.createAttributes(ClayToolTiers.CLAY_STEEL_SHOVEL, 3.0f, -3.0f))));
 }

@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1,
+  "duration": 16,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:compressed_clay_3"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 5,
+      "id": "clayium:advanced_industrial_clay_shard"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:grinder"
+}

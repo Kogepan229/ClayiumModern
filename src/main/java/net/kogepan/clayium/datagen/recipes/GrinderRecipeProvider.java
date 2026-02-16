@@ -43,12 +43,27 @@ public class GrinderRecipeProvider {
         create(recipeOutput, "compressed_clay_0_block",
                 ClayiumBlocks.COMPRESSED_CLAYS.get(0).asItem().getDefaultInstance(),
                 ClayiumItems.DENSE_CLAY_DUST.toStack(), CEUtils.TEN_MICRO_CE, 8, 0);
+        create(recipeOutput, "compressed_clay_1_block_shard",
+                ClayiumBlocks.COMPRESSED_CLAYS.get(1).asItem().getDefaultInstance(),
+                ClayiumItems.COMPRESSED_CLAY_SHARD.toStack(2), CEUtils.TEN_MICRO_CE, 8, 0);
         create(recipeOutput, "compressed_clay_2_block",
                 ClayiumBlocks.COMPRESSED_CLAYS.get(2).asItem().getDefaultInstance(),
                 ClayiumItems.INDUSTRIAL_CLAY_PLATE.toStack(), CEUtils.TEN_MICRO_CE, 12, 0);
+        create(recipeOutput, "compressed_clay_2_block_shard",
+                ClayiumBlocks.COMPRESSED_CLAYS.get(2).asItem().getDefaultInstance(),
+                ClayiumItems.INDUSTRIAL_CLAY_SHARD.toStack(3), CEUtils.TEN_MICRO_CE, 12, 0);
+        create(recipeOutput, "compressed_clay_2_block_dust",
+                ClayiumBlocks.COMPRESSED_CLAYS.get(2).asItem().getDefaultInstance(),
+                ClayiumItems.INDUSTRIAL_CLAY_DUST.toStack(2), CEUtils.TEN_MICRO_CE, 12, 0);
         create(recipeOutput, "compressed_clay_3_block",
                 ClayiumBlocks.COMPRESSED_CLAYS.get(3).asItem().getDefaultInstance(),
                 ClayiumItems.ADVANCED_INDUSTRIAL_CLAY_PLATE.toStack(), CEUtils.TEN_MICRO_CE, 16, 0);
+        create(recipeOutput, "compressed_clay_3_block_shard",
+                ClayiumBlocks.COMPRESSED_CLAYS.get(3).asItem().getDefaultInstance(),
+                ClayiumItems.ADVANCED_INDUSTRIAL_CLAY_SHARD.toStack(5), CEUtils.TEN_MICRO_CE, 16, 0);
+        create(recipeOutput, "compressed_clay_3_block_dust",
+                ClayiumBlocks.COMPRESSED_CLAYS.get(3).asItem().getDefaultInstance(),
+                ClayiumItems.ADVANCED_INDUSTRIAL_CLAY_DUST.toStack(2), CEUtils.TEN_MICRO_CE, 16, 0);
 
         // Clay part grinding (energy 1, time 3*i for CLAY i=1)
         create(recipeOutput, "clay_plate", ClayiumItems.CLAY_PLATE.toStack(), ClayiumItems.CLAY_DUST.toStack(),
@@ -121,6 +136,28 @@ public class GrinderRecipeProvider {
                 ClayiumItems.DENSE_CLAY_DUST.toStack(4), CEUtils.TEN_MICRO_CE, 48, 0);
         create(recipeOutput, "dense_clay_cutting_head", ClayiumItems.DENSE_CLAY_CUTTING_HEAD.toStack(),
                 ClayiumItems.DENSE_CLAY_DUST.toStack(9), CEUtils.TEN_MICRO_CE, 108, 0);
+
+        // Ingot to dust (tier 4 materials)
+        create(recipeOutput, "impure_silicon_ingot", ClayiumItems.IMPURE_SILICON_INGOT.toStack(),
+                ClayiumItems.IMPURE_SILICON_DUST.toStack(), CEUtils.ONE_MILLI_CE, 20, 4);
+        create(recipeOutput, "silicon_ingot", ClayiumItems.SILICON_INGOT.toStack(),
+                ClayiumItems.SILICON_DUST.toStack(), CEUtils.ONE_MILLI_CE, 20, 4);
+        create(recipeOutput, "silicone_ingot", ClayiumItems.SILICONE_INGOT.toStack(),
+                ClayiumItems.SILICONE_DUST.toStack(), CEUtils.ONE_MILLI_CE, 4, 4);
+        create(recipeOutput, "aluminium_ingot", ClayiumItems.ALUMINIUM_INGOT.toStack(),
+                ClayiumItems.ALUMINIUM_DUST.toStack(), CEUtils.ONE_MILLI_CE, 20, 4);
+        create(recipeOutput, "impure_aluminium_ingot", ClayiumItems.IMPURE_ALUMINIUM_INGOT.toStack(),
+                ClayiumItems.IMPURE_ALUMINIUM_DUST.toStack(), CEUtils.ONE_MILLI_CE, 20, 4);
+        create(recipeOutput, "clay_steel_ingot", ClayiumItems.CLAY_STEEL_INGOT.toStack(),
+                ClayiumItems.CLAY_STEEL_DUST.toStack(), CEUtils.ONE_MILLI_CE, 60, 4);
+        create(recipeOutput, "clayium_ingot", ClayiumItems.CLAYIUM_INGOT.toStack(),
+                ClayiumItems.CLAYIUM_DUST.toStack(), CEUtils.ONE_MILLI_CE, 120, 4);
+        create(recipeOutput, "ultimate_alloy_ingot", ClayiumItems.ULTIMATE_ALLOY_INGOT.toStack(),
+                ClayiumItems.ULTIMATE_ALLOY_DUST.toStack(), CEUtils.ONE_MILLI_CE, 180, 4);
+        create(recipeOutput, "az91d_alloy_ingot", ClayiumItems.AZ91D_ALLOY_INGOT.toStack(),
+                ClayiumItems.AZ91D_ALLOY_DUST.toStack(), CEUtils.ONE_MILLI_CE, 20, 4);
+        create(recipeOutput, "zk60a_alloy_ingot", ClayiumItems.ZK60A_ALLOY_INGOT.toStack(),
+                ClayiumItems.ZK60A_ALLOY_DUST.toStack(), CEUtils.ONE_MILLI_CE, 20, 4);
 
         // Vanilla compatibility
         create(recipeOutput, "cobblestone_to_gravel", Blocks.COBBLESTONE.asItem().getDefaultInstance(),
