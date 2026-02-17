@@ -43,6 +43,11 @@ public class ClayiumItems {
     public static final DeferredItem<Item> PRECISION_CIRCUIT = ITEMS.registerItem("precision_circuit", p -> new TieredItem(p, 6));
     public static final DeferredItem<Item> INTEGRATED_CIRCUIT = ITEMS.registerItem("integrated_circuit", p -> new TieredItem(p, 7));
     public static final DeferredItem<Item> CLAY_CORE = ITEMS.registerItem("clay_core", p -> new TieredItem(p, 8));
+    public static final DeferredItem<Item> CLAY_BRAIN = ITEMS.registerItem("clay_brain", p -> new TieredItem(p, 9));
+    public static final DeferredItem<Item> CLAY_SPIRIT = ITEMS.registerItem("clay_spirit", p -> new TieredItem(p, 10));
+    public static final DeferredItem<Item> CLAY_SOUL = ITEMS.registerItem("clay_soul", p -> new TieredItem(p, 11));
+    public static final DeferredItem<Item> CLAY_ANIMA = ITEMS.registerItem("clay_anima", p -> new TieredItem(p, 12));
+    public static final DeferredItem<Item> CLAY_PSYCHE = ITEMS.registerItem("clay_psyche", p -> new TieredItem(p, 13));
 
     // Raw Clay Tools
     public static final DeferredItem<Item> RAW_CLAY_ROLLING_PIN = ITEMS.registerItem("raw_clay_rolling_pin", Item::new);
