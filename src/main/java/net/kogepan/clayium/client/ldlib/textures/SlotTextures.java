@@ -17,4 +17,6 @@ public class SlotTextures {
     public static final IGuiTexture OUTPUT_SLOT_1 = SpriteTexture.of(SPRITE).setSprite(0, 18, 18, 18);
     public static final IGuiTexture OUTPUT_SLOT_2 = SpriteTexture.of(SPRITE).setSprite(18, 18, 18, 18);
     public static final IGuiTexture OUTPUT_SLOT_3 = SpriteTexture.of(SPRITE).setSprite(36, 18, 18, 18);
+
+    public static final IGuiTexture PHANTOM_ITEM_SLOT_OVERLAY = SpriteTexture.of(SPRITE).setSprite(54 + 1, 1, 16, 16);
 }

@@ -1,4 +1,6 @@
-// 1.21.1	2026-02-17T20:05:43.710130633	Block States: clayium
+// 1.21.1	2026-02-17T20:42:20.636276413	Block States: clayium
+9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
+56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
 59a8cbf5691d0619fce4e61af85d4b071774605e assets/clayium/blockstates/bending_machine_1.json
 cf427b0b7f1ae41b9380716a7ab0c338538ef482 assets/clayium/blockstates/bending_machine_2.json
@@ -89,6 +91,8 @@ e68b8b63ba6f44e78a6f9f6f8d20ceb0cf203141 assets/clayium/blockstates/raw_clay_mac
 bfed7736530ab9ab3c5dba989859780517708448 assets/clayium/blockstates/wire_drawing_machine_3.json
 b193a4c406648d11ea756e6134eb86386ca647bb assets/clayium/blockstates/wire_drawing_machine_4.json
 a6156bb8f7c116bb8f386134ed4f86fb9ecced62 assets/clayium/blockstates/zk60a_alloy_hull.json
+5a46d3b0a608a8bda584737168be799f14767b53 assets/clayium/models/block/auto_clay_condenser_5.json
+76f6271a4d526e5861e1a47b4c59ce715ee86859 assets/clayium/models/block/auto_clay_condenser_7.json
 87585e0cffc201ca7e29b200135c06f494153da1 assets/clayium/models/block/az91d_alloy_hull.json
 34159bff4160e78c9e6828607bcab37fa1f5ea59 assets/clayium/models/block/bending_machine_1.json
 0d4939f5e060b5bc9f872436ee7f2874e5b852a3 assets/clayium/models/block/bending_machine_2.json
@@ -179,6 +183,8 @@ de6797a0a88beffb3bcf99c6be58ff966cc1bc53 assets/clayium/models/block/wire_drawin
 4120a982df37872894064912469e93ffe17acc5f assets/clayium/models/block/wire_drawing_machine_3.json
 9b5057eaff19a23ecfa76dd25d94bc3e5feb34fe assets/clayium/models/block/wire_drawing_machine_4.json
 a21639b3c2b5434193461f0c8657e8d6bbbf6bf9 assets/clayium/models/block/zk60a_alloy_hull.json
+6cd0f73b21efc97ad47ae8617dc9a408afdb2280 assets/clayium/models/item/auto_clay_condenser_5.json
+36b1935ca2c09fb94050eed5453f6456dad1ea49 assets/clayium/models/item/auto_clay_condenser_7.json
 458f91945044f253addf5a101b3b18712fe608fc assets/clayium/models/item/az91d_alloy_hull.json
 d90468f5ffd59da72beb686c5ac5b6c032177bca assets/clayium/models/item/bending_machine_1.json
 36c332094498e15a7883475dcaa7e9ee736c777a assets/clayium/models/item/bending_machine_2.json

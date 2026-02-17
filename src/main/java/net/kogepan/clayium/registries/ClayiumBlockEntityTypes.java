@@ -5,6 +5,7 @@ import net.kogepan.clayium.blockentities.ClayBufferBlockEntity;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.ClayWorkTableBlockEntity;
 import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
+import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CobblestoneGeneratorBlockEntity;
@@ -142,6 +143,17 @@ public class ClayiumBlockEntityTypes {
                         .map(DeferredHolder::get).toList());
                 return BlockEntityType.Builder
                         .of(ClayCondenserBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AutoClayCondenserBlockEntity>> AUTO_CLAY_CONDENSER_BLOCK_ENTITY = registerClayContainer(
+            "auto_clay_condenser_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.AUTO_CLAY_CONDENSER_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(AutoClayCondenserBlockEntity::new,
+                                blocks.toArray(Block[]::new))
                         .build(null);
             });
 

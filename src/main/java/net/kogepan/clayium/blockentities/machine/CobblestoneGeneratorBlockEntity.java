@@ -160,9 +160,6 @@ public class CobblestoneGeneratorBlockEntity extends ClayContainerBlockEntity {
     }
 
     @Override
-    protected void invalidateItemHandlerCapability() {}
-
-    @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
         super.saveAdditional(tag, provider);
         tag.put("outputInventory", this.outputInventory.serializeNBT(provider));

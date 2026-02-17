@@ -6,6 +6,7 @@ import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.blocks.ClayOre;
 import net.kogepan.clayium.blocks.ClayWorkTableBlock;
 import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
+import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.ClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
@@ -235,5 +236,14 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("grinder", i, GrinderBlock::new));
         }
         GRINDER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> AUTO_CLAY_CONDENSER_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i : new int[] { 5, 7 }) {
+            map.put(i, registerTiered("auto_clay_condenser", i, AutoClayCondenserBlock::new));
+        }
+        AUTO_CLAY_CONDENSER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 }

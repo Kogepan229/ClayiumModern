@@ -1,4 +1,6 @@
-// 1.21.1	2026-02-17T19:38:26.127419135	Loot Tables
+// 1.21.1	2026-02-17T20:42:20.645750579	Loot Tables
+c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
+c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
 0897080755d66020606439b4962ffdbc984745df data/clayium/loot_table/blocks/bending_machine_1.json
 3fb7788ed2907cf9d728f21fc4e68560a14a9d30 data/clayium/loot_table/blocks/bending_machine_2.json
