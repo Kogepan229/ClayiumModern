@@ -17,6 +17,7 @@ import org.jetbrains.annotations.Nullable;
 public class ClayiumBlockModelProvider extends BlockStateProvider {
 
     private static final ResourceLocation OVERLAY_MODEL = Clayium.id("block/overlay");
+    private static final ResourceLocation INPUT_ALL_OVERLAY_TEXTURE = Clayium.id("block/overlay/import_all");
 
     private static final ResourceLocation[] TIER_BASE_TEXTURES;
     static {
@@ -81,7 +82,7 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         simpleBlockAndItem(ClayiumBlocks.ZK60A_ALLOY_HULL.get());
 
         for (var entry : ClayiumBlocks.CLAY_BUFFERS.int2ObjectEntrySet()) {
-            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), null);
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), INPUT_ALL_OVERLAY_TEXTURE, true);
         }
 
         for (var entry : ClayiumBlocks.BENDING_MACHINE_BLOCKS.int2ObjectEntrySet()) {
@@ -120,11 +121,16 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay) {
-        registerSingleMachine(block, tier, overlay, false);
+        registerSingleMachine(block, tier, overlay, false, false);
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,
-                                       boolean rotateVertical) {
+                                       boolean overlayItemOnly) {
+        registerSingleMachine(block, tier, overlay, false, overlayItemOnly);
+    }
+
+    private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,
+                                       boolean rotateVertical, boolean overlayItemOnly) {
         ClayContainerModelBuilder builder = models().getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
                 .customLoader(ClayContainerModelBuilder::new)
                 .baseModel(models().nested().parent(models().getExistingFile(models().mcLoc("block/cube_all")))
@@ -134,6 +140,9 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
             builder.overlayModel(
                     models().nested().parent(models().getExistingFile(OVERLAY_MODEL)).texture("overlay_front",
                             overlay));
+            if (overlayItemOnly) {
+                builder.overlayItemOnly(true);
+            }
         }
 
         if (rotateVertical) {

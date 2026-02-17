@@ -49,12 +49,15 @@ public class ClayContainerModel implements IDynamicBakedModel {
     private final BakedModel pipeCoreModel;
     private final Map<Direction, BakedModel> pipeArmModels;
 
+    private final boolean overlayItemOnly;
+
     public ClayContainerModel(BakedModel base, @Nullable Map<Direction, BakedModel> overlays, BakedModel pipeCore,
-                              Map<Direction, BakedModel> pipeArms) {
+                              Map<Direction, BakedModel> pipeArms, boolean overlayItemOnly) {
         this.baseModel = base;
         this.bakedOverlayModels = overlays;
         this.pipeCoreModel = pipeCore;
         this.pipeArmModels = pipeArms;
+        this.overlayItemOnly = overlayItemOnly;
     }
 
     @Override
@@ -69,12 +72,15 @@ public class ClayContainerModel implements IDynamicBakedModel {
                     this.baseModel.getQuads(blockState, direction, randomSource, modelData, renderType));
 
             if (bakedOverlayModels != null) {
-                Direction facing = Direction.NORTH;
-                if (blockState != null && blockState.getBlock() instanceof ClayContainerBlock containerBlock) {
-                    facing = blockState.getValue(containerBlock.getFacingProperty());
+                boolean shouldRenderOverlayModel = !overlayItemOnly || blockState == null;
+                if (shouldRenderOverlayModel) {
+                    Direction facing = Direction.NORTH;
+                    if (blockState != null && blockState.getBlock() instanceof ClayContainerBlock containerBlock) {
+                        facing = blockState.getValue(containerBlock.getFacingProperty());
+                    }
+                    quads.addAll(bakedOverlayModels.get(facing).getQuads(blockState, direction, randomSource,
+                            modelData, renderType));
                 }
-                quads.addAll(bakedOverlayModels.get(facing).getQuads(blockState, direction, randomSource, modelData,
-                        renderType));
             }
 
             if (renderType == RenderType.CUTOUT) {

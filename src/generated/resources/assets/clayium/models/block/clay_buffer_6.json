@@ -5,5 +5,12 @@
       "all": "clayium:block/tier/tier6"
     }
   },
-  "loader": "clayium:clay_container_model_loader"
+  "loader": "clayium:clay_container_model_loader",
+  "overlay_item_only": true,
+  "overlay_model": {
+    "parent": "clayium:block/overlay",
+    "textures": {
+      "overlay_front": "clayium:block/overlay/import_all"
+    }
+  }
 }

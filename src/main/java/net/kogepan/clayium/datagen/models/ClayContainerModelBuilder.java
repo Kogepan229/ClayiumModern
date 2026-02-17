@@ -14,6 +14,7 @@ public class ClayContainerModelBuilder extends CustomLoaderBuilder<BlockModelBui
     BlockModelBuilder baseModel;
     BlockModelBuilder overlayModel;
     boolean rotateVertical = false;
+    boolean overlayItemOnly = false;
 
     public ClayContainerModelBuilder(BlockModelBuilder parent, ExistingFileHelper existingFileHelper) {
         super(ClayContainerModelLoader.ID, parent, existingFileHelper, false);
@@ -26,6 +27,11 @@ public class ClayContainerModelBuilder extends CustomLoaderBuilder<BlockModelBui
 
     public ClayContainerModelBuilder overlayModel(BlockModelBuilder overlayModel) {
         this.overlayModel = overlayModel;
+        return this;
+    }
+
+    public ClayContainerModelBuilder overlayItemOnly(boolean overlayItemOnly) {
+        this.overlayItemOnly = overlayItemOnly;
         return this;
     }
 
@@ -50,6 +56,10 @@ public class ClayContainerModelBuilder extends CustomLoaderBuilder<BlockModelBui
 
         if (rotateVertical) {
             json.addProperty("rotate_vertical", true);
+        }
+
+        if (overlayItemOnly) {
+            json.addProperty("overlay_item_only", true);
         }
 
         return json;
