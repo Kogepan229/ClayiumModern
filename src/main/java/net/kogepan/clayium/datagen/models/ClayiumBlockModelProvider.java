@@ -73,6 +73,13 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
             simpleBlockAndItem(entry.get());
         }
 
+        simpleBlockAndItem(ClayiumBlocks.RAW_CLAY_MACHINE_HULL.get());
+        for (var entry : ClayiumBlocks.MACHINE_HULLS.values()) {
+            simpleBlockAndItem(entry.get());
+        }
+        simpleBlockAndItem(ClayiumBlocks.AZ91D_ALLOY_HULL.get());
+        simpleBlockAndItem(ClayiumBlocks.ZK60A_ALLOY_HULL.get());
+
         for (var entry : ClayiumBlocks.CLAY_BUFFERS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), null);
         }

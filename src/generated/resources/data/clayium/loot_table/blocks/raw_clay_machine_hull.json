@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:block",
+  "pools": [
+    {
+      "bonus_rolls": 0.0,
+      "conditions": [
+        {
+          "condition": "minecraft:survives_explosion"
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "clayium:raw_clay_machine_hull"
+        }
+      ],
+      "rolls": 1.0
+    }
+  ],
+  "random_sequence": "clayium:blocks/raw_clay_machine_hull"
+}

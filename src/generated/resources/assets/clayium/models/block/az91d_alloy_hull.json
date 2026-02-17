@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "clayium:block/az91d_alloy_hull"
+  }
+}

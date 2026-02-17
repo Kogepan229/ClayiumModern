@@ -93,6 +93,50 @@ public class ClayiumBlocks {
                 () -> new QuartzCrucibleBlockItem(QUARTZ_CRUCIBLE.get(), new Item.Properties()));
     }
 
+    public static final DeferredBlock<Block> RAW_CLAY_MACHINE_HULL = BLOCKS.register("raw_clay_machine_hull",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .destroyTime(2.0f)
+                    .explosionResistance(6.0f)
+                    .sound(SoundType.STONE)
+                    .requiresCorrectToolForDrops()));
+    static {
+        ClayiumItems.ITEMS.register("raw_clay_machine_hull",
+                () -> new TieredBlockItem(RAW_CLAY_MACHINE_HULL.get(), new Item.Properties(), 1));
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<Block>> MACHINE_HULLS;
+    static {
+        Int2ObjectMap<DeferredBlock<Block>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 1; i <= 13; i++) {
+            map.put(i, registerTiered("machine_hull", i,
+                    (t) -> new Block(BlockBehaviour.Properties.of()
+                            .destroyTime(3.0f)
+                            .explosionResistance(10.0f)
+                            .sound(SoundType.METAL)
+                            .requiresCorrectToolForDrops())));
+        }
+        MACHINE_HULLS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final DeferredBlock<Block> AZ91D_ALLOY_HULL = BLOCKS.register("az91d_alloy_hull",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .destroyTime(3.0f)
+                    .explosionResistance(10.0f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+    public static final DeferredBlock<Block> ZK60A_ALLOY_HULL = BLOCKS.register("zk60a_alloy_hull",
+            () -> new Block(BlockBehaviour.Properties.of()
+                    .destroyTime(3.0f)
+                    .explosionResistance(10.0f)
+                    .sound(SoundType.METAL)
+                    .requiresCorrectToolForDrops()));
+    static {
+        ClayiumItems.ITEMS.register("az91d_alloy_hull",
+                () -> new TieredBlockItem(AZ91D_ALLOY_HULL.get(), new Item.Properties(), 6));
+        ClayiumItems.ITEMS.register("zk60a_alloy_hull",
+                () -> new TieredBlockItem(ZK60A_ALLOY_HULL.get(), new Item.Properties(), 6));
+    }
+
     public static final Int2ObjectMap<DeferredBlock<ClayBufferBlock>> CLAY_BUFFERS;
     static {
         Int2ObjectMap<DeferredBlock<ClayBufferBlock>> map = new Int2ObjectOpenHashMap<>();
