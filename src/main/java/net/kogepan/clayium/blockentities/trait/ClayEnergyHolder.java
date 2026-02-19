@@ -37,6 +37,7 @@ public class ClayEnergyHolder extends ClayContainerTrait implements IClayEnergyH
 
     private final ClayiumItemStackHandler backingEcSlotHandler;
     private final FilteredItemHandlerModifiable energizedClayItemHandler;
+    private final AutoIOTrait.EcImporter energizedClayImporter;
 
     private long clayEnergy = 0L;
     private int ceSlotStackLimit = 1;
@@ -53,11 +54,12 @@ public class ClayEnergyHolder extends ClayContainerTrait implements IClayEnergyH
         this.energizedClayItemHandler = new FilteredItemHandlerModifiable(
                 this.backingEcSlotHandler,
                 stack -> CEUtils.getItemEnergy(stack) > 0);
+        this.energizedClayImporter = new AutoIOTrait.EcImporter(blockEntity, this.energizedClayItemHandler);
     }
 
     @Override
     public void tick() {
-        // TODO: Implement energized clay importer when AutoIOTrait pattern is available
+        this.energizedClayImporter.tick();
         if (blockEntity.getLevel() == null || blockEntity.getLevel().isClientSide()) return;
 
         Level world = blockEntity.getLevel();

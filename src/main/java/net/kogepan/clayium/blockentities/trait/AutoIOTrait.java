@@ -11,6 +11,7 @@ import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public abstract class AutoIOTrait extends ClayContainerTrait {
 
@@ -57,13 +58,22 @@ public abstract class AutoIOTrait extends ClayContainerTrait {
         return this.blockEntity.getOutputMode(direction) != MachineIOMode.NONE;
     }
 
+    /**
+     * Returns the item handler to import items into for the given direction.
+     * Override in subclasses (e.g. EcImporter) to use a different target.
+     */
+    @Nullable
+    protected IItemHandler getImportTarget(Direction direction) {
+        return this.blockEntity.getExposedItemHandler(direction);
+    }
+
     protected void importItemsFromNeighbors(final int amount) {
         int remainingImport = amount;
         for (Direction direction : Direction.values()) {
             if (remainingImport > 0 && this.canImport(direction)) {
                 IItemHandler from = this.blockEntity.getNeighborItemHandler(direction);
                 if (from == null) continue;
-                IItemHandler to = this.blockEntity.getExposedItemHandler(direction);
+                IItemHandler to = this.getImportTarget(direction);
                 if (to == null) continue;
 
                 remainingImport = transferItems(from, to, remainingImport);
@@ -131,6 +141,34 @@ public abstract class AutoIOTrait extends ClayContainerTrait {
 
         public Combined(@NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer) {
             super(blockEntity, tier, isBuffer);
+        }
+    }
+
+    /**
+     * Importer specialized for Energized Clay (CE).
+     * Uses separate limits from the normal importer, so CE can be imported even when
+     * the normal importer is at full capacity.
+     * Only imports when the input mode for a direction is CE.
+     */
+    public static class EcImporter extends Impoter {
+
+        private final IItemHandler energizedClayItemHandler;
+
+        public EcImporter(@NotNull ClayContainerBlockEntity blockEntity,
+                          @NotNull IItemHandler energizedClayItemHandler) {
+            super(blockEntity, blockEntity.tier, false);
+            this.energizedClayItemHandler = energizedClayItemHandler;
+        }
+
+        @Override
+        protected boolean canImport(Direction direction) {
+            return this.blockEntity.getInputMode(direction) == MachineIOMode.CE;
+        }
+
+        @Override
+        @Nullable
+        protected IItemHandler getImportTarget(Direction direction) {
+            return this.energizedClayItemHandler;
         }
     }
 }
