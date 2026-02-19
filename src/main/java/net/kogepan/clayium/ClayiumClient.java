@@ -5,6 +5,7 @@ import net.kogepan.clayium.client.model.ModelTextures;
 import net.kogepan.clayium.client.model.PipeOverlayQuads;
 import net.kogepan.clayium.client.model.block.ClayContainerModelLoader;
 import net.kogepan.clayium.client.renderer.ClayContainerRenderer;
+import net.kogepan.clayium.client.renderer.LaserReflectorRenderer;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.utils.CEUtils;
 
@@ -98,6 +99,9 @@ public class ClayiumClient {
                     (BlockEntityType<? extends ClayContainerBlockEntity>) holder.get(),
                     ClayContainerRenderer::new);
         }
+        event.registerBlockEntityRenderer(
+                ClayiumBlockEntityTypes.LASER_REFLECTOR_BLOCK_ENTITY.get(),
+                LaserReflectorRenderer::new);
     }
 
     @SubscribeEvent

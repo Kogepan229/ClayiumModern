@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-19T17:58:02.498067732	Loot Tables
+// 1.21.1	2026-02-19T21:41:52.484918269	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -63,6 +63,7 @@ bbb860d1e21d8e2d46ae3958df56feb739b7f085 data/clayium/loot_table/blocks/grinder_
 c4bc086c9348e122a5e884fe9d62dbc6e539df40 data/clayium/loot_table/blocks/grinder_5.json
 b8de2e847afe808615318524bf931907c03cefcb data/clayium/loot_table/blocks/grinder_6.json
 4f977e91fd1a23ccb931077c55f086e5a3ddda13 data/clayium/loot_table/blocks/large_dense_clay_ore.json
+080ada3fcba7f09a36d82ce49a109c2687b78571 data/clayium/loot_table/blocks/laser_reflector.json
 5a813f520e03d5f5db49f206163b12cdeec9b002 data/clayium/loot_table/blocks/lathe_1.json
 7dd534db941044ab16a9aa0b43a5e78d00d5b1d9 data/clayium/loot_table/blocks/lathe_2.json
 bef86bf20451e668a37262db598908a4d42459ce data/clayium/loot_table/blocks/lathe_3.json

@@ -12,6 +12,7 @@ import net.kogepan.clayium.blockentities.machine.ClayLaserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CobblestoneGeneratorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CuttingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.GrinderBlockEntity;
+import net.kogepan.clayium.blockentities.machine.LaserReflectorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.LatheBlockEntity;
 import net.kogepan.clayium.blockentities.machine.MillingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.PipeDrawingMachineBlockEntity;
@@ -177,6 +178,12 @@ public class ClayiumBlockEntityTypes {
                         .of(ClayLaserBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<LaserReflectorBlockEntity>> LASER_REFLECTOR_BLOCK_ENTITY = BLOCK_ENTITY_TYPES
+            .register("laser_reflector_block_entity",
+                    () -> BlockEntityType.Builder
+                            .of(LaserReflectorBlockEntity::new, ClayiumBlocks.LASER_REFLECTOR.get())
+                            .build(null));
 
     private static <
             T extends ClayContainerBlockEntity> DeferredHolder<BlockEntityType<?>, BlockEntityType<T>> registerClayContainer(

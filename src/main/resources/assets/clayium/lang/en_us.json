@@ -106,6 +106,7 @@
   "block.clayium.clay_laser_8": "Clayium Laser Emitter",
   "block.clayium.clay_laser_9": "Ultimate Laser Emitter",
   "block.clayium.clay_laser_10": "Antimatter Laser Emitter",
+  "block.clayium.laser_reflector": "Laser Reflector",
   "block.clayium.quartz_crucible": "Quartz Crucible",
 
   "item.clayium.compressed_clay_shard": "Compressed Clay Shard",

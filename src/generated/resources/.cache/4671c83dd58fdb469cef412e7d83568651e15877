@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-19T18:12:44.561399029	Block States: clayium
+// 1.21.1	2026-02-19T21:41:52.47781882	Block States: clayium
 9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
 56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
@@ -63,6 +63,7 @@ f1e4e2a8f9fb065a1ee4f10774409f3f6d801036 assets/clayium/blockstates/grinder_2.js
 33f35d3acc1feedc6d11759018f3c78023262f46 assets/clayium/blockstates/grinder_5.json
 a53f5a44f1513d782c9a82b1f56d7131599843d0 assets/clayium/blockstates/grinder_6.json
 f0921fc5e8b394e2ed97799c3fd93119ec511ed7 assets/clayium/blockstates/large_dense_clay_ore.json
+bc39c0850e63deaa999a9b2d5173b3acbcd8cc35 assets/clayium/blockstates/laser_reflector.json
 2ab89b9403b14b660e131d140b62338dae60843a assets/clayium/blockstates/lathe_1.json
 85fe4c8f6fb4a96b56cf317ad307350ab6fd86fa assets/clayium/blockstates/lathe_2.json
 4837adeda2f9355de01a04b4ca4236fa68fc28e5 assets/clayium/blockstates/lathe_3.json
@@ -159,6 +160,7 @@ c7109590cf829672a39d2993084efe13fb4e63c8 assets/clayium/models/block/grinder_4.j
 e4f2de3019a62b1d961f21d163ba5c32278a0296 assets/clayium/models/block/grinder_5.json
 8ae10ff18ccedab695b62a09661595a2a60e13af assets/clayium/models/block/grinder_6.json
 a6a9c6c37b9f6d0b3850b06108f0ac11f9fe774f assets/clayium/models/block/large_dense_clay_ore.json
+d564b1b05544fa14a325b8c4d74f5e7b8149d1ab assets/clayium/models/block/laser_reflector.json
 274861319aed6ccec1fa2f9cc171c137910f4b2e assets/clayium/models/block/lathe_1.json
 fd8d7cad1d34687051572dcd40168f5c5a3d712a assets/clayium/models/block/lathe_2.json
 76b9688abd8547cdb0487d9a381390ce75bc3198 assets/clayium/models/block/lathe_3.json
@@ -255,6 +257,7 @@ b1b56137032e69d0ca4d1a00e3d7a874bf91d921 assets/clayium/models/item/grinder_4.js
 3f3ea9b87cb3a566054560d02abf4d22e12ddcb2 assets/clayium/models/item/grinder_5.json
 b119e6cf7eb73ce19db78ed878301ef1eab4674d assets/clayium/models/item/grinder_6.json
 62a459d2d49090936d2c1c57bbe28cf6b834e78b assets/clayium/models/item/large_dense_clay_ore.json
+2921e44f80c515efc2f4064dedd57a14835fedcd assets/clayium/models/item/laser_reflector.json
 081d9fed44652b523a0e3c1ba52bd3535dca3451 assets/clayium/models/item/lathe_1.json
 826fcbbd4ed2744f6463e1f8ba7796b85d9c0394 assets/clayium/models/item/lathe_2.json
 bb7a2f02b424dec0f0ea42b81f1ae32ec48d1855 assets/clayium/models/item/lathe_3.json

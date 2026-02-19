@@ -128,6 +128,12 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         for (var entry : ClayiumBlocks.CLAY_LASER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CLAY_LASER_TEXTURE, true, false);
         }
+
+        // Laser Reflector: directional block with simple cube model (for item); block uses ENTITYBLOCK_ANIMATED
+        ResourceLocation laserReflectorTexture = Clayium.id("block/machine/laser_reflector");
+        ModelFile laserReflectorModel = models().cubeAll("laser_reflector", laserReflectorTexture);
+        directionalBlock(ClayiumBlocks.LASER_REFLECTOR.get(), laserReflectorModel);
+        simpleBlockItem(ClayiumBlocks.LASER_REFLECTOR.get(), laserReflectorModel);
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay) {

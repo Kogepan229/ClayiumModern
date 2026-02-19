@@ -32,6 +32,16 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         GrinderRecipeProvider.buildRecipes(recipeOutput);
         QuartzCrucibleRecipeProvider.buildRecipes(recipeOutput);
 
+        // Laser Reflector
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.LASER_REFLECTOR.get())
+                .pattern(" G ")
+                .pattern("GLG")
+                .pattern(" G ")
+                .define('G', Items.GLASS_PANE)
+                .define('L', ClayiumBlocks.CLAY_LASER_BLOCKS.get(7).get())
+                .unlockedBy("has_clay_laser", has(ClayiumBlocks.CLAY_LASER_BLOCKS.get(7).get()))
+                .save(recipeOutput, Clayium.id("laser_reflector"));
+
         // Quartz Crucible
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.QUARTZ_CRUCIBLE.get())
                 .pattern("Q Q")

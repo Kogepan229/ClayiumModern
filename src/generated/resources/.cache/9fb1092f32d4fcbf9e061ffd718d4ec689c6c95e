@@ -1,4 +1,5 @@
-// 1.21.1	2026-02-17T00:19:26.160227345	Recipes
+// 1.21.1	2026-02-19T21:41:52.486818209	Recipes
+8404c3a8b4c96d3f3be9ed3e1e664b4088b94969 data/clayium/advancement/recipes/misc/laser_reflector.json
 8ecc70c9b249bb84cc1e6864effb8ceda68323ff data/clayium/advancement/recipes/misc/quartz_crucible.json
 f5623d1a9bc85993b5a084eece21287828c7f083 data/clayium/recipe/bending_machine/advanced_industrial_clay_plate.json
 732d450af977ce5a24aa12afaedc3151597ce86a data/clayium/recipe/bending_machine/advanced_industrial_clay_plate_from_dust.json
@@ -150,6 +151,7 @@ a20632d3f6208cb5bb6d08bd8bf4d832d8ffacef data/clayium/recipe/grinder/silicon_ing
 580d228828616361004c24dfb70c948111fe0ff6 data/clayium/recipe/grinder/ultimate_alloy_ingot.json
 17470639dc92b02a7bd484e3df0655d6c317763e data/clayium/recipe/grinder/wool_to_string.json
 d9b8f27263ecbd9c5a28db5206a549f21ef33f40 data/clayium/recipe/grinder/zk60a_alloy_ingot.json
+2a4bb9b5ccfd67635c4956c1a4028cfb46ef87e5 data/clayium/recipe/laser_reflector.json
 da40d0213eb71e670a66ad09ded61bb5ea416518 data/clayium/recipe/lathe/clay_ball_to_short_stick.json
 8e12c8b54fe86beba0d9fcc4ad4f25ac986bbea5 data/clayium/recipe/lathe/clay_cylinder_to_needle.json
 e9b50b410b30fd54d20b92a128a59da1b704b706 data/clayium/recipe/lathe/clay_disc_to_ring.json

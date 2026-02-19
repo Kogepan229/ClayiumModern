@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "G": {
+      "item": "minecraft:glass_pane"
+    },
+    "L": {
+      "item": "clayium:clay_laser_7"
+    }
+  },
+  "pattern": [
+    " G ",
+    "GLG",
+    " G "
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:laser_reflector"
+  }
+}

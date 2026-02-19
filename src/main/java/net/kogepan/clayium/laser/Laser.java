@@ -4,6 +4,7 @@ import net.minecraft.nbt.CompoundTag;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import org.jetbrains.annotations.Nullable;
 
 import java.io.DataInput;
 import java.io.DataOutput;
@@ -73,6 +74,34 @@ public record Laser(int red, int green, int blue, int age) {
 
     public static Laser decode(DataInput input) throws IOException {
         return new Laser(input.readInt(), input.readInt(), input.readInt(), input.readInt());
+    }
+
+    /**
+     * Merges multiple lasers according to Unofficial synthesis rules.
+     * <p>
+     * - If maxAge &lt; 10: RGB values are summed, age = maxAge + 1
+     * - If maxAge &gt;= 10: RGB values are per-channel max, age = maxAge
+     *
+     * @param lasers Lasers to merge (non-null, non-empty)
+     * @return Merged laser, or null if lasers is empty
+     */
+    @Nullable
+    public static Laser merge(java.util.Collection<Laser> lasers) {
+        if (lasers == null || lasers.isEmpty()) {
+            return null;
+        }
+        int maxAge = lasers.stream().mapToInt(Laser::age).max().orElse(0);
+        if (maxAge >= 10) {
+            int r = lasers.stream().mapToInt(Laser::red).max().orElse(0);
+            int g = lasers.stream().mapToInt(Laser::green).max().orElse(0);
+            int b = lasers.stream().mapToInt(Laser::blue).max().orElse(0);
+            return new Laser(r, g, b, maxAge);
+        } else {
+            int r = lasers.stream().mapToInt(Laser::red).sum();
+            int g = lasers.stream().mapToInt(Laser::green).sum();
+            int b = lasers.stream().mapToInt(Laser::blue).sum();
+            return new Laser(r, g, b, maxAge + 1);
+        }
     }
 
     private static double calculateEnergyPerColor(int colorAmount, double base, double maxEnergy, double dampingRate) {

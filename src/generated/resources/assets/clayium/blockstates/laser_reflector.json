@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "clayium:block/laser_reflector",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "clayium:block/laser_reflector",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "clayium:block/laser_reflector",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "clayium:block/laser_reflector",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "clayium:block/laser_reflector"
+    },
+    "facing=west": {
+      "model": "clayium:block/laser_reflector",
+      "x": 90,
+      "y": 270
+    }
+  }
+}
