@@ -41,6 +41,7 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation CLAY_CONDENSER_TEXTURE = Clayium.id("block/machine/clay_condenser");
     private static final ResourceLocation AUTO_CLAY_CONDENSER_TEXTURE = Clayium.id("block/machine/auto_clay_condenser");
     private static final ResourceLocation GRINDER_TEXTURE = Clayium.id("block/machine/grinder");
+    private static final ResourceLocation CLAY_LASER_TEXTURE = Clayium.id("block/machine/clay_laser");
 
     public ClayiumBlockModelProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, Clayium.MODID, exFileHelper);
@@ -83,7 +84,7 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         simpleBlockAndItem(ClayiumBlocks.ZK60A_ALLOY_HULL.get());
 
         for (var entry : ClayiumBlocks.CLAY_BUFFERS.int2ObjectEntrySet()) {
-            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), INPUT_ALL_OVERLAY_TEXTURE, true);
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), INPUT_ALL_OVERLAY_TEXTURE, false, true);
         }
 
         for (var entry : ClayiumBlocks.BENDING_MACHINE_BLOCKS.int2ObjectEntrySet()) {
@@ -106,11 +107,12 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         }
 
         for (var entry : ClayiumBlocks.WATERWHEELS.int2ObjectEntrySet()) {
-            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), WATERWHEEL_TEXTURE, true);
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), WATERWHEEL_TEXTURE, true, false);
         }
 
         for (var entry : ClayiumBlocks.COBBLESTONE_GENERATORS.int2ObjectEntrySet()) {
-            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), COBBLESTONE_GENERATOR_TEXTURE, true);
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), COBBLESTONE_GENERATOR_TEXTURE, true,
+                    false);
         }
 
         for (var entry : ClayiumBlocks.CLAY_CONDENSER_BLOCKS.int2ObjectEntrySet()) {
@@ -122,15 +124,14 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         for (var entry : ClayiumBlocks.GRINDER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), GRINDER_TEXTURE);
         }
+
+        for (var entry : ClayiumBlocks.CLAY_LASER_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CLAY_LASER_TEXTURE, true, false);
+        }
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay) {
         registerSingleMachine(block, tier, overlay, false, false);
-    }
-
-    private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,
-                                       boolean overlayItemOnly) {
-        registerSingleMachine(block, tier, overlay, false, overlayItemOnly);
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,

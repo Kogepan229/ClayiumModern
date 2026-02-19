@@ -23,10 +23,10 @@ public interface LaserBlockIrradiationHandler {
      * @param irradiationTicks      Number of consecutive irradiation ticks on the same target block
      */
     void irradiate(
-            @NotNull Level level,
-            @NotNull BlockPos targetPos,
-            @NotNull BlockState targetState,
-            double tickEnergy,
-            double totalEnergyIrradiated,
-            int irradiationTicks);
+                   @NotNull Level level,
+                   @NotNull BlockPos targetPos,
+                   @NotNull BlockState targetState,
+                   double tickEnergy,
+                   double totalEnergyIrradiated,
+                   int irradiationTicks);
 }

@@ -46,10 +46,9 @@ public record Laser(int red, int green, int blue, int age) {
      * @return Energy value
      */
     public double energy() {
-        return calculateEnergyPerColor(blue, BASES[0], MAX_ENERGIES[0], DAMPING_RATE)
-                * calculateEnergyPerColor(green, BASES[1], MAX_ENERGIES[1], DAMPING_RATE)
-                * calculateEnergyPerColor(red, BASES[2], MAX_ENERGIES[2], DAMPING_RATE)
-                - 1.0;
+        return calculateEnergyPerColor(blue, BASES[0], MAX_ENERGIES[0], DAMPING_RATE) *
+                calculateEnergyPerColor(green, BASES[1], MAX_ENERGIES[1], DAMPING_RATE) *
+                calculateEnergyPerColor(red, BASES[2], MAX_ENERGIES[2], DAMPING_RATE) - 1.0;
     }
 
     public CompoundTag toTag() {
@@ -87,8 +86,8 @@ public record Laser(int red, int green, int blue, int age) {
         double aiTop = Math.log(r1 / (Math.pow(c, -amount) + dampingRate));
         double aiBottom = Math.log(r1 / dampingRate);
         double ai = aiTop / aiBottom;
-        double energy = Math.pow(maxEnergy, ai)
-                * ((1 + dampingRate * colorAmount * Math.pow(c, amount)) / (1 + dampingRate * Math.pow(c, amount)));
+        double energy = Math.pow(maxEnergy, ai) *
+                ((1 + dampingRate * colorAmount * Math.pow(c, amount)) / (1 + dampingRate * Math.pow(c, amount)));
         return Math.max(1.0, energy);
     }
 }

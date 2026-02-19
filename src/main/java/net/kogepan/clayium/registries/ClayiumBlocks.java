@@ -9,6 +9,7 @@ import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
 import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.ClayCondenserBlock;
+import net.kogepan.clayium.blocks.machine.ClayLaserBlock;
 import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
 import net.kogepan.clayium.blocks.machine.CuttingMachineBlock;
 import net.kogepan.clayium.blocks.machine.GrinderBlock;
@@ -245,5 +246,14 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("auto_clay_condenser", i, AutoClayCondenserBlock::new));
         }
         AUTO_CLAY_CONDENSER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CLAY_LASER_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 7; i <= 10; i++) {
+            map.put(i, registerTiered("clay_laser", i, ClayLaserBlock::new));
+        }
+        CLAY_LASER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 }

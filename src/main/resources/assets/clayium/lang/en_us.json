@@ -102,6 +102,10 @@
   "block.clayium.grinder_5": "Advanced Grinder",
   "block.clayium.grinder_6": "Precision Grinder",
   "block.clayium.grinder_10": "Antimatter Grinder",
+  "block.clayium.clay_laser_7": "Clay Steel Laser Emitter",
+  "block.clayium.clay_laser_8": "Clayium Laser Emitter",
+  "block.clayium.clay_laser_9": "Ultimate Laser Emitter",
+  "block.clayium.clay_laser_10": "Antimatter Laser Emitter",
   "block.clayium.quartz_crucible": "Quartz Crucible",
 
   "item.clayium.compressed_clay_shard": "Compressed Clay Shard",
@@ -199,6 +203,10 @@
   "gui.clayium.waterwheel.durability": "Durability: %d",
   "gui.clayium.waterwheel.water": "Water: %d",
   "gui.clayium.cobblestone_generator.progress": "Progress: %d",
+  "gui.clayium.clay_laser.length": "Laser Length: %d",
+  "gui.clayium.clay_laser.mode": "RS Mode: %s",
+  "gui.clayium.clay_laser.mode.default": "Emit when unpowered",
+  "gui.clayium.clay_laser.mode.inverted": "Emit when powered",
 
   "xei.clayium.tier": "Tier: %d",
 

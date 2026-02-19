@@ -8,6 +8,7 @@ import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayCondenserBlockEntity;
+import net.kogepan.clayium.blockentities.machine.ClayLaserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CobblestoneGeneratorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CuttingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.GrinderBlockEntity;
@@ -164,6 +165,16 @@ public class ClayiumBlockEntityTypes {
                         .map(DeferredHolder::get).toList());
                 return BlockEntityType.Builder
                         .of(GrinderBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ClayLaserBlockEntity>> CLAY_LASER_BLOCK_ENTITY = registerClayContainer(
+            "clay_laser_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.CLAY_LASER_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(ClayLaserBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
 

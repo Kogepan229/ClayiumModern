@@ -9,8 +9,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.StainedGlassPaneBlock;
 import net.minecraft.world.level.block.TransparentBlock;
-import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,7 +28,8 @@ public class ClayLaserIrradiator {
 
     private static final int DEFAULT_MAX_LASER_LENGTH = 32;
     private static final LaserBlockIrradiationHandler NO_OP_BLOCK_IRRADIATION = (level, targetPos, targetState,
-            tickEnergy, totalEnergyIrradiated, irradiationTicks) -> {};
+                                                                                 tickEnergy, totalEnergyIrradiated,
+                                                                                 irradiationTicks) -> {};
 
     private final BlockEntity owner;
     private final int maxLaserLength;
@@ -48,12 +49,13 @@ public class ClayLaserIrradiator {
     }
 
     public ClayLaserIrradiator(
-            @NotNull BlockEntity owner,
-            int maxLaserLength,
-            @Nullable LaserBlockIrradiationHandler blockIrradiationHandler) {
+                               @NotNull BlockEntity owner,
+                               int maxLaserLength,
+                               @Nullable LaserBlockIrradiationHandler blockIrradiationHandler) {
         this.owner = owner;
         this.maxLaserLength = Math.max(1, maxLaserLength);
-        this.blockIrradiationHandler = blockIrradiationHandler != null ? blockIrradiationHandler : NO_OP_BLOCK_IRRADIATION;
+        this.blockIrradiationHandler = blockIrradiationHandler != null ? blockIrradiationHandler :
+                NO_OP_BLOCK_IRRADIATION;
     }
 
     /**
@@ -152,9 +154,8 @@ public class ClayLaserIrradiator {
             return true;
         }
 
-        return state.getBlock() instanceof TransparentBlock
-                || state.getBlock() instanceof StainedGlassPaneBlock
-                || state.is(Blocks.GLASS_PANE);
+        return state.getBlock() instanceof TransparentBlock || state.getBlock() instanceof StainedGlassPaneBlock ||
+                state.is(Blocks.GLASS_PANE);
     }
 
     private void irradiateLaserBlock(@NotNull Level level, @NotNull BlockPos targetPos, double energy) {
