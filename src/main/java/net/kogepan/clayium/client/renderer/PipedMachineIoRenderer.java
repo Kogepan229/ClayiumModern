@@ -38,6 +38,7 @@ public class PipedMachineIoRenderer implements BlockEntityRenderer<ClayContainer
     public void render(@NotNull ClayContainerBlockEntity blockEntity, float partialTick,
                        @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer,
                        int packedLight, int packedOverlay) {
+        // Render pipe IO icons only when holding piping tool
         LocalPlayer player = Minecraft.getInstance().player;
         if (player == null) return;
 

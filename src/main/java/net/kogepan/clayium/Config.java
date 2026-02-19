@@ -29,6 +29,10 @@ public class Config {
             .comment("A list of items to log on common setup.")
             .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), () -> "", Config::validateItemName);
 
+    public static final ModConfigSpec.IntValue LASER_QUALITY = BUILDER
+            .comment("Visual quality of clay laser beam. 2 is recommended for low-end computers.")
+            .defineInRange("laserQuality", 8, 1, 32);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     private static boolean validateItemName(final Object obj) {

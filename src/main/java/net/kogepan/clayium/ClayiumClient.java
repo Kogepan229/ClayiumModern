@@ -4,7 +4,7 @@ import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.client.model.ModelTextures;
 import net.kogepan.clayium.client.model.PipeOverlayQuads;
 import net.kogepan.clayium.client.model.block.ClayContainerModelLoader;
-import net.kogepan.clayium.client.renderer.PipedMachineIoRenderer;
+import net.kogepan.clayium.client.renderer.ClayContainerRenderer;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.utils.CEUtils;
 
@@ -96,7 +96,7 @@ public class ClayiumClient {
         for (DeferredHolder<BlockEntityType<?>, ?> holder : ClayiumBlockEntityTypes.CLAY_CONTAINER_BLOCK_ENTITY_TYPES) {
             event.registerBlockEntityRenderer(
                     (BlockEntityType<? extends ClayContainerBlockEntity>) holder.get(),
-                    PipedMachineIoRenderer::new);
+                    ClayContainerRenderer::new);
         }
     }
 

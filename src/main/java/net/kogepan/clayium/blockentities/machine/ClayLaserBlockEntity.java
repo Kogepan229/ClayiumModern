@@ -82,20 +82,29 @@ public class ClayLaserBlockEntity extends ClayContainerBlockEntity implements IC
             return;
         }
 
+        boolean prevIrradiating = this.irradiating;
+        int prevLength = this.length;
+
         boolean shouldIrradiate = shouldIrradiate(level.hasNeighborSignal(this.worldPosition), this.invertRsCondition);
         boolean canEmit = shouldIrradiate && this.energyHolder.drawEnergy(this.consumingEnergy, false);
 
         if (canEmit) {
             this.irradiating = true;
             this.length = this.irradiator.irradiateLaser(this.getDirection(), this.sampleLaser);
-            return;
+        } else {
+            if (this.irradiating) {
+                this.irradiator.stopIrradiation();
+            }
+            this.irradiating = false;
+            this.length = 0;
         }
 
-        if (this.irradiating) {
-            this.irradiator.stopIrradiation();
+        // Sync to client when irradiating state or length changes
+        if (this.irradiating != prevIrradiating || this.length != prevLength) {
+            this.setChanged();
+            level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(),
+                    net.minecraft.world.level.block.Block.UPDATE_CLIENTS);
         }
-        this.irradiating = false;
-        this.length = 0;
     }
 
     public static boolean shouldIrradiate(boolean hasRedstoneSignal, boolean invertRsCondition) {
@@ -161,6 +170,16 @@ public class ClayLaserBlockEntity extends ClayContainerBlockEntity implements IC
         if (tag.contains("laserLength")) {
             this.length = tag.getInt("laserLength");
         }
+    }
+
+    @Override
+    @NotNull
+    public CompoundTag getUpdateTag(@NotNull HolderLookup.Provider provider) {
+        CompoundTag tag = super.getUpdateTag(provider);
+        tag.putBoolean("invertRsCondition", this.invertRsCondition);
+        tag.putBoolean("irradiating", this.irradiating);
+        tag.putInt("laserLength", this.length);
+        return tag;
     }
 
     @Override
