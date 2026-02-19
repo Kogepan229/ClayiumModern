@@ -181,6 +181,11 @@ dependencies {
     // lombok
     compileOnly("org.projectlombok:lombok:${lombok_version}")
     annotationProcessor("org.projectlombok:lombok:${lombok_version}")
+
+    testImplementation(platform("org.junit:junit-bom:5.12.1"))
+    testImplementation("org.junit.jupiter:junit-jupiter")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    testRuntimeOnly("com.mojang:datafixerupper:8.0.16")
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
@@ -223,6 +228,9 @@ publishing {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8' // Use the UTF-8 charset for Java compilation
+}
+tasks.named('test', Test).configure {
+    useJUnitPlatform()
 }
 tasks.withType(JavaExec).configureEach {
     standardInput = System.in

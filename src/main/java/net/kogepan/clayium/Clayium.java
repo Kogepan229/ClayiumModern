@@ -4,6 +4,8 @@ import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.capability.IClayEnergyHolder;
+import net.kogepan.clayium.capability.IClayLaserAcceptor;
+import net.kogepan.clayium.capability.IClayLaserSource;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
@@ -123,6 +125,18 @@ public class Clayium {
                         var trait = container.getTrait(ClayEnergyHolder.TRAIT_ID);
                         return trait instanceof IClayEnergyHolder ? (IClayEnergyHolder) trait : null;
                     });
+        }
+
+        for (DeferredHolder<BlockEntityType<?>, ?> type : ClayiumBlockEntityTypes.BLOCK_ENTITY_TYPES.getEntries()) {
+            event.registerBlockEntity(
+                    ClayiumCapabilities.CLAY_LASER_SOURCE,
+                    type.get(),
+                    (blockEntity, side) -> blockEntity instanceof IClayLaserSource source ? source : null);
+
+            event.registerBlockEntity(
+                    ClayiumCapabilities.CLAY_LASER_ACCEPTOR,
+                    type.get(),
+                    (blockEntity, side) -> blockEntity instanceof IClayLaserAcceptor acceptor ? acceptor : null);
         }
     }
 
