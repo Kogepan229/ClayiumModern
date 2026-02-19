@@ -26,6 +26,9 @@ public final class ClayLaserRenderer {
 
     private static final ResourceLocation LASER_TEXTURE = Clayium.id("textures/misc/laser.png");
 
+    /** Half-width of the laser beam cross-section (Z extent); 0.5 = full block width. */
+    private static final float LASER_HALF_WIDTH = 0.35f;
+
     private ClayLaserRenderer() {}
 
     /**
@@ -78,7 +81,7 @@ public final class ClayLaserRenderer {
         // Use full brightness so vertex colors are not darkened by lighting (Unofficial: setLightValue(15,15))
         int fullBright = LightTexture.FULL_BRIGHT;
 
-        RenderType renderType = RenderType.entityTranslucentEmissive(LASER_TEXTURE);
+        RenderType renderType = ClayiumRenderTypes.entityTranslucentUnlitEmissive(LASER_TEXTURE);
         VertexConsumer consumer = buffer.getBuffer(renderType);
 
         poseStack.pushPose();
@@ -114,12 +117,11 @@ public final class ClayLaserRenderer {
                 poseStack.last().normal().transform(normal);
             }
 
-            // Quad on X=0 plane: Y 0..1, Z -0.5..0.5
-            // Vertices: (0,1,0.5), (0,1,-0.5), (0,0,-0.5), (0,0,0.5)
-            Vector4f v0 = new Vector4f(0, 1, 0.5f, 1).mul(matrix);
-            Vector4f v1 = new Vector4f(0, 1, -0.5f, 1).mul(matrix);
-            Vector4f v2 = new Vector4f(0, 0, -0.5f, 1).mul(matrix);
-            Vector4f v3 = new Vector4f(0, 0, 0.5f, 1).mul(matrix);
+            // Quad on X=0 plane: Y 0..1, Z -LASER_HALF_WIDTH..LASER_HALF_WIDTH
+            Vector4f v0 = new Vector4f(0, 1, LASER_HALF_WIDTH, 1).mul(matrix);
+            Vector4f v1 = new Vector4f(0, 1, -LASER_HALF_WIDTH, 1).mul(matrix);
+            Vector4f v2 = new Vector4f(0, 0, -LASER_HALF_WIDTH, 1).mul(matrix);
+            Vector4f v3 = new Vector4f(0, 0, LASER_HALF_WIDTH, 1).mul(matrix);
 
             // Use NO_OVERLAY to avoid block overlay (crack texture) darkening the laser (Original used fixed pipeline
             // with no overlay)

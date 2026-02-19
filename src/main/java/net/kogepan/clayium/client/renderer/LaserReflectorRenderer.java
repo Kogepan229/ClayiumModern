@@ -47,16 +47,13 @@ public class LaserReflectorRenderer implements BlockEntityRenderer<LaserReflecto
     }
 
     /**
-     * Renders the Laser Reflector (laser beam + pyramid). Called from AFTER_BLOCK_ENTITIES.
+     * Renders the Laser Reflector pyramid only. Called from AFTER_BLOCK_ENTITIES.
+     * Laser beam is drawn separately via {@link ClayLaserRenderer#renderLaser} in the level stage.
      * Pose stack must already be translated to block-relative coordinates.
      */
     public static void renderLaserReflector(@NotNull LaserReflectorBlockEntity blockEntity,
                                             @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer,
                                             int packedLight, int packedOverlay) {
-        if (blockEntity.getIrradiatingLaser() != null) {
-            ClayLaserRenderer.renderLaser(blockEntity, poseStack, buffer, packedLight, packedOverlay);
-        }
-
         Direction facing = blockEntity.getBlockState().getValue(LaserReflectorBlock.FACING);
         TextureAtlasSprite sprite = net.minecraft.client.Minecraft.getInstance()
                 .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)

@@ -2,10 +2,12 @@ package net.kogepan.clayium;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.LaserReflectorBlockEntity;
+import net.kogepan.clayium.capability.IClayLaserSource;
 import net.kogepan.clayium.client.model.ModelTextures;
 import net.kogepan.clayium.client.model.PipeOverlayQuads;
 import net.kogepan.clayium.client.model.block.ClayContainerModelLoader;
 import net.kogepan.clayium.client.renderer.ClayContainerRenderer;
+import net.kogepan.clayium.client.renderer.ClayLaserRenderer;
 import net.kogepan.clayium.client.renderer.LaserReflectorBEWLR;
 import net.kogepan.clayium.client.renderer.LaserReflectorRenderer;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
@@ -132,6 +134,10 @@ public class ClayiumClient {
                 LaserReflectorRenderer::new);
     }
 
+    /**
+     * Renders lasers at AFTER_BLOCK_ENTITIES stage (no depth write, so they are visible through
+     * translucent blocks like water).
+     */
     @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES) {
@@ -141,23 +147,29 @@ public class ClayiumClient {
         var poseStack = event.getPoseStack();
         var camera = event.getCamera().getPosition();
         var bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
-        float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
 
         levelRenderer.iterateVisibleBlockEntities(blockEntity -> {
-            if (!(blockEntity instanceof LaserReflectorBlockEntity reflector)) {
-                return;
-            }
-            var level = reflector.getLevel();
+            var level = blockEntity.getLevel();
             if (level == null) return;
 
-            BlockPos pos = reflector.getBlockPos();
+            boolean drawLaser = blockEntity instanceof IClayLaserSource source && source.getIrradiatingLaser() != null;
+            boolean drawReflector = blockEntity instanceof LaserReflectorBlockEntity;
+            if (!drawLaser && !drawReflector) return;
+
+            BlockPos pos = blockEntity.getBlockPos();
             int packedLight = LevelRenderer.getLightColor(level, pos);
             int packedOverlay = OverlayTexture.NO_OVERLAY;
 
             poseStack.pushPose();
             poseStack.translate(pos.getX() - camera.x, pos.getY() - camera.y, pos.getZ() - camera.z);
-            LaserReflectorRenderer.renderLaserReflector(reflector, poseStack, bufferSource, packedLight,
-                    packedOverlay);
+            if (drawLaser) {
+                ClayLaserRenderer.renderLaser(
+                        (IClayLaserSource) blockEntity, poseStack, bufferSource, packedLight, packedOverlay);
+            }
+            if (drawReflector) {
+                LaserReflectorRenderer.renderLaserReflector(
+                        (LaserReflectorBlockEntity) blockEntity, poseStack, bufferSource, packedLight, packedOverlay);
+            }
             poseStack.popPose();
         });
     }
