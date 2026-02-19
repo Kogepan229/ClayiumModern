@@ -197,6 +197,7 @@
   "item.clayium.cee_circuit": "CEE Circuit",
 
   "tooltip.clayium.quartz_crucible": "Purifies impure silicon. Drop Impure Silicon Ingots, wait, then drop a String to collect Silicon Ingots.",
+  "tooltip.clayium.laser_reflector": "Changes the direction of Laser.",
   "tooltip.clayium.tier":  "Tier %d",
 
   "gui.clayium.inventory": "Inventory",

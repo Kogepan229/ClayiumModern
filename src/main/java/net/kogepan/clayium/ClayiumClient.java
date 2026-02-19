@@ -1,18 +1,25 @@
 package net.kogepan.clayium;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.blockentities.machine.LaserReflectorBlockEntity;
 import net.kogepan.clayium.client.model.ModelTextures;
 import net.kogepan.clayium.client.model.PipeOverlayQuads;
 import net.kogepan.clayium.client.model.block.ClayContainerModelLoader;
 import net.kogepan.clayium.client.renderer.ClayContainerRenderer;
+import net.kogepan.clayium.client.renderer.LaserReflectorBEWLR;
 import net.kogepan.clayium.client.renderer.LaserReflectorRenderer;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
+import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.utils.CEUtils;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColors;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -25,11 +32,16 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
+import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.client.extensions.common.RegisterClientExtensionsEvent;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
+
+import org.jetbrains.annotations.NotNull;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
 @Mod(value = Clayium.MODID, dist = Dist.CLIENT)
@@ -92,6 +104,22 @@ public class ClayiumClient {
     }
 
     @SubscribeEvent
+    public static void onRegisterClientExtensions(RegisterClientExtensionsEvent event) {
+        event.registerItem(new IClientItemExtensions() {
+
+            private final LaserReflectorBEWLR renderer = new LaserReflectorBEWLR(
+                    Minecraft.getInstance().getBlockEntityRenderDispatcher(),
+                    Minecraft.getInstance().getEntityModels());
+
+            @Override
+            @NotNull
+            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
+                return renderer;
+            }
+        }, ClayiumBlocks.LASER_REFLECTOR.get().asItem());
+    }
+
+    @SubscribeEvent
     @SuppressWarnings("unchecked")
     public static void onRegisterRenderers(EntityRenderersEvent.RegisterRenderers event) {
         for (DeferredHolder<BlockEntityType<?>, ?> holder : ClayiumBlockEntityTypes.CLAY_CONTAINER_BLOCK_ENTITY_TYPES) {
@@ -102,6 +130,36 @@ public class ClayiumClient {
         event.registerBlockEntityRenderer(
                 ClayiumBlockEntityTypes.LASER_REFLECTOR_BLOCK_ENTITY.get(),
                 LaserReflectorRenderer::new);
+    }
+
+    @SubscribeEvent
+    public static void onRenderLevelStage(RenderLevelStageEvent event) {
+        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_BLOCK_ENTITIES) {
+            return;
+        }
+        var levelRenderer = event.getLevelRenderer();
+        var poseStack = event.getPoseStack();
+        var camera = event.getCamera().getPosition();
+        var bufferSource = Minecraft.getInstance().renderBuffers().bufferSource();
+        float partialTick = event.getPartialTick().getGameTimeDeltaPartialTick(false);
+
+        levelRenderer.iterateVisibleBlockEntities(blockEntity -> {
+            if (!(blockEntity instanceof LaserReflectorBlockEntity reflector)) {
+                return;
+            }
+            var level = reflector.getLevel();
+            if (level == null) return;
+
+            BlockPos pos = reflector.getBlockPos();
+            int packedLight = LevelRenderer.getLightColor(level, pos);
+            int packedOverlay = OverlayTexture.NO_OVERLAY;
+
+            poseStack.pushPose();
+            poseStack.translate(pos.getX() - camera.x, pos.getY() - camera.y, pos.getZ() - camera.z);
+            LaserReflectorRenderer.renderLaserReflector(reflector, poseStack, bufferSource, packedLight,
+                    packedOverlay);
+            poseStack.popPose();
+        });
     }
 
     @SubscribeEvent

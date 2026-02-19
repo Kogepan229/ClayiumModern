@@ -19,6 +19,7 @@ import net.kogepan.clayium.blocks.machine.MillingMachineBlock;
 import net.kogepan.clayium.blocks.machine.PipeDrawingMachineBlock;
 import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
 import net.kogepan.clayium.blocks.machine.WireDrawingMachineBlock;
+import net.kogepan.clayium.items.blockitem.LaserReflectorBlockItem;
 import net.kogepan.clayium.items.blockitem.QuartzCrucibleBlockItem;
 import net.kogepan.clayium.items.blockitem.TieredBlockItem;
 
@@ -258,6 +259,10 @@ public class ClayiumBlocks {
         CLAY_LASER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
-    public static final DeferredBlock<LaserReflectorBlock> LASER_REFLECTOR = register("laser_reflector",
+    public static final DeferredBlock<LaserReflectorBlock> LASER_REFLECTOR = BLOCKS.register("laser_reflector",
             LaserReflectorBlock::new);
+    static {
+        ClayiumItems.ITEMS.register("laser_reflector",
+                () -> new LaserReflectorBlockItem(LASER_REFLECTOR.get(), new Item.Properties()));
+    }
 }

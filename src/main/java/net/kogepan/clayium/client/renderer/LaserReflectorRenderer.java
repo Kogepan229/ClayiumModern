@@ -3,19 +3,18 @@ package net.kogepan.clayium.client.renderer;
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.machine.LaserReflectorBlockEntity;
 import net.kogepan.clayium.blocks.machine.LaserReflectorBlock;
-import net.kogepan.clayium.capability.IClayLaserSource;
 
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
-import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
+import net.neoforged.api.distmarker.Dist;
+import net.neoforged.api.distmarker.OnlyIn;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -28,34 +27,69 @@ import org.joml.Matrix4f;
  * <p>
  * Shape: flat base + 4 triangular faces forming a pyramid. The apex points in the facing direction.
  */
-@net.neoforged.api.distmarker.OnlyIn(net.neoforged.api.distmarker.Dist.CLIENT)
+@OnlyIn(Dist.CLIENT)
 public class LaserReflectorRenderer implements BlockEntityRenderer<LaserReflectorBlockEntity> {
 
-    private static final ResourceLocation TEXTURE = Clayium.id("block/machine/laser_reflector");
-    private static final float F = 0.125f;
+    static final ResourceLocation TEXTURE = Clayium.id("block/machine/laser_reflector");
+    static final float F = 0.125f;
 
     public LaserReflectorRenderer(BlockEntityRendererProvider.Context context) {}
 
+    /**
+     * Block entity pass: do nothing. Laser Reflector is rendered in AFTER_BLOCK_ENTITIES
+     * so it draws on top of other block entities (e.g. chests) for correct depth ordering.
+     */
     @Override
     public void render(@NotNull LaserReflectorBlockEntity blockEntity, float partialTick,
                        @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer,
                        int packedLight, int packedOverlay) {
-        // Render laser beam
+        // Rendered in RenderLevelStageEvent.AFTER_BLOCK_ENTITIES
+    }
+
+    /**
+     * Renders the Laser Reflector (laser beam + pyramid). Called from AFTER_BLOCK_ENTITIES.
+     * Pose stack must already be translated to block-relative coordinates.
+     */
+    public static void renderLaserReflector(@NotNull LaserReflectorBlockEntity blockEntity,
+                                            @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer,
+                                            int packedLight, int packedOverlay) {
         if (blockEntity.getIrradiatingLaser() != null) {
             ClayLaserRenderer.renderLaser(blockEntity, poseStack, buffer, packedLight, packedOverlay);
         }
 
-        // Render pyramid block shape (matching ClayiumOriginal)
+        Direction facing = blockEntity.getBlockState().getValue(LaserReflectorBlock.FACING);
         TextureAtlasSprite sprite = net.minecraft.client.Minecraft.getInstance()
                 .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
                 .apply(TEXTURE);
+        renderPyramid(poseStack, buffer, packedLight, packedOverlay, facing, sprite);
+    }
 
+    /** Face index for dimming in GUI. Face 0 = -Z (front when apex points left). */
+    public static final int GUI_FRONT_FACE_INDEX = 1;
+
+    /**
+     * Renders the pyramid shape. Used by both block entity and item (BEWLR).
+     */
+    public static void renderPyramid(PoseStack poseStack, MultiBufferSource buffer,
+                                     int packedLight, int packedOverlay,
+                                     Direction facing, TextureAtlasSprite sprite) {
+        renderPyramid(poseStack, buffer, packedLight, packedOverlay, facing, sprite, null, 255);
+    }
+
+    /**
+     * Renders the pyramid shape with optional face dimming for GUI.
+     *
+     * @param dimmedFaceIndex Which triangular face (0-3) to dim; null for none
+     * @param dimmedColor     RGB value (0-255) for dimmed face; ignored if dimmedFaceIndex is null
+     */
+    public static void renderPyramid(PoseStack poseStack, MultiBufferSource buffer,
+                                     int packedLight, int packedOverlay,
+                                     Direction facing, TextureAtlasSprite sprite,
+                                     Integer dimmedFaceIndex, int dimmedColor) {
         float u0 = sprite.getU0();
         float u1 = sprite.getU1();
         float v0 = sprite.getV0();
         float v1 = sprite.getV1();
-
-        Direction facing = blockEntity.getBlockState().getValue(LaserReflectorBlock.FACING);
 
         poseStack.pushPose();
 
@@ -71,12 +105,10 @@ public class LaserReflectorRenderer implements BlockEntityRenderer<LaserReflecto
         }
         poseStack.translate(-0.5, -0.5, -0.5);
 
-        // Use block atlas for block texture; UV comes from sprite
-        VertexConsumer consumer = buffer.getBuffer(RenderType.entityTranslucentCull(TextureAtlas.LOCATION_BLOCKS));
+        VertexConsumer consumer = buffer.getBuffer(ClayiumRenderTypes.LASER_REFLECTOR_TRANSLUCENT);
         var pose = poseStack.last();
         Matrix4f matrix = pose.pose();
 
-        // Base quad (at y=F, facing -Y)
         float x0 = F * 2;
         float x1 = 1 - F * 2;
         float z0 = F * 2;
@@ -87,23 +119,22 @@ public class LaserReflectorRenderer implements BlockEntityRenderer<LaserReflecto
                 new Vec3(x0, yBase, z0), new Vec3(x1, yBase, z0), new Vec3(x1, yBase, z1), new Vec3(x0, yBase, z1),
                 u0, v0, u1, v1, 0, -1, 0);
 
-        // 4 triangular faces: apex at (0.5, 1-F, 0.5), each face uses its own base edge
         float apexX = 0.5f;
         float apexY = 1 - F;
         float apexZ = 0.5f;
 
-        // Face 1: edge at z=z0 (front)
-        addTriangle(consumer, pose, matrix, packedLight, packedOverlay,
-                apexX, apexY, apexZ, x1, yBase, z0, x0, yBase, z0, u0, v0, u1, v1);
-        // Face 2: edge at x=x1 (right)
-        addTriangle(consumer, pose, matrix, packedLight, packedOverlay,
-                apexX, apexY, apexZ, x1, yBase, z1, x1, yBase, z0, u0, v0, u1, v1);
-        // Face 3: edge at z=z1 (back)
-        addTriangle(consumer, pose, matrix, packedLight, packedOverlay,
-                apexX, apexY, apexZ, x0, yBase, z1, x1, yBase, z1, u0, v0, u1, v1);
-        // Face 4: edge at x=x0 (left)
-        addTriangle(consumer, pose, matrix, packedLight, packedOverlay,
-                apexX, apexY, apexZ, x0, yBase, z0, x0, yBase, z1, u0, v0, u1, v1);
+        addTriangle(consumer, pose, matrix, packedLight, packedOverlay, 0,
+                apexX, apexY, apexZ, x1, yBase, z0, x0, yBase, z0, u0, v0, u1, v1,
+                dimmedFaceIndex, dimmedColor);
+        addTriangle(consumer, pose, matrix, packedLight, packedOverlay, 1,
+                apexX, apexY, apexZ, x1, yBase, z1, x1, yBase, z0, u0, v0, u1, v1,
+                dimmedFaceIndex, dimmedColor);
+        addTriangle(consumer, pose, matrix, packedLight, packedOverlay, 2,
+                apexX, apexY, apexZ, x0, yBase, z1, x1, yBase, z1, u0, v0, u1, v1,
+                dimmedFaceIndex, dimmedColor);
+        addTriangle(consumer, pose, matrix, packedLight, packedOverlay, 3,
+                apexX, apexY, apexZ, x0, yBase, z0, x0, yBase, z1, u0, v0, u1, v1,
+                dimmedFaceIndex, dimmedColor);
 
         poseStack.popPose();
     }
@@ -140,11 +171,12 @@ public class LaserReflectorRenderer implements BlockEntityRenderer<LaserReflecto
     }
 
     private static void addTriangle(VertexConsumer consumer, PoseStack.Pose pose, Matrix4f matrix,
-                                    int packedLight, int packedOverlay,
+                                    int packedLight, int packedOverlay, int faceIndex,
                                     float x1, float y1, float z1,
                                     float x2, float y2, float z2,
                                     float x3, float y3, float z3,
-                                    float uMin, float vMin, float uMax, float vMax) {
+                                    float uMin, float vMin, float uMax, float vMax,
+                                    Integer dimmedFaceIndex, int dimmedColor) {
         // Compute face normal
         float ax = x2 - x1, ay = y2 - y1, az = z2 - z1;
         float bx = x3 - x1, by = y3 - y1, bz = z3 - z1;
@@ -158,26 +190,33 @@ public class LaserReflectorRenderer implements BlockEntityRenderer<LaserReflecto
             nz /= len;
         }
 
+        int r, g, b;
+        if (dimmedFaceIndex != null && dimmedFaceIndex == faceIndex) {
+            r = g = b = dimmedColor;
+        } else {
+            r = g = b = 255;
+        }
+
         consumer.addVertex(matrix, x1, y1, z1)
-                .setColor(255, 255, 255, 225)
+                .setColor(r, g, b, 225)
                 .setUv(uMax, vMin)
                 .setOverlay(packedOverlay)
                 .setLight(packedLight)
                 .setNormal(pose, nx, ny, nz);
         consumer.addVertex(matrix, x2, y2, z2)
-                .setColor(255, 255, 255, 225)
+                .setColor(r, g, b, 225)
                 .setUv(uMax, vMax)
                 .setOverlay(packedOverlay)
                 .setLight(packedLight)
                 .setNormal(pose, nx, ny, nz);
         consumer.addVertex(matrix, x3, y3, z3)
-                .setColor(255, 255, 255, 225)
+                .setColor(r, g, b, 225)
                 .setUv(uMin, vMax)
                 .setOverlay(packedOverlay)
                 .setLight(packedLight)
                 .setNormal(pose, nx, ny, nz);
         consumer.addVertex(matrix, x1, y1, z1)
-                .setColor(255, 255, 255, 225)
+                .setColor(r, g, b, 225)
                 .setUv(uMax, vMin)
                 .setOverlay(packedOverlay)
                 .setLight(packedLight)
@@ -187,10 +226,10 @@ public class LaserReflectorRenderer implements BlockEntityRenderer<LaserReflecto
     @Override
     @NotNull
     public AABB getRenderBoundingBox(@NotNull LaserReflectorBlockEntity blockEntity) {
-        if (blockEntity instanceof IClayLaserSource source && source.getIrradiatingLaser() != null) {
-            int length = source.getLength();
+        if (blockEntity.getIrradiatingLaser() != null) {
+            int length = blockEntity.getLength();
             if (length > 0) {
-                Direction dir = source.getDirection();
+                Direction dir = blockEntity.getDirection();
                 var step = dir.getNormal();
                 double minX = blockEntity.getBlockPos().getX() + Math.min(0, step.getX() * length);
                 double maxX = blockEntity.getBlockPos().getX() + 1 + Math.max(0, step.getX() * length);
@@ -201,6 +240,6 @@ public class LaserReflectorRenderer implements BlockEntityRenderer<LaserReflecto
                 return new AABB(minX, minY, minZ, maxX, maxY, maxZ);
             }
         }
-        return BlockEntityRenderer.super.getRenderBoundingBox(blockEntity);
+        return new AABB(blockEntity.getBlockPos());
     }
 }
