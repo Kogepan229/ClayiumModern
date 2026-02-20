@@ -8,10 +8,10 @@ This document compares the block conversion (laser irradiation) behaviour of Cla
   Original は `ClayLaserManager` 内のハードコード。Modern はレシピ駆動（JSON データパック）。
 
 - **鉱石変換のトリガー**  
-  Original は蓄積 energy が硬度ベースの閾値を超えたら変換（と推測）。Modern は全鉱石で固定 `required_energy=100` ＋ 毎 tick の energy が `[energy_min, energy_max]` ＋ 照射 tick 数 > 10。
+  Original は蓄積 energy が硬度ベースの閾値を超えたら変換（と推測）。Modern は Original 同様に**蓄積 total のみ**で判定し、各レシピで `required_energy`（硬度相当）を指定。鉱石は 100、サンプリングは 300。照射 tick 数 > 10 は共通。
 
 - **サンプリング循環の条件**  
-  Original は `300 <= total < 1000` のときのみ変換。Modern は `total >= 300` かつ tick 数 > 10 かつ tick energy が [300, 1000] で変換するため、**蓄積の上限（total < 1000）は見ていない**。
+  Original は `300 <= total < 1000` のときのみ変換。Modern は `total >= required_energy`（300）かつ tick 数 > 10 で変換。**蓄積の上限（total < 1000）は見ていない**点は従来どおり。
 
 - **Clay tree sapling**  
   Original は `total >= 300000` で clay tree サンプリングに変換。Modern は clay tree サンプリングブロックを未実装のため**未対応**。
@@ -60,8 +60,8 @@ This document compares the block conversion (laser irradiation) behaviour of Cla
 |--------|-----------------|---------------|
 | Implementation | Hardcoded in `ClayLaserManager` | Recipe-driven (JSON data pack) |
 | Ore list | coal, iron, gold, diamond, redstone, lapis, emerald | Same + copper; stone + deepslate variants |
-| Ore trigger | Hardness-based accumulated energy threshold (implied) | Fixed `required_energy` (100) + per-tick energy range + ticks > 10 |
-| Sapling cycle | `300 <= total < 1000` | `required_energy = 300`, tick energy in [300, 1000], ticks > 10 (no total upper bound) |
+| Ore trigger | Hardness-based accumulated energy threshold (implied) | Accumulated total only; `required_energy` (100) per recipe (hardness-equivalent) + ticks > 10 |
+| Sapling cycle | `300 <= total < 1000` | Accumulated total only; `required_energy = 300` per recipe + ticks > 10 (no total upper bound) |
 | Clay tree sapling | `total >= 300000` → clay tree sapling | Not implemented (no clay tree sapling block in mod) |
 | Rock mining | Hardness-based mining (drops or ore→block) | Not implemented (intentionally out of scope) |
 
@@ -75,12 +75,13 @@ This document compares the block conversion (laser irradiation) behaviour of Cla
 
 ## Modern behaviour (current implementation)
 
-- **Condition model (Unofficial-style):**
-  - Recipe match: current block matches recipe input block and **tick energy** is in `[energy_min, energy_max]`.
-  - Transform when: `totalEnergyIrradiated >= required_energy` and `irradiationTicks > 10`.
+- **Condition model (Original-style: accumulated total only):**
+  - Recipe match: current block matches recipe input block.
+  - Transform when: `totalEnergyIrradiated >= required_energy` (per-recipe threshold, hardness-equivalent) and `irradiationTicks > 10`.
+  - No per-tick energy min/max; only accumulated total is used for the condition.
   - On transform: destroy block (no drops), set output block state, irradiator resets counters for that target.
-- **Ore recipes:** All ore → block use `energy_min=0`, `energy_max=10000`, `required_energy=100`. So any tier can trigger after enough ticks. Original did not expose these numbers; we chose fixed values for data-driven balance.
-- **Sapling cycle:** `required_energy=300`, tick energy in [300, 1000], so behaviour is aligned with Original’s lower bound (300). We do **not** enforce `total < 1000`; once total ≥ 300 and ticks > 10 we transform. So we match “trigger at 300” but not “only if total &lt; 1000”.
+- **Ore recipes:** All ore → block use `required_energy=100` (hardness-equivalent threshold per recipe). Any tier can trigger after enough ticks.
+- **Sapling cycle:** `required_energy=300` per recipe. We do **not** enforce `total < 1000`; once total ≥ 300 and ticks > 10 we transform.
 - **Clay tree sapling:** Not added because the mod does not register a clay tree sapling block. Can be added later via recipe JSON when that block exists.
 - **Copper / deepslate / extra saplings:** Added as natural extensions for 1.21 (Original was 1.7.10).
 
@@ -93,6 +94,6 @@ This document compares the block conversion (laser irradiation) behaviour of Cla
 
 ## Deviations
 
-1. **Sapling cycle total upper bound:** Original: `300 <= total < 1000`. Modern: we only require `total >= 300` (and ticks > 10, tick energy in range). So we do not prevent transformation when total ≥ 1000.
-2. **Ore trigger:** Original likely used hardness-based thresholds; Modern uses a fixed `required_energy` (100) for all ores. This is a deliberate simplification for data-driven design.
+1. **Sapling cycle total upper bound:** Original: `300 <= total < 1000`. Modern: we only require `total >= required_energy` (300) and ticks > 10. We do not prevent transformation when total ≥ 1000.
+2. **Ore trigger:** Original likely used block-hardness–based thresholds; Modern uses a per-recipe `required_energy` (100 for all ores) as a configurable hardness-equivalent.
 3. **Clay tree sapling:** Not implemented; add when the block is available and a recipe is defined.

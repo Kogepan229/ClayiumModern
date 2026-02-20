@@ -12,7 +12,8 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Block irradiation handler that looks up laser irradiation recipes and performs block
- * transformation when the target block matches a recipe and energy/tick conditions are met.
+ * transformation when the target block matches a recipe and accumulated total energy meets
+ * the recipe's threshold (Original-style: total only, no per-tick energy range).
  */
 public final class LaserIrradiationRecipeHandler implements LaserBlockIrradiationHandler {
 
@@ -25,7 +26,8 @@ public final class LaserIrradiationRecipeHandler implements LaserBlockIrradiatio
                           @NotNull BlockState targetState,
                           long tickEnergy,
                           long totalEnergyIrradiated,
-                          int irradiationTicks) {
+                          int irradiationTicks,
+                          @NotNull Runnable onBlockConverted) {
         if (level.isClientSide()) {
             return;
         }
@@ -37,7 +39,7 @@ public final class LaserIrradiationRecipeHandler implements LaserBlockIrradiatio
         for (var holder : level.getRecipeManager()
                 .getAllRecipesFor(ClayiumRecipeTypes.LASER_IRRADIATION_RECIPE_TYPE.get())) {
             LaserIrradiationRecipe recipe = holder.value();
-            if (!recipe.matches(targetState, tickEnergy)) {
+            if (!recipe.matches(targetState)) {
                 continue;
             }
             if (totalEnergyIrradiated < recipe.requiredEnergy()) {
@@ -46,6 +48,7 @@ public final class LaserIrradiationRecipeHandler implements LaserBlockIrradiatio
 
             level.destroyBlock(targetPos, false);
             level.setBlock(targetPos, recipe.outputState(), Block.UPDATE_ALL);
+            onBlockConverted.run();
             return;
         }
     }

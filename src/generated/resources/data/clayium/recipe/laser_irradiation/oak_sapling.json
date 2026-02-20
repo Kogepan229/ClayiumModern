@@ -1,8 +1,6 @@
 {
   "type": "clayium:laser_irradiation",
-  "energy_max": 1000,
-  "energy_min": 300,
-  "input": "minecraft:spruce_sapling",
+  "input": "minecraft:oak_sapling",
   "output": "minecraft:spruce_sapling",
   "required_energy": 300
 }

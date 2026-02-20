@@ -22,6 +22,8 @@ public interface LaserBlockIrradiationHandler {
      *                              {@link net.kogepan.clayium.laser.Laser#energy()})
      * @param totalEnergyIrradiated Accumulated energy on the same target block
      * @param irradiationTicks      Number of consecutive irradiation ticks on the same target block
+     * @param onBlockConverted      Callback to run when the handler performs a block conversion
+     *                              (e.g. so the irradiator can reset its state)
      */
     void irradiate(
                    @NotNull Level level,
@@ -29,5 +31,6 @@ public interface LaserBlockIrradiationHandler {
                    @NotNull BlockState targetState,
                    long tickEnergy,
                    long totalEnergyIrradiated,
-                   int irradiationTicks);
+                   int irradiationTicks,
+                   @NotNull Runnable onBlockConverted);
 }

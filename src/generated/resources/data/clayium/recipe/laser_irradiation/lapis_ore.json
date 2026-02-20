@@ -1,8 +1,6 @@
 {
   "type": "clayium:laser_irradiation",
-  "energy_max": 10000,
-  "energy_min": 0,
   "input": "minecraft:lapis_ore",
   "output": "minecraft:lapis_block",
-  "required_energy": 100
+  "required_energy": 400
 }

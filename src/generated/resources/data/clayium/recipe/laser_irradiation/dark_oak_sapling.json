@@ -1,8 +1,6 @@
 {
   "type": "clayium:laser_irradiation",
-  "energy_max": 1000,
-  "energy_min": 300,
-  "input": "minecraft:mangrove_propagule",
+  "input": "minecraft:dark_oak_sapling",
   "output": "minecraft:mangrove_propagule",
   "required_energy": 300
 }

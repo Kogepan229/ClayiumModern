@@ -29,7 +29,8 @@ public class ClayLaserIrradiator {
     private static final int DEFAULT_MAX_LASER_LENGTH = 32;
     private static final LaserBlockIrradiationHandler NO_OP_BLOCK_IRRADIATION = (level, targetPos, targetState,
                                                                                  tickEnergy, totalEnergyIrradiated,
-                                                                                 irradiationTicks) -> {};
+                                                                                 irradiationTicks,
+                                                                                 onBlockConverted) -> {};
 
     private final BlockEntity owner;
     private final int maxLaserLength;
@@ -173,7 +174,8 @@ public class ClayLaserIrradiator {
                 level.getBlockState(targetPos),
                 energy,
                 this.totalEnergyIrradiated,
-                this.irradiationTicks);
+                this.irradiationTicks,
+                this::resetBlockIrradiationState);
     }
 
     private void resetBlockIrradiationState() {

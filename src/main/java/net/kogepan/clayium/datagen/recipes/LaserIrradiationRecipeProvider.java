@@ -11,57 +11,69 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Data generation for laser irradiation recipes (block conversion when irradiated by Clay Laser).
+ * Ore required_energy uses Original formula: (hardness + 1.0) * 100.
  */
 public class LaserIrradiationRecipeProvider {
 
+    /** Stone ore hardness in 1.21 → (3 + 1) * 100 = 400 */
+    private static final long REQUIRED_ENERGY_STONE_ORE = 400L;
+    /** Deepslate ore hardness in 1.21 → (4.5 + 1) * 100 = 550 */
+    private static final long REQUIRED_ENERGY_DEEPSLATE_ORE = 550L;
+
     /**
-     * Registers laser irradiation recipes. Ore -> block conversions (ClayiumOriginal-style, data-driven)
-     * and sapling cycle (Unofficial-style).
+     * Registers laser irradiation recipes. Ore -> block and sapling cycle (Original-style:
+     * conversion when accumulated total >= required_energy per recipe, no per-tick energy range).
      */
     public static void buildRecipes(@NotNull RecipeOutput recipeOutput) {
-        // Ore -> compressed block (Original-style, data-driven)
-        addOre(recipeOutput, "coal_ore", Blocks.COAL_ORE, Blocks.COAL_BLOCK);
-        addOre(recipeOutput, "deepslate_coal_ore", Blocks.DEEPSLATE_COAL_ORE, Blocks.COAL_BLOCK);
-        addOre(recipeOutput, "iron_ore", Blocks.IRON_ORE, Blocks.IRON_BLOCK);
-        addOre(recipeOutput, "deepslate_iron_ore", Blocks.DEEPSLATE_IRON_ORE, Blocks.IRON_BLOCK);
-        addOre(recipeOutput, "gold_ore", Blocks.GOLD_ORE, Blocks.GOLD_BLOCK);
-        addOre(recipeOutput, "deepslate_gold_ore", Blocks.DEEPSLATE_GOLD_ORE, Blocks.GOLD_BLOCK);
-        addOre(recipeOutput, "diamond_ore", Blocks.DIAMOND_ORE, Blocks.DIAMOND_BLOCK);
-        addOre(recipeOutput, "deepslate_diamond_ore", Blocks.DEEPSLATE_DIAMOND_ORE, Blocks.DIAMOND_BLOCK);
-        addOre(recipeOutput, "redstone_ore", Blocks.REDSTONE_ORE, Blocks.REDSTONE_BLOCK);
-        addOre(recipeOutput, "deepslate_redstone_ore", Blocks.DEEPSLATE_REDSTONE_ORE, Blocks.REDSTONE_BLOCK);
-        addOre(recipeOutput, "lapis_ore", Blocks.LAPIS_ORE, Blocks.LAPIS_BLOCK);
-        addOre(recipeOutput, "deepslate_lapis_ore", Blocks.DEEPSLATE_LAPIS_ORE, Blocks.LAPIS_BLOCK);
-        addOre(recipeOutput, "emerald_ore", Blocks.EMERALD_ORE, Blocks.EMERALD_BLOCK);
-        addOre(recipeOutput, "deepslate_emerald_ore", Blocks.DEEPSLATE_EMERALD_ORE, Blocks.EMERALD_BLOCK);
-        addOre(recipeOutput, "copper_ore", Blocks.COPPER_ORE, Blocks.COPPER_BLOCK);
-        addOre(recipeOutput, "deepslate_copper_ore", Blocks.DEEPSLATE_COPPER_ORE, Blocks.COPPER_BLOCK);
+        // Ore -> compressed block (Original: threshold = (hardness + 1.0) * 100 per block)
+        addOre(recipeOutput, "coal_ore", Blocks.COAL_ORE, Blocks.COAL_BLOCK, REQUIRED_ENERGY_STONE_ORE);
+        addOre(recipeOutput, "deepslate_coal_ore", Blocks.DEEPSLATE_COAL_ORE, Blocks.COAL_BLOCK,
+                REQUIRED_ENERGY_DEEPSLATE_ORE);
+        addOre(recipeOutput, "iron_ore", Blocks.IRON_ORE, Blocks.IRON_BLOCK, REQUIRED_ENERGY_STONE_ORE);
+        addOre(recipeOutput, "deepslate_iron_ore", Blocks.DEEPSLATE_IRON_ORE, Blocks.IRON_BLOCK,
+                REQUIRED_ENERGY_DEEPSLATE_ORE);
+        addOre(recipeOutput, "gold_ore", Blocks.GOLD_ORE, Blocks.GOLD_BLOCK, REQUIRED_ENERGY_STONE_ORE);
+        addOre(recipeOutput, "deepslate_gold_ore", Blocks.DEEPSLATE_GOLD_ORE, Blocks.GOLD_BLOCK,
+                REQUIRED_ENERGY_DEEPSLATE_ORE);
+        addOre(recipeOutput, "diamond_ore", Blocks.DIAMOND_ORE, Blocks.DIAMOND_BLOCK, REQUIRED_ENERGY_STONE_ORE);
+        addOre(recipeOutput, "deepslate_diamond_ore", Blocks.DEEPSLATE_DIAMOND_ORE, Blocks.DIAMOND_BLOCK,
+                REQUIRED_ENERGY_DEEPSLATE_ORE);
+        addOre(recipeOutput, "redstone_ore", Blocks.REDSTONE_ORE, Blocks.REDSTONE_BLOCK, REQUIRED_ENERGY_STONE_ORE);
+        addOre(recipeOutput, "deepslate_redstone_ore", Blocks.DEEPSLATE_REDSTONE_ORE, Blocks.REDSTONE_BLOCK,
+                REQUIRED_ENERGY_DEEPSLATE_ORE);
+        addOre(recipeOutput, "lapis_ore", Blocks.LAPIS_ORE, Blocks.LAPIS_BLOCK, REQUIRED_ENERGY_STONE_ORE);
+        addOre(recipeOutput, "deepslate_lapis_ore", Blocks.DEEPSLATE_LAPIS_ORE, Blocks.LAPIS_BLOCK,
+                REQUIRED_ENERGY_DEEPSLATE_ORE);
+        addOre(recipeOutput, "emerald_ore", Blocks.EMERALD_ORE, Blocks.EMERALD_BLOCK, REQUIRED_ENERGY_STONE_ORE);
+        addOre(recipeOutput, "deepslate_emerald_ore", Blocks.DEEPSLATE_EMERALD_ORE, Blocks.EMERALD_BLOCK,
+                REQUIRED_ENERGY_DEEPSLATE_ORE);
+        addOre(recipeOutput, "copper_ore", Blocks.COPPER_ORE, Blocks.COPPER_BLOCK, REQUIRED_ENERGY_STONE_ORE);
+        addOre(recipeOutput, "deepslate_copper_ore", Blocks.DEEPSLATE_COPPER_ORE, Blocks.COPPER_BLOCK,
+                REQUIRED_ENERGY_DEEPSLATE_ORE);
 
-        // Sapling cycle (Unofficial-style: energy in range 300..1000 to cycle)
-        addSaplingCycle(recipeOutput, "oak_sapling", Blocks.OAK_SAPLING);
-        addSaplingCycle(recipeOutput, "spruce_sapling", Blocks.SPRUCE_SAPLING);
-        addSaplingCycle(recipeOutput, "birch_sapling", Blocks.BIRCH_SAPLING);
-        addSaplingCycle(recipeOutput, "jungle_sapling", Blocks.JUNGLE_SAPLING);
-        addSaplingCycle(recipeOutput, "acacia_sapling", Blocks.ACACIA_SAPLING);
-        addSaplingCycle(recipeOutput, "cherry_sapling", Blocks.CHERRY_SAPLING);
-        addSaplingCycle(recipeOutput, "dark_oak_sapling", Blocks.DARK_OAK_SAPLING);
-        addSaplingCycle(recipeOutput, "mangrove_propagule", Blocks.MANGROVE_PROPAGULE);
+        // Sapling cycle (Original: 300 <= total < 1000; we use required_energy=300 as threshold)
+        addSapling(recipeOutput, "oak_sapling", Blocks.OAK_SAPLING, Blocks.SPRUCE_SAPLING);
+        addSapling(recipeOutput, "spruce_sapling", Blocks.SPRUCE_SAPLING, Blocks.BIRCH_SAPLING);
+        addSapling(recipeOutput, "birch_sapling", Blocks.BIRCH_SAPLING, Blocks.JUNGLE_SAPLING);
+        addSapling(recipeOutput, "jungle_sapling", Blocks.JUNGLE_SAPLING, Blocks.ACACIA_SAPLING);
+        addSapling(recipeOutput, "acacia_sapling", Blocks.ACACIA_SAPLING, Blocks.CHERRY_SAPLING);
+        addSapling(recipeOutput, "cherry_sapling", Blocks.CHERRY_SAPLING, Blocks.DARK_OAK_SAPLING);
+        addSapling(recipeOutput, "dark_oak_sapling", Blocks.DARK_OAK_SAPLING, Blocks.MANGROVE_PROPAGULE);
+        addSapling(recipeOutput, "mangrove_propagule", Blocks.MANGROVE_PROPAGULE, Blocks.OAK_SAPLING);
     }
 
-    private static void addOre(RecipeOutput output, String name, Block input, Block outputBlock) {
-        // Any laser tier: energy per tick in [0, 1e4], require 100 total, transformation after 10+ ticks
+    private static void addOre(RecipeOutput output, String name, Block input, Block outputBlock, long requiredEnergy) {
         output.accept(
                 Clayium.id("laser_irradiation/" + name),
-                new LaserIrradiationRecipe(input, outputBlock, 0L, 10_000L, 100L),
+                new LaserIrradiationRecipe(input, outputBlock, requiredEnergy),
                 null);
     }
 
-    private static void addSaplingCycle(RecipeOutput output, String name, Block sapling) {
-        // Sapling -> same sapling. Original: 300 <= total < 1000 for cycle; we use required_energy=300
-        // and tick energy in [300, 1000] so mid-tier laser triggers. (We do not enforce total < 1000.)
+    private static void addSapling(RecipeOutput output, String name, Block input, Block outputBlock) {
+        // Original: 300 <= total for sapling cycle
         output.accept(
-                Clayium.id("laser_irradiation/" + name + "_cycle"),
-                new LaserIrradiationRecipe(sapling, sapling, 300L, 1000L, 300L),
+                Clayium.id("laser_irradiation/" + name),
+                new LaserIrradiationRecipe(input, outputBlock, 300L),
                 null);
     }
 }

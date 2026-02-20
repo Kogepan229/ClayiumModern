@@ -17,15 +17,14 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * Recipe for laser block irradiation. When a block (without a laser acceptor) is irradiated
- * and matches the input block, and energy/tick conditions are met, the block is replaced by
- * the output block. Not used in a crafting grid; matching is done via
- * {@link #matches(BlockState, long)}.
+ * and matches the input block, and the accumulated total energy meets the threshold, the block
+ * is replaced by the output block. Original-style: only accumulated total is used for the
+ * condition; {@code requiredEnergy} is the hardness-equivalent threshold per recipe.
+ * Not used in a crafting grid; matching is done via {@link #matches(BlockState)}.
  */
 public record LaserIrradiationRecipe(
                                      @NotNull Block inputBlock,
                                      @NotNull Block outputBlock,
-                                     long energyMin,
-                                     long energyMax,
                                      long requiredEnergy)
         implements Recipe<SingleRecipeInput> {
 
@@ -36,11 +35,11 @@ public record LaserIrradiationRecipe(
     }
 
     /**
-     * Returns true if the given block state and tick energy match this recipe's criteria.
-     * Does not check accumulated energy or tick count; the handler does that.
+     * Returns true if the given block state matches this recipe's input.
+     * Conversion is allowed when totalEnergyIrradiated >= requiredEnergy and irradiationTicks > 10.
      */
-    public boolean matches(@NotNull BlockState state, long tickEnergy) {
-        return state.is(inputBlock) && tickEnergy >= energyMin && tickEnergy <= energyMax;
+    public boolean matches(@NotNull BlockState state) {
+        return state.is(inputBlock);
     }
 
     @Override

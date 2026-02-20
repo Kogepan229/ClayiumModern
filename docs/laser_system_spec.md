@@ -239,8 +239,11 @@ Tier と色:
 
 `ClayLaserManager` 内に直接ハードコードされた効果があります。
 
+- **硬度と閾値:** 岩系ブロック（`Material.rock`、bedrock 除く）では、変換/採掘の条件が次の式で与えられる:
+  - `totalIrradiatedEnergy >= (block.getBlockHardness(world, x, y, z) + 1.0F) * 100L`
+  - つまり **閾値 = (硬度 + 1.0) × 100**。硬度が高いブロックほど、蓄積が必要。
 - 岩系（bedrock 除く）:
-  - 蓄積 energy が硬度ベース閾値を超えると採掘処理
+  - 蓄積 energy が上記閾値を超えると採掘処理
   - 通常岩はドロップ
   - 特定鉱石は以下の圧縮ブロックへ直接変換
 - 鉱石変換:
