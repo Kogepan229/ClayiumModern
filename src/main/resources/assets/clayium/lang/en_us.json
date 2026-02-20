@@ -209,6 +209,9 @@
   "gui.clayium.clay_laser.mode": "RS Mode: %s",
   "gui.clayium.clay_laser.mode.default": "Emit when unpowered",
   "gui.clayium.clay_laser.mode.inverted": "Emit when powered",
+  "gui.clayium.jade.laser_energy": "Laser Energy: %s",
+
+  "config.jade.plugin_clayium.clay_laser_source_energy": "Laser energy (CE)",
 
   "xei.clayium.tier": "Tier: %d",
 

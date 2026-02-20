@@ -174,6 +174,7 @@ dependencies {
             break;
     }
 
+    compileOnly("maven.modrinth:jade:${jade_version}")
     localRuntime("maven.modrinth:jade:${jade_version}")
 
 //    localRuntime("curse.maven:x-ray-java-edition-1266195:7341071")
