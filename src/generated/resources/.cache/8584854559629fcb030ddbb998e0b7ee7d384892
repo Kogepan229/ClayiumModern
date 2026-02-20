@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-17T19:25:07.073370228	Item Models: clayium
+// 1.21.1	2026-02-21T00:50:36.93635162	Item Models: clayium
 99062d5c019a425dbcc8fc7c8fad74fe2e568b88 assets/clayium/models/item/advanced_circuit.json
 b053cb23d79938f5988a137a12fa465fef616833 assets/clayium/models/item/advanced_industrial_clay_dust.json
 a849708aabf7090c02ef1ae2c9565dd40fb618ce assets/clayium/models/item/advanced_industrial_clay_plate.json
@@ -79,6 +79,7 @@ c913c88109a5f3495d519504990396e225f38c85 assets/clayium/models/item/dense_clay_s
 73edc210b8ee5fa8b1cc897efad06466712d5efc assets/clayium/models/item/dense_short_clay_stick.json
 e06b13edad972be3a8e65c0ac21eb2ab0e5f880e assets/clayium/models/item/dense_small_clay_disc.json
 661637f796b0eb7ba41397715b37ed98ff850aec assets/clayium/models/item/dense_small_clay_ring.json
+be0d0d4da7e50653b4ee8f0b31e026714096e7c6 assets/clayium/models/item/energized_clay_dust.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/impure_aluminium_dust.json
 03bc045bdaf16acca33b4fab04f9470122c1ebd0 assets/clayium/models/item/impure_aluminium_ingot.json
 30052ef2299a06fee6bdff0ea34288df1197fe1b assets/clayium/models/item/impure_aluminium_plate.json

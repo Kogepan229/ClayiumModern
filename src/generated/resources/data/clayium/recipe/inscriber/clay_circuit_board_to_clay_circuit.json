@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 2,
+  "duration": 20,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:clay_circuit_board"
+      }
+    },
+    {
+      "amount": 6,
+      "ingredient": {
+        "item": "clayium:dense_clay_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:clay_circuit"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:inscriber"
+}

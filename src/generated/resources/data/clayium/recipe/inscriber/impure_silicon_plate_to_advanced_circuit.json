@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100,
+  "duration": 120,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:impure_silicon_plate"
+      }
+    },
+    {
+      "amount": 32,
+      "ingredient": {
+        "item": "clayium:energized_clay_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:advanced_circuit"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:inscriber"
+}

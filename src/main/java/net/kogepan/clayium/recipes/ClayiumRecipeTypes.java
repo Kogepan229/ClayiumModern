@@ -58,4 +58,8 @@ public class ClayiumRecipeTypes {
             "grinder", 1, 1);
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> SMELTER_RECIPE_TYPE = registerSimpleMachineType(
             "smelter", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> DECOMPOSER_RECIPE_TYPE = registerSimpleMachineType(
+            "decomposer", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> INSCRIBER_RECIPE_TYPE = registerSimpleMachineType(
+            "inscriber", 2, 1);
 }

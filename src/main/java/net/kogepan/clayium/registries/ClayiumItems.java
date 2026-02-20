@@ -103,6 +103,7 @@ public class ClayiumItems {
 
     public static final DeferredItem<Item> INDUSTRIAL_CLAY_DUST = ITEMS.registerItem("industrial_clay_dust", p -> new TieredItem(p, 3));
     public static final DeferredItem<Item> ADVANCED_INDUSTRIAL_CLAY_DUST = ITEMS.registerItem("advanced_industrial_clay_dust", p -> new TieredItem(p, 4));
+    public static final DeferredItem<Item> ENERGIZED_CLAY_DUST = ITEMS.registerItem("energized_clay_dust", p -> new TieredItem(p, 3));
     public static final DeferredItem<Item> INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("industrial_clay_plate", p -> new TieredItem(p, 3));
     public static final DeferredItem<Item> LARGE_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("large_industrial_clay_plate", p -> new TieredItem(p, 3));
     public static final DeferredItem<Item> ADVANCED_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("advanced_industrial_clay_plate", p -> new TieredItem(p, 4));

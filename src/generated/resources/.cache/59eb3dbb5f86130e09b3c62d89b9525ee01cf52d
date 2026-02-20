@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-20T21:43:46.666192496	Loot Tables
+// 1.21.1	2026-02-21T00:50:36.933094521	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -59,6 +59,9 @@ ba07f3e2b5abc4fa805ecff5d07476d341a89d08 data/clayium/loot_table/blocks/cutting_
 98e91f1c3b0ba2a86880b5f0652a6132f05f7046 data/clayium/loot_table/blocks/cutting_machine_2.json
 a7489255f3887915b91d04d14b0e7a7efd0bfb6b data/clayium/loot_table/blocks/cutting_machine_3.json
 f919a364f3e0348dcdcfe5c0f915540543835e3e data/clayium/loot_table/blocks/cutting_machine_4.json
+27a944c43e3f932c65bf8e8d0455e0d995336abd data/clayium/loot_table/blocks/decomposer_2.json
+cb19a4a3127f65aeebf2b74081816063428e3ca9 data/clayium/loot_table/blocks/decomposer_3.json
+2ac18d03ecd2c5db2de06703c3231cc9074c2d66 data/clayium/loot_table/blocks/decomposer_4.json
 04d49b5724b4f6f75e8156dc177c8970e133ac31 data/clayium/loot_table/blocks/dense_clay_ore.json
 407ade45ad583e9936261ddc86c2a5a71f2f7f2c data/clayium/loot_table/blocks/grinder_10.json
 76dec2974b86ffec6b6a6c5c017431ccd14e7508 data/clayium/loot_table/blocks/grinder_2.json
@@ -66,6 +69,8 @@ a3bf31ca7174eada18906b5f1df52646f4162dd1 data/clayium/loot_table/blocks/grinder_
 bbb860d1e21d8e2d46ae3958df56feb739b7f085 data/clayium/loot_table/blocks/grinder_4.json
 c4bc086c9348e122a5e884fe9d62dbc6e539df40 data/clayium/loot_table/blocks/grinder_5.json
 b8de2e847afe808615318524bf931907c03cefcb data/clayium/loot_table/blocks/grinder_6.json
+9beda566987bc5dcbe8057c51da5e730eff1965a data/clayium/loot_table/blocks/inscriber_3.json
+2db4632962f952d5851afdc5be6c41a2f62bfa36 data/clayium/loot_table/blocks/inscriber_4.json
 4f977e91fd1a23ccb931077c55f086e5a3ddda13 data/clayium/loot_table/blocks/large_dense_clay_ore.json
 080ada3fcba7f09a36d82ce49a109c2687b78571 data/clayium/loot_table/blocks/laser_reflector.json
 5a813f520e03d5f5db49f206163b12cdeec9b002 data/clayium/loot_table/blocks/lathe_1.json

@@ -13,7 +13,9 @@ import net.kogepan.clayium.blockentities.machine.ClayLaserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CobblestoneGeneratorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CreativeCESourceBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CuttingMachineBlockEntity;
+import net.kogepan.clayium.blockentities.machine.DecomposerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.GrinderBlockEntity;
+import net.kogepan.clayium.blockentities.machine.InscriberBlockEntity;
 import net.kogepan.clayium.blockentities.machine.LatheBlockEntity;
 import net.kogepan.clayium.blockentities.machine.MillingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.PipeDrawingMachineBlockEntity;
@@ -168,6 +170,26 @@ public class ClayiumBlockEntityTypes {
                         .map(DeferredHolder::get).toList());
                 return BlockEntityType.Builder
                         .of(GrinderBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DecomposerBlockEntity>> DECOMPOSER_BLOCK_ENTITY = registerClayContainer(
+            "decomposer_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.DECOMPOSER_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(DecomposerBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<InscriberBlockEntity>> INSCRIBER_BLOCK_ENTITY = registerClayContainer(
+            "inscriber_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.INSCRIBER_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(InscriberBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
 

@@ -17,7 +17,9 @@ import net.kogepan.clayium.blocks.machine.ClayLaserBlock;
 import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
 import net.kogepan.clayium.blocks.machine.CreativeCESourceBlock;
 import net.kogepan.clayium.blocks.machine.CuttingMachineBlock;
+import net.kogepan.clayium.blocks.machine.DecomposerBlock;
 import net.kogepan.clayium.blocks.machine.GrinderBlock;
+import net.kogepan.clayium.blocks.machine.InscriberBlock;
 import net.kogepan.clayium.blocks.machine.LatheBlock;
 import net.kogepan.clayium.blocks.machine.MillingMachineBlock;
 import net.kogepan.clayium.blocks.machine.PipeDrawingMachineBlock;
@@ -244,6 +246,24 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("grinder", i, GrinderBlock::new));
         }
         GRINDER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> DECOMPOSER_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i : new int[] { 2, 3, 4 }) {
+            map.put(i, registerTiered("decomposer", i, DecomposerBlock::new));
+        }
+        DECOMPOSER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> INSCRIBER_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i : new int[] { 3, 4 }) {
+            map.put(i, registerTiered("inscriber", i, InscriberBlock::new));
+        }
+        INSCRIBER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> SMELTER_BLOCKS;
