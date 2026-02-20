@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 200,
+  "duration": 400,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:zk60a_alloy_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:zk60a_alloy_ingot"
+    }
+  ],
+  "recipe_tier": 6,
+  "recipe_type": "clayium:smelter"
+}

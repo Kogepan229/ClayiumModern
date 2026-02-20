@@ -21,6 +21,7 @@ import net.kogepan.clayium.blocks.machine.GrinderBlock;
 import net.kogepan.clayium.blocks.machine.LatheBlock;
 import net.kogepan.clayium.blocks.machine.MillingMachineBlock;
 import net.kogepan.clayium.blocks.machine.PipeDrawingMachineBlock;
+import net.kogepan.clayium.blocks.machine.SmelterBlock;
 import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
 import net.kogepan.clayium.blocks.machine.WireDrawingMachineBlock;
 import net.kogepan.clayium.items.blockitem.LaserReflectorBlockItem;
@@ -243,6 +244,15 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("grinder", i, GrinderBlock::new));
         }
         GRINDER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> SMELTER_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 4; i <= 9; i++) {
+            map.put(i, registerTiered("smelter", i, SmelterBlock::new));
+        }
+        SMELTER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> AUTO_CLAY_CONDENSER_BLOCKS;

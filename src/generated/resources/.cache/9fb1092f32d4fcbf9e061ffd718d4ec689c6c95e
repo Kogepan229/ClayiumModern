@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-20T18:46:07.975879598	Recipes
+// 1.21.1	2026-02-20T22:07:24.571746251	Recipes
 8404c3a8b4c96d3f3be9ed3e1e664b4088b94969 data/clayium/advancement/recipes/misc/laser_reflector.json
 8ecc70c9b249bb84cc1e6864effb8ceda68323ff data/clayium/advancement/recipes/misc/quartz_crucible.json
 f5623d1a9bc85993b5a084eece21287828c7f083 data/clayium/recipe/bending_machine/advanced_industrial_clay_plate.json
@@ -199,6 +199,10 @@ f5ef8806d538fee92a1614061dcc9386a919a1d0 data/clayium/recipe/pipe_drawing_machin
 eda66bdd428bddfd03cc391a016e37262b1ed9b2 data/clayium/recipe/pipe_drawing_machine/dense_clay_cylinder_to_pipe.json
 2a034ca19c22d2ffc84dd6c28891621a12a33ed5 data/clayium/recipe/quartz_crucible.json
 8604b346aad61572921688368548e7d1b2484933 data/clayium/recipe/quartz_crucible/impure_silicon.json
+83cd0f13e2fa2c64551a3789462d1ee296b02436 data/clayium/recipe/smelter/aluminium_dust.json
+20b1fe87510ab1628e102212bc9429107f75aa05 data/clayium/recipe/smelter/az91d_alloy_dust.json
+b4773530deb8de73070148a2bee96838156dd4f0 data/clayium/recipe/smelter/impure_aluminium_dust.json
+6b4ad143d5fbcdf1984c10a369cb2dcd1ad7753e data/clayium/recipe/smelter/zk60a_alloy_dust.json
 1a372ff4d031fbb6fe2e471a21827342286f57b1 data/clayium/recipe/wire_drawing_machine/clay_ball_to_stick.json
 1bde408363bd7ca41b5557651ee81d29be4de503 data/clayium/recipe/wire_drawing_machine/clay_cylinder_to_stick.json
 db073bdc76ccb187c7c60a49ef1568c0c5fd713f data/clayium/recipe/wire_drawing_machine/clay_pipe_to_stick.json

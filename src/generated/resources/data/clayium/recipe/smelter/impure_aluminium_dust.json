@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100,
+  "duration": 200,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:impure_aluminium_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:impure_aluminium_ingot"
+    }
+  ],
+  "recipe_tier": 5,
+  "recipe_type": "clayium:smelter"
+}

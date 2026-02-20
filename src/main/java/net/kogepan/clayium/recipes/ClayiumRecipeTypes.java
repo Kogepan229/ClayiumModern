@@ -56,4 +56,6 @@ public class ClayiumRecipeTypes {
             "clay_condenser", 1, 1);
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> GRINDER_RECIPE_TYPE = registerSimpleMachineType(
             "grinder", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> SMELTER_RECIPE_TYPE = registerSimpleMachineType(
+            "smelter", 1, 1);
 }

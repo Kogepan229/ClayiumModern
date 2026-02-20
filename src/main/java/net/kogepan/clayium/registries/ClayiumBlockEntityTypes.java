@@ -17,6 +17,7 @@ import net.kogepan.clayium.blockentities.machine.GrinderBlockEntity;
 import net.kogepan.clayium.blockentities.machine.LatheBlockEntity;
 import net.kogepan.clayium.blockentities.machine.MillingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.PipeDrawingMachineBlockEntity;
+import net.kogepan.clayium.blockentities.machine.SmelterBlockEntity;
 import net.kogepan.clayium.blockentities.machine.WaterwheelBlockEntity;
 import net.kogepan.clayium.blockentities.machine.WireDrawingMachineBlockEntity;
 
@@ -167,6 +168,16 @@ public class ClayiumBlockEntityTypes {
                         .map(DeferredHolder::get).toList());
                 return BlockEntityType.Builder
                         .of(GrinderBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SmelterBlockEntity>> SMELTER_BLOCK_ENTITY = registerClayContainer(
+            "smelter_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.SMELTER_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(SmelterBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
 

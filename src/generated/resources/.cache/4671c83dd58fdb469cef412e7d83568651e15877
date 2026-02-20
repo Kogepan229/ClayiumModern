@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-20T19:27:00.902588397	Block States: clayium
+// 1.21.1	2026-02-20T21:43:46.657556842	Block States: clayium
 9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
 56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
@@ -93,6 +93,12 @@ f8466a457f84ac1905ebb3f49a22d3ec942049ee assets/clayium/blockstates/milling_mach
 a0606666487960a5f0987d9e1cc68f2c7573cbd4 assets/clayium/blockstates/pipe_drawing_machine_3.json
 3c4af04e44af844240ca919f494d8b6822291105 assets/clayium/blockstates/pipe_drawing_machine_4.json
 e68b8b63ba6f44e78a6f9f6f8d20ceb0cf203141 assets/clayium/blockstates/raw_clay_machine_hull.json
+8669bbb9d17ce1aa8b892224f25e6f30964dbc97 assets/clayium/blockstates/smelter_4.json
+8a86a615f76d162b9013660bd0756e87e294ebf5 assets/clayium/blockstates/smelter_5.json
+6a90c25ce7fc4095da69629c05c2d0b39158d1af assets/clayium/blockstates/smelter_6.json
+10cd40afe8ee95caa04c23fdfd76d68fce9f5912 assets/clayium/blockstates/smelter_7.json
+a48b6b14584b7932b2d96baabde36566bd2a5bf2 assets/clayium/blockstates/smelter_8.json
+9c5295c185046d2c87f28cce60262c44c4b8f869 assets/clayium/blockstates/smelter_9.json
 489b0c5eeb6e92020dfa096242637fac74fcc656 assets/clayium/blockstates/waterwheel_1.json
 0f3bbd28410acd3c79c41240d19a4d168e63eeac assets/clayium/blockstates/waterwheel_2.json
 23ac85dad0606cf88c4c0ffb6907c0497a4decde assets/clayium/blockstates/wire_drawing_machine_1.json
@@ -194,6 +200,12 @@ f4b3b68d744976f20b01bd398f8592fbd30f9fb0 assets/clayium/models/block/pipe_drawin
 fa5e6a2d30929057f0b5ba0b5ea5afa842ac4754 assets/clayium/models/block/pipe_drawing_machine_3.json
 d3a7ad8bd0a0aee453571bf08ea2bb64c015e1d2 assets/clayium/models/block/pipe_drawing_machine_4.json
 6f2dde3f33f8834d7d5607909ab39768d44096c5 assets/clayium/models/block/raw_clay_machine_hull.json
+7dc679abc2aa46b375afd1883c379a1a676aae17 assets/clayium/models/block/smelter_4.json
+43681a6c4b8f4fba2842fc451724a5d3f630394f assets/clayium/models/block/smelter_5.json
+d50862c990530e276824b1161e1f345903c3e223 assets/clayium/models/block/smelter_6.json
+9a87f13ec91320955e62ef49864d1b93da0fa7d4 assets/clayium/models/block/smelter_7.json
+0122428053677aafaf45f778171c5cb551eb6e86 assets/clayium/models/block/smelter_8.json
+11fd0547a26e0fc62bf3fe26e9f35ebe93bc83ea assets/clayium/models/block/smelter_9.json
 831261a7dedb0e75e024968782037d00ca6ac19b assets/clayium/models/block/waterwheel_1.json
 692af5d109827760cf477bfb7d0ff5742a9fe4f3 assets/clayium/models/block/waterwheel_2.json
 32a4d1648330c774d765cb54f91fc10573997596 assets/clayium/models/block/wire_drawing_machine_1.json
@@ -296,6 +308,12 @@ d9ff1040850e864e4a52dab329ae6f0d3ec6383e assets/clayium/models/item/machine_hull
 642d8b828f24b193cb4a68c47a9ca3a304295ff8 assets/clayium/models/item/pipe_drawing_machine_4.json
 9af2ddd51604e14111db8c8f70664e3ddbde107f assets/clayium/models/item/quartz_crucible.json
 713ec25e9ef9bbd784efa7d9cd5b90c750028b54 assets/clayium/models/item/raw_clay_machine_hull.json
+f956f212976276499a42736f9100a7e30ede1723 assets/clayium/models/item/smelter_4.json
+47142e4fc8525675d0b9730e57e1b067bff860f7 assets/clayium/models/item/smelter_5.json
+e44bbd513f4fe07ae12f3187b4cbb83d4a5ec7b6 assets/clayium/models/item/smelter_6.json
+e5d5698385c307941d5cf3493ee495b888217059 assets/clayium/models/item/smelter_7.json
+eee23c11d13e50c5d34bd96ec120ac48a4e29d11 assets/clayium/models/item/smelter_8.json
+83d4cbbb0175c1dd28810d638931aeac61332781 assets/clayium/models/item/smelter_9.json
 4b3a5e677bc8f6c4f7f607990b2bc0bca4104485 assets/clayium/models/item/waterwheel_1.json
 42ee1af804b8f6ab2e24edd67a0e8681d2168bb1 assets/clayium/models/item/waterwheel_2.json
 322c7a313cb1525ae26481df1f0bc8344ee498b6 assets/clayium/models/item/wire_drawing_machine_1.json

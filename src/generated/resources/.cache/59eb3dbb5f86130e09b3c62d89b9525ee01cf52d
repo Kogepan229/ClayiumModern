@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-20T19:27:00.906626545	Loot Tables
+// 1.21.1	2026-02-20T21:43:46.666192496	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -94,6 +94,12 @@ b6e02fb669ad8f5542bdb8aaceb439194d17f2ed data/clayium/loot_table/blocks/pipe_dra
 91d0c60235d8c98e7e8a45bf89862ed95517b7a3 data/clayium/loot_table/blocks/pipe_drawing_machine_4.json
 2f3748ca83c05d13bcbd4becc7afc8e06a7301dd data/clayium/loot_table/blocks/quartz_crucible.json
 94c029895a33c067fa38ffdb7771cd9ec865d55d data/clayium/loot_table/blocks/raw_clay_machine_hull.json
+0502ccc19a3ee9235aa43d247c4de0d76e8264a8 data/clayium/loot_table/blocks/smelter_4.json
+c4749da853e55660b53d6f8deec171b9fab355f2 data/clayium/loot_table/blocks/smelter_5.json
+bbc878eac7679d6afedc43e514dac1cae770a86d data/clayium/loot_table/blocks/smelter_6.json
+c05dab572b9890103906cdf03b323580e3c904c1 data/clayium/loot_table/blocks/smelter_7.json
+6eb960c5833d3fdb026bb6a06320cfc11f45531b data/clayium/loot_table/blocks/smelter_8.json
+5c4ceaee133a643d712d97cd9c3f7c61ea816cb6 data/clayium/loot_table/blocks/smelter_9.json
 863d0d65464e9edf00c3a3f86b440b8f0799fdcb data/clayium/loot_table/blocks/waterwheel_1.json
 5170c767f373a17a79fd4bdba2c158510ac3db70 data/clayium/loot_table/blocks/waterwheel_2.json
 25334ed0af71f5647af83c712a1d43c42f5e25ee data/clayium/loot_table/blocks/wire_drawing_machine_1.json

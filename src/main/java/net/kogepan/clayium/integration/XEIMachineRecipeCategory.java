@@ -59,6 +59,8 @@ public class XEIMachineRecipeCategory {
                 ClayiumBlocks.CLAY_CONDENSER_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.GRINDER_RECIPE_TYPE,
                 ClayiumBlocks.GRINDER_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.SMELTER_RECIPE_TYPE,
+                ClayiumBlocks.SMELTER_BLOCKS.values()));
 
         return categories;
     }
