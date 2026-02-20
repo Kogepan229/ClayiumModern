@@ -17,12 +17,11 @@ import net.neoforged.neoforge.client.model.ExtraFaceData;
 import net.neoforged.neoforge.client.model.QuadTransformers;
 
 import com.mojang.math.Transformation;
+import org.jetbrains.annotations.Nullable;
 import org.joml.Matrix4f;
 import org.joml.Quaternionf;
 import org.joml.Vector3f;
 import org.joml.Vector4f;
-
-import javax.annotation.Nullable;
 
 public class StaticFaceBakery {
 

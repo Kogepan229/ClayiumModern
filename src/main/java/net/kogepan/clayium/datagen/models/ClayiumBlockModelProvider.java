@@ -129,10 +129,13 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CLAY_LASER_TEXTURE, true, false);
         }
 
-        // Laser Reflector: directional block; block uses ENTITYBLOCK_ANIMATED; item uses BEWLR (builtin/entity)
+        // Laser Reflector: custom pyramid geometry model; block uses ENTITYBLOCK_ANIMATED; item uses BEWLR
+        // (builtin/entity)
         ResourceLocation laserReflectorTexture = Clayium.id("block/machine/laser_reflector");
-        ModelFile laserReflectorModel = models().cubeAll("laser_reflector", laserReflectorTexture);
-        directionalBlock(ClayiumBlocks.LASER_REFLECTOR.get(), laserReflectorModel);
+        BlockModelBuilder laserReflectorBuilder = models().getBuilder("laser_reflector");
+        laserReflectorBuilder.customLoader(net.kogepan.clayium.datagen.models.LaserReflectorModelBuilder::new)
+                .texture(laserReflectorTexture);
+        directionalBlock(ClayiumBlocks.LASER_REFLECTOR.get(), laserReflectorBuilder);
         simpleBlockItem(ClayiumBlocks.LASER_REFLECTOR.get(),
                 new ModelFile.UncheckedModelFile("minecraft:builtin/entity"));
     }

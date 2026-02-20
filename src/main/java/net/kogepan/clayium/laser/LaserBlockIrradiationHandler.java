@@ -18,7 +18,8 @@ public interface LaserBlockIrradiationHandler {
      * @param level                 The world level
      * @param targetPos             The hit position
      * @param targetState           The current block state at the target position
-     * @param tickEnergy            Laser energy for this tick (long, same as {@link net.kogepan.clayium.laser.Laser#energy()})
+     * @param tickEnergy            Laser energy for this tick (long, same as
+     *                              {@link net.kogepan.clayium.laser.Laser#energy()})
      * @param totalEnergyIrradiated Accumulated energy on the same target block
      * @param irradiationTicks      Number of consecutive irradiation ticks on the same target block
      */

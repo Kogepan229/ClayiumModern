@@ -1,11 +1,11 @@
 package net.kogepan.clayium;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
-import net.kogepan.clayium.blockentities.machine.LaserReflectorBlockEntity;
 import net.kogepan.clayium.capability.IClayLaserSource;
 import net.kogepan.clayium.client.model.ModelTextures;
 import net.kogepan.clayium.client.model.PipeOverlayQuads;
 import net.kogepan.clayium.client.model.block.ClayContainerModelLoader;
+import net.kogepan.clayium.client.model.block.LaserReflectorGeometryLoader;
 import net.kogepan.clayium.client.renderer.ClayContainerRenderer;
 import net.kogepan.clayium.client.renderer.ClayLaserRenderer;
 import net.kogepan.clayium.client.renderer.LaserReflectorBEWLR;
@@ -93,6 +93,7 @@ public class ClayiumClient {
     @SubscribeEvent
     public static void registerGeometryLoaders(ModelEvent.RegisterGeometryLoaders event) {
         event.register(ClayContainerModelLoader.ID, ClayContainerModelLoader.INSTANCE);
+        event.register(LaserReflectorGeometryLoader.ID, LaserReflectorGeometryLoader.INSTANCE);
     }
 
     @SuppressWarnings({ "deprecation" })
@@ -152,9 +153,9 @@ public class ClayiumClient {
             var level = blockEntity.getLevel();
             if (level == null) return;
 
-            boolean drawLaser = blockEntity instanceof IClayLaserSource source && source.getIrradiatingLaser() != null;
-            boolean drawReflector = blockEntity instanceof LaserReflectorBlockEntity;
-            if (!drawLaser && !drawReflector) return;
+            if (!(blockEntity instanceof IClayLaserSource source) || source.getIrradiatingLaser() == null) {
+                return;
+            }
 
             BlockPos pos = blockEntity.getBlockPos();
             int packedLight = LevelRenderer.getLightColor(level, pos);
@@ -162,14 +163,8 @@ public class ClayiumClient {
 
             poseStack.pushPose();
             poseStack.translate(pos.getX() - camera.x, pos.getY() - camera.y, pos.getZ() - camera.z);
-            if (drawLaser) {
-                ClayLaserRenderer.renderLaser(
-                        (IClayLaserSource) blockEntity, poseStack, bufferSource, packedLight, packedOverlay);
-            }
-            if (drawReflector) {
-                LaserReflectorRenderer.renderLaserReflector(
-                        (LaserReflectorBlockEntity) blockEntity, poseStack, bufferSource, packedLight, packedOverlay);
-            }
+            ClayLaserRenderer.renderLaser(
+                    (IClayLaserSource) blockEntity, poseStack, bufferSource, packedLight, packedOverlay);
             poseStack.popPose();
         });
     }

@@ -2,7 +2,6 @@ package net.kogepan.clayium.client.renderer;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.machine.LaserReflectorBlockEntity;
-import net.kogepan.clayium.blocks.machine.LaserReflectorBlock;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;
@@ -10,7 +9,6 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.inventory.InventoryMenu;
 import net.minecraft.world.phys.AABB;
 import net.minecraft.world.phys.Vec3;
 import net.neoforged.api.distmarker.Dist;
@@ -23,9 +21,12 @@ import org.jetbrains.annotations.NotNull;
 import org.joml.Matrix4f;
 
 /**
- * Renders the Laser Reflector block with the same pyramid shape as ClayiumOriginal.
+ * Block entity renderer for Laser Reflector. The block (pyramid) is drawn by the block model;
+ * this BER does not draw the block but provides {@link #getRenderBoundingBox} so that the
+ * laser beam (drawn in AFTER_BLOCK_ENTITIES) is correctly culled and the reflector is
+ * considered visible when the laser is on screen.
  * <p>
- * Shape: flat base + 4 triangular faces forming a pyramid. The apex points in the facing direction.
+ * Pyramid shape for item/BEWLR is rendered via {@link #renderPyramid}.
  */
 @OnlyIn(Dist.CLIENT)
 public class LaserReflectorRenderer implements BlockEntityRenderer<LaserReflectorBlockEntity> {
@@ -35,30 +36,31 @@ public class LaserReflectorRenderer implements BlockEntityRenderer<LaserReflecto
 
     public LaserReflectorRenderer(BlockEntityRendererProvider.Context context) {}
 
-    /**
-     * Block entity pass: do nothing. Laser Reflector is rendered in AFTER_BLOCK_ENTITIES
-     * so it draws on top of other block entities (e.g. chests) for correct depth ordering.
-     */
     @Override
     public void render(@NotNull LaserReflectorBlockEntity blockEntity, float partialTick,
                        @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer,
                        int packedLight, int packedOverlay) {
-        // Rendered in RenderLevelStageEvent.AFTER_BLOCK_ENTITIES
+        // Block is rendered by block model; laser is drawn in RenderLevelStageEvent.AFTER_BLOCK_ENTITIES
     }
 
-    /**
-     * Renders the Laser Reflector pyramid only. Called from AFTER_BLOCK_ENTITIES.
-     * Laser beam is drawn separately via {@link ClayLaserRenderer#renderLaser} in the level stage.
-     * Pose stack must already be translated to block-relative coordinates.
-     */
-    public static void renderLaserReflector(@NotNull LaserReflectorBlockEntity blockEntity,
-                                            @NotNull PoseStack poseStack, @NotNull MultiBufferSource buffer,
-                                            int packedLight, int packedOverlay) {
-        Direction facing = blockEntity.getBlockState().getValue(LaserReflectorBlock.FACING);
-        TextureAtlasSprite sprite = net.minecraft.client.Minecraft.getInstance()
-                .getTextureAtlas(InventoryMenu.BLOCK_ATLAS)
-                .apply(TEXTURE);
-        renderPyramid(poseStack, buffer, packedLight, packedOverlay, facing, sprite);
+    @Override
+    @NotNull
+    public AABB getRenderBoundingBox(@NotNull LaserReflectorBlockEntity blockEntity) {
+        if (blockEntity.getIrradiatingLaser() != null) {
+            int length = blockEntity.getLength();
+            if (length > 0) {
+                Direction dir = blockEntity.getDirection();
+                var step = dir.getNormal();
+                double minX = blockEntity.getBlockPos().getX() + Math.min(0, step.getX() * length);
+                double maxX = blockEntity.getBlockPos().getX() + 1 + Math.max(0, step.getX() * length);
+                double minY = blockEntity.getBlockPos().getY() + Math.min(0, step.getY() * length);
+                double maxY = blockEntity.getBlockPos().getY() + 1 + Math.max(0, step.getY() * length);
+                double minZ = blockEntity.getBlockPos().getZ() + Math.min(0, step.getZ() * length);
+                double maxZ = blockEntity.getBlockPos().getZ() + 1 + Math.max(0, step.getZ() * length);
+                return new AABB(minX, minY, minZ, maxX, maxY, maxZ);
+            }
+        }
+        return new AABB(blockEntity.getBlockPos());
     }
 
     /** Face index for dimming in GUI. Face 0 = -Z (front when apex points left). */
@@ -218,25 +220,5 @@ public class LaserReflectorRenderer implements BlockEntityRenderer<LaserReflecto
                 .setOverlay(packedOverlay)
                 .setLight(packedLight)
                 .setNormal(pose, nx, ny, nz);
-    }
-
-    @Override
-    @NotNull
-    public AABB getRenderBoundingBox(@NotNull LaserReflectorBlockEntity blockEntity) {
-        if (blockEntity.getIrradiatingLaser() != null) {
-            int length = blockEntity.getLength();
-            if (length > 0) {
-                Direction dir = blockEntity.getDirection();
-                var step = dir.getNormal();
-                double minX = blockEntity.getBlockPos().getX() + Math.min(0, step.getX() * length);
-                double maxX = blockEntity.getBlockPos().getX() + 1 + Math.max(0, step.getX() * length);
-                double minY = blockEntity.getBlockPos().getY() + Math.min(0, step.getY() * length);
-                double maxY = blockEntity.getBlockPos().getY() + 1 + Math.max(0, step.getY() * length);
-                double minZ = blockEntity.getBlockPos().getZ() + Math.min(0, step.getZ() * length);
-                double maxZ = blockEntity.getBlockPos().getZ() + 1 + Math.max(0, step.getZ() * length);
-                return new AABB(minX, minY, minZ, maxX, maxY, maxZ);
-            }
-        }
-        return new AABB(blockEntity.getBlockPos());
     }
 }

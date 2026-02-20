@@ -90,7 +90,7 @@ public class LaserReflectorBlock extends Block implements EntityBlock {
     @Override
     @NotNull
     public RenderShape getRenderShape(@NotNull BlockState state) {
-        return RenderShape.ENTITYBLOCK_ANIMATED;
+        return RenderShape.MODEL;
     }
 
     @Override

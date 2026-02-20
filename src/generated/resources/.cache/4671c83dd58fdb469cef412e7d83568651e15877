@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-19T22:23:03.064178798	Block States: clayium
+// 1.21.1	2026-02-20T16:17:18.481526269	Block States: clayium
 9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
 56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
@@ -160,7 +160,7 @@ c7109590cf829672a39d2993084efe13fb4e63c8 assets/clayium/models/block/grinder_4.j
 e4f2de3019a62b1d961f21d163ba5c32278a0296 assets/clayium/models/block/grinder_5.json
 8ae10ff18ccedab695b62a09661595a2a60e13af assets/clayium/models/block/grinder_6.json
 a6a9c6c37b9f6d0b3850b06108f0ac11f9fe774f assets/clayium/models/block/large_dense_clay_ore.json
-d564b1b05544fa14a325b8c4d74f5e7b8149d1ab assets/clayium/models/block/laser_reflector.json
+9c978e955e378f077c546cb2082d826e9f227443 assets/clayium/models/block/laser_reflector.json
 274861319aed6ccec1fa2f9cc171c137910f4b2e assets/clayium/models/block/lathe_1.json
 fd8d7cad1d34687051572dcd40168f5c5a3d712a assets/clayium/models/block/lathe_2.json
 76b9688abd8547cdb0487d9a381390ce75bc3198 assets/clayium/models/block/lathe_3.json
