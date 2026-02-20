@@ -4,6 +4,7 @@ import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.ClayBufferBlockEntity;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.ClayWorkTableBlockEntity;
+import net.kogepan.clayium.blockentities.LaserReflectorBlockEntity;
 import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
@@ -13,7 +14,6 @@ import net.kogepan.clayium.blockentities.machine.CobblestoneGeneratorBlockEntity
 import net.kogepan.clayium.blockentities.machine.CreativeCESourceBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CuttingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.GrinderBlockEntity;
-import net.kogepan.clayium.blockentities.machine.LaserReflectorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.LatheBlockEntity;
 import net.kogepan.clayium.blockentities.machine.MillingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.PipeDrawingMachineBlockEntity;

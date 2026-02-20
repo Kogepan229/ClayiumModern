@@ -1,7 +1,7 @@
 package net.kogepan.clayium.client.renderer;
 
 import net.kogepan.clayium.Clayium;
-import net.kogepan.clayium.blockentities.machine.LaserReflectorBlockEntity;
+import net.kogepan.clayium.blockentities.LaserReflectorBlockEntity;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderer;

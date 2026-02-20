@@ -1,6 +1,7 @@
-package net.kogepan.clayium.blockentities.machine;
+package net.kogepan.clayium.blockentities;
 
 import net.kogepan.clayium.Config;
+import net.kogepan.clayium.blocks.LaserReflectorBlock;
 import net.kogepan.clayium.capability.IClayLaserAcceptor;
 import net.kogepan.clayium.capability.IClayLaserSource;
 import net.kogepan.clayium.laser.ClayLaserIrradiator;
@@ -61,7 +62,7 @@ public class LaserReflectorBlockEntity extends BlockEntity implements IClayLaser
             blockEntity.irradiator.stopIrradiation();
             blockEntity.length = 0;
         } else {
-            Direction direction = state.getValue(net.kogepan.clayium.blocks.machine.LaserReflectorBlock.FACING);
+            Direction direction = state.getValue(LaserReflectorBlock.FACING);
             blockEntity.length = blockEntity.irradiator.irradiateLaser(direction, merged);
         }
 
@@ -90,7 +91,7 @@ public class LaserReflectorBlockEntity extends BlockEntity implements IClayLaser
     @NotNull
     public Direction getDirection() {
         BlockState state = this.getBlockState();
-        if (state.getBlock() instanceof net.kogepan.clayium.blocks.machine.LaserReflectorBlock reflectorBlock) {
+        if (state.getBlock() instanceof LaserReflectorBlock reflectorBlock) {
             return state.getValue(reflectorBlock.FACING);
         }
         return Direction.NORTH;

@@ -1,8 +1,8 @@
 package net.kogepan.clayium.integration.jade;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.blockentities.LaserReflectorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayLaserBlockEntity;
-import net.kogepan.clayium.blockentities.machine.LaserReflectorBlockEntity;
 
 import net.minecraft.world.level.block.Block;
 

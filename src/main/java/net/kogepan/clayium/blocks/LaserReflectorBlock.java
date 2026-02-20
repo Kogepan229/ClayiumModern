@@ -1,7 +1,6 @@
-package net.kogepan.clayium.blocks.machine;
+package net.kogepan.clayium.blocks;
 
-import net.kogepan.clayium.blockentities.machine.LaserReflectorBlockEntity;
-import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.blockentities.LaserReflectorBlockEntity;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 
 import net.minecraft.core.BlockPos;
