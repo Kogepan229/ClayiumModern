@@ -1,0 +1,6 @@
+{
+  "type": "clayium:laser_irradiation",
+  "input": "minecraft:cherry_sapling",
+  "output": "clayium:clay_sapling",
+  "required_energy": 300000
+}

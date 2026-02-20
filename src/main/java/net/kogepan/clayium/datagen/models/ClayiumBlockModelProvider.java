@@ -146,6 +146,18 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
                 .texture("all", creativeCeSourceTexture);
         simpleBlock(ClayiumBlocks.CREATIVE_CE_SOURCE.get(), creativeCeSourceModel);
         simpleBlockItem(ClayiumBlocks.CREATIVE_CE_SOURCE.get(), creativeCeSourceModel);
+
+        // Clay Sapling: block uses cross model with cutout; item uses flat (item/generated) texture
+        ResourceLocation claySaplingTexture = Clayium.id("block/clay_sapling");
+        ModelFile claySaplingBlockModel = models().getBuilder("clay_sapling")
+                .parent(models().getExistingFile(models().mcLoc("block/cross")))
+                .texture("cross", claySaplingTexture)
+                .renderType("minecraft:cutout");
+        simpleBlock(ClayiumBlocks.CLAY_SAPLING.get(), claySaplingBlockModel);
+        // Item uses flat texture (item/generated); do not use simpleBlockItem or it overwrites parent
+        itemModels().getBuilder("clay_sapling")
+                .parent(new ModelFile.UncheckedModelFile("minecraft:item/generated"))
+                .texture("layer0", claySaplingTexture);
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay) {

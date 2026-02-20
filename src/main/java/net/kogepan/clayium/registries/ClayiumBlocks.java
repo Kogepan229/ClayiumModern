@@ -4,6 +4,7 @@ import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blocks.ClayBufferBlock;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.blocks.ClayOre;
+import net.kogepan.clayium.blocks.ClaySaplingBlock;
 import net.kogepan.clayium.blocks.ClayWorkTableBlock;
 import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
 import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
@@ -269,4 +270,7 @@ public class ClayiumBlocks {
 
     public static final DeferredBlock<CreativeCESourceBlock> CREATIVE_CE_SOURCE = register("creative_ce_source",
             CreativeCESourceBlock::new);
+
+    public static final DeferredBlock<ClaySaplingBlock> CLAY_SAPLING = register("clay_sapling",
+            ClaySaplingBlock::new);
 }
