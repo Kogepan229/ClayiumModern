@@ -11,6 +11,7 @@ import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.ClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.ClayLaserBlock;
 import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
+import net.kogepan.clayium.blocks.machine.CreativeCESourceBlock;
 import net.kogepan.clayium.blocks.machine.CuttingMachineBlock;
 import net.kogepan.clayium.blocks.machine.GrinderBlock;
 import net.kogepan.clayium.blocks.machine.LaserReflectorBlock;
@@ -265,4 +266,7 @@ public class ClayiumBlocks {
         ClayiumItems.ITEMS.register("laser_reflector",
                 () -> new LaserReflectorBlockItem(LASER_REFLECTOR.get(), new Item.Properties()));
     }
+
+    public static final DeferredBlock<CreativeCESourceBlock> CREATIVE_CE_SOURCE = register("creative_ce_source",
+            CreativeCESourceBlock::new);
 }

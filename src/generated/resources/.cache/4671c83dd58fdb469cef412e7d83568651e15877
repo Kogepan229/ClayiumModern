@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-20T16:17:18.481526269	Block States: clayium
+// 1.21.1	2026-02-20T18:11:18.85849124	Block States: clayium
 9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
 56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
@@ -51,6 +51,7 @@ b887c32d4881e590c87f4ddcc5fa7107a285ee1f assets/clayium/blockstates/compressed_c
 aafaaac338817bdffa80fa8a024efe68f16cda16 assets/clayium/blockstates/compressed_clay_7.json
 e03c01332458f9345eec899a36935c1260ddabd7 assets/clayium/blockstates/compressed_clay_8.json
 48c5bc987bff8e439ff5a4db75b41cbba52c538b assets/clayium/blockstates/compressed_clay_9.json
+daafd6cd363ed0a549b39670158583ef9986ddee assets/clayium/blockstates/creative_ce_source.json
 b6ef17105072d66930d269a225d3485756205da6 assets/clayium/blockstates/cutting_machine_1.json
 4c90cad1e735be290ea49f8de63a681f9ae27206 assets/clayium/blockstates/cutting_machine_2.json
 6a7f543037708550cf9431dc986a3e3c703c00c2 assets/clayium/blockstates/cutting_machine_3.json
@@ -148,6 +149,7 @@ dcbcac6eeb24f899c03c81913f1df04ea65561e2 assets/clayium/models/block/compressed_
 e82bfdacde8e12527d991faee20cd0112105e292 assets/clayium/models/block/compressed_clay_7.json
 33d30a10aa315a436513644207fae373bcefd2ff assets/clayium/models/block/compressed_clay_8.json
 f87690e252db5c7cb935c84f134a3ea2b7640277 assets/clayium/models/block/compressed_clay_9.json
+fe5dfac4a79c4c40c573ede1e23ccb0b8f45bf82 assets/clayium/models/block/creative_ce_source.json
 15cd655a4e2bb5fbbe43aeb99cc080ce53734d24 assets/clayium/models/block/cutting_machine_1.json
 01ba508e449509187a7a676a6a1154a5a299730b assets/clayium/models/block/cutting_machine_2.json
 3a743f6ba4067985843f17bb4764b1c3e3e5c542 assets/clayium/models/block/cutting_machine_3.json
@@ -245,6 +247,7 @@ dbe74f40559e3a555f091192f14c172ee6ba734e assets/clayium/models/item/compressed_c
 188546ed3505cb599b13524f440fb54e20c2ddd3 assets/clayium/models/item/compressed_clay_7.json
 faa9c06b53044b767131cc215ac8586d3239e0d1 assets/clayium/models/item/compressed_clay_8.json
 5371d70fc04a1b572b91e5640de0c706614fe8f9 assets/clayium/models/item/compressed_clay_9.json
+f8f87abdbe068eb6a3c216991413f89d605e404d assets/clayium/models/item/creative_ce_source.json
 480393a4165a10e02d432ca1cd9c2407c23cd1ec assets/clayium/models/item/cutting_machine_1.json
 6e429ba80b561dd98dbc074aab6119ca64b1c6ad assets/clayium/models/item/cutting_machine_2.json
 ef49c237c6454d62d75ebdd937beaf8963414e55 assets/clayium/models/item/cutting_machine_3.json

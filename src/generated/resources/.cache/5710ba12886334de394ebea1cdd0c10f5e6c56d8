@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-19T21:41:52.483364961	Tags for minecraft:block mod id clayium
+// 1.21.1	2026-02-20T18:08:51.052446701	Tags for minecraft:block mod id clayium
 e4c6f52e1d10feff4753597b54aa3c4951ebfe1f data/clayium/tags/block/clay_tools_bonus_block.json
-4c5dc4f21087c913681c31da7577e3c5dfcfd7d9 data/minecraft/tags/block/mineable/pickaxe.json
+9cf6462419ffe0ba8bd0c3f8863f537167640ae2 data/minecraft/tags/block/mineable/pickaxe.json
 56d25309bba6bcc95010d485bcf88e80eb36bccb data/minecraft/tags/block/mineable/shovel.json

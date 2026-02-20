@@ -138,6 +138,14 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         directionalBlock(ClayiumBlocks.LASER_REFLECTOR.get(), laserReflectorBuilder);
         simpleBlockItem(ClayiumBlocks.LASER_REFLECTOR.get(),
                 new ModelFile.UncheckedModelFile("minecraft:builtin/entity"));
+
+        // Creative CE Source: texture from ClayiumOriginal (creativeenergy.png)
+        ResourceLocation creativeCeSourceTexture = Clayium.id("block/machine/creative_ce_source");
+        ModelFile creativeCeSourceModel = models().getBuilder("creative_ce_source")
+                .parent(models().getExistingFile(models().mcLoc("block/cube_all")))
+                .texture("all", creativeCeSourceTexture);
+        simpleBlock(ClayiumBlocks.CREATIVE_CE_SOURCE.get(), creativeCeSourceModel);
+        simpleBlockItem(ClayiumBlocks.CREATIVE_CE_SOURCE.get(), creativeCeSourceModel);
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay) {

@@ -10,6 +10,7 @@ import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayLaserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CobblestoneGeneratorBlockEntity;
+import net.kogepan.clayium.blockentities.machine.CreativeCESourceBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CuttingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.GrinderBlockEntity;
 import net.kogepan.clayium.blockentities.machine.LaserReflectorBlockEntity;
@@ -183,6 +184,12 @@ public class ClayiumBlockEntityTypes {
             .register("laser_reflector_block_entity",
                     () -> BlockEntityType.Builder
                             .of(LaserReflectorBlockEntity::new, ClayiumBlocks.LASER_REFLECTOR.get())
+                            .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CreativeCESourceBlockEntity>> CREATIVE_CE_SOURCE_BLOCK_ENTITY = BLOCK_ENTITY_TYPES
+            .register("creative_ce_source_block_entity",
+                    () -> BlockEntityType.Builder
+                            .of(CreativeCESourceBlockEntity::new, ClayiumBlocks.CREATIVE_CE_SOURCE.get())
                             .build(null));
 
     private static <

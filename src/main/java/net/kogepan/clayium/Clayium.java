@@ -1,6 +1,7 @@
 package net.kogepan.clayium;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.blockentities.machine.CreativeCESourceBlockEntity;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.capability.IClayEnergyHolder;
@@ -126,6 +127,11 @@ public class Clayium {
                         return trait instanceof IClayEnergyHolder ? (IClayEnergyHolder) trait : null;
                     });
         }
+
+        event.registerBlockEntity(
+                Capabilities.ItemHandler.BLOCK,
+                ClayiumBlockEntityTypes.CREATIVE_CE_SOURCE_BLOCK_ENTITY.get(),
+                (blockEntity, side) -> ((CreativeCESourceBlockEntity) blockEntity).getItemHandler(side));
 
         for (DeferredHolder<BlockEntityType<?>, ?> type : ClayiumBlockEntityTypes.BLOCK_ENTITY_TYPES.getEntries()) {
             event.registerBlockEntity(

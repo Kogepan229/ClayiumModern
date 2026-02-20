@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-19T21:41:52.484918269	Loot Tables
+// 1.21.1	2026-02-20T18:08:51.054061685	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -51,6 +51,7 @@ d4f92fb9ad7839ac9d597b76d39fee2d5e1d765d data/clayium/loot_table/blocks/compress
 4b89e7272e1b268b3018bb8361dc0b269324a15b data/clayium/loot_table/blocks/compressed_clay_7.json
 4abe7b9e66ecd800c978ce630b7f5ba26ee271b1 data/clayium/loot_table/blocks/compressed_clay_8.json
 6f99308ed29f7e88c02ec5f5818f31fe8bc6b41d data/clayium/loot_table/blocks/compressed_clay_9.json
+3d064493fb90480d30a2cf932423dd5119573703 data/clayium/loot_table/blocks/creative_ce_source.json
 ba07f3e2b5abc4fa805ecff5d07476d341a89d08 data/clayium/loot_table/blocks/cutting_machine_1.json
 98e91f1c3b0ba2a86880b5f0652a6132f05f7046 data/clayium/loot_table/blocks/cutting_machine_2.json
 a7489255f3887915b91d04d14b0e7a7efd0bfb6b data/clayium/loot_table/blocks/cutting_machine_3.json
