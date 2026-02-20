@@ -63,7 +63,7 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
     public int tier;
 
     public ClayContainerBlock(int tier) {
-        super(BlockBehaviour.Properties.of().dynamicShape());
+        super(BlockBehaviour.Properties.of().dynamicShape().forceSolidOn());
         this.tier = tier;
 
         this.registerDefaultState(this.stateDefinition.any()

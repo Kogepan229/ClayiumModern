@@ -52,7 +52,8 @@ public class QuartzCrucibleBlock extends Block implements EntityBlock {
                 .sound(SoundType.GLASS)
                 .destroyTime(0.2f)
                 .explosionResistance(0.2f)
-                .noOcclusion());
+                .noOcclusion()
+                .forceSolidOn());
         registerDefaultState(stateDefinition.any().setValue(LEVEL, 0));
     }
 

@@ -54,7 +54,8 @@ public class LaserReflectorBlock extends Block implements EntityBlock {
         super(BlockBehaviour.Properties.of()
                 .noOcclusion()
                 .sound(SoundType.GLASS)
-                .strength(1.0f, 1.0f));
+                .strength(1.0f, 1.0f)
+                .forceSolidOn());
         this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
     }
 
