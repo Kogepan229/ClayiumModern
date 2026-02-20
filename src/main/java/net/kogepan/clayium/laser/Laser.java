@@ -14,6 +14,8 @@ import java.io.IOException;
  * Immutable laser data model.
  * <p>
  * Energy calculation follows ClayiumUnofficial / ClayiumOriginal behavior.
+ * Use {@link #rawEnergy()} for the exact double value; use {@link #energy()}
+ * for the truncated long value (e.g. for display or game logic).
  *
  * @param red   Red channel intensity
  * @param green Green channel intensity
@@ -42,11 +44,22 @@ public record Laser(int red, int green, int blue, int age) {
     }
 
     /**
-     * Calculates laser energy from current RGB values.
+     * Returns laser energy as a long (truncated from the raw double).
+     * Use this for display or game logic that requires an integer value.
      *
-     * @return Energy value
+     * @return Energy value as long (floor of {@link #rawEnergy()})
      */
-    public double energy() {
+    public long energy() {
+        return (long) this.rawEnergy();
+    }
+
+    /**
+     * Calculates the raw laser energy from current RGB values (exact double).
+     * Formula: E1 * E2 * E3 - 1.0, where Ei is per-color energy (blue, green, red).
+     *
+     * @return Raw energy value as double
+     */
+    public double rawEnergy() {
         return calculateEnergyPerColor(blue, BASES[0], MAX_ENERGIES[0], DAMPING_RATE) *
                 calculateEnergyPerColor(green, BASES[1], MAX_ENERGIES[1], DAMPING_RATE) *
                 calculateEnergyPerColor(red, BASES[2], MAX_ENERGIES[2], DAMPING_RATE) - 1.0;

@@ -23,8 +23,8 @@ public final class LaserIrradiationRecipeHandler implements LaserBlockIrradiatio
                           @NotNull Level level,
                           @NotNull BlockPos targetPos,
                           @NotNull BlockState targetState,
-                          double tickEnergy,
-                          double totalEnergyIrradiated,
+                          long tickEnergy,
+                          long totalEnergyIrradiated,
                           int irradiationTicks) {
         if (level.isClientSide()) {
             return;

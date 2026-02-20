@@ -41,7 +41,7 @@ public class ClayLaserIrradiator {
 
     @Nullable
     private BlockPos previousBlockTargetPos = null;
-    private double totalEnergyIrradiated = 0.0;
+    private long totalEnergyIrradiated = 0L;
     private int irradiationTicks = 0;
 
     public ClayLaserIrradiator(@NotNull BlockEntity owner) {
@@ -129,7 +129,7 @@ public class ClayLaserIrradiator {
         this.resetBlockIrradiationState();
     }
 
-    public double getTotalEnergyIrradiated() {
+    public long getTotalEnergyIrradiated() {
         return this.totalEnergyIrradiated;
     }
 
@@ -158,9 +158,9 @@ public class ClayLaserIrradiator {
                 state.is(Blocks.GLASS_PANE);
     }
 
-    private void irradiateLaserBlock(@NotNull Level level, @NotNull BlockPos targetPos, double energy) {
+    private void irradiateLaserBlock(@NotNull Level level, @NotNull BlockPos targetPos, long energy) {
         if (!Objects.equals(this.previousBlockTargetPos, targetPos)) {
-            this.totalEnergyIrradiated = 0.0;
+            this.totalEnergyIrradiated = 0L;
             this.irradiationTicks = 0;
             this.previousBlockTargetPos = targetPos.immutable();
         }
@@ -178,7 +178,7 @@ public class ClayLaserIrradiator {
 
     private void resetBlockIrradiationState() {
         this.previousBlockTargetPos = null;
-        this.totalEnergyIrradiated = 0.0;
+        this.totalEnergyIrradiated = 0L;
         this.irradiationTicks = 0;
     }
 }

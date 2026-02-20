@@ -18,30 +18,30 @@ class LaserTest {
     private static final double EPSILON = 1.0E-12;
 
     @Test
-    void energyIsZeroForNoColorLaser() {
+    void rawEnergyIsZeroForNoColorLaser() {
         Laser laser = new Laser(0, 0, 0);
-        assertEquals(0.0, laser.energy(), EPSILON);
+        assertEquals(0.0, laser.rawEnergy(), EPSILON);
     }
 
     @Test
-    void calculatesExpectedEnergyForTierSampleLasers() {
-        assertEquals(0.493174154155451, new Laser(1, 0, 0).energy(), EPSILON);
-        assertEquals(0.785973181960941, new Laser(0, 1, 0).energy(), EPSILON);
-        assertEquals(1.460226149452476, new Laser(0, 0, 1).energy(), EPSILON);
-        assertEquals(598.395857989328300, new Laser(3, 3, 3).energy(), EPSILON);
+    void calculatesExpectedRawEnergyForTierSampleLasers() {
+        assertEquals(0.493174154155451, new Laser(1, 0, 0).rawEnergy(), EPSILON);
+        assertEquals(0.785973181960941, new Laser(0, 1, 0).rawEnergy(), EPSILON);
+        assertEquals(1.460226149452476, new Laser(0, 0, 1).rawEnergy(), EPSILON);
+        assertEquals(598.395857989328300, new Laser(3, 3, 3).rawEnergy(), EPSILON);
     }
 
     @Test
-    void calculatesExpectedEnergyForMixedLaser() {
+    void calculatesExpectedRawEnergyForMixedLaser() {
         Laser laser = new Laser(2, 1, 4);
-        assertEquals(231.641773712002250, laser.energy(), EPSILON);
+        assertEquals(231.641773712002250, laser.rawEnergy(), EPSILON);
     }
 
     @Test
-    void energyCalculationDoesNotDependOnAge() {
+    void rawEnergyCalculationDoesNotDependOnAge() {
         Laser oldLaser = new Laser(2, 1, 4, 0);
         Laser agedLaser = new Laser(2, 1, 4, 200);
-        assertEquals(oldLaser.energy(), agedLaser.energy(), EPSILON);
+        assertEquals(oldLaser.rawEnergy(), agedLaser.rawEnergy(), EPSILON);
     }
 
     @Test

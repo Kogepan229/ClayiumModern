@@ -29,11 +29,11 @@ public class LaserIrradiationRecipeSerializer implements RecipeSerializer<LaserI
             .group(
                     BLOCK_CODEC.fieldOf("input").forGetter(LaserIrradiationRecipe::inputBlock),
                     BLOCK_CODEC.fieldOf("output").forGetter(LaserIrradiationRecipe::outputBlock),
-                    com.mojang.serialization.Codec.DOUBLE.fieldOf("energy_min")
+                    com.mojang.serialization.Codec.LONG.fieldOf("energy_min")
                             .forGetter(LaserIrradiationRecipe::energyMin),
-                    com.mojang.serialization.Codec.DOUBLE.fieldOf("energy_max")
+                    com.mojang.serialization.Codec.LONG.fieldOf("energy_max")
                             .forGetter(LaserIrradiationRecipe::energyMax),
-                    com.mojang.serialization.Codec.DOUBLE
+                    com.mojang.serialization.Codec.LONG
                             .fieldOf("required_energy")
                             .forGetter(LaserIrradiationRecipe::requiredEnergy))
             .apply(instance, LaserIrradiationRecipe::new));
@@ -44,11 +44,11 @@ public class LaserIrradiationRecipeSerializer implements RecipeSerializer<LaserI
                     LaserIrradiationRecipe::inputBlock,
                     ByteBufCodecs.registry(Registries.BLOCK),
                     LaserIrradiationRecipe::outputBlock,
-                    ByteBufCodecs.DOUBLE,
+                    ByteBufCodecs.VAR_LONG,
                     LaserIrradiationRecipe::energyMin,
-                    ByteBufCodecs.DOUBLE,
+                    ByteBufCodecs.VAR_LONG,
                     LaserIrradiationRecipe::energyMax,
-                    ByteBufCodecs.DOUBLE,
+                    ByteBufCodecs.VAR_LONG,
                     LaserIrradiationRecipe::requiredEnergy,
                     LaserIrradiationRecipe::new);
 

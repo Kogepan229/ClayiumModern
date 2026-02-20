@@ -52,7 +52,7 @@ public class LaserIrradiationRecipeProvider {
         // Any laser tier: energy per tick in [0, 1e4], require 100 total, transformation after 10+ ticks
         output.accept(
                 Clayium.id("laser_irradiation/" + name),
-                new LaserIrradiationRecipe(input, outputBlock, 0.0, 10_000.0, 100.0),
+                new LaserIrradiationRecipe(input, outputBlock, 0L, 10_000L, 100L),
                 null);
     }
 
@@ -61,7 +61,7 @@ public class LaserIrradiationRecipeProvider {
         // and tick energy in [300, 1000] so mid-tier laser triggers. (We do not enforce total < 1000.)
         output.accept(
                 Clayium.id("laser_irradiation/" + name + "_cycle"),
-                new LaserIrradiationRecipe(sapling, sapling, 300.0, 1000.0, 300.0),
+                new LaserIrradiationRecipe(sapling, sapling, 300L, 1000L, 300L),
                 null);
     }
 }
