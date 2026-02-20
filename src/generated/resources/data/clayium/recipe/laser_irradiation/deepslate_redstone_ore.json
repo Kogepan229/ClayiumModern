@@ -1,0 +1,8 @@
+{
+  "type": "clayium:laser_irradiation",
+  "energy_max": 10000.0,
+  "energy_min": 0.0,
+  "input": "minecraft:deepslate_redstone_ore",
+  "output": "minecraft:redstone_block",
+  "required_energy": 100.0
+}

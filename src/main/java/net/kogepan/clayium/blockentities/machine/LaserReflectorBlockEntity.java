@@ -1,9 +1,11 @@
 package net.kogepan.clayium.blockentities.machine;
 
+import net.kogepan.clayium.Config;
 import net.kogepan.clayium.capability.IClayLaserAcceptor;
 import net.kogepan.clayium.capability.IClayLaserSource;
 import net.kogepan.clayium.laser.ClayLaserIrradiator;
 import net.kogepan.clayium.laser.Laser;
+import net.kogepan.clayium.laser.LaserIrradiationRecipeHandler;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 
 import net.minecraft.core.BlockPos;
@@ -40,7 +42,8 @@ public class LaserReflectorBlockEntity extends BlockEntity implements IClayLaser
 
     public LaserReflectorBlockEntity(BlockPos pos, BlockState blockState) {
         super(ClayiumBlockEntityTypes.LASER_REFLECTOR_BLOCK_ENTITY.get(), pos, blockState);
-        this.irradiator = new ClayLaserIrradiator(this);
+        int maxLength = Config.MAX_CLAY_LASER_LENGTH.get();
+        this.irradiator = new ClayLaserIrradiator(this, maxLength, new LaserIrradiationRecipeHandler());
     }
 
     public static void tick(Level level, BlockPos pos, BlockState state, LaserReflectorBlockEntity blockEntity) {

@@ -2,6 +2,7 @@ package net.kogepan.clayium.recipes;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
+import net.kogepan.clayium.recipes.recipes.LaserIrradiationRecipe;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.recipes.recipes.QuartzCrucibleRecipe;
 
@@ -35,6 +36,9 @@ public class ClayiumRecipeTypes {
 
     public static final DeferredHolder<RecipeType<?>, RecipeType<QuartzCrucibleRecipe>> QUARTZ_CRUCIBLE_RECIPE_TYPE = RECIPE_TYPES
             .register("quartz_crucible", RecipeType::simple);
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<LaserIrradiationRecipe>> LASER_IRRADIATION_RECIPE_TYPE = RECIPE_TYPES
+            .register("laser_irradiation", RecipeType::simple);
 
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> BENDING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
             "bending_machine", 1, 1);

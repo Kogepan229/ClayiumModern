@@ -31,6 +31,7 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         ClayCondenserRecipeProvider.buildRecipes(recipeOutput);
         GrinderRecipeProvider.buildRecipes(recipeOutput);
         QuartzCrucibleRecipeProvider.buildRecipes(recipeOutput);
+        LaserIrradiationRecipeProvider.buildRecipes(recipeOutput);
 
         // Laser Reflector
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.LASER_REFLECTOR.get())

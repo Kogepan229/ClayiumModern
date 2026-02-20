@@ -2,9 +2,11 @@ package net.kogepan.clayium.recipes;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
+import net.kogepan.clayium.recipes.recipes.LaserIrradiationRecipe;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.recipes.recipes.QuartzCrucibleRecipe;
 import net.kogepan.clayium.recipes.serializers.ClayWorkTableRecipeSerializer;
+import net.kogepan.clayium.recipes.serializers.LaserIrradiationRecipeSerializer;
 import net.kogepan.clayium.recipes.serializers.MachineRecipeSerializer;
 import net.kogepan.clayium.recipes.serializers.QuartzCrucibleRecipeSerializer;
 
@@ -26,4 +28,7 @@ public class ClayiumRecipeSerializers {
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<QuartzCrucibleRecipe>> QUARTZ_CRUCIBLE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
             .register("quartz_crucible", QuartzCrucibleRecipeSerializer::new);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<LaserIrradiationRecipe>> LASER_IRRADIATION_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
+            .register("laser_irradiation", LaserIrradiationRecipeSerializer::new);
 }

@@ -33,6 +33,10 @@ public class Config {
             .comment("Visual quality of clay laser beam. 2 is recommended for low-end computers.")
             .defineInRange("laserQuality", 8, 1, 32);
 
+    public static final ModConfigSpec.IntValue MAX_CLAY_LASER_LENGTH = BUILDER
+            .comment("Maximum length of clay laser beam in blocks.")
+            .defineInRange("maxClayLaserLength", 32, 1, 256);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     private static boolean validateItemName(final Object obj) {

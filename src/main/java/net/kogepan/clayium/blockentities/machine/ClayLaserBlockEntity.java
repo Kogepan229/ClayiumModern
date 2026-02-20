@@ -1,5 +1,6 @@
 package net.kogepan.clayium.blockentities.machine;
 
+import net.kogepan.clayium.Config;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
@@ -8,6 +9,7 @@ import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
 import net.kogepan.clayium.laser.ClayLaserIrradiator;
 import net.kogepan.clayium.laser.Laser;
+import net.kogepan.clayium.laser.LaserIrradiationRecipeHandler;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.utils.MachineIOMode;
 
@@ -59,7 +61,8 @@ public class ClayLaserBlockEntity extends ClayContainerBlockEntity implements IC
         this.energyHolder = new ClayEnergyHolder(this);
         this.addTrait(this.energyHolder);
 
-        this.irradiator = new ClayLaserIrradiator(this);
+        int maxLength = Config.MAX_CLAY_LASER_LENGTH.get();
+        this.irradiator = new ClayLaserIrradiator(this, maxLength, new LaserIrradiationRecipeHandler());
 
         this.sampleLaser = sampleLaserForTier(this.tier);
         this.consumingEnergy = consumingEnergyForTier(this.tier);
