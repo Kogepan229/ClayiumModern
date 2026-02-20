@@ -2,6 +2,7 @@ package net.kogepan.clayium.blockentities.trait;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
+import net.kogepan.clayium.recipes.ItemIngredientStack;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.utils.TransferUtils;
 
@@ -26,7 +27,7 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
     public static final String TRAIT_ID = "recipeLogic";
 
     @Nullable
-    protected RecipeHolder<MachineRecipe> processingRecipeHolder;
+    protected RecipeHolder<?> processingRecipeHolder;
     protected long currentProgress = 0;
     protected boolean canProgress = false; // TODO: onFIrstTick
     protected final RecipeType<MachineRecipe> recipeType;
@@ -66,6 +67,43 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         this.canProgress = checkCanProgress();
     }
 
+    protected abstract RecipeHolder<?> getMatchedRecipe(Level level, List<ItemStack> inventoryStacks);
+
+    protected long getRecipeCEPerTick(RecipeHolder<?> recipeHolder) {
+        if (recipeHolder.value() instanceof MachineRecipe recipe) {
+            return recipe.cePerTick();
+        }
+        throw new IllegalStateException();
+    }
+
+    protected long getRecipeDuration(RecipeHolder<?> recipeHolder) {
+        if (recipeHolder.value() instanceof MachineRecipe recipe) {
+            return recipe.duration();
+        }
+        throw new IllegalStateException();
+    }
+
+    protected List<ItemIngredientStack> getRecipeInputs(RecipeHolder<?> recipeHolder) {
+        if (recipeHolder.value() instanceof MachineRecipe recipe) {
+            return recipe.inputs();
+        }
+        throw new IllegalStateException();
+    }
+
+    protected List<ItemStack> getRecipeOutputs(RecipeHolder<?> recipeHolder) {
+        if (recipeHolder.value() instanceof MachineRecipe recipe) {
+            return recipe.outputs();
+        }
+        throw new IllegalStateException();
+    }
+
+    protected List<ItemStack> getCopiedRecipeOutputs(RecipeHolder<?> recipeHolder) {
+        if (recipeHolder.value() instanceof MachineRecipe recipe) {
+            return recipe.copyOutputs();
+        }
+        throw new IllegalStateException();
+    }
+
     public void notifyItemInputInventoryChanged() {
         isInputItemInventoryChanged = true;
     }
@@ -94,6 +132,13 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         return true;
     }
 
+    /**
+     * Converts the given inventory's contents into a list of item stacks,
+     * merging stacks that are the same item with the same components.
+     *
+     * @param inventory the item handler to read from
+     * @return a list of merged item stacks (no duplicate item types)
+     */
     private static List<ItemStack> getList(IItemHandler inventory) {
         List<ItemStack> list = new ArrayList<>();
 
@@ -120,35 +165,28 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         Level level = this.blockEntity.getLevel();
         if (level == null) return false;
 
-        var recipeHolders = level.getRecipeManager()
-                .getAllRecipesFor(this.recipeType);
-
         List<ItemStack> inventoryStacks = getList(blockEntity.getInputInventory());
-        for (RecipeHolder<MachineRecipe> holder : recipeHolders) {
-            MachineRecipe recipe = holder.value();
-            if (recipe.recipeTier() > this.blockEntity.tier) continue;
+        RecipeHolder<?> matchedRecipeHolder = getMatchedRecipe(level, inventoryStacks);
 
-            if (recipe.matchesItems(inventoryStacks)) {
-                return prepareRecipe(holder, inventoryStacks);
-            }
+        if (matchedRecipeHolder != null) {
+            return prepareRecipe(matchedRecipeHolder, inventoryStacks);
         }
 
         isInvalidInputsForRecipes = true;
         return false;
     }
 
-    protected boolean prepareRecipe(RecipeHolder<MachineRecipe> holder, List<ItemStack> inventoryStacks) {
-        MachineRecipe recipe = holder.value();
-        if (!this.drawEnergy(recipe.cePerTick(), true)) return false;
-        if (!TransferUtils.simulateInsertItemsToHandler(blockEntity.getOutputInventory(), recipe.outputs())) {
+    protected boolean prepareRecipe(RecipeHolder<?> holder, List<ItemStack> inventoryStacks) {
+        if (!this.drawEnergy(getRecipeCEPerTick(holder), true)) return false;
+        if (!TransferUtils.simulateInsertItemsToHandler(blockEntity.getOutputInventory(), getRecipeOutputs(holder))) {
             noEnoughOutputSpace = true;
             return false;
         }
 
         IItemHandlerModifiable machineInventory = blockEntity.getInputInventory();
 
-        // Consume ingredients
-        for (var ingredient : recipe.inputs()) {
+        // Consume ingredients;
+        for (var ingredient : getRecipeInputs(holder)) {
             for (var inventoryStack : inventoryStacks) {
                 if (!ingredient.test(inventoryStack)) continue;
                 ItemStack stackToConsume = inventoryStack.copy();
@@ -187,13 +225,12 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
             return;
         }
 
-        MachineRecipe recipe = processingRecipeHolder.value();
-        if (!drawEnergy(recipe.cePerTick(), false)) {
+        if (!drawEnergy(getRecipeCEPerTick(processingRecipeHolder), false)) {
             return;
         }
 
         currentProgress += getProgressPerTick();
-        if (currentProgress >= recipe.duration()) {
+        if (currentProgress >= getRecipeDuration(processingRecipeHolder)) {
             completeWork();
         }
     }
@@ -203,7 +240,7 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
 
         IItemHandler outputInventory = blockEntity.getOutputInventory();
         assert this.processingRecipeHolder != null;
-        for (ItemStack stack : this.processingRecipeHolder.value().copyOutputs()) {
+        for (ItemStack stack : getCopiedRecipeOutputs(processingRecipeHolder)) {
             ItemHandlerHelper.insertItem(outputInventory, stack, false);
         }
         this.processingRecipeHolder = null;
@@ -213,7 +250,7 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         return new ProgressArrow()
                 .bind(DataBindingBuilder
                         .floatValS2C(() -> this.processingRecipeHolder != null ?
-                                (float) this.currentProgress / this.processingRecipeHolder.value().duration() : 0)
+                                (float) this.currentProgress / getRecipeDuration(processingRecipeHolder) : 0)
                         .build())
                 .layout(layout -> layout.width(22));
     }

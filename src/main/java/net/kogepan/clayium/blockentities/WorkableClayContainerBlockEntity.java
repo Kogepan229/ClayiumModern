@@ -19,6 +19,7 @@ import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
 import com.lowdragmc.lowdraglib2.gui.slot.ItemHandlerSlot;
 import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
+import lombok.Getter;
 import org.appliedenergistics.yoga.YogaAlign;
 import org.appliedenergistics.yoga.YogaFlexDirection;
 import org.appliedenergistics.yoga.YogaJustify;
@@ -34,6 +35,7 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
 
     protected final RecipeType<?> recipeType;
     protected final AbstractRecipeLogic recipeLogic;
+    @Getter
     protected final ClayEnergyHolder energyHolder;
 
     public WorkableClayContainerBlockEntity(@NotNull BlockEntityType<?> type,

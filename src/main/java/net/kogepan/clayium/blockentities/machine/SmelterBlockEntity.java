@@ -1,6 +1,7 @@
 package net.kogepan.clayium.blockentities.machine;
 
 import net.kogepan.clayium.blockentities.SimpleMachineBlockEntity;
+import net.kogepan.clayium.blockentities.trait.SmelterRecipeLogic;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 
@@ -13,6 +14,8 @@ public class SmelterBlockEntity extends SimpleMachineBlockEntity {
 
     public SmelterBlockEntity(@NotNull BlockPos pos, @NotNull BlockState blockState) {
         super(ClayiumBlockEntityTypes.SMELTER_BLOCK_ENTITY.get(), pos, blockState,
-                ClayiumRecipeTypes.SMELTER_RECIPE_TYPE.get());
+                ClayiumRecipeTypes.SMELTER_RECIPE_TYPE.get(),
+                (be) -> new SmelterRecipeLogic(be, ClayiumRecipeTypes.SMELTER_RECIPE_TYPE.get(),
+                        be.getEnergyHolder()));
     }
 }
