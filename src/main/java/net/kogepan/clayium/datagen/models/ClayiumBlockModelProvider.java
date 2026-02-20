@@ -7,9 +7,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.neoforged.neoforge.client.model.generators.BlockModelBuilder;
 import net.neoforged.neoforge.client.model.generators.BlockStateProvider;
+import net.neoforged.neoforge.client.model.generators.ConfiguredModel;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
+import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import org.jetbrains.annotations.Nullable;
@@ -147,17 +150,38 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         simpleBlock(ClayiumBlocks.CREATIVE_CE_SOURCE.get(), creativeCeSourceModel);
         simpleBlockItem(ClayiumBlocks.CREATIVE_CE_SOURCE.get(), creativeCeSourceModel);
 
-        // Clay Sapling: block uses cross model with cutout; item uses flat (item/generated) texture
+        // Clay Sapling: block uses cross model with cutout; blockstate has stage 0 and 1 (same model)
         ResourceLocation claySaplingTexture = Clayium.id("block/clay_sapling");
         ModelFile claySaplingBlockModel = models().getBuilder("clay_sapling")
                 .parent(models().getExistingFile(models().mcLoc("block/cross")))
                 .texture("cross", claySaplingTexture)
                 .renderType("minecraft:cutout");
-        simpleBlock(ClayiumBlocks.CLAY_SAPLING.get(), claySaplingBlockModel);
-        // Item uses flat texture (item/generated); do not use simpleBlockItem or it overwrites parent
+        VariantBlockStateBuilder claySaplingBuilder = getVariantBuilder(ClayiumBlocks.CLAY_SAPLING.get());
+        claySaplingBuilder
+                .partialState().with(BlockStateProperties.STAGE, 0)
+                .addModels(new ConfiguredModel(claySaplingBlockModel))
+                .partialState().with(BlockStateProperties.STAGE, 1)
+                .addModels(new ConfiguredModel(claySaplingBlockModel));
+        // Item uses flat texture (item/generated)
         itemModels().getBuilder("clay_sapling")
                 .parent(new ModelFile.UncheckedModelFile("minecraft:item/generated"))
                 .texture("layer0", claySaplingTexture);
+
+        // Clay Log: column (side + end)
+        ResourceLocation clayLogSide = Clayium.id("block/clay_log");
+        ResourceLocation clayLogTop = Clayium.id("block/clay_log_top");
+        ModelFile clayLogModel = models().cubeColumn("clay_log", clayLogSide, clayLogTop);
+        axisBlock(ClayiumBlocks.CLAY_LOG.get(), clayLogModel, clayLogModel);
+        simpleBlockItem(ClayiumBlocks.CLAY_LOG.get(), clayLogModel);
+
+        // Clay Leaves: cube_all with cutout
+        ResourceLocation clayLeavesTexture = Clayium.id("block/clay_leaves");
+        ModelFile clayLeavesModel = models().getBuilder("clay_leaves")
+                .parent(models().getExistingFile(models().mcLoc("block/leaves")))
+                .texture("all", clayLeavesTexture)
+                .renderType("minecraft:cutout");
+        simpleBlock(ClayiumBlocks.CLAY_LEAVES.get(), clayLeavesModel);
+        simpleBlockItem(ClayiumBlocks.CLAY_LEAVES.get(), clayLeavesModel);
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay) {

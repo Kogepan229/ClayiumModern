@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-20T18:25:33.657420634	Loot Tables
+// 1.21.1	2026-02-20T19:27:00.906626545	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -29,6 +29,8 @@ ee86f26ada6e224f8e7fee211694bea2d653e0e3 data/clayium/loot_table/blocks/clay_con
 57e9a81a9cbe4361530795f207d541f0f860f429 data/clayium/loot_table/blocks/clay_laser_7.json
 0eb5d8736e728d18e00901df7ae5933f3d2d16d5 data/clayium/loot_table/blocks/clay_laser_8.json
 226e2c19b7e632a1653ad519a556a5522dd41f7a data/clayium/loot_table/blocks/clay_laser_9.json
+5876d2330f46c7df3570226b37809e764d5349f4 data/clayium/loot_table/blocks/clay_leaves.json
+f565aa074c31229ac3194159246e9cd728a01c54 data/clayium/loot_table/blocks/clay_log.json
 97bf0fefd2cc82ad71b870c24c8856aa9c556750 data/clayium/loot_table/blocks/clay_ore.json
 ebf6b55b72963d28003699bc74f9e8fe16d4aa50 data/clayium/loot_table/blocks/clay_sapling.json
 289f2435fb39b54cab3a9f657fc896b59a259580 data/clayium/loot_table/blocks/clay_work_table.json

@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-20T18:56:31.365363573	Block States: clayium
+// 1.21.1	2026-02-20T19:27:00.902588397	Block States: clayium
 9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
 56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
@@ -29,8 +29,10 @@ f79ead5cd1ed5067a41b3109d50d76b113978a69 assets/clayium/blockstates/clay_laser_1
 6cf077c0139b016e49f76d3aaa50105299bb30ca assets/clayium/blockstates/clay_laser_7.json
 77dfce7690cf5f636c450a05bcd4560432a27889 assets/clayium/blockstates/clay_laser_8.json
 382af44a9afd4c0a2edf723d82497fc82ba8e656 assets/clayium/blockstates/clay_laser_9.json
+185d0e7ab8b63776badcd8fc05a66c427ff07b42 assets/clayium/blockstates/clay_leaves.json
+abe004e582bdd5957cd40f2a8b9a0de0f84ddbfc assets/clayium/blockstates/clay_log.json
 8c126741808f10d1e9d2593574e9d1c5a16f1327 assets/clayium/blockstates/clay_ore.json
-e61f776debb4938b112a41e209f389678396e091 assets/clayium/blockstates/clay_sapling.json
+e1740da17d83205cd9d4384681b5f8b9580d0ca2 assets/clayium/blockstates/clay_sapling.json
 4d2c37e21a584697986cce646cccd1fb2cf8c4ad assets/clayium/blockstates/clay_work_table.json
 7121ff08306f421439b3d1e5f9577badf5cf29a5 assets/clayium/blockstates/cobblestone_generator_1.json
 15d95b6536c7112f5a076c40b76b40da0bf18079 assets/clayium/blockstates/cobblestone_generator_2.json
@@ -128,6 +130,8 @@ bee8fb9bfdc5de81560e50b6deed234487a22ad4 assets/clayium/models/block/clay_buffer
 748f12035f091714768fb476926dc65d9b408b92 assets/clayium/models/block/clay_laser_7.json
 a57490e1df867b14fd67bd2d84ed5f9ab59e9251 assets/clayium/models/block/clay_laser_8.json
 4571394c5507d5e6e9e1522afecab8def578a4ba assets/clayium/models/block/clay_laser_9.json
+e224bc1db9c6fbb38b2dec5fe5d175f0fba7c5c4 assets/clayium/models/block/clay_leaves.json
+6ff48dda4b5219575bc5f3c6fb6ff75c5e9c7654 assets/clayium/models/block/clay_log.json
 4f707de7cd7d0eb061ba1cc8c0b476b7d78d5252 assets/clayium/models/block/clay_ore.json
 bba7dd9baad7e32be74f6b3e16f0ed31f48769b7 assets/clayium/models/block/clay_sapling.json
 9ae1d29ca4e20f6efe101a311297900e8513ad93 assets/clayium/models/block/clay_work_table.json
@@ -227,6 +231,8 @@ bd35bcedb7081cc706457291f1fffcb8022df8df assets/clayium/models/item/clay_condens
 3981e81e80b4a1c43e6779e27c4e183b25675b0d assets/clayium/models/item/clay_laser_7.json
 e9e17883c84fcfab5033b3da883361a7f7aaf28a assets/clayium/models/item/clay_laser_8.json
 b5f7bc322a99dc07639d282bcf4188cecf1780c8 assets/clayium/models/item/clay_laser_9.json
+d66e7bcd080a80811111104c7d58ec31bd6ff906 assets/clayium/models/item/clay_leaves.json
+9248c52eda0b9e73b7f51b987caeb97290b985f3 assets/clayium/models/item/clay_log.json
 fbbdc8988166ea1864225430ece143761b54b9d1 assets/clayium/models/item/clay_ore.json
 dd48495fd194bba0e79177bb940ba2f6ec541104 assets/clayium/models/item/clay_sapling.json
 15fd4af28c382a718c1227f304571da330b7f00b assets/clayium/models/item/clay_work_table.json

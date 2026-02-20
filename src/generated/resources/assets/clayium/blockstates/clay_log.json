@@ -1,0 +1,16 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "clayium:block/clay_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y": {
+      "model": "clayium:block/clay_log"
+    },
+    "axis=z": {
+      "model": "clayium:block/clay_log",
+      "x": 90
+    }
+  }
+}

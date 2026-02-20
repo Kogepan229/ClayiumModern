@@ -109,6 +109,8 @@
   "block.clayium.laser_reflector": "Laser Reflector",
   "block.clayium.creative_ce_source": "Creative CE Source",
   "block.clayium.clay_sapling": "Clay Sapling",
+  "block.clayium.clay_log": "Clay Log",
+  "block.clayium.clay_leaves": "Clay Leaves",
   "block.clayium.quartz_crucible": "Quartz Crucible",
 
   "item.clayium.compressed_clay_shard": "Compressed Clay Shard",

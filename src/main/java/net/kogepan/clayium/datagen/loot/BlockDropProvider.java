@@ -1,6 +1,7 @@
 package net.kogepan.clayium.datagen.loot;
 
 import net.kogepan.clayium.registries.ClayiumBlocks;
+import net.kogepan.clayium.registries.ClayiumItems;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
@@ -11,6 +12,7 @@ import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.world.level.storage.loot.entries.LootItem;
 import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.predicates.ExplosionCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
@@ -34,8 +36,17 @@ public class BlockDropProvider extends BlockLootSubProvider {
     @Override
     protected void generate() {
         for (var block : ClayiumBlocks.BLOCKS.getEntries()) {
+            if (block.get() == ClayiumBlocks.CLAY_LEAVES.get()) {
+                continue; // Handled below (drops clay_dust like Original)
+            }
             add(block.get(), defaultBuilder(block.get()));
         }
+        // Clay leaves: drop clay_dust with chance when broken (like ClayiumOriginal ClayTreeLeaf)
+        add(ClayiumBlocks.CLAY_LEAVES.get(), LootTable.lootTable()
+                .withPool(LootPool.lootPool().setRolls(ConstantValue.exactly(1))
+                        .add(LootItem.lootTableItem(ClayiumItems.CLAY_DUST.get()))
+                        .when(LootItemRandomChanceCondition.randomChance(0.2f))
+                        .when(ExplosionCondition.survivesExplosion())));
     }
 
     private LootTable.Builder defaultBuilder(Block block) {

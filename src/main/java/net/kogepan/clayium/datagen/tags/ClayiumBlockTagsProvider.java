@@ -31,6 +31,9 @@ public class ClayiumBlockTagsProvider extends BlockTagsProvider {
                 .add(ClayiumBlocks.DENSE_CLAY_ORE.get())
                 .add(ClayiumBlocks.LARGE_DENSE_CLAY_ORE.get());
 
+        tag(BlockTags.LOGS).add(ClayiumBlocks.CLAY_LOG.get());
+        tag(BlockTags.LEAVES).add(ClayiumBlocks.CLAY_LEAVES.get());
+
         addEffectiveTools();
     }
 
@@ -39,6 +42,14 @@ public class ClayiumBlockTagsProvider extends BlockTagsProvider {
 
             if (ClayiumBlocks.COMPRESSED_CLAYS.containsValue(block)) {
                 tag(BlockTags.MINEABLE_WITH_SHOVEL).add(block.get());
+                continue;
+            }
+            if (block.get() == ClayiumBlocks.CLAY_LOG.get()) {
+                tag(BlockTags.MINEABLE_WITH_AXE).add(block.get());
+                continue;
+            }
+            if (block.get() == ClayiumBlocks.CLAY_LEAVES.get()) {
+                tag(BlockTags.MINEABLE_WITH_HOE).add(block.get());
                 continue;
             }
 

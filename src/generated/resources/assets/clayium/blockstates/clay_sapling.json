@@ -1,6 +1,9 @@
 {
   "variants": {
-    "": {
+    "stage=0": {
+      "model": "clayium:block/clay_sapling"
+    },
+    "stage=1": {
       "model": "clayium:block/clay_sapling"
     }
   }

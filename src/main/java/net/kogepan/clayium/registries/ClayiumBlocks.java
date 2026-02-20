@@ -3,6 +3,8 @@ package net.kogepan.clayium.registries;
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blocks.ClayBufferBlock;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.blocks.ClayLeavesBlock;
+import net.kogepan.clayium.blocks.ClayLogBlock;
 import net.kogepan.clayium.blocks.ClayOre;
 import net.kogepan.clayium.blocks.ClaySaplingBlock;
 import net.kogepan.clayium.blocks.ClayWorkTableBlock;
@@ -273,4 +275,7 @@ public class ClayiumBlocks {
 
     public static final DeferredBlock<ClaySaplingBlock> CLAY_SAPLING = register("clay_sapling",
             ClaySaplingBlock::new);
+
+    public static final DeferredBlock<ClayLogBlock> CLAY_LOG = register("clay_log", ClayLogBlock::new);
+    public static final DeferredBlock<ClayLeavesBlock> CLAY_LEAVES = register("clay_leaves", ClayLeavesBlock::new);
 }
