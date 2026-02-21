@@ -10,6 +10,8 @@ import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
@@ -78,6 +80,24 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
     @Override
     public IItemHandlerModifiable getOutputInventory() {
         return this.outputItemInventory;
+    }
+
+    @Override
+    protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
+        super.saveAdditional(tag, provider);
+        tag.put("inputItemInventory", this.inputItemInventory.serializeNBT(provider));
+        tag.put("outputItemInventory", this.outputItemInventory.serializeNBT(provider));
+    }
+
+    @Override
+    protected void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
+        super.loadAdditional(tag, provider);
+        if (tag.contains("inputItemInventory")) {
+            this.inputItemInventory.deserializeNBT(provider, tag.getCompound("inputItemInventory"));
+        }
+        if (tag.contains("outputItemInventory")) {
+            this.outputItemInventory.deserializeNBT(provider, tag.getCompound("outputItemInventory"));
+        }
     }
 
     private static final List<List<MachineIOMode>> VALID_INPUT_MODES_LISTS = List.of(

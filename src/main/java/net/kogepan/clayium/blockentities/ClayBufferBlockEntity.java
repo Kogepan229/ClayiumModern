@@ -89,7 +89,9 @@ public class ClayBufferBlockEntity extends ClayContainerBlockEntity {
     @Override
     protected void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
         super.loadAdditional(tag, provider);
-        this.itemInventory.deserializeNBT(provider, tag.getCompound("itemInventory"));
+        if (tag.contains("itemInventory")) {
+            this.itemInventory.deserializeNBT(provider, tag.getCompound("itemInventory"));
+        }
     }
 
     @Override

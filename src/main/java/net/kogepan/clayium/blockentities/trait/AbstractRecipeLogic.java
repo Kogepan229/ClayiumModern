@@ -6,6 +6,9 @@ import net.kogepan.clayium.recipes.ItemIngredientStack;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.utils.TransferUtils;
 
+import net.minecraft.core.HolderLookup;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -28,6 +31,12 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
 
     @Nullable
     protected RecipeHolder<?> processingRecipeHolder;
+    /**
+     * Set when loading from NBT and getLevel() was null (e.g. chunk load order).
+     * Cleared when recipeHolder is resolved in resolveRecipeHolder(Level).
+     */
+    @Nullable
+    protected ResourceLocation pendingRecipeId = null;
     protected long currentProgress = 0;
     protected boolean canProgress = false; // TODO: onFIrstTick
     protected final RecipeType<MachineRecipe> recipeType;
@@ -60,11 +69,63 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         }
     }
 
+    @Override
     public void onLoad() {
         Level level = this.blockEntity.getLevel();
         if (level == null || level.isClientSide()) return;
 
+        resolveRecipeHolder(level);
         this.canProgress = checkCanProgress();
+    }
+
+    /**
+     * Resolves pendingRecipeId to processingRecipeHolder when level is available. Call when level is known.
+     */
+    protected void resolveRecipeHolder(Level level) {
+        if (processingRecipeHolder != null || level == null || pendingRecipeId == null) {
+            return;
+        }
+        processingRecipeHolder = resolveRecipeHolderFromId(level, pendingRecipeId);
+
+        if (processingRecipeHolder == null) {
+            currentProgress = 0;
+        }
+        pendingRecipeId = null;
+    }
+
+    @Nullable
+    private RecipeHolder<?> resolveRecipeHolderFromId(Level level, ResourceLocation recipeId) {
+        return level.getRecipeManager()
+                .byKey(recipeId)
+                .orElse(null);
+    }
+
+    @Override
+    public void saveAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
+        tag.putLong("progress", currentProgress);
+        if (processingRecipeHolder != null) {
+            tag.putString("recipeId", processingRecipeHolder.id().toString());
+        }
+    }
+
+    @Override
+    public void loadAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
+        currentProgress = tag.getLong("progress");
+        processingRecipeHolder = null;
+        pendingRecipeId = null;
+        if (!tag.contains("recipeId")) {
+            return;
+        }
+        ResourceLocation recipeId = ResourceLocation.parse(tag.getString("recipeId"));
+        Level level = blockEntity.getLevel();
+        if (level != null) {
+            processingRecipeHolder = resolveRecipeHolderFromId(level, recipeId);
+            if (processingRecipeHolder == null) {
+                currentProgress = 0;
+            }
+        } else {
+            pendingRecipeId = recipeId;
+        }
     }
 
     protected abstract RecipeHolder<?> getMatchedRecipe(Level level, List<ItemStack> inventoryStacks);
