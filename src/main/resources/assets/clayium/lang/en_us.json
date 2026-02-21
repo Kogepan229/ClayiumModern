@@ -254,5 +254,15 @@
   "clayium.configuration.items": "Item List",
   "clayium.configuration.logDirtBlock": "Log Dirt Block",
   "clayium.configuration.magicNumberIntroduction": "Magic Number Text",
-  "clayium.configuration.magicNumber": "Magic Number"
+  "clayium.configuration.magicNumber": "Magic Number",
+
+  "item.clayium.simple_item_filter": "Simple Item Filter",
+  "item.clayium.simple_item_filter.tooltip": "Right-click to configure. Allow/Deny list of items.\nFilters placed in slots are applied as well (nested filters).",
+  "item.clayium.simple_item_filter.copy": "Simple Item Filter (Copy)",
+  "item.clayium.fazy_item_filter": "Fuzzy Item Filter",
+  "item.clayium.fazy_item_filter.tooltip": "Right-click to configure. Matches by item type (ignores NBT/damage).",
+  "item.clayium.fazy_item_filter.copy": "Fuzzy Item Filter (Copy)",
+  "item.clayium.unlocalized_name_item_filter": "Unlocalized Name Item Filter",
+  "item.clayium.unlocalized_name_item_filter.tooltip": "Right-click to configure. Regex match on item translation key.",
+  "item.clayium.unlocalized_name_item_filter.copy": "Unlocalized Name Item Filter (Copy)"
 }

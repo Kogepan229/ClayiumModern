@@ -7,10 +7,12 @@ import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.capability.IClayEnergyHolder;
 import net.kogepan.clayium.capability.IClayLaserAcceptor;
 import net.kogepan.clayium.capability.IClayLaserSource;
+import net.kogepan.clayium.items.filter.ItemFilterBase;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumBlocks;
+import net.kogepan.clayium.registries.ClayiumDataComponents;
 import net.kogepan.clayium.registries.ClayiumDataMaps;
 import net.kogepan.clayium.registries.ClayiumFeatures;
 import net.kogepan.clayium.registries.ClayiumItems;
@@ -21,6 +23,7 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.CreativeModeTabs;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -70,6 +73,7 @@ public class Clayium {
 
         ClayiumItems.ITEMS.register(modEventBus);
         ClayiumBlocks.BLOCKS.register(modEventBus);
+        ClayiumDataComponents.DATA_COMPONENTS.register(modEventBus);
         ClayiumBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
         ClayiumRecipeTypes.RECIPE_TYPES.register(modEventBus);
         ClayiumRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
@@ -107,7 +111,6 @@ public class Clayium {
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(ServerStartingEvent event) {
-        // Do something when the server starts
         LOGGER.info("HELLO from server starting");
     }
 
@@ -144,6 +147,13 @@ public class Clayium {
                     type.get(),
                     (blockEntity, side) -> blockEntity instanceof IClayLaserAcceptor acceptor ? acceptor : null);
         }
+
+        // Item filter capability for filter items
+        event.registerItem(ClayiumCapabilities.ITEM_FILTER, (stack, context) -> {
+            Item item = stack.getItem();
+            return item instanceof ItemFilterBase filterItem ? filterItem.createFilter(stack) : null;
+        }, ClayiumItems.SIMPLE_ITEM_FILTER.get(), ClayiumItems.FAZY_ITEM_FILTER.get(),
+                ClayiumItems.UNLOCALIZED_NAME_ITEM_FILTER.get());
     }
 
     public void registerDataMapTypes(RegisterDataMapTypesEvent event) {

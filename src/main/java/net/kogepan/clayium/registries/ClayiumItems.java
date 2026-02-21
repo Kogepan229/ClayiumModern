@@ -2,6 +2,9 @@ package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.items.TieredItem;
+import net.kogepan.clayium.items.filter.FazyItemFilterItem;
+import net.kogepan.clayium.items.filter.SimpleItemFilterItem;
+import net.kogepan.clayium.items.filter.UnlocalizedNameItemFilterItem;
 import net.kogepan.clayium.items.tools.ClayPickaxe;
 import net.kogepan.clayium.items.tools.ClayShovel;
 import net.kogepan.clayium.items.tools.ClayToolTiers;
@@ -196,6 +199,11 @@ public class ClayiumItems {
     public static final DeferredItem<Item> LARGE_AZ91D_ALLOY_PLATE = ITEMS.registerItem("large_az91d_alloy_plate", p -> new TieredItem(p, 6));
     public static final DeferredItem<Item> ZK60A_ALLOY_PLATE = ITEMS.registerItem("zk60a_alloy_plate", p -> new TieredItem(p, 6));
     public static final DeferredItem<Item> LARGE_ZK60A_ALLOY_PLATE = ITEMS.registerItem("large_zk60a_alloy_plate", p -> new TieredItem(p, 6));
+
+    // Item filters
+    public static final DeferredItem<Item> SIMPLE_ITEM_FILTER = ITEMS.registerItem("simple_item_filter", p -> new SimpleItemFilterItem());
+    public static final DeferredItem<Item> FAZY_ITEM_FILTER = ITEMS.registerItem("fazy_item_filter", p -> new FazyItemFilterItem());
+    public static final DeferredItem<Item> UNLOCALIZED_NAME_ITEM_FILTER = ITEMS.registerItem("unlocalized_name_item_filter", p -> new UnlocalizedNameItemFilterItem());
 
     // spotless:on
 }

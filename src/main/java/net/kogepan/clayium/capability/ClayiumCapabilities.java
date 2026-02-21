@@ -5,6 +5,7 @@ import net.kogepan.clayium.Clayium;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.capabilities.BlockCapability;
+import net.neoforged.neoforge.capabilities.ItemCapability;
 
 import org.jetbrains.annotations.Nullable;
 
@@ -12,6 +13,12 @@ import org.jetbrains.annotations.Nullable;
  * Capabilities for Clayium mod.
  */
 public final class ClayiumCapabilities {
+
+    /**
+     * Capability for item filter. Provides IItemFilter from filter items (Simple, Fuzzy, UnlocalizedName).
+     */
+    public static final ItemCapability<IItemFilter, Void> ITEM_FILTER = ItemCapability
+            .createVoid(ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "item_filter"), IItemFilter.class);
 
     /**
      * Capability for Clay Energy Holder.
