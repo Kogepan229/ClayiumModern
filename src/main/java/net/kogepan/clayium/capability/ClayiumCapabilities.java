@@ -46,4 +46,13 @@ public final class ClayiumCapabilities {
             .createSided(
                     ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "clay_laser_acceptor"),
                     IClayLaserAcceptor.class);
+
+    /**
+     * Capability for applying item filters per face on ClayContainers.
+     * When the player uses a filter item on a block face, this capability is used to set/get the filter.
+     */
+    public static final BlockCapability<IItemFilterApplicatable, @Nullable Direction> ITEM_FILTER_APPLICATABLE = BlockCapability
+            .createSided(
+                    ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "item_filter_applicatable"),
+                    IItemFilterApplicatable.class);
 }

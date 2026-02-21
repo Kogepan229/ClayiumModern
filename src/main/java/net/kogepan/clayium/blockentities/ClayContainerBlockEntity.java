@@ -1,8 +1,12 @@
 package net.kogepan.clayium.blockentities;
 
 import net.kogepan.clayium.blockentities.trait.ClayContainerTrait;
+import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.capability.IItemFilter;
+import net.kogepan.clayium.capability.IItemFilterApplicatable;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
+import net.kogepan.clayium.inventory.FilteredItemHandler;
 import net.kogepan.clayium.inventory.MachineIOInventoryWrapper;
 import net.kogepan.clayium.utils.MachineIOMode;
 import net.kogepan.clayium.utils.MachineIOModes;
@@ -11,6 +15,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
@@ -47,6 +52,7 @@ import java.util.List;
 import java.util.Map;
 
 import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_EXPORT;
+import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_FILTER_SIDES;
 import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_IMPORT;
 
 public abstract class ClayContainerBlockEntity extends BlockEntity {
@@ -81,6 +87,8 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         } else {
             throw new RuntimeException("Invalid block!");
         }
+
+        this.addTrait(new ItemFilterHolderTrait(this));
     }
 
     public static void tick(@NotNull Level level, @NotNull BlockPos pos, @NotNull BlockState state,
@@ -183,24 +191,35 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     public IItemHandler getExposedItemHandler(@Nullable Direction side) {
         if (side == null) {
             return null;
-        } else {
-            IItemHandler inputInventory = switch (this.inputModes.getMode(side)) {
-                case FIRST -> new RangedWrapper(this.getInputInventory(), 0, 1);
-                case SECOND -> new RangedWrapper(this.getInputInventory(), 1, 2);
-                case ALL -> this.getInputInventory();
-                case CE -> null;
-                default -> null;
-            };
-
-            IItemHandler outputInventory = switch (this.outputModes.getMode(side)) {
-                case FIRST -> new RangedWrapper(this.getOutputInventory(), 0, 1);
-                case SECOND -> new RangedWrapper(this.getOutputInventory(), 1, 2);
-                case ALL -> this.getOutputInventory();
-                default -> null;
-            };
-
-            return new MachineIOInventoryWrapper(inputInventory, outputInventory);
         }
+        IItemHandler inputInventory = switch (this.inputModes.getMode(side)) {
+            case FIRST -> new RangedWrapper(this.getInputInventory(), 0, 1);
+            case SECOND -> new RangedWrapper(this.getInputInventory(), 1, 2);
+            case ALL -> this.getInputInventory();
+            case CE -> null;
+            default -> null;
+        };
+
+        IItemHandler outputInventory = switch (this.outputModes.getMode(side)) {
+            case FIRST -> new RangedWrapper(this.getOutputInventory(), 0, 1);
+            case SECOND -> new RangedWrapper(this.getOutputInventory(), 1, 2);
+            case ALL -> this.getOutputInventory();
+            default -> null;
+        };
+
+        IItemFilter filter = getFilterForSide(side);
+        if (filter != null) {
+            inputInventory = inputInventory != null ? new FilteredItemHandler(inputInventory, filter) : null;
+            outputInventory = outputInventory != null ? new FilteredItemHandler(outputInventory, filter) : null;
+        }
+
+        return new MachineIOInventoryWrapper(inputInventory, outputInventory);
+    }
+
+    @Nullable
+    private IItemFilter getFilterForSide(@NotNull Direction side) {
+        ClayContainerTrait trait = getTrait(ItemFilterHolderTrait.TRAIT_ID);
+        return trait instanceof IItemFilterApplicatable applicatable ? applicatable.getFilter(side) : null;
     }
 
     protected void invalidateItemHandlerCapability() {
@@ -277,12 +296,6 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
                 trait.loadAdditional(traitTag, provider);
             }
         }
-
-        if (this.level != null && this.level.isClientSide()) {
-            this.requestModelDataUpdate();
-            this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
-                    Block.UPDATE_NONE);
-        }
     }
 
     @Override
@@ -291,6 +304,16 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         CompoundTag tag = super.getUpdateTag(provider);
         tag.put("inputModes", this.inputModes.serializeNBT(provider));
         tag.put("outputModes", this.outputModes.serializeNBT(provider));
+
+        // Save trait data
+        for (ClayContainerTrait trait : this.traits.values()) {
+            CompoundTag traitTag = new CompoundTag();
+            trait.saveForUpdate(traitTag, provider);
+            if (!traitTag.isEmpty()) {
+                tag.put(trait.id, traitTag);
+            }
+        }
+
         return tag;
     }
 
@@ -301,11 +324,62 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     }
 
     @Override
+    public void handleUpdateTag(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
+        super.handleUpdateTag(tag, provider);
+
+        if (tag.isEmpty()) return;
+
+        onReceivePacket(tag, provider);
+    }
+
+    @Override
+    public void onDataPacket(@NotNull Connection net, @NotNull ClientboundBlockEntityDataPacket pkt,
+                             @NotNull HolderLookup.Provider provider) {
+        super.onDataPacket(net, pkt, provider);
+
+        CompoundTag tag = pkt.getTag();
+        if (tag.isEmpty()) return;
+
+        onReceivePacket(tag, provider);
+    }
+
+    protected void onReceivePacket(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
+        if (tag.contains("inputModes")) {
+            this.inputModes.deserializeNBT(provider, tag.getCompound("inputModes"));
+        }
+        if (tag.contains("outputModes")) {
+            this.outputModes.deserializeNBT(provider, tag.getCompound("outputModes"));
+        }
+
+        // Load trait data
+        for (ClayContainerTrait trait : this.traits.values()) {
+            if (tag.contains(trait.id)) {
+                CompoundTag traitTag = tag.getCompound(trait.id);
+                trait.loadForUpdate(traitTag, provider);
+            }
+        }
+
+        if (this.level != null && this.level.isClientSide()) {
+            this.requestModelDataUpdate();
+            this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
+                    Block.UPDATE_NONE);
+        }
+    }
+
+    @Override
     @NotNull
     public ModelData getModelData() {
+        boolean[] filterSides = new boolean[6];
+        ClayContainerTrait trait = getTrait(ItemFilterHolderTrait.TRAIT_ID);
+        if (trait instanceof ItemFilterHolderTrait filterHolder) {
+            for (Direction d : Direction.values()) {
+                filterSides[d.ordinal()] = filterHolder.getFilter(d) != null || filterHolder.hasFilterClientOnly(d);
+            }
+        }
         return ModelData.builder()
                 .with(MODEL_DATA_IMPORT, this.inputModes)
                 .with(MODEL_DATA_EXPORT, this.outputModes)
+                .with(MODEL_DATA_FILTER_SIDES, filterSides)
                 .build();
     }
 

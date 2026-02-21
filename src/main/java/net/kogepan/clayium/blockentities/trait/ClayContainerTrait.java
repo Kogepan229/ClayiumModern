@@ -29,4 +29,8 @@ public abstract class ClayContainerTrait {
     public void saveAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {}
 
     public void loadAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {}
+
+    public void saveForUpdate(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {}
+
+    public void loadForUpdate(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {}
 }

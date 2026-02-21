@@ -21,11 +21,14 @@ public class ModelTextures {
     private static final ResourceLocation OVERLAY_IMPORT_ALL = Clayium.id("block/overlay/import_all");
     private static final ResourceLocation OVERLAY_IMPORT_CE = Clayium.id("block/overlay/import_ce");
     private static final ResourceLocation OVERLAY_EXPORT_ALL = Clayium.id("block/overlay/export_all");
+    private static final ResourceLocation OVERLAY_FILTER = Clayium.id("block/overlay/filter");
 
     private static final Map<MachineIOMode, @Nullable TextureAtlasSprite> OVERLAY_IMPORT_SPRITES = new EnumMap<>(
             MachineIOMode.class);
     private static final Map<MachineIOMode, @Nullable TextureAtlasSprite> OVERLAY_EXPORT_SPRITES = new EnumMap<>(
             MachineIOMode.class);
+    @Nullable
+    private static TextureAtlasSprite OVERLAY_FILTER_SPRITE;
 
     @Nullable
     public static ResourceLocation getOverlayImport(MachineIOMode mode) {
@@ -83,6 +86,7 @@ public class ModelTextures {
                 OVERLAY_EXPORT_SPRITES.put(mode, atlas.getSprite(overlayExport));
             }
         }
+        OVERLAY_FILTER_SPRITE = atlas.getSprite(OVERLAY_FILTER);
     }
 
     @Nullable
@@ -93,5 +97,13 @@ public class ModelTextures {
     @Nullable
     public static TextureAtlasSprite getOverlayExportSprite(MachineIOMode mode) {
         return OVERLAY_EXPORT_SPRITES.get(mode);
+    }
+
+    /**
+     * Sprite for the "filter applied" overlay on container faces (block/overlay/filter.png).
+     */
+    @Nullable
+    public static TextureAtlasSprite getFilterOverlaySprite() {
+        return OVERLAY_FILTER_SPRITE;
     }
 }

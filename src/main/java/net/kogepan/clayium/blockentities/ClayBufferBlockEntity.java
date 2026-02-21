@@ -1,8 +1,12 @@
 package net.kogepan.clayium.blockentities;
 
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
+import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.capability.IItemFilter;
+import net.kogepan.clayium.capability.IItemFilterApplicatable;
 import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
+import net.kogepan.clayium.inventory.FilteredItemHandler;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.utils.MachineIOMode;
 
@@ -74,6 +78,14 @@ public class ClayBufferBlockEntity extends ClayContainerBlockEntity {
     @Override
     @Nullable
     public IItemHandler getExposedItemHandler(@Nullable Direction side) {
+        if (side == null) {
+            return null;
+        }
+        var trait = getTrait(ItemFilterHolderTrait.TRAIT_ID);
+        IItemFilter filter = trait instanceof IItemFilterApplicatable a ? a.getFilter(side) : null;
+        if (filter != null) {
+            return new FilteredItemHandler(this.itemInventory, filter);
+        }
         return this.itemInventory;
     }
 

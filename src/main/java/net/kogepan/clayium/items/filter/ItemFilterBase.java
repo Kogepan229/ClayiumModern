@@ -1,15 +1,18 @@
 package net.kogepan.clayium.items.filter;
 
+import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.capability.IItemFilter;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 
 import com.lowdragmc.lowdraglib2.gui.factory.HeldItemUIMenuType;
@@ -49,6 +52,34 @@ public abstract class ItemFilterBase extends Item implements HeldItemUIMenuType.
 
     protected boolean hasCopyFlag(@NotNull ItemStack stack) {
         return FilterItemHelper.hasCopyFlag(stack);
+    }
+
+    @Override
+    public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
+        if (context.getLevel().isClientSide()) {
+            return InteractionResult.SUCCESS;
+        }
+        var cap = ClayiumCapabilities.ITEM_FILTER_APPLICATABLE.getCapability(
+                context.getLevel(),
+                context.getClickedPos(),
+                context.getLevel().getBlockState(context.getClickedPos()),
+                context.getLevel().getBlockEntity(context.getClickedPos()),
+                context.getClickedFace());
+        if (cap == null) {
+            return InteractionResult.PASS;
+        }
+        if (hasCopyFlag(stack)) {
+            ItemStack created = cap.createFilterStack(context.getClickedFace());
+            if (created != null) {
+                FilterItemHelper.setCopyFlag(created, true);
+                context.getPlayer().setItemInHand(context.getHand(), created);
+                return InteractionResult.SUCCESS;
+            }
+        } else {
+            cap.setFilter(context.getClickedFace(), createFilter(stack), stack.copy());
+            return InteractionResult.SUCCESS;
+        }
+        return InteractionResult.PASS;
     }
 
     @Override

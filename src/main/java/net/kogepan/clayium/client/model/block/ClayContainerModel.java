@@ -36,11 +36,14 @@ public class ClayContainerModel implements IDynamicBakedModel {
             1.001f, 1.001f, 1.001f);
     private static final AABB IMPORT_OVERLAY_AABB = new AABB(-0.002f, -0.002f, -0.002f,
             1.002f, 1.002f, 1.002f);
+    private static final AABB FILTER_OVERLAY_AABB = new AABB(-0.003f, -0.003f, -0.003f,
+            1.003f, 1.003f, 1.003f);
 
     private static final ChunkRenderTypeSet RENDER_TYPES = ChunkRenderTypeSet.of(RenderType.CUTOUT);
 
     public static final ModelProperty<MachineIOModes> MODEL_DATA_IMPORT = new ModelProperty<>();
     public static final ModelProperty<MachineIOModes> MODEL_DATA_EXPORT = new ModelProperty<>();
+    public static final ModelProperty<boolean[]> MODEL_DATA_FILTER_SIDES = new ModelProperty<>();
 
     private final BakedModel baseModel;
     @Nullable
@@ -118,6 +121,18 @@ public class ClayContainerModel implements IDynamicBakedModel {
 
         renderExportOverlay(quads, exportModes, direction);
         renderImportOverlay(quads, importModes, direction);
+
+        boolean[] filterSides = modelData.get(MODEL_DATA_FILTER_SIDES);
+        if (filterSides != null && direction.ordinal() < filterSides.length && filterSides[direction.ordinal()]) {
+            renderFilterOverlay(quads, direction);
+        }
+    }
+
+    private static void renderFilterOverlay(@NotNull List<BakedQuad> quads, @NotNull Direction direction) {
+        TextureAtlasSprite overlay = ModelTextures.getFilterOverlaySprite();
+        if (overlay != null) {
+            quads.add(StaticFaceBakery.bakeFace(FILTER_OVERLAY_AABB, direction, overlay));
+        }
     }
 
     private static void renderExportOverlay(@NotNull List<BakedQuad> quads, @NotNull MachineIOModes exportModes,

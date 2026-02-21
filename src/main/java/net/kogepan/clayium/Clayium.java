@@ -3,10 +3,12 @@ package net.kogepan.clayium;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CreativeCESourceBlockEntity;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
+import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
 import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.capability.IClayEnergyHolder;
 import net.kogepan.clayium.capability.IClayLaserAcceptor;
 import net.kogepan.clayium.capability.IClayLaserSource;
+import net.kogepan.clayium.capability.IItemFilterApplicatable;
 import net.kogepan.clayium.items.filter.ItemFilterBase;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
@@ -128,6 +130,15 @@ public class Clayium {
                         ClayContainerBlockEntity container = (ClayContainerBlockEntity) blockEntity;
                         var trait = container.getTrait(ClayEnergyHolder.TRAIT_ID);
                         return trait instanceof IClayEnergyHolder ? (IClayEnergyHolder) trait : null;
+                    });
+
+            event.registerBlockEntity(
+                    ClayiumCapabilities.ITEM_FILTER_APPLICATABLE,
+                    type.get(),
+                    (blockEntity, side) -> {
+                        ClayContainerBlockEntity container = (ClayContainerBlockEntity) blockEntity;
+                        var trait = container.getTrait(ItemFilterHolderTrait.TRAIT_ID);
+                        return trait instanceof IItemFilterApplicatable a ? a : null;
                     });
         }
 
