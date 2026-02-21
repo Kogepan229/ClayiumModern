@@ -111,6 +111,23 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
                 .layout(layout -> layout.marginTop(12).flexDirection(YogaFlexDirection.ROW)
                         .setJustifyContent(YogaJustify.CENTER));
 
+        centerUI.layout(layout -> layout.marginBottom(4).alignItems(YogaAlign.CENTER))
+                .addChild(createInputSlots())
+                .addChild(this.recipeLogic.createProgressUIElement().layout(layout -> layout.marginHorizontal(8)))
+                .addChild(createOutputSlots());
+
+        UIElement mainUI = new UIElement();
+        mainUI.addChild(centerUI);
+        if (this.tier < 3) {
+            mainUI.addChild(new UIElement().layout(layout -> layout.height(0).alignItems(YogaAlign.CENTER))
+                    .addChild(this.energyHolder.createEnergyButtonElement()));
+        }
+        mainUI.addChild(this.energyHolder.createEnergyTextUIElement().textStyle(style -> style.adaptiveWidth(true)));
+
+        root.addChild(mainUI);
+    }
+
+    protected UIElement createInputSlots() {
         UIElement inputSlotContainer = new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW));
         if (this.inputItemInventory.getSlots() == 1) {
             inputSlotContainer.addChild(new ItemSlot().bind(new ItemHandlerSlot(this.inputItemInventory, 0)));
@@ -120,7 +137,10 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
             inputSlotContainer.addChild(new ItemSlot().bind(new ItemHandlerSlot(this.inputItemInventory, 1))
                     .style(style -> style.backgroundTexture(SlotTextures.INPUT_SLOT_2)));
         }
+        return inputSlotContainer;
+    }
 
+    protected UIElement createOutputSlots() {
         UIElement outputSlotContainer = new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW));
         if (this.outputItemInventory.getSlots() == 1) {
             outputSlotContainer.addChild(
@@ -133,20 +153,6 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
                     new ItemSlot().bind(new ItemHandlerSlot(this.outputItemInventory, 1).setCanPlace((s) -> false))
                             .style(style -> style.backgroundTexture(SlotTextures.OUTPUT_SLOT_2)));
         }
-
-        centerUI.layout(layout -> layout.marginBottom(4))
-                .addChild(inputSlotContainer)
-                .addChild(this.recipeLogic.createProgressUIElement().layout(layout -> layout.marginHorizontal(8)))
-                .addChild(outputSlotContainer);
-
-        UIElement mainUI = new UIElement();
-        mainUI.addChild(centerUI);
-        if (this.tier < 3) {
-            mainUI.addChild(new UIElement().layout(layout -> layout.height(0).alignItems(YogaAlign.CENTER))
-                    .addChild(this.energyHolder.createEnergyButtonElement()));
-        }
-        mainUI.addChild(this.energyHolder.createEnergyTextUIElement().textStyle(style -> style.adaptiveWidth(true)));
-
-        root.addChild(mainUI);
+        return outputSlotContainer;
     }
 }

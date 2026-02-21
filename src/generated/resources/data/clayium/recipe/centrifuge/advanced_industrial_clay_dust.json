@@ -1,0 +1,33 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000,
+  "duration": 12,
+  "inputs": [
+    {
+      "amount": 2,
+      "ingredient": {
+        "item": "clayium:advanced_industrial_clay_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 64,
+      "id": "clayium:energized_clay_dust"
+    },
+    {
+      "count": 64,
+      "id": "clayium:clay_dust"
+    },
+    {
+      "count": 64,
+      "id": "clayium:dense_clay_dust"
+    },
+    {
+      "count": 12,
+      "id": "clayium:industrial_clay_dust"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:centrifuge"
+}

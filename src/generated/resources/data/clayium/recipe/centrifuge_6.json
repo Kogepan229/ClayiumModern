@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "clayium:machine_hull_6"
+    },
+    "*": {
+      "item": "clayium:dense_clay_gear"
+    },
+    "o": {
+      "item": "clayium:dense_clay_spindle"
+    }
+  },
+  "pattern": [
+    "*o*",
+    "o#o",
+    "*o*"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:centrifuge_6"
+  }
+}

@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-21T00:50:36.93635162	Item Models: clayium
+// 1.21.1	2026-02-21T12:07:29.903411949	Item Models: clayium
 99062d5c019a425dbcc8fc7c8fad74fe2e568b88 assets/clayium/models/item/advanced_circuit.json
 b053cb23d79938f5988a137a12fa465fef616833 assets/clayium/models/item/advanced_industrial_clay_dust.json
 a849708aabf7090c02ef1ae2c9565dd40fb618ce assets/clayium/models/item/advanced_industrial_clay_plate.json
@@ -13,6 +13,7 @@ d08a7d9b0b034810fb0d189d29dab6450fd74dc8 assets/clayium/models/item/advanced_ind
 03bc045bdaf16acca33b4fab04f9470122c1ebd0 assets/clayium/models/item/az91d_alloy_ingot.json
 30052ef2299a06fee6bdff0ea34288df1197fe1b assets/clayium/models/item/az91d_alloy_plate.json
 ef64bf5a06acc87a14250638799362ac5f23da0b assets/clayium/models/item/basic_circuit.json
+4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/calcareous_clay_dust.json
 db9800b9b5dd558343ae744a60540d9e96098158 assets/clayium/models/item/cee_board.json
 5950494a482fda1711fcb0246eefeb108f486e67 assets/clayium/models/item/cee_circuit.json
 18b6492022cbb7ccc97064a8692e16211ec88d5b assets/clayium/models/item/clay_anima.json
@@ -109,6 +110,8 @@ b7891ff66c8fbc73e97983a7362a5293cba41915 assets/clayium/models/item/large_indust
 99bb655e45a7857bc0c447e4cd1d2a0b5e109e6e assets/clayium/models/item/large_silicone_plate.json
 99bb655e45a7857bc0c447e4cd1d2a0b5e109e6e assets/clayium/models/item/large_ultimate_alloy_plate.json
 99bb655e45a7857bc0c447e4cd1d2a0b5e109e6e assets/clayium/models/item/large_zk60a_alloy_plate.json
+4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/lithium_dust.json
+4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/manganese_dust.json
 30052ef2299a06fee6bdff0ea34288df1197fe1b assets/clayium/models/item/octuple_energetic_clay_plate.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/octuple_pure_antimatter_dust.json
 30052ef2299a06fee6bdff0ea34288df1197fe1b assets/clayium/models/item/octuple_pure_antimatter_plate.json
@@ -132,6 +135,7 @@ f248316958024cb37e296db923a8deca48400b4b assets/clayium/models/item/raw_clay_spa
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/ultimate_alloy_dust.json
 03bc045bdaf16acca33b4fab04f9470122c1ebd0 assets/clayium/models/item/ultimate_alloy_ingot.json
 30052ef2299a06fee6bdff0ea34288df1197fe1b assets/clayium/models/item/ultimate_alloy_plate.json
+4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/zirconium_dust.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/zk60a_alloy_dust.json
 03bc045bdaf16acca33b4fab04f9470122c1ebd0 assets/clayium/models/item/zk60a_alloy_ingot.json
 30052ef2299a06fee6bdff0ea34288df1197fe1b assets/clayium/models/item/zk60a_alloy_plate.json

@@ -2,6 +2,7 @@ package net.kogepan.clayium.datagen.recipes;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.registries.ClayiumBlocks;
+import net.kogepan.clayium.registries.ClayiumItems;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -30,6 +31,7 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         MillingMachineRecipeProvider.buildRecipes(recipeOutput);
         ClayCondenserRecipeProvider.buildRecipes(recipeOutput);
         GrinderRecipeProvider.buildRecipes(recipeOutput);
+        CentrifugeRecipeProvider.buildRecipes(recipeOutput);
         DecomposerRecipeProvider.buildRecipes(recipeOutput);
         InscriberRecipeProvider.buildRecipes(recipeOutput);
         SmelterRecipeProvider.buildRecipes(recipeOutput);
@@ -54,5 +56,18 @@ public class ClayiumRecipeProvider extends RecipeProvider {
                 .define('Q', Items.QUARTZ)
                 .unlockedBy("has_quartz", has(Items.QUARTZ))
                 .save(recipeOutput, Clayium.id("quartz_crucible"));
+
+        // Centrifuge (tiers 3, 4, 5, 6): *o* / o#o / *o* — # = machine hull, o = spindle, * = gear
+        for (int tier : new int[] { 3, 4, 5, 6 }) {
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.CENTRIFUGE_BLOCKS.get(tier).get())
+                    .pattern("*o*")
+                    .pattern("o#o")
+                    .pattern("*o*")
+                    .define('#', ClayiumBlocks.MACHINE_HULLS.get(tier).get())
+                    .define('o', ClayiumItems.DENSE_CLAY_SPINDLE.get())
+                    .define('*', ClayiumItems.DENSE_CLAY_GEAR.get())
+                    .unlockedBy("has_machine_hull", has(ClayiumBlocks.MACHINE_HULLS.get(tier).get()))
+                    .save(recipeOutput, Clayium.id("centrifuge_" + tier));
+        }
     }
 }

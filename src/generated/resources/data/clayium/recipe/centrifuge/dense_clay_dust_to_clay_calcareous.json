@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 4,
+  "duration": 20,
+  "inputs": [
+    {
+      "amount": 2,
+      "ingredient": {
+        "item": "clayium:dense_clay_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 9,
+      "id": "clayium:clay_dust"
+    },
+    {
+      "count": 1,
+      "id": "clayium:calcareous_clay_dust"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:centrifuge"
+}

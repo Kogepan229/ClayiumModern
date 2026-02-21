@@ -1,0 +1,32 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000,
+  "duration": 400,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:clay_log"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 16,
+      "id": "clayium:advanced_industrial_clay_dust"
+    },
+    {
+      "count": 5,
+      "id": "clayium:manganese_dust"
+    },
+    {
+      "count": 3,
+      "id": "clayium:lithium_dust"
+    },
+    {
+      "count": 1,
+      "id": "clayium:zirconium_dust"
+    }
+  ],
+  "recipe_tier": 6,
+  "recipe_type": "clayium:centrifuge"
+}

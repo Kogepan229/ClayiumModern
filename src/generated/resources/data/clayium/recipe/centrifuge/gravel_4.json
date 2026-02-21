@@ -1,0 +1,21 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 2,
+  "duration": 2,
+  "inputs": [
+    {
+      "amount": 4,
+      "ingredient": {
+        "item": "minecraft:gravel"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 4,
+      "id": "clayium:compressed_clay_0"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:centrifuge"
+}

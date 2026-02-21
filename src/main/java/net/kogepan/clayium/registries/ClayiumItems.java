@@ -110,6 +110,7 @@ public class ClayiumItems {
     public static final DeferredItem<Item> LARGE_ADVANCED_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("large_advanced_industrial_clay_plate", p -> new TieredItem(p, 4));
 
     // Material dusts (3-layer tinted; grinder output from ingots)
+    public static final DeferredItem<Item> CALCAREOUS_CLAY_DUST = ITEMS.registerItem("calcareous_clay_dust", p -> new TieredItem(p, 1));
     public static final DeferredItem<Item> IMPURE_SILICON_DUST = ITEMS.registerItem("impure_silicon_dust", p -> new TieredItem(p, 5));
     public static final DeferredItem<Item> SILICON_DUST = ITEMS.registerItem("silicon_dust", p -> new TieredItem(p, 5));
     public static final DeferredItem<Item> SILICONE_DUST = ITEMS.registerItem("silicone_dust", p -> new TieredItem(p, 5));
@@ -120,6 +121,9 @@ public class ClayiumItems {
     public static final DeferredItem<Item> ULTIMATE_ALLOY_DUST = ITEMS.registerItem("ultimate_alloy_dust", p -> new TieredItem(p, 9));
     public static final DeferredItem<Item> AZ91D_ALLOY_DUST = ITEMS.registerItem("az91d_alloy_dust", p -> new TieredItem(p, 6));
     public static final DeferredItem<Item> ZK60A_ALLOY_DUST = ITEMS.registerItem("zk60a_alloy_dust", p -> new TieredItem(p, 6));
+    public static final DeferredItem<Item> MANGANESE_DUST = ITEMS.registerItem("manganese_dust", p -> new TieredItem(p, 6));
+    public static final DeferredItem<Item> LITHIUM_DUST = ITEMS.registerItem("lithium_dust", p -> new TieredItem(p, 6));
+    public static final DeferredItem<Item> ZIRCONIUM_DUST = ITEMS.registerItem("zirconium_dust", p -> new TieredItem(p, 6));
 
     // Antimatter dust (3-layer tinted)
     public static final DeferredItem<Item> ANTIMATTER_DUST = ITEMS.registerItem("antimatter_dust", Item::new);
