@@ -1,8 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "clayium:item/dust_base",
-    "layer1": "clayium:item/dust_dark",
-    "layer2": "clayium:item/dust_light"
+    "layer0": "clayium:item/calcareous_clay_dust"
   }
 }

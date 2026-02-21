@@ -75,12 +75,10 @@ public final class ColoredDustTints {
         int[] ultimateAlloy = { 0xFF55CD55, 0xFF0E220E, 0xFFF5A0FF };
         int[] az91d = { 0xFF828C87, 0xFF0A280A, 0xFFFFFFFF };
         int[] zk60a = { 0xFF4B5550, 0xFF0A280A, 0xFFFFFFFF };
-        int[] calcareousClay = { 0xFFE8E0D8, 0xFFC4B8A8, 0xFFF5F0E8 };
-        int[] manganese = { 0xFF6B6B6B, 0xFF3D3D3D, 0xFF9A9A9A };
-        int[] lithium = { 0xFFC8C8C8, 0xFFA0A0A0, 0xFFE8E8E8 };
-        int[] zirconium = { 0xFFD4D4D4, 0xFFA8A8A8, 0xFFF0F0F0 };
+        int[] manganese = { 0xFFBEF0F0, 0xFF1F2828, 0xFFFFFFFF };
+        int[] lithium = { 0xFFD2D296, 0xFF787878, 0xFFFFFFFF };
+        int[] zirconium = { 0xFFBEAA7A, 0xFF787878, 0xFFFFFFFF };
 
-        register(ClayiumItems.CALCAREOUS_CLAY_DUST, calcareousClay[0], calcareousClay[1], calcareousClay[2]);
         register(ClayiumItems.MANGANESE_DUST, manganese[0], manganese[1], manganese[2]);
         register(ClayiumItems.LITHIUM_DUST, lithium[0], lithium[1], lithium[2]);
         register(ClayiumItems.ZIRCONIUM_DUST, zirconium[0], zirconium[1], zirconium[2]);
