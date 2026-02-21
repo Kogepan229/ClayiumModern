@@ -64,8 +64,9 @@ public final class ColoredDustTints {
         register(ClayiumItems.OCTUPLE_PURE_ANTIMATTER_DUST, octuplePureAntimatter[0], octuplePureAntimatter[1],
                 octuplePureAntimatter[2]);
 
-        // Material dusts (same colors as corresponding plates in ColoredPlateTints)
-        int[] impureSilicon = { 0xFF281C28, 0xFF060406, 0xFFFFFFFF };
+        // Material dusts (Original: CMaterials IMPURE_SILICON 151,143,152 / 83,55,100 / 169,165,165)
+        int[] impureSilicon = { 0xFF978F98, 0xFF533764, 0xFFA9A5A5 };
+        // Silicon (Original: 40,28,40 and 255,255,255 for layer 2; dark from plate style)
         int[] silicon = { 0xFF281C28, 0xFF060406, 0xFFFFFFFF };
         int[] silicone = { 0xFFD2D2D2, 0xFFB4B4B4, 0xFFF0F0F0 };
         int[] aluminium = { 0xFFBEC8CA, 0xFF1F2121, 0xFFFFFFFF };
@@ -92,5 +93,11 @@ public final class ColoredDustTints {
         register(ClayiumItems.ULTIMATE_ALLOY_DUST, ultimateAlloy[0], ultimateAlloy[1], ultimateAlloy[2]);
         register(ClayiumItems.AZ91D_ALLOY_DUST, az91d[0], az91d[1], az91d[2]);
         register(ClayiumItems.ZK60A_ALLOY_DUST, zk60a[0], zk60a[1], zk60a[2]);
+
+        // Chemical reactor dusts (Original: ImpureRedstone 151,70,70; ImpureGlowstone 151,151,70)
+        int[] impureRedstone = { 0xFF974646, 0xFF3D1E1E, 0xFFCC6666 };
+        int[] impureGlowstone = { 0xFF979746, 0xFF3D3D1E, 0xFFCCCC66 };
+        register(ClayiumItems.IMPURE_REDSTONE_DUST, impureRedstone[0], impureRedstone[1], impureRedstone[2]);
+        register(ClayiumItems.IMPURE_GLOWSTONE_DUST, impureGlowstone[0], impureGlowstone[1], impureGlowstone[2]);
     }
 }

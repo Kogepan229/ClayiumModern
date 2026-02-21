@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100,
+  "duration": 120,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:sodium_carbonate_dust"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:clay_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:quartz_dust"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:chemical_reactor"
+}

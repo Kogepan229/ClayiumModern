@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000000,
+  "duration": 1,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:quartz_dust"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:industrial_clay_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:impure_silicon_ingot"
+    }
+  ],
+  "recipe_tier": 8,
+  "recipe_type": "clayium:chemical_reactor"
+}

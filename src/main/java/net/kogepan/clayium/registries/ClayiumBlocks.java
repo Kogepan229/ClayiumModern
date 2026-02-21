@@ -13,6 +13,7 @@ import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
 import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.CentrifugeBlock;
+import net.kogepan.clayium.blocks.machine.ChemicalReactorBlock;
 import net.kogepan.clayium.blocks.machine.ClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.ClayLaserBlock;
 import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
@@ -256,6 +257,15 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("centrifuge", i, CentrifugeBlock::new));
         }
         CENTRIFUGE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CHEMICAL_REACTOR_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i : new int[] { 4, 5, 8 }) {
+            map.put(i, registerTiered("chemical_reactor", i, ChemicalReactorBlock::new));
+        }
+        CHEMICAL_REACTOR_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> DECOMPOSER_BLOCKS;

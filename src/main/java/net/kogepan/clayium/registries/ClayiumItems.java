@@ -111,6 +111,12 @@ public class ClayiumItems {
 
     // Material dusts (3-layer tinted; grinder output from ingots)
     public static final DeferredItem<Item> CALCAREOUS_CLAY_DUST = ITEMS.registerItem("calcareous_clay_dust", p -> new TieredItem(p, 1));
+    public static final DeferredItem<Item> SALT_DUST = ITEMS.registerItem("salt_dust", p -> new TieredItem(p, 4));
+    public static final DeferredItem<Item> SODIUM_CARBONATE_DUST = ITEMS.registerItem("sodium_carbonate_dust", p -> new TieredItem(p, 4));
+    public static final DeferredItem<Item> CALCIUM_CHLORIDE_DUST = ITEMS.registerItem("calcium_chloride_dust", p -> new TieredItem(p, 4));
+    public static final DeferredItem<Item> QUARTZ_DUST = ITEMS.registerItem("quartz_dust", p -> new TieredItem(p, 4));
+    public static final DeferredItem<Item> IMPURE_REDSTONE_DUST = ITEMS.registerItem("impure_redstone_dust", Item::new);
+    public static final DeferredItem<Item> IMPURE_GLOWSTONE_DUST = ITEMS.registerItem("impure_glowstone_dust", Item::new);
     public static final DeferredItem<Item> IMPURE_SILICON_DUST = ITEMS.registerItem("impure_silicon_dust", p -> new TieredItem(p, 5));
     public static final DeferredItem<Item> SILICON_DUST = ITEMS.registerItem("silicon_dust", p -> new TieredItem(p, 5));
     public static final DeferredItem<Item> SILICONE_DUST = ITEMS.registerItem("silicone_dust", p -> new TieredItem(p, 5));

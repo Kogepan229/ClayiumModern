@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_machine_hull": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clayium:machine_hull_8"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayium:chemical_reactor_8"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_machine_hull"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayium:chemical_reactor_8"
+    ]
+  }
+}

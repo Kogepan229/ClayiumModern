@@ -61,6 +61,8 @@ public class XEIMachineRecipeCategory {
                 ClayiumBlocks.GRINDER_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.CENTRIFUGE_RECIPE_TYPE,
                 ClayiumBlocks.CENTRIFUGE_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.CHEMICAL_REACTOR_RECIPE_TYPE,
+                ClayiumBlocks.CHEMICAL_REACTOR_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.DECOMPOSER_RECIPE_TYPE,
                 ClayiumBlocks.DECOMPOSER_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.INSCRIBER_RECIPE_TYPE,

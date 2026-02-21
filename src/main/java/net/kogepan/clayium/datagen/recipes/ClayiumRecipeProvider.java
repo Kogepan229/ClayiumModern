@@ -32,6 +32,7 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         ClayCondenserRecipeProvider.buildRecipes(recipeOutput);
         GrinderRecipeProvider.buildRecipes(recipeOutput);
         CentrifugeRecipeProvider.buildRecipes(recipeOutput);
+        ChemicalReactorRecipeProvider.buildRecipes(recipeOutput);
         DecomposerRecipeProvider.buildRecipes(recipeOutput);
         InscriberRecipeProvider.buildRecipes(recipeOutput);
         SmelterRecipeProvider.buildRecipes(recipeOutput);
@@ -68,6 +69,19 @@ public class ClayiumRecipeProvider extends RecipeProvider {
                     .define('*', ClayiumItems.DENSE_CLAY_GEAR.get())
                     .unlockedBy("has_machine_hull", has(ClayiumBlocks.MACHINE_HULLS.get(tier).get()))
                     .save(recipeOutput, Clayium.id("centrifuge_" + tier));
+        }
+
+        // Chemical Reactor (tiers 4, 5, 8): *o* / o#o / *o* — # = machine hull, o = spindle, * = gear
+        for (int tier : new int[] { 4, 5, 8 }) {
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.CHEMICAL_REACTOR_BLOCKS.get(tier).get())
+                    .pattern("*o*")
+                    .pattern("o#o")
+                    .pattern("*o*")
+                    .define('#', ClayiumBlocks.MACHINE_HULLS.get(tier).get())
+                    .define('o', ClayiumItems.DENSE_CLAY_SPINDLE.get())
+                    .define('*', ClayiumItems.DENSE_CLAY_GEAR.get())
+                    .unlockedBy("has_machine_hull", has(ClayiumBlocks.MACHINE_HULLS.get(tier).get()))
+                    .save(recipeOutput, Clayium.id("chemical_reactor_" + tier));
         }
     }
 }

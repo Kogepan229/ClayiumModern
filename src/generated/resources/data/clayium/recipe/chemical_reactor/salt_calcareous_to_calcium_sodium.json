@@ -1,0 +1,30 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1000,
+  "duration": 120,
+  "inputs": [
+    {
+      "amount": 2,
+      "ingredient": {
+        "item": "clayium:salt_dust"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:calcareous_clay_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:calcium_chloride_dust"
+    },
+    {
+      "count": 1,
+      "id": "clayium:sodium_carbonate_dust"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:chemical_reactor"
+}

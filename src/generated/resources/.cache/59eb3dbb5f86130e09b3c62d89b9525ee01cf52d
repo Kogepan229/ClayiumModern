@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-21T12:07:29.90183038	Loot Tables
+// 1.21.1	2026-02-21T13:31:55.021090689	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -14,6 +14,9 @@ c818155e7c293fdc6a788a3e929ae077e2e72fe2 data/clayium/loot_table/blocks/centrifu
 9457bca3a3bef4a2b626157f7af23d663f87e27d data/clayium/loot_table/blocks/centrifuge_4.json
 a53371318348338c8fa2dc067c91f25f7f1a43bc data/clayium/loot_table/blocks/centrifuge_5.json
 6baa76b601046f54edfc3c771e774a7b8c9c1633 data/clayium/loot_table/blocks/centrifuge_6.json
+f01173e402ea50f53529a96db0122ec6c69812f9 data/clayium/loot_table/blocks/chemical_reactor_4.json
+7e88e0196663dc5b5f02f02e2d16a015bdac6e84 data/clayium/loot_table/blocks/chemical_reactor_5.json
+118ac81472fff6e2bf193e56290cb8eb82ca8932 data/clayium/loot_table/blocks/chemical_reactor_8.json
 9f3c35edecf0b9d1ed8b90ab32d694cbc7204a10 data/clayium/loot_table/blocks/clay_buffer_10.json
 b396fbc44931e314a2c528e0769700b2629fb13d data/clayium/loot_table/blocks/clay_buffer_11.json
 0e026cfbd51f79add9fd0b3d54b9fb66eb1d1d8b data/clayium/loot_table/blocks/clay_buffer_12.json

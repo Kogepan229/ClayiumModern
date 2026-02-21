@@ -9,6 +9,7 @@ import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CentrifugeBlockEntity;
+import net.kogepan.clayium.blockentities.machine.ChemicalReactorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayLaserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CobblestoneGeneratorBlockEntity;
@@ -181,6 +182,16 @@ public class ClayiumBlockEntityTypes {
                         .map(DeferredHolder::get).toList());
                 return BlockEntityType.Builder
                         .of(CentrifugeBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChemicalReactorBlockEntity>> CHEMICAL_REACTOR_BLOCK_ENTITY = registerClayContainer(
+            "chemical_reactor_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.CHEMICAL_REACTOR_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(ChemicalReactorBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
 
