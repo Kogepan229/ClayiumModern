@@ -88,6 +88,12 @@ An unofficial 1.21.1 port of Clayium.
     ordering="NONE"
     side="BOTH"
 
+[[dependencies.${mod_id}]]
+    modId="ldlib2"
+    type="required"
+    versionRange="[2.2.1,)"
+    side="BOTH"
+
 # Optional Jade integration (tooltip for laser energy)
 [[dependencies.${mod_id}]]
     modId="jade"
