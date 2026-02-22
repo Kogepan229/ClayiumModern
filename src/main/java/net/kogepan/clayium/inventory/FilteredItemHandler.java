@@ -1,6 +1,6 @@
 package net.kogepan.clayium.inventory;
 
-import net.kogepan.clayium.capability.IItemFilter;
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 
 import net.minecraft.world.item.ItemStack;
 import net.neoforged.neoforge.items.IItemHandler;
@@ -8,15 +8,15 @@ import net.neoforged.neoforge.items.IItemHandler;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Wraps an IItemHandler and applies an IItemFilter to insert, extract, and isItemValid.
+ * Wraps an IItemHandler and applies a ItemFilterData to insert, extract, and isItemValid.
  * Only stacks that pass the filter are allowed through.
  */
 public class FilteredItemHandler implements IItemHandler {
 
     private final IItemHandler delegate;
-    private final IItemFilter filter;
+    private final ItemFilterData filter;
 
-    public FilteredItemHandler(@NotNull IItemHandler delegate, @NotNull IItemFilter filter) {
+    public FilteredItemHandler(@NotNull IItemHandler delegate, @NotNull ItemFilterData filter) {
         this.delegate = delegate;
         this.filter = filter;
     }

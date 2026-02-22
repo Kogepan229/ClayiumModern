@@ -1,7 +1,7 @@
 package net.kogepan.clayium.items.filter;
 
-import net.kogepan.clayium.capability.IItemFilter;
-import net.kogepan.clayium.capability.filter.UnlocalizedNameItemFilter;
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
+import net.kogepan.clayium.capability.filter.data.UnlocalizedNameFilterData;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 
 import net.minecraft.world.item.ItemStack;
@@ -30,9 +30,8 @@ public class UnlocalizedNameItemFilterItem extends ItemFilterBase {
 
     @Override
     @NotNull
-    public IItemFilter createFilter(@NotNull ItemStack stack) {
-        String filterString = FilterItemHelper.getFilterString(stack);
-        return new UnlocalizedNameItemFilter(filterString);
+    public ItemFilterData createFilterData(@NotNull ItemStack stack) {
+        return UnlocalizedNameFilterData.fromStack(stack);
     }
 
     @Override

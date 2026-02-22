@@ -1,6 +1,8 @@
 package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
+import net.kogepan.clayium.capability.filter.data.ItemFilterDataCodecs;
 import net.kogepan.clayium.items.filter.component.FilterSlotsData;
 
 import net.minecraft.core.component.DataComponentType;
@@ -45,6 +47,13 @@ public class ClayiumDataComponents {
                     () -> DataComponentType.<Boolean>builder()
                             .persistent(Codec.BOOL)
                             .networkSynchronized(ByteBufCodecs.BOOL)
+                            .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemFilterData>> FILTER_COPIED_DATA = DATA_COMPONENTS
+            .register("filter_copied_data",
+                    () -> DataComponentType.<ItemFilterData>builder()
+                            .persistent(ItemFilterDataCodecs
+                                    .dispatchCodec(ClayiumFilterTypes.FILTER_TYPES.getRegistry().get()))
                             .build());
 
     private ClayiumDataComponents() {}

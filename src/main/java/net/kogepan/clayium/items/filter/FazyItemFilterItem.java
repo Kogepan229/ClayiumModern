@@ -1,7 +1,7 @@
 package net.kogepan.clayium.items.filter;
 
-import net.kogepan.clayium.capability.IItemFilter;
-import net.kogepan.clayium.capability.filter.FuzzyItemFilter;
+import net.kogepan.clayium.capability.filter.data.FuzzyFilterData;
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.client.ldlib.elements.PhantomItemSlot;
 
@@ -34,9 +34,8 @@ public class FazyItemFilterItem extends ItemFilterBase {
 
     @Override
     @NotNull
-    public IItemFilter createFilter(@NotNull ItemStack stack) {
-        List<ItemStack> stacks = FilterItemHelper.readItems(stack);
-        return new FuzzyItemFilter(stacks);
+    public ItemFilterData createFilterData(@NotNull ItemStack stack) {
+        return FuzzyFilterData.fromStack(stack);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package net.kogepan.clayium.capability;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
@@ -15,10 +16,11 @@ import org.jetbrains.annotations.Nullable;
 public final class ClayiumCapabilities {
 
     /**
-     * Capability for item filter. Provides IItemFilter from filter items (Simple, Fuzzy, UnlocalizedName).
+     * Capability for serializable item filter data, used when applying filters to ClayContainer sides.
      */
-    public static final ItemCapability<IItemFilter, Void> ITEM_FILTER = ItemCapability
-            .createVoid(ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "item_filter"), IItemFilter.class);
+    public static final ItemCapability<ItemFilterData, Void> ITEM_FILTER_DATA = ItemCapability
+            .createVoid(ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "item_filter_data"),
+                    ItemFilterData.class);
 
     /**
      * Capability for Clay Energy Holder.

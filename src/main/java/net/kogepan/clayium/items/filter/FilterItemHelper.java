@@ -1,11 +1,13 @@
 package net.kogepan.clayium.items.filter;
 
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 import net.kogepan.clayium.items.filter.component.FilterSlotsData;
 import net.kogepan.clayium.registries.ClayiumDataComponents;
 
 import net.minecraft.world.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -63,6 +65,19 @@ public final class FilterItemHelper {
             stack.set(ClayiumDataComponents.FILTER_COPY_FLAG.get(), true);
         } else {
             stack.remove(ClayiumDataComponents.FILTER_COPY_FLAG.get());
+        }
+    }
+
+    @Nullable
+    public static ItemFilterData getCopiedFilterData(@NotNull ItemStack stack) {
+        return stack.get(ClayiumDataComponents.FILTER_COPIED_DATA.get());
+    }
+
+    public static void setCopiedFilterData(@NotNull ItemStack stack, @Nullable ItemFilterData data) {
+        if (data == null) {
+            stack.remove(ClayiumDataComponents.FILTER_COPIED_DATA.get());
+        } else {
+            stack.set(ClayiumDataComponents.FILTER_COPIED_DATA.get(), data);
         }
     }
 }

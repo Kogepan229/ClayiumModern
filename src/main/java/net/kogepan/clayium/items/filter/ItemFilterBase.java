@@ -1,7 +1,6 @@
 package net.kogepan.clayium.items.filter;
 
-import net.kogepan.clayium.capability.ClayiumCapabilities;
-import net.kogepan.clayium.capability.IItemFilter;
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
@@ -18,6 +17,7 @@ import net.minecraft.world.level.Level;
 import com.lowdragmc.lowdraglib2.gui.factory.HeldItemUIMenuType;
 import com.lowdragmc.lowdraglib2.gui.ui.ModularUI;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -32,9 +32,13 @@ public abstract class ItemFilterBase extends Item implements HeldItemUIMenuType.
     }
 
     /**
-     * Creates the IItemFilter instance from the current stack state. Used by the capability provider.
+     * Creates serializable filter data from the current stack state.
+     * This is used for applying filters to container sides and persisting them without storing raw ItemStack.
      */
-    public abstract IItemFilter createFilter(@NotNull ItemStack stack);
+    @Nullable
+    public ItemFilterData createFilterData(@NotNull ItemStack stack) {
+        return null;
+    }
 
     /**
      * Creates the ModularUI for this filter item. Called when the player opens the filter GUI.
@@ -56,30 +60,7 @@ public abstract class ItemFilterBase extends Item implements HeldItemUIMenuType.
 
     @Override
     public InteractionResult onItemUseFirst(ItemStack stack, UseOnContext context) {
-        if (context.getLevel().isClientSide()) {
-            return InteractionResult.SUCCESS;
-        }
-        var cap = ClayiumCapabilities.ITEM_FILTER_APPLICATABLE.getCapability(
-                context.getLevel(),
-                context.getClickedPos(),
-                context.getLevel().getBlockState(context.getClickedPos()),
-                context.getLevel().getBlockEntity(context.getClickedPos()),
-                context.getClickedFace());
-        if (cap == null) {
-            return InteractionResult.PASS;
-        }
-        if (hasCopyFlag(stack)) {
-            ItemStack created = cap.createFilterStack(context.getClickedFace());
-            if (created != null) {
-                FilterItemHelper.setCopyFlag(created, true);
-                context.getPlayer().setItemInHand(context.getHand(), created);
-                return InteractionResult.SUCCESS;
-            }
-        } else {
-            cap.setFilter(context.getClickedFace(), createFilter(stack), stack.copy());
-            return InteractionResult.SUCCESS;
-        }
-        return InteractionResult.PASS;
+        return FilterApplyHelper.applyFilterItemOnBlock(stack, context);
     }
 
     @Override

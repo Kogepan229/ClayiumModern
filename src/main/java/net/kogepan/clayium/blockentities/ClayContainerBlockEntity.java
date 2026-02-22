@@ -3,8 +3,8 @@ package net.kogepan.clayium.blockentities;
 import net.kogepan.clayium.blockentities.trait.ClayContainerTrait;
 import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
-import net.kogepan.clayium.capability.IItemFilter;
 import net.kogepan.clayium.capability.IItemFilterApplicatable;
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.inventory.FilteredItemHandler;
 import net.kogepan.clayium.inventory.MachineIOInventoryWrapper;
@@ -207,7 +207,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
             default -> null;
         };
 
-        IItemFilter filter = getFilterForSide(side);
+        ItemFilterData filter = getFilterForSide(side);
         if (filter != null) {
             inputInventory = inputInventory != null ? new FilteredItemHandler(inputInventory, filter) : null;
             outputInventory = outputInventory != null ? new FilteredItemHandler(outputInventory, filter) : null;
@@ -217,7 +217,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     }
 
     @Nullable
-    private IItemFilter getFilterForSide(@NotNull Direction side) {
+    private ItemFilterData getFilterForSide(@NotNull Direction side) {
         ClayContainerTrait trait = getTrait(ItemFilterHolderTrait.TRAIT_ID);
         return trait instanceof IItemFilterApplicatable applicatable ? applicatable.getFilter(side) : null;
     }

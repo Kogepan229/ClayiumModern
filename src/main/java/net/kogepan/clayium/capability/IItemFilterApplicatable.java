@@ -1,7 +1,8 @@
 package net.kogepan.clayium.capability;
 
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
+
 import net.minecraft.core.Direction;
-import net.minecraft.world.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -13,26 +14,18 @@ import org.jetbrains.annotations.Nullable;
 public interface IItemFilterApplicatable {
 
     /**
-     * Sets the filter for the given face. The filter and stack are stored for persistence.
+     * Sets the filter for the given face from serializable filter data.
      *
-     * @param side        the face to apply the filter to
-     * @param filter      the filter instance (used for runtime filtering)
-     * @param filterStack copy of the filter item stack (used for persistence and createFilterStack)
+     * @param side       the face to apply the filter to
+     * @param filterData serializable filter payload used for persistence/runtime/copy
      */
-    void setFilter(@NotNull Direction side, @NotNull IItemFilter filter, @NotNull ItemStack filterStack);
+    void setFilter(@NotNull Direction side, @NotNull ItemFilterData filterData);
 
     /**
      * Returns the filter for the given face, or null if none is set.
      */
     @Nullable
-    IItemFilter getFilter(@NotNull Direction side);
-
-    /**
-     * Returns a copy of the filter stack stored for the given face, for filter duplicator use.
-     * Returns null if no filter is set for that face.
-     */
-    @Nullable
-    ItemStack createFilterStack(@NotNull Direction side);
+    ItemFilterData getFilter(@NotNull Direction side);
 
     /**
      * Clears the filter for the given face.

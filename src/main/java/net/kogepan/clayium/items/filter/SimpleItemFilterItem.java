@@ -1,7 +1,7 @@
 package net.kogepan.clayium.items.filter;
 
-import net.kogepan.clayium.capability.IItemFilter;
-import net.kogepan.clayium.capability.filter.SimpleItemFilter;
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
+import net.kogepan.clayium.capability.filter.data.SimpleFilterData;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.client.ldlib.elements.PhantomItemSlot;
 
@@ -35,10 +35,8 @@ public class SimpleItemFilterItem extends ItemFilterBase {
 
     @Override
     @NotNull
-    public IItemFilter createFilter(@NotNull ItemStack stack) {
-        List<ItemStack> stacks = FilterItemHelper.readItems(stack);
-        boolean whitelist = FilterItemHelper.getWhitelist(stack, true);
-        return new SimpleItemFilter(stacks, whitelist);
+    public ItemFilterData createFilterData(@NotNull ItemStack stack) {
+        return SimpleFilterData.fromStack(stack);
     }
 
     @Override

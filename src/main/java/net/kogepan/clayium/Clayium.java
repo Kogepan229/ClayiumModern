@@ -9,6 +9,8 @@ import net.kogepan.clayium.capability.IClayEnergyHolder;
 import net.kogepan.clayium.capability.IClayLaserAcceptor;
 import net.kogepan.clayium.capability.IClayLaserSource;
 import net.kogepan.clayium.capability.IItemFilterApplicatable;
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
+import net.kogepan.clayium.items.filter.FilterItemHelper;
 import net.kogepan.clayium.items.filter.ItemFilterBase;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
@@ -17,6 +19,7 @@ import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumDataComponents;
 import net.kogepan.clayium.registries.ClayiumDataMaps;
 import net.kogepan.clayium.registries.ClayiumFeatures;
+import net.kogepan.clayium.registries.ClayiumFilterTypes;
 import net.kogepan.clayium.registries.ClayiumItems;
 
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -80,6 +83,7 @@ public class Clayium {
         ClayiumRecipeTypes.RECIPE_TYPES.register(modEventBus);
         ClayiumRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
         ClayiumFeatures.FEATURES.register(modEventBus);
+        ClayiumFilterTypes.FILTER_TYPES.register(modEventBus);
 
         modEventBus.addListener(this::registerCapacilities);
         modEventBus.addListener(this::registerDataMapTypes);
@@ -159,10 +163,14 @@ public class Clayium {
                     (blockEntity, side) -> blockEntity instanceof IClayLaserAcceptor acceptor ? acceptor : null);
         }
 
-        // Item filter capability for filter items
-        event.registerItem(ClayiumCapabilities.ITEM_FILTER, (stack, context) -> {
+        // Serializable filter data capability for item-side persistence.
+        event.registerItem(ClayiumCapabilities.ITEM_FILTER_DATA, (stack, context) -> {
+            ItemFilterData copied = FilterItemHelper.getCopiedFilterData(stack);
+            if (copied != null) {
+                return copied;
+            }
             Item item = stack.getItem();
-            return item instanceof ItemFilterBase filterItem ? filterItem.createFilter(stack) : null;
+            return item instanceof ItemFilterBase filterItem ? filterItem.createFilterData(stack) : null;
         }, ClayiumItems.SIMPLE_ITEM_FILTER.get(), ClayiumItems.FAZY_ITEM_FILTER.get(),
                 ClayiumItems.UNLOCALIZED_NAME_ITEM_FILTER.get());
     }

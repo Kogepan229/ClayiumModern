@@ -1,15 +1,15 @@
 package net.kogepan.clayium.blockentities.trait;
 
+import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
-import net.kogepan.clayium.capability.IItemFilter;
 import net.kogepan.clayium.capability.IItemFilterApplicatable;
-import net.kogepan.clayium.items.filter.ItemFilterBase;
+import net.kogepan.clayium.capability.filter.data.ItemFilterData;
+import net.kogepan.clayium.capability.filter.data.ItemFilterDataCodecs;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 
@@ -27,8 +27,7 @@ public class ItemFilterHolderTrait extends ClayContainerTrait implements IItemFi
     private static final String FILTER_PREFIX = "filter";
     private static final String FILTER_FLAGS = "filterFlags";
 
-    private final IItemFilter[] filters = new IItemFilter[6];
-    private final ItemStack[] filterStacks = new ItemStack[6];
+    private final ItemFilterData[] filterData = new ItemFilterData[6];
 
     /**
      * Client-only: which sides have a filter (for rendering). Synced via getUpdateTag/handleUpdateTag.
@@ -37,16 +36,12 @@ public class ItemFilterHolderTrait extends ClayContainerTrait implements IItemFi
 
     public ItemFilterHolderTrait(@NotNull ClayContainerBlockEntity blockEntity) {
         super(blockEntity, TRAIT_ID);
-        for (int i = 0; i < 6; i++) {
-            filterStacks[i] = ItemStack.EMPTY;
-        }
     }
 
     @Override
-    public void setFilter(@NotNull Direction side, @NotNull IItemFilter filter, @NotNull ItemStack filterStack) {
+    public void setFilter(@NotNull Direction side, @NotNull ItemFilterData data) {
         int i = side.ordinal();
-        filters[i] = filter;
-        filterStacks[i] = filterStack.copy();
+        filterData[i] = data;
         clientFilterFlags[i] = true;
 
         blockEntity.setChanged();
@@ -60,22 +55,14 @@ public class ItemFilterHolderTrait extends ClayContainerTrait implements IItemFi
 
     @Override
     @Nullable
-    public IItemFilter getFilter(@NotNull Direction side) {
-        return filters[side.ordinal()];
-    }
-
-    @Override
-    @Nullable
-    public ItemStack createFilterStack(@NotNull Direction side) {
-        ItemStack stack = filterStacks[side.ordinal()];
-        return stack.isEmpty() ? null : stack.copy();
+    public ItemFilterData getFilter(@NotNull Direction side) {
+        return filterData[side.ordinal()];
     }
 
     @Override
     public void clearFilter(@NotNull Direction side) {
         int i = side.ordinal();
-        filters[i] = null;
-        filterStacks[i] = ItemStack.EMPTY;
+        filterData[i] = null;
         blockEntity.setChanged();
         clientFilterFlags[i] = false;
     }
@@ -87,26 +74,19 @@ public class ItemFilterHolderTrait extends ClayContainerTrait implements IItemFi
         return clientFilterFlags[side.ordinal()];
     }
 
-    /**
-     * Writes only the "has filter" flags into the given tag for client sync.
-     */
-    public void writeFilterFlagsToTag(@NotNull CompoundTag tag) {
-        byte[] flags = new byte[6];
-        for (int i = 0; i < 6; i++) {
-            flags[i] = (byte) (filters[i] != null ? 1 : 0);
-        }
-        tag.putByteArray(FILTER_FLAGS, flags);
-    }
-
     @Override
     public void saveAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
         for (int i = 0; i < 6; i++) {
-            if (filterStacks[i].isEmpty()) {
+            if (filterData[i] == null) {
                 continue;
             }
-            // ItemStack.save() returns the encoded tag; it does not write into the passed tag (Codec contract)
-            Tag stackTag = filterStacks[i].save(provider);
-            tag.put(FILTER_PREFIX + i, stackTag);
+            CompoundTag encoded = ItemFilterDataCodecs.encode(provider, filterData[i]);
+            if (encoded == null) {
+                Clayium.LOGGER.warn("Failed to save item filter at {} side {}",
+                        blockEntity.getBlockPos(), Direction.from3DDataValue(i));
+                continue;
+            }
+            tag.put(FILTER_PREFIX + i, encoded);
         }
     }
 
@@ -114,23 +94,21 @@ public class ItemFilterHolderTrait extends ClayContainerTrait implements IItemFi
     public void loadAdditional(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
         for (int i = 0; i < 6; i++) {
             String key = FILTER_PREFIX + i;
-            if (!tag.contains(key)) {
-                filters[i] = null;
-                filterStacks[i] = ItemStack.EMPTY;
+            if (!tag.contains(key, Tag.TAG_COMPOUND)) {
+                filterData[i] = null;
                 continue;
             }
-            ItemStack stack = ItemStack.parse(provider, tag.getCompound(key)).orElse(ItemStack.EMPTY);
-            filterStacks[i] = stack;
-            if (stack.isEmpty()) {
-                filters[i] = null;
-            } else if (stack.getItem() instanceof ItemFilterBase filterItem) {
-                filters[i] = filterItem.createFilter(stack);
-            } else {
-                filters[i] = null;
+            ItemFilterData decoded = ItemFilterDataCodecs.decode(provider, tag.getCompound(key));
+            if (decoded == null) {
+                Clayium.LOGGER.warn("Failed to load item filter at {} side {}",
+                        blockEntity.getBlockPos(), Direction.from3DDataValue(i));
+                filterData[i] = null;
+                continue;
             }
+            filterData[i] = decoded;
         }
         for (int i = 0; i < 6; i++) {
-            clientFilterFlags[i] = filters[i] != null;
+            clientFilterFlags[i] = filterData[i] != null;
         }
     }
 
@@ -138,7 +116,7 @@ public class ItemFilterHolderTrait extends ClayContainerTrait implements IItemFi
     public void saveForUpdate(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
         byte[] flags = new byte[6];
         for (int i = 0; i < 6; i++) {
-            flags[i] = (byte) (filters[i] != null ? 1 : 0);
+            flags[i] = (byte) (filterData[i] != null ? 1 : 0);
         }
         tag.putByteArray(FILTER_FLAGS, flags);
     }
