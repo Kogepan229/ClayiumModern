@@ -27,9 +27,9 @@ import com.lowdragmc.lowdraglib2.gui.ui.data.Horizontal;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
 import com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager;
 import com.lowdragmc.lowdraglib2.integration.xei.IngredientIO;
-import org.appliedenergistics.yoga.YogaAlign;
-import org.appliedenergistics.yoga.YogaFlexDirection;
-import org.appliedenergistics.yoga.YogaJustify;
+import dev.vfyjxf.taffy.style.AlignContent;
+import dev.vfyjxf.taffy.style.AlignItems;
+import dev.vfyjxf.taffy.style.FlexDirection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -80,7 +80,7 @@ public record ClayWorkTableRecipe(@NotNull ItemIngredientStack ingredient,
 
     private UIElement createWorkTableButton(ClayWorkTableButtonTextures.ButtonTexture texture, int index) {
         UIElement uiElement = new UIElement();
-        uiElement.layout(layout -> layout.height(16 + 9).marginTop(-9).setJustifyContent(YogaJustify.FLEX_END));
+        uiElement.layout(layout -> layout.height(16 + 9).marginTop(-9).justifyContent(AlignContent.FLEX_END));
 
         if (this.button == index) {
             uiElement.addChild(new CLabel().setText(String.valueOf(this.cost))
@@ -99,7 +99,7 @@ public record ClayWorkTableRecipe(@NotNull ItemIngredientStack ingredient,
                 .width(WIDTH)
                 .height(HEIGHT)
                 .paddingAll(6)
-                .setJustifyContent(YogaJustify.CENTER));
+                .justifyContent(AlignContent.CENTER));
 
         ItemSlotXEI toolSlot = new ItemSlotXEI();
 
@@ -111,20 +111,20 @@ public record ClayWorkTableRecipe(@NotNull ItemIngredientStack ingredient,
             case 4 -> toolSlot.xeiRecipeIngredient(IngredientIO.CATALYST, Ingredient.of(ClayiumItems.CLAY_SPATULA), 1);
         }
 
-        root.addChild(new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW).paddingHorizontal(4))
+        root.addChild(new UIElement().layout(layout -> layout.flexDirection(FlexDirection.ROW).paddingHorizontal(4))
                 .addChild(new LargeItemSlot(new ItemSlotXEI().xeiRecipeIngredient(IngredientIO.INPUT,
                         this.ingredient.getIngredient(), this.ingredient.getAmount()))
                         .layout(layout -> layout.marginTop(15)))
                 .addChild(new UIElement()
-                        .layout(layout -> layout.flexGrow(1).paddingHorizontal(0).setAlignItems(YogaAlign.CENTER))
+                        .layout(layout -> layout.flexGrow(1).paddingHorizontal(0).alignItems(AlignItems.CENTER))
                         .addChild(new UIElement()
-                                .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW)
-                                        .setJustifyContent(YogaJustify.CENTER))
+                                .layout(layout -> layout.flexDirection(FlexDirection.ROW)
+                                        .justifyContent(AlignContent.CENTER))
                                 .addChild(toolSlot))
                         .addChild(new ProgressArrow().layout(layout -> layout.width(80)))
                         .addChild(new UIElement()
-                                .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW)
-                                        .setJustifyContent(YogaJustify.CENTER).marginTop(5))
+                                .layout(layout -> layout.flexDirection(FlexDirection.ROW)
+                                        .justifyContent(AlignContent.CENTER).marginTop(5))
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON1, 0))
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON2, 1))
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON3, 2))
@@ -132,7 +132,7 @@ public record ClayWorkTableRecipe(@NotNull ItemIngredientStack ingredient,
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON5, 4))
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON6, 5))))
                 .addChild(new UIElement()
-                        .layout(layout -> layout.marginTop(15).gapAll(3).setAlignItems(YogaAlign.CENTER))
+                        .layout(layout -> layout.marginTop(15).gapAll(3).alignItems(AlignItems.CENTER))
                         .addChild(new LargeItemSlot(new ItemSlot().setItem(this.result)
                                 .xeiRecipeIngredient(IngredientIO.OUTPUT).xeiRecipeSlot()))
                         .addChild(new ItemSlot().setItem(this.byproduct).xeiRecipeIngredient(IngredientIO.OUTPUT)

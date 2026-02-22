@@ -21,10 +21,10 @@ import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
 import com.lowdragmc.lowdraglib2.gui.slot.ItemHandlerSlot;
 import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
+import dev.vfyjxf.taffy.style.AlignContent;
+import dev.vfyjxf.taffy.style.AlignItems;
+import dev.vfyjxf.taffy.style.FlexDirection;
 import lombok.Getter;
-import org.appliedenergistics.yoga.YogaAlign;
-import org.appliedenergistics.yoga.YogaFlexDirection;
-import org.appliedenergistics.yoga.YogaJustify;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -128,10 +128,10 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
     @Override
     protected void createMainUI(BlockUIMenuType.BlockUIHolder holder, UIElement root) {
         UIElement centerUI = new UIElement()
-                .layout(layout -> layout.marginTop(12).flexDirection(YogaFlexDirection.ROW)
-                        .setJustifyContent(YogaJustify.CENTER));
+                .layout(layout -> layout.marginTop(12).flexDirection(FlexDirection.ROW)
+                        .justifyContent(AlignContent.CENTER));
 
-        centerUI.layout(layout -> layout.marginBottom(4).alignItems(YogaAlign.CENTER))
+        centerUI.layout(layout -> layout.marginBottom(4).alignItems(AlignItems.CENTER))
                 .addChild(createInputSlots())
                 .addChild(this.recipeLogic.createProgressUIElement().layout(layout -> layout.marginHorizontal(8)))
                 .addChild(createOutputSlots());
@@ -139,7 +139,7 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
         UIElement mainUI = new UIElement();
         mainUI.addChild(centerUI);
         if (this.tier < 3) {
-            mainUI.addChild(new UIElement().layout(layout -> layout.height(0).alignItems(YogaAlign.CENTER))
+            mainUI.addChild(new UIElement().layout(layout -> layout.height(0).alignItems(AlignItems.CENTER))
                     .addChild(this.energyHolder.createEnergyButtonElement()));
         }
         mainUI.addChild(this.energyHolder.createEnergyTextUIElement().textStyle(style -> style.adaptiveWidth(true)));
@@ -148,7 +148,7 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
     }
 
     protected UIElement createInputSlots() {
-        UIElement inputSlotContainer = new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW));
+        UIElement inputSlotContainer = new UIElement().layout(layout -> layout.flexDirection(FlexDirection.ROW));
         if (this.inputItemInventory.getSlots() == 1) {
             inputSlotContainer.addChild(new ItemSlot().bind(new ItemHandlerSlot(this.inputItemInventory, 0)));
         } else if (this.inputItemInventory.getSlots() == 2) {
@@ -161,7 +161,7 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
     }
 
     protected UIElement createOutputSlots() {
-        UIElement outputSlotContainer = new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW));
+        UIElement outputSlotContainer = new UIElement().layout(layout -> layout.flexDirection(FlexDirection.ROW));
         if (this.outputItemInventory.getSlots() == 1) {
             outputSlotContainer.addChild(
                     new ItemSlot().bind(new ItemHandlerSlot(this.outputItemInventory, 0).setCanPlace((s) -> false)));

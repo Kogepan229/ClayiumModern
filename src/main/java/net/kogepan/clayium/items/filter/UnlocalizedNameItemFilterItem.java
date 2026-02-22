@@ -14,7 +14,7 @@ import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.TextField;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.inventory.InventorySlots;
 import com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager;
-import org.appliedenergistics.yoga.YogaJustify;
+import dev.vfyjxf.taffy.style.AlignContent;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -37,7 +37,7 @@ public class UnlocalizedNameItemFilterItem extends ItemFilterBase {
     @Override
     @NotNull
     protected ModularUI createFilterUI(HeldItemUIMenuType.HeldItemUIHolder holder) {
-        var root = new UIElement().layout(layout -> layout.paddingAll(6).setJustifyContent(YogaJustify.CENTER))
+        var root = new UIElement().layout(layout -> layout.paddingAll(6).justifyContent(AlignContent.CENTER))
                 .addClass("panel_bg");
         root.addChild(new CLabel().setText(holder.itemStack.getHoverName().getString()));
 

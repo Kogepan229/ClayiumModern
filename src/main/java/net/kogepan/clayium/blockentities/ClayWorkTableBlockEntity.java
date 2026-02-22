@@ -32,10 +32,10 @@ import com.lowdragmc.lowdraglib2.syncdata.annotation.DescSynced;
 import com.lowdragmc.lowdraglib2.syncdata.annotation.Persisted;
 import com.lowdragmc.lowdraglib2.syncdata.holder.blockentity.ISyncPersistRPCBlockEntity;
 import com.lowdragmc.lowdraglib2.syncdata.storage.FieldManagedStorage;
+import dev.vfyjxf.taffy.style.AlignContent;
+import dev.vfyjxf.taffy.style.AlignItems;
+import dev.vfyjxf.taffy.style.FlexDirection;
 import lombok.Getter;
-import org.appliedenergistics.yoga.YogaAlign;
-import org.appliedenergistics.yoga.YogaFlexDirection;
-import org.appliedenergistics.yoga.YogaJustify;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -193,26 +193,26 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
     public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
         var root = new UIElement().layout(layout -> layout
                 .paddingAll(6)
-                .setJustifyContent(YogaJustify.CENTER))
+                .justifyContent(AlignContent.CENTER))
                 .addClass("panel_bg");
         root.addChild(
                 new CLabel().setText(this.getBlockState().getBlock().getName().getString()));
-        root.addChild(new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW).paddingHorizontal(4))
+        root.addChild(new UIElement().layout(layout -> layout.flexDirection(FlexDirection.ROW).paddingHorizontal(4))
                 .addChild(new LargeItemSlot().itemSlot(slot -> slot.bind(inventory, INGREDIENT_SLOT))
                         .layout(layout -> layout.marginTop(15)))
                 .addChild(new UIElement()
-                        .layout(layout -> layout.flexGrow(1).paddingHorizontal(0).setAlignItems(YogaAlign.CENTER))
+                        .layout(layout -> layout.flexGrow(1).paddingHorizontal(0).alignItems(AlignItems.CENTER))
                         .addChild(new UIElement()
-                                .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW)
-                                        .setJustifyContent(YogaJustify.CENTER))
+                                .layout(layout -> layout.flexDirection(FlexDirection.ROW)
+                                        .justifyContent(AlignContent.CENTER))
                                 .addChild(new ItemSlot().bind(inventory, 3)))
                         .addChild(new ProgressArrow().bind(
                                 DataBindingBuilder.floatValS2C(() -> this.processingRecipeHolder != null ?
                                         (float) progress / this.processingRecipeHolder.value().cost() : 0).build())
                                 .layout(layout -> layout.width(80)))
                         .addChild(new UIElement()
-                                .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW)
-                                        .setJustifyContent(YogaJustify.CENTER).marginTop(5))
+                                .layout(layout -> layout.flexDirection(FlexDirection.ROW)
+                                        .justifyContent(AlignContent.CENTER).marginTop(5))
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON1, 0))
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON2, 1))
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON3, 2))
@@ -220,7 +220,7 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON5, 4))
                                 .addChild(createWorkTableButton(ClayWorkTableButtonTextures.BUTTON6, 5))))
                 .addChild(new UIElement()
-                        .layout(layout -> layout.marginTop(15).gapAll(3).setAlignItems(YogaAlign.CENTER))
+                        .layout(layout -> layout.marginTop(15).gapAll(3).alignItems(AlignItems.CENTER))
                         .addChild(new LargeItemSlot().itemSlot(
                                 slot -> slot.bind(new ItemHandlerSlot(inventory, RESULT_SLOT).setCanPlace(s -> false))))
                         .addChild(new ItemSlot()

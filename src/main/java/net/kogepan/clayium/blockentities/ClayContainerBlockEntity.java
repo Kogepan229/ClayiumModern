@@ -40,8 +40,8 @@ import com.lowdragmc.lowdraglib2.gui.ui.UI;
 import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.inventory.InventorySlots;
 import com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager;
+import dev.vfyjxf.taffy.style.AlignContent;
 import lombok.Getter;
-import org.appliedenergistics.yoga.YogaJustify;
 import org.jetbrains.annotations.MustBeInvokedByOverriders;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -388,7 +388,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
         var root = new UIElement().layout(layout -> layout
                 .paddingAll(6)
-                .setJustifyContent(YogaJustify.CENTER))
+                .justifyContent(AlignContent.CENTER))
                 .addClass("panel_bg");
         root.addChild(
                 new CLabel().setText(this.getBlockState().getBlock().getName().getString()));

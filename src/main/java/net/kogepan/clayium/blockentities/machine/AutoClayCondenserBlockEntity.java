@@ -23,9 +23,9 @@ import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
 import com.lowdragmc.lowdraglib2.gui.slot.ItemHandlerSlot;
 import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
-import org.appliedenergistics.yoga.YogaAlign;
-import org.appliedenergistics.yoga.YogaFlexDirection;
-import org.appliedenergistics.yoga.YogaJustify;
+import dev.vfyjxf.taffy.style.AlignContent;
+import dev.vfyjxf.taffy.style.AlignItems;
+import dev.vfyjxf.taffy.style.FlexDirection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -323,8 +323,8 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
     @Override
     protected void createMainUI(BlockUIMenuType.BlockUIHolder holder, UIElement root) {
         UIElement rowContainer = new UIElement().layout(
-                layout -> layout.flexDirection(YogaFlexDirection.ROW)
-                        .setAlignItems(YogaAlign.FLEX_START)
+                layout -> layout.flexDirection(FlexDirection.ROW)
+                        .alignItems(AlignItems.FLEX_START)
                         .flexGrow(1));
         root.addChild(rowContainer);
 
@@ -333,12 +333,12 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
         rowContainer.addChild(leftSpacer);
 
         UIElement grid = new UIElement().layout(
-                layout -> layout.setJustifyContent(YogaJustify.CENTER).flexGrow(0).flexShrink(1).flexBasisAuto());
+                layout -> layout.justifyContent(AlignContent.CENTER).flexGrow(0).flexShrink(1).flexBasisAuto());
         rowContainer.addChild(grid);
 
         for (int row = 0; row < ROWS; row++) {
             UIElement rowElement = new UIElement().layout(
-                    layout -> layout.flexDirection(YogaFlexDirection.ROW).setJustifyContent(YogaJustify.CENTER));
+                    layout -> layout.flexDirection(FlexDirection.ROW).justifyContent(AlignContent.CENTER));
             grid.addChild(rowElement);
             for (int col = 0; col < COLS; col++) {
                 int index = col + row * COLS;
@@ -349,8 +349,8 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
 
         // Right block: same flex width as left spacer; config slot at its right edge.
         UIElement rightBlock = new UIElement().layout(
-                layout -> layout.flexDirection(YogaFlexDirection.ROW)
-                        .setAlignItems(YogaAlign.FLEX_START)
+                layout -> layout.flexDirection(FlexDirection.ROW)
+                        .alignItems(AlignItems.FLEX_START)
                         .flexGrow(1).flexShrink(1).flexBasis(0));
         rowContainer.addChild(rightBlock);
         UIElement configSlotWrapper = new UIElement().layout(

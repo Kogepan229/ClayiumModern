@@ -15,8 +15,8 @@ import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.Toggle;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.inventory.InventorySlots;
 import com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager;
-import org.appliedenergistics.yoga.YogaFlexDirection;
-import org.appliedenergistics.yoga.YogaJustify;
+import dev.vfyjxf.taffy.style.AlignContent;
+import dev.vfyjxf.taffy.style.FlexDirection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -43,14 +43,14 @@ public class SimpleItemFilterItem extends ItemFilterBase {
     @NotNull
     protected ModularUI createFilterUI(HeldItemUIMenuType.HeldItemUIHolder holder) {
         var handler = new FilterSlotItemHandler(() -> holder.player.getItemInHand(holder.hand));
-        var root = new UIElement().layout(layout -> layout.paddingAll(6).setJustifyContent(YogaJustify.CENTER))
+        var root = new UIElement().layout(layout -> layout.paddingAll(6).justifyContent(AlignContent.CENTER))
                 .addClass("panel_bg");
         root.addChild(new CLabel().setText(holder.itemStack.getHoverName().getString()));
 
         var slotContainer = new UIElement();
         for (int row = 0; row < FILTER_SIZE_Y; row++) {
             var slotRow = new UIElement().layout(
-                    layout -> layout.flexDirection(YogaFlexDirection.ROW).setJustifyContent(YogaJustify.CENTER));
+                    layout -> layout.flexDirection(FlexDirection.ROW).justifyContent(AlignContent.CENTER));
             slotContainer.addChild(slotRow);
             for (int col = 0; col < FILTER_SIZE_X; col++) {
                 int index = row * FILTER_SIZE_X + col;
@@ -65,7 +65,7 @@ public class SimpleItemFilterItem extends ItemFilterBase {
                 .build();
 
         var buttonContainer = new UIElement().layout(
-                layout -> layout.flexDirection(YogaFlexDirection.ROW).setJustifyContent(YogaJustify.SPACE_BETWEEN));
+                layout -> layout.flexDirection(FlexDirection.ROW).justifyContent(AlignContent.SPACE_BETWEEN));
         var toggleButton = new Toggle().noText().bind(blacklistToggleBinding).layout(layout -> layout.marginLeft(35));
         toggleButton.addChild(new CLabel().setText("Blacklist").layout(layout -> layout.marginLeft(2)));
         buttonContainer.addChild(toggleButton);

@@ -22,8 +22,8 @@ import com.lowdragmc.lowdraglib2.gui.factory.BlockUIMenuType;
 import com.lowdragmc.lowdraglib2.gui.slot.ItemHandlerSlot;
 import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
-import org.appliedenergistics.yoga.YogaFlexDirection;
-import org.appliedenergistics.yoga.YogaJustify;
+import dev.vfyjxf.taffy.style.AlignContent;
+import dev.vfyjxf.taffy.style.FlexDirection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -108,11 +108,11 @@ public class ClayBufferBlockEntity extends ClayContainerBlockEntity {
 
     @Override
     protected void createMainUI(BlockUIMenuType.BlockUIHolder holder, UIElement root) {
-        UIElement slotsElement = new UIElement().layout(layout -> layout.setJustifyContent(YogaJustify.CENTER));
+        UIElement slotsElement = new UIElement().layout(layout -> layout.justifyContent(AlignContent.CENTER));
         root.addChild(slotsElement);
         for (int row = 0; row < this.inventoryRowSize; row++) {
             UIElement rowElement = new UIElement().layout(
-                    layout -> layout.flexDirection(YogaFlexDirection.ROW).setJustifyContent(YogaJustify.CENTER));
+                    layout -> layout.flexDirection(FlexDirection.ROW).justifyContent(AlignContent.CENTER));
             slotsElement.addChild(rowElement);
             for (int col = 0; col < this.inventoryColumnSize; col++) {
                 rowElement.addChild(new ItemSlot()

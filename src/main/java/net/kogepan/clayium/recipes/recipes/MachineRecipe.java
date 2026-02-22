@@ -28,8 +28,8 @@ import com.lowdragmc.lowdraglib2.gui.ui.UI;
 import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager;
 import com.lowdragmc.lowdraglib2.integration.xei.IngredientIO;
-import org.appliedenergistics.yoga.YogaFlexDirection;
-import org.appliedenergistics.yoga.YogaJustify;
+import dev.vfyjxf.taffy.style.AlignContent;
+import dev.vfyjxf.taffy.style.FlexDirection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -179,17 +179,17 @@ public record MachineRecipe(
                 .width(WIDTH)
                 .height(HEIGHT)
                 .paddingAll(6)
-                .setJustifyContent(YogaJustify.CENTER));
+                .justifyContent(AlignContent.CENTER));
 
         root.addChild(new UIElement().layout(layout -> layout.width(28).height(11))
                 .style(style -> style.backgroundTexture(XEITextures.BADGE)));
 
         UIElement inputContainer = new UIElement()
-                .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW).width(69).height(18)
-                        .setJustifyContent(YogaJustify.FLEX_END))
+                .layout(layout -> layout.flexDirection(FlexDirection.ROW).width(69).height(18)
+                        .justifyContent(AlignContent.FLEX_END))
                 .style(style -> style.background(XEITextures.SLOT));
         UIElement outputContainer = new UIElement()
-                .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW).width(69).height(18))
+                .layout(layout -> layout.flexDirection(FlexDirection.ROW).width(69).height(18))
                 .style(style -> style.background(XEITextures.SLOT));
 
         for (ItemIngredientStack input : this.inputs) {
@@ -203,7 +203,7 @@ public record MachineRecipe(
         }
 
         root.addChild(new UIElement()
-                .layout(layout -> layout.marginTop(3).gapAll(3).flexDirection(YogaFlexDirection.ROW))
+                .layout(layout -> layout.marginTop(3).gapAll(3).flexDirection(FlexDirection.ROW))
                 .addChild(inputContainer)
                 .addChild(new ProgressArrow().bindDataSource(SupplierDataSource
                         .of(() -> {

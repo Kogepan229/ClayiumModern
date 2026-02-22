@@ -13,7 +13,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import com.lowdragmc.lowdraglib2.gui.slot.ItemHandlerSlot;
 import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
-import org.appliedenergistics.yoga.YogaFlexDirection;
+import dev.vfyjxf.taffy.style.FlexDirection;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -49,7 +49,7 @@ public class CentrifugeBlockEntity extends WorkableClayContainerBlockEntity {
     protected UIElement createOutputSlots() {
         if (this.outputItemInventory.getSlots() <= 3) {
             UIElement outputSlotContainer = new UIElement()
-                    .layout(layout -> layout.flexDirection(YogaFlexDirection.ROW));
+                    .layout(layout -> layout.flexDirection(FlexDirection.ROW));
             for (int i = 0; i < this.outputItemInventory.getSlots(); i++) {
                 outputSlotContainer.addChild(
                         new ItemSlot()
@@ -58,8 +58,8 @@ public class CentrifugeBlockEntity extends WorkableClayContainerBlockEntity {
             return outputSlotContainer;
         } else {
             UIElement outputSlotContainer = new UIElement();
-            UIElement row1 = new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW));
-            UIElement row2 = new UIElement().layout(layout -> layout.flexDirection(YogaFlexDirection.ROW));
+            UIElement row1 = new UIElement().layout(layout -> layout.flexDirection(FlexDirection.ROW));
+            UIElement row2 = new UIElement().layout(layout -> layout.flexDirection(FlexDirection.ROW));
 
             row1.addChild(
                     new ItemSlot().bind(new ItemHandlerSlot(this.outputItemInventory, 0).setCanPlace((s) -> false)));
