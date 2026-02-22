@@ -1,6 +1,7 @@
 package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.items.RawClayFilterRemoverItem;
 import net.kogepan.clayium.items.TieredItem;
 import net.kogepan.clayium.items.filter.FazyItemFilterItem;
 import net.kogepan.clayium.items.filter.SimpleItemFilterItem;
@@ -53,9 +54,12 @@ public class ClayiumItems {
     public static final DeferredItem<Item> CLAY_PSYCHE = ITEMS.registerItem("clay_psyche", p -> new TieredItem(p, 13));
 
     // Raw Clay Tools
-    public static final DeferredItem<Item> RAW_CLAY_ROLLING_PIN = ITEMS.registerItem("raw_clay_rolling_pin", Item::new);
-    public static final DeferredItem<Item> RAW_CLAY_SPATULA = ITEMS.registerItem("raw_clay_spatula", Item::new);
-    public static final DeferredItem<Item> RAW_CLAY_SLICER = ITEMS.registerItem("raw_clay_slicer", Item::new);
+    public static final DeferredItem<Item> RAW_CLAY_ROLLING_PIN = ITEMS.registerItem("raw_clay_rolling_pin",
+            RawClayFilterRemoverItem::new);
+    public static final DeferredItem<Item> RAW_CLAY_SPATULA = ITEMS.registerItem("raw_clay_spatula",
+            RawClayFilterRemoverItem::new);
+    public static final DeferredItem<Item> RAW_CLAY_SLICER = ITEMS.registerItem("raw_clay_slicer",
+            RawClayFilterRemoverItem::new);
 
     // Clay Materials
     public static final DeferredItem<Item> CLAY_PLATE = ITEMS.registerItem("clay_plate", p -> new TieredItem(p, 1));

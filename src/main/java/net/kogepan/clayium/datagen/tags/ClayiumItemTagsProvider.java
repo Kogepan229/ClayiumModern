@@ -1,6 +1,8 @@
 package net.kogepan.clayium.datagen.tags;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.registries.ClayiumItems;
+import net.kogepan.clayium.registries.ClayiumTags;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -22,5 +24,10 @@ public class ClayiumItemTagsProvider extends ItemTagsProvider {
     }
 
     @Override
-    protected void addTags(@NotNull HolderLookup.Provider provider) {}
+    protected void addTags(@NotNull HolderLookup.Provider provider) {
+        tag(ClayiumTags.ITEM_FILTER_REMOVERS)
+                .add(ClayiumItems.RAW_CLAY_ROLLING_PIN.get())
+                .add(ClayiumItems.RAW_CLAY_SLICER.get())
+                .add(ClayiumItems.RAW_CLAY_SPATULA.get());
+    }
 }

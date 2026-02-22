@@ -264,5 +264,6 @@
   "item.clayium.fazy_item_filter.copy": "Fuzzy Item Filter (Copy)",
   "item.clayium.unlocalized_name_item_filter": "Unlocalized Name Item Filter",
   "item.clayium.unlocalized_name_item_filter.tooltip": "Right-click to configure. Regex match on item translation key.",
-  "item.clayium.unlocalized_name_item_filter.copy": "Unlocalized Name Item Filter (Copy)"
+  "item.clayium.unlocalized_name_item_filter.copy": "Unlocalized Name Item Filter (Copy)",
+  "item.clayium.filter_remover.tooltip1": "Deletes filters applied to machines."
 }

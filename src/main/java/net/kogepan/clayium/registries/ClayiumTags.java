@@ -17,4 +17,5 @@ public class ClayiumTags {
     }
 
     public static final TagKey<Block> CLAY_TOOLS_BONUS_BLOCK = blockTag("clayium:clay_tools_bonus_block");
+    public static final TagKey<Item> ITEM_FILTER_REMOVERS = itemTag("clayium:item_filter_removers");
 }

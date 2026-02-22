@@ -47,6 +47,7 @@ public class ItemFilterHolderTrait extends ClayContainerTrait implements IItemFi
         blockEntity.setChanged();
         Level level = blockEntity.getLevel();
         if (level != null) {
+            level.invalidateCapabilities(blockEntity.getBlockPos());
             level.sendBlockUpdated(blockEntity.getBlockPos(), this.blockEntity.getBlockState(),
                     this.blockEntity.getBlockState(),
                     Block.UPDATE_ALL | Block.UPDATE_KNOWN_SHAPE);
@@ -65,6 +66,13 @@ public class ItemFilterHolderTrait extends ClayContainerTrait implements IItemFi
         filterData[i] = null;
         blockEntity.setChanged();
         clientFilterFlags[i] = false;
+        Level level = blockEntity.getLevel();
+        if (level != null) {
+            level.invalidateCapabilities(blockEntity.getBlockPos());
+            level.sendBlockUpdated(blockEntity.getBlockPos(), this.blockEntity.getBlockState(),
+                    this.blockEntity.getBlockState(),
+                    Block.UPDATE_ALL | Block.UPDATE_KNOWN_SHAPE);
+        }
     }
 
     /**

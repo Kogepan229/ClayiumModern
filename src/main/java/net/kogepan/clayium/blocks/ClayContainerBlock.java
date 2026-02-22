@@ -1,7 +1,9 @@
 package net.kogepan.clayium.blocks;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.registries.ClayiumItems;
+import net.kogepan.clayium.registries.ClayiumTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -143,23 +145,38 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
             return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
         }
 
+        Direction clickedSide = this.getHitDirection(state, pos, hitResult);
+
         if (stack.is(ClayiumItems.CLAY_ROLLING_PIN)) {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof ClayContainerBlockEntity container) {
-                container.cycleInputMode(this.getHitDirection(state, pos, hitResult));
+                container.cycleInputMode(clickedSide);
                 return ItemInteractionResult.SUCCESS;
             }
         }
         if (stack.is(ClayiumItems.CLAY_SLICER)) {
             BlockEntity be = level.getBlockEntity(pos);
             if (be instanceof ClayContainerBlockEntity container) {
-                container.cycleOutputMode(this.getHitDirection(state, pos, hitResult));
+                container.cycleOutputMode(clickedSide);
                 return ItemInteractionResult.SUCCESS;
             }
         }
         if (stack.is(ClayiumItems.CLAY_SPATULA)) {
             this.togglePipe(level, pos, state);
             return ItemInteractionResult.SUCCESS;
+        }
+        if (stack.is(ClayiumTags.ITEM_FILTER_REMOVERS)) {
+            BlockEntity be = level.getBlockEntity(pos);
+            var applicatable = ClayiumCapabilities.ITEM_FILTER_APPLICATABLE.getCapability(
+                    level,
+                    pos,
+                    state,
+                    be,
+                    clickedSide);
+            if (applicatable != null) {
+                applicatable.clearFilter(clickedSide);
+                return ItemInteractionResult.SUCCESS;
+            }
         }
 
         return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
