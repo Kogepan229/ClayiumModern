@@ -24,6 +24,7 @@ import com.lowdragmc.lowdraglib2.gui.ui.elements.ItemSlot;
 import dev.vfyjxf.taffy.style.AlignContent;
 import dev.vfyjxf.taffy.style.AlignItems;
 import dev.vfyjxf.taffy.style.FlexDirection;
+import dev.vfyjxf.taffy.style.TaffyDisplay;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -128,13 +129,17 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
     @Override
     protected void createMainUI(BlockUIMenuType.BlockUIHolder holder, UIElement root) {
         UIElement centerUI = new UIElement()
-                .layout(layout -> layout.marginTop(12).flexDirection(FlexDirection.ROW)
-                        .justifyContent(AlignContent.CENTER));
+                .layout(layout -> layout.marginTop(8)
+                        .marginBottom(4)
+                        .display(TaffyDisplay.GRID)
+                        .gridTemplateColumns("1fr auto 1fr")
+                        .alignItems(AlignItems.CENTER)
+                        .justifyContent(AlignContent.CENTER)
+                        .gapColumn(8));
 
-        centerUI.layout(layout -> layout.marginBottom(4).alignItems(AlignItems.CENTER))
-                .addChild(createInputSlots())
-                .addChild(this.recipeLogic.createProgressUIElement().layout(layout -> layout.marginHorizontal(8)))
-                .addChild(createOutputSlots());
+        centerUI.addChild(createInputSlots().layout(layout -> layout.gridColumn("1").justifySelf(AlignItems.END)))
+                .addChild(this.recipeLogic.createProgressUIElement().layout(layout -> layout.gridColumn("2")))
+                .addChild(createOutputSlots().layout(layout -> layout.gridColumn("3").justifySelf(AlignItems.START)));
 
         UIElement mainUI = new UIElement();
         mainUI.addChild(centerUI);
