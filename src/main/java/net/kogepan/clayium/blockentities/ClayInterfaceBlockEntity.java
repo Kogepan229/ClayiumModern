@@ -16,9 +16,11 @@ import net.minecraft.core.GlobalPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtOps;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -51,6 +53,7 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     private static final String LINKED_TARGET_PRESENT_TAG = "hasLinkedTarget";
     private static final String LINK_SOURCE_TAG = "linkSource";
     private static final String TARGET_VALID_TAG = "targetValid";
+    private static final String DISPLAY_ITEM_STACK_TAG = "displayItemStack";
     private static final int VALIDATION_INTERVAL = 20;
     private static final MachineIOModes HIDDEN_IO_MODES = new MachineIOModes();
 
@@ -89,6 +92,8 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     private boolean targetValid = false;
     @Nullable
     private ClayContainerBlockEntity linkedTarget;
+    @NotNull
+    private ItemStack displayItemStack = ItemStack.EMPTY;
     // NeoForge stores capability listeners as weak references, so keep a strong reference here.
     @Nullable
     private ICapabilityInvalidationListener targetCapabilityInvalidationListener;
@@ -171,6 +176,11 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
         return this.linkedTargetPos;
     }
 
+    @NotNull
+    public ItemStack getDisplayItemStack() {
+        return this.displayItemStack;
+    }
+
     @Override
     public @NotNull LinkSource getLinkSource() {
         return this.linkSource;
@@ -228,6 +238,7 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
         CompoundTag tag = super.getUpdateTag(provider);
         this.writeLinkedTargetTag(tag, provider, false);
         tag.putBoolean(TARGET_VALID_TAG, this.targetValid);
+        this.writeDisplayItemStackTag(tag, provider);
         return tag;
     }
 
@@ -239,6 +250,7 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
         if (tag.contains(TARGET_VALID_TAG)) {
             this.targetValid = tag.getBoolean(TARGET_VALID_TAG);
         }
+        this.readDisplayItemStackTag(tag, provider);
         super.onReceivePacket(tag, provider);
     }
 
@@ -291,6 +303,50 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
         if (includeLinkSource && this.linkedTargetPos != null) {
             this.linkSource = readLinkSource(tag.getString(LINK_SOURCE_TAG));
         }
+    }
+
+    private void writeDisplayItemStackTag(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
+        ItemStack displayStack = this.createDisplayItemStackForClientSync();
+        if (!displayStack.isEmpty()) {
+            tag.put(DISPLAY_ITEM_STACK_TAG, displayStack.save(provider));
+        }
+    }
+
+    private void readDisplayItemStackTag(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
+        this.displayItemStack = ItemStack.EMPTY;
+        if (!tag.contains(DISPLAY_ITEM_STACK_TAG, Tag.TAG_COMPOUND)) {
+            return;
+        }
+        this.displayItemStack = ItemStack.parse(provider, tag.get(DISPLAY_ITEM_STACK_TAG)).orElse(ItemStack.EMPTY);
+    }
+
+    @NotNull
+    private ItemStack createDisplayItemStackForClientSync() {
+        if (!(this.level instanceof ServerLevel serverLevel) || this.linkedTargetPos == null) {
+            return ItemStack.EMPTY;
+        }
+        if (serverLevel.dimension().equals(this.linkedTargetPos.dimension())) {
+            return ItemStack.EMPTY;
+        }
+
+        ServerLevel targetLevel = serverLevel.getServer().getLevel(this.linkedTargetPos.dimension());
+        if (targetLevel == null || !targetLevel.isLoaded(this.linkedTargetPos.pos())) {
+            return ItemStack.EMPTY;
+        }
+
+        BlockPos targetPos = this.linkedTargetPos.pos();
+        BlockEntity targetBlockEntity = targetLevel.getBlockEntity(targetPos);
+        if (!(targetBlockEntity instanceof ClayContainerBlockEntity) ||
+                targetBlockEntity instanceof ClayInterfaceBlockEntity) {
+            return ItemStack.EMPTY;
+        }
+
+        BlockState targetState = targetLevel.getBlockState(targetPos);
+        ItemStack displayStack = targetState.getBlock().getCloneItemStack(targetLevel, targetPos, targetState);
+        if (displayStack.isEmpty()) {
+            displayStack = new ItemStack(targetState.getBlock());
+        }
+        return displayStack;
     }
 
     @Override

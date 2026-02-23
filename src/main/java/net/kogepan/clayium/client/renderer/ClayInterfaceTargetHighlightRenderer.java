@@ -80,18 +80,23 @@ public final class ClayInterfaceTargetHighlightRenderer {
         }
 
         GlobalPos targetGlobalPos = interfaceBlockEntity.getLinkedTargetPos();
-        if (targetGlobalPos == null || !targetGlobalPos.dimension().equals(level.dimension())) {
+        if (targetGlobalPos == null) {
             return;
         }
 
         BlockPos targetPos = targetGlobalPos.pos();
-        if (!level.isLoaded(targetPos)) {
-            return;
+        boolean sameDimensionTarget = targetGlobalPos.dimension().equals(level.dimension());
+        BlockState targetState = null;
+        ItemStack displayStack = sameDimensionTarget ? ItemStack.EMPTY : interfaceBlockEntity.getDisplayItemStack();
+        if (sameDimensionTarget && level.isLoaded(targetPos)) {
+            BlockEntity targetBlockEntity = level.getBlockEntity(targetPos);
+            if (targetBlockEntity instanceof ClayContainerBlockEntity &&
+                    !(targetBlockEntity instanceof ClayInterfaceBlockEntity)) {
+                targetState = level.getBlockState(targetPos);
+                displayStack = resolveDisplayStack(level, targetPos, targetState, displayStack);
+            }
         }
-
-        BlockEntity targetBlockEntity = level.getBlockEntity(targetPos);
-        if (!(targetBlockEntity instanceof ClayContainerBlockEntity) ||
-                targetBlockEntity instanceof ClayInterfaceBlockEntity) {
+        if (displayStack.isEmpty() && targetState == null) {
             return;
         }
 
@@ -102,7 +107,6 @@ public final class ClayInterfaceTargetHighlightRenderer {
         float green = rainbowComponent(tickTime, ONE_THIRD_TURN);
         float blue = rainbowComponent(tickTime, ONE_THIRD_TURN * 2.0F);
         float alpha = (float) ((Math.sin(tickTime * RAINBOW_ALPHA_SPEED) + 1.0D) * 0.15D + 0.2D);
-        BlockState targetState = level.getBlockState(targetPos);
 
         renderTargetInfo(
                 poseStack,
@@ -111,38 +115,40 @@ public final class ClayInterfaceTargetHighlightRenderer {
                 blockHitResult.getBlockPos(),
                 blockHitResult.getDirection(),
                 targetGlobalPos,
-                targetState,
+                displayStack,
                 tickTime);
 
-        AABB targetBox = getTargetHighlightBox(level, targetPos, targetState).inflate(TARGET_HIGHLIGHT_INFLATE);
-        double minX = targetBox.minX - camera.x;
-        double minY = targetBox.minY - camera.y;
-        double minZ = targetBox.minZ - camera.z;
-        double maxX = targetBox.maxX - camera.x;
-        double maxY = targetBox.maxY - camera.y;
-        double maxZ = targetBox.maxZ - camera.z;
+        if (targetState != null) {
+            AABB targetBox = getTargetHighlightBox(level, targetPos, targetState).inflate(TARGET_HIGHLIGHT_INFLATE);
+            double minX = targetBox.minX - camera.x;
+            double minY = targetBox.minY - camera.y;
+            double minZ = targetBox.minZ - camera.z;
+            double maxX = targetBox.maxX - camera.x;
+            double maxY = targetBox.maxY - camera.y;
+            double maxZ = targetBox.maxZ - camera.z;
 
-        VertexConsumer fillConsumer = bufferSource.getBuffer(ClayiumRenderTypes.INTERFACE_TARGET_FILLED_NO_DEPTH);
-        LevelRenderer.addChainedFilledBoxVertices(
-                poseStack, fillConsumer, minX, minY, minZ, maxX, maxY, maxZ, red, green, blue, alpha);
+            VertexConsumer fillConsumer = bufferSource.getBuffer(ClayiumRenderTypes.INTERFACE_TARGET_FILLED_NO_DEPTH);
+            LevelRenderer.addChainedFilledBoxVertices(
+                    poseStack, fillConsumer, minX, minY, minZ, maxX, maxY, maxZ, red, green, blue, alpha);
 
-        VertexConsumer lineConsumer = bufferSource.getBuffer(ClayiumRenderTypes.INTERFACE_TARGET_LINES_NO_DEPTH);
-        if (Config.INTERFACE_TARGET_HIGHLIGHT_OUTLINE.get()) {
-            LevelRenderer.renderLineBox(
-                    poseStack, lineConsumer, minX, minY, minZ, maxX, maxY, maxZ, red, green, blue,
-                    1.0F);
+            VertexConsumer lineConsumer = bufferSource.getBuffer(ClayiumRenderTypes.INTERFACE_TARGET_LINES_NO_DEPTH);
+            if (Config.INTERFACE_TARGET_HIGHLIGHT_OUTLINE.get()) {
+                LevelRenderer.renderLineBox(
+                        poseStack, lineConsumer, minX, minY, minZ, maxX, maxY, maxZ, red, green, blue,
+                        1.0F);
+            }
+
+            renderConnectorLine(
+                    poseStack,
+                    lineConsumer,
+                    camera,
+                    blockHitResult.getBlockPos(),
+                    targetPos,
+                    red,
+                    green,
+                    blue,
+                    alpha);
         }
-
-        renderConnectorLine(
-                poseStack,
-                lineConsumer,
-                camera,
-                blockHitResult.getBlockPos(),
-                targetPos,
-                red,
-                green,
-                blue,
-                alpha);
 
         bufferSource.endBatch();
     }
@@ -164,7 +170,7 @@ public final class ClayInterfaceTargetHighlightRenderer {
                                          @NotNull BlockPos interfacePos,
                                          @NotNull Direction hitFace,
                                          @NotNull GlobalPos targetGlobalPos,
-                                         @NotNull BlockState targetState,
+                                         @NotNull ItemStack targetDisplayStack,
                                          float tickTime) {
         Minecraft minecraft = Minecraft.getInstance();
         Level level = minecraft.level;
@@ -173,13 +179,7 @@ public final class ClayInterfaceTargetHighlightRenderer {
         }
 
         BlockPos targetPos = targetGlobalPos.pos();
-        ItemStack targetDisplayStack = targetState.getBlock().getCloneItemStack(level, targetPos, targetState);
-        if (targetDisplayStack.isEmpty()) {
-            targetDisplayStack = new ItemStack(targetState.getBlock());
-        }
-
-        String targetName = targetDisplayStack.isEmpty() ? targetState.getBlock().getName().getString() :
-                targetDisplayStack.getHoverName().getString();
+        String targetName = targetDisplayStack.isEmpty() ? "" : targetDisplayStack.getHoverName().getString();
         String targetLocation = formatTargetLocation(targetGlobalPos);
 
         Vec3 infoAnchor = Vec3.atCenterOf(interfacePos).add(
@@ -218,6 +218,18 @@ public final class ClayInterfaceTargetHighlightRenderer {
                 targetLocation);
 
         poseStack.popPose();
+    }
+
+    @NotNull
+    private static ItemStack resolveDisplayStack(@NotNull Level level,
+                                                 @NotNull BlockPos targetPos,
+                                                 @NotNull BlockState targetState,
+                                                 @NotNull ItemStack fallback) {
+        ItemStack displayStack = targetState.getBlock().getCloneItemStack(level, targetPos, targetState);
+        if (displayStack.isEmpty()) {
+            displayStack = new ItemStack(targetState.getBlock());
+        }
+        return displayStack.isEmpty() ? fallback : displayStack;
     }
 
     @NotNull
