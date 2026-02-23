@@ -1,5 +1,6 @@
 package net.kogepan.clayium.gui.factory;
 
+import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
 import net.kogepan.clayium.blocks.machine.ClayInterfaceBlock;
 import net.kogepan.clayium.registries.ClayiumMenuTypes;
@@ -10,6 +11,8 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.server.MinecraftServer;
+import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
@@ -45,11 +48,15 @@ public class ClayInterfaceUIMenuType {
             return false;
         }
 
+        GlobalPos target = interfaceBlockEntity.getLinkedTargetPos();
+        // Resolve and serialize the target state on the server so the client can rebuild the same UI
+        // even when the target dimension is not locally loaded.
         ClayInterfaceUIHolder holder = new ClayInterfaceUIHolder(
                 player,
                 interfacePos,
                 interfaceState,
-                interfaceBlockEntity.getLinkedTargetPos());
+                target,
+                resolveTargetStateForUI(player, target));
         return player.openMenu(holder).isPresent();
     }
 
@@ -60,10 +67,39 @@ public class ClayInterfaceUIMenuType {
         BlockState interfaceState = BlockUIMenuType.BLOCK_STATE_STREAM_CODEC.decode(data);
         @Nullable
         GlobalPos target = data.readBoolean() ? GLOBAL_POS_STREAM_CODEC.decode(data) : null;
+        @Nullable
+        // Optional target state used for client-side UI reconstruction.
+        BlockState targetState = data.readBoolean() ? BlockUIMenuType.BLOCK_STATE_STREAM_CODEC.decode(data) : null;
 
         ClayInterfaceUIHolder holder = new ClayInterfaceUIHolder(inventory.player, interfacePos, interfaceState,
-                target);
+                target, targetState);
         return new ModularUIContainerMenu(ClayiumMenuTypes.CLAY_INTERFACE_UI.get(), windowId, inventory, holder);
+    }
+
+    @Nullable
+    private static BlockState resolveTargetStateForUI(@NotNull ServerPlayer player, @Nullable GlobalPos target) {
+        if (target == null) {
+            return null;
+        }
+
+        MinecraftServer server = player.getServer();
+        if (server == null) {
+            return null;
+        }
+
+        ServerLevel targetLevel = server.getLevel(target.dimension());
+        if (targetLevel == null || !targetLevel.isLoaded(target.pos())) {
+            return null;
+        }
+
+        // Only serialize container targets that can actually provide a machine/container UI.
+        BlockEntity targetBlockEntity = targetLevel.getBlockEntity(target.pos());
+        if (targetBlockEntity instanceof ClayContainerBlockEntity &&
+                !(targetBlockEntity instanceof ClayInterfaceBlockEntity)) {
+            return targetBlockEntity.getBlockState();
+        }
+
+        return null;
     }
 
     public static class ClayInterfaceUIHolder implements MenuProvider, IContainerUIHolder {
@@ -73,13 +109,17 @@ public class ClayInterfaceUIMenuType {
         public final BlockState interfaceState;
         @Nullable
         public final GlobalPos target;
+        @Nullable
+        public final BlockState targetState;
 
         public ClayInterfaceUIHolder(@NotNull Player player, @NotNull BlockPos interfacePos,
-                                     @NotNull BlockState interfaceState, @Nullable GlobalPos target) {
+                                     @NotNull BlockState interfaceState, @Nullable GlobalPos target,
+                                     @Nullable BlockState targetState) {
             this.player = player;
             this.interfacePos = interfacePos;
             this.interfaceState = interfaceState;
             this.target = target;
+            this.targetState = targetState;
         }
 
         @Override
@@ -107,6 +147,11 @@ public class ClayInterfaceUIMenuType {
             if (this.target != null) {
                 GLOBAL_POS_STREAM_CODEC.encode(buffer, this.target);
             }
+            // Keep this optional to avoid forcing chunk loads or fake states when the target is unavailable.
+            buffer.writeBoolean(this.targetState != null);
+            if (this.targetState != null) {
+                BlockUIMenuType.BLOCK_STATE_STREAM_CODEC.encode(buffer, this.targetState);
+            }
         }
 
         @Override
@@ -121,7 +166,7 @@ public class ClayInterfaceUIMenuType {
 
             BlockUIMenuType.BlockUIHolder blockHolder = new BlockUIMenuType.BlockUIHolder(
                     blockUI, player, this.interfacePos, this.interfaceState);
-            return interfaceBlockEntity.createUI(blockHolder, this.target);
+            return interfaceBlockEntity.createUI(blockHolder, this.target, this.targetState);
         }
     }
 }

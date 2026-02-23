@@ -21,6 +21,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.capabilities.ICapabilityInvalidationListener;
@@ -259,20 +260,37 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
 
     @Override
     public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
-        return this.createUI(holder, this.linkedTargetPos);
+        return this.createUI(holder, this.linkedTargetPos, null);
     }
 
     public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder, @Nullable GlobalPos target) {
+        return this.createUI(holder, target, null);
+    }
+
+    /**
+     * Builds the linked target UI when possible.
+     * <p>
+     * On the server we resolve the real target block entity (including other dimensions).
+     * On the client, when the real target cannot be resolved locally, we may use a temporary proxy block entity
+     * created from {@code targetState} to keep the rendered UI layout consistent with the server side.
+     */
+    public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder, @Nullable GlobalPos target,
+                              @Nullable BlockState targetState) {
         TargetResolution resolution = this.resolveTargetForUI(target);
-        if (resolution.state() == TargetState.VALID && resolution.target() != null) {
-            ClayContainerBlockEntity targetContainer = resolution.target();
-            BlockState targetState = targetContainer.getBlockState();
-            if (targetState.getBlock() instanceof BlockUIMenuType.BlockUI blockUI) {
+        ClayContainerBlockEntity targetContainer = resolution.target();
+        if (resolution.state() != TargetState.VALID || targetContainer == null) {
+            // Client fallback: build UI from serialized target state when the actual BE is not locally accessible.
+            targetContainer = this.createClientTargetUIProxy(target, targetState);
+        }
+
+        if (targetContainer != null) {
+            BlockState resolvedTargetState = targetContainer.getBlockState();
+            if (resolvedTargetState.getBlock() instanceof BlockUIMenuType.BlockUI blockUI) {
                 BlockUIMenuType.BlockUIHolder targetHolder = new BlockUIMenuType.BlockUIHolder(
                         blockUI,
                         holder.player,
                         targetContainer.getBlockPos(),
-                        targetState);
+                        resolvedTargetState);
                 return targetContainer.createUI(targetHolder);
             }
         }
@@ -304,23 +322,30 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
 
     @NotNull
     private TargetResolution resolveTargetForUI(@Nullable GlobalPos target) {
-        Level level = this.level;
         if (target == null) {
             return TargetResolution.none();
         }
+        Level level = this.level;
         if (level == null) {
             return TargetResolution.unloaded();
         }
+
+        if (level instanceof ServerLevel serverLevel) {
+            // Server can resolve linked targets across dimensions via the server level registry.
+            MinecraftServer server = serverLevel.getServer();
+            ServerLevel targetLevel = server.getLevel(target.dimension());
+            if (targetLevel == null || !targetLevel.isLoaded(target.pos())) {
+                return TargetResolution.unloaded();
+            }
+            return this.resolveTargetFromLevel(targetLevel, target.pos());
+        }
+
+        // Client only has direct access to the current dimension's loaded chunks.
         if (!level.dimension().equals(target.dimension()) || !level.isLoaded(target.pos())) {
             return TargetResolution.unloaded();
         }
 
-        BlockEntity blockEntity = level.getBlockEntity(target.pos());
-        if (blockEntity instanceof ClayContainerBlockEntity targetContainer &&
-                !(targetContainer instanceof ClayInterfaceBlockEntity)) {
-            return TargetResolution.valid(targetContainer);
-        }
-        return TargetResolution.invalid();
+        return this.resolveTargetFromLevel(level, target.pos());
     }
 
     @NotNull
@@ -346,17 +371,41 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
             return result;
         }
 
-        BlockEntity blockEntity = targetLevel.getBlockEntity(target.pos());
-        if (blockEntity instanceof ClayContainerBlockEntity targetContainer &&
-                !(targetContainer instanceof ClayInterfaceBlockEntity)) {
-            TargetResolution result = TargetResolution.valid(targetContainer);
-            refreshLinkStatus(result);
-            return result;
-        }
-
-        TargetResolution result = TargetResolution.invalid();
+        TargetResolution result = this.resolveTargetFromLevel(targetLevel, target.pos());
         refreshLinkStatus(result);
         return result;
+    }
+
+    @NotNull
+    private TargetResolution resolveTargetFromLevel(@NotNull Level targetLevel, @NotNull BlockPos targetPos) {
+        BlockEntity blockEntity = targetLevel.getBlockEntity(targetPos);
+        if (blockEntity instanceof ClayContainerBlockEntity targetContainer &&
+                !(targetContainer instanceof ClayInterfaceBlockEntity)) {
+            return TargetResolution.valid(targetContainer);
+        }
+        return TargetResolution.invalid();
+    }
+
+    @Nullable
+    private ClayContainerBlockEntity createClientTargetUIProxy(@Nullable GlobalPos target,
+                                                               @Nullable BlockState targetState) {
+        Level level = this.level;
+        if (level == null || !level.isClientSide() || target == null || targetState == null) {
+            return null;
+        }
+        if (!(targetState.getBlock() instanceof EntityBlock entityBlock)) {
+            return null;
+        }
+
+        // This BE is UI-only. It is never inserted into a world chunk and must not be used for game logic.
+        BlockEntity blockEntity = entityBlock.newBlockEntity(target.pos(), targetState);
+        // Some UI code paths expect a non-null level, so attach the current client level.
+        blockEntity.setLevel(level);
+        if (blockEntity instanceof ClayContainerBlockEntity targetContainer &&
+                !(targetContainer instanceof ClayInterfaceBlockEntity)) {
+            return targetContainer;
+        }
+        return null;
     }
 
     private void refreshLinkStatus(@NotNull TargetResolution resolution) {
