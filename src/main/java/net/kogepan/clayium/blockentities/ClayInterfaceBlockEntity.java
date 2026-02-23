@@ -54,6 +54,7 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     private static final String LINK_SOURCE_TAG = "linkSource";
     private static final String TARGET_VALID_TAG = "targetValid";
     private static final String DISPLAY_ITEM_STACK_TAG = "displayItemStack";
+    private static final String CAN_SYNCHRONIZE_TAG = "canSynchronize";
     private static final int VALIDATION_INTERVAL = 20;
     private static final MachineIOModes HIDDEN_IO_MODES = new MachineIOModes();
 
@@ -88,6 +89,7 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     private GlobalPos linkedTargetPos;
     @NotNull
     private LinkSource linkSource = LinkSource.NONE;
+    private boolean canSynchronize = false;
     private int validationTimer;
     private boolean targetValid = false;
     @Nullable
@@ -187,7 +189,24 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     }
 
     @Override
+    public boolean canSynchronize() {
+        return this.canSynchronize;
+    }
+
+    @Override
+    public void setCanSynchronize(boolean canSynchronize) {
+        if (this.canSynchronize == canSynchronize) {
+            return;
+        }
+        this.canSynchronize = canSynchronize;
+        this.setChanged();
+    }
+
+    @Override
     public boolean setLinkedTarget(@NotNull GlobalPos target, @NotNull LinkSource source) {
+        if (source == LinkSource.MANUAL && !this.canSynchronize()) {
+            return false;
+        }
         if (this.isSelfTarget(target)) {
             return false;
         }
@@ -223,12 +242,14 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
         super.saveAdditional(tag, provider);
+        tag.putBoolean(CAN_SYNCHRONIZE_TAG, this.canSynchronize);
         this.writeLinkedTargetTag(tag, provider, true);
     }
 
     @Override
     protected void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
         super.loadAdditional(tag, provider);
+        this.canSynchronize = tag.getBoolean(CAN_SYNCHRONIZE_TAG);
         this.readLinkedTargetTag(tag, provider, true);
     }
 

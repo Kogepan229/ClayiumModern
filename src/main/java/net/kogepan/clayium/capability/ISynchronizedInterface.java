@@ -22,6 +22,10 @@ public interface ISynchronizedInterface {
     @NotNull
     LinkSource getLinkSource();
 
+    boolean canSynchronize();
+
+    void setCanSynchronize(boolean canSynchronize);
+
     boolean setLinkedTarget(@NotNull GlobalPos target, @NotNull LinkSource source);
 
     void clearLinkedTarget();

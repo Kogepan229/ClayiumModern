@@ -62,6 +62,12 @@ public class SynchronizerItem extends Item {
                 player.displayClientMessage(Component.translatable("item.clayium.synchronizer.unlinked"), true);
                 return InteractionResult.SUCCESS;
             }
+            if (!targetInterface.canSynchronize()) {
+                player.displayClientMessage(
+                        Component.translatable("item.clayium.synchronizer.requires_synchronous_parts"),
+                        true);
+                return InteractionResult.SUCCESS;
+            }
 
             boolean linked = targetInterface.setLinkedTarget(savedTarget, ISynchronizedInterface.LinkSource.MANUAL);
             if (linked) {
