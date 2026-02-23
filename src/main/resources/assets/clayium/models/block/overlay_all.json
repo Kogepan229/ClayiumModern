@@ -1,0 +1,17 @@
+{
+  "parent": "minecraft:block/block",
+  "elements": [
+    {
+      "from": [ -0.01, -0.01, -0.01 ],
+      "to":   [ 16.01, 16.01, 16.01 ],
+      "faces": {
+        "down":  { "uv": [0, 0, 16, 16], "texture": "#overlay_front", "cullface": "down" },
+        "up":    { "uv": [0, 0, 16, 16], "texture": "#overlay_front", "cullface": "up" },
+        "north": { "uv": [0, 0, 16, 16], "texture": "#overlay_front", "cullface": "north" },
+        "south": { "uv": [0, 0, 16, 16], "texture": "#overlay_front", "cullface": "south" },
+        "west":  { "uv": [0, 0, 16, 16], "texture": "#overlay_front", "cullface": "west" },
+        "east":  { "uv": [0, 0, 16, 16], "texture": "#overlay_front", "cullface": "east" }
+      }
+    }
+  ]
+}

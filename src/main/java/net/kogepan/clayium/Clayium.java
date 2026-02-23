@@ -1,14 +1,14 @@
 package net.kogepan.clayium;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CreativeCESourceBlockEntity;
-import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
 import net.kogepan.clayium.capability.ClayiumCapabilities;
-import net.kogepan.clayium.capability.IClayEnergyHolder;
 import net.kogepan.clayium.capability.IClayLaserAcceptor;
 import net.kogepan.clayium.capability.IClayLaserSource;
 import net.kogepan.clayium.capability.IItemFilterApplicatable;
+import net.kogepan.clayium.capability.ISynchronizedInterface;
 import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 import net.kogepan.clayium.items.filter.FilterItemHelper;
 import net.kogepan.clayium.items.filter.ItemFilterBase;
@@ -21,6 +21,7 @@ import net.kogepan.clayium.registries.ClayiumDataMaps;
 import net.kogepan.clayium.registries.ClayiumFeatures;
 import net.kogepan.clayium.registries.ClayiumFilterTypes;
 import net.kogepan.clayium.registries.ClayiumItems;
+import net.kogepan.clayium.registries.ClayiumMenuTypes;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -84,6 +85,7 @@ public class Clayium {
         ClayiumRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
         ClayiumFeatures.FEATURES.register(modEventBus);
         ClayiumFilterTypes.FILTER_TYPES.register(modEventBus);
+        ClayiumMenuTypes.MENUS.register(modEventBus);
 
         modEventBus.addListener(this::registerCapacilities);
         modEventBus.addListener(this::registerDataMapTypes);
@@ -130,17 +132,17 @@ public class Clayium {
             event.registerBlockEntity(
                     ClayiumCapabilities.CLAY_ENERGY_HOLDER,
                     type.get(),
-                    (blockEntity, side) -> {
-                        ClayContainerBlockEntity container = (ClayContainerBlockEntity) blockEntity;
-                        var trait = container.getTrait(ClayEnergyHolder.TRAIT_ID);
-                        return trait instanceof IClayEnergyHolder ? (IClayEnergyHolder) trait : null;
-                    });
+                    (blockEntity, side) -> ((ClayContainerBlockEntity) blockEntity).getExposedClayEnergyHolder(side));
 
             event.registerBlockEntity(
                     ClayiumCapabilities.ITEM_FILTER_APPLICATABLE,
                     type.get(),
                     (blockEntity, side) -> {
                         ClayContainerBlockEntity container = (ClayContainerBlockEntity) blockEntity;
+                        if (container instanceof ClayInterfaceBlockEntity clayInterface &&
+                                !clayInterface.hasValidTargetForModeChange()) {
+                            return null;
+                        }
                         var trait = container.getTrait(ItemFilterHolderTrait.TRAIT_ID);
                         return trait instanceof IItemFilterApplicatable a ? a : null;
                     });
@@ -150,6 +152,11 @@ public class Clayium {
                 Capabilities.ItemHandler.BLOCK,
                 ClayiumBlockEntityTypes.CREATIVE_CE_SOURCE_BLOCK_ENTITY.get(),
                 (blockEntity, side) -> ((CreativeCESourceBlockEntity) blockEntity).getItemHandler(side));
+
+        event.registerBlockEntity(
+                ClayiumCapabilities.SYNCHRONIZED_INTERFACE,
+                ClayiumBlockEntityTypes.CLAY_INTERFACE_BLOCK_ENTITY.get(),
+                (blockEntity, side) -> blockEntity instanceof ISynchronizedInterface sync ? sync : null);
 
         for (DeferredHolder<BlockEntityType<?>, ?> type : ClayiumBlockEntityTypes.BLOCK_ENTITY_TYPES.getEntries()) {
             event.registerBlockEntity(

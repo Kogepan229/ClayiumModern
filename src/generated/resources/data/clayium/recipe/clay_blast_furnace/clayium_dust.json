@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 200000,
+  "duration": 1000,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:clayium_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:clayium_ingot"
+    }
+  ],
+  "recipe_tier": 7,
+  "recipe_type": "clayium:clay_blast_furnace"
+}

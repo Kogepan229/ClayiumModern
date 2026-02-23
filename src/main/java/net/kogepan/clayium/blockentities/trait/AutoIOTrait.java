@@ -10,12 +10,18 @@ import net.minecraft.world.level.Level;
 import net.neoforged.neoforge.items.IItemHandler;
 import net.neoforged.neoforge.items.ItemHandlerHelper;
 
+import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 public abstract class AutoIOTrait extends ClayContainerTrait {
 
+    public static final String TRAIT_ID = "autoIoHandler";
+    public static final String TRAIT_ID_EC = "autoIoHandlerEC";
+
     protected final int tier;
+    @Getter
+    protected final boolean isBuffer;
     protected final int importInterval;
     protected final int exportInterval;
     protected final int importMax;
@@ -24,9 +30,10 @@ public abstract class AutoIOTrait extends ClayContainerTrait {
     protected int importIntervalCount = 0;
     protected int exportIntervalCount = 0;
 
-    protected AutoIOTrait(@NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer) {
-        super(blockEntity, "autoIoHandler");
+    protected AutoIOTrait(String id, @NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer) {
+        super(blockEntity, id);
         this.tier = tier;
+        this.isBuffer = isBuffer;
         this.importInterval = isBuffer ? TierUtils.getBufferAutoImportInterval(tier) :
                 TierUtils.getMachineAutoImportInterval(tier);
         this.exportInterval = isBuffer ? TierUtils.getBufferAutoExportInterval(tier) :
@@ -120,7 +127,11 @@ public abstract class AutoIOTrait extends ClayContainerTrait {
     public static class Impoter extends AutoIOTrait {
 
         public Impoter(@NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer) {
-            super(blockEntity, tier, isBuffer);
+            super(TRAIT_ID, blockEntity, tier, isBuffer);
+        }
+
+        protected Impoter(String id, @NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer) {
+            super(id, blockEntity, tier, isBuffer);
         }
 
         @Override
@@ -130,7 +141,7 @@ public abstract class AutoIOTrait extends ClayContainerTrait {
     public static class Expoter extends AutoIOTrait {
 
         public Expoter(@NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer) {
-            super(blockEntity, tier, isBuffer);
+            super(TRAIT_ID, blockEntity, tier, isBuffer);
         }
 
         @Override
@@ -140,7 +151,7 @@ public abstract class AutoIOTrait extends ClayContainerTrait {
     public static class Combined extends AutoIOTrait {
 
         public Combined(@NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer) {
-            super(blockEntity, tier, isBuffer);
+            super(TRAIT_ID, blockEntity, tier, isBuffer);
         }
     }
 
@@ -156,7 +167,7 @@ public abstract class AutoIOTrait extends ClayContainerTrait {
 
         public EcImporter(@NotNull ClayContainerBlockEntity blockEntity,
                           @NotNull IItemHandler energizedClayItemHandler) {
-            super(blockEntity, blockEntity.tier, false);
+            super(TRAIT_ID_EC, blockEntity, blockEntity.tier, false);
             this.energizedClayItemHandler = energizedClayItemHandler;
         }
 

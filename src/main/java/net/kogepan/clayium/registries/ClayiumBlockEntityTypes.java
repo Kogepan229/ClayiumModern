@@ -3,6 +3,7 @@ package net.kogepan.clayium.registries;
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.ClayBufferBlockEntity;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.ClayWorkTableBlockEntity;
 import net.kogepan.clayium.blockentities.LaserReflectorBlockEntity;
 import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
@@ -10,6 +11,7 @@ import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CentrifugeBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChemicalReactorBlockEntity;
+import net.kogepan.clayium.blockentities.machine.ClayBlastFurnaceBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayLaserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CobblestoneGeneratorBlockEntity;
@@ -224,6 +226,21 @@ public class ClayiumBlockEntityTypes {
                         .of(SmelterBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ClayBlastFurnaceBlockEntity>> CLAY_BLAST_FURNACE_BLOCK_ENTITY = registerClayContainer(
+            "clay_blast_furnace_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(ClayBlastFurnaceBlockEntity::new, ClayiumBlocks.CLAY_BLAST_FURNACE.get())
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ClayInterfaceBlockEntity>> CLAY_INTERFACE_BLOCK_ENTITY = registerClayContainer(
+            "clay_interface_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(ClayInterfaceBlockEntity::new,
+                            ClayiumBlocks.CLAY_INTERFACE_BLOCKS.values().stream()
+                                    .map(DeferredHolder::get)
+                                    .toArray(Block[]::new))
+                    .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ClayLaserBlockEntity>> CLAY_LASER_BLOCK_ENTITY = registerClayContainer(
             "clay_laser_block_entity",

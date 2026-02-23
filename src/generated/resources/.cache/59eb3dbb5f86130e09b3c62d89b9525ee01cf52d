@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-21T13:31:55.021090689	Loot Tables
+// 1.21.1	2026-02-22T19:51:52.200588031	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -17,6 +17,7 @@ a53371318348338c8fa2dc067c91f25f7f1a43bc data/clayium/loot_table/blocks/centrifu
 f01173e402ea50f53529a96db0122ec6c69812f9 data/clayium/loot_table/blocks/chemical_reactor_4.json
 7e88e0196663dc5b5f02f02e2d16a015bdac6e84 data/clayium/loot_table/blocks/chemical_reactor_5.json
 118ac81472fff6e2bf193e56290cb8eb82ca8932 data/clayium/loot_table/blocks/chemical_reactor_8.json
+7ae9f01e1c207c623f9191a092f972f4e16159f9 data/clayium/loot_table/blocks/clay_blast_furnace.json
 9f3c35edecf0b9d1ed8b90ab32d694cbc7204a10 data/clayium/loot_table/blocks/clay_buffer_10.json
 b396fbc44931e314a2c528e0769700b2629fb13d data/clayium/loot_table/blocks/clay_buffer_11.json
 0e026cfbd51f79add9fd0b3d54b9fb66eb1d1d8b data/clayium/loot_table/blocks/clay_buffer_12.json
@@ -32,6 +33,15 @@ ec9af6a3af10ed5e08cbf972be3f5dcdebcd7479 data/clayium/loot_table/blocks/clay_buf
 1751687a7b0de7a4ac8a9ac3e6e3ceec4f888084 data/clayium/loot_table/blocks/clay_condenser_3.json
 8401b8d87f33c291a3aadc2997465a97dc7e0d2c data/clayium/loot_table/blocks/clay_condenser_4.json
 ee86f26ada6e224f8e7fee211694bea2d653e0e3 data/clayium/loot_table/blocks/clay_condenser_5.json
+1d0e8447b847da3431a03b8c8ef4efbaa3643ce6 data/clayium/loot_table/blocks/clay_interface_10.json
+eae89aedcc7d43d75e6c21471f2c3a3a6e628f7a data/clayium/loot_table/blocks/clay_interface_11.json
+458f42762b206c4abf6e04d3accc3366fd6fd34c data/clayium/loot_table/blocks/clay_interface_12.json
+bcb33fe7ccc10962f85d66fe6f074fff51657d59 data/clayium/loot_table/blocks/clay_interface_13.json
+2d540bb4198f449487b956086c634eb3f88c4eb7 data/clayium/loot_table/blocks/clay_interface_5.json
+cdf427052d80817e8fdf03e64e76d2a67d181d92 data/clayium/loot_table/blocks/clay_interface_6.json
+f63893cdb8b6a95179033e9995ee46d070e6c137 data/clayium/loot_table/blocks/clay_interface_7.json
+5a7fbcb502851372e92fee41a834c9ccf6dd41b6 data/clayium/loot_table/blocks/clay_interface_8.json
+80122778f5a5cbeeb5c343662e900f14cdcf4c59 data/clayium/loot_table/blocks/clay_interface_9.json
 102c0be82eb5d2f02bd8d880e7a54647a9f372b4 data/clayium/loot_table/blocks/clay_laser_10.json
 57e9a81a9cbe4361530795f207d541f0f860f429 data/clayium/loot_table/blocks/clay_laser_7.json
 0eb5d8736e728d18e00901df7ae5933f3d2d16d5 data/clayium/loot_table/blocks/clay_laser_8.json

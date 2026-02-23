@@ -1,8 +1,10 @@
 package net.kogepan.clayium.blockentities;
 
 import net.kogepan.clayium.blockentities.trait.ClayContainerTrait;
+import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.capability.IClayEnergyHolder;
 import net.kogepan.clayium.capability.IItemFilterApplicatable;
 import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
@@ -98,7 +100,9 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
 
     @MustBeInvokedByOverriders
     protected void tick() {
-        this.traits.values().forEach(ClayContainerTrait::tick);
+        for (ClayContainerTrait trait : this.getTraitsSnapshot()) {
+            trait.tick();
+        }
     }
 
     @Override
@@ -114,11 +118,18 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
             }
         }
 
-        this.traits.values().forEach(ClayContainerTrait::onLoad);
+        for (ClayContainerTrait trait : this.getTraitsSnapshot()) {
+            trait.onLoad();
+        }
     }
 
     public void addTrait(ClayContainerTrait trait) {
         this.traits.put(trait.id, trait);
+    }
+
+    @Nullable
+    public ClayContainerTrait removeTrait(@NotNull String id) {
+        return this.traits.remove(id);
     }
 
     @Nullable
@@ -127,13 +138,13 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     }
 
     public void notifyItemInputInventoryChanged() {
-        for (ClayContainerTrait trait : this.traits.values()) {
+        for (ClayContainerTrait trait : this.getTraitsSnapshot()) {
             trait.notifyItemInputInventoryChanged();
         }
     }
 
     public void notifyItemOutputInventoryChanged() {
-        for (ClayContainerTrait trait : this.traits.values()) {
+        for (ClayContainerTrait trait : this.getTraitsSnapshot()) {
             trait.notifyItemOutputInventoryChanged();
         }
     }
@@ -217,9 +228,15 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     }
 
     @Nullable
-    private ItemFilterData getFilterForSide(@NotNull Direction side) {
+    protected ItemFilterData getFilterForSide(@NotNull Direction side) {
         ClayContainerTrait trait = getTrait(ItemFilterHolderTrait.TRAIT_ID);
         return trait instanceof IItemFilterApplicatable applicatable ? applicatable.getFilter(side) : null;
+    }
+
+    @Nullable
+    public IClayEnergyHolder getExposedClayEnergyHolder(@Nullable Direction side) {
+        ClayContainerTrait trait = getTrait(ClayEnergyHolder.TRAIT_ID);
+        return trait instanceof IClayEnergyHolder holder ? holder : null;
     }
 
     protected void invalidateItemHandlerCapability() {
@@ -270,7 +287,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         tag.put("outputModes", this.outputModes.serializeNBT(provider));
 
         // Save trait data
-        for (ClayContainerTrait trait : this.traits.values()) {
+        for (ClayContainerTrait trait : this.getTraitsSnapshot()) {
             CompoundTag traitTag = new CompoundTag();
             trait.saveAdditional(traitTag, provider);
             if (!traitTag.isEmpty()) {
@@ -290,7 +307,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         }
 
         // Load trait data
-        for (ClayContainerTrait trait : this.traits.values()) {
+        for (ClayContainerTrait trait : this.getTraitsSnapshot()) {
             if (tag.contains(trait.id)) {
                 CompoundTag traitTag = tag.getCompound(trait.id);
                 trait.loadAdditional(traitTag, provider);
@@ -306,7 +323,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         tag.put("outputModes", this.outputModes.serializeNBT(provider));
 
         // Save trait data
-        for (ClayContainerTrait trait : this.traits.values()) {
+        for (ClayContainerTrait trait : this.getTraitsSnapshot()) {
             CompoundTag traitTag = new CompoundTag();
             trait.saveForUpdate(traitTag, provider);
             if (!traitTag.isEmpty()) {
@@ -352,7 +369,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         }
 
         // Load trait data
-        for (ClayContainerTrait trait : this.traits.values()) {
+        for (ClayContainerTrait trait : this.getTraitsSnapshot()) {
             if (tag.contains(trait.id)) {
                 CompoundTag traitTag = tag.getCompound(trait.id);
                 trait.loadForUpdate(traitTag, provider);
@@ -364,6 +381,11 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
             this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
                     Block.UPDATE_NONE);
         }
+    }
+
+    @NotNull
+    private List<ClayContainerTrait> getTraitsSnapshot() {
+        return List.copyOf(this.traits.values());
     }
 
     @Override

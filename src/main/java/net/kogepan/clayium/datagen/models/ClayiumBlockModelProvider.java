@@ -20,6 +20,7 @@ import org.jetbrains.annotations.Nullable;
 public class ClayiumBlockModelProvider extends BlockStateProvider {
 
     private static final ResourceLocation OVERLAY_MODEL = Clayium.id("block/overlay");
+    private static final ResourceLocation OVERLAY_ALL_MODEL = Clayium.id("block/overlay_all");
     private static final ResourceLocation INPUT_ALL_OVERLAY_TEXTURE = Clayium.id("block/overlay/import_all");
 
     private static final ResourceLocation[] TIER_BASE_TEXTURES;
@@ -49,6 +50,8 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation DECOMPOSER_TEXTURE = Clayium.id("block/machine/decomposer");
     private static final ResourceLocation INSCRIBER_TEXTURE = Clayium.id("block/machine/inscriber");
     private static final ResourceLocation SMELTER_TEXTURE = Clayium.id("block/machine/smelter");
+    private static final ResourceLocation CLAY_BLAST_FURNACE_TEXTURE = Clayium.id("block/machine/clay_blast_furnace");
+    private static final ResourceLocation CLAY_INTERFACE_TEXTURE = Clayium.id("block/machine/clay_interface");
     private static final ResourceLocation CLAY_LASER_TEXTURE = Clayium.id("block/machine/clay_laser");
 
     public ClayiumBlockModelProvider(PackOutput output, ExistingFileHelper exFileHelper) {
@@ -147,6 +150,12 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         for (var entry : ClayiumBlocks.SMELTER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), SMELTER_TEXTURE);
         }
+        registerSingleMachine(ClayiumBlocks.CLAY_BLAST_FURNACE.get(), 6, CLAY_BLAST_FURNACE_TEXTURE);
+
+        for (var entry : ClayiumBlocks.CLAY_INTERFACE_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CLAY_INTERFACE_TEXTURE, OVERLAY_ALL_MODEL,
+                    false, false);
+        }
 
         for (var entry : ClayiumBlocks.CLAY_LASER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CLAY_LASER_TEXTURE, true, false);
@@ -210,6 +219,11 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,
                                        boolean rotateVertical, boolean overlayItemOnly) {
+        registerSingleMachine(block, tier, overlay, OVERLAY_MODEL, rotateVertical, overlayItemOnly);
+    }
+
+    private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,
+                                       ResourceLocation overlayModel, boolean rotateVertical, boolean overlayItemOnly) {
         ClayContainerModelBuilder builder = models().getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
                 .customLoader(ClayContainerModelBuilder::new)
                 .baseModel(models().nested().parent(models().getExistingFile(models().mcLoc("block/cube_all")))
@@ -217,7 +231,7 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
 
         if (overlay != null) {
             builder.overlayModel(
-                    models().nested().parent(models().getExistingFile(OVERLAY_MODEL)).texture("overlay_front",
+                    models().nested().parent(models().getExistingFile(overlayModel)).texture("overlay_front",
                             overlay));
             if (overlayItemOnly) {
                 builder.overlayItemOnly(true);

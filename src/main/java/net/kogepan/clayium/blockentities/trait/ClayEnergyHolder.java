@@ -59,8 +59,9 @@ public class ClayEnergyHolder extends ClayContainerTrait implements IClayEnergyH
 
     @Override
     public void tick() {
-        this.energizedClayImporter.tick();
         if (blockEntity.getLevel() == null || blockEntity.getLevel().isClientSide()) return;
+
+        this.energizedClayImporter.tick();
 
         Level world = blockEntity.getLevel();
         BlockPos pos = blockEntity.getBlockPos();

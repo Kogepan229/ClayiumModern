@@ -14,7 +14,9 @@ import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.CentrifugeBlock;
 import net.kogepan.clayium.blocks.machine.ChemicalReactorBlock;
+import net.kogepan.clayium.blocks.machine.ClayBlastFurnaceBlock;
 import net.kogepan.clayium.blocks.machine.ClayCondenserBlock;
+import net.kogepan.clayium.blocks.machine.ClayInterfaceBlock;
 import net.kogepan.clayium.blocks.machine.ClayLaserBlock;
 import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
 import net.kogepan.clayium.blocks.machine.CreativeCESourceBlock;
@@ -42,6 +44,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMaps;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Function;
 import java.util.function.Supplier;
@@ -295,6 +298,22 @@ public class ClayiumBlocks {
         SMELTER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
+    public static final DeferredBlock<ClayBlastFurnaceBlock> CLAY_BLAST_FURNACE = BLOCKS.register(
+            "clay_blast_furnace", ClayBlastFurnaceBlock::new);
+    static {
+        ClayiumItems.ITEMS.register("clay_blast_furnace",
+                () -> new TieredBlockItem(CLAY_BLAST_FURNACE.get(), new Item.Properties(), 6));
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CLAY_INTERFACE_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 5; i <= 13; i++) {
+            map.put(i, registerTiered("clay_interface", i, ClayInterfaceBlock::new));
+        }
+        CLAY_INTERFACE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> AUTO_CLAY_CONDENSER_BLOCKS;
     static {
         Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
@@ -328,4 +347,19 @@ public class ClayiumBlocks {
 
     public static final DeferredBlock<ClayLogBlock> CLAY_LOG = register("clay_log", ClayLogBlock::new);
     public static final DeferredBlock<ClayLeavesBlock> CLAY_LEAVES = register("clay_leaves", ClayLeavesBlock::new);
+
+    public static int getMachineHullTier(@NotNull Block block) {
+        if (block == RAW_CLAY_MACHINE_HULL.get()) {
+            return 1;
+        }
+        if (block == AZ91D_ALLOY_HULL.get() || block == ZK60A_ALLOY_HULL.get()) {
+            return 6;
+        }
+        for (var entry : MACHINE_HULLS.int2ObjectEntrySet()) {
+            if (entry.getValue().get() == block) {
+                return entry.getIntKey();
+            }
+        }
+        return -1;
+    }
 }

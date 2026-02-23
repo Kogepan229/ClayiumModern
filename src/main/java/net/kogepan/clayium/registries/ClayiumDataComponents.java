@@ -5,6 +5,7 @@ import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 import net.kogepan.clayium.capability.filter.data.ItemFilterDataCodecs;
 import net.kogepan.clayium.items.filter.component.FilterSlotsData;
 
+import net.minecraft.core.GlobalPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -54,6 +55,13 @@ public class ClayiumDataComponents {
                     () -> DataComponentType.<ItemFilterData>builder()
                             .persistent(ItemFilterDataCodecs
                                     .dispatchCodec(ClayiumFilterTypes.FILTER_TYPES.getRegistry().get()))
+                            .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<GlobalPos>> SYNCHRONIZER_TARGET = DATA_COMPONENTS
+            .register("synchronizer_target",
+                    () -> DataComponentType.<GlobalPos>builder()
+                            .persistent(GlobalPos.CODEC)
+                            .networkSynchronized(ByteBufCodecs.fromCodecWithRegistries(GlobalPos.CODEC))
                             .build());
 
     private ClayiumDataComponents() {}

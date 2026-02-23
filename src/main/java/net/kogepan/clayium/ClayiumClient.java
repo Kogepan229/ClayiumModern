@@ -12,6 +12,7 @@ import net.kogepan.clayium.client.renderer.LaserReflectorBEWLR;
 import net.kogepan.clayium.client.renderer.LaserReflectorRenderer;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumBlocks;
+import net.kogepan.clayium.registries.ClayiumMenuTypes;
 import net.kogepan.clayium.utils.CEUtils;
 
 import net.minecraft.ChatFormatting;
@@ -34,6 +35,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 import net.neoforged.neoforge.client.event.ModelEvent;
+import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.neoforged.neoforge.client.event.TextureAtlasStitchedEvent;
 import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
@@ -43,6 +45,7 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.entity.player.ItemTooltipEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 
+import com.lowdragmc.lowdraglib2.gui.holder.ModularUIContainerScreen;
 import org.jetbrains.annotations.NotNull;
 
 // This class will not load on dedicated servers. Accessing client side code from here is safe.
@@ -120,6 +123,11 @@ public class ClayiumClient {
                 return renderer;
             }
         }, ClayiumBlocks.LASER_REFLECTOR.get().asItem());
+    }
+
+    @SubscribeEvent
+    public static void onRegisterMenuScreens(RegisterMenuScreensEvent event) {
+        event.register(ClayiumMenuTypes.CLAY_INTERFACE_UI.get(), ModularUIContainerScreen::new);
     }
 
     @SubscribeEvent

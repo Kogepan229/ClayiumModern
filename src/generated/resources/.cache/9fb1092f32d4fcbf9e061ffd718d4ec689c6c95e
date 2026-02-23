@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-21T14:00:46.600003314	Recipes
+// 1.21.1	2026-02-22T19:51:52.201805256	Recipes
 3dbe7dd47d57bd754e05636b105fb30612729669 data/clayium/advancement/recipes/misc/centrifuge_3.json
 24cd27ecb334fc3e4fe9f41cb2932f87abf6c297 data/clayium/advancement/recipes/misc/centrifuge_4.json
 7195387f8196585e8d8444ef5a84ae5b2daaff11 data/clayium/advancement/recipes/misc/centrifuge_5.json
@@ -75,6 +75,11 @@ eb1471a2b2ea7537ecb5eb2f0fd1ea60451e0a24 data/clayium/recipe/chemical_reactor/en
 36f051aaceb76769a3010eb2f382961b6aab72ed data/clayium/recipe/chemical_reactor_4.json
 567de0ab53634783901dd296bc9aa27b0e2ea616 data/clayium/recipe/chemical_reactor_5.json
 b6265597fe24fbe1e02d32b7f401a608cf35e289 data/clayium/recipe/chemical_reactor_8.json
+51a5d992a3c8cb4e3df8dcf9e3a5c43519a2a213 data/clayium/recipe/clay_blast_furnace/az91d_alloy_dust.json
+ed46017993eb4f1452d1a7c93b1b0650ba19c228 data/clayium/recipe/clay_blast_furnace/clay_steel_dust.json
+7ddb8c47d0a050bc5f0812c7bd7b56bee53192e8 data/clayium/recipe/clay_blast_furnace/clayium_dust.json
+b5c8d242b8fb973600abc31d384112c2e5e4aebb data/clayium/recipe/clay_blast_furnace/ultimate_alloy_dust.json
+b231b550a90682cd1bc0534ec824e7d37e96cb62 data/clayium/recipe/clay_blast_furnace/zk60a_alloy_dust.json
 5ddc0284964825f80d38b5e3944c4a12aa3c86e5 data/clayium/recipe/clay_condenser/advanced_industrial_clay_shard_to_block.json
 fc0ae01610e667a703865639c5b936a402cf6ad1 data/clayium/recipe/clay_condenser/clay_to_compressed_0.json
 9ed8d42482bcceeae33f4810efd561b9ab53a76a data/clayium/recipe/clay_condenser/compressed_0_to_1.json

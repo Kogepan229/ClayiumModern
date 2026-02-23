@@ -2,6 +2,7 @@ package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.items.RawClayFilterRemoverItem;
+import net.kogepan.clayium.items.SynchronizerItem;
 import net.kogepan.clayium.items.TieredItem;
 import net.kogepan.clayium.items.filter.FazyItemFilterItem;
 import net.kogepan.clayium.items.filter.SimpleItemFilterItem;
@@ -208,6 +209,7 @@ public class ClayiumItems {
     public static final DeferredItem<Item> SIMPLE_ITEM_FILTER = ITEMS.registerItem("simple_item_filter", p -> new SimpleItemFilterItem());
     public static final DeferredItem<Item> FAZY_ITEM_FILTER = ITEMS.registerItem("fazy_item_filter", p -> new FazyItemFilterItem());
     public static final DeferredItem<Item> UNLOCALIZED_NAME_ITEM_FILTER = ITEMS.registerItem("unlocalized_name_item_filter", p -> new UnlocalizedNameItemFilterItem());
+    public static final DeferredItem<Item> SYNCHRONIZER = ITEMS.registerItem("synchronizer", SynchronizerItem::new);
 
     // spotless:on
 }

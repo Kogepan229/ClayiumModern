@@ -57,4 +57,12 @@ public final class ClayiumCapabilities {
             .createSided(
                     ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "item_filter_applicatable"),
                     IItemFilterApplicatable.class);
+
+    /**
+     * Capability for synchronized interface link management.
+     */
+    public static final BlockCapability<ISynchronizedInterface, @Nullable Direction> SYNCHRONIZED_INTERFACE = BlockCapability
+            .createSided(
+                    ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "synchronized_interface"),
+                    ISynchronizedInterface.class);
 }

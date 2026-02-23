@@ -69,7 +69,24 @@ public class XEIMachineRecipeCategory {
                 ClayiumBlocks.INSCRIBER_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.SMELTER_RECIPE_TYPE,
                 ClayiumBlocks.SMELTER_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.CLAY_BLAST_FURNACE_RECIPE_TYPE,
+                castWorkstations(ClayiumBlocks.CLAY_BLAST_FURNACE)));
 
         return categories;
+    }
+
+    @SafeVarargs
+    private static Collection<DeferredBlock<ClayContainerBlock>> castWorkstations(
+                                                                                  DeferredBlock<? extends ClayContainerBlock>... blocks) {
+        List<DeferredBlock<ClayContainerBlock>> list = new ArrayList<>(blocks.length);
+        for (DeferredBlock<? extends ClayContainerBlock> block : blocks) {
+            list.add(castBlock(block));
+        }
+        return list;
+    }
+
+    @SuppressWarnings("unchecked")
+    private static DeferredBlock<ClayContainerBlock> castBlock(DeferredBlock<? extends ClayContainerBlock> block) {
+        return (DeferredBlock<ClayContainerBlock>) (DeferredBlock<?>) block;
     }
 }
