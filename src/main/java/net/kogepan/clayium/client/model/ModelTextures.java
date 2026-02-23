@@ -15,12 +15,20 @@ import java.util.Map;
 public class ModelTextures {
 
     private static final ResourceLocation OVERLAY_IMPORT_PIPE_ALL = Clayium.id("block/overlay/import_pipe_all");
+    private static final ResourceLocation OVERLAY_IMPORT_PIPE_FIRST = Clayium.id("block/overlay/import_pipe_1");
+    private static final ResourceLocation OVERLAY_IMPORT_PIPE_SECOND = Clayium.id("block/overlay/import_pipe_2");
     private static final ResourceLocation OVERLAY_IMPORT_PIPE_CE = Clayium.id("block/overlay/import_pipe_ce");
     private static final ResourceLocation OVERLAY_EXPORT_PIPE_ALL = Clayium.id("block/overlay/export_pipe_all");
+    private static final ResourceLocation OVERLAY_EXPORT_PIPE_FIRST = Clayium.id("block/overlay/export_pipe_1");
+    private static final ResourceLocation OVERLAY_EXPORT_PIPE_SECOND = Clayium.id("block/overlay/export_pipe_2");
 
     private static final ResourceLocation OVERLAY_IMPORT_ALL = Clayium.id("block/overlay/import_all");
+    private static final ResourceLocation OVERLAY_IMPORT_FIRST = Clayium.id("block/overlay/import_1");
+    private static final ResourceLocation OVERLAY_IMPORT_SECOND = Clayium.id("block/overlay/import_2");
     private static final ResourceLocation OVERLAY_IMPORT_CE = Clayium.id("block/overlay/import_ce");
     private static final ResourceLocation OVERLAY_EXPORT_ALL = Clayium.id("block/overlay/export_all");
+    private static final ResourceLocation OVERLAY_EXPORT_FIRST = Clayium.id("block/overlay/export_1");
+    private static final ResourceLocation OVERLAY_EXPORT_SECOND = Clayium.id("block/overlay/export_2");
     private static final ResourceLocation OVERLAY_FILTER = Clayium.id("block/overlay/filter");
 
     private static final Map<MachineIOMode, @Nullable TextureAtlasSprite> OVERLAY_IMPORT_SPRITES = new EnumMap<>(
@@ -34,8 +42,8 @@ public class ModelTextures {
     public static ResourceLocation getOverlayImport(MachineIOMode mode) {
         return switch (mode) {
             case NONE -> null;
-            case FIRST -> null;
-            case SECOND -> null;
+            case FIRST -> OVERLAY_IMPORT_FIRST;
+            case SECOND -> OVERLAY_IMPORT_SECOND;
             case ALL -> OVERLAY_IMPORT_ALL;
             case CE -> OVERLAY_IMPORT_CE;
         };
@@ -45,8 +53,8 @@ public class ModelTextures {
     public static ResourceLocation getOverlayExport(MachineIOMode mode) {
         return switch (mode) {
             case NONE -> null;
-            case FIRST -> null;
-            case SECOND -> null;
+            case FIRST -> OVERLAY_EXPORT_FIRST;
+            case SECOND -> OVERLAY_EXPORT_SECOND;
             case ALL -> OVERLAY_EXPORT_ALL;
             case CE -> null;
         };
@@ -56,8 +64,8 @@ public class ModelTextures {
     public static ResourceLocation getOverlayImportPipe(MachineIOMode mode) {
         return switch (mode) {
             case NONE -> null;
-            case FIRST -> null;
-            case SECOND -> null;
+            case FIRST -> OVERLAY_IMPORT_PIPE_FIRST;
+            case SECOND -> OVERLAY_IMPORT_PIPE_SECOND;
             case ALL -> OVERLAY_IMPORT_PIPE_ALL;
             case CE -> OVERLAY_IMPORT_PIPE_CE;
         };
@@ -67,8 +75,8 @@ public class ModelTextures {
     public static ResourceLocation getOverlayExportPipe(MachineIOMode mode) {
         return switch (mode) {
             case NONE -> null;
-            case FIRST -> null;
-            case SECOND -> null;
+            case FIRST -> OVERLAY_EXPORT_PIPE_FIRST;
+            case SECOND -> OVERLAY_EXPORT_PIPE_SECOND;
             case ALL -> OVERLAY_EXPORT_PIPE_ALL;
             case CE -> null;
         };
