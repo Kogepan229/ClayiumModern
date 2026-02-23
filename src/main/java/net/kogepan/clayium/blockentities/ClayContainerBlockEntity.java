@@ -167,10 +167,27 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         return this.outputModes.getMode(direction);
     }
 
+    @NotNull
+    protected List<MachineIOMode> getCycleValidInputModes(@NotNull Direction direction) {
+        return this.validInputModes;
+    }
+
+    @NotNull
+    protected List<MachineIOMode> getCycleValidOutputModes(@NotNull Direction direction) {
+        return this.validOutputModes;
+    }
+
     public void cycleInputMode(@NotNull Direction direction) {
+        List<MachineIOMode> validModes = this.getCycleValidInputModes(direction);
+        if (validModes.isEmpty()) {
+            return;
+        }
+
         MachineIOMode current = this.inputModes.getMode(direction);
-        int currentIndex = this.validInputModes.indexOf(current);
-        MachineIOMode next = this.validInputModes.get((currentIndex + 1) % this.validInputModes.size());
+        int currentIndex = validModes.indexOf(current);
+        MachineIOMode next = currentIndex >= 0 ?
+                validModes.get((currentIndex + 1) % validModes.size()) :
+                validModes.get(0);
 
         this.inputModes.setMode(direction, next);
         if (level != null && !level.isClientSide()) {
@@ -182,9 +199,16 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     }
 
     public void cycleOutputMode(@NotNull Direction direction) {
+        List<MachineIOMode> validModes = this.getCycleValidOutputModes(direction);
+        if (validModes.isEmpty()) {
+            return;
+        }
+
         MachineIOMode current = this.outputModes.getMode(direction);
-        int currentIndex = this.validOutputModes.indexOf(current);
-        MachineIOMode next = this.validOutputModes.get((currentIndex + 1) % this.validOutputModes.size());
+        int currentIndex = validModes.indexOf(current);
+        MachineIOMode next = currentIndex >= 0 ?
+                validModes.get((currentIndex + 1) % validModes.size()) :
+                validModes.get(0);
 
         this.outputModes.setMode(direction, next);
         if (level != null && !level.isClientSide()) {

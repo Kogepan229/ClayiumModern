@@ -38,6 +38,7 @@ import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -94,8 +95,7 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     public ClayInterfaceBlockEntity(@NotNull BlockPos pos,
                                     @NotNull BlockState blockState) {
         super(ClayiumBlockEntityTypes.CLAY_INTERFACE_BLOCK_ENTITY.get(), pos, blockState,
-                List.of(MachineIOMode.NONE, MachineIOMode.ALL, MachineIOMode.CE),
-                List.of(MachineIOMode.NONE, MachineIOMode.ALL));
+                Collections.emptyList(), Collections.emptyList());
     }
 
     @Override
@@ -152,19 +152,17 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     }
 
     @Override
-    public void cycleInputMode(@NotNull Direction direction) {
-        if (!this.hasValidTargetForModeChange()) {
-            return;
-        }
-        super.cycleInputMode(direction);
+    @NotNull
+    protected List<MachineIOMode> getCycleValidInputModes(@NotNull Direction direction) {
+        ClayContainerBlockEntity targetContainer = this.resolveTargetForModeCycle();
+        return targetContainer != null ? targetContainer.validInputModes : Collections.emptyList();
     }
 
     @Override
-    public void cycleOutputMode(@NotNull Direction direction) {
-        if (!this.hasValidTargetForModeChange()) {
-            return;
-        }
-        super.cycleOutputMode(direction);
+    @NotNull
+    protected List<MachineIOMode> getCycleValidOutputModes(@NotNull Direction direction) {
+        ClayContainerBlockEntity targetContainer = this.resolveTargetForModeCycle();
+        return targetContainer != null ? targetContainer.validOutputModes : Collections.emptyList();
     }
 
     @Override
@@ -482,6 +480,21 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
         } catch (IllegalArgumentException ignored) {
             return LinkSource.MANUAL;
         }
+    }
+
+    @Nullable
+    private ClayContainerBlockEntity resolveTargetForModeCycle() {
+        if (this.level instanceof ServerLevel) {
+            TargetResolution resolution = this.resolveTarget(this.linkedTargetPos);
+            if (resolution.state() == TargetState.VALID) {
+                return resolution.target();
+            }
+            return null;
+        }
+        if (this.targetValid) {
+            return this.linkedTarget;
+        }
+        return null;
     }
 
     public boolean hasValidTargetForModeChange() {
