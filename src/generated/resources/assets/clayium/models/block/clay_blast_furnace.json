@@ -9,7 +9,15 @@
   "overlay_model": {
     "parent": "clayium:block/overlay",
     "textures": {
-      "overlay_front": "clayium:block/machine/clay_blast_furnace"
+      "overlay_front": "clayium:block/machine/clay_blast_furnace_unformed"
+    }
+  },
+  "overlay_models": {
+    "formed": {
+      "parent": "clayium:block/overlay",
+      "textures": {
+        "overlay_front": "clayium:block/machine/clay_blast_furnace_formed"
+      }
     }
   }
 }

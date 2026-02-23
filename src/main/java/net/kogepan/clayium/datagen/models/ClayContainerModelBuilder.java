@@ -9,10 +9,14 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import com.google.gson.JsonObject;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class ClayContainerModelBuilder extends CustomLoaderBuilder<BlockModelBuilder> {
 
     BlockModelBuilder baseModel;
     BlockModelBuilder overlayModel;
+    Map<String, BlockModelBuilder> overlayModels = new LinkedHashMap<>();
     boolean rotateVertical = false;
     boolean overlayItemOnly = false;
 
@@ -27,6 +31,11 @@ public class ClayContainerModelBuilder extends CustomLoaderBuilder<BlockModelBui
 
     public ClayContainerModelBuilder overlayModel(BlockModelBuilder overlayModel) {
         this.overlayModel = overlayModel;
+        return this;
+    }
+
+    public ClayContainerModelBuilder overlayModelVariant(@NotNull String variantKey, BlockModelBuilder overlayModel) {
+        this.overlayModels.put(variantKey, overlayModel);
         return this;
     }
 
@@ -52,6 +61,13 @@ public class ClayContainerModelBuilder extends CustomLoaderBuilder<BlockModelBui
 
         if (overlayModel != null) {
             json.add("overlay_model", overlayModel.toJson());
+        }
+        if (!overlayModels.isEmpty()) {
+            JsonObject overlayModelsJson = new JsonObject();
+            for (var entry : overlayModels.entrySet()) {
+                overlayModelsJson.add(entry.getKey(), entry.getValue().toJson());
+            }
+            json.add("overlay_models", overlayModelsJson);
         }
 
         if (rotateVertical) {

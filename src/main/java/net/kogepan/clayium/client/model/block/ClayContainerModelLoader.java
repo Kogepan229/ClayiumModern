@@ -11,6 +11,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class ClayContainerModelLoader implements IGeometryLoader<UnbakedClayContainerModel> {
 
     public static final ClayContainerModelLoader INSTANCE = new ClayContainerModelLoader();
@@ -24,6 +27,7 @@ public class ClayContainerModelLoader implements IGeometryLoader<UnbakedClayCont
                                           @NotNull JsonDeserializationContext context) throws JsonParseException {
         BlockModel base = null;
         BlockModel overlay = null;
+        Map<String, BlockModel> overlayModels = Map.of();
         boolean rotateVertical = false;
         boolean overlayItemOnly = false;
 
@@ -32,6 +36,13 @@ public class ClayContainerModelLoader implements IGeometryLoader<UnbakedClayCont
         }
         if (json.has("overlay_model")) {
             overlay = context.deserialize(json.getAsJsonObject("overlay_model"), BlockModel.class);
+        }
+        if (json.has("overlay_models")) {
+            overlayModels = new LinkedHashMap<>();
+            JsonObject overlayModelsJson = json.getAsJsonObject("overlay_models");
+            for (String key : overlayModelsJson.keySet()) {
+                overlayModels.put(key, context.deserialize(overlayModelsJson.getAsJsonObject(key), BlockModel.class));
+            }
         }
         if (json.has("rotate_vertical")) {
             rotateVertical = json.get("rotate_vertical").getAsBoolean();
@@ -43,6 +54,6 @@ public class ClayContainerModelLoader implements IGeometryLoader<UnbakedClayCont
             throw new JsonParseException("ClayContainerModel dosen't have 'base_model'");
         }
 
-        return new UnbakedClayContainerModel(base, overlay, rotateVertical, overlayItemOnly);
+        return new UnbakedClayContainerModel(base, overlay, overlayModels, rotateVertical, overlayItemOnly);
     }
 }

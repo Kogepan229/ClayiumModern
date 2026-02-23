@@ -36,6 +36,8 @@ public class ClayBlastFurnaceBlockEntity extends WorkableClayContainerBlockEntit
 
     private static final int STRUCTURE_CHECK_INTERVAL = 20;
     private static final int STRUCTURE_PARTS = 17;
+    private static final String FRONT_OVERLAY_VARIANT_DEFAULT = "default";
+    public static final String FRONT_OVERLAY_VARIANT_FORMED = "formed";
 
     @Getter
     private boolean structureFormed = false;
@@ -244,6 +246,28 @@ public class ClayBlastFurnaceBlockEntity extends WorkableClayContainerBlockEntit
         if (tag.contains("structureCheckTimer")) {
             this.structureCheckTimer = tag.getInt("structureCheckTimer");
         }
+    }
+
+    @Override
+    @NotNull
+    public CompoundTag getUpdateTag(@NotNull HolderLookup.Provider provider) {
+        CompoundTag tag = super.getUpdateTag(provider);
+        tag.putBoolean("structureFormed", this.structureFormed);
+        return tag;
+    }
+
+    @Override
+    protected void onReceivePacket(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
+        if (tag.contains("structureFormed")) {
+            this.structureFormed = tag.getBoolean("structureFormed");
+        }
+        super.onReceivePacket(tag, provider);
+    }
+
+    @Override
+    @NotNull
+    protected String getFrontOverlayVariant() {
+        return this.structureFormed ? FRONT_OVERLAY_VARIANT_FORMED : FRONT_OVERLAY_VARIANT_DEFAULT;
     }
 
     @Override

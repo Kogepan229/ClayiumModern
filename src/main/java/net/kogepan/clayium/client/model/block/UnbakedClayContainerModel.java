@@ -36,21 +36,30 @@ public class UnbakedClayContainerModel implements IUnbakedGeometry<UnbakedClayCo
     private final BlockModel base;
     @Nullable
     private final BlockModel overlay;
+    @NotNull
+    private final Map<String, BlockModel> overlays;
     private final boolean rotateVertical;
     private final boolean overlayItemOnly;
 
     public UnbakedClayContainerModel(BlockModel base, @Nullable BlockModel overlay) {
-        this(base, overlay, false, false);
+        this(base, overlay, Map.of(), false, false);
     }
 
     public UnbakedClayContainerModel(BlockModel base, @Nullable BlockModel overlay, boolean rotateVertical) {
-        this(base, overlay, rotateVertical, false);
+        this(base, overlay, Map.of(), rotateVertical, false);
     }
 
     public UnbakedClayContainerModel(BlockModel base, @Nullable BlockModel overlay, boolean rotateVertical,
                                      boolean overlayItemOnly) {
+        this(base, overlay, Map.of(), rotateVertical, overlayItemOnly);
+    }
+
+    public UnbakedClayContainerModel(BlockModel base, @Nullable BlockModel overlay,
+                                     @NotNull Map<String, BlockModel> overlays,
+                                     boolean rotateVertical, boolean overlayItemOnly) {
         this.base = base;
         this.overlay = overlay;
+        this.overlays = overlays;
         this.rotateVertical = rotateVertical;
         this.overlayItemOnly = overlayItemOnly;
     }
@@ -62,27 +71,16 @@ public class UnbakedClayContainerModel implements IUnbakedGeometry<UnbakedClayCo
                            @NotNull ItemOverrides overrides) {
         BakedModel bakedBase = this.base.bake(baker, spriteGetter, modelState);
 
-        Map<Direction, BakedModel> bakedOverlays = null;
+        Map<String, Map<Direction, BakedModel>> bakedOverlays = new java.util.LinkedHashMap<>();
         if (this.overlay != null) {
-
-            bakedOverlays = new EnumMap<>(Direction.class);
-            bakedOverlays.put(Direction.NORTH,
-                    ModelUtils.rotateModel(this.overlay, baker, spriteGetter, context.getRootTransform(), 0));
-            bakedOverlays.put(Direction.WEST,
-                    ModelUtils.rotateModel(this.overlay, baker, spriteGetter, context.getRootTransform(), 90));
-            bakedOverlays.put(Direction.SOUTH,
-                    ModelUtils.rotateModel(this.overlay, baker, spriteGetter, context.getRootTransform(), 180));
-            bakedOverlays.put(Direction.EAST,
-                    ModelUtils.rotateModel(this.overlay, baker, spriteGetter, context.getRootTransform(), 270));
-
-            if (this.rotateVertical) {
-                bakedOverlays.put(Direction.UP,
-                        ModelUtils.rotateModelVertical(this.overlay, baker, spriteGetter, context.getRootTransform(),
-                                90));
-                bakedOverlays.put(Direction.DOWN,
-                        ModelUtils.rotateModelVertical(this.overlay, baker, spriteGetter, context.getRootTransform(),
-                                -90));
-            }
+            bakedOverlays.put(ClayContainerModel.DEFAULT_FRONT_OVERLAY_VARIANT,
+                    bakeOverlay(this.overlay, baker, spriteGetter, context));
+        }
+        for (var entry : this.overlays.entrySet()) {
+            bakedOverlays.put(entry.getKey(), bakeOverlay(entry.getValue(), baker, spriteGetter, context));
+        }
+        if (bakedOverlays.isEmpty()) {
+            bakedOverlays = null;
         }
 
         BakedModel pipeCore = new BakedPipeModel(bakedBase, baker.bake(PIPE_CORE_MODEL, modelState, spriteGetter));
@@ -109,5 +107,31 @@ public class UnbakedClayContainerModel implements IUnbakedGeometry<UnbakedClayCo
         if (this.overlay != null) {
             this.overlay.resolveParents(modelGetter);
         }
+        for (var overlayModel : this.overlays.values()) {
+            overlayModel.resolveParents(modelGetter);
+        }
+    }
+
+    @NotNull
+    private Map<Direction, BakedModel> bakeOverlay(@NotNull BlockModel overlay, @NotNull ModelBaker baker,
+                                                   @NotNull Function<Material, TextureAtlasSprite> spriteGetter,
+                                                   @NotNull IGeometryBakingContext context) {
+        Map<Direction, BakedModel> bakedOverlay = new EnumMap<>(Direction.class);
+        bakedOverlay.put(Direction.NORTH,
+                ModelUtils.rotateModel(overlay, baker, spriteGetter, context.getRootTransform(), 0));
+        bakedOverlay.put(Direction.WEST,
+                ModelUtils.rotateModel(overlay, baker, spriteGetter, context.getRootTransform(), 90));
+        bakedOverlay.put(Direction.SOUTH,
+                ModelUtils.rotateModel(overlay, baker, spriteGetter, context.getRootTransform(), 180));
+        bakedOverlay.put(Direction.EAST,
+                ModelUtils.rotateModel(overlay, baker, spriteGetter, context.getRootTransform(), 270));
+
+        if (this.rotateVertical) {
+            bakedOverlay.put(Direction.UP,
+                    ModelUtils.rotateModelVertical(overlay, baker, spriteGetter, context.getRootTransform(), 90));
+            bakedOverlay.put(Direction.DOWN,
+                    ModelUtils.rotateModelVertical(overlay, baker, spriteGetter, context.getRootTransform(), -90));
+        }
+        return bakedOverlay;
     }
 }

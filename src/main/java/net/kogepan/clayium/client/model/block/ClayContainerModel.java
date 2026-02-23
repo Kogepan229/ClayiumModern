@@ -41,20 +41,23 @@ public class ClayContainerModel implements IDynamicBakedModel {
 
     private static final ChunkRenderTypeSet RENDER_TYPES = ChunkRenderTypeSet.of(RenderType.CUTOUT);
 
+    public static final String DEFAULT_FRONT_OVERLAY_VARIANT = "default";
     public static final ModelProperty<MachineIOModes> MODEL_DATA_IMPORT = new ModelProperty<>();
     public static final ModelProperty<MachineIOModes> MODEL_DATA_EXPORT = new ModelProperty<>();
     public static final ModelProperty<boolean[]> MODEL_DATA_FILTER_SIDES = new ModelProperty<>();
+    public static final ModelProperty<String> MODEL_DATA_FRONT_OVERLAY_VARIANT = new ModelProperty<>();
 
     private final BakedModel baseModel;
     @Nullable
-    private final Map<Direction, BakedModel> bakedOverlayModels;
+    private final Map<String, Map<Direction, BakedModel>> bakedOverlayModels;
 
     private final BakedModel pipeCoreModel;
     private final Map<Direction, BakedModel> pipeArmModels;
 
     private final boolean overlayItemOnly;
 
-    public ClayContainerModel(BakedModel base, @Nullable Map<Direction, BakedModel> overlays, BakedModel pipeCore,
+    public ClayContainerModel(BakedModel base, @Nullable Map<String, Map<Direction, BakedModel>> overlays,
+                              BakedModel pipeCore,
                               Map<Direction, BakedModel> pipeArms, boolean overlayItemOnly) {
         this.baseModel = base;
         this.bakedOverlayModels = overlays;
@@ -81,8 +84,14 @@ public class ClayContainerModel implements IDynamicBakedModel {
                     if (blockState != null && blockState.getBlock() instanceof ClayContainerBlock containerBlock) {
                         facing = blockState.getValue(containerBlock.getFacingProperty());
                     }
-                    quads.addAll(bakedOverlayModels.get(facing).getQuads(blockState, direction, randomSource,
-                            modelData, renderType));
+                    Map<Direction, BakedModel> overlay = getOverlayVariant(modelData);
+                    if (overlay != null) {
+                        BakedModel facingOverlay = overlay.get(facing);
+                        if (facingOverlay != null) {
+                            quads.addAll(facingOverlay.getQuads(blockState, direction, randomSource, modelData,
+                                    renderType));
+                        }
+                    }
                 }
             }
 
@@ -109,6 +118,21 @@ public class ClayContainerModel implements IDynamicBakedModel {
         }
 
         return quads;
+    }
+
+    @Nullable
+    private Map<Direction, BakedModel> getOverlayVariant(@NotNull ModelData modelData) {
+        if (this.bakedOverlayModels == null || this.bakedOverlayModels.isEmpty()) {
+            return null;
+        }
+        String overlayVariant = modelData.get(MODEL_DATA_FRONT_OVERLAY_VARIANT);
+        if (overlayVariant != null) {
+            Map<Direction, BakedModel> selected = this.bakedOverlayModels.get(overlayVariant);
+            if (selected != null) {
+                return selected;
+            }
+        }
+        return this.bakedOverlayModels.get(DEFAULT_FRONT_OVERLAY_VARIANT);
     }
 
     private void renderOverlays(@NotNull List<BakedQuad> quads, @Nullable Direction direction,

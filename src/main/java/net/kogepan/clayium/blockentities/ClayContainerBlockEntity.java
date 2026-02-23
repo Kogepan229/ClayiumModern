@@ -55,6 +55,7 @@ import java.util.Map;
 
 import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_EXPORT;
 import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_FILTER_SIDES;
+import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_FRONT_OVERLAY_VARIANT;
 import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_IMPORT;
 
 public abstract class ClayContainerBlockEntity extends BlockEntity {
@@ -398,11 +399,21 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
                 filterSides[d.ordinal()] = filterHolder.getFilter(d) != null || filterHolder.hasFilterClientOnly(d);
             }
         }
-        return ModelData.builder()
+        ModelData.Builder builder = ModelData.builder()
                 .with(MODEL_DATA_IMPORT, this.inputModes)
                 .with(MODEL_DATA_EXPORT, this.outputModes)
-                .with(MODEL_DATA_FILTER_SIDES, filterSides)
-                .build();
+                .with(MODEL_DATA_FILTER_SIDES, filterSides);
+        String frontOverlayVariant = this.getFrontOverlayVariant();
+        if (frontOverlayVariant != null) {
+            builder.with(MODEL_DATA_FRONT_OVERLAY_VARIANT, frontOverlayVariant);
+        }
+        return builder.build();
+    }
+
+    @Nullable
+    protected String getFrontOverlayVariant() {
+        // Override in machines that need state-dependent front overlays.
+        return null;
     }
 
     protected abstract void createMainUI(BlockUIMenuType.BlockUIHolder holder, UIElement root);

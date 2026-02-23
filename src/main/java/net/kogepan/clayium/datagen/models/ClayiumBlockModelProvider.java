@@ -1,6 +1,7 @@
 package net.kogepan.clayium.datagen.models;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.blockentities.machine.ClayBlastFurnaceBlockEntity;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -16,6 +17,8 @@ import net.neoforged.neoforge.client.model.generators.VariantBlockStateBuilder;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 import org.jetbrains.annotations.Nullable;
+
+import java.util.Map;
 
 public class ClayiumBlockModelProvider extends BlockStateProvider {
 
@@ -50,7 +53,10 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation DECOMPOSER_TEXTURE = Clayium.id("block/machine/decomposer");
     private static final ResourceLocation INSCRIBER_TEXTURE = Clayium.id("block/machine/inscriber");
     private static final ResourceLocation SMELTER_TEXTURE = Clayium.id("block/machine/smelter");
-    private static final ResourceLocation CLAY_BLAST_FURNACE_TEXTURE = Clayium.id("block/machine/clay_blast_furnace");
+    private static final ResourceLocation CLAY_BLAST_FURNACE_TEXTURE_UNFORMED = Clayium
+            .id("block/machine/clay_blast_furnace_unformed");
+    private static final ResourceLocation CLAY_BLAST_FURNACE_TEXTURE_FORMED = Clayium
+            .id("block/machine/clay_blast_furnace_formed");
     private static final ResourceLocation CLAY_INTERFACE_TEXTURE = Clayium.id("block/machine/clay_interface");
     private static final ResourceLocation CLAY_LASER_TEXTURE = Clayium.id("block/machine/clay_laser");
 
@@ -150,7 +156,9 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         for (var entry : ClayiumBlocks.SMELTER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), SMELTER_TEXTURE);
         }
-        registerSingleMachine(ClayiumBlocks.CLAY_BLAST_FURNACE.get(), 6, CLAY_BLAST_FURNACE_TEXTURE);
+        registerSingleMachine(ClayiumBlocks.CLAY_BLAST_FURNACE.get(), 6, CLAY_BLAST_FURNACE_TEXTURE_UNFORMED,
+                Map.of(ClayBlastFurnaceBlockEntity.FRONT_OVERLAY_VARIANT_FORMED, CLAY_BLAST_FURNACE_TEXTURE_FORMED),
+                false, false);
 
         for (var entry : ClayiumBlocks.CLAY_INTERFACE_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CLAY_INTERFACE_TEXTURE, OVERLAY_ALL_MODEL,
@@ -219,10 +227,22 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,
                                        boolean rotateVertical, boolean overlayItemOnly) {
-        registerSingleMachine(block, tier, overlay, OVERLAY_MODEL, rotateVertical, overlayItemOnly);
+        registerSingleMachine(block, tier, overlay, Map.of(), OVERLAY_MODEL, rotateVertical, overlayItemOnly);
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,
+                                       Map<String, ResourceLocation> overlayVariants,
+                                       boolean rotateVertical, boolean overlayItemOnly) {
+        registerSingleMachine(block, tier, overlay, overlayVariants, OVERLAY_MODEL, rotateVertical, overlayItemOnly);
+    }
+
+    private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,
+                                       ResourceLocation overlayModel, boolean rotateVertical, boolean overlayItemOnly) {
+        registerSingleMachine(block, tier, overlay, Map.of(), overlayModel, rotateVertical, overlayItemOnly);
+    }
+
+    private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,
+                                       Map<String, ResourceLocation> overlayVariants,
                                        ResourceLocation overlayModel, boolean rotateVertical, boolean overlayItemOnly) {
         ClayContainerModelBuilder builder = models().getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
                 .customLoader(ClayContainerModelBuilder::new)
@@ -236,6 +256,11 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
             if (overlayItemOnly) {
                 builder.overlayItemOnly(true);
             }
+        }
+        for (var entry : overlayVariants.entrySet()) {
+            builder.overlayModelVariant(entry.getKey(),
+                    models().nested().parent(models().getExistingFile(overlayModel)).texture("overlay_front",
+                            entry.getValue()));
         }
 
         if (rotateVertical) {
