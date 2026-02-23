@@ -280,6 +280,7 @@
   "clayium.configuration.logDirtBlock": "Log Dirt Block",
   "clayium.configuration.magicNumberIntroduction": "Magic Number Text",
   "clayium.configuration.magicNumber": "Magic Number",
+  "clayium.configuration.interfaceTargetHighlightOutline": "Interface Target Highlight Outline",
 
   "item.clayium.simple_item_filter": "Simple Item Filter",
   "item.clayium.simple_item_filter.tooltip": "Right-click to configure. Allow/Deny list of items.\nFilters placed in slots are applied as well (nested filters).",

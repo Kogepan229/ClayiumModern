@@ -140,7 +140,7 @@ public class Clayium {
                     (blockEntity, side) -> {
                         ClayContainerBlockEntity container = (ClayContainerBlockEntity) blockEntity;
                         if (container instanceof ClayInterfaceBlockEntity clayInterface &&
-                                !clayInterface.hasValidTargetForModeChange()) {
+                                !clayInterface.hasValidTarget()) {
                             return null;
                         }
                         var trait = container.getTrait(ItemFilterHolderTrait.TRAIT_ID);

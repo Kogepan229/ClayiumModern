@@ -48,6 +48,7 @@ import java.util.List;
 public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implements ISynchronizedInterface {
 
     private static final String LINKED_TARGET_TAG = "linkedTarget";
+    private static final String LINKED_TARGET_PRESENT_TAG = "hasLinkedTarget";
     private static final String LINK_SOURCE_TAG = "linkSource";
     private static final String TARGET_VALID_TAG = "targetValid";
     private static final int VALIDATION_INTERVAL = 20;
@@ -212,47 +213,83 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     @Override
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
         super.saveAdditional(tag, provider);
-
-        if (this.linkedTargetPos != null) {
-            GlobalPos.CODEC.encodeStart(provider.createSerializationContext(NbtOps.INSTANCE), this.linkedTargetPos)
-                    .result()
-                    .ifPresent(encoded -> tag.put(LINKED_TARGET_TAG, encoded));
-            tag.putString(LINK_SOURCE_TAG, this.linkSource.name());
-        }
+        this.writeLinkedTargetTag(tag, provider, true);
     }
 
     @Override
     protected void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
         super.loadAdditional(tag, provider);
-
-        this.linkedTargetPos = null;
-        this.linkSource = LinkSource.NONE;
-        if (tag.contains(LINKED_TARGET_TAG)) {
-            this.linkedTargetPos = GlobalPos.CODEC
-                    .parse(provider.createSerializationContext(NbtOps.INSTANCE), tag.get(LINKED_TARGET_TAG))
-                    .result()
-                    .orElse(null);
-            this.linkSource = readLinkSource(tag.getString(LINK_SOURCE_TAG));
-        }
-
-        if (this.linkedTargetPos == null) {
-            this.linkSource = LinkSource.NONE;
-        }
+        this.readLinkedTargetTag(tag, provider, true);
     }
 
     @Override
     @NotNull
     public CompoundTag getUpdateTag(@NotNull HolderLookup.Provider provider) {
         CompoundTag tag = super.getUpdateTag(provider);
+        this.writeLinkedTargetTag(tag, provider, false);
         tag.putBoolean(TARGET_VALID_TAG, this.targetValid);
         return tag;
     }
 
     @Override
     protected void onReceivePacket(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
-        super.onReceivePacket(tag, provider);
+        if (tag.contains(LINKED_TARGET_PRESENT_TAG) || tag.contains(LINKED_TARGET_TAG)) {
+            this.readLinkedTargetTag(tag, provider, false);
+        }
         if (tag.contains(TARGET_VALID_TAG)) {
             this.targetValid = tag.getBoolean(TARGET_VALID_TAG);
+        }
+        super.onReceivePacket(tag, provider);
+    }
+
+    @NotNull
+    private static LinkSource readLinkSource(@NotNull String name) {
+        if (name.isEmpty()) {
+            return LinkSource.MANUAL;
+        }
+        try {
+            return LinkSource.valueOf(name);
+        } catch (IllegalArgumentException ignored) {
+            return LinkSource.MANUAL;
+        }
+    }
+
+    private void writeLinkedTargetTag(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider,
+                                      boolean includeLinkSource) {
+        boolean hasLinkedTarget = this.linkedTargetPos != null;
+        tag.putBoolean(LINKED_TARGET_PRESENT_TAG, hasLinkedTarget);
+        if (!hasLinkedTarget) {
+            return;
+        }
+
+        GlobalPos.CODEC.encodeStart(provider.createSerializationContext(NbtOps.INSTANCE), this.linkedTargetPos)
+                .result()
+                .ifPresent(encoded -> tag.put(LINKED_TARGET_TAG, encoded));
+        if (includeLinkSource) {
+            tag.putString(LINK_SOURCE_TAG, this.linkSource.name());
+        }
+    }
+
+    private void readLinkedTargetTag(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider,
+                                     boolean includeLinkSource) {
+        this.linkedTargetPos = null;
+        if (includeLinkSource) {
+            this.linkSource = LinkSource.NONE;
+        }
+
+        boolean hasLinkedTarget = tag.contains(LINKED_TARGET_PRESENT_TAG) ? tag.getBoolean(LINKED_TARGET_PRESENT_TAG) :
+                tag.contains(LINKED_TARGET_TAG);
+        if (!hasLinkedTarget || !tag.contains(LINKED_TARGET_TAG)) {
+            this.linkSource = LinkSource.NONE;
+            return;
+        }
+
+        this.linkedTargetPos = GlobalPos.CODEC
+                .parse(provider.createSerializationContext(NbtOps.INSTANCE), tag.get(LINKED_TARGET_TAG))
+                .result()
+                .orElse(null);
+        if (includeLinkSource && this.linkedTargetPos != null) {
+            this.linkSource = readLinkSource(tag.getString(LINK_SOURCE_TAG));
         }
     }
 
@@ -470,18 +507,6 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
         return false;
     }
 
-    @NotNull
-    private static LinkSource readLinkSource(@NotNull String name) {
-        if (name.isEmpty()) {
-            return LinkSource.MANUAL;
-        }
-        try {
-            return LinkSource.valueOf(name);
-        } catch (IllegalArgumentException ignored) {
-            return LinkSource.MANUAL;
-        }
-    }
-
     @Nullable
     private ClayContainerBlockEntity resolveTargetForModeCycle() {
         if (this.level instanceof ServerLevel) {
@@ -497,7 +522,7 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
         return null;
     }
 
-    public boolean hasValidTargetForModeChange() {
+    public boolean hasValidTarget() {
         if (this.level instanceof ServerLevel) {
             return this.resolveTarget(this.linkedTargetPos).state() == TargetState.VALID;
         }
