@@ -80,6 +80,9 @@ public class ClayBlastFurnaceBlockEntity extends WorkableClayContainerBlockEntit
         super.tick();
     }
 
+    @Override
+    public void initDefaultRoutes() {}
+
     private void verifyStructure() {
         if (this.level == null) {
             return;
