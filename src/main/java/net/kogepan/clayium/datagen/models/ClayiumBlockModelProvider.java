@@ -4,6 +4,7 @@ import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.machine.ClayBlastFurnaceBlockEntity;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -22,6 +23,7 @@ import java.util.Map;
 
 public class ClayiumBlockModelProvider extends BlockStateProvider {
 
+    private static final ResourceLocation OVERLAY_ALL_CUBE_MODEL = Clayium.id("block/overlay_all_cube");
     private static final ResourceLocation OVERLAY_MODEL = Clayium.id("block/overlay");
     private static final ResourceLocation OVERLAY_ALL_MODEL = Clayium.id("block/overlay_all");
     private static final ResourceLocation INPUT_ALL_OVERLAY_TEXTURE = Clayium.id("block/overlay/import_all");
@@ -57,6 +59,7 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
             .id("block/machine/clay_blast_furnace_unformed");
     private static final ResourceLocation CLAY_BLAST_FURNACE_TEXTURE_FORMED = Clayium
             .id("block/machine/clay_blast_furnace_formed");
+    private static final ResourceLocation CHUNK_LOADER_TEXTURE = Clayium.id("block/machine/chunk_loader");
     private static final ResourceLocation CLAY_INTERFACE_TEXTURE = Clayium.id("block/machine/clay_interface");
     private static final ResourceLocation CLAY_LASER_TEXTURE = Clayium.id("block/machine/clay_laser");
 
@@ -219,6 +222,14 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
                 .renderType("minecraft:cutout");
         simpleBlock(ClayiumBlocks.CLAY_LEAVES.get(), clayLeavesModel);
         simpleBlockItem(ClayiumBlocks.CLAY_LEAVES.get(), clayLeavesModel);
+
+        ModelFile chunkLoaderModel = models().getBuilder("chunk_loader")
+                .parent(models().getExistingFile(OVERLAY_ALL_CUBE_MODEL))
+                .texture("all", Clayium.id("block/zk60a_alloy_hull"))
+                .texture("overlay", CHUNK_LOADER_TEXTURE)
+                .renderType(RenderType.cutout().name);
+        this.simpleBlock(ClayiumBlocks.CHUNK_LOADER.get(), chunkLoaderModel);
+        this.simpleBlockItem(ClayiumBlocks.CHUNK_LOADER.get(), chunkLoaderModel);
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay) {

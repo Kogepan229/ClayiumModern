@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-23T15:55:02.507974627	Block States: clayium
+// 1.21.1	2026-03-01T13:56:56.704408077	Block States: clayium
 9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
 56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
@@ -17,6 +17,7 @@ b04745c10e308425bc30656237e36d6ba66628e2 assets/clayium/blockstates/centrifuge_5
 40f8d01af3cc2ad2248ea4885869aa7afb37fa9c assets/clayium/blockstates/chemical_reactor_4.json
 b22dd6d1003ed99a1faf3628855a27d2bde694bd assets/clayium/blockstates/chemical_reactor_5.json
 4a634b0070b083e5f7b3e29a04fe7869ab5f9ee9 assets/clayium/blockstates/chemical_reactor_8.json
+a5433978ef67cc5fb829051c3e40d9af7fe75e57 assets/clayium/blockstates/chunk_loader.json
 fcf54df7321093c0259c8956f9859aa9132d3d32 assets/clayium/blockstates/clay_blast_furnace.json
 78f3d6b961db6b8649ca855c0fcd5f9cfec58849 assets/clayium/blockstates/clay_buffer_10.json
 68407079d1a501b2d2334544f2898c390d9c00af assets/clayium/blockstates/clay_buffer_11.json
@@ -146,6 +147,7 @@ fd6feb72446a2c56c29b63f61dbd0c34f9f9e7c0 assets/clayium/models/block/centrifuge_
 f4e3f2fef29eea17c25d5eaaa7a0d9cb7f357e13 assets/clayium/models/block/chemical_reactor_4.json
 c0878645854a2d8c9a182bd2122e8967bbc4bfaf assets/clayium/models/block/chemical_reactor_5.json
 45e71e61e9e9816137de6f1cd3e36696b4fe9583 assets/clayium/models/block/chemical_reactor_8.json
+5b128773439c33e855d24741b5ef0c87cc50f1f7 assets/clayium/models/block/chunk_loader.json
 124976e2ab4e96a1810510f13f6f5e05c081f788 assets/clayium/models/block/clay_blast_furnace.json
 7c4d8e460e69cd296ecbed43544226d18f449e6a assets/clayium/models/block/clay_buffer_10.json
 29a99ca0d638bcb2ab339919c9d5f3d3e3f4be4b assets/clayium/models/block/clay_buffer_11.json
@@ -275,6 +277,7 @@ cfccd8c2ef02a9ea4c7037f71f79f7273a021ca9 assets/clayium/models/item/centrifuge_4
 e4e438fed71e033fd36cf759f70b3d8490ab4633 assets/clayium/models/item/chemical_reactor_4.json
 4e7261eb5ca58f06c36c999505705de79e1ff2bc assets/clayium/models/item/chemical_reactor_5.json
 831ceb461f2df9bed7e02da8ca042b1200466d74 assets/clayium/models/item/chemical_reactor_8.json
+03df6deb566f7207fed7ae1444868070a77428ec assets/clayium/models/item/chunk_loader.json
 cea0f2f6c9f0ab9e9ac0b226b0a041aa3d24c76d assets/clayium/models/item/clay_blast_furnace.json
 c9c82eee142b9a866c1e2c4c447a84aa2a1af617 assets/clayium/models/item/clay_buffer_10.json
 b7ec09322c2a5691958a0871fee0be25b9860990 assets/clayium/models/item/clay_buffer_11.json

@@ -11,6 +11,7 @@ import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CentrifugeBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChemicalReactorBlockEntity;
+import net.kogepan.clayium.blockentities.machine.ChunkLoaderBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayBlastFurnaceBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayLaserBlockEntity;
@@ -262,6 +263,12 @@ public class ClayiumBlockEntityTypes {
             .register("creative_ce_source_block_entity",
                     () -> BlockEntityType.Builder
                             .of(CreativeCESourceBlockEntity::new, ClayiumBlocks.CREATIVE_CE_SOURCE.get())
+                            .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChunkLoaderBlockEntity>> CHUNK_LOADER_BLOCK_ENTITY = BLOCK_ENTITY_TYPES
+            .register("chunk_loader_block_entity",
+                    () -> BlockEntityType.Builder
+                            .of(ChunkLoaderBlockEntity::new, ClayiumBlocks.CHUNK_LOADER.get())
                             .build(null));
 
     private static <

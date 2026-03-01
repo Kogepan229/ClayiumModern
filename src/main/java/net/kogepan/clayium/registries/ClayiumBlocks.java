@@ -14,6 +14,7 @@ import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.CentrifugeBlock;
 import net.kogepan.clayium.blocks.machine.ChemicalReactorBlock;
+import net.kogepan.clayium.blocks.machine.ChunkLoaderBlock;
 import net.kogepan.clayium.blocks.machine.ClayBlastFurnaceBlock;
 import net.kogepan.clayium.blocks.machine.ClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.ClayInterfaceBlock;
@@ -347,6 +348,13 @@ public class ClayiumBlocks {
 
     public static final DeferredBlock<ClayLogBlock> CLAY_LOG = register("clay_log", ClayLogBlock::new);
     public static final DeferredBlock<ClayLeavesBlock> CLAY_LEAVES = register("clay_leaves", ClayLeavesBlock::new);
+
+    public static final DeferredBlock<ChunkLoaderBlock> CHUNK_LOADER = BLOCKS.register(
+            "chunk_loader", ChunkLoaderBlock::new);
+    static {
+        ClayiumItems.ITEMS.register("chunk_loader",
+                () -> new TieredBlockItem(CHUNK_LOADER.get(), new Item.Properties(), 6));
+    }
 
     public static int getMachineHullTier(@NotNull Block block) {
         if (block == RAW_CLAY_MACHINE_HULL.get()) {

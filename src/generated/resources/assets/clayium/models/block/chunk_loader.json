@@ -1,0 +1,8 @@
+{
+  "parent": "clayium:block/overlay_all_cube",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "all": "clayium:block/zk60a_alloy_hull",
+    "overlay": "clayium:block/machine/chunk_loader"
+  }
+}

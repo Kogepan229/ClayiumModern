@@ -2,6 +2,7 @@ package net.kogepan.clayium;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
+import net.kogepan.clayium.blockentities.machine.ChunkLoaderBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CreativeCESourceBlockEntity;
 import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
 import net.kogepan.clayium.capability.ClayiumCapabilities;
@@ -42,6 +43,7 @@ import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.common.world.chunk.RegisterTicketControllersEvent;
 import net.neoforged.neoforge.event.server.ServerStartingEvent;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -89,6 +91,7 @@ public class Clayium {
 
         modEventBus.addListener(this::registerCapacilities);
         modEventBus.addListener(this::registerDataMapTypes);
+        modEventBus.addListener(this::registerTicketControllers);
 
         // Register the Deferred Register to the mod event bus so tabs get registered
         CREATIVE_MODE_TABS.register(modEventBus);
@@ -184,6 +187,10 @@ public class Clayium {
 
     public void registerDataMapTypes(RegisterDataMapTypesEvent event) {
         event.register(ClayiumDataMaps.CLAY_ENERGY);
+    }
+
+    public void registerTicketControllers(RegisterTicketControllersEvent event) {
+        event.register(ChunkLoaderBlockEntity.TICKET_CONTROLLER);
     }
 
     public static ResourceLocation id(String path) {
