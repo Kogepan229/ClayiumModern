@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-23T21:28:43.253828773	Loot Tables
+// 1.21.1	2026-03-02T15:37:17.115970242	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -117,6 +117,10 @@ b6e02fb669ad8f5542bdb8aaceb439194d17f2ed data/clayium/loot_table/blocks/pipe_dra
 91d0c60235d8c98e7e8a45bf89862ed95517b7a3 data/clayium/loot_table/blocks/pipe_drawing_machine_4.json
 2f3748ca83c05d13bcbd4becc7afc8e06a7301dd data/clayium/loot_table/blocks/quartz_crucible.json
 94c029895a33c067fa38ffdb7771cd9ec865d55d data/clayium/loot_table/blocks/raw_clay_machine_hull.json
+37cef17f8cb7f6e1538fe36416c7db198294ca39 data/clayium/loot_table/blocks/salt_extractor_4.json
+48629239ff4be2d0d46c28ee17dd18b2d8371f7c data/clayium/loot_table/blocks/salt_extractor_5.json
+2560040935f44d6937ebf1c4c51ff31303b798ec data/clayium/loot_table/blocks/salt_extractor_6.json
+daa93cc51c7f843adc78d1970bdf8e917cd34a3a data/clayium/loot_table/blocks/salt_extractor_7.json
 0502ccc19a3ee9235aa43d247c4de0d76e8264a8 data/clayium/loot_table/blocks/smelter_4.json
 c4749da853e55660b53d6f8deec171b9fab355f2 data/clayium/loot_table/blocks/smelter_5.json
 bbc878eac7679d6afedc43e514dac1cae770a86d data/clayium/loot_table/blocks/smelter_6.json

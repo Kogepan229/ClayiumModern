@@ -84,5 +84,15 @@ public class ClayiumRecipeProvider extends RecipeProvider {
                     .unlockedBy("has_machine_hull", has(ClayiumBlocks.MACHINE_HULLS.get(tier).get()))
                     .save(recipeOutput, Clayium.id("chemical_reactor_" + tier));
         }
+
+        // Salt Extractor (tiers 4, 5, 6, 7): Buffer + Basic Circuit
+        for (int tier : new int[] { 4, 5, 6, 7 }) {
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.SALT_EXTRACTOR_BLOCKS.get(tier).get())
+                    .pattern("BC")
+                    .define('B', ClayiumBlocks.CLAY_BUFFERS.get(tier).get())
+                    .define('C', ClayiumItems.BASIC_CIRCUIT.get())
+                    .unlockedBy("has_basic_circuit", has(ClayiumItems.BASIC_CIRCUIT.get()))
+                    .save(recipeOutput, Clayium.id("salt_extractor_" + tier));
+        }
     }
 }

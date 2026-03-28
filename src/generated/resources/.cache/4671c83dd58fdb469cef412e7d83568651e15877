@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-01T13:56:56.704408077	Block States: clayium
+// 1.21.1	2026-03-02T15:37:17.108895921	Block States: clayium
 9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
 56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
@@ -116,6 +116,10 @@ f8466a457f84ac1905ebb3f49a22d3ec942049ee assets/clayium/blockstates/milling_mach
 a0606666487960a5f0987d9e1cc68f2c7573cbd4 assets/clayium/blockstates/pipe_drawing_machine_3.json
 3c4af04e44af844240ca919f494d8b6822291105 assets/clayium/blockstates/pipe_drawing_machine_4.json
 e68b8b63ba6f44e78a6f9f6f8d20ceb0cf203141 assets/clayium/blockstates/raw_clay_machine_hull.json
+e33848be87886443097e56ca530bfc7b129e4711 assets/clayium/blockstates/salt_extractor_4.json
+799424ed4f302533317bc7c7aa1f2bef29af95a5 assets/clayium/blockstates/salt_extractor_5.json
+2ca777f356f9ed6a1d465cae3109f7ee5c1fa587 assets/clayium/blockstates/salt_extractor_6.json
+ef2a039db171243af31182d2c5eaea4dad1300f5 assets/clayium/blockstates/salt_extractor_7.json
 8669bbb9d17ce1aa8b892224f25e6f30964dbc97 assets/clayium/blockstates/smelter_4.json
 8a86a615f76d162b9013660bd0756e87e294ebf5 assets/clayium/blockstates/smelter_5.json
 6a90c25ce7fc4095da69629c05c2d0b39158d1af assets/clayium/blockstates/smelter_6.json
@@ -246,6 +250,10 @@ f4b3b68d744976f20b01bd398f8592fbd30f9fb0 assets/clayium/models/block/pipe_drawin
 fa5e6a2d30929057f0b5ba0b5ea5afa842ac4754 assets/clayium/models/block/pipe_drawing_machine_3.json
 d3a7ad8bd0a0aee453571bf08ea2bb64c015e1d2 assets/clayium/models/block/pipe_drawing_machine_4.json
 6f2dde3f33f8834d7d5607909ab39768d44096c5 assets/clayium/models/block/raw_clay_machine_hull.json
+e66e21ec464f501e24f1ff070ef1bbe5b8ea1a0f assets/clayium/models/block/salt_extractor_4.json
+9d7d5fab40e4f4c49577a52b66904b8be054e978 assets/clayium/models/block/salt_extractor_5.json
+2bc7662bbe99c1196f305dcb6c663f880c26617e assets/clayium/models/block/salt_extractor_6.json
+383cfa179e078813f6a160c32d606a81dbfddc12 assets/clayium/models/block/salt_extractor_7.json
 7dc679abc2aa46b375afd1883c379a1a676aae17 assets/clayium/models/block/smelter_4.json
 43681a6c4b8f4fba2842fc451724a5d3f630394f assets/clayium/models/block/smelter_5.json
 d50862c990530e276824b1161e1f345903c3e223 assets/clayium/models/block/smelter_6.json
@@ -377,6 +385,10 @@ d9ff1040850e864e4a52dab329ae6f0d3ec6383e assets/clayium/models/item/machine_hull
 642d8b828f24b193cb4a68c47a9ca3a304295ff8 assets/clayium/models/item/pipe_drawing_machine_4.json
 9af2ddd51604e14111db8c8f70664e3ddbde107f assets/clayium/models/item/quartz_crucible.json
 713ec25e9ef9bbd784efa7d9cd5b90c750028b54 assets/clayium/models/item/raw_clay_machine_hull.json
+260cb8fe95623f2614bddb15af2191a7c46fb635 assets/clayium/models/item/salt_extractor_4.json
+f166d442ee30051ab9b3d707b4520e9895140787 assets/clayium/models/item/salt_extractor_5.json
+7f3d9783a3f4978ef3c1c25aefdd90680644973e assets/clayium/models/item/salt_extractor_6.json
+90a155ca541c3deef871c7879a1127cecdc9d2dd assets/clayium/models/item/salt_extractor_7.json
 f956f212976276499a42736f9100a7e30ede1723 assets/clayium/models/item/smelter_4.json
 47142e4fc8525675d0b9730e57e1b067bff860f7 assets/clayium/models/item/smelter_5.json
 e44bbd513f4fe07ae12f3187b4cbb83d4a5ec7b6 assets/clayium/models/item/smelter_6.json

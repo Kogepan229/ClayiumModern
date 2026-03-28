@@ -1,4 +1,4 @@
-// 1.21.1	2026-02-22T19:51:52.201805256	Recipes
+// 1.21.1	2026-03-02T15:37:17.117473925	Recipes
 3dbe7dd47d57bd754e05636b105fb30612729669 data/clayium/advancement/recipes/misc/centrifuge_3.json
 24cd27ecb334fc3e4fe9f41cb2932f87abf6c297 data/clayium/advancement/recipes/misc/centrifuge_4.json
 7195387f8196585e8d8444ef5a84ae5b2daaff11 data/clayium/advancement/recipes/misc/centrifuge_5.json
@@ -8,6 +8,10 @@ baefc0d67b8c762bb70e6024a6aa29c30c8eeab9 data/clayium/advancement/recipes/misc/c
 7d61c5990b14637ed185aa6dd558c7bc3fd1ea37 data/clayium/advancement/recipes/misc/chemical_reactor_8.json
 8404c3a8b4c96d3f3be9ed3e1e664b4088b94969 data/clayium/advancement/recipes/misc/laser_reflector.json
 8ecc70c9b249bb84cc1e6864effb8ceda68323ff data/clayium/advancement/recipes/misc/quartz_crucible.json
+d608bb2942fb2258824d64596dcfe030a891c710 data/clayium/advancement/recipes/misc/salt_extractor_4.json
+dde4a3627eee8452dc44aeef64b7b12561f48364 data/clayium/advancement/recipes/misc/salt_extractor_5.json
+c5d73db916f58aedfe890ec3838b86650b26b6f2 data/clayium/advancement/recipes/misc/salt_extractor_6.json
+153fd84cce0861c6c70337d85898197967a3fb48 data/clayium/advancement/recipes/misc/salt_extractor_7.json
 f5623d1a9bc85993b5a084eece21287828c7f083 data/clayium/recipe/bending_machine/advanced_industrial_clay_plate.json
 732d450af977ce5a24aa12afaedc3151597ce86a data/clayium/recipe/bending_machine/advanced_industrial_clay_plate_from_dust.json
 1f1f8c9d12fb17f7135cfe989670cab74a4eb298 data/clayium/recipe/bending_machine/aluminium_plate.json
@@ -247,6 +251,10 @@ f5ef8806d538fee92a1614061dcc9386a919a1d0 data/clayium/recipe/pipe_drawing_machin
 eda66bdd428bddfd03cc391a016e37262b1ed9b2 data/clayium/recipe/pipe_drawing_machine/dense_clay_cylinder_to_pipe.json
 2a034ca19c22d2ffc84dd6c28891621a12a33ed5 data/clayium/recipe/quartz_crucible.json
 8604b346aad61572921688368548e7d1b2484933 data/clayium/recipe/quartz_crucible/impure_silicon.json
+3badba6e41b1ccf45e0850abc68bae1e7fb7c34c data/clayium/recipe/salt_extractor_4.json
+af255df61d3c9db6cbfe1d82ce88d59fb12cbd27 data/clayium/recipe/salt_extractor_5.json
+dda1248156e8010ff73880919c75693cda160948 data/clayium/recipe/salt_extractor_6.json
+ce349d47e9584c83a0ea1ff4052bd183c3d706c6 data/clayium/recipe/salt_extractor_7.json
 83cd0f13e2fa2c64551a3789462d1ee296b02436 data/clayium/recipe/smelter/aluminium_dust.json
 20b1fe87510ab1628e102212bc9429107f75aa05 data/clayium/recipe/smelter/az91d_alloy_dust.json
 b4773530deb8de73070148a2bee96838156dd4f0 data/clayium/recipe/smelter/impure_aluminium_dust.json

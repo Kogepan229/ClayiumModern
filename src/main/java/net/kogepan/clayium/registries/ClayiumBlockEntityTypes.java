@@ -24,6 +24,7 @@ import net.kogepan.clayium.blockentities.machine.InscriberBlockEntity;
 import net.kogepan.clayium.blockentities.machine.LatheBlockEntity;
 import net.kogepan.clayium.blockentities.machine.MillingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.PipeDrawingMachineBlockEntity;
+import net.kogepan.clayium.blockentities.machine.SaltExtractorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.SmelterBlockEntity;
 import net.kogepan.clayium.blockentities.machine.WaterwheelBlockEntity;
 import net.kogepan.clayium.blockentities.machine.WireDrawingMachineBlockEntity;
@@ -94,6 +95,16 @@ public class ClayiumBlockEntityTypes {
                 return BlockEntityType.Builder
                         .of(CobblestoneGeneratorBlockEntity::new,
                                 blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SaltExtractorBlockEntity>> SALT_EXTRACTOR_BLOCK_ENTITY = registerClayContainer(
+            "salt_extractor_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.SALT_EXTRACTOR_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(SaltExtractorBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
 

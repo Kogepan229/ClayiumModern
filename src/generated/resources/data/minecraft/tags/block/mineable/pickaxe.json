@@ -67,6 +67,10 @@
     "clayium:cobblestone_generator_5",
     "clayium:cobblestone_generator_6",
     "clayium:cobblestone_generator_7",
+    "clayium:salt_extractor_4",
+    "clayium:salt_extractor_5",
+    "clayium:salt_extractor_6",
+    "clayium:salt_extractor_7",
     "clayium:clay_condenser_2",
     "clayium:clay_condenser_3",
     "clayium:clay_condenser_4",
@@ -97,7 +101,6 @@
     "clayium:smelter_8",
     "clayium:smelter_9",
     "clayium:clay_blast_furnace",
-    "clayium:chunk_loader",
     "clayium:clay_interface_5",
     "clayium:clay_interface_6",
     "clayium:clay_interface_7",
@@ -115,6 +118,7 @@
     "clayium:clay_laser_10",
     "clayium:laser_reflector",
     "clayium:creative_ce_source",
-    "clayium:clay_sapling"
+    "clayium:clay_sapling",
+    "clayium:chunk_loader"
   ]
 }

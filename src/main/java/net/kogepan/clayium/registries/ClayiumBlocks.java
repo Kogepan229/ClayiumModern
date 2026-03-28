@@ -28,6 +28,7 @@ import net.kogepan.clayium.blocks.machine.InscriberBlock;
 import net.kogepan.clayium.blocks.machine.LatheBlock;
 import net.kogepan.clayium.blocks.machine.MillingMachineBlock;
 import net.kogepan.clayium.blocks.machine.PipeDrawingMachineBlock;
+import net.kogepan.clayium.blocks.machine.SaltExtractorBlock;
 import net.kogepan.clayium.blocks.machine.SmelterBlock;
 import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
 import net.kogepan.clayium.blocks.machine.WireDrawingMachineBlock;
@@ -234,6 +235,15 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("cobblestone_generator", i, CobblestoneGeneratorBlock::new));
         }
         COBBLESTONE_GENERATORS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> SALT_EXTRACTOR_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i : new int[] { 4, 5, 6, 7 }) {
+            map.put(i, registerTiered("salt_extractor", i, SaltExtractorBlock::new));
+        }
+        SALT_EXTRACTOR_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CLAY_CONDENSER_BLOCKS;

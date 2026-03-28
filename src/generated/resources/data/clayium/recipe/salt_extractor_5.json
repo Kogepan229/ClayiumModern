@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "clayium:clay_buffer_5"
+    },
+    "C": {
+      "item": "clayium:basic_circuit"
+    }
+  },
+  "pattern": [
+    "BC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:salt_extractor_5"
+  }
+}
