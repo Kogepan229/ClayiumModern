@@ -9,6 +9,7 @@ import net.kogepan.clayium.client.ldlib.textures.XEITextures;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumItems;
 import net.kogepan.clayium.utils.CEUtils;
+import net.kogepan.clayium.utils.ProgressionRates;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -34,10 +35,10 @@ public class XEISaltExtractorRecipeCategory {
 
     private static final ResourceLocation ID = Clayium.id("salt_extractor");
     private static final List<XEISaltExtractorRecipe> RECIPES = List.of(
-            new XEISaltExtractorRecipe(ClayiumBlocks.SALT_EXTRACTOR_BLOCKS.get(4), 4, 0.5, CEUtils.milliCeToLong(15)),
-            new XEISaltExtractorRecipe(ClayiumBlocks.SALT_EXTRACTOR_BLOCKS.get(5), 5, 2, CEUtils.milliCeToLong(60)),
-            new XEISaltExtractorRecipe(ClayiumBlocks.SALT_EXTRACTOR_BLOCKS.get(6), 6, 10, CEUtils.milliCeToLong(300)),
-            new XEISaltExtractorRecipe(ClayiumBlocks.SALT_EXTRACTOR_BLOCKS.get(7), 7, 80, CEUtils.ceToLong(2.4)));
+            new XEISaltExtractorRecipe(ClayiumBlocks.SALT_EXTRACTOR_BLOCKS.get(4), 4, 50),
+            new XEISaltExtractorRecipe(ClayiumBlocks.SALT_EXTRACTOR_BLOCKS.get(5), 5, 200),
+            new XEISaltExtractorRecipe(ClayiumBlocks.SALT_EXTRACTOR_BLOCKS.get(6), 6, 1000),
+            new XEISaltExtractorRecipe(ClayiumBlocks.SALT_EXTRACTOR_BLOCKS.get(7), 7, 8000));
 
     public static ResourceLocation getId() {
         return ID;
@@ -51,12 +52,24 @@ public class XEISaltExtractorRecipeCategory {
         return RECIPES;
     }
 
-    public record XEISaltExtractorRecipe(DeferredBlock<ClayContainerBlock> machine, int tier, double itemPerTick,
-                                         long cePerTick) {
+    public record XEISaltExtractorRecipe(DeferredBlock<ClayContainerBlock> machine, int tier,
+                                         int baseProgressEfficiency) {
 
         public static final int WIDTH = 174;
         public static final int HEIGHT = 70;
         private static final int PROGRESS_ARROW_WIDTH = 20;
+
+        public int progressEfficiency() {
+            return ProgressionRates.multiplyInt(this.baseProgressEfficiency);
+        }
+
+        public double itemPerTick() {
+            return (double) this.progressEfficiency() / 100.0D;
+        }
+
+        public long cePerTick() {
+            return this.progressEfficiency() * CEUtils.TEN_MICRO_CE * 30L;
+        }
 
         public ModularUI createModularUI() {
             var root = new UIElement().layout(layout -> layout
@@ -102,8 +115,8 @@ public class XEISaltExtractorRecipeCategory {
             root.addChild(new UIElement().layout(layout -> layout.marginTop(3))
                     .addChild(new CLabel().setText(Component.translatable("xei.clayium.tier", this.tier)))
                     .addChild(new CLabel()
-                            .setText(Component.translatable("xei.clayium.items_per_tick", this.itemPerTick)))
-                    .addChild(new CLabel().setText(String.format("%s/t", CEUtils.formatCE(this.cePerTick)))));
+                            .setText(Component.translatable("xei.clayium.items_per_tick", this.itemPerTick())))
+                    .addChild(new CLabel().setText(String.format("%s/t", CEUtils.formatCE(this.cePerTick())))));
 
             return new ModularUI(
                     UI.of(root, List.of(StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC))));

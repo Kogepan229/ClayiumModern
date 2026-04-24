@@ -10,6 +10,7 @@ import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.ItemIngredientStack;
 import net.kogepan.clayium.registries.ClayiumItems;
+import net.kogepan.clayium.utils.ProgressionRates;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.world.item.ItemStack;
@@ -75,6 +76,14 @@ public record ClayWorkTableRecipe(@NotNull ItemIngredientStack ingredient,
         return ClayiumRecipeTypes.CLAY_WORK_TABLE_RECIPE_TYPE.get();
     }
 
+    public int adjustedCost() {
+        return adjustedCost(ProgressionRates.current());
+    }
+
+    public int adjustedCost(double progressionRate) {
+        return Math.max(1, ProgressionRates.divideInt(this.cost, progressionRate));
+    }
+
     public static final int WIDTH = 174;
     public static final int HEIGHT = 70;
 
@@ -83,7 +92,7 @@ public record ClayWorkTableRecipe(@NotNull ItemIngredientStack ingredient,
         uiElement.layout(layout -> layout.height(16 + 9).marginTop(-9).justifyContent(AlignContent.FLEX_END));
 
         if (this.button == index) {
-            uiElement.addChild(new CLabel().setText(String.valueOf(this.cost))
+            uiElement.addChild(new CLabel().setText(String.valueOf(this.adjustedCost()))
                     .textStyle(style -> style.textAlignHorizontal(Horizontal.CENTER))
                     .layout(layout -> layout.width(16)));
         }

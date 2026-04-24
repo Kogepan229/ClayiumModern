@@ -29,6 +29,11 @@ public class Config {
             .comment("A list of items to log on common setup.")
             .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), () -> "", Config::validateItemName);
 
+    public static final ModConfigSpec.DoubleValue PROGRESSION_RATE = BUILDER
+            .gameRestart()
+            .comment("Progression speed multiplier. Values above 1 speed up progression; values below 1 slow it down.")
+            .defineInRange("progressionRate", 1.0D, 0.001D, 9999.0D);
+
     public static final ModConfigSpec.IntValue LASER_QUALITY = BUILDER
             .comment("Visual quality of clay laser beam. 2 is recommended for low-end computers.")
             .defineInRange("laserQuality", 8, 1, 32);

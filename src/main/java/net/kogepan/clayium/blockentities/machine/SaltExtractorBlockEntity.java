@@ -9,6 +9,7 @@ import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumItems;
 import net.kogepan.clayium.utils.CEUtils;
 import net.kogepan.clayium.utils.MachineIOMode;
+import net.kogepan.clayium.utils.ProgressionRates;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -87,7 +88,8 @@ public class SaltExtractorBlockEntity extends ClayContainerBlockEntity {
         this.inventoryRowSize = inventoryRowSizeForTier(this.tier);
         this.inventoryColumnSize = inventoryColumnSizeForTier(this.tier);
         int efficiencyIndex = this.tier - 4;
-        this.progressEfficiency = EFFICIENCIES[Math.max(0, Math.min(efficiencyIndex, EFFICIENCIES.length - 1))];
+        this.progressEfficiency = ProgressionRates.multiplyInt(
+                EFFICIENCIES[Math.max(0, Math.min(efficiencyIndex, EFFICIENCIES.length - 1))]);
         this.cePerTick = this.progressEfficiency * ENERGY_PER_WORK;
         this.outputInventory = new ClayiumItemStackHandler(this,
                 this.inventoryRowSize * this.inventoryColumnSize);

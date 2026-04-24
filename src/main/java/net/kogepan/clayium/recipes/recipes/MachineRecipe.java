@@ -9,6 +9,7 @@ import net.kogepan.clayium.recipes.ItemIngredientStack;
 import net.kogepan.clayium.recipes.SimpleMachineRecipeType;
 import net.kogepan.clayium.recipes.inputs.MachineRecipeInput;
 import net.kogepan.clayium.utils.CEUtils;
+import net.kogepan.clayium.utils.ProgressionRates;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
@@ -158,6 +159,18 @@ public record MachineRecipe(
         return outputs.stream().map(ItemStack::copy).toList();
     }
 
+    public long adjustedDuration() {
+        return adjustedDuration(ProgressionRates.current());
+    }
+
+    public long adjustedDuration(double progressionRate) {
+        return ProgressionRates.divideLong(this.duration, progressionRate);
+    }
+
+    public long adjustedTotalCE() {
+        return this.cePerTick * this.adjustedDuration();
+    }
+
     @Override
     @NotNull
     public RecipeSerializer<?> getSerializer() {
@@ -215,10 +228,11 @@ public record MachineRecipe(
                         .layout(layout -> layout.width(PROGRESS_ARROW_WIDTH)))
                 .addChild(outputContainer));
 
+        long adjustedDuration = this.adjustedDuration();
         root.addChild(new UIElement().layout(layout -> layout.marginTop(3))
                 .addChild(new CLabel().setText(Component.translatable("xei.clayium.tier", this.recipeTier)))
                 .addChild(new CLabel().setText(String.format("%s/t ✕ %st = %s", CEUtils.formatCE(this.cePerTick),
-                        this.duration, CEUtils.formatCE(this.cePerTick * this.duration)))));
+                        adjustedDuration, CEUtils.formatCE(this.cePerTick * adjustedDuration)))));
 
         return new ModularUI(UI.of(root, List.of(StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC))));
     }

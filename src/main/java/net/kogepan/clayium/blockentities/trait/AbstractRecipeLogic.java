@@ -139,7 +139,7 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
 
     protected long getRecipeDuration(RecipeHolder<?> recipeHolder) {
         if (recipeHolder.value() instanceof MachineRecipe recipe) {
-            return recipe.duration();
+            return recipe.adjustedDuration();
         }
         throw new IllegalStateException();
     }

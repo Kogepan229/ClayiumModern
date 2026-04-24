@@ -6,6 +6,7 @@ import net.kogepan.clayium.capability.IClayEnergyHolder;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.utils.MachineIOMode;
+import net.kogepan.clayium.utils.ProgressionRates;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -58,7 +59,8 @@ public class WaterwheelBlockEntity extends ClayContainerBlockEntity {
         long tierValue = Math.max(this.tier, 1);
 
         this.progress = 0;
-        this.progressEfficiency = (int) (BASE_PROGRESS_EFFICIENCY * Math.pow(tierValue, 3.0D));
+        this.progressEfficiency = ProgressionRates.multiplyInt(
+                (int) (BASE_PROGRESS_EFFICIENCY * Math.pow(tierValue, 3.0D)));
 
         this.clayEnergyPerWork = (long) Math.pow(tierValue, 8.0D);
         this.maxClayEnergy = this.clayEnergyPerWork * 5L;

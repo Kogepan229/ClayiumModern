@@ -106,7 +106,7 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
 
         validButtons.addAll(recipes.stream().map(RecipeHolder::value)
                 .filter(r -> r.ingredient().test(ingredient) &&
-                        ingredient.getCount() >= r.cost() &&
+                        ingredient.getCount() >= r.adjustedCost() &&
                         this.inventory.insertItem(RESULT_SLOT, r.result(), true).isEmpty() &&
                         this.inventory.insertItem(BYPRODUCT_SLOT, r.byproduct(), true).isEmpty())
                 .map(ClayWorkTableRecipe::button).distinct().filter(this::checkTool).toList());
@@ -152,7 +152,7 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
             var foundRecipeHolder = recipes.stream()
                     .filter(holder -> {
                         var r = holder.value();
-                        return r.ingredient().test(ingredient) && ingredient.getCount() >= r.cost() &&
+                        return r.ingredient().test(ingredient) && ingredient.getCount() >= r.adjustedCost() &&
                                 r.button() == button;
                     })
                     .findFirst();
@@ -165,19 +165,24 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
             this.hurtTool(recipe.button(), player);
             this.inventory.extractItem(INGREDIENT_SLOT, recipe.ingredient().getAmount(), false);
             this.validButtons.add(recipe.button());
+            completeRecipeIfDone(recipe);
         } else {
             final var recipe = this.processingRecipeHolder.value();
             this.progress++;
             this.hurtTool(recipe.button(), player);
 
-            if (this.progress == recipe.cost()) {
-                this.inventory.insertItem(1, recipe.result().copy(), false);
-                validButtons.clear();
-                this.processingRecipeHolder = null;
-                this.progress = 0;
-                checkValidRecipe();
-            }
+            completeRecipeIfDone(recipe);
         }
+    }
+
+    private void completeRecipeIfDone(ClayWorkTableRecipe recipe) {
+        if (this.progress < recipe.adjustedCost()) return;
+
+        this.inventory.insertItem(RESULT_SLOT, recipe.result().copy(), false);
+        validButtons.clear();
+        this.processingRecipeHolder = null;
+        this.progress = 0;
+        checkValidRecipe();
     }
 
     private ClayWorkTableButton createWorkTableButton(ClayWorkTableButtonTextures.ButtonTexture texture, int index) {
@@ -208,7 +213,8 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
                                 .addChild(new ItemSlot().bind(inventory, 3)))
                         .addChild(new ProgressArrow().bind(
                                 DataBindingBuilder.floatValS2C(() -> this.processingRecipeHolder != null ?
-                                        (float) progress / this.processingRecipeHolder.value().cost() : 0).build())
+                                        (float) progress / this.processingRecipeHolder.value().adjustedCost() : 0)
+                                        .build())
                                 .layout(layout -> layout.width(80)))
                         .addChild(new UIElement()
                                 .layout(layout -> layout.flexDirection(FlexDirection.ROW)

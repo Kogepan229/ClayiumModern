@@ -46,7 +46,7 @@ public class ClayiumEMIPlugin implements EmiPlugin {
                             .<RecipeHolder<MachineRecipe>>comparingInt(r -> r.value().recipeTier())
                             .thenComparingLong(r -> {
                                 MachineRecipe recipe = r.value();
-                                return recipe.duration() * recipe.cePerTick();
+                                return recipe.adjustedTotalCE();
                             }))
                     .map((holder) -> new EMIMachineRecipe(emiCategory, holder))
                     .forEach(registry::addRecipe);

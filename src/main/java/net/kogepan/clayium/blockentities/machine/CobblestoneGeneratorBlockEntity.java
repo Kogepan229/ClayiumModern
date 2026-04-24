@@ -7,6 +7,7 @@ import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.utils.MachineIOMode;
+import net.kogepan.clayium.utils.ProgressionRates;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -82,7 +83,7 @@ public class CobblestoneGeneratorBlockEntity extends ClayContainerBlockEntity {
 
         this.inventoryRowSize = inventoryRowSizeForTier(this.tier);
         this.inventoryColumnSize = inventoryColumnSizeForTier(this.tier);
-        this.progressEfficiency = EFFICIENCIES[this.tier - 1];
+        this.progressEfficiency = ProgressionRates.multiplyInt(EFFICIENCIES[this.tier - 1]);
         this.outputInventory = new ClayiumItemStackHandler(this,
                 this.inventoryRowSize * this.inventoryColumnSize);
 

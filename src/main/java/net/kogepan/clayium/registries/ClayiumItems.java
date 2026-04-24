@@ -11,6 +11,7 @@ import net.kogepan.clayium.items.filter.UnlocalizedNameItemFilterItem;
 import net.kogepan.clayium.items.tools.ClayPickaxe;
 import net.kogepan.clayium.items.tools.ClayShovel;
 import net.kogepan.clayium.items.tools.ClayToolTiers;
+import net.kogepan.clayium.utils.ProgressionRates;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.PickaxeItem;
@@ -34,9 +35,9 @@ public class ClayiumItems {
     // spotless:off
 
     // Clay Tools
-    public static final DeferredItem<Item> CLAY_ROLLING_PIN = ITEMS.registerItem("clay_rolling_pin", p -> new Item(p.durability(60)));
-    public static final DeferredItem<Item> CLAY_SPATULA = ITEMS.registerItem("clay_spatula", p -> new Item(p.durability(36)));
-    public static final DeferredItem<Item> CLAY_SLICER = ITEMS.registerItem("clay_slicer", p -> new Item(p.durability(60)));
+    public static final DeferredItem<Item> CLAY_ROLLING_PIN = ITEMS.registerItem("clay_rolling_pin", p -> new Item(p.durability(ProgressionRates.multiplyInt(60))));
+    public static final DeferredItem<Item> CLAY_SPATULA = ITEMS.registerItem("clay_spatula", p -> new Item(p.durability(ProgressionRates.multiplyInt(36))));
+    public static final DeferredItem<Item> CLAY_SLICER = ITEMS.registerItem("clay_slicer", p -> new Item(p.durability(ProgressionRates.multiplyInt(60))));
 
     // Circuits and boards
     public static final DeferredItem<Item> CLAY_CIRCUIT_BOARD = ITEMS.registerItem("clay_circuit_board", p -> new TieredItem(p, 2));
