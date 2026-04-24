@@ -56,6 +56,7 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation DECOMPOSER_TEXTURE = Clayium.id("block/machine/decomposer");
     private static final ResourceLocation ELECTROLYSIS_REACTOR_TEXTURE = Clayium
             .id("block/machine/electrolysis_reactor");
+    private static final ResourceLocation DISTRIBUTOR_TEXTURE = Clayium.id("block/machine/distributor");
     private static final ResourceLocation INSCRIBER_TEXTURE = Clayium.id("block/machine/inscriber");
     private static final ResourceLocation SMELTER_TEXTURE = Clayium.id("block/machine/smelter");
     private static final ResourceLocation CLAY_BLAST_FURNACE_TEXTURE_UNFORMED = Clayium
@@ -162,6 +163,10 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         }
         for (var entry : ClayiumBlocks.ELECTROLYSIS_REACTOR_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), ELECTROLYSIS_REACTOR_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.DISTRIBUTOR_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), DISTRIBUTOR_TEXTURE, OVERLAY_ALL_MODEL,
+                    false, false);
         }
         for (var entry : ClayiumBlocks.INSCRIBER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), INSCRIBER_TEXTURE);

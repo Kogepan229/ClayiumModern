@@ -23,6 +23,7 @@ import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
 import net.kogepan.clayium.blocks.machine.CreativeCESourceBlock;
 import net.kogepan.clayium.blocks.machine.CuttingMachineBlock;
 import net.kogepan.clayium.blocks.machine.DecomposerBlock;
+import net.kogepan.clayium.blocks.machine.DistributorBlock;
 import net.kogepan.clayium.blocks.machine.ElectrolysisReactorBlock;
 import net.kogepan.clayium.blocks.machine.GrinderBlock;
 import net.kogepan.clayium.blocks.machine.InscriberBlock;
@@ -33,6 +34,7 @@ import net.kogepan.clayium.blocks.machine.SaltExtractorBlock;
 import net.kogepan.clayium.blocks.machine.SmelterBlock;
 import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
 import net.kogepan.clayium.blocks.machine.WireDrawingMachineBlock;
+import net.kogepan.clayium.items.blockitem.DistributorBlockItem;
 import net.kogepan.clayium.items.blockitem.LaserReflectorBlockItem;
 import net.kogepan.clayium.items.blockitem.QuartzCrucibleBlockItem;
 import net.kogepan.clayium.items.blockitem.TieredBlockItem;
@@ -299,6 +301,20 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("electrolysis_reactor", i, ElectrolysisReactorBlock::new));
         }
         ELECTROLYSIS_REACTOR_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> DISTRIBUTOR_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 7; i <= 9; i++) {
+            final int tier = i;
+            String name = "distributor_" + tier;
+            DeferredBlock<ClayContainerBlock> block = BLOCKS.register(name, () -> new DistributorBlock(tier));
+            ClayiumItems.ITEMS.register(name,
+                    () -> new DistributorBlockItem(block.get(), new Item.Properties(), tier));
+            map.put(tier, block);
+        }
+        DISTRIBUTOR_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> INSCRIBER_BLOCKS;

@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-24T17:35:54.455570276	Recipes
+// 1.21.1	2026-04-24T18:35:15.260786952	Recipes
 3dbe7dd47d57bd754e05636b105fb30612729669 data/clayium/advancement/recipes/misc/centrifuge_3.json
 24cd27ecb334fc3e4fe9f41cb2932f87abf6c297 data/clayium/advancement/recipes/misc/centrifuge_4.json
 7195387f8196585e8d8444ef5a84ae5b2daaff11 data/clayium/advancement/recipes/misc/centrifuge_5.json
@@ -6,6 +6,9 @@
 baefc0d67b8c762bb70e6024a6aa29c30c8eeab9 data/clayium/advancement/recipes/misc/chemical_reactor_4.json
 39e5c21b9d47bef68b8a284b723a780b6e782362 data/clayium/advancement/recipes/misc/chemical_reactor_5.json
 7d61c5990b14637ed185aa6dd558c7bc3fd1ea37 data/clayium/advancement/recipes/misc/chemical_reactor_8.json
+67ac1446f5d6c182b3e5391c1582e0915bb3d169 data/clayium/advancement/recipes/misc/distributor_7.json
+ad3484afac72a8212779fc48524d1fff935dd04b data/clayium/advancement/recipes/misc/distributor_8.json
+40400adcf15f7380ec0b23f3d49d38eedc5f5706 data/clayium/advancement/recipes/misc/distributor_9.json
 6722f9a99bb35d3d7b5972559a25491b1d7c5f45 data/clayium/advancement/recipes/misc/electrolysis_reactor_6.json
 eaf7d2ee08c237adfc668f28503518956c39a10b data/clayium/advancement/recipes/misc/electrolysis_reactor_7.json
 ac88e7b1bfa85afda55f90f1e4e54caf4b86c558 data/clayium/advancement/recipes/misc/electrolysis_reactor_8.json
@@ -136,6 +139,9 @@ f1d5ba5ec18b463515246cacf93f7182ca6900b1 data/clayium/recipe/decomposer/compress
 a53a1cc2fa096c2a4def1b01dbb1e42527aab297 data/clayium/recipe/decomposer/compressed_clay_2_to_1.json
 e321db59d079885e2789a78527631d56d3b8360f data/clayium/recipe/decomposer/compressed_clay_3_to_2.json
 184434ae882474102d4b40db94b17481b8455cf5 data/clayium/recipe/decomposer/industrial_clay_dust_to_energized.json
+abacb31ed31c5610a918eda440b7ca83fb851c23 data/clayium/recipe/distributor_7.json
+9e7da9e61bbfe385e023ae23c09b3a309472648d data/clayium/recipe/distributor_8.json
+01e8641e6fbe2b8b901d4b60e23f81565d7cbb8f data/clayium/recipe/distributor_9.json
 094b02ed673e1bed9f27f2e8f2f8183ea449adf9 data/clayium/recipe/electrolysis_reactor/aluminium_dust.json
 f21e7061d277eccf61c883f2589fd6ac5b255267 data/clayium/recipe/electrolysis_reactor/barium_dust.json
 ddb0004b2f584a29e073e620ebdc84bcf69056dd data/clayium/recipe/electrolysis_reactor/beryllium_dust.json

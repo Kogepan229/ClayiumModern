@@ -121,5 +121,15 @@ public class ClayiumRecipeProvider extends RecipeProvider {
                 .define('C', ClayiumItems.CLAY_BRAIN.get())
                 .unlockedBy("has_clay_brain", has(ClayiumItems.CLAY_BRAIN.get()))
                 .save(recipeOutput, Clayium.id("electrolysis_reactor_9"));
+
+        // Distributor (tiers 7, 8, 9): Buffer + Machine Hull
+        for (int tier : new int[] { 7, 8, 9 }) {
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.DISTRIBUTOR_BLOCKS.get(tier).get())
+                    .pattern("BH")
+                    .define('B', ClayiumBlocks.CLAY_BUFFERS.get(tier).get())
+                    .define('H', ClayiumBlocks.MACHINE_HULLS.get(tier).get())
+                    .unlockedBy("has_clay_buffer", has(ClayiumBlocks.CLAY_BUFFERS.get(tier).get()))
+                    .save(recipeOutput, Clayium.id("distributor_" + tier));
+        }
     }
 }

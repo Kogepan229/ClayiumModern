@@ -120,6 +120,9 @@
   "block.clayium.electrolysis_reactor_7": "Clay Steel Electrolysis Reactor",
   "block.clayium.electrolysis_reactor_8": "Clayium Electrolysis Reactor",
   "block.clayium.electrolysis_reactor_9": "Ultimate Electrolysis Reactor",
+  "block.clayium.distributor_7": "Clay Steel Distributor",
+  "block.clayium.distributor_8": "Clayium Distributor",
+  "block.clayium.distributor_9": "Ultimate Distributor",
   "block.clayium.inscriber_3": "Simple Inscriber",
   "block.clayium.inscriber_4": "Basic Inscriber",
   "block.clayium.smelter_4": "Basic Smelter",
@@ -295,6 +298,7 @@
 
   "tooltip.clayium.quartz_crucible": "Purifies impure silicon. Drop Impure Silicon Ingots, wait, then drop a String to collect Silicon Ingots.",
   "tooltip.clayium.laser_reflector": "Changes the direction of Laser.",
+  "tooltip.clayium.distributor": "Distributes items that pass through itself equally.",
   "tooltip.clayium.tier":  "Tier %d",
 
   "gui.clayium.inventory": "Inventory",

@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "clayium:clay_buffer_7"
+    },
+    "H": {
+      "item": "clayium:machine_hull_7"
+    }
+  },
+  "pattern": [
+    "BH"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:distributor_7"
+  }
+}
