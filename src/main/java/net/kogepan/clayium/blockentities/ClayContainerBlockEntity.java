@@ -43,6 +43,8 @@ import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
 import com.lowdragmc.lowdraglib2.gui.ui.elements.inventory.InventorySlots;
 import com.lowdragmc.lowdraglib2.gui.ui.style.StylesheetManager;
 import dev.vfyjxf.taffy.style.AlignContent;
+import dev.vfyjxf.taffy.style.AlignItems;
+import dev.vfyjxf.taffy.style.FlexDirection;
 import lombok.Getter;
 import org.jetbrains.annotations.MustBeInvokedByOverriders;
 import org.jetbrains.annotations.NotNull;
@@ -233,6 +235,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
             case SECOND -> new RangedWrapper(this.getInputInventory(), 1, 2);
             case ALL -> this.getInputInventory();
             case CE -> null;
+            case M_ALL, M_1, M_2, M_3, M_4, M_5, M_6 -> null;
             default -> null;
         };
 
@@ -240,6 +243,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
             case FIRST -> new RangedWrapper(this.getOutputInventory(), 0, 1);
             case SECOND -> new RangedWrapper(this.getOutputInventory(), 1, 2);
             case ALL -> this.getOutputInventory();
+            case M_ALL, M_1, M_2, M_3, M_4, M_5, M_6 -> null;
             default -> null;
         };
 
@@ -452,8 +456,18 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
 
         this.createMainUI(holder, root);
 
-        root.addChild(new CLabel().setText("Inventory"));
-        root.addChild(new InventorySlots());
+        UIElement playerInventorySection = new UIElement().layout(layout -> layout
+                .flexDirection(FlexDirection.COLUMN)
+                .alignItems(AlignItems.CENTER)
+                .widthPercent(100));
+        UIElement playerInventoryLabelAndSlots = new UIElement().layout(layout -> layout
+                .flexDirection(FlexDirection.COLUMN)
+                .alignItems(AlignItems.FLEX_START));
+        playerInventoryLabelAndSlots.addChild(new CLabel().setText("Inventory")
+                .layout(layout -> layout.alignSelf(AlignItems.START)));
+        playerInventoryLabelAndSlots.addChild(new InventorySlots());
+        playerInventorySection.addChild(playerInventoryLabelAndSlots);
+        root.addChild(playerInventorySection);
         return new ModularUI(UI.of(root, List.of(StylesheetManager.INSTANCE.getStylesheetSafe(StylesheetManager.MC))),
                 holder.player);
     }

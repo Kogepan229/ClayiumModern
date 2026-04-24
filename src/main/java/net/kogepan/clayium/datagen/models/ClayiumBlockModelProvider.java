@@ -111,6 +111,10 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), INPUT_ALL_OVERLAY_TEXTURE, false, true);
         }
 
+        for (var entry : ClayiumBlocks.MULTITRACK_BUFFERS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), INPUT_ALL_OVERLAY_TEXTURE, false, true);
+        }
+
         for (var entry : ClayiumBlocks.BENDING_MACHINE_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), BENDING_MACHINE_TEXTURE);
         }

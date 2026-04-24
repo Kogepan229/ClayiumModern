@@ -46,6 +46,17 @@
   "block.clayium.clay_buffer_12": "OEC Buffer",
   "block.clayium.clay_buffer_13": "OPA Buffer",
 
+  "block.clayium.multi_track_buffer_4": "Basic Multitrack Buffer",
+  "block.clayium.multi_track_buffer_5": "Advanced Multitrack Buffer",
+  "block.clayium.multi_track_buffer_6": "Precision Multitrack Buffer",
+  "block.clayium.multi_track_buffer_7": "Clay Steel Multitrack Buffer",
+  "block.clayium.multi_track_buffer_8": "Clayium Multitrack Buffer",
+  "block.clayium.multi_track_buffer_9": "Ultimate Multitrack Buffer",
+  "block.clayium.multi_track_buffer_10": "Antimatter Multitrack Buffer",
+  "block.clayium.multi_track_buffer_11": "Pure Antimatter Multitrack Buffer",
+  "block.clayium.multi_track_buffer_12": "OEC Multitrack Buffer",
+  "block.clayium.multi_track_buffer_13": "OPA Multitrack Buffer",
+
   "block.clayium.bending_machine_1": "Clay Bending Machine",
   "block.clayium.bending_machine_2": "Dense Clay Bending Machine",
   "block.clayium.bending_machine_3": "Simple Bending Machine",

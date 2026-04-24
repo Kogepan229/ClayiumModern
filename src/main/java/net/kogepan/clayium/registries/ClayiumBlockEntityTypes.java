@@ -6,6 +6,7 @@ import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.ClayWorkTableBlockEntity;
 import net.kogepan.clayium.blockentities.LaserReflectorBlockEntity;
+import net.kogepan.clayium.blockentities.MultitrackBufferBlockEntity;
 import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
@@ -75,6 +76,13 @@ public class ClayiumBlockEntityTypes {
             "clay_buffer_block_entity",
             () -> BlockEntityType.Builder
                     .of(ClayBufferBlockEntity::new, ClayiumBlocks.CLAY_BUFFERS.values().stream()
+                            .map(DeferredHolder::get).toArray(Block[]::new))
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MultitrackBufferBlockEntity>> MULTITRACK_BUFFER_BLOCK_ENTITY = registerClayContainer(
+            "multitrack_buffer_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(MultitrackBufferBlockEntity::new, ClayiumBlocks.MULTITRACK_BUFFERS.values().stream()
                             .map(DeferredHolder::get).toArray(Block[]::new))
                     .build(null));
 

@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-24T18:35:15.259812852	Loot Tables
+// 1.21.1	2026-04-24T20:24:36.547796741	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -118,6 +118,16 @@ ef21f43ed2fc1162756d5eee333da9b7f735af3c data/clayium/loot_table/blocks/machine_
 ac9f6ca15f0eba033452ca20cb6b4e46e27fbf66 data/clayium/loot_table/blocks/milling_machine_1.json
 46faa077798d0c1d90124064859d5ba1c236c9c3 data/clayium/loot_table/blocks/milling_machine_3.json
 2e0f9bd498ad12babd728b4ac5e908728f246924 data/clayium/loot_table/blocks/milling_machine_4.json
+18b3e1bb405bc6a80add7e75628bd8a5c93b59c0 data/clayium/loot_table/blocks/multi_track_buffer_10.json
+bde1c052756efc9fa5a1fff027936f395f048b58 data/clayium/loot_table/blocks/multi_track_buffer_11.json
+8f8ec8ccafdcbf42e2ec501638b53f3ea09d2fcf data/clayium/loot_table/blocks/multi_track_buffer_12.json
+021843e493b257ba8a29947aac8666509a6b3c61 data/clayium/loot_table/blocks/multi_track_buffer_13.json
+637430142c5b5d639df008a4dc27121c2c5a5636 data/clayium/loot_table/blocks/multi_track_buffer_4.json
+e293aa9e81b8c5df016bd98f32159cc780d24b26 data/clayium/loot_table/blocks/multi_track_buffer_5.json
+6a4a7324cbd9e066cf550b216878dcc34da0d586 data/clayium/loot_table/blocks/multi_track_buffer_6.json
+f52d61cd8a8d1c1c343699cb696733cae2b89015 data/clayium/loot_table/blocks/multi_track_buffer_7.json
+8bf32057a63271322114cb3f428a006e1232cb41 data/clayium/loot_table/blocks/multi_track_buffer_8.json
+d39e72684d6035308f12e97c90704b8cbabe1f9f data/clayium/loot_table/blocks/multi_track_buffer_9.json
 d92b501a707a126b8eec3277498d52bc5bdc83f8 data/clayium/loot_table/blocks/pipe_drawing_machine_1.json
 b6e02fb669ad8f5542bdb8aaceb439194d17f2ed data/clayium/loot_table/blocks/pipe_drawing_machine_2.json
 62641800a132324d3d693be35f85346d1bf49261 data/clayium/loot_table/blocks/pipe_drawing_machine_3.json

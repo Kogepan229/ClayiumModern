@@ -31,6 +31,35 @@ public class ModelTextures {
     private static final ResourceLocation OVERLAY_EXPORT_SECOND = Clayium.id("block/overlay/export_2");
     private static final ResourceLocation OVERLAY_FILTER = Clayium.id("block/overlay/filter");
 
+    private static final ResourceLocation OVERLAY_IMPORT_M_ALL = Clayium.id("block/overlay/import_m_all");
+    private static final ResourceLocation OVERLAY_IMPORT_M1 = Clayium.id("block/overlay/import_m1");
+    private static final ResourceLocation OVERLAY_IMPORT_M2 = Clayium.id("block/overlay/import_m2");
+    private static final ResourceLocation OVERLAY_IMPORT_M3 = Clayium.id("block/overlay/import_m3");
+    private static final ResourceLocation OVERLAY_IMPORT_M4 = Clayium.id("block/overlay/import_m4");
+    private static final ResourceLocation OVERLAY_IMPORT_M5 = Clayium.id("block/overlay/import_m5");
+    private static final ResourceLocation OVERLAY_IMPORT_M6 = Clayium.id("block/overlay/import_m6");
+    private static final ResourceLocation OVERLAY_EXPORT_M_ALL = Clayium.id("block/overlay/export_m_all");
+    private static final ResourceLocation OVERLAY_EXPORT_M1 = Clayium.id("block/overlay/export_m1");
+    private static final ResourceLocation OVERLAY_EXPORT_M2 = Clayium.id("block/overlay/export_m2");
+    private static final ResourceLocation OVERLAY_EXPORT_M3 = Clayium.id("block/overlay/export_m3");
+    private static final ResourceLocation OVERLAY_EXPORT_M4 = Clayium.id("block/overlay/export_m4");
+    private static final ResourceLocation OVERLAY_EXPORT_M5 = Clayium.id("block/overlay/export_m5");
+    private static final ResourceLocation OVERLAY_EXPORT_M6 = Clayium.id("block/overlay/export_m6");
+    private static final ResourceLocation OVERLAY_IMPORT_PIPE_M_ALL = Clayium.id("block/overlay/import_m_all_p");
+    private static final ResourceLocation OVERLAY_IMPORT_PIPE_M1 = Clayium.id("block/overlay/import_m1_p");
+    private static final ResourceLocation OVERLAY_IMPORT_PIPE_M2 = Clayium.id("block/overlay/import_m2_p");
+    private static final ResourceLocation OVERLAY_IMPORT_PIPE_M3 = Clayium.id("block/overlay/import_m3_p");
+    private static final ResourceLocation OVERLAY_IMPORT_PIPE_M4 = Clayium.id("block/overlay/import_m4_p");
+    private static final ResourceLocation OVERLAY_IMPORT_PIPE_M5 = Clayium.id("block/overlay/import_m5_p");
+    private static final ResourceLocation OVERLAY_IMPORT_PIPE_M6 = Clayium.id("block/overlay/import_m6_p");
+    private static final ResourceLocation OVERLAY_EXPORT_PIPE_M_ALL = Clayium.id("block/overlay/export_m_all_p");
+    private static final ResourceLocation OVERLAY_EXPORT_PIPE_M1 = Clayium.id("block/overlay/export_m1_p");
+    private static final ResourceLocation OVERLAY_EXPORT_PIPE_M2 = Clayium.id("block/overlay/export_m2_p");
+    private static final ResourceLocation OVERLAY_EXPORT_PIPE_M3 = Clayium.id("block/overlay/export_m3_p");
+    private static final ResourceLocation OVERLAY_EXPORT_PIPE_M4 = Clayium.id("block/overlay/export_m4_p");
+    private static final ResourceLocation OVERLAY_EXPORT_PIPE_M5 = Clayium.id("block/overlay/export_m5_p");
+    private static final ResourceLocation OVERLAY_EXPORT_PIPE_M6 = Clayium.id("block/overlay/export_m6_p");
+
     private static final Map<MachineIOMode, @Nullable TextureAtlasSprite> OVERLAY_IMPORT_SPRITES = new EnumMap<>(
             MachineIOMode.class);
     private static final Map<MachineIOMode, @Nullable TextureAtlasSprite> OVERLAY_EXPORT_SPRITES = new EnumMap<>(
@@ -46,6 +75,13 @@ public class ModelTextures {
             case SECOND -> OVERLAY_IMPORT_SECOND;
             case ALL -> OVERLAY_IMPORT_ALL;
             case CE -> OVERLAY_IMPORT_CE;
+            case M_ALL -> OVERLAY_IMPORT_M_ALL;
+            case M_1 -> OVERLAY_IMPORT_M1;
+            case M_2 -> OVERLAY_IMPORT_M2;
+            case M_3 -> OVERLAY_IMPORT_M3;
+            case M_4 -> OVERLAY_IMPORT_M4;
+            case M_5 -> OVERLAY_IMPORT_M5;
+            case M_6 -> OVERLAY_IMPORT_M6;
         };
     }
 
@@ -57,6 +93,13 @@ public class ModelTextures {
             case SECOND -> OVERLAY_EXPORT_SECOND;
             case ALL -> OVERLAY_EXPORT_ALL;
             case CE -> null;
+            case M_ALL -> OVERLAY_EXPORT_M_ALL;
+            case M_1 -> OVERLAY_EXPORT_M1;
+            case M_2 -> OVERLAY_EXPORT_M2;
+            case M_3 -> OVERLAY_EXPORT_M3;
+            case M_4 -> OVERLAY_EXPORT_M4;
+            case M_5 -> OVERLAY_EXPORT_M5;
+            case M_6 -> OVERLAY_EXPORT_M6;
         };
     }
 
@@ -68,6 +111,13 @@ public class ModelTextures {
             case SECOND -> OVERLAY_IMPORT_PIPE_SECOND;
             case ALL -> OVERLAY_IMPORT_PIPE_ALL;
             case CE -> OVERLAY_IMPORT_PIPE_CE;
+            case M_ALL -> OVERLAY_IMPORT_PIPE_M_ALL;
+            case M_1 -> OVERLAY_IMPORT_PIPE_M1;
+            case M_2 -> OVERLAY_IMPORT_PIPE_M2;
+            case M_3 -> OVERLAY_IMPORT_PIPE_M3;
+            case M_4 -> OVERLAY_IMPORT_PIPE_M4;
+            case M_5 -> OVERLAY_IMPORT_PIPE_M5;
+            case M_6 -> OVERLAY_IMPORT_PIPE_M6;
         };
     }
 
@@ -79,6 +129,13 @@ public class ModelTextures {
             case SECOND -> OVERLAY_EXPORT_PIPE_SECOND;
             case ALL -> OVERLAY_EXPORT_PIPE_ALL;
             case CE -> null;
+            case M_ALL -> OVERLAY_EXPORT_PIPE_M_ALL;
+            case M_1 -> OVERLAY_EXPORT_PIPE_M1;
+            case M_2 -> OVERLAY_EXPORT_PIPE_M2;
+            case M_3 -> OVERLAY_EXPORT_PIPE_M3;
+            case M_4 -> OVERLAY_EXPORT_PIPE_M4;
+            case M_5 -> OVERLAY_EXPORT_PIPE_M5;
+            case M_6 -> OVERLAY_EXPORT_PIPE_M6;
         };
     }
 

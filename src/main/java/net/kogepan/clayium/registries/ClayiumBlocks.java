@@ -9,6 +9,7 @@ import net.kogepan.clayium.blocks.ClayOre;
 import net.kogepan.clayium.blocks.ClaySaplingBlock;
 import net.kogepan.clayium.blocks.ClayWorkTableBlock;
 import net.kogepan.clayium.blocks.LaserReflectorBlock;
+import net.kogepan.clayium.blocks.MultitrackBufferBlock;
 import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
 import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
@@ -165,6 +166,15 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("clay_buffer", i, ClayBufferBlock::new));
         }
         CLAY_BUFFERS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<MultitrackBufferBlock>> MULTITRACK_BUFFERS;
+    static {
+        Int2ObjectMap<DeferredBlock<MultitrackBufferBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 4; i <= 13; i++) {
+            map.put(i, registerTiered("multi_track_buffer", i, MultitrackBufferBlock::new));
+        }
+        MULTITRACK_BUFFERS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> BENDING_MACHINE_BLOCKS;
