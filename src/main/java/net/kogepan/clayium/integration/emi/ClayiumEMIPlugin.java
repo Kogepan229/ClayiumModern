@@ -1,6 +1,7 @@
 package net.kogepan.clayium.integration.emi;
 
 import net.kogepan.clayium.integration.XEIMachineRecipeCategory;
+import net.kogepan.clayium.integration.XEISaltExtractorRecipeCategory;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.registries.ClayiumBlocks;
@@ -49,6 +50,12 @@ public class ClayiumEMIPlugin implements EmiPlugin {
                             }))
                     .map((holder) -> new EMIMachineRecipe(emiCategory, holder))
                     .forEach(registry::addRecipe);
+        }
+
+        registry.addCategory(EMISaltExtractorRecipe.CATEGORY);
+        for (var recipe : XEISaltExtractorRecipeCategory.getRecipes()) {
+            registry.addWorkstation(EMISaltExtractorRecipe.CATEGORY, EmiStack.of(recipe.machine()));
+            registry.addRecipe(new EMISaltExtractorRecipe(recipe));
         }
     }
 

@@ -87,6 +87,6 @@ public class XEIMachineRecipeCategory {
 
     @SuppressWarnings("unchecked")
     private static DeferredBlock<ClayContainerBlock> castBlock(DeferredBlock<? extends ClayContainerBlock> block) {
-        return (DeferredBlock<ClayContainerBlock>) (DeferredBlock<?>) block;
+        return (DeferredBlock<ClayContainerBlock>) block;
     }
 }

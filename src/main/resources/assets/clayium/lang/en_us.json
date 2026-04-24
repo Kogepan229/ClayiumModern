@@ -282,6 +282,7 @@
   "config.jade.plugin_clayium.clay_laser_source_energy": "Laser energy (CE)",
 
   "xei.clayium.tier": "Tier: %d",
+  "xei.clayium.items_per_tick": "%.2f Items/t",
 
   "clayium.configuration.title": "Clayium Configs",
   "clayium.configuration.section.clayium.common.toml": "Clayium Configs",

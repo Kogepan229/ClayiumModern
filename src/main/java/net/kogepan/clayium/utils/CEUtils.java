@@ -47,6 +47,16 @@ public final class CEUtils {
     }
 
     /**
+     * Converts CE (possibly fractional) to long value.
+     *
+     * @param ce The amount in CE
+     * @return The long value ({@code trunc(ce * 100,000)} toward zero)
+     */
+    public static long ceToLong(double ce) {
+        return (long) (ce * (double) ONE_CE);
+    }
+
+    /**
      * Converts mCE to long value.
      *
      * @param mce The amount in mCE
