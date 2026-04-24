@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "clayium:precision_circuit"
+    },
+    "R": {
+      "item": "clayium:chemical_reactor_5"
+    }
+  },
+  "pattern": [
+    "RC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:electrolysis_reactor_6"
+  }
+}

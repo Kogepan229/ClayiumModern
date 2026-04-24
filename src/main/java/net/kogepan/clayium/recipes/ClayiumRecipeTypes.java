@@ -64,6 +64,8 @@ public class ClayiumRecipeTypes {
             "clay_blast_furnace", 2, 2);
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> DECOMPOSER_RECIPE_TYPE = registerSimpleMachineType(
             "decomposer", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> ELECTROLYSIS_REACTOR_RECIPE_TYPE = registerSimpleMachineType(
+            "electrolysis_reactor", 1, 1);
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> INSCRIBER_RECIPE_TYPE = registerSimpleMachineType(
             "inscriber", 2, 1);
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> CHEMICAL_REACTOR_RECIPE_TYPE = registerSimpleMachineType(

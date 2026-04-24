@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-02T15:37:17.108895921	Block States: clayium
+// 1.21.1	2026-04-24T17:35:54.447014426	Block States: clayium
 9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
 56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
@@ -81,6 +81,10 @@ b6ef17105072d66930d269a225d3485756205da6 assets/clayium/blockstates/cutting_mach
 279113008a2f2045f4e9db05a57cda8c0937e6f9 assets/clayium/blockstates/decomposer_3.json
 19b6a2cccb2b930b1616e16580a5c13dd6fd9c61 assets/clayium/blockstates/decomposer_4.json
 3de122146683385805c38ccb20eb8b846de71f0e assets/clayium/blockstates/dense_clay_ore.json
+5227b4b4b00562533ef287835776f316a2a586d4 assets/clayium/blockstates/electrolysis_reactor_6.json
+93fd7e4293dcf0a88d5e6b41a93f238c07c0bc59 assets/clayium/blockstates/electrolysis_reactor_7.json
+d7650c7145fa76a1ad0f4558d828b6f654e0f8eb assets/clayium/blockstates/electrolysis_reactor_8.json
+8cc849e27ae8a436883ec9978322d4249cf9f8d5 assets/clayium/blockstates/electrolysis_reactor_9.json
 6e5e5f3ef4f5f8b46b84a016ca5c97291d8a5601 assets/clayium/blockstates/grinder_10.json
 f1e4e2a8f9fb065a1ee4f10774409f3f6d801036 assets/clayium/blockstates/grinder_2.json
 1b0d29378d532eb94b5bd9520a97db04ea42528d assets/clayium/blockstates/grinder_3.json
@@ -215,6 +219,10 @@ cf33872d82d67038e5d724a206a92abcd610257d assets/clayium/models/block/decomposer_
 6e0a58c8bd2309add9a14a54b840eff0b9ffeaa5 assets/clayium/models/block/decomposer_3.json
 3757c79ed2132a4406b02e60d90400b8372ec947 assets/clayium/models/block/decomposer_4.json
 94a428ac082898e65d999d5116bc13b412ccb86a assets/clayium/models/block/dense_clay_ore.json
+a38a0a84aede67f9298e2a8e9cdfdd5661982a87 assets/clayium/models/block/electrolysis_reactor_6.json
+d1e1c1e24d6c94fd96fffe25b7ab5ecec642e55f assets/clayium/models/block/electrolysis_reactor_7.json
+540a5ebac7f238d78069e222a1bbe0577bf43114 assets/clayium/models/block/electrolysis_reactor_8.json
+0c5dca72338b8d8ac46e4886adbbbc570a4b0a5e assets/clayium/models/block/electrolysis_reactor_9.json
 15471abd86b5250848c9921ecf24395889b429b6 assets/clayium/models/block/grinder_10.json
 40c1590ad3ef07fb62f88b3b1682b369da52fec7 assets/clayium/models/block/grinder_2.json
 83221ef8d4ec9b54f1d2e09ca302665a3a6f8a01 assets/clayium/models/block/grinder_3.json
@@ -349,6 +357,10 @@ ef49c237c6454d62d75ebdd937beaf8963414e55 assets/clayium/models/item/cutting_mach
 f5506f9f79cc70ab3b30a0099004b630c863a76f assets/clayium/models/item/decomposer_3.json
 e12a874f6df959ea5f85563bcd45aff07d603b26 assets/clayium/models/item/decomposer_4.json
 454b4894b9433b0fe713802c18e3ecc368b30750 assets/clayium/models/item/dense_clay_ore.json
+2b5ba5b9ed204ebd9d685d1399201edacb3cb257 assets/clayium/models/item/electrolysis_reactor_6.json
+82ba78bb6b5202228c0ebd8e2f76eac4ca6788a4 assets/clayium/models/item/electrolysis_reactor_7.json
+cdc430af081b6d1386afbeae53f916193459e122 assets/clayium/models/item/electrolysis_reactor_8.json
+3402f20eade715ac8f2af881fafe0943557e2d0d assets/clayium/models/item/electrolysis_reactor_9.json
 3a01d2f7cd2e937f3e84c80541f13fa5ab93292b assets/clayium/models/item/grinder_10.json
 477198d30e5835dcf8226226123c7ca028de1470 assets/clayium/models/item/grinder_2.json
 ff766004683d729a8744c5c7872255351d2e524d assets/clayium/models/item/grinder_3.json

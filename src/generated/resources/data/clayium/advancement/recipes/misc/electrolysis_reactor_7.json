@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_integrated_circuit": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clayium:integrated_circuit"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayium:electrolysis_reactor_7"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_integrated_circuit"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayium:electrolysis_reactor_7"
+    ]
+  }
+}

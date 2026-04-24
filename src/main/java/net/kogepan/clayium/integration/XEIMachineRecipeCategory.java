@@ -65,6 +65,8 @@ public class XEIMachineRecipeCategory {
                 ClayiumBlocks.CHEMICAL_REACTOR_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.DECOMPOSER_RECIPE_TYPE,
                 ClayiumBlocks.DECOMPOSER_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.ELECTROLYSIS_REACTOR_RECIPE_TYPE,
+                ClayiumBlocks.ELECTROLYSIS_REACTOR_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.INSCRIBER_RECIPE_TYPE,
                 ClayiumBlocks.INSCRIBER_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.SMELTER_RECIPE_TYPE,

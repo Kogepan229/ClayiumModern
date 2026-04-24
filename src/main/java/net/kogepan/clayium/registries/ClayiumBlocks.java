@@ -23,6 +23,7 @@ import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
 import net.kogepan.clayium.blocks.machine.CreativeCESourceBlock;
 import net.kogepan.clayium.blocks.machine.CuttingMachineBlock;
 import net.kogepan.clayium.blocks.machine.DecomposerBlock;
+import net.kogepan.clayium.blocks.machine.ElectrolysisReactorBlock;
 import net.kogepan.clayium.blocks.machine.GrinderBlock;
 import net.kogepan.clayium.blocks.machine.InscriberBlock;
 import net.kogepan.clayium.blocks.machine.LatheBlock;
@@ -289,6 +290,15 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("decomposer", i, DecomposerBlock::new));
         }
         DECOMPOSER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> ELECTROLYSIS_REACTOR_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 6; i <= 9; i++) {
+            map.put(i, registerTiered("electrolysis_reactor", i, ElectrolysisReactorBlock::new));
+        }
+        ELECTROLYSIS_REACTOR_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> INSCRIBER_BLOCKS;

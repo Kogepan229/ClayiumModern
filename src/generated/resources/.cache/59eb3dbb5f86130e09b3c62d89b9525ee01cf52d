@@ -1,4 +1,4 @@
-// 1.21.1	2026-03-02T15:37:17.115970242	Loot Tables
+// 1.21.1	2026-04-24T17:35:54.454112596	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -81,6 +81,10 @@ f919a364f3e0348dcdcfe5c0f915540543835e3e data/clayium/loot_table/blocks/cutting_
 cb19a4a3127f65aeebf2b74081816063428e3ca9 data/clayium/loot_table/blocks/decomposer_3.json
 2ac18d03ecd2c5db2de06703c3231cc9074c2d66 data/clayium/loot_table/blocks/decomposer_4.json
 04d49b5724b4f6f75e8156dc177c8970e133ac31 data/clayium/loot_table/blocks/dense_clay_ore.json
+fa91dd834aebd8f7b469f725aa2eac4054de5d2b data/clayium/loot_table/blocks/electrolysis_reactor_6.json
+00b36624412cb8d6aee95b0fb5d219b33d317110 data/clayium/loot_table/blocks/electrolysis_reactor_7.json
+7afc7790710d2fcc6be737cf96270337a65eb064 data/clayium/loot_table/blocks/electrolysis_reactor_8.json
+b4df566e323894a6358ba838b7cf425f7f48e4f1 data/clayium/loot_table/blocks/electrolysis_reactor_9.json
 407ade45ad583e9936261ddc86c2a5a71f2f7f2c data/clayium/loot_table/blocks/grinder_10.json
 76dec2974b86ffec6b6a6c5c017431ccd14e7508 data/clayium/loot_table/blocks/grinder_2.json
 a3bf31ca7174eada18906b5f1df52646f4162dd1 data/clayium/loot_table/blocks/grinder_3.json

@@ -34,6 +34,7 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         CentrifugeRecipeProvider.buildRecipes(recipeOutput);
         ChemicalReactorRecipeProvider.buildRecipes(recipeOutput);
         DecomposerRecipeProvider.buildRecipes(recipeOutput);
+        ElectrolysisReactorRecipeProvider.buildRecipes(recipeOutput);
         InscriberRecipeProvider.buildRecipes(recipeOutput);
         SmelterRecipeProvider.buildRecipes(recipeOutput);
         ClayBlastFurnaceRecipeProvider.buildRecipes(recipeOutput);
@@ -94,5 +95,31 @@ public class ClayiumRecipeProvider extends RecipeProvider {
                     .unlockedBy("has_basic_circuit", has(ClayiumItems.BASIC_CIRCUIT.get()))
                     .save(recipeOutput, Clayium.id("salt_extractor_" + tier));
         }
+
+        // Electrolysis Reactor (tiers 6, 7, 8, 9): Chemical Reactor + circuit progression
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.ELECTROLYSIS_REACTOR_BLOCKS.get(6).get())
+                .pattern("RC")
+                .define('R', ClayiumBlocks.CHEMICAL_REACTOR_BLOCKS.get(5).get())
+                .define('C', ClayiumItems.PRECISION_CIRCUIT.get())
+                .unlockedBy("has_precision_circuit", has(ClayiumItems.PRECISION_CIRCUIT.get()))
+                .save(recipeOutput, Clayium.id("electrolysis_reactor_6"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.ELECTROLYSIS_REACTOR_BLOCKS.get(7).get())
+                .pattern("RC")
+                .define('R', ClayiumBlocks.CHEMICAL_REACTOR_BLOCKS.get(5).get())
+                .define('C', ClayiumItems.INTEGRATED_CIRCUIT.get())
+                .unlockedBy("has_integrated_circuit", has(ClayiumItems.INTEGRATED_CIRCUIT.get()))
+                .save(recipeOutput, Clayium.id("electrolysis_reactor_7"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.ELECTROLYSIS_REACTOR_BLOCKS.get(8).get())
+                .pattern("RC")
+                .define('R', ClayiumBlocks.CHEMICAL_REACTOR_BLOCKS.get(5).get())
+                .define('C', ClayiumItems.CLAY_CORE.get())
+                .unlockedBy("has_clay_core", has(ClayiumItems.CLAY_CORE.get()))
+                .save(recipeOutput, Clayium.id("electrolysis_reactor_8"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.ELECTROLYSIS_REACTOR_BLOCKS.get(9).get())
+                .pattern("RC")
+                .define('R', ClayiumBlocks.CHEMICAL_REACTOR_BLOCKS.get(5).get())
+                .define('C', ClayiumItems.CLAY_BRAIN.get())
+                .unlockedBy("has_clay_brain", has(ClayiumItems.CLAY_BRAIN.get()))
+                .save(recipeOutput, Clayium.id("electrolysis_reactor_9"));
     }
 }

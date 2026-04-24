@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1000000,
+  "duration": 300,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:impure_strontium_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:strontium_dust"
+    }
+  ],
+  "recipe_tier": 7,
+  "recipe_type": "clayium:electrolysis_reactor"
+}
