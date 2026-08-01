@@ -6,6 +6,7 @@ import net.kogepan.clayium.client.ldlib.elements.PhantomItemSlot;
 import net.kogepan.clayium.client.ldlib.textures.SlotTextures;
 import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
 import net.kogepan.clayium.registries.ClayiumBlocks;
+import net.kogepan.clayium.utils.ClayTierUtil;
 import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.core.BlockPos;
@@ -14,8 +15,6 @@ import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.items.IItemHandlerModifiable;
 
@@ -59,14 +58,14 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
 
             @Override
             public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                return getClayTier(stack) >= 0;
+                return ClayTierUtil.getClayTier(stack) >= 0;
             }
         };
         this.configInventory = new ClayiumItemStackHandler(this, 1) {
 
             @Override
             public boolean isItemValid(int slot, @NotNull ItemStack stack) {
-                return getClayTier(stack) >= 0;
+                return ClayTierUtil.getClayTier(stack) >= 0;
             }
         };
         this.exposedHandler = new AutoClayCondenserItemHandler();
@@ -144,7 +143,7 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
     /** Empty filter slot = max tier 13; otherwise use tier of item in slot. */
     private int getConfiguredMaxTier() {
         ItemStack stack = this.configInventory.getStackInSlot(CONFIG_SLOT);
-        int tier = getClayTier(stack);
+        int tier = ClayTierUtil.getClayTier(stack);
         if (tier >= 0) {
             return tier;
         }
@@ -157,7 +156,7 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
 
         for (int i = 0; i < MAIN_SLOTS; i++) {
             ItemStack stack = this.mainInventory.getStackInSlot(i);
-            int tier = getClayTier(stack);
+            int tier = ClayTierUtil.getClayTier(stack);
             if (tier >= 0 && tier < num.length) {
                 num[tier] += stack.getCount();
             }
@@ -184,7 +183,7 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
         int remaining = amount;
         for (int i = 0; i < MAIN_SLOTS && remaining > 0; i++) {
             ItemStack stack = this.mainInventory.getStackInSlot(i);
-            if (getClayTier(stack) != tier) continue;
+            if (ClayTierUtil.getClayTier(stack) != tier) continue;
             int toConsume = Math.min(remaining, stack.getCount());
             ItemStack copy = stack.copy();
             copy.shrink(toConsume);
@@ -199,7 +198,7 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
         // First, try merge into existing stacks of the same tier.
         for (int i = 0; i < MAIN_SLOTS && remaining > 0; i++) {
             ItemStack stack = this.mainInventory.getStackInSlot(i);
-            if (getClayTier(stack) != tier) continue;
+            if (ClayTierUtil.getClayTier(stack) != tier) continue;
             int space = Math.min(stack.getMaxStackSize(), this.mainInventory.getSlotLimit(i)) - stack.getCount();
             if (space > 0) {
                 int toAdd = Math.min(space, remaining);
@@ -223,7 +222,7 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
 
         for (int i = 0; i < MAIN_SLOTS && remaining > 0; i++) {
             ItemStack stack = this.mainInventory.getStackInSlot(i);
-            if (getClayTier(stack) != tier) continue;
+            if (ClayTierUtil.getClayTier(stack) != tier) continue;
 
             int space = Math.min(stack.getMaxStackSize(), this.mainInventory.getSlotLimit(i)) - stack.getCount();
             if (space <= 0) continue;
@@ -239,7 +238,7 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
             ItemStack stack = this.mainInventory.getStackInSlot(i);
             if (!stack.isEmpty()) continue;
 
-            this.mainInventory.setStackInSlot(i, createClayStack(tier, 1));
+            this.mainInventory.setStackInSlot(i, ClayTierUtil.createClayStack(tier, 1));
             remaining--;
         }
     }
@@ -257,42 +256,15 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
             while (remaining > 0 && slotIndex < MAIN_SLOTS) {
                 int maxStack = Math.min(64, this.mainInventory.getSlotLimit(slotIndex));
                 int toPlace = Math.min(maxStack, remaining);
-                this.mainInventory.setStackInSlot(slotIndex, createClayStack(tier, toPlace));
+                this.mainInventory.setStackInSlot(slotIndex, ClayTierUtil.createClayStack(tier, toPlace));
                 remaining -= toPlace;
                 slotIndex++;
             }
         }
     }
 
-    private static int getClayTier(ItemStack stack) {
-        if (stack.isEmpty()) {
-            return -1;
-        }
-
-        Block block = Block.byItem(stack.getItem());
-        if (block == Blocks.CLAY) {
-            return 0;
-        }
-
-        for (var entry : ClayiumBlocks.COMPRESSED_CLAYS.int2ObjectEntrySet()) {
-            if (entry.getValue().get().asItem() == stack.getItem()) {
-                return entry.getIntKey() + 1;
-            }
-        }
-
-        return -1;
-    }
-
-    private static ItemStack createClayStack(int tier, int amount) {
-        if (tier == 0) {
-            return new ItemStack(Blocks.CLAY, amount);
-        }
-        Block block = ClayiumBlocks.COMPRESSED_CLAYS.get(tier - 1).get();
-        return new ItemStack(block.asItem(), amount);
-    }
-
     private boolean canExport(ItemStack stack) {
-        int tier = getClayTier(stack);
+        int tier = ClayTierUtil.getClayTier(stack);
         if (tier < 0) return false;
         int maxTier = getConfiguredMaxTier();
         return tier >= maxTier;
@@ -377,7 +349,7 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
         @Override
         @NotNull
         public ItemStack insertItem(int slot, @NotNull ItemStack stack, boolean simulate) {
-            if (stack.isEmpty() || getClayTier(stack) < 0) {
+            if (stack.isEmpty() || ClayTierUtil.getClayTier(stack) < 0) {
                 return stack;
             }
 
@@ -409,7 +381,7 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
         @Override
         public boolean isItemValid(int slot, @NotNull ItemStack stack) {
             // Only clay and compressed clay blocks are accepted.
-            return getClayTier(stack) >= 0;
+            return ClayTierUtil.getClayTier(stack) >= 0;
         }
 
         @Override

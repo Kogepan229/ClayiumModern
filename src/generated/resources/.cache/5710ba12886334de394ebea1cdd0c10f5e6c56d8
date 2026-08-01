@@ -1,8 +1,8 @@
-// 1.21.1	2026-04-24T20:24:36.547249352	Tags for minecraft:block mod id clayium
+// 1.21.1	2026-04-25T00:55:31.572046384	Tags for minecraft:block mod id clayium
 e4c6f52e1d10feff4753597b54aa3c4951ebfe1f data/clayium/tags/block/clay_tools_bonus_block.json
 39f8c088abb72871901f774ed6b582af8005e9fc data/minecraft/tags/block/leaves.json
 b87107c99bb1bbbb29a38f3b6bd5a884887673f8 data/minecraft/tags/block/logs.json
 b87107c99bb1bbbb29a38f3b6bd5a884887673f8 data/minecraft/tags/block/mineable/axe.json
 39f8c088abb72871901f774ed6b582af8005e9fc data/minecraft/tags/block/mineable/hoe.json
-8b41b46c10c9b5c969735faab4e7c231384eed0e data/minecraft/tags/block/mineable/pickaxe.json
+2d6b733d2f8e3489163fba7891f1ee6928a21ec0 data/minecraft/tags/block/mineable/pickaxe.json
 56d25309bba6bcc95010d485bcf88e80eb36bccb data/minecraft/tags/block/mineable/shovel.json

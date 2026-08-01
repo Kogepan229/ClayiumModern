@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-24T18:35:15.260786952	Recipes
+// 1.21.1	2026-08-01T18:02:37.073453424	Recipes
 3dbe7dd47d57bd754e05636b105fb30612729669 data/clayium/advancement/recipes/misc/centrifuge_3.json
 24cd27ecb334fc3e4fe9f41cb2932f87abf6c297 data/clayium/advancement/recipes/misc/centrifuge_4.json
 7195387f8196585e8d8444ef5a84ae5b2daaff11 data/clayium/advancement/recipes/misc/centrifuge_5.json
@@ -219,6 +219,7 @@ d72e16fcd0b7c0e5345f08b624234b7768842b5f data/clayium/recipe/grinder/dense_small
 475201156e66afc5376626b1e0b6eabd56ecde74 data/clayium/recipe/grinder/impure_silicon_ingot.json
 3cc0c28546929f0b486c32c69c4443329fa02064 data/clayium/recipe/grinder/large_clay_plate.json
 78d6a7da4386fb7a3e6ce1a4ae8b40abd8ac6e36 data/clayium/recipe/grinder/large_dense_clay_ore.json
+95b54a41300418fcd3708f807105856c8c64bc59 data/clayium/recipe/grinder/lithium_ingot.json
 dad409b81b678e8ee3c5e161fdd56aca858696e6 data/clayium/recipe/grinder/melon_block_to_melon.json
 70f4bd5659cd98744fc75687639bf08a38fb6914 data/clayium/recipe/grinder/red_sandstone_to_sand.json
 2a5872fce5b364f12d171504a1692032fc8cc5d7 data/clayium/recipe/grinder/sandstone_to_sand.json
@@ -291,6 +292,7 @@ ce349d47e9584c83a0ea1ff4052bd183c3d706c6 data/clayium/recipe/salt_extractor_7.js
 83cd0f13e2fa2c64551a3789462d1ee296b02436 data/clayium/recipe/smelter/aluminium_dust.json
 20b1fe87510ab1628e102212bc9429107f75aa05 data/clayium/recipe/smelter/az91d_alloy_dust.json
 b4773530deb8de73070148a2bee96838156dd4f0 data/clayium/recipe/smelter/impure_aluminium_dust.json
+9aff0e2f0a756a74113e8458b899ec1fc4f486c6 data/clayium/recipe/smelter/lithium_dust.json
 6b4ad143d5fbcdf1984c10a369cb2dcd1ad7753e data/clayium/recipe/smelter/zk60a_alloy_dust.json
 1a372ff4d031fbb6fe2e471a21827342286f57b1 data/clayium/recipe/wire_drawing_machine/clay_ball_to_stick.json
 1bde408363bd7ca41b5557651ee81d29be4de503 data/clayium/recipe/wire_drawing_machine/clay_cylinder_to_stick.json

@@ -29,5 +29,7 @@ public class ClayiumItemTagsProvider extends ItemTagsProvider {
                 .add(ClayiumItems.RAW_CLAY_ROLLING_PIN.get())
                 .add(ClayiumItems.RAW_CLAY_SLICER.get())
                 .add(ClayiumItems.RAW_CLAY_SPATULA.get());
+        tag(ClayiumTags.LITHIUM_INGOTS)
+                .add(ClayiumItems.LITHIUM_INGOT.get());
     }
 }

@@ -15,6 +15,7 @@ import net.kogepan.clayium.blockentities.machine.ChemicalReactorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChunkLoaderBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayBlastFurnaceBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayCondenserBlockEntity;
+import net.kogepan.clayium.blockentities.machine.ClayFabricatorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayLaserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CobblestoneGeneratorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CreativeCESourceBlockEntity;
@@ -29,6 +30,7 @@ import net.kogepan.clayium.blockentities.machine.MillingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.PipeDrawingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.SaltExtractorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.SmelterBlockEntity;
+import net.kogepan.clayium.blockentities.machine.SolarClayFabricatorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.WaterwheelBlockEntity;
 import net.kogepan.clayium.blockentities.machine.WireDrawingMachineBlockEntity;
 
@@ -291,6 +293,26 @@ public class ClayiumBlockEntityTypes {
                         .map(DeferredHolder::get).toList());
                 return BlockEntityType.Builder
                         .of(ClayLaserBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SolarClayFabricatorBlockEntity>> SOLAR_CLAY_FABRICATOR_BLOCK_ENTITY = registerClayContainer(
+            "solar_clay_fabricator_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.SOLAR_CLAY_FABRICATOR_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(SolarClayFabricatorBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ClayFabricatorBlockEntity>> CLAY_FABRICATOR_BLOCK_ENTITY = registerClayContainer(
+            "clay_fabricator_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.CLAY_FABRICATOR_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(ClayFabricatorBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
 

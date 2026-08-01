@@ -64,6 +64,7 @@ public final class ColoredIngotTints {
         register(ClayiumItems.SILICON_INGOT, 0xFF281C28, 0xFF060406, 0xFFFFFFFF);
         register(ClayiumItems.SILICONE_INGOT, 0xFFD2D2D2, 0xFFB4B4B4, 0xFFF0F0F0);
         register(ClayiumItems.ALUMINIUM_INGOT, 0xFFBEC8CA, 0xFF1F2121, 0xFFFFFFFF);
+        register(ClayiumItems.LITHIUM_INGOT, 0xFFD2D296, 0xFF787878, 0xFFFFFFFF);
         register(ClayiumItems.IMPURE_ALUMINIUM_INGOT, 0xFFBEC8CA, 0xFF78783C, 0xFFDCDCDC);
         register(ClayiumItems.CLAY_STEEL_INGOT, 0xFF8890AD, 0xFF16181C, 0xFFFFFFFF);
         register(ClayiumItems.CLAYIUM_INGOT, 0xFF5AF0D2, 0xFF3F4855, 0xFFFFCDC8);

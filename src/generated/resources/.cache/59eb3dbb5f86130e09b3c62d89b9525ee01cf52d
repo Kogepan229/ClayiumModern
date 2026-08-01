@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-24T20:24:36.547796741	Loot Tables
+// 1.21.1	2026-04-25T00:55:31.572982873	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -34,6 +34,9 @@ ec9af6a3af10ed5e08cbf972be3f5dcdebcd7479 data/clayium/loot_table/blocks/clay_buf
 1751687a7b0de7a4ac8a9ac3e6e3ceec4f888084 data/clayium/loot_table/blocks/clay_condenser_3.json
 8401b8d87f33c291a3aadc2997465a97dc7e0d2c data/clayium/loot_table/blocks/clay_condenser_4.json
 ee86f26ada6e224f8e7fee211694bea2d653e0e3 data/clayium/loot_table/blocks/clay_condenser_5.json
+ab5a937a9f7101ff99e2698f63309f689364f033 data/clayium/loot_table/blocks/clay_fabricator_13.json
+43f7c3c6f99e572a9967fd3669342b79405801ae data/clayium/loot_table/blocks/clay_fabricator_8.json
+e5fe7a1046eae85a0444a9489dfba1d1ba0feda9 data/clayium/loot_table/blocks/clay_fabricator_9.json
 1d0e8447b847da3431a03b8c8ef4efbaa3643ce6 data/clayium/loot_table/blocks/clay_interface_10.json
 eae89aedcc7d43d75e6c21471f2c3a3a6e628f7a data/clayium/loot_table/blocks/clay_interface_11.json
 458f42762b206c4abf6e04d3accc3366fd6fd34c data/clayium/loot_table/blocks/clay_interface_12.json
@@ -144,6 +147,9 @@ bbc878eac7679d6afedc43e514dac1cae770a86d data/clayium/loot_table/blocks/smelter_
 c05dab572b9890103906cdf03b323580e3c904c1 data/clayium/loot_table/blocks/smelter_7.json
 6eb960c5833d3fdb026bb6a06320cfc11f45531b data/clayium/loot_table/blocks/smelter_8.json
 5c4ceaee133a643d712d97cd9c3f7c61ea816cb6 data/clayium/loot_table/blocks/smelter_9.json
+3dc4c0dcb2161dc29dfd424cb92aee8375a3fc8f data/clayium/loot_table/blocks/solar_clay_fabricator_5.json
+189d7975269c8366d18133466b33e2cff4ef6a52 data/clayium/loot_table/blocks/solar_clay_fabricator_6.json
+4a05fe8bd261be6eb17f3320dcef786e888d4cf1 data/clayium/loot_table/blocks/solar_clay_fabricator_7.json
 863d0d65464e9edf00c3a3f86b440b8f0799fdcb data/clayium/loot_table/blocks/waterwheel_1.json
 5170c767f373a17a79fd4bdba2c158510ac3db70 data/clayium/loot_table/blocks/waterwheel_2.json
 25334ed0af71f5647af83c712a1d43c42f5e25ee data/clayium/loot_table/blocks/wire_drawing_machine_1.json

@@ -18,6 +18,7 @@ import net.kogepan.clayium.blocks.machine.ChemicalReactorBlock;
 import net.kogepan.clayium.blocks.machine.ChunkLoaderBlock;
 import net.kogepan.clayium.blocks.machine.ClayBlastFurnaceBlock;
 import net.kogepan.clayium.blocks.machine.ClayCondenserBlock;
+import net.kogepan.clayium.blocks.machine.ClayFabricatorBlock;
 import net.kogepan.clayium.blocks.machine.ClayInterfaceBlock;
 import net.kogepan.clayium.blocks.machine.ClayLaserBlock;
 import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
@@ -33,6 +34,7 @@ import net.kogepan.clayium.blocks.machine.MillingMachineBlock;
 import net.kogepan.clayium.blocks.machine.PipeDrawingMachineBlock;
 import net.kogepan.clayium.blocks.machine.SaltExtractorBlock;
 import net.kogepan.clayium.blocks.machine.SmelterBlock;
+import net.kogepan.clayium.blocks.machine.SolarClayFabricatorBlock;
 import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
 import net.kogepan.clayium.blocks.machine.WireDrawingMachineBlock;
 import net.kogepan.clayium.items.blockitem.DistributorBlockItem;
@@ -368,6 +370,24 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("auto_clay_condenser", i, AutoClayCondenserBlock::new));
         }
         AUTO_CLAY_CONDENSER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> SOLAR_CLAY_FABRICATOR_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i : new int[] { 5, 6, 7 }) {
+            map.put(i, registerTiered("solar_clay_fabricator", i, SolarClayFabricatorBlock::new));
+        }
+        SOLAR_CLAY_FABRICATOR_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CLAY_FABRICATOR_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i : new int[] { 8, 9, 13 }) {
+            map.put(i, registerTiered("clay_fabricator", i, ClayFabricatorBlock::new));
+        }
+        CLAY_FABRICATOR_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CLAY_LASER_BLOCKS;

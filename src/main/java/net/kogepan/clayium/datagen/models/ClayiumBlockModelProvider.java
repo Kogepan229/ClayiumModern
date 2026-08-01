@@ -25,6 +25,7 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
 
     private static final ResourceLocation OVERLAY_ALL_CUBE_MODEL = Clayium.id("block/overlay_all_cube");
     private static final ResourceLocation OVERLAY_MODEL = Clayium.id("block/overlay");
+    private static final ResourceLocation OVERLAY_TOP_MODEL = Clayium.id("block/overlay_top");
     private static final ResourceLocation OVERLAY_ALL_MODEL = Clayium.id("block/overlay_all");
     private static final ResourceLocation INPUT_ALL_OVERLAY_TEXTURE = Clayium.id("block/overlay/import_all");
 
@@ -50,6 +51,8 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation MILLING_MACHINE_TEXTURE = Clayium.id("block/machine/milling_machine");
     private static final ResourceLocation CLAY_CONDENSER_TEXTURE = Clayium.id("block/machine/clay_condenser");
     private static final ResourceLocation AUTO_CLAY_CONDENSER_TEXTURE = Clayium.id("block/machine/auto_clay_condenser");
+    private static final ResourceLocation SOLAR_CLAY_FABRICATOR_TEXTURE = Clayium.id("block/machine/solar");
+    private static final ResourceLocation CLAY_FABRICATOR_TEXTURE = Clayium.id("block/machine/clay_fabricator");
     private static final ResourceLocation GRINDER_TEXTURE = Clayium.id("block/machine/grinder");
     private static final ResourceLocation CENTRIFUGE_TEXTURE = Clayium.id("block/machine/centrifuge");
     private static final ResourceLocation CHEMICAL_REACTOR_TEXTURE = Clayium.id("block/machine/chemical_reactor");
@@ -152,6 +155,13 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         }
         for (var entry : ClayiumBlocks.AUTO_CLAY_CONDENSER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), AUTO_CLAY_CONDENSER_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.SOLAR_CLAY_FABRICATOR_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), SOLAR_CLAY_FABRICATOR_TEXTURE,
+                    OVERLAY_TOP_MODEL, false, false);
+        }
+        for (var entry : ClayiumBlocks.CLAY_FABRICATOR_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CLAY_FABRICATOR_TEXTURE);
         }
         for (var entry : ClayiumBlocks.GRINDER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), GRINDER_TEXTURE);

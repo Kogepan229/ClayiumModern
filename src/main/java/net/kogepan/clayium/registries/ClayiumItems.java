@@ -183,6 +183,7 @@ public class ClayiumItems {
     // Additional ingots (3-layer tinted)
     public static final DeferredItem<Item> SILICONE_INGOT = ITEMS.registerItem("silicone_ingot", Item::new);
     public static final DeferredItem<Item> ALUMINIUM_INGOT = ITEMS.registerItem("aluminium_ingot", Item::new);
+    public static final DeferredItem<Item> LITHIUM_INGOT = ITEMS.registerItem("lithium_ingot", Item::new);
     public static final DeferredItem<Item> IMPURE_ALUMINIUM_INGOT = ITEMS.registerItem("impure_aluminium_ingot", Item::new);
     public static final DeferredItem<Item> CLAY_STEEL_INGOT = ITEMS.registerItem("clay_steel_ingot", Item::new);
     public static final DeferredItem<Item> CLAYIUM_INGOT = ITEMS.registerItem("clayium_ingot", Item::new);

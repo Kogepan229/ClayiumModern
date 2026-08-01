@@ -6,6 +6,7 @@ import net.kogepan.clayium.recipes.ItemIngredientStack;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumItems;
+import net.kogepan.clayium.registries.ClayiumTags;
 import net.kogepan.clayium.utils.CEUtils;
 
 import net.minecraft.core.registries.Registries;
@@ -160,6 +161,9 @@ public class GrinderRecipeProvider {
                 ClayiumItems.SILICONE_DUST.toStack(), CEUtils.ONE_MILLI_CE, 4, 4);
         create(recipeOutput, "aluminium_ingot", ClayiumItems.ALUMINIUM_INGOT.toStack(),
                 ClayiumItems.ALUMINIUM_DUST.toStack(), CEUtils.ONE_MILLI_CE, 20, 4);
+        create(recipeOutput, "lithium_ingot",
+                ItemIngredientStack.of(Ingredient.of(ClayiumTags.LITHIUM_INGOTS), 1),
+                ClayiumItems.LITHIUM_DUST.toStack(), CEUtils.TEN_MICRO_CE * 25, 80, 0);
         create(recipeOutput, "impure_aluminium_ingot", ClayiumItems.IMPURE_ALUMINIUM_INGOT.toStack(),
                 ClayiumItems.IMPURE_ALUMINIUM_DUST.toStack(), CEUtils.ONE_MILLI_CE, 20, 4);
         create(recipeOutput, "clay_steel_ingot", ClayiumItems.CLAY_STEEL_INGOT.toStack(),
