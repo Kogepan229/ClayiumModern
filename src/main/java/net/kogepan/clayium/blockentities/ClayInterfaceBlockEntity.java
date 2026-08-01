@@ -148,6 +148,12 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     }
 
     @Override
+    @NotNull
+    protected List<IItemHandler> getInventoryHandlersForDrops() {
+        return List.of();
+    }
+
+    @Override
     public @Nullable IClayEnergyHolder getExposedClayEnergyHolder(@Nullable Direction side) {
         TargetResolution resolution = this.resolveTarget(this.linkedTargetPos);
         if (resolution.state() == TargetState.VALID && resolution.target() != null) {

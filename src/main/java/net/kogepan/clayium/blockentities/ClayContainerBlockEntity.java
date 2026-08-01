@@ -22,6 +22,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.world.Containers;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -50,10 +51,14 @@ import org.jetbrains.annotations.MustBeInvokedByOverriders;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.EnumMap;
+import java.util.IdentityHashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_EXPORT;
 import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_FILTER_SIDES;
@@ -224,6 +229,35 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     public abstract IItemHandlerModifiable getInputInventory();
 
     public abstract IItemHandlerModifiable getOutputInventory();
+
+    public void dropInventoryContents(@NotNull Level level) {
+        Set<IItemHandler> droppedInventories = Collections.newSetFromMap(new IdentityHashMap<>());
+        for (IItemHandler inventory : this.getInventoryHandlersForDrops()) {
+            if (!droppedInventories.add(inventory)) {
+                continue;
+            }
+            for (int slot = 0; slot < inventory.getSlots(); slot++) {
+                ItemStack stack = inventory.extractItem(slot, Integer.MAX_VALUE, false);
+                if (!stack.isEmpty()) {
+                    Containers.dropItemStack(level, this.worldPosition.getX(), this.worldPosition.getY(),
+                            this.worldPosition.getZ(), stack);
+                }
+            }
+        }
+    }
+
+    @NotNull
+    protected List<IItemHandler> getInventoryHandlersForDrops() {
+        List<IItemHandler> inventories = new ArrayList<>();
+        inventories.add(this.getInputInventory());
+        inventories.add(this.getOutputInventory());
+
+        ClayContainerTrait energyTrait = this.getTrait(ClayEnergyHolder.TRAIT_ID);
+        if (energyTrait instanceof ClayEnergyHolder energyHolder) {
+            inventories.add(energyHolder.getEnergizedClayItemHandler());
+        }
+        return inventories;
+    }
 
     @Nullable
     public IItemHandler getExposedItemHandler(@Nullable Direction side) {
