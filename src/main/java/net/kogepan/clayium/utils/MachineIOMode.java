@@ -1,5 +1,11 @@
 package net.kogepan.clayium.utils;
 
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+
+import com.mojang.serialization.Codec;
+import io.netty.buffer.ByteBuf;
+
 import java.util.OptionalInt;
 
 public enum MachineIOMode {
@@ -17,6 +23,10 @@ public enum MachineIOMode {
     M_4(204),
     M_5(205),
     M_6(206);
+
+    public static final Codec<MachineIOMode> CODEC = Codec.INT.xmap(MachineIOMode::fromMode, MachineIOMode::getMode);
+    public static final StreamCodec<ByteBuf, MachineIOMode> STREAM_CODEC = ByteBufCodecs.VAR_INT
+            .map(MachineIOMode::fromMode, MachineIOMode::getMode);
 
     private final int mode;
 

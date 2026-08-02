@@ -1,5 +1,11 @@
 package net.kogepan.clayium.utils;
 
+import net.kogepan.clayium.registries.ClayiumDataMaps;
+
+import net.minecraft.world.item.ItemStack;
+
+import org.jspecify.annotations.Nullable;
+
 /** Utility methods for converting and formatting Clay Energy units. */
 public final class CEUtils {
 
@@ -55,6 +61,16 @@ public final class CEUtils {
         int prefixIndex = Math.min(magnitude / 3, CE_NUMERALS.length - 1);
         int digits = (int) ((double) scaledEnergy * 1000.0D / Math.pow(10.0D, (double) (prefixIndex * 3)));
         return sign + formatCE(digits, prefixIndex, prefixIndex == 0 || omitTrailingZeros);
+    }
+
+    /** Returns the Clay Energy value attached to this item, or zero when it has none. */
+    public static long getItemEnergy(ItemStack stack) {
+        if (stack.isEmpty()) {
+            return 0L;
+        }
+        @Nullable
+        Long energy = stack.typeHolder().getData(ClayiumDataMaps.CLAY_ENERGY);
+        return energy != null ? energy : 0L;
     }
 
     private static String formatCE(int digits, int prefixIndex, boolean omitTrailingZeros) {
