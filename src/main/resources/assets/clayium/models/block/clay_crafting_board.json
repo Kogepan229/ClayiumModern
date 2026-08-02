@@ -1,0 +1,56 @@
+{
+  "parent": "minecraft:block/block",
+  "render_type": "minecraft:cutout",
+  "textures": {
+    "particle": "clayium:block/compressed_clay_0",
+    "base": "clayium:block/compressed_clay_0",
+    "overlay": "clayium:block/clay_crafting_board"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 4, 16],
+      "faces": {
+        "down": {
+          "uv": [0, 0, 16, 16],
+          "texture": "#base",
+          "cullface": "down"
+        },
+        "up": {
+          "uv": [0, 0, 16, 16],
+          "texture": "#base"
+        },
+        "north": {
+          "uv": [0, 12, 16, 16],
+          "texture": "#base",
+          "cullface": "north"
+        },
+        "south": {
+          "uv": [0, 12, 16, 16],
+          "texture": "#base",
+          "cullface": "south"
+        },
+        "west": {
+          "uv": [0, 12, 16, 16],
+          "texture": "#base",
+          "cullface": "west"
+        },
+        "east": {
+          "uv": [0, 12, 16, 16],
+          "texture": "#base",
+          "cullface": "east"
+        }
+      }
+    },
+    {
+      "from": [0, 0, 0],
+      "to": [16, 4.01, 16],
+      "faces": {
+        "up": {
+          "uv": [0, 0, 16, 16],
+          "texture": "#overlay"
+        }
+      }
+    }
+  ]
+}

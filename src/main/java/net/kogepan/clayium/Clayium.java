@@ -1,6 +1,7 @@
 package net.kogepan.clayium;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.blockentities.ClayCraftingBoardBlockEntity;
 import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChunkLoaderBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CreativeCESourceBlockEntity;
@@ -160,6 +161,11 @@ public class Clayium {
                 Capabilities.ItemHandler.BLOCK,
                 ClayiumBlockEntityTypes.CREATIVE_CE_SOURCE_BLOCK_ENTITY.get(),
                 (blockEntity, side) -> ((CreativeCESourceBlockEntity) blockEntity).getItemHandler(side));
+
+        event.registerBlockEntity(
+                Capabilities.ItemHandler.BLOCK,
+                ClayiumBlockEntityTypes.CLAY_CRAFTING_BOARD_BLOCK_ENTITY.get(),
+                (blockEntity, side) -> ((ClayCraftingBoardBlockEntity) blockEntity).getInventory());
 
         event.registerBlockEntity(
                 ClayiumCapabilities.SYNCHRONIZED_INTERFACE,

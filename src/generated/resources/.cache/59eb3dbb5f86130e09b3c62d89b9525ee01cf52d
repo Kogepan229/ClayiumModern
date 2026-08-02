@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-01T20:15:50.909056639	Loot Tables
+// 1.21.1	2026-08-02T13:35:59.925023196	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -34,6 +34,7 @@ ec9af6a3af10ed5e08cbf972be3f5dcdebcd7479 data/clayium/loot_table/blocks/clay_buf
 1751687a7b0de7a4ac8a9ac3e6e3ceec4f888084 data/clayium/loot_table/blocks/clay_condenser_3.json
 8401b8d87f33c291a3aadc2997465a97dc7e0d2c data/clayium/loot_table/blocks/clay_condenser_4.json
 ee86f26ada6e224f8e7fee211694bea2d653e0e3 data/clayium/loot_table/blocks/clay_condenser_5.json
+985c510e573face87c528fbdda08a20ad4e08203 data/clayium/loot_table/blocks/clay_crafting_board.json
 ab5a937a9f7101ff99e2698f63309f689364f033 data/clayium/loot_table/blocks/clay_fabricator_13.json
 43f7c3c6f99e572a9967fd3669342b79405801ae data/clayium/loot_table/blocks/clay_fabricator_8.json
 e5fe7a1046eae85a0444a9489dfba1d1ba0feda9 data/clayium/loot_table/blocks/clay_fabricator_9.json

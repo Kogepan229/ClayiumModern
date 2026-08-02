@@ -134,6 +134,7 @@ public class ClayiumClient {
     @SubscribeEvent
     public static void onRegisterMenuScreens(RegisterMenuScreensEvent event) {
         event.register(ClayiumMenuTypes.CLAY_INTERFACE_UI.get(), ModularUIContainerScreen::new);
+        event.register(ClayiumMenuTypes.CLAY_CRAFTING_BOARD_UI.get(), ModularUIContainerScreen::new);
     }
 
     @SubscribeEvent

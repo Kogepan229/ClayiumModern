@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-01T20:32:52.567519996	Block States: clayium
+// 1.21.1	2026-08-02T13:44:50.155838325	Block States: clayium
 9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
 56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
@@ -34,6 +34,7 @@ f4e959e5453d60d2b734bec763241bc5640d19b9 assets/clayium/blockstates/clay_buffer_
 a84d9deb971cf074680e3b6e3206366615632843 assets/clayium/blockstates/clay_condenser_3.json
 0ccbf4d81907121d3ba0dcac31d9261243cbef7f assets/clayium/blockstates/clay_condenser_4.json
 f3cd3260d7e2c5d51e066541a9a2a12800d6dd3d assets/clayium/blockstates/clay_condenser_5.json
+fe6f52c00982d6933486932c4f3504087c7d81c4 assets/clayium/blockstates/clay_crafting_board.json
 19cea0063228ebcd4ef8cbcc420743f408737016 assets/clayium/blockstates/clay_fabricator_13.json
 43f278bc9a08081c929b9e5747a14a023e3cb404 assets/clayium/blockstates/clay_fabricator_8.json
 72685c2b83e4ddc2d0272d916550bc61d13712d2 assets/clayium/blockstates/clay_fabricator_9.json

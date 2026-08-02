@@ -11,6 +11,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.world.item.Items;
 
@@ -42,6 +43,17 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         ClayBlastFurnaceRecipeProvider.buildRecipes(recipeOutput);
         QuartzCrucibleRecipeProvider.buildRecipes(recipeOutput);
         LaserIrradiationRecipeProvider.buildRecipes(recipeOutput);
+
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.CLAY_CRAFTING_BOARD.get())
+                .pattern("DDD")
+                .define('D', ClayiumBlocks.COMPRESSED_CLAYS.get(0).get())
+                .unlockedBy("has_dense_clay", has(ClayiumBlocks.COMPRESSED_CLAYS.get(0).get()))
+                .save(recipeOutput, Clayium.id("clay_crafting_board"));
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.BUILDING_BLOCKS,
+                ClayiumBlocks.COMPRESSED_CLAYS.get(0).get(), 3)
+                .requires(ClayiumBlocks.CLAY_CRAFTING_BOARD.get())
+                .unlockedBy("has_clay_crafting_board", has(ClayiumBlocks.CLAY_CRAFTING_BOARD.get()))
+                .save(recipeOutput, Clayium.id("clay_crafting_board_to_dense_clay"));
 
         SpecialRecipeBuilder.special(StorageContainerUpgradeRecipe::new)
                 .save(recipeOutput, Clayium.id("storage_container_upgrade"));

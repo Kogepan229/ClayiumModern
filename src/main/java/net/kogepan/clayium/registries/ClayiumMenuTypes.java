@@ -1,7 +1,9 @@
 package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.gui.factory.ClayCraftingBoardUIMenuType;
 import net.kogepan.clayium.gui.factory.ClayInterfaceUIMenuType;
+import net.kogepan.clayium.gui.menu.ClayCraftingBoardMenu;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.inventory.MenuType;
@@ -18,4 +20,8 @@ public class ClayiumMenuTypes {
     public static final DeferredHolder<MenuType<?>, MenuType<ModularUIContainerMenu>> CLAY_INTERFACE_UI = MENUS
             .register("clay_interface_ui",
                     () -> IMenuTypeExtension.create(ClayInterfaceUIMenuType::create));
+
+    public static final DeferredHolder<MenuType<?>, MenuType<ClayCraftingBoardMenu>> CLAY_CRAFTING_BOARD_UI = MENUS
+            .register("clay_crafting_board_ui",
+                    () -> IMenuTypeExtension.create(ClayCraftingBoardUIMenuType::create));
 }

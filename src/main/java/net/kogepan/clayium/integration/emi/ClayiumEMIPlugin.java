@@ -5,6 +5,7 @@ import net.kogepan.clayium.integration.XEISaltExtractorRecipeCategory;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.registries.ClayiumBlocks;
+import net.kogepan.clayium.registries.ClayiumMenuTypes;
 
 import net.minecraft.world.item.crafting.Recipe;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -15,6 +16,7 @@ import dev.emi.emi.api.EmiEntrypoint;
 import dev.emi.emi.api.EmiPlugin;
 import dev.emi.emi.api.EmiRegistry;
 import dev.emi.emi.api.recipe.EmiRecipe;
+import dev.emi.emi.api.recipe.VanillaEmiRecipeCategories;
 import dev.emi.emi.api.stack.EmiStack;
 
 import java.util.Comparator;
@@ -25,6 +27,11 @@ public class ClayiumEMIPlugin implements EmiPlugin {
 
     @Override
     public void register(EmiRegistry registry) {
+        registry.addWorkstation(VanillaEmiRecipeCategories.CRAFTING,
+                EmiStack.of(ClayiumBlocks.CLAY_CRAFTING_BOARD));
+        registry.addRecipeHandler(ClayiumMenuTypes.CLAY_CRAFTING_BOARD_UI.get(),
+                new ClayCraftingBoardEmiRecipeHandler());
+
         registry.addCategory(EMIClayWorkTableRecipe.CATEGORY);
         registry.addWorkstation(EMIClayWorkTableRecipe.CATEGORY, EmiStack.of(ClayiumBlocks.CLAY_WORK_TABLE));
         registry.getRecipeManager().getAllRecipesFor(ClayiumRecipeTypes.CLAY_WORK_TABLE_RECIPE_TYPE.get())

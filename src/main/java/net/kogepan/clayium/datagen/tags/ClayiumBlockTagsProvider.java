@@ -44,6 +44,10 @@ public class ClayiumBlockTagsProvider extends BlockTagsProvider {
                 tag(BlockTags.MINEABLE_WITH_SHOVEL).add(block.get());
                 continue;
             }
+            if (block.get() == ClayiumBlocks.CLAY_CRAFTING_BOARD.get()) {
+                tag(BlockTags.MINEABLE_WITH_SHOVEL).add(block.get());
+                continue;
+            }
             if (block.get() == ClayiumBlocks.CLAY_LOG.get()) {
                 tag(BlockTags.MINEABLE_WITH_AXE).add(block.get());
                 continue;

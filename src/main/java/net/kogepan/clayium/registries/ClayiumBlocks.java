@@ -3,6 +3,7 @@ package net.kogepan.clayium.registries;
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blocks.ClayBufferBlock;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.blocks.ClayCraftingBoardBlock;
 import net.kogepan.clayium.blocks.ClayLeavesBlock;
 import net.kogepan.clayium.blocks.ClayLogBlock;
 import net.kogepan.clayium.blocks.ClayOre;
@@ -113,6 +114,13 @@ public class ClayiumBlocks {
 
     public static final DeferredBlock<ClayWorkTableBlock> CLAY_WORK_TABLE = register("clay_work_table",
             ClayWorkTableBlock::new);
+
+    public static final DeferredBlock<ClayCraftingBoardBlock> CLAY_CRAFTING_BOARD = BLOCKS
+            .register("clay_crafting_board", ClayCraftingBoardBlock::new);
+    static {
+        ClayiumItems.ITEMS.register("clay_crafting_board",
+                registryName -> new TieredBlockItem(CLAY_CRAFTING_BOARD.get(), new Item.Properties(), 0));
+    }
 
     public static final DeferredBlock<QuartzCrucibleBlock> QUARTZ_CRUCIBLE = BLOCKS.register("quartz_crucible",
             QuartzCrucibleBlock::new);

@@ -3,6 +3,7 @@ package net.kogepan.clayium.registries;
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.ClayBufferBlockEntity;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.blockentities.ClayCraftingBoardBlockEntity;
 import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.ClayWorkTableBlockEntity;
 import net.kogepan.clayium.blockentities.LaserReflectorBlockEntity;
@@ -57,6 +58,12 @@ public class ClayiumBlockEntityTypes {
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ClayWorkTableBlockEntity>> CLAY_WORK_TABLE_BLOCK_ENTITY = BLOCK_ENTITY_TYPES
             .register("clay_work_table_entity",
                     () -> BlockEntityType.Builder.of(ClayWorkTableBlockEntity::new, ClayiumBlocks.CLAY_WORK_TABLE.get())
+                            .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ClayCraftingBoardBlockEntity>> CLAY_CRAFTING_BOARD_BLOCK_ENTITY = BLOCK_ENTITY_TYPES
+            .register("clay_crafting_board_block_entity",
+                    () -> BlockEntityType.Builder
+                            .of(ClayCraftingBoardBlockEntity::new, ClayiumBlocks.CLAY_CRAFTING_BOARD.get())
                             .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<QuartzCrucibleBlockEntity>> QUARTZ_CRUCIBLE_BLOCK_ENTITY = BLOCK_ENTITY_TYPES

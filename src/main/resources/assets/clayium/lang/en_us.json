@@ -5,6 +5,7 @@
   "block.clayium.dense_clay_ore": "Dense Clay Ore",
   "block.clayium.large_dense_clay_ore": "Large Dense Clay Ore",
   "block.clayium.clay_work_table": "Clay Work Table",
+  "block.clayium.clay_crafting_board": "Clay Crafting Board",
   "block.clayium.raw_clay_machine_hull": "Raw Clay Machine Hull",
   "block.clayium.machine_hull_1": "Clay Machine Hull",
   "block.clayium.machine_hull_2": "Dense Clay Machine Hull",
@@ -325,6 +326,7 @@
   "tooltip.clayium.tier":  "Tier %d",
 
   "gui.clayium.inventory": "Inventory",
+  "gui.clayium.adjacent_inventory": "Adjacent Inventory",
   "gui.clayium.waterwheel.progress": "Progress: %d",
   "gui.clayium.waterwheel.durability": "Durability: %d",
   "gui.clayium.waterwheel.water": "Water: %d",

@@ -113,6 +113,9 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
                 makeId("block/clay_work_table_side"),
                 makeId("block/clay_work_table")));
 
+        ModelFile craftingBoardModel = models().getExistingFile(Clayium.id("block/clay_crafting_board"));
+        simpleBlock(ClayiumBlocks.CLAY_CRAFTING_BOARD.get(), craftingBoardModel);
+
         // Quartz Crucible: blockstate is in main (multipart: empty + level_1..9). Item uses empty model.
         ModelFile quartzCrucibleItemModel = models().getExistingFile(Clayium.id("block/quartz_crucible/base"));
         simpleBlockItem(ClayiumBlocks.QUARTZ_CRUCIBLE.get(), quartzCrucibleItemModel);
