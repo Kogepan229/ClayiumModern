@@ -1,0 +1,4 @@
+{
+  "parent": "clayium:block/overlay/export",
+  "textures": { "overlay": "clayium:block/overlay/export_all" }
+}

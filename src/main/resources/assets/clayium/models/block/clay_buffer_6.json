@@ -1,0 +1,7 @@
+{
+  "parent": "clayium:block/clay_buffer",
+  "textures": {
+    "tier": "clayium:block/tier/tier6",
+    "overlay": "clayium:block/overlay/import_all"
+  }
+}

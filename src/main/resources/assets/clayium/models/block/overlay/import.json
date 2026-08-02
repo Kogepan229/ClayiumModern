@@ -1,0 +1,13 @@
+{
+  "parent": "minecraft:block/block",
+  "textures": { "particle": "#overlay" },
+  "elements": [
+    {
+      "from": [-0.032, -0.032, -0.032],
+      "to": [16.032, 16.032, 16.032],
+      "faces": {
+        "north": { "uv": [0, 0, 16, 16], "texture": "#overlay", "cullface": "north" }
+      }
+    }
+  ]
+}

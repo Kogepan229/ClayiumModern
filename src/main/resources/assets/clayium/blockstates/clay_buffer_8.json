@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "": {
+      "type": "clayium:clay_container",
+      "base_model": "clayium:block/clay_buffer_8_base",
+      "import_overlay": "clayium:block/overlay/import_all",
+      "export_overlay": "clayium:block/overlay/export_all",
+      "filter_overlay": "clayium:block/overlay/filter"
+    }
+  }
+}

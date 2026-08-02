@@ -1,5 +1,6 @@
 package net.kogepan.clayium;
 
+import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.datagen.ClayiumDataGenerators;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
@@ -8,6 +9,7 @@ import net.kogepan.clayium.recipes.display.ClayiumRecipeDisplays;
 import net.kogepan.clayium.recipes.display.ClayiumSlotDisplays;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumBlocks;
+import net.kogepan.clayium.registries.ClayiumCreativeModeTabs;
 import net.kogepan.clayium.registries.ClayiumDataComponents;
 import net.kogepan.clayium.registries.ClayiumDataMaps;
 import net.kogepan.clayium.registries.ClayiumFeatures;
@@ -20,6 +22,8 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
+import net.neoforged.neoforge.capabilities.Capabilities;
+import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import com.mojang.logging.LogUtils;
@@ -34,6 +38,7 @@ public final class Clayium {
     public Clayium(IEventBus modEventBus, ModContainer modContainer) {
         ClayiumBlocks.BLOCKS.register(modEventBus);
         ClayiumItems.ITEMS.register(modEventBus);
+        ClayiumCreativeModeTabs.CREATIVE_MODE_TABS.register(modEventBus);
         ClayiumBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
         ClayiumFilterTypes.FILTER_TYPES.register(modEventBus);
         ClayiumDataComponents.DATA_COMPONENTS.register(modEventBus);
@@ -47,12 +52,20 @@ public final class Clayium {
 
         modEventBus.addListener(ClayiumDataGenerators::gatherData);
         modEventBus.addListener(Clayium::registerDataMapTypes);
+        modEventBus.addListener(Clayium::registerCapabilities);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
     private static void registerDataMapTypes(RegisterDataMapTypesEvent event) {
         event.register(ClayiumDataMaps.CLAY_ENERGY);
+    }
+
+    private static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+                Capabilities.Item.BLOCK,
+                ClayiumBlockEntityTypes.CLAY_BUFFER_BLOCK_ENTITY.get(),
+                ClayContainerBlockEntity::getExposedItemHandler);
     }
 
     public static Identifier id(String path) {

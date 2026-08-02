@@ -1,0 +1,4 @@
+{
+  "parent": "clayium:block/clay_buffer_base",
+  "textures": { "tier": "clayium:block/tier/tier12" }
+}

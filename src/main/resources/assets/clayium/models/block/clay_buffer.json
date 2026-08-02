@@ -1,0 +1,28 @@
+{
+  "parent": "minecraft:block/block",
+  "ambientocclusion": true,
+  "textures": {
+    "particle": "#tier"
+  },
+  "elements": [
+    {
+      "from": [0, 0, 0],
+      "to": [16, 16, 16],
+      "faces": {
+        "down": { "texture": "#tier", "cullface": "down" },
+        "up": { "texture": "#tier", "cullface": "up" },
+        "north": { "texture": "#tier", "cullface": "north" },
+        "south": { "texture": "#tier", "cullface": "south" },
+        "west": { "texture": "#tier", "cullface": "west" },
+        "east": { "texture": "#tier", "cullface": "east" }
+      }
+    },
+    {
+      "from": [0, 0, -0.01],
+      "to": [16, 16, 0],
+      "faces": {
+        "north": { "texture": "#overlay", "cullface": "north" }
+      }
+    }
+  ]
+}
