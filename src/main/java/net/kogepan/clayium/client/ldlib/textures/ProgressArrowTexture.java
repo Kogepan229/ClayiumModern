@@ -1,9 +1,10 @@
 package net.kogepan.clayium.client.ldlib.textures;
 
+import net.kogepan.clayium.Clayium;
+
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 
-import com.lowdragmc.lowdraglib2.LDLib2;
 import com.lowdragmc.lowdraglib2.client.shader.LDLibRenderTypes;
 import com.lowdragmc.lowdraglib2.gui.texture.TransformTexture;
 import com.mojang.blaze3d.systems.RenderSystem;
@@ -11,7 +12,7 @@ import lombok.Getter;
 
 public class ProgressArrowTexture extends TransformTexture {
 
-    private static final ResourceLocation SPRITE = LDLib2.id("textures/gui/progress_bar_arrow.png");
+    private static final ResourceLocation SPRITE = Clayium.id("textures/gui/progress_bar_arrow.png");
 
     @Getter
     private float progress = 0.0f;
@@ -32,12 +33,12 @@ public class ProgressArrowTexture extends TransformTexture {
         RenderSystem.disableDepthTest();
         final int color = 0xFFFFFFFF;
 
-        // Texture UV（0.0-1.0）
-        final float texLeft = LEFT_WIDTH / FULL_WIDTH;        // 1/20 = 0.05
-        final float texMidStart = LEFT_WIDTH / FULL_WIDTH;    // 1/20 = 0.05
+        // Texture UVs range from 0.0 to 1.0.
+        final float texLeft = LEFT_WIDTH / FULL_WIDTH; // 1/20 = 0.05
+        final float texMidStart = LEFT_WIDTH / FULL_WIDTH; // 1/20 = 0.05
         final float texMidEnd = (LEFT_WIDTH + MID_WIDTH) / FULL_WIDTH; // 12/20 = 0.6
         final float texRightStart = (LEFT_WIDTH + MID_WIDTH) / FULL_WIDTH; // 12/20 = 0.6
-        final float texRightEnd = 1.0f;                   // 20/20 = 1.0
+        final float texRightEnd = 1.0f; // 20/20 = 1.0
 
         final float v0 = isEmpty ? 0.0f : 0.5f;
         final float v1 = isEmpty ? 0.5f : 1.0f;
