@@ -75,13 +75,28 @@ side = "BOTH"
 [[dependencies."${mod_id}"]]
 modId = "ldlib2"
 type = "required"
-versionRange = "[${ldlib2_version},)"
+versionRange = "${ldlib2_version_range}"
 ordering = "AFTER"
 side = "BOTH"
 
 [[dependencies."${mod_id}"]]
+modId = "jei"
+type = "optional"
+versionRange = "${jei_version_range}"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies."${mod_id}"]]
+modId = "roughlyenoughitems"
+type = "optional"
+versionRange = "${rei_version_range}"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies."${mod_id}"]]
 modId = "jade"
 type = "optional"
+versionRange = "${jade_version_range}"
 ordering = "AFTER"
 side = "CLIENT"
 

@@ -1,5 +1,14 @@
 package net.kogepan.clayium;
 
+import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
+import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
+import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
+import net.kogepan.clayium.registries.ClayiumBlocks;
+import net.kogepan.clayium.registries.ClayiumDataComponents;
+import net.kogepan.clayium.registries.ClayiumFeatures;
+import net.kogepan.clayium.registries.ClayiumItems;
+import net.kogepan.clayium.registries.ClayiumMenuTypes;
+
 import net.minecraft.resources.Identifier;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
@@ -16,6 +25,15 @@ public final class Clayium {
     public static final Logger LOGGER = LogUtils.getLogger();
 
     public Clayium(IEventBus modEventBus, ModContainer modContainer) {
+        ClayiumBlocks.BLOCKS.register(modEventBus);
+        ClayiumItems.ITEMS.register(modEventBus);
+        ClayiumBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
+        ClayiumDataComponents.DATA_COMPONENTS.register(modEventBus);
+        ClayiumRecipeTypes.RECIPE_TYPES.register(modEventBus);
+        ClayiumRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+        ClayiumFeatures.FEATURES.register(modEventBus);
+        ClayiumMenuTypes.MENU_TYPES.register(modEventBus);
+
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
     }
 
