@@ -1,7 +1,11 @@
 package net.kogepan.clayium;
 
+import net.kogepan.clayium.datagen.ClayiumDataGenerators;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
+import net.kogepan.clayium.recipes.display.ClayiumRecipeBookCategories;
+import net.kogepan.clayium.recipes.display.ClayiumRecipeDisplays;
+import net.kogepan.clayium.recipes.display.ClayiumSlotDisplays;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumDataComponents;
@@ -35,9 +39,13 @@ public final class Clayium {
         ClayiumDataComponents.DATA_COMPONENTS.register(modEventBus);
         ClayiumRecipeTypes.RECIPE_TYPES.register(modEventBus);
         ClayiumRecipeSerializers.RECIPE_SERIALIZERS.register(modEventBus);
+        ClayiumRecipeBookCategories.RECIPE_BOOK_CATEGORIES.register(modEventBus);
+        ClayiumRecipeDisplays.RECIPE_DISPLAYS.register(modEventBus);
+        ClayiumSlotDisplays.SLOT_DISPLAYS.register(modEventBus);
         ClayiumFeatures.FEATURES.register(modEventBus);
         ClayiumMenuTypes.MENU_TYPES.register(modEventBus);
 
+        modEventBus.addListener(ClayiumDataGenerators::gatherData);
         modEventBus.addListener(Clayium::registerDataMapTypes);
 
         modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);

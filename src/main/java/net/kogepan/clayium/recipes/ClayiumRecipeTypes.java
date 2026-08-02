@@ -1,15 +1,74 @@
 package net.kogepan.clayium.recipes;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
+import net.kogepan.clayium.recipes.recipes.LaserIrradiationRecipe;
+import net.kogepan.clayium.recipes.recipes.MachineRecipe;
+import net.kogepan.clayium.recipes.recipes.QuartzCrucibleRecipe;
 
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.Identifier;
 import net.minecraft.world.item.crafting.RecipeType;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public final class ClayiumRecipeTypes {
 
     public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES = DeferredRegister.create(Registries.RECIPE_TYPE,
             Clayium.MODID);
+
+    public static final Map<Identifier, DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>>> SIMPLE_MACHINE_RECIPE_TYPES = new HashMap<>();
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<ClayWorkTableRecipe>> CLAY_WORK_TABLE_RECIPE_TYPE = RECIPE_TYPES
+            .register("clay_work_table", RecipeType::simple);
+    public static final DeferredHolder<RecipeType<?>, RecipeType<QuartzCrucibleRecipe>> QUARTZ_CRUCIBLE_RECIPE_TYPE = RECIPE_TYPES
+            .register("quartz_crucible", RecipeType::simple);
+    public static final DeferredHolder<RecipeType<?>, RecipeType<LaserIrradiationRecipe>> LASER_IRRADIATION_RECIPE_TYPE = RECIPE_TYPES
+            .register("laser_irradiation", RecipeType::simple);
+
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> BENDING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
+            "bending_machine", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> WIRE_DRAWING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
+            "wire_drawing_machine", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> PIPE_DRAWING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
+            "pipe_drawing_machine", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> CUTTING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
+            "cutting_machine", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> LATHE_RECIPE_TYPE = registerSimpleMachineType(
+            "lathe", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> MILLING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
+            "milling_machine", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> CLAY_CONDENSER_RECIPE_TYPE = registerSimpleMachineType(
+            "clay_condenser", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> GRINDER_RECIPE_TYPE = registerSimpleMachineType(
+            "grinder", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> CENTRIFUGE_RECIPE_TYPE = registerSimpleMachineType(
+            "centrifuge", 1, 4);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> SMELTER_RECIPE_TYPE = registerSimpleMachineType(
+            "smelter", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> CLAY_BLAST_FURNACE_RECIPE_TYPE = registerSimpleMachineType(
+            "clay_blast_furnace", 2, 2);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> DECOMPOSER_RECIPE_TYPE = registerSimpleMachineType(
+            "decomposer", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> ELECTROLYSIS_REACTOR_RECIPE_TYPE = registerSimpleMachineType(
+            "electrolysis_reactor", 1, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> INSCRIBER_RECIPE_TYPE = registerSimpleMachineType(
+            "inscriber", 2, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> CHEMICAL_REACTOR_RECIPE_TYPE = registerSimpleMachineType(
+            "chemical_reactor", 2, 2);
+
+    private static DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> registerSimpleMachineType(
+                                                                                                                   String name,
+                                                                                                                   int maxInputSize,
+                                                                                                                   int maxOutputSize) {
+        var holder = RECIPE_TYPES.register(name,
+                id -> SimpleMachineRecipeType.<MachineRecipe>create(id, maxInputSize, maxOutputSize));
+        SIMPLE_MACHINE_RECIPE_TYPES.put(holder.getId(), holder);
+        return holder;
+    }
 
     private ClayiumRecipeTypes() {}
 }
