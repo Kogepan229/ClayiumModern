@@ -11,6 +11,8 @@ import net.kogepan.clayium.blocks.ClayWorkTableBlock;
 import net.kogepan.clayium.blocks.LaserReflectorBlock;
 import net.kogepan.clayium.blocks.MultitrackBufferBlock;
 import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
+import net.kogepan.clayium.blocks.StorageContainerBlock;
+import net.kogepan.clayium.blocks.VacuumContainerBlock;
 import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.CentrifugeBlock;
@@ -40,7 +42,9 @@ import net.kogepan.clayium.blocks.machine.WireDrawingMachineBlock;
 import net.kogepan.clayium.items.blockitem.DistributorBlockItem;
 import net.kogepan.clayium.items.blockitem.LaserReflectorBlockItem;
 import net.kogepan.clayium.items.blockitem.QuartzCrucibleBlockItem;
+import net.kogepan.clayium.items.blockitem.StorageContainerBlockItem;
 import net.kogepan.clayium.items.blockitem.TieredBlockItem;
+import net.kogepan.clayium.items.blockitem.VacuumContainerBlockItem;
 
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -159,6 +163,17 @@ public class ClayiumBlocks {
                 () -> new TieredBlockItem(AZ91D_ALLOY_HULL.get(), new Item.Properties(), 6));
         ClayiumItems.ITEMS.register("zk60a_alloy_hull",
                 () -> new TieredBlockItem(ZK60A_ALLOY_HULL.get(), new Item.Properties(), 6));
+    }
+
+    public static final DeferredBlock<StorageContainerBlock> STORAGE_CONTAINER = BLOCKS.register(
+            "storage_container", StorageContainerBlock::new);
+    public static final DeferredBlock<VacuumContainerBlock> VACUUM_CONTAINER = BLOCKS.register(
+            "vacuum_container", VacuumContainerBlock::new);
+    static {
+        ClayiumItems.ITEMS.register("storage_container",
+                () -> new StorageContainerBlockItem(STORAGE_CONTAINER.get(), new Item.Properties()));
+        ClayiumItems.ITEMS.register("vacuum_container",
+                () -> new VacuumContainerBlockItem(VACUUM_CONTAINER.get(), new Item.Properties()));
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayBufferBlock>> CLAY_BUFFERS;

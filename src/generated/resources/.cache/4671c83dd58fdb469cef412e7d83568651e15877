@@ -1,4 +1,4 @@
-// 1.21.1	2026-05-20T15:33:02.115397158	Block States: clayium
+// 1.21.1	2026-08-01T20:32:52.567519996	Block States: clayium
 9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
 56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
@@ -149,6 +149,8 @@ a48b6b14584b7932b2d96baabde36566bd2a5bf2 assets/clayium/blockstates/smelter_8.js
 7f724ce070814e082905dcb5ff97b82cf9be8545 assets/clayium/blockstates/solar_clay_fabricator_5.json
 d5c7426fbe058f70aeb85d8ddf2545db37bcd9fe assets/clayium/blockstates/solar_clay_fabricator_6.json
 65661427fae6b1b7ddc722ec51b4bbd93be7d677 assets/clayium/blockstates/solar_clay_fabricator_7.json
+e90d3b30e044d5e09c770df4c7548e083cef6994 assets/clayium/blockstates/storage_container.json
+b118737c904d6c7521430318fe8c2456a112afd9 assets/clayium/blockstates/vacuum_container.json
 489b0c5eeb6e92020dfa096242637fac74fcc656 assets/clayium/blockstates/waterwheel_1.json
 0f3bbd28410acd3c79c41240d19a4d168e63eeac assets/clayium/blockstates/waterwheel_2.json
 23ac85dad0606cf88c4c0ffb6907c0497a4decde assets/clayium/blockstates/wire_drawing_machine_1.json
@@ -306,6 +308,11 @@ d50862c990530e276824b1161e1f345903c3e223 assets/clayium/models/block/smelter_6.j
 e2c1ef4f32335806997fe4000a3abe724937f048 assets/clayium/models/block/solar_clay_fabricator_5.json
 cfb276c991c3d07c36f3f384eab5afae2a9c34a8 assets/clayium/models/block/solar_clay_fabricator_6.json
 144a2a319d7ab1bd4cbe2ab086abfcea32463c40 assets/clayium/models/block/solar_clay_fabricator_7.json
+17250a3b67c148297e1cb99dee8a3304811c8e99 assets/clayium/models/block/storage_container.json
+6a7956d413592bbc90ec98adf6ab11ce8d06c6ef assets/clayium/models/block/storage_container_inventory.json
+0f344c9b881a7cb830d85346d7d62828ce90ddf8 assets/clayium/models/block/storage_container_upgraded_inventory.json
+06938e5050ff6b8218d17a1ed3bc38760922f45c assets/clayium/models/block/vacuum_container.json
+126bafc3e93351b75469e21618b9fff45159aefe assets/clayium/models/block/vacuum_container_inventory.json
 831261a7dedb0e75e024968782037d00ca6ac19b assets/clayium/models/block/waterwheel_1.json
 692af5d109827760cf477bfb7d0ff5742a9fe4f3 assets/clayium/models/block/waterwheel_2.json
 32a4d1648330c774d765cb54f91fc10573997596 assets/clayium/models/block/wire_drawing_machine_1.json
@@ -464,6 +471,8 @@ eee23c11d13e50c5d34bd96ec120ac48a4e29d11 assets/clayium/models/item/smelter_8.js
 5703efb9063936f68e15e7ece342e807740bad8f assets/clayium/models/item/solar_clay_fabricator_5.json
 8f15027e388d9c1dfcc486a21344bafc434ab526 assets/clayium/models/item/solar_clay_fabricator_6.json
 7e8dcb0c586a98e3fb5e4bf804e51acfb6764496 assets/clayium/models/item/solar_clay_fabricator_7.json
+ef5b3420e70950728f5892ca56f075838ff11c67 assets/clayium/models/item/storage_container.json
+1f88b80ee89eed6bf69a808d0b1da41d6e0e6ce7 assets/clayium/models/item/vacuum_container.json
 4b3a5e677bc8f6c4f7f607990b2bc0bca4104485 assets/clayium/models/item/waterwheel_1.json
 42ee1af804b8f6ab2e24edd67a0e8681d2168bb1 assets/clayium/models/item/waterwheel_2.json
 322c7a313cb1525ae26481df1f0bc8344ee498b6 assets/clayium/models/item/wire_drawing_machine_1.json

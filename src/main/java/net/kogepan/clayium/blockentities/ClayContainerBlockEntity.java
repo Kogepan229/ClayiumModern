@@ -16,6 +16,7 @@ import net.kogepan.clayium.utils.MachineIOModes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.component.DataComponents;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
@@ -25,6 +26,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.Containers;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.component.CustomData;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -329,7 +331,9 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     }
 
     public void onPlacedByServer(@Nullable LivingEntity placer, ItemStack stack) {
-        this.initDefaultRoutes();
+        if (!stack.getOrDefault(DataComponents.BLOCK_ENTITY_DATA, CustomData.EMPTY).contains("inputModes")) {
+            this.initDefaultRoutes();
+        }
 
         this.setChanged();
 
@@ -341,6 +345,10 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
                     state,
                     Block.UPDATE_CLIENTS);
         }
+    }
+
+    public boolean acceptsClayInterfaceSynchronization() {
+        return true;
     }
 
     @Override
@@ -405,8 +413,6 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
 
     @Override
     public void handleUpdateTag(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
-        super.handleUpdateTag(tag, provider);
-
         if (tag.isEmpty()) return;
 
         onReceivePacket(tag, provider);
@@ -415,8 +421,6 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     @Override
     public void onDataPacket(@NotNull Connection net, @NotNull ClientboundBlockEntityDataPacket pkt,
                              @NotNull HolderLookup.Provider provider) {
-        super.onDataPacket(net, pkt, provider);
-
         CompoundTag tag = pkt.getTag();
         if (tag.isEmpty()) return;
 
@@ -424,6 +428,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     }
 
     protected void onReceivePacket(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
+        boolean refreshModelData = this.shouldRefreshModelDataForUpdate(tag, provider);
         if (tag.contains("inputModes")) {
             this.inputModes.deserializeNBT(provider, tag.getCompound("inputModes"));
         }
@@ -439,11 +444,17 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
             }
         }
 
-        if (this.level != null && this.level.isClientSide()) {
+        Level level = this.level;
+        if (refreshModelData && level != null && level.isClientSide()) {
             this.requestModelDataUpdate();
-            this.level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
+            level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
                     Block.UPDATE_NONE);
         }
+    }
+
+    protected boolean shouldRefreshModelDataForUpdate(@NotNull CompoundTag tag,
+                                                      @NotNull HolderLookup.Provider provider) {
+        return true;
     }
 
     @NotNull

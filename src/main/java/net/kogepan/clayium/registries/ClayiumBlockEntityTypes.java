@@ -8,6 +8,8 @@ import net.kogepan.clayium.blockentities.ClayWorkTableBlockEntity;
 import net.kogepan.clayium.blockentities.LaserReflectorBlockEntity;
 import net.kogepan.clayium.blockentities.MultitrackBufferBlockEntity;
 import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
+import net.kogepan.clayium.blockentities.StorageContainerBlockEntity;
+import net.kogepan.clayium.blockentities.VacuumContainerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CentrifugeBlockEntity;
@@ -79,6 +81,18 @@ public class ClayiumBlockEntityTypes {
             () -> BlockEntityType.Builder
                     .of(ClayBufferBlockEntity::new, ClayiumBlocks.CLAY_BUFFERS.values().stream()
                             .map(DeferredHolder::get).toArray(Block[]::new))
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<StorageContainerBlockEntity>> STORAGE_CONTAINER_BLOCK_ENTITY = registerClayContainer(
+            "storage_container_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(StorageContainerBlockEntity::new, ClayiumBlocks.STORAGE_CONTAINER.get())
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<VacuumContainerBlockEntity>> VACUUM_CONTAINER_BLOCK_ENTITY = registerClayContainer(
+            "vacuum_container_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(VacuumContainerBlockEntity::new, ClayiumBlocks.VACUUM_CONTAINER.get())
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MultitrackBufferBlockEntity>> MULTITRACK_BUFFER_BLOCK_ENTITY = registerClayContainer(

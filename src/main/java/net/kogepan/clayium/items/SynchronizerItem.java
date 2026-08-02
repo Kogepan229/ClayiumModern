@@ -33,8 +33,9 @@ public class SynchronizerItem extends Item {
         var clickedPos = context.getClickedPos();
         var clickedBlockEntity = level.getBlockEntity(clickedPos);
 
-        boolean isContainerTarget = clickedBlockEntity instanceof ClayContainerBlockEntity &&
-                !(clickedBlockEntity instanceof ClayInterfaceBlockEntity);
+        boolean isContainerTarget = clickedBlockEntity instanceof ClayContainerBlockEntity container &&
+                !(clickedBlockEntity instanceof ClayInterfaceBlockEntity) &&
+                container.acceptsClayInterfaceSynchronization();
         boolean isInterfaceTarget = clickedBlockEntity instanceof ClayInterfaceBlockEntity;
         if (!isContainerTarget && !isInterfaceTarget) {
             return InteractionResult.PASS;

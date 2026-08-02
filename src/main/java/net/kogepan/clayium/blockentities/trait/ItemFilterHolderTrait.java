@@ -12,6 +12,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Rotation;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -80,6 +81,30 @@ public class ItemFilterHolderTrait extends ClayContainerTrait implements IItemFi
      */
     public boolean hasFilterClientOnly(@NotNull Direction side) {
         return clientFilterFlags[side.ordinal()];
+    }
+
+    public boolean hasSameClientFilterFlags(@NotNull CompoundTag updateTag) {
+        if (!updateTag.contains(FILTER_FLAGS)) {
+            return true;
+        }
+        byte[] flags = updateTag.getByteArray(FILTER_FLAGS);
+        for (int i = 0; i < this.clientFilterFlags.length; i++) {
+            boolean incoming = i < flags.length && flags[i] != 0;
+            if (this.clientFilterFlags[i] != incoming) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void rotateSides(@NotNull Rotation rotation) {
+        ItemFilterData[] previousData = this.filterData.clone();
+        boolean[] previousFlags = this.clientFilterFlags.clone();
+        for (Direction side : Direction.values()) {
+            Direction rotatedSide = rotation.rotate(side);
+            this.filterData[rotatedSide.ordinal()] = previousData[side.ordinal()];
+            this.clientFilterFlags[rotatedSide.ordinal()] = previousFlags[side.ordinal()];
+        }
     }
 
     @Override

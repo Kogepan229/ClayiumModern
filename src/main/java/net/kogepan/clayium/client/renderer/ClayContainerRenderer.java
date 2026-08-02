@@ -21,9 +21,11 @@ import org.jetbrains.annotations.NotNull;
 public class ClayContainerRenderer implements BlockEntityRenderer<ClayContainerBlockEntity> {
 
     private final PipedMachineIoRenderer pipeRenderer;
+    private final FilteredContainerRenderer filteredContainerRenderer;
 
     public ClayContainerRenderer(BlockEntityRendererProvider.Context context) {
         this.pipeRenderer = new PipedMachineIoRenderer(context);
+        this.filteredContainerRenderer = new FilteredContainerRenderer(context);
     }
 
     @Override
@@ -34,6 +36,9 @@ public class ClayContainerRenderer implements BlockEntityRenderer<ClayContainerB
         if (blockEntity instanceof IClayLaserSource source && source.getIrradiatingLaser() != null) {
             ClayLaserRenderer.renderLaser(source, poseStack, buffer, packedLight, packedOverlay);
         }
+
+        // Render the stored or filtered item on specialized container fronts.
+        this.filteredContainerRenderer.render(blockEntity, poseStack, buffer, packedLight, packedOverlay);
 
         // Render pipe IO icons
         pipeRenderer.render(blockEntity, partialTick, poseStack, buffer, packedLight, packedOverlay);

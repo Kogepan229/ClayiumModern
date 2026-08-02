@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-25T00:55:31.572982873	Loot Tables
+// 1.21.1	2026-08-01T20:15:50.909056639	Loot Tables
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
@@ -150,6 +150,8 @@ c05dab572b9890103906cdf03b323580e3c904c1 data/clayium/loot_table/blocks/smelter_
 3dc4c0dcb2161dc29dfd424cb92aee8375a3fc8f data/clayium/loot_table/blocks/solar_clay_fabricator_5.json
 189d7975269c8366d18133466b33e2cff4ef6a52 data/clayium/loot_table/blocks/solar_clay_fabricator_6.json
 4a05fe8bd261be6eb17f3320dcef786e888d4cf1 data/clayium/loot_table/blocks/solar_clay_fabricator_7.json
+3d76132c3acb0878ff78d39943918f0d167ac483 data/clayium/loot_table/blocks/storage_container.json
+6589e1f037100ecec96f9e93ffff563ad8a4c7bc data/clayium/loot_table/blocks/vacuum_container.json
 863d0d65464e9edf00c3a3f86b440b8f0799fdcb data/clayium/loot_table/blocks/waterwheel_1.json
 5170c767f373a17a79fd4bdba2c158510ac3db70 data/clayium/loot_table/blocks/waterwheel_2.json
 25334ed0af71f5647af83c712a1d43c42f5e25ee data/clayium/loot_table/blocks/wire_drawing_machine_1.json

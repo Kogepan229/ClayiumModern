@@ -1,0 +1,11 @@
+{
+  "parent": "clayium:block/storage_container_inventory",
+  "overrides": [
+    {
+      "model": "clayium:block/storage_container_upgraded_inventory",
+      "predicate": {
+        "clayium:upgraded": 1.0
+      }
+    }
+  ]
+}

@@ -11,6 +11,7 @@ import net.kogepan.clayium.client.renderer.ClayInterfaceTargetHighlightRenderer;
 import net.kogepan.clayium.client.renderer.ClayLaserRenderer;
 import net.kogepan.clayium.client.renderer.LaserReflectorBEWLR;
 import net.kogepan.clayium.client.renderer.LaserReflectorRenderer;
+import net.kogepan.clayium.items.blockitem.StorageContainerBlockItem;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumMenuTypes;
@@ -21,6 +22,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.color.item.ItemColors;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.client.renderer.LevelRenderer;
+import net.minecraft.client.renderer.item.ItemProperties;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.core.BlockPos;
@@ -70,6 +72,9 @@ public class ClayiumClient {
         Clayium.LOGGER.info("MINECRAFT NAME >> {}", Minecraft.getInstance().getUser().getName());
 
         event.enqueueWork(() -> {
+            ItemProperties.register(ClayiumBlocks.STORAGE_CONTAINER.asItem(), Clayium.id("upgraded"),
+                    (stack, level, entity, seed) -> StorageContainerBlockItem.isUpgraded(stack) ? 1.0F : 0.0F);
+
             ItemColors itemColors = Minecraft.getInstance().getItemColors();
             for (var holder : ColoredIngotTints.getRegisteredHolders()) {
                 itemColors.register(

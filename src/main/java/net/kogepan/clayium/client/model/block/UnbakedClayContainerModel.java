@@ -3,6 +3,7 @@ package net.kogepan.clayium.client.model.block;
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.client.utils.ModelUtils;
 
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.block.model.BlockModel;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
@@ -97,7 +98,17 @@ public class UnbakedClayContainerModel implements IUnbakedGeometry<UnbakedClayCo
         pipeArms.put(Direction.DOWN,
                 new BakedPipeModel(bakedBase, baker.bake(PIPE_DOWN_MODEL, modelState, spriteGetter)));
 
-        return new ClayContainerModel(bakedBase, bakedOverlays, pipeCore, pipeArms, overlayItemOnly);
+        RenderType overlayRenderType = RenderType.CUTOUT;
+        ResourceLocation renderTypeHint = context.getRenderTypeHint();
+        if (renderTypeHint != null) {
+            var renderTypeGroup = context.getRenderType(renderTypeHint);
+            if (!renderTypeGroup.isEmpty()) {
+                overlayRenderType = renderTypeGroup.block();
+            }
+        }
+
+        return new ClayContainerModel(
+                bakedBase, bakedOverlays, pipeCore, pipeArms, overlayItemOnly, overlayRenderType);
     }
 
     @Override

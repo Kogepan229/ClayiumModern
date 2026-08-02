@@ -39,7 +39,7 @@ public class ClayContainerModel implements IDynamicBakedModel {
     private static final AABB FILTER_OVERLAY_AABB = new AABB(-0.003f, -0.003f, -0.003f,
             1.003f, 1.003f, 1.003f);
 
-    private static final ChunkRenderTypeSet RENDER_TYPES = ChunkRenderTypeSet.of(RenderType.CUTOUT);
+    private static final ChunkRenderTypeSet CUTOUT_RENDER_TYPES = ChunkRenderTypeSet.of(RenderType.CUTOUT);
 
     public static final String DEFAULT_FRONT_OVERLAY_VARIANT = "default";
     public static final ModelProperty<MachineIOModes> MODEL_DATA_IMPORT = new ModelProperty<>();
@@ -55,15 +55,21 @@ public class ClayContainerModel implements IDynamicBakedModel {
     private final Map<Direction, BakedModel> pipeArmModels;
 
     private final boolean overlayItemOnly;
+    private final RenderType overlayRenderType;
+    private final ChunkRenderTypeSet renderTypes;
 
     public ClayContainerModel(BakedModel base, @Nullable Map<String, Map<Direction, BakedModel>> overlays,
                               BakedModel pipeCore,
-                              Map<Direction, BakedModel> pipeArms, boolean overlayItemOnly) {
+                              Map<Direction, BakedModel> pipeArms, boolean overlayItemOnly,
+                              RenderType overlayRenderType) {
         this.baseModel = base;
         this.bakedOverlayModels = overlays;
         this.pipeCoreModel = pipeCore;
         this.pipeArmModels = pipeArms;
         this.overlayItemOnly = overlayItemOnly;
+        this.overlayRenderType = overlayRenderType;
+        this.renderTypes = overlayRenderType == RenderType.CUTOUT ? CUTOUT_RENDER_TYPES :
+                ChunkRenderTypeSet.of(RenderType.CUTOUT, overlayRenderType);
     }
 
     @Override
@@ -74,10 +80,13 @@ public class ClayContainerModel implements IDynamicBakedModel {
         List<BakedQuad> quads;
 
         if (blockState == null || !blockState.getValue(ClayContainerBlock.PIPE)) {
-            quads = new ArrayList<>(
-                    this.baseModel.getQuads(blockState, direction, randomSource, modelData, renderType));
+            boolean renderBase = renderType == null || renderType == RenderType.CUTOUT;
+            quads = renderBase ? new ArrayList<>(
+                    this.baseModel.getQuads(blockState, direction, randomSource, modelData, renderType)) :
+                    new ArrayList<>();
 
-            if (bakedOverlayModels != null) {
+            boolean renderMachineOverlay = renderType == null || renderType == this.overlayRenderType;
+            if (renderMachineOverlay && bakedOverlayModels != null) {
                 boolean shouldRenderOverlayModel = !overlayItemOnly || blockState == null;
                 if (shouldRenderOverlayModel) {
                     Direction facing = Direction.NORTH;
@@ -99,6 +108,9 @@ public class ClayContainerModel implements IDynamicBakedModel {
                 renderOverlays(quads, direction, modelData);
             }
         } else {
+            if (renderType != null && renderType != RenderType.CUTOUT) {
+                return List.of();
+            }
             quads = new ArrayList<>();
 
             // Core
@@ -222,6 +234,6 @@ public class ClayContainerModel implements IDynamicBakedModel {
     @NotNull
     public ChunkRenderTypeSet getRenderTypes(@NotNull BlockState state, @NotNull RandomSource rand,
                                              @NotNull ModelData data) {
-        return RENDER_TYPES;
+        return state.getValue(ClayContainerBlock.PIPE) ? CUTOUT_RENDER_TYPES : this.renderTypes;
     }
 }

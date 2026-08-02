@@ -3,9 +3,12 @@ package net.kogepan.clayium.utils;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.world.level.block.Rotation;
 import net.neoforged.neoforge.common.util.INBTSerializable;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.EnumMap;
 
 public class MachineIOModes implements INBTSerializable<CompoundTag> {
 
@@ -39,6 +42,16 @@ public class MachineIOModes implements INBTSerializable<CompoundTag> {
             case WEST -> west;
             case EAST -> east;
         };
+    }
+
+    public void rotate(@NotNull Rotation rotation) {
+        EnumMap<Direction, MachineIOMode> previous = new EnumMap<>(Direction.class);
+        for (Direction side : Direction.values()) {
+            previous.put(side, this.getMode(side));
+        }
+        for (Direction side : Direction.values()) {
+            this.setMode(rotation.rotate(side), previous.get(side));
+        }
     }
 
     @Override

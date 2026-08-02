@@ -11,6 +11,7 @@ import net.kogepan.clayium.capability.IClayLaserSource;
 import net.kogepan.clayium.capability.IItemFilterApplicatable;
 import net.kogepan.clayium.capability.ISynchronizedInterface;
 import net.kogepan.clayium.capability.filter.data.ItemFilterData;
+import net.kogepan.clayium.items.blockitem.StorageContainerBlockItem;
 import net.kogepan.clayium.items.filter.FilterItemHelper;
 import net.kogepan.clayium.items.filter.ItemFilterBase;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
@@ -69,7 +70,11 @@ public class Clayium {
                     .icon(Items.CLAY_BALL::getDefaultInstance)
                     .displayItems((parameters, output) -> {
                         for (var item : ClayiumItems.ITEMS.getEntries()) {
-                            output.accept(item.get());
+                            Item registeredItem = item.get();
+                            output.accept(registeredItem);
+                            if (registeredItem == ClayiumBlocks.STORAGE_CONTAINER.asItem()) {
+                                output.accept(StorageContainerBlockItem.createWithCapacity(Integer.MAX_VALUE));
+                            }
                         }
                     }).build());
 

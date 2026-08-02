@@ -5,6 +5,7 @@ import net.kogepan.clayium.blockentities.machine.ClayBlastFurnaceBlockEntity;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 
 import net.minecraft.client.renderer.RenderType;
+import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -20,6 +21,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Map;
+import java.util.Set;
 
 public class ClayiumBlockModelProvider extends BlockStateProvider {
 
@@ -28,6 +30,22 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation OVERLAY_TOP_MODEL = Clayium.id("block/overlay_top");
     private static final ResourceLocation OVERLAY_ALL_MODEL = Clayium.id("block/overlay_all");
     private static final ResourceLocation INPUT_ALL_OVERLAY_TEXTURE = Clayium.id("block/overlay/import_all");
+    private static final ResourceLocation AZ91D_ALLOY_HULL_TEXTURE = Clayium.id("block/az91d_alloy_hull");
+
+    private static final ResourceLocation STORAGE_CONTAINER_FRONT_TEXTURE = Clayium
+            .id("block/machine/storage_container_front");
+    private static final ResourceLocation STORAGE_CONTAINER_SIDE_TEXTURE = Clayium
+            .id("block/machine/storage_container_side");
+    private static final ResourceLocation STORAGE_CONTAINER_TOP_TEXTURE = Clayium
+            .id("block/machine/storage_container_top");
+    private static final ResourceLocation STORAGE_CONTAINER_UPGRADED_TEXTURE = Clayium
+            .id("block/machine/storage_container_upgraded");
+    private static final ResourceLocation VACUUM_CONTAINER_FRONT_TEXTURE = Clayium
+            .id("block/machine/vacuum_container_front");
+    private static final ResourceLocation VACUUM_CONTAINER_SIDE_TEXTURE = Clayium
+            .id("block/machine/vacuum_container_side");
+    private static final ResourceLocation VACUUM_CONTAINER_TOP_TEXTURE = Clayium
+            .id("block/machine/vacuum_container_top");
 
     private static final ResourceLocation[] TIER_BASE_TEXTURES;
     static {
@@ -197,6 +215,8 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
                     false, false);
         }
 
+        registerFilteredContainers();
+
         for (var entry : ClayiumBlocks.CLAY_LASER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CLAY_LASER_TEXTURE, true, false);
         }
@@ -259,6 +279,153 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
                 .renderType(RenderType.cutout().name);
         this.simpleBlock(ClayiumBlocks.CHUNK_LOADER.get(), chunkLoaderModel);
         this.simpleBlockItem(ClayiumBlocks.CHUNK_LOADER.get(), chunkLoaderModel);
+    }
+
+    private void registerFilteredContainers() {
+        Block storageContainer = ClayiumBlocks.STORAGE_CONTAINER.get();
+        String storageName = BuiltInRegistries.BLOCK.getKey(storageContainer).getPath();
+        BlockModelBuilder storageModel = models().getBuilder(storageName)
+                .renderType(RenderType.translucent().name)
+                .customLoader(ClayContainerModelBuilder::new)
+                .baseModel(models().nested().parent(models().getExistingFile(models().mcLoc("block/cube_all")))
+                        .texture("all", AZ91D_ALLOY_HULL_TEXTURE))
+                .overlayModel(containerOverlayModel(
+                        STORAGE_CONTAINER_FRONT_TEXTURE,
+                        STORAGE_CONTAINER_SIDE_TEXTURE,
+                        STORAGE_CONTAINER_TOP_TEXTURE,
+                        true,
+                        null))
+                .overlayModelVariant("upgraded", containerOverlayModel(
+                        STORAGE_CONTAINER_FRONT_TEXTURE,
+                        STORAGE_CONTAINER_SIDE_TEXTURE,
+                        STORAGE_CONTAINER_TOP_TEXTURE,
+                        true,
+                        STORAGE_CONTAINER_UPGRADED_TEXTURE))
+                .end();
+        simpleBlock(storageContainer, storageModel);
+
+        BlockModelBuilder storageInventoryModel = containerInventoryModel(
+                storageName + "_inventory",
+                STORAGE_CONTAINER_FRONT_TEXTURE,
+                STORAGE_CONTAINER_SIDE_TEXTURE,
+                STORAGE_CONTAINER_TOP_TEXTURE,
+                true,
+                null);
+        BlockModelBuilder upgradedStorageInventoryModel = containerInventoryModel(
+                storageName + "_upgraded_inventory",
+                STORAGE_CONTAINER_FRONT_TEXTURE,
+                STORAGE_CONTAINER_SIDE_TEXTURE,
+                STORAGE_CONTAINER_TOP_TEXTURE,
+                true,
+                STORAGE_CONTAINER_UPGRADED_TEXTURE);
+        itemModels().getBuilder(storageName)
+                .parent(storageInventoryModel)
+                .override()
+                .predicate(Clayium.id("upgraded"), 1.0F)
+                .model(upgradedStorageInventoryModel)
+                .end();
+
+        Block vacuumContainer = ClayiumBlocks.VACUUM_CONTAINER.get();
+        String vacuumName = BuiltInRegistries.BLOCK.getKey(vacuumContainer).getPath();
+        BlockModelBuilder vacuumModel = models().getBuilder(vacuumName)
+                .renderType(RenderType.translucent().name)
+                .customLoader(ClayContainerModelBuilder::new)
+                .baseModel(models().nested().parent(models().getExistingFile(models().mcLoc("block/cube_all")))
+                        .texture("all", AZ91D_ALLOY_HULL_TEXTURE))
+                .overlayModel(containerOverlayModel(
+                        VACUUM_CONTAINER_FRONT_TEXTURE,
+                        VACUUM_CONTAINER_SIDE_TEXTURE,
+                        VACUUM_CONTAINER_TOP_TEXTURE,
+                        false,
+                        null))
+                .end();
+        simpleBlock(vacuumContainer, vacuumModel);
+
+        BlockModelBuilder vacuumInventoryModel = containerInventoryModel(
+                vacuumName + "_inventory",
+                VACUUM_CONTAINER_FRONT_TEXTURE,
+                VACUUM_CONTAINER_SIDE_TEXTURE,
+                VACUUM_CONTAINER_TOP_TEXTURE,
+                false,
+                null);
+        itemModels().getBuilder(vacuumName).parent(vacuumInventoryModel);
+    }
+
+    private BlockModelBuilder containerOverlayModel(
+                                                    ResourceLocation frontTexture,
+                                                    ResourceLocation sideTexture,
+                                                    ResourceLocation topTexture,
+                                                    boolean renderBottom,
+                                                    @Nullable ResourceLocation upgradeTexture) {
+        BlockModelBuilder model = models().nested()
+                .parent(models().getExistingFile(models().mcLoc("block/block")))
+                .texture("front", frontTexture)
+                .texture("side", sideTexture)
+                .texture("top", topTexture);
+        addContainerOverlayElement(model, -0.01F, 16.01F, renderBottom);
+
+        if (upgradeTexture != null) {
+            model.texture("upgrade", upgradeTexture);
+            model.element()
+                    .from(-0.02F, -0.02F, -0.02F)
+                    .to(16.02F, 16.02F, 16.02F)
+                    .allFaces((direction, face) -> face
+                            .uvs(0, 0, 16, 16)
+                            .texture("#upgrade")
+                            .cullface(direction))
+                    .end();
+        }
+        return model;
+    }
+
+    private BlockModelBuilder containerInventoryModel(
+                                                      String modelName,
+                                                      ResourceLocation frontTexture,
+                                                      ResourceLocation sideTexture,
+                                                      ResourceLocation topTexture,
+                                                      boolean renderBottom,
+                                                      @Nullable ResourceLocation upgradeTexture) {
+        BlockModelBuilder model = models().getBuilder(modelName)
+                .parent(models().getExistingFile(models().mcLoc("block/block")))
+                .texture("particle", AZ91D_ALLOY_HULL_TEXTURE)
+                .texture("base", AZ91D_ALLOY_HULL_TEXTURE)
+                .texture("front", frontTexture)
+                .texture("side", sideTexture)
+                .texture("top", topTexture)
+                .renderType(RenderType.translucent().name);
+        model.element().cube("#base").end();
+        addContainerOverlayElement(model, -0.01F, 16.01F, renderBottom);
+
+        if (upgradeTexture != null) {
+            model.texture("upgrade", upgradeTexture);
+            model.element()
+                    .from(-0.02F, -0.02F, -0.02F)
+                    .to(16.02F, 16.02F, 16.02F)
+                    .allFaces((direction, face) -> face
+                            .uvs(0, 0, 16, 16)
+                            .texture("#upgrade")
+                            .cullface(direction))
+                    .end();
+        }
+        return model;
+    }
+
+    private static void addContainerOverlayElement(
+                                                   BlockModelBuilder model, float from, float to,
+                                                   boolean renderBottom) {
+        model.element()
+                .from(from, from, from)
+                .to(to, to, to)
+                .allFacesExcept((direction, face) -> face
+                        .uvs(0, 0, 16, 16)
+                        .texture(switch (direction) {
+                            case UP, DOWN -> "#top";
+                            case NORTH -> "#front";
+                            case SOUTH, WEST, EAST -> "#side";
+                        })
+                        .cullface(direction),
+                        renderBottom ? Set.of() : Set.of(Direction.DOWN))
+                .end();
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay) {

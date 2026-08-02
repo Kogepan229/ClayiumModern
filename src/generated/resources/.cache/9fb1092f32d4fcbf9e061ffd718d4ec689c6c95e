@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-01T18:02:37.073453424	Recipes
+// 1.21.1	2026-08-01T20:15:50.998742235	Recipes
 3dbe7dd47d57bd754e05636b105fb30612729669 data/clayium/advancement/recipes/misc/centrifuge_3.json
 24cd27ecb334fc3e4fe9f41cb2932f87abf6c297 data/clayium/advancement/recipes/misc/centrifuge_4.json
 7195387f8196585e8d8444ef5a84ae5b2daaff11 data/clayium/advancement/recipes/misc/centrifuge_5.json
@@ -294,6 +294,7 @@ ce349d47e9584c83a0ea1ff4052bd183c3d706c6 data/clayium/recipe/salt_extractor_7.js
 b4773530deb8de73070148a2bee96838156dd4f0 data/clayium/recipe/smelter/impure_aluminium_dust.json
 9aff0e2f0a756a74113e8458b899ec1fc4f486c6 data/clayium/recipe/smelter/lithium_dust.json
 6b4ad143d5fbcdf1984c10a369cb2dcd1ad7753e data/clayium/recipe/smelter/zk60a_alloy_dust.json
+fde5b09f2404eeac0287d2d898c84b05ec43a4a7 data/clayium/recipe/storage_container_upgrade.json
 1a372ff4d031fbb6fe2e471a21827342286f57b1 data/clayium/recipe/wire_drawing_machine/clay_ball_to_stick.json
 1bde408363bd7ca41b5557651ee81d29be4de503 data/clayium/recipe/wire_drawing_machine/clay_cylinder_to_stick.json
 db073bdc76ccb187c7c60a49ef1568c0c5fd713f data/clayium/recipe/wire_drawing_machine/clay_pipe_to_stick.json

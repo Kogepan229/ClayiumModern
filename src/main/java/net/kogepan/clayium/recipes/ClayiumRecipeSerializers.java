@@ -5,6 +5,7 @@ import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
 import net.kogepan.clayium.recipes.recipes.LaserIrradiationRecipe;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.recipes.recipes.QuartzCrucibleRecipe;
+import net.kogepan.clayium.recipes.recipes.StorageContainerUpgradeRecipe;
 import net.kogepan.clayium.recipes.serializers.ClayWorkTableRecipeSerializer;
 import net.kogepan.clayium.recipes.serializers.LaserIrradiationRecipeSerializer;
 import net.kogepan.clayium.recipes.serializers.MachineRecipeSerializer;
@@ -12,6 +13,7 @@ import net.kogepan.clayium.recipes.serializers.QuartzCrucibleRecipeSerializer;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
+import net.minecraft.world.item.crafting.SimpleCraftingRecipeSerializer;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -31,4 +33,8 @@ public class ClayiumRecipeSerializers {
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<LaserIrradiationRecipe>> LASER_IRRADIATION_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
             .register("laser_irradiation", LaserIrradiationRecipeSerializer::new);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<StorageContainerUpgradeRecipe>> STORAGE_CONTAINER_UPGRADE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
+            .register("storage_container_upgrade",
+                    () -> new SimpleCraftingRecipeSerializer<>(StorageContainerUpgradeRecipe::new));
 }

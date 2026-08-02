@@ -1,6 +1,7 @@
 package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.items.ClayCoreItem;
 import net.kogepan.clayium.items.RawClayFilterRemoverItem;
 import net.kogepan.clayium.items.SynchronizerItem;
 import net.kogepan.clayium.items.SynchronousPartsItem;
@@ -49,7 +50,7 @@ public class ClayiumItems {
     public static final DeferredItem<Item> ADVANCED_CIRCUIT = ITEMS.registerItem("advanced_circuit", p -> new TieredItem(p, 5));
     public static final DeferredItem<Item> PRECISION_CIRCUIT = ITEMS.registerItem("precision_circuit", p -> new TieredItem(p, 6));
     public static final DeferredItem<Item> INTEGRATED_CIRCUIT = ITEMS.registerItem("integrated_circuit", p -> new TieredItem(p, 7));
-    public static final DeferredItem<Item> CLAY_CORE = ITEMS.registerItem("clay_core", p -> new TieredItem(p, 8));
+    public static final DeferredItem<Item> CLAY_CORE = ITEMS.registerItem("clay_core", ClayCoreItem::new);
     public static final DeferredItem<Item> CLAY_BRAIN = ITEMS.registerItem("clay_brain", p -> new TieredItem(p, 9));
     public static final DeferredItem<Item> CLAY_SPIRIT = ITEMS.registerItem("clay_spirit", p -> new TieredItem(p, 10));
     public static final DeferredItem<Item> CLAY_SOUL = ITEMS.registerItem("clay_soul", p -> new TieredItem(p, 11));

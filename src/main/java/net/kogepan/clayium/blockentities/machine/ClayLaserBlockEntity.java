@@ -164,6 +164,10 @@ public class ClayLaserBlockEntity extends ClayContainerBlockEntity implements IC
     @Override
     protected void loadAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
         super.loadAdditional(tag, provider);
+        this.readLaserData(tag);
+    }
+
+    private void readLaserData(@NotNull CompoundTag tag) {
         if (tag.contains("invertRsCondition")) {
             this.invertRsCondition = tag.getBoolean("invertRsCondition");
         }
@@ -183,6 +187,12 @@ public class ClayLaserBlockEntity extends ClayContainerBlockEntity implements IC
         tag.putBoolean("irradiating", this.irradiating);
         tag.putInt("laserLength", this.length);
         return tag;
+    }
+
+    @Override
+    protected void onReceivePacket(@NotNull CompoundTag tag, @NotNull HolderLookup.Provider provider) {
+        this.readLaserData(tag);
+        super.onReceivePacket(tag, provider);
     }
 
     @Override

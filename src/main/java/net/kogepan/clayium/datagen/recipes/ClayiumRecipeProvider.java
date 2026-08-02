@@ -1,6 +1,7 @@
 package net.kogepan.clayium.datagen.recipes;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.recipes.recipes.StorageContainerUpgradeRecipe;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumItems;
 
@@ -10,6 +11,7 @@ import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
 import net.minecraft.data.recipes.ShapedRecipeBuilder;
+import net.minecraft.data.recipes.SpecialRecipeBuilder;
 import net.minecraft.world.item.Items;
 
 import java.util.concurrent.CompletableFuture;
@@ -40,6 +42,9 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         ClayBlastFurnaceRecipeProvider.buildRecipes(recipeOutput);
         QuartzCrucibleRecipeProvider.buildRecipes(recipeOutput);
         LaserIrradiationRecipeProvider.buildRecipes(recipeOutput);
+
+        SpecialRecipeBuilder.special(StorageContainerUpgradeRecipe::new)
+                .save(recipeOutput, Clayium.id("storage_container_upgrade"));
 
         // Laser Reflector
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.LASER_REFLECTOR.get())

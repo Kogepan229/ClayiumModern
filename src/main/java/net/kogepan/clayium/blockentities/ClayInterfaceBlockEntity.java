@@ -363,8 +363,9 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
 
         BlockPos targetPos = this.linkedTargetPos.pos();
         BlockEntity targetBlockEntity = targetLevel.getBlockEntity(targetPos);
-        if (!(targetBlockEntity instanceof ClayContainerBlockEntity) ||
-                targetBlockEntity instanceof ClayInterfaceBlockEntity) {
+        if (!(targetBlockEntity instanceof ClayContainerBlockEntity targetContainer) ||
+                targetContainer instanceof ClayInterfaceBlockEntity ||
+                !targetContainer.acceptsClayInterfaceSynchronization()) {
             return ItemStack.EMPTY;
         }
 
@@ -498,7 +499,8 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     private TargetResolution resolveTargetFromLevel(@NotNull Level targetLevel, @NotNull BlockPos targetPos) {
         BlockEntity blockEntity = targetLevel.getBlockEntity(targetPos);
         if (blockEntity instanceof ClayContainerBlockEntity targetContainer &&
-                !(targetContainer instanceof ClayInterfaceBlockEntity)) {
+                !(targetContainer instanceof ClayInterfaceBlockEntity) &&
+                targetContainer.acceptsClayInterfaceSynchronization()) {
             return TargetResolution.valid(targetContainer);
         }
         return TargetResolution.invalid();
@@ -517,10 +519,14 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
 
         // This BE is UI-only. It is never inserted into a world chunk and must not be used for game logic.
         BlockEntity blockEntity = entityBlock.newBlockEntity(target.pos(), targetState);
+        if (blockEntity == null) {
+            return null;
+        }
         // Some UI code paths expect a non-null level, so attach the current client level.
         blockEntity.setLevel(level);
         if (blockEntity instanceof ClayContainerBlockEntity targetContainer &&
-                !(targetContainer instanceof ClayInterfaceBlockEntity)) {
+                !(targetContainer instanceof ClayInterfaceBlockEntity) &&
+                targetContainer.acceptsClayInterfaceSynchronization()) {
             return targetContainer;
         }
         return null;
