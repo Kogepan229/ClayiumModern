@@ -15,7 +15,6 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import com.mojang.serialization.Codec;
 
-/** Registry for item filter payload types. */
 public final class ClayiumFilterTypes {
 
     public static final ResourceKey<Registry<ItemFilterType<?>>> FILTER_TYPE_REGISTRY_KEY = ResourceKey
@@ -38,9 +37,6 @@ public final class ClayiumFilterTypes {
 
     public static final Codec<ItemFilterData> FILTER_DATA_CODEC = ItemFilterDataCodecs
             .dispatchCodec(FILTER_TYPE_REGISTRY);
-
-    public static final Codec<ItemFilterData> PERSISTED_FILTER_DATA_CODEC = ItemFilterDataCodecs
-            .persistedCodec(FILTER_TYPE_REGISTRY);
 
     private ClayiumFilterTypes() {}
 }
