@@ -1,14 +1,15 @@
-# Clayium Modern 1.26.1.2
+# Clayium Modern 26.1.2
 
-An unofficial port of [Clayium](https://www.curseforge.com/minecraft/mc-mods/clayium) for Minecraft 1.26.1.2 and NeoForge 26.1.2.94.
+An unofficial port of [Clayium](https://www.curseforge.com/minecraft/mc-mods/clayium) for Minecraft 26.1.2 and NeoForge 26.1.2.94.
 
 This branch ports the Minecraft 1.21.1 version of Clayium Modern to the newer platform. It is currently under development and is not ready for normal gameplay.
 
 ## Requirements
 
-- Minecraft 1.26.1.2
+- Minecraft 26.1.2
 - NeoForge 26.1.2.94
 - Java 25
+- LDLib2 26.1.2.31 or newer
 
 ## Building
 
