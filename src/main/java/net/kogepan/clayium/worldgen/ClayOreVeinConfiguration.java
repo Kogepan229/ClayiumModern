@@ -11,8 +11,8 @@ import com.mojang.serialization.codecs.RecordCodecBuilder;
  * <p>
  * This mirrors the behaviour of the original Clayium ClayOreGenerator by
  * allowing control over the normal ore vein size, the dense overlay size, and
- * the probability of upgrading a dense block to a large dense block at a fixed
- * offset.
+ * the probability of upgrading a dense block at the vein origin to a large
+ * dense block.
  * </p>
  */
 public record ClayOreVeinConfiguration(

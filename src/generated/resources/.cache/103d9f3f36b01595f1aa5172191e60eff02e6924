@@ -1,0 +1,6 @@
+// 1.21.1	2026-08-03T11:30:33.6900853	Registries
+696f1a8371d3e25015ce99feb7899420570e461b data/clayium/neoforge/biome_modifier/add_clay_ore.json
+5d63554884c45a38eb391dd1effa034d1975cfec data/clayium/worldgen/configured_feature/clay_ore_vein.json
+6132dada15fa657ce342d6b27f0cf1e3cd3d8717 data/clayium/worldgen/configured_feature/large_dense_clay_ore.json
+bbbabd8796aa86993f3763bf323487107ba1b8e0 data/clayium/worldgen/placed_feature/clay_ore_vein.json
+df38f98657ac5231a0a5a76fd25a2e59596518db data/clayium/worldgen/placed_feature/large_dense_clay_ore.json

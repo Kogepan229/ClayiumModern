@@ -5,15 +5,14 @@
     "size": 6,
     "targets": [
       {
+        "state": {
+          "Name": "clayium:large_dense_clay_ore"
+        },
         "target": {
           "predicate_type": "minecraft:tag_match",
           "tag": "minecraft:stone_ore_replaceables"
-        },
-        "state": {
-          "Name": "clayium:large_dense_clay_ore"
         }
       }
     ]
   }
 }
-
