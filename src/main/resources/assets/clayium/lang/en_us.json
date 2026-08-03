@@ -1,5 +1,7 @@
 {
   "itemGroup.clayium": "Clayium",
+  "item.clayium.clay_plate": "Clay Plate",
+  "block.clayium.bending_machine_1": "Clay Bending Machine",
   "block.clayium.clay_buffer_4": "Basic Buffer",
   "block.clayium.clay_buffer_5": "Advanced Buffer",
   "block.clayium.clay_buffer_6": "Precision Buffer",
@@ -9,5 +11,9 @@
   "block.clayium.clay_buffer_10": "Antimatter Buffer",
   "block.clayium.clay_buffer_11": "Pure Antimatter Buffer",
   "block.clayium.clay_buffer_12": "OEC Buffer",
-  "block.clayium.clay_buffer_13": "OPA Buffer"
+  "block.clayium.clay_buffer_13": "OPA Buffer",
+  "tooltip.clayium.tier": "Tier %d",
+  "gui.clayium.machine.energy": "Energy: %s",
+  "gui.clayium.machine.progress": "Processing progress",
+  "gui.clayium.machine.add_energy": "Add %s"
 }

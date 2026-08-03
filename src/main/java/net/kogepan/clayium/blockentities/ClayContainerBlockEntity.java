@@ -225,6 +225,9 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
     }
 
     public @Nullable ClayEnergyHandler getExposedClayEnergyHandler(@Nullable Direction side) {
+        if (side == null || this.inputModes.getMode(side) != MachineIOMode.CE) {
+            return null;
+        }
         ClayContainerTrait trait = this.getTrait(ClayEnergyHolder.TRAIT_ID);
         return trait instanceof ClayEnergyHandler energyHandler ? energyHandler : null;
     }

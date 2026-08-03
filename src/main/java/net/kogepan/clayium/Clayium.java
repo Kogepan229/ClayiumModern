@@ -1,6 +1,7 @@
 package net.kogepan.clayium;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.datagen.ClayiumDataGenerators;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
@@ -62,6 +63,14 @@ public final class Clayium {
     }
 
     private static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerBlockEntity(
+                Capabilities.Item.BLOCK,
+                ClayiumBlockEntityTypes.BENDING_MACHINE_BLOCK_ENTITY.get(),
+                ClayContainerBlockEntity::getExposedItemHandler);
+        event.registerBlockEntity(
+                ClayiumCapabilities.CLAY_ENERGY,
+                ClayiumBlockEntityTypes.BENDING_MACHINE_BLOCK_ENTITY.get(),
+                ClayContainerBlockEntity::getExposedClayEnergyHandler);
         event.registerBlockEntity(
                 Capabilities.Item.BLOCK,
                 ClayiumBlockEntityTypes.CLAY_BUFFER_BLOCK_ENTITY.get(),

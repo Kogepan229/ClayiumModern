@@ -1,6 +1,7 @@
 package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.blockentities.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.ClayBufferBlockEntity;
 
 import net.minecraft.core.registries.Registries;
@@ -15,6 +16,13 @@ public final class ClayiumBlockEntityTypes {
 
     public static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES = DeferredRegister
             .create(Registries.BLOCK_ENTITY_TYPE, Clayium.MODID);
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BendingMachineBlockEntity>> BENDING_MACHINE_BLOCK_ENTITY = BLOCK_ENTITY_TYPES
+            .register(
+                    "bending_machine_block_entity",
+                    () -> new BlockEntityType<>(
+                            BendingMachineBlockEntity::new,
+                            ClayiumBlocks.BENDING_MACHINE_1.get()));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ClayBufferBlockEntity>> CLAY_BUFFER_BLOCK_ENTITY = BLOCK_ENTITY_TYPES
             .register(

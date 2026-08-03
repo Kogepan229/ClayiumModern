@@ -9,7 +9,6 @@ import net.minecraft.world.flag.FeatureFlagSet;
 import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
@@ -28,8 +27,8 @@ public record MachineRecipeDisplay(Identifier recipeType,
                     Identifier.CODEC.fieldOf("recipe_type").forGetter(MachineRecipeDisplay::recipeType),
                     SlotDisplay.CODEC.listOf().fieldOf("inputs").forGetter(MachineRecipeDisplay::inputs),
                     SlotDisplay.CODEC.listOf().fieldOf("outputs").forGetter(MachineRecipeDisplay::outputs),
-                    Codec.LONG.fieldOf("duration").forGetter(MachineRecipeDisplay::duration),
-                    Codec.LONG.fieldOf("ce_per_tick").forGetter(MachineRecipeDisplay::cePerTick),
+                    ExtraCodecs.POSITIVE_LONG.fieldOf("duration").forGetter(MachineRecipeDisplay::duration),
+                    ExtraCodecs.POSITIVE_LONG.fieldOf("ce_per_tick").forGetter(MachineRecipeDisplay::cePerTick),
                     ExtraCodecs.NON_NEGATIVE_INT.fieldOf("recipe_tier").forGetter(MachineRecipeDisplay::recipeTier))
             .apply(instance, MachineRecipeDisplay::new));
 
@@ -55,6 +54,12 @@ public record MachineRecipeDisplay(Identifier recipeType,
     public MachineRecipeDisplay {
         inputs = List.copyOf(inputs);
         outputs = List.copyOf(outputs);
+        if (duration <= 0L) {
+            throw new IllegalArgumentException("Recipe display duration must be positive");
+        }
+        if (cePerTick <= 0L) {
+            throw new IllegalArgumentException("Recipe display CE per tick must be positive");
+        }
     }
 
     @Override

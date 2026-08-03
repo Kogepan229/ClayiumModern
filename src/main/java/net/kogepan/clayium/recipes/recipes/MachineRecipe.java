@@ -23,13 +23,14 @@ import net.minecraft.world.item.crafting.display.RecipeDisplay;
 import net.minecraft.world.item.crafting.display.SlotDisplay;
 import net.minecraft.world.level.Level;
 
-import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public record MachineRecipe(SimpleMachineRecipeType<MachineRecipe> recipeType,
                             List<ItemIngredientStack> inputs,
@@ -43,8 +44,8 @@ public record MachineRecipe(SimpleMachineRecipeType<MachineRecipe> recipeType,
             SimpleMachineRecipeType.CODEC.fieldOf("recipe_type").forGetter(MachineRecipe::recipeType),
             ItemIngredientStack.CODEC.listOf().fieldOf("inputs").forGetter(MachineRecipe::inputs),
             ItemStackTemplate.CODEC.listOf().fieldOf("outputs").forGetter(MachineRecipe::outputs),
-            Codec.LONG.fieldOf("duration").forGetter(MachineRecipe::duration),
-            Codec.LONG.fieldOf("ce_per_tick").forGetter(MachineRecipe::cePerTick),
+            ExtraCodecs.POSITIVE_LONG.fieldOf("duration").forGetter(MachineRecipe::duration),
+            ExtraCodecs.POSITIVE_LONG.fieldOf("ce_per_tick").forGetter(MachineRecipe::cePerTick),
             ExtraCodecs.NON_NEGATIVE_INT.fieldOf("recipe_tier").forGetter(MachineRecipe::recipeTier))
             .apply(instance, MachineRecipe::new));
 
@@ -66,6 +67,12 @@ public record MachineRecipe(SimpleMachineRecipeType<MachineRecipe> recipeType,
     public MachineRecipe {
         inputs = List.copyOf(inputs);
         outputs = List.copyOf(outputs);
+        if (duration <= 0L) {
+            throw new IllegalArgumentException("Recipe duration must be positive");
+        }
+        if (cePerTick <= 0L) {
+            throw new IllegalArgumentException("Recipe CE per tick must be positive");
+        }
     }
 
     @Override
@@ -74,8 +81,12 @@ public record MachineRecipe(SimpleMachineRecipeType<MachineRecipe> recipeType,
     }
 
     public boolean matches(MachineRecipeInput input, int machineTier) {
+        return this.consumptionPlan(input, machineTier).isPresent();
+    }
+
+    public Optional<List<Integer>> consumptionPlan(MachineRecipeInput input, int machineTier) {
         if (this.recipeTier > machineTier) {
-            return false;
+            return Optional.empty();
         }
 
         int ingredientCount = this.inputs.size();
@@ -104,7 +115,20 @@ public record MachineRecipe(SimpleMachineRecipeType<MachineRecipe> recipeType,
             capacity[firstStack + stackIndex][sink] = input.getItem(stackIndex).getCount();
         }
 
-        return maximumFlow(capacity, source, sink) == required;
+        if (maximumFlow(capacity, source, sink) != required) {
+            return Optional.empty();
+        }
+
+        List<Integer> consumedByStack = new ArrayList<>(stackCount);
+        for (int stackIndex = 0; stackIndex < stackCount; stackIndex++) {
+            int stackNode = firstStack + stackIndex;
+            long consumed = 0L;
+            for (int ingredientIndex = 0; ingredientIndex < ingredientCount; ingredientIndex++) {
+                consumed += capacity[stackNode][firstIngredient + ingredientIndex];
+            }
+            consumedByStack.add(Math.toIntExact(consumed));
+        }
+        return Optional.of(List.copyOf(consumedByStack));
     }
 
     private static long maximumFlow(long[][] capacity, int source, int sink) {

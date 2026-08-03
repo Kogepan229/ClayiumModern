@@ -2,6 +2,7 @@ package net.kogepan.clayium.client.model.block;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.ClayContainerModelData;
+import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
@@ -20,38 +21,52 @@ import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
 
 import com.mojang.math.Quadrant;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import org.jspecify.annotations.Nullable;
 
 import java.util.EnumMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public final class ClayContainerBlockStateModel implements DynamicBlockStateModel {
 
     private static final Direction[] DIRECTIONS = Direction.values();
 
-    private final BlockStateModelPart baseModel;
-    private final Map<Direction, BlockStateModelPart> importOverlays;
-    private final Map<Direction, BlockStateModelPart> exportOverlays;
+    private final Map<Direction, BlockStateModelPart> baseModels;
+    private final Map<MachineIOMode, Map<Direction, BlockStateModelPart>> importOverlays;
+    private final Map<MachineIOMode, Map<Direction, BlockStateModelPart>> exportOverlays;
     private final Map<Direction, BlockStateModelPart> filterOverlays;
     private final int materialFlags;
 
     private ClayContainerBlockStateModel(
-                                         BlockStateModelPart baseModel,
-                                         Map<Direction, BlockStateModelPart> importOverlays,
-                                         Map<Direction, BlockStateModelPart> exportOverlays,
+                                         Map<Direction, BlockStateModelPart> baseModels,
+                                         Map<MachineIOMode, Map<Direction, BlockStateModelPart>> importOverlays,
+                                         Map<MachineIOMode, Map<Direction, BlockStateModelPart>> exportOverlays,
                                          Map<Direction, BlockStateModelPart> filterOverlays) {
-        this.baseModel = baseModel;
+        this.baseModels = baseModels;
         this.importOverlays = importOverlays;
         this.exportOverlays = exportOverlays;
         this.filterOverlays = filterOverlays;
-        int flags = baseModel.materialFlags();
-        for (Direction side : DIRECTIONS) {
-            flags |= importOverlays.get(side).materialFlags();
-            flags |= exportOverlays.get(side).materialFlags();
-            flags |= filterOverlays.get(side).materialFlags();
+        int flags = 0;
+        for (BlockStateModelPart part : baseModels.values()) {
+            flags |= part.materialFlags();
+        }
+        for (Map<Direction, BlockStateModelPart> overlays : importOverlays.values()) {
+            for (BlockStateModelPart part : overlays.values()) {
+                flags |= part.materialFlags();
+            }
+        }
+        for (Map<Direction, BlockStateModelPart> overlays : exportOverlays.values()) {
+            for (BlockStateModelPart part : overlays.values()) {
+                flags |= part.materialFlags();
+            }
+        }
+        for (BlockStateModelPart part : filterOverlays.values()) {
+            flags |= part.materialFlags();
         }
         this.materialFlags = flags;
     }
@@ -63,7 +78,10 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
                                     BlockState state,
                                     RandomSource random) {
         ClayContainerModelData data = level.getModelData(pos).get(ClayContainerModelData.PROPERTY);
-        return new GeometryKey(this, data != null ? data : ClayContainerModelData.EMPTY);
+        return new GeometryKey(
+                this,
+                data != null ? data : ClayContainerModelData.EMPTY,
+                state.getValue(ClayContainerBlock.FACING));
     }
 
     @Override
@@ -73,17 +91,19 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
                              BlockState state,
                              RandomSource random,
                              List<BlockStateModelPart> parts) {
-        parts.add(this.baseModel);
+        parts.add(this.baseModels.get(state.getValue(ClayContainerBlock.FACING)));
         ClayContainerModelData data = level.getModelData(pos).get(ClayContainerModelData.PROPERTY);
         if (data == null) {
             return;
         }
         for (Direction side : DIRECTIONS) {
-            if (data.outputMode(side) != MachineIOMode.NONE) {
-                parts.add(this.exportOverlays.get(side));
+            Map<Direction, BlockStateModelPart> outputParts = this.exportOverlays.get(data.outputMode(side));
+            if (outputParts != null) {
+                parts.add(outputParts.get(side));
             }
-            if (data.inputMode(side) != MachineIOMode.NONE) {
-                parts.add(this.importOverlays.get(side));
+            Map<Direction, BlockStateModelPart> inputParts = this.importOverlays.get(data.inputMode(side));
+            if (inputParts != null) {
+                parts.add(inputParts.get(side));
             }
             if (data.hasFilter(side)) {
                 parts.add(this.filterOverlays.get(side));
@@ -93,7 +113,7 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
 
     @Override
     public Material.Baked particleMaterial() {
-        return this.baseModel.particleMaterial();
+        return this.baseModels.get(Direction.NORTH).particleMaterial();
     }
 
     @Override
@@ -102,22 +122,39 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
         return this.materialFlags;
     }
 
-    private record GeometryKey(ClayContainerBlockStateModel model, ClayContainerModelData data) {}
+    private record GeometryKey(
+                               ClayContainerBlockStateModel model,
+                               ClayContainerModelData data,
+                               Direction facing) {}
 
     public record Unbaked(
                           Identifier baseModel,
-                          Identifier importOverlay,
-                          Identifier exportOverlay,
+                          Map<MachineIOMode, Identifier> importOverlays,
+                          Map<MachineIOMode, Identifier> exportOverlays,
                           Identifier filterOverlay)
             implements CustomUnbakedBlockStateModel {
 
         public static final Identifier ID = Clayium.id("clay_container");
+        private static final Codec<MachineIOMode> MODE_NAME_CODEC = Codec.STRING.comapFlatMap(name -> {
+            try {
+                return DataResult.success(MachineIOMode.valueOf(name.toUpperCase(Locale.ROOT)));
+            } catch (IllegalArgumentException exception) {
+                return DataResult.error(() -> "Unknown machine I/O mode: " + name);
+            }
+        }, mode -> mode.name().toLowerCase(Locale.ROOT));
         public static final MapCodec<Unbaked> MAP_CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
                 Identifier.CODEC.fieldOf("base_model").forGetter(Unbaked::baseModel),
-                Identifier.CODEC.fieldOf("import_overlay").forGetter(Unbaked::importOverlay),
-                Identifier.CODEC.fieldOf("export_overlay").forGetter(Unbaked::exportOverlay),
+                Codec.unboundedMap(MODE_NAME_CODEC, Identifier.CODEC).fieldOf("import_overlays")
+                        .forGetter(Unbaked::importOverlays),
+                Codec.unboundedMap(MODE_NAME_CODEC, Identifier.CODEC).fieldOf("export_overlays")
+                        .forGetter(Unbaked::exportOverlays),
                 Identifier.CODEC.fieldOf("filter_overlay").forGetter(Unbaked::filterOverlay))
                 .apply(instance, Unbaked::new));
+
+        public Unbaked {
+            importOverlays = Map.copyOf(importOverlays);
+            exportOverlays = Map.copyOf(exportOverlays);
+        }
 
         @Override
         public BlockStateModel.UnbakedRoot asRoot() {
@@ -128,10 +165,29 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
         @Override
         public BlockStateModel bake(ModelBaker baker) {
             return new ClayContainerBlockStateModel(
-                    bake(new Variant(this.baseModel), baker),
-                    bakeForAllSides(this.importOverlay, baker),
-                    bakeForAllSides(this.exportOverlay, baker),
+                    bakeForHorizontalSides(this.baseModel, baker),
+                    bakeOverlays(this.importOverlays, baker),
+                    bakeOverlays(this.exportOverlays, baker),
                     bakeForAllSides(this.filterOverlay, baker));
+        }
+
+        private static Map<Direction, BlockStateModelPart> bakeForHorizontalSides(
+                                                                                  Identifier model,
+                                                                                  ModelBaker baker) {
+            Map<Direction, BlockStateModelPart> parts = new EnumMap<>(Direction.class);
+            parts.put(Direction.NORTH, bake(new Variant(model), baker));
+            parts.put(Direction.EAST, bake(new Variant(model).withYRot(Quadrant.R90), baker));
+            parts.put(Direction.SOUTH, bake(new Variant(model).withYRot(Quadrant.R180), baker));
+            parts.put(Direction.WEST, bake(new Variant(model).withYRot(Quadrant.R270), baker));
+            return Map.copyOf(parts);
+        }
+
+        private static Map<MachineIOMode, Map<Direction, BlockStateModelPart>> bakeOverlays(
+                                                                                            Map<MachineIOMode, Identifier> models,
+                                                                                            ModelBaker baker) {
+            Map<MachineIOMode, Map<Direction, BlockStateModelPart>> overlays = new EnumMap<>(MachineIOMode.class);
+            models.forEach((mode, model) -> overlays.put(mode, bakeForAllSides(model, baker)));
+            return Map.copyOf(overlays);
         }
 
         private static Map<Direction, BlockStateModelPart> bakeForAllSides(
@@ -154,8 +210,8 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
         @Override
         public void resolveDependencies(Resolver resolver) {
             resolver.markDependency(this.baseModel);
-            resolver.markDependency(this.importOverlay);
-            resolver.markDependency(this.exportOverlay);
+            this.importOverlays.values().forEach(resolver::markDependency);
+            this.exportOverlays.values().forEach(resolver::markDependency);
             resolver.markDependency(this.filterOverlay);
         }
 
