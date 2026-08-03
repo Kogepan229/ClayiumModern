@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10,
+  "duration": 120,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:machine_hull_3"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:clay_spindle"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:lathe_3"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:assembler"
+}

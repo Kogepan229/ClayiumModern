@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "clayium:machine_hull_2"
+    },
+    "*": {
+      "item": "clayium:dense_clay_gear"
+    },
+    "0": {
+      "item": "clayium:dense_clay_grinding_head"
+    },
+    "P": {
+      "item": "clayium:dense_clay_plate"
+    },
+    "o": {
+      "item": "clayium:dense_clay_spindle"
+    }
+  },
+  "pattern": [
+    "P0P",
+    "o#o",
+    "P*P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:grinder_2"
+  }
+}

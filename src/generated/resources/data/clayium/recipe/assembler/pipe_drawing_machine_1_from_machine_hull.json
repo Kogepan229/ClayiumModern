@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 0,
+  "duration": 120,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:machine_hull_1"
+      }
+    },
+    {
+      "amount": 2,
+      "ingredient": {
+        "item": "clayium:dense_clay_cylinder"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:pipe_drawing_machine_1"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:assembler"
+}

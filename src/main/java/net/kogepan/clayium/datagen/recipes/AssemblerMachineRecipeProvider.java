@@ -1,7 +1,5 @@
 package net.kogepan.clayium.datagen.recipes;
 
-import java.util.List;
-
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.items.blockitem.StorageContainerBlockItem;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
@@ -15,6 +13,8 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public final class AssemblerMachineRecipeProvider {
 
@@ -36,6 +36,9 @@ public final class AssemblerMachineRecipeProvider {
         create(output, "milling_machine_1_from_machine_hull", machineHull(1),
                 ClayiumItems.DENSE_CLAY_CUTTING_HEAD.toStack(),
                 new ItemStack(ClayiumBlocks.MILLING_MACHINE_BLOCKS.get(1).get()), energyForTier(1), 120);
+        create(output, "energetic_clay_condenser_3_from_machine_hull", machineHull(3),
+                ClayiumItems.CLAY_ENERGY_EXCITOR.toStack(2),
+                new ItemStack(ClayiumBlocks.ENERGETIC_CLAY_CONDENSER_BLOCKS.get(3).get()), energyForTier(3), 120);
 
         for (int tier = 1; tier <= 3; tier++) {
             create(output, "cobblestone_generator_" + tier + "_from_plate", materialLargePlate(tier, 1),

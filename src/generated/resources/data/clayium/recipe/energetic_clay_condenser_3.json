@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "clayium:machine_hull_3"
+    },
+    "*": {
+      "item": "clayium:dense_clay_gear"
+    },
+    "C": {
+      "item": "clayium:basic_circuit"
+    },
+    "E": {
+      "item": "clayium:cee"
+    },
+    "P": {
+      "item": "clayium:dense_clay_plate"
+    }
+  },
+  "pattern": [
+    "P*P",
+    "E#E",
+    "PCP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:energetic_clay_condenser_3"
+  }
+}

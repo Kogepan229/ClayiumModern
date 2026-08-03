@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "clayium:small_clay_ring"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:short_clay_stick"
+  }
+}

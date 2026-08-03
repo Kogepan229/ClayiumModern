@@ -69,6 +69,8 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation LATHE_TEXTURE = Clayium.id("block/machine/lathe");
     private static final ResourceLocation MILLING_MACHINE_TEXTURE = Clayium.id("block/machine/milling_machine");
     private static final ResourceLocation CLAY_CONDENSER_TEXTURE = Clayium.id("block/machine/clay_condenser");
+    private static final ResourceLocation ENERGETIC_CLAY_CONDENSER_TEXTURE = Clayium
+            .id("block/machine/energetic_clay_condenser");
     private static final ResourceLocation AUTO_CLAY_CONDENSER_TEXTURE = Clayium.id("block/machine/auto_clay_condenser");
     private static final ResourceLocation SOLAR_CLAY_FABRICATOR_TEXTURE = Clayium.id("block/machine/solar");
     private static final ResourceLocation CLAY_FABRICATOR_TEXTURE = Clayium.id("block/machine/clay_fabricator");
@@ -182,6 +184,9 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
 
         for (var entry : ClayiumBlocks.CLAY_CONDENSER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CLAY_CONDENSER_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.ENERGETIC_CLAY_CONDENSER_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), ENERGETIC_CLAY_CONDENSER_TEXTURE);
         }
         for (var entry : ClayiumBlocks.AUTO_CLAY_CONDENSER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), AUTO_CLAY_CONDENSER_TEXTURE);

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "I": {
+      "item": "clayium:clay_steel_ingot"
+    },
+    "S": {
+      "item": "clayium:dense_clay_stick"
+    }
+  },
+  "pattern": [
+    "III",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:clay_steel_pickaxe"
+  }
+}

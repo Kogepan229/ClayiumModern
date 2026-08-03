@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_clay_needle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clayium:clay_needle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayium:clay_needle_to_clay_balls"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_clay_needle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayium:clay_needle_to_clay_balls"
+    ]
+  }
+}

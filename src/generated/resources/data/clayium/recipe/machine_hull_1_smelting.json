@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:smelting",
+  "category": "blocks",
+  "cookingtime": 200,
+  "experience": 0.1,
+  "ingredient": {
+    "item": "clayium:raw_clay_machine_hull"
+  },
+  "result": {
+    "count": 1,
+    "id": "clayium:machine_hull_1"
+  }
+}

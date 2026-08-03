@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_clay_energy_excitor": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clayium:cee"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayium:energetic_clay_condenser_3"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_clay_energy_excitor"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayium:energetic_clay_condenser_3"
+    ]
+  }
+}

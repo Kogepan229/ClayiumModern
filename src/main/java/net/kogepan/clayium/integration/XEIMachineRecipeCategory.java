@@ -57,6 +57,8 @@ public class XEIMachineRecipeCategory {
                 ClayiumBlocks.MILLING_MACHINE_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.CLAY_CONDENSER_RECIPE_TYPE,
                 ClayiumBlocks.CLAY_CONDENSER_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.ENERGETIC_CLAY_CONDENSER_RECIPE_TYPE,
+                ClayiumBlocks.ENERGETIC_CLAY_CONDENSER_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.GRINDER_RECIPE_TYPE,
                 ClayiumBlocks.GRINDER_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.CENTRIFUGE_RECIPE_TYPE,

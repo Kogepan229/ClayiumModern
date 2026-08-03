@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "clayium:simple_circuit"
+    },
+    "P": {
+      "item": "clayium:large_industrial_clay_plate"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PCP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:machine_hull_3"
+  }
+}

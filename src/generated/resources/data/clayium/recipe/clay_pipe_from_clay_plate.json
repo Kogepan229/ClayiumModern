@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "clayium:clay_plate"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:clay_pipe"
+  }
+}

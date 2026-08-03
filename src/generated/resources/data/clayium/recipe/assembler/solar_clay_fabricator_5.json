@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1000,
+  "duration": 120,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:machine_hull_5"
+      }
+    },
+    {
+      "amount": 8,
+      "ingredient": {
+        "item": "clayium:silicon_plate"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:solar_clay_fabricator_5"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:assembler"
+}

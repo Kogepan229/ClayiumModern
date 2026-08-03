@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "clayium:clay_plate"
+    },
+    "0": {
+      "item": "clayium:small_clay_ring"
+    },
+    "O": {
+      "item": "clayium:clay_ring"
+    },
+    "i": {
+      "item": "clayium:clay_stick"
+    },
+    "o": {
+      "item": "clayium:clay_bearing"
+    }
+  },
+  "pattern": [
+    "0#0",
+    "ioO",
+    "0#0"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:clay_spindle"
+  }
+}

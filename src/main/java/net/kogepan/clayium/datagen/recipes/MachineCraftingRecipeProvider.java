@@ -38,8 +38,8 @@ public final class MachineCraftingRecipeProvider {
         Item gear = clayParts ? ClayiumItems.CLAY_GEAR.get() : ClayiumItems.DENSE_CLAY_GEAR.get();
         Item plate = clayParts ? ClayiumItems.CLAY_PLATE.get() : ClayiumItems.DENSE_CLAY_PLATE.get();
         Item pipe = clayParts ? ClayiumItems.CLAY_PIPE.get() : ClayiumItems.DENSE_CLAY_PIPE.get();
-        Item cuttingHead = clayParts ? ClayiumItems.CLAY_CUTTING_HEAD.get()
-                : ClayiumItems.DENSE_CLAY_CUTTING_HEAD.get();
+        Item cuttingHead = clayParts ? ClayiumItems.CLAY_CUTTING_HEAD.get() :
+                ClayiumItems.DENSE_CLAY_CUTTING_HEAD.get();
         Item stick = clayParts ? ClayiumItems.CLAY_STICK.get() : ClayiumItems.DENSE_CLAY_STICK.get();
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.BENDING_MACHINE_BLOCKS.get(tier).get())
@@ -139,8 +139,9 @@ public final class MachineCraftingRecipeProvider {
                     .define('o', spindle)
                     .define('*', gear)
                     .define('=', pipe)
-                    .define('C', tier == 2 ? ClayiumItems.CLAY_CIRCUIT.get()
-                            : tier == 3 ? ClayiumItems.SIMPLE_CIRCUIT.get() : ClayiumItems.BASIC_CIRCUIT.get())
+                    .define('C',
+                            tier == 2 ? ClayiumItems.CLAY_CIRCUIT.get() :
+                                    tier == 3 ? ClayiumItems.SIMPLE_CIRCUIT.get() : ClayiumItems.BASIC_CIRCUIT.get())
                     .unlockedBy("has_machine_hull", has(hull))
                     .save(output, Clayium.id("decomposer_" + tier));
             ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.CLAY_CONDENSER_BLOCKS.get(tier).get())
@@ -164,6 +165,20 @@ public final class MachineCraftingRecipeProvider {
                     .define('C', tier == 3 ? ClayiumItems.SIMPLE_CIRCUIT.get() : ClayiumItems.BASIC_CIRCUIT.get())
                     .unlockedBy("has_machine_hull", has(hull))
                     .save(output, Clayium.id("inscriber_" + tier));
+        }
+        if (tier == 3) {
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC,
+                    ClayiumBlocks.ENERGETIC_CLAY_CONDENSER_BLOCKS.get(tier).get())
+                    .pattern("P*P")
+                    .pattern("E#E")
+                    .pattern("PCP")
+                    .define('#', hull)
+                    .define('P', ClayiumItems.DENSE_CLAY_PLATE.get())
+                    .define('*', ClayiumItems.DENSE_CLAY_GEAR.get())
+                    .define('C', ClayiumItems.BASIC_CIRCUIT.get())
+                    .define('E', ClayiumItems.CLAY_ENERGY_EXCITOR.get())
+                    .unlockedBy("has_clay_energy_excitor", has(ClayiumItems.CLAY_ENERGY_EXCITOR.get()))
+                    .save(output, Clayium.id("energetic_clay_condenser_" + tier));
         }
     }
 

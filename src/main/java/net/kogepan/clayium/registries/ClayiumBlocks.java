@@ -33,6 +33,7 @@ import net.kogepan.clayium.blocks.machine.CuttingMachineBlock;
 import net.kogepan.clayium.blocks.machine.DecomposerBlock;
 import net.kogepan.clayium.blocks.machine.DistributorBlock;
 import net.kogepan.clayium.blocks.machine.ElectrolysisReactorBlock;
+import net.kogepan.clayium.blocks.machine.EnergeticClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.GrinderBlock;
 import net.kogepan.clayium.blocks.machine.InscriberBlock;
 import net.kogepan.clayium.blocks.machine.LatheBlock;
@@ -45,6 +46,7 @@ import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
 import net.kogepan.clayium.blocks.machine.WireDrawingMachineBlock;
 import net.kogepan.clayium.items.blockitem.ActivatorBlockItem;
 import net.kogepan.clayium.items.blockitem.DistributorBlockItem;
+import net.kogepan.clayium.items.blockitem.EnergeticClayCondenserBlockItem;
 import net.kogepan.clayium.items.blockitem.LaserReflectorBlockItem;
 import net.kogepan.clayium.items.blockitem.QuartzCrucibleBlockItem;
 import net.kogepan.clayium.items.blockitem.StorageContainerBlockItem;
@@ -295,6 +297,19 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("clay_condenser", i, ClayCondenserBlock::new));
         }
         CLAY_CONDENSER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> ENERGETIC_CLAY_CONDENSER_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        int tier = 3;
+        String name = "energetic_clay_condenser_" + tier;
+        DeferredBlock<ClayContainerBlock> block = BLOCKS.register(name,
+                () -> new EnergeticClayCondenserBlock(tier));
+        ClayiumItems.ITEMS.register(name,
+                () -> new EnergeticClayCondenserBlockItem(block.get(), new Item.Properties(), tier));
+        map.put(tier, block);
+        ENERGETIC_CLAY_CONDENSER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> GRINDER_BLOCKS;

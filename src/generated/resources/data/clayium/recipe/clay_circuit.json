@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "clayium:clay_circuit_board"
+    },
+    "G": {
+      "item": "clayium:dense_clay_gear"
+    },
+    "R": {
+      "item": "clayium:dense_clay_ring"
+    },
+    "S": {
+      "item": "clayium:dense_clay_stick"
+    }
+  },
+  "pattern": [
+    "SGS",
+    "RBR",
+    "SGS"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:clay_circuit"
+  }
+}

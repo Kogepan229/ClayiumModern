@@ -127,10 +127,10 @@ public final class OriginalCraftingRecipeProvider {
     }
 
     private static void buildComponentRecipes(RecipeOutput output, String prefix, ItemLike plate, ItemLike stick,
-                                               ItemLike shortStick, ItemLike ring, ItemLike smallRing, ItemLike gear,
-                                               ItemLike blade, ItemLike needle, ItemLike ball, ItemLike bearing,
-                                               ItemLike spindle, ItemLike cuttingHead, ItemLike grindingHead,
-                                               ItemLike wheel, boolean buildBearing) {
+                                              ItemLike shortStick, ItemLike ring, ItemLike smallRing, ItemLike gear,
+                                              ItemLike blade, ItemLike needle, ItemLike ball, ItemLike bearing,
+                                              ItemLike spindle, ItemLike cuttingHead, ItemLike grindingHead,
+                                              ItemLike wheel, boolean buildBearing) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, gear)
                 .pattern("iii")
                 .pattern("ioi")

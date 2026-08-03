@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "clayium:machine_hull_1"
+    },
+    "*": {
+      "item": "clayium:clay_gear"
+    },
+    "P": {
+      "item": "clayium:clay_plate"
+    },
+    "o": {
+      "item": "clayium:clay_spindle"
+    },
+    "|": {
+      "item": "clayium:clay_cutting_head"
+    }
+  },
+  "pattern": [
+    "P*P",
+    "o#|",
+    "P*P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:cutting_machine_1"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "clayium:clay_plate"
+    },
+    "o": {
+      "item": "clayium:clay_ring"
+    }
+  },
+  "pattern": [
+    "###",
+    "#o#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:clay_wheel"
+  }
+}

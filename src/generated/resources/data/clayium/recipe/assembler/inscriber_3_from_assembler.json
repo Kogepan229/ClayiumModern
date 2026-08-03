@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10,
+  "duration": 40,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:assembler_3"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:basic_circuit"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:inscriber_3"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:assembler"
+}

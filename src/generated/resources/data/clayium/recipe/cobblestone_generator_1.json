@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "clayium:machine_hull_1"
+    },
+    "*": {
+      "item": "clayium:clay_gear"
+    },
+    "=": {
+      "item": "clayium:clay_pipe"
+    }
+  },
+  "pattern": [
+    " * ",
+    "=#=",
+    " * "
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:cobblestone_generator_1"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "clayium:machine_hull_1"
+    },
+    "*": {
+      "item": "clayium:clay_gear"
+    },
+    "-": {
+      "item": "clayium:clay_cylinder"
+    },
+    "=": {
+      "item": "clayium:clay_pipe"
+    },
+    "o": {
+      "item": "clayium:clay_spindle"
+    }
+  },
+  "pattern": [
+    "*o*",
+    "-#=",
+    "*o*"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:pipe_drawing_machine_1"
+  }
+}

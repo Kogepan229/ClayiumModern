@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 50000,
+  "duration": 200,
+  "inputs": [
+    {
+      "amount": 2,
+      "ingredient": {
+        "item": "clayium:industrial_clay_dust"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:impure_manganese_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 2,
+      "id": "clayium:clay_steel_ingot"
+    }
+  ],
+  "recipe_tier": 6,
+  "recipe_type": "clayium:clay_blast_furnace"
+}

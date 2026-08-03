@@ -1,7 +1,5 @@
 package net.kogepan.clayium.datagen.recipes;
 
-import java.util.List;
-
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.ItemIngredientStack;
@@ -13,6 +11,8 @@ import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.ItemStack;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public final class MillingMachineRecipeProvider {
 

@@ -29,6 +29,7 @@ import net.kogepan.clayium.blockentities.machine.CuttingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.DecomposerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.DistributorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ElectrolysisReactorBlockEntity;
+import net.kogepan.clayium.blockentities.machine.EnergeticClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.GrinderBlockEntity;
 import net.kogepan.clayium.blockentities.machine.InscriberBlockEntity;
 import net.kogepan.clayium.blockentities.machine.LatheBlockEntity;
@@ -201,6 +202,16 @@ public class ClayiumBlockEntityTypes {
                         .map(DeferredHolder::get).toList());
                 return BlockEntityType.Builder
                         .of(ClayCondenserBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<EnergeticClayCondenserBlockEntity>> ENERGETIC_CLAY_CONDENSER_BLOCK_ENTITY = registerClayContainer(
+            "energetic_clay_condenser_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.ENERGETIC_CLAY_CONDENSER_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(EnergeticClayCondenserBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
 

@@ -63,6 +63,7 @@ public class ClayiumItems {
     public static final DeferredItem<Item> CLAY_CIRCUIT = ITEMS.registerItem("clay_circuit", p -> new TieredItem(p, 2));
     public static final DeferredItem<Item> SIMPLE_CIRCUIT = ITEMS.registerItem("simple_circuit", p -> new TieredItem(p, 3));
     public static final DeferredItem<Item> CEE_CIRCUIT = ITEMS.registerItem("cee_circuit", p -> new TieredItem(p, 3));
+    public static final DeferredItem<Item> CLAY_ENERGY_EXCITOR = ITEMS.registerItem("cee", p -> new TieredItem(p, 3));
     public static final DeferredItem<Item> BASIC_CIRCUIT = ITEMS.registerItem("basic_circuit", p -> new TieredItem(p, 4));
     public static final DeferredItem<Item> ADVANCED_CIRCUIT = ITEMS.registerItem("advanced_circuit", p -> new TieredItem(p, 5));
     public static final DeferredItem<Item> PRECISION_CIRCUIT = ITEMS.registerItem("precision_circuit", p -> new TieredItem(p, 6));

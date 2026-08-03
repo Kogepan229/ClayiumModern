@@ -39,6 +39,7 @@ public class AssemblerRecipeProvider {
 
         // Tier 0
         create(recipeOutput, "quartz_crucible", ClayiumItems.QUARTZ_DUST.toStack(16), new ItemStack(ClayiumBlocks.QUARTZ_CRUCIBLE.get()), CEUtils.milliCeToLong(10), 20, 0);
+        create(recipeOutput, "clay_energy_excitor", ClayiumItems.CEE_CIRCUIT.toStack(), ClayiumItems.INDUSTRIAL_CLAY_PLATE.toStack(3), ClayiumItems.CLAY_ENERGY_EXCITOR.toStack(), CEUtils.TEN_MICRO_CE * 8, 20, 0);
 
         // Tier 3
         create(recipeOutput, "clay_gear_from_sticks", ClayiumItems.CLAY_STICK.toStack(5), ClayiumItems.CLAY_GEAR.toStack(), CEUtils.TEN_MICRO_CE * 10, 20, 3);

@@ -1,0 +1,32 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000,
+  "duration": 120,
+  "inputs": [
+    {
+      "amount": 4,
+      "ingredient": {
+        "item": "clayium:az91d_alloy_hull"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:clay_interface_5"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "components": {
+        "minecraft:block_entity_data": {
+          "capacity": 65536,
+          "id": "clayium:storage_container_block_entity"
+        }
+      },
+      "count": 4,
+      "id": "clayium:storage_container"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:assembler"
+}

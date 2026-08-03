@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "i": {
+      "item": "clayium:clay_blade"
+    },
+    "o": {
+      "item": "clayium:clay_ring"
+    }
+  },
+  "pattern": [
+    "iii",
+    "ioi",
+    "iii"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:clay_cutting_head"
+  }
+}

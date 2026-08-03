@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "clayium:machine_hull_1"
+    },
+    {
+      "item": "clayium:clay_wheel"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:waterwheel_1"
+  }
+}

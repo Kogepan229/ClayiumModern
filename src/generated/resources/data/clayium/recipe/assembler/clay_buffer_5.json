@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1000,
+  "duration": 40,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:impure_silicon_plate"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:advanced_circuit"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 16,
+      "id": "clayium:clay_buffer_5"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:assembler"
+}

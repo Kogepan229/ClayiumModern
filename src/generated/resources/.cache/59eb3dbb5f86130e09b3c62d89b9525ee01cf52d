@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T15:51:34.345810632	Loot Tables
+// 1.21.1	2026-08-03T17:09:01.391862328	Loot Tables
 1ac3e13377b179fa98ca4ee15ed27da063c60007 data/clayium/loot_table/blocks/activator.json
 464cecdb1cea9558a73ec9d43ffbfe00caecb8e7 data/clayium/loot_table/blocks/assembler_10.json
 dbcebc8087ac47ea656064dc17084726e13770f6 data/clayium/loot_table/blocks/assembler_3.json
@@ -98,6 +98,7 @@ fa91dd834aebd8f7b469f725aa2eac4054de5d2b data/clayium/loot_table/blocks/electrol
 00b36624412cb8d6aee95b0fb5d219b33d317110 data/clayium/loot_table/blocks/electrolysis_reactor_7.json
 7afc7790710d2fcc6be737cf96270337a65eb064 data/clayium/loot_table/blocks/electrolysis_reactor_8.json
 b4df566e323894a6358ba838b7cf425f7f48e4f1 data/clayium/loot_table/blocks/electrolysis_reactor_9.json
+d1f84dc769dd5f16a74411118fd2c8fa16799c19 data/clayium/loot_table/blocks/energetic_clay_condenser_3.json
 407ade45ad583e9936261ddc86c2a5a71f2f7f2c data/clayium/loot_table/blocks/grinder_10.json
 76dec2974b86ffec6b6a6c5c017431ccd14e7508 data/clayium/loot_table/blocks/grinder_2.json
 a3bf31ca7174eada18906b5f1df52646f4162dd1 data/clayium/loot_table/blocks/grinder_3.json

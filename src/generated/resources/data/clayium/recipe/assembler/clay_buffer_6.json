@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000,
+  "duration": 40,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:aluminium_plate"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:precision_circuit"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 16,
+      "id": "clayium:clay_buffer_6"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:assembler"
+}

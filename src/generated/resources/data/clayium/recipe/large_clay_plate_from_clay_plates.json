@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "P": {
+      "item": "clayium:clay_plate"
+    }
+  },
+  "pattern": [
+    "PPP",
+    "PPP",
+    "PPP"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:large_clay_plate"
+  }
+}

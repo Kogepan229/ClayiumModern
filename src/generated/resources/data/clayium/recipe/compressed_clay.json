@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "D": {
+      "item": "clayium:compressed_clay_0"
+    }
+  },
+  "pattern": [
+    "DDD",
+    "DDD",
+    "DDD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:compressed_clay_1"
+  }
+}

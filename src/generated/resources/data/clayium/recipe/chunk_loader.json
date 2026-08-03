@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "clayium:zk60a_alloy_hull"
+    },
+    "A": {
+      "item": "clayium:advanced_circuit"
+    },
+    "C": {
+      "item": "clayium:precision_circuit"
+    }
+  },
+  "pattern": [
+    "ACA",
+    "C#C",
+    "ACA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:chunk_loader"
+  }
+}

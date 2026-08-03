@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "clayium:fazy_item_filter"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:fazy_item_filter"
+  }
+}

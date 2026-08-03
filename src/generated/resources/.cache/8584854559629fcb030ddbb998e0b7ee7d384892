@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T14:20:12.598409345	Item Models: clayium
+// 1.21.1	2026-08-03T17:09:01.400299131	Item Models: clayium
 99062d5c019a425dbcc8fc7c8fad74fe2e568b88 assets/clayium/models/item/advanced_circuit.json
 b053cb23d79938f5988a137a12fa465fef616833 assets/clayium/models/item/advanced_industrial_clay_dust.json
 a849708aabf7090c02ef1ae2c9565dd40fb618ce assets/clayium/models/item/advanced_industrial_clay_plate.json
@@ -18,6 +18,7 @@ ef64bf5a06acc87a14250638799362ac5f23da0b assets/clayium/models/item/basic_circui
 4994bdcc0a7e2acbfbd5a7bade2eb5099434c0b3 assets/clayium/models/item/calcareous_clay_dust.json
 4084db1ff37133cbd659ec991f61d8bfd8388e38 assets/clayium/models/item/calcium_chloride_dust.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/calcium_dust.json
+9eb4aa515b79d5e89e4683592e386489e35ca119 assets/clayium/models/item/cee.json
 db9800b9b5dd558343ae744a60540d9e96098158 assets/clayium/models/item/cee_board.json
 5950494a482fda1711fcb0246eefeb108f486e67 assets/clayium/models/item/cee_circuit.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/chrome_dust.json

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "#": {
+      "item": "clayium:machine_hull_3"
+    },
+    "*": {
+      "item": "clayium:dense_clay_gear"
+    },
+    "P": {
+      "item": "clayium:dense_clay_plate"
+    },
+    "o": {
+      "item": "clayium:dense_clay_spindle"
+    },
+    "|": {
+      "item": "clayium:dense_clay_cutting_head"
+    }
+  },
+  "pattern": [
+    "P*P",
+    "o#|",
+    "P*P"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:cutting_machine_3"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100,
+  "duration": 40,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:clay_buffer_4"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:simple_circuit"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:cobblestone_generator_4"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:assembler"
+}

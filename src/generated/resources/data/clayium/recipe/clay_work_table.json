@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "D": {
+      "item": "clayium:compressed_clay_0"
+    }
+  },
+  "pattern": [
+    "DD",
+    "DD"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:clay_work_table"
+  }
+}

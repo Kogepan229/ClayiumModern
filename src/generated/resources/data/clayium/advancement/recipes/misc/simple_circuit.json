@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_clay_circuit_board": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clayium:clay_circuit_board"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayium:simple_circuit"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_clay_circuit_board"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayium:simple_circuit"
+    ]
+  }
+}

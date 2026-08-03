@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100,
+  "duration": 40,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:advanced_industrial_clay_plate"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:basic_circuit"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 16,
+      "id": "clayium:clay_buffer_4"
+    }
+  ],
+  "recipe_tier": 4,
+  "recipe_type": "clayium:assembler"
+}

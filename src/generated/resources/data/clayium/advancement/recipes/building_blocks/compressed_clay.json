@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_dense_clay": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clayium:compressed_clay_0"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayium:compressed_clay"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_dense_clay"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayium:compressed_clay"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_needle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clayium:dense_clay_needle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayium:dense_clay_grinding_head_crafting"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_needle"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayium:dense_clay_grinding_head_crafting"
+    ]
+  }
+}

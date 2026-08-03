@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 2,
+  "duration": 32,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:advanced_industrial_clay_plate"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:cee_board"
+    }
+  ],
+  "recipe_tier": 3,
+  "recipe_type": "clayium:milling_machine"
+}
