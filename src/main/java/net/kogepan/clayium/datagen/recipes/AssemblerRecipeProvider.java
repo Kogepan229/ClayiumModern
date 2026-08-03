@@ -59,6 +59,11 @@ public class AssemblerRecipeProvider {
         create(recipeOutput, "assembler_4_from_machine_hull", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(4).get()), ClayiumItems.DENSE_CLAY_GEAR.toStack(4), new ItemStack(ClayiumBlocks.ASSEMBLER_BLOCKS.get(4).get()), CEUtils.ONE_MILLI_CE, 40, 4);
         create(recipeOutput, "assembler_6_from_machine_hull", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(6).get()), ClayiumItems.DENSE_CLAY_GEAR.toStack(4), new ItemStack(ClayiumBlocks.ASSEMBLER_BLOCKS.get(6).get()), CEUtils.milliCeToLong(100), 40, 4);
         create(recipeOutput, "assembler_6_from_basic_assembler", new ItemStack(ClayiumBlocks.ASSEMBLER_BLOCKS.get(4).get()), ClayiumItems.PRECISION_CIRCUIT.toStack(), new ItemStack(ClayiumBlocks.ASSEMBLER_BLOCKS.get(6).get()), CEUtils.milliCeToLong(100), 40, 4);
+        create(recipeOutput, "clay_gadget_holder", new ItemStack(Items.LEATHER, 4), ClayiumItems.AZ91D_ALLOY_PLATE.toStack(8), ClayiumItems.CLAY_GADGET_HOLDER.toStack(), CEUtils.milliCeToLong(100), 120, 4);
+        create(recipeOutput, "clay_gadget_parts", ClayiumItems.INDUSTRIAL_CLAY_PLATE.toStack(8), ClayiumItems.AZ91D_ALLOY_PLATE.toStack(4), ClayiumItems.CLAY_GADGET_PARTS.toStack(), CEUtils.milliCeToLong(100), 120, 4);
+        create(recipeOutput, "gadget_health_mk1", ClayiumItems.CLAY_GADGET_PARTS.toStack(), ClayiumItems.PRECISION_CIRCUIT.toStack(4), ClayiumItems.GADGET_HEALTH_MK1.toStack(), CEUtils.milliCeToLong(100), 120, 4);
+        create(recipeOutput, "gadget_health_mk2", ClayiumItems.GADGET_HEALTH_MK1.toStack(), ClayiumItems.CLAY_SPIRIT.toStack(4), ClayiumItems.GADGET_HEALTH_MK2.toStack(), CEUtils.ceToLong(1000), 120, 4);
+        create(recipeOutput, "gadget_auto_eat_economical", ClayiumItems.CLAY_GADGET_PARTS.toStack(), ClayiumItems.INTEGRATED_CIRCUIT.toStack(2), ClayiumItems.GADGET_AUTO_EAT_ECONOMICAL.toStack(), CEUtils.ceToLong(1), 120, 4);
 
         // Tier 6
         create(recipeOutput, "clay_io_configurator", ClayiumItems.CLAY_ROLLING_PIN.toStack(), ClayiumItems.CLAY_SLICER.toStack(), ClayiumItems.CLAY_IO_CONFIGURATOR.toStack(), CEUtils.milliCeToLong(100), 20, 6);
@@ -73,6 +78,10 @@ public class AssemblerRecipeProvider {
         // Tier 10
         create(recipeOutput, "saddle", new ItemStack(Items.LEATHER, 4), new ItemStack(Items.STRING, 16), new ItemStack(Items.SADDLE), CEUtils.ceToLong(1000), 6000, 10);
         create(recipeOutput, "name_tag", new ItemStack(Items.PAPER, 2), new ItemStack(Items.STRING, 4), new ItemStack(Items.NAME_TAG), CEUtils.ceToLong(1000), 600, 10);
+        create(recipeOutput, "gadget_flight_mk1", ClayiumItems.CLAY_GADGET_PARTS.toStack(), ClayiumItems.CLAY_ANIMA.toStack(16), ClayiumItems.GADGET_FLIGHT_MK1.toStack(), CEUtils.ceToLong(100000), 120, 10);
+        create(recipeOutput, "gadget_flight_mk2", ClayiumItems.GADGET_FLIGHT_MK1.toStack(), ClayiumItems.CLAY_PSYCHE.toStack(16), ClayiumItems.GADGET_FLIGHT_MK2.toStack(), CEUtils.ceToLong(1000000), 1200, 10);
+        create(recipeOutput, "gadget_health_mk3", ClayiumItems.GADGET_HEALTH_MK2.toStack(), ClayiumItems.CLAY_ANIMA.toStack(4), ClayiumItems.GADGET_HEALTH_MK3.toStack(), CEUtils.ceToLong(100000), 120, 10);
+        create(recipeOutput, "gadget_repeatedly_attack", ClayiumItems.GADGET_OVERCLOCKER_MK1.toStack(), ClayiumItems.CLAY_SPIRIT.toStack(4), ClayiumItems.GADGET_REPEATEDLY_ATTACK.toStack(), CEUtils.ceToLong(1000), 120, 10);
 
         // spotless:on
     }

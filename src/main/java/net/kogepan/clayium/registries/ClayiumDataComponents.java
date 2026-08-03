@@ -10,6 +10,7 @@ import net.minecraft.core.GlobalPos;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.world.item.component.ItemContainerContents;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -69,6 +70,14 @@ public class ClayiumDataComponents {
             .register("machine_io_configuration",
                     () -> DataComponentType.<MachineIOConfiguration>builder()
                             .persistent(MachineIOConfiguration.CODEC)
+                            .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ItemContainerContents>> GADGET_HOLDER_CONTENTS = DATA_COMPONENTS
+            .register("gadget_holder_contents",
+                    () -> DataComponentType.<ItemContainerContents>builder()
+                            .persistent(ItemContainerContents.CODEC)
+                            .networkSynchronized(ItemContainerContents.STREAM_CODEC)
+                            .cacheEncoding()
                             .build());
 
     private ClayiumDataComponents() {}

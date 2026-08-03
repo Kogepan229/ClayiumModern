@@ -1,6 +1,7 @@
 package net.kogepan.clayium.datagen.recipes;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.recipes.recipes.AutoEatGadgetToggleRecipe;
 import net.kogepan.clayium.recipes.recipes.StorageContainerUpgradeRecipe;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumItems;
@@ -84,6 +85,8 @@ public class ClayiumRecipeProvider extends RecipeProvider {
 
         SpecialRecipeBuilder.special(StorageContainerUpgradeRecipe::new)
                 .save(recipeOutput, Clayium.id("storage_container_upgrade"));
+        SpecialRecipeBuilder.special(AutoEatGadgetToggleRecipe::new)
+                .save(recipeOutput, Clayium.id("auto_eat_gadget_toggle"));
 
         // Laser Reflector
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.LASER_REFLECTOR.get())

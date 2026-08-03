@@ -3,6 +3,7 @@ package net.kogepan.clayium.capability;
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.api.configuration.IConfigurationTool;
 import net.kogepan.clayium.api.configuration.IMachineConfigurable;
+import net.kogepan.clayium.api.gadget.IClayGadget;
 import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 
 import net.minecraft.core.Direction;
@@ -33,6 +34,11 @@ public final class ClayiumCapabilities {
     public static final ItemCapability<ItemFilterData, Void> ITEM_FILTER_DATA = ItemCapability
             .createVoid(ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "item_filter_data"),
                     ItemFilterData.class);
+
+    /** Capability exposed by items that can be installed in a Clay Gadget Holder. */
+    public static final ItemCapability<IClayGadget, Void> CLAY_GADGET = ItemCapability
+            .createVoid(ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "clay_gadget"),
+                    IClayGadget.class);
 
     /**
      * Capability for Clay Energy Holder.

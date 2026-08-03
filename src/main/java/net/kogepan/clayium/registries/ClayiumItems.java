@@ -13,6 +13,15 @@ import net.kogepan.clayium.items.TieredItem;
 import net.kogepan.clayium.items.filter.FazyItemFilterItem;
 import net.kogepan.clayium.items.filter.SimpleItemFilterItem;
 import net.kogepan.clayium.items.filter.UnlocalizedNameItemFilterItem;
+import net.kogepan.clayium.items.gadget.AutoEatGadgetItem;
+import net.kogepan.clayium.items.gadget.ClayGadgetHolderItem;
+import net.kogepan.clayium.items.gadget.ClayGadgetItem;
+import net.kogepan.clayium.items.gadget.behavior.AutoEatGadget;
+import net.kogepan.clayium.items.gadget.behavior.FlightGadget;
+import net.kogepan.clayium.items.gadget.behavior.HealthGadget;
+import net.kogepan.clayium.items.gadget.behavior.LongArmGadget;
+import net.kogepan.clayium.items.gadget.behavior.OverclockGadget;
+import net.kogepan.clayium.items.gadget.behavior.RepeatedAttackGadget;
 import net.kogepan.clayium.items.tools.ClayPickaxe;
 import net.kogepan.clayium.items.tools.ClayShovel;
 import net.kogepan.clayium.items.tools.ClayToolTiers;
@@ -247,6 +256,26 @@ public class ClayiumItems {
     public static final DeferredItem<Item> LARGE_AZ91D_ALLOY_PLATE = ITEMS.registerItem("large_az91d_alloy_plate", p -> new TieredItem(p, 6));
     public static final DeferredItem<Item> ZK60A_ALLOY_PLATE = ITEMS.registerItem("zk60a_alloy_plate", p -> new TieredItem(p, 6));
     public static final DeferredItem<Item> LARGE_ZK60A_ALLOY_PLATE = ITEMS.registerItem("large_zk60a_alloy_plate", p -> new TieredItem(p, 6));
+
+    // Clay Gadgets
+    public static final DeferredItem<ClayGadgetHolderItem> CLAY_GADGET_HOLDER = ITEMS.registerItem("clay_gadget_holder", ClayGadgetHolderItem::new);
+    public static final DeferredItem<TieredItem> CLAY_GADGET_PARTS = ITEMS.registerItem("clay_gadget_parts", p -> new TieredItem(p.stacksTo(1), 6));
+    public static final DeferredItem<ClayGadgetItem> GADGET_OVERCLOCKER_MK1 = ITEMS.registerItem("gadget_overclocker_mk1", p -> new ClayGadgetItem(p, 10, new OverclockGadget(3, 1), true));
+    public static final DeferredItem<ClayGadgetItem> GADGET_OVERCLOCKER_MK2 = ITEMS.registerItem("gadget_overclocker_mk2", p -> new ClayGadgetItem(p, 11, new OverclockGadget(2, 2), true));
+    public static final DeferredItem<ClayGadgetItem> GADGET_OVERCLOCKER_MK3 = ITEMS.registerItem("gadget_overclocker_mk3", p -> new ClayGadgetItem(p, 12, new OverclockGadget(1, 3), true));
+    public static final DeferredItem<ClayGadgetItem> GADGET_OVERCLOCKER_MK4 = ITEMS.registerItem("gadget_overclocker_mk4", p -> new ClayGadgetItem(p, 13, new OverclockGadget(0, 4), true));
+    public static final DeferredItem<ClayGadgetItem> GADGET_FLIGHT_MK1 = ITEMS.registerItem("gadget_flight_mk1", p -> new ClayGadgetItem(p, 12, new FlightGadget(0, 1)));
+    public static final DeferredItem<ClayGadgetItem> GADGET_FLIGHT_MK2 = ITEMS.registerItem("gadget_flight_mk2", p -> new ClayGadgetItem(p, 13, new FlightGadget(1, 2)));
+    public static final DeferredItem<ClayGadgetItem> GADGET_FLIGHT_MK3 = ITEMS.registerItem("gadget_flight_mk3", p -> new ClayGadgetItem(p, 13, new FlightGadget(2, 3)));
+    public static final DeferredItem<ClayGadgetItem> GADGET_HEALTH_MK1 = ITEMS.registerItem("gadget_health_mk1", p -> new ClayGadgetItem(p, 6, new HealthGadget(20.0D, 1)));
+    public static final DeferredItem<ClayGadgetItem> GADGET_HEALTH_MK2 = ITEMS.registerItem("gadget_health_mk2", p -> new ClayGadgetItem(p, 10, new HealthGadget(80.0D, 2)));
+    public static final DeferredItem<ClayGadgetItem> GADGET_HEALTH_MK3 = ITEMS.registerItem("gadget_health_mk3", p -> new ClayGadgetItem(p, 12, new HealthGadget(180.0D, 3)));
+    public static final DeferredItem<AutoEatGadgetItem> GADGET_AUTO_EAT_ECONOMICAL = ITEMS.registerItem("gadget_auto_eat_economical", p -> new AutoEatGadgetItem(p, 7, new AutoEatGadget(true)));
+    public static final DeferredItem<AutoEatGadgetItem> GADGET_AUTO_EAT = ITEMS.registerItem("gadget_auto_eat", p -> new AutoEatGadgetItem(p, 7, new AutoEatGadget(false)));
+    public static final DeferredItem<ClayGadgetItem> GADGET_REPEATEDLY_ATTACK = ITEMS.registerItem("gadget_repeatedly_attack", p -> new ClayGadgetItem(p, 10, new RepeatedAttackGadget()));
+    public static final DeferredItem<ClayGadgetItem> GADGET_LONG_ARM_MK1 = ITEMS.registerItem("gadget_long_arm_mk1", p -> new ClayGadgetItem(p, 6, new LongArmGadget(3.0D, 1)));
+    public static final DeferredItem<ClayGadgetItem> GADGET_LONG_ARM_MK2 = ITEMS.registerItem("gadget_long_arm_mk2", p -> new ClayGadgetItem(p, 8, new LongArmGadget(7.0D, 2)));
+    public static final DeferredItem<ClayGadgetItem> GADGET_LONG_ARM_MK3 = ITEMS.registerItem("gadget_long_arm_mk3", p -> new ClayGadgetItem(p, 12, new LongArmGadget(20.0D, 3)));
 
     // Item filters
     public static final DeferredItem<Item> SIMPLE_ITEM_FILTER = ITEMS.registerItem("simple_item_filter", p -> new SimpleItemFilterItem());

@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T12:50:39.824822067	Item Models: clayium
+// 1.21.1	2026-08-03T14:20:12.598409345	Item Models: clayium
 99062d5c019a425dbcc8fc7c8fad74fe2e568b88 assets/clayium/models/item/advanced_circuit.json
 b053cb23d79938f5988a137a12fa465fef616833 assets/clayium/models/item/advanced_industrial_clay_dust.json
 a849708aabf7090c02ef1ae2c9565dd40fb618ce assets/clayium/models/item/advanced_industrial_clay_plate.json
@@ -32,6 +32,8 @@ d63a74988e3376ab321d6c8ba41545238e49ad71 assets/clayium/models/item/clay_circuit
 8b979220586086fdc47e3304bfe30700bc5cc462 assets/clayium/models/item/clay_cylinder.json
 f57baf8229f87beb9190fa1f685c2f0243ad56c4 assets/clayium/models/item/clay_disc.json
 9298cb291551b6e9588b51190160ed77fde657be assets/clayium/models/item/clay_dust.json
+9b2f2428100ae5bf47ad8ea70f4ba62030416027 assets/clayium/models/item/clay_gadget_holder.json
+f4a0af3102d4e6e0285f15a3fb840d29e7c85cee assets/clayium/models/item/clay_gadget_parts.json
 e8ff61c963d7690933c079798e42c4dfe18070b9 assets/clayium/models/item/clay_gear.json
 21b58e275b981f1453bd5d4d3f9e40066e293f22 assets/clayium/models/item/clay_grinding_head.json
 4ce9d0d34ec85501852f9a591717861bd65d0588 assets/clayium/models/item/clay_io_configurator.json
@@ -91,6 +93,22 @@ e06b13edad972be3a8e65c0ac21eb2ab0e5f880e assets/clayium/models/item/dense_small_
 661637f796b0eb7ba41397715b37ed98ff850aec assets/clayium/models/item/dense_small_clay_ring.json
 be0d0d4da7e50653b4ee8f0b31e026714096e7c6 assets/clayium/models/item/energized_clay_dust.json
 de52616828bdfbb7f700b5aafb25a6f0c93a738a assets/clayium/models/item/fazy_item_filter.json
+4669607fe022785ec7c1de8a9e611e2363fd0dba assets/clayium/models/item/gadget_auto_eat.json
+a2e1913d4f82f3f0e9ea9591bd8a30570f6dcc0b assets/clayium/models/item/gadget_auto_eat_economical.json
+549656bae3597f11b30a94dd25c8566cb6f01eb5 assets/clayium/models/item/gadget_flight_mk1.json
+6d030a539f438038dda568994d94eb8f5950c82b assets/clayium/models/item/gadget_flight_mk2.json
+b555f979a519296e0886244227120af90688da5e assets/clayium/models/item/gadget_flight_mk3.json
+55970493d38417ef0edf4505177f5953314aff4e assets/clayium/models/item/gadget_health_mk1.json
+3c5c087e0b6970dd4382aae5a46243418e8af170 assets/clayium/models/item/gadget_health_mk2.json
+22a372bd05c6776ba1e16742f6cf5183624564c3 assets/clayium/models/item/gadget_health_mk3.json
+fc3fad55f60f2c75648343b68fc692a6c6fe7592 assets/clayium/models/item/gadget_long_arm_mk1.json
+49c2e6f8018e2a7ad4028375e057909252972e1f assets/clayium/models/item/gadget_long_arm_mk2.json
+dbcc48e99172d2836494bd35df43cee0575e534d assets/clayium/models/item/gadget_long_arm_mk3.json
+3efb65cfb61240ef0e655a61acca46f1b16b61a2 assets/clayium/models/item/gadget_overclocker_mk1.json
+a51e849d40bf964e9e1f43b3486292f91c0c8d2a assets/clayium/models/item/gadget_overclocker_mk2.json
+3867d48d29567aed6442723b16f684fa23d38d4b assets/clayium/models/item/gadget_overclocker_mk3.json
+c5a87944bd325dfa1bbfac0fe1b66cd5416e8867 assets/clayium/models/item/gadget_overclocker_mk4.json
+61e8d9ac3faf39f297fb92252e631ac7fa26cb58 assets/clayium/models/item/gadget_repeatedly_attack.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/hafnium_dust.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/impure_aluminium_dust.json
 03bc045bdaf16acca33b4fab04f9470122c1ebd0 assets/clayium/models/item/impure_aluminium_ingot.json

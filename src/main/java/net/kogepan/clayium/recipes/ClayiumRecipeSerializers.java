@@ -1,6 +1,7 @@
 package net.kogepan.clayium.recipes;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.recipes.recipes.AutoEatGadgetToggleRecipe;
 import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
 import net.kogepan.clayium.recipes.recipes.LaserIrradiationRecipe;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
@@ -37,4 +38,8 @@ public class ClayiumRecipeSerializers {
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<StorageContainerUpgradeRecipe>> STORAGE_CONTAINER_UPGRADE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
             .register("storage_container_upgrade",
                     () -> new SimpleCraftingRecipeSerializer<>(StorageContainerUpgradeRecipe::new));
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<AutoEatGadgetToggleRecipe>> AUTO_EAT_GADGET_TOGGLE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
+            .register("auto_eat_gadget_toggle",
+                    () -> new SimpleCraftingRecipeSerializer<>(AutoEatGadgetToggleRecipe::new));
 }

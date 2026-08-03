@@ -18,6 +18,8 @@ import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 import net.kogepan.clayium.items.blockitem.StorageContainerBlockItem;
 import net.kogepan.clayium.items.filter.FilterItemHelper;
 import net.kogepan.clayium.items.filter.ItemFilterBase;
+import net.kogepan.clayium.items.gadget.ClayGadgetHolderItem;
+import net.kogepan.clayium.items.gadget.ClayGadgetItem;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
@@ -222,6 +224,22 @@ public class Clayium {
             return item instanceof ItemFilterBase filterItem ? filterItem.createFilterData(stack) : null;
         }, ClayiumItems.SIMPLE_ITEM_FILTER.get(), ClayiumItems.FAZY_ITEM_FILTER.get(),
                 ClayiumItems.UNLOCALIZED_NAME_ITEM_FILTER.get());
+
+        event.registerItem(Capabilities.ItemHandler.ITEM,
+                (stack, context) -> ClayGadgetHolderItem.createHandler(stack),
+                ClayiumItems.CLAY_GADGET_HOLDER.get());
+
+        event.registerItem(ClayiumCapabilities.CLAY_GADGET,
+                (stack, context) -> stack.getItem() instanceof ClayGadgetItem gadgetItem ? gadgetItem.getGadget() :
+                        null,
+                ClayiumItems.GADGET_OVERCLOCKER_MK1.get(), ClayiumItems.GADGET_OVERCLOCKER_MK2.get(),
+                ClayiumItems.GADGET_OVERCLOCKER_MK3.get(), ClayiumItems.GADGET_OVERCLOCKER_MK4.get(),
+                ClayiumItems.GADGET_FLIGHT_MK1.get(), ClayiumItems.GADGET_FLIGHT_MK2.get(),
+                ClayiumItems.GADGET_FLIGHT_MK3.get(), ClayiumItems.GADGET_HEALTH_MK1.get(),
+                ClayiumItems.GADGET_HEALTH_MK2.get(), ClayiumItems.GADGET_HEALTH_MK3.get(),
+                ClayiumItems.GADGET_AUTO_EAT_ECONOMICAL.get(), ClayiumItems.GADGET_AUTO_EAT.get(),
+                ClayiumItems.GADGET_REPEATEDLY_ATTACK.get(), ClayiumItems.GADGET_LONG_ARM_MK1.get(),
+                ClayiumItems.GADGET_LONG_ARM_MK2.get(), ClayiumItems.GADGET_LONG_ARM_MK3.get());
 
         event.registerItem(ClayiumCapabilities.CONFIGURATION_TOOL, (stack, context) -> INSERTION_TOOL,
                 ClayiumItems.CLAY_ROLLING_PIN.get());
