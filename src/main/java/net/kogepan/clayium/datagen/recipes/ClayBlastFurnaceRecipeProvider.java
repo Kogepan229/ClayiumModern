@@ -23,10 +23,19 @@ public class ClayBlastFurnaceRecipeProvider {
         output.accept(Clayium.id("clay_blast_furnace/" + name), machineRecipe, null);
     }
 
+    private static void create(RecipeOutput output, String name, ItemStack ingredient1, ItemStack ingredient2,
+                               ItemStack result, long energy, long duration, int tier) {
+        MachineRecipe machineRecipe = new MachineRecipe(ClayiumRecipeTypes.CLAY_BLAST_FURNACE_RECIPE_TYPE.get(),
+                List.of(ItemIngredientStack.of(ingredient1), ItemIngredientStack.of(ingredient2)), List.of(result),
+                duration, energy, tier);
+        output.accept(Clayium.id("clay_blast_furnace/" + name), machineRecipe, null);
+    }
+
     public static void buildRecipes(@NotNull RecipeOutput recipeOutput) {
         // spotless:off
 
         // Tier 6
+        create(recipeOutput, "clay_steel", ClayiumItems.INDUSTRIAL_CLAY_DUST.toStack(2), ClayiumItems.IMPURE_MANGANESE_DUST.toStack(), ClayiumItems.CLAY_STEEL_INGOT.toStack(2), CEUtils.ceToLong(0.5), 200, 6);
         create(recipeOutput, "clay_steel_dust", ClayiumItems.CLAY_STEEL_DUST.toStack(), ClayiumItems.CLAY_STEEL_INGOT.toStack(), CEUtils.ONE_MILLI_CE * 100, 500, 6);
         create(recipeOutput, "az91d_alloy_dust", ClayiumItems.AZ91D_ALLOY_DUST.toStack(), ClayiumItems.AZ91D_ALLOY_INGOT.toStack(), CEUtils.ONE_MILLI_CE * 2, 400, 6);
         create(recipeOutput, "zk60a_alloy_dust", ClayiumItems.ZK60A_ALLOY_DUST.toStack(), ClayiumItems.ZK60A_ALLOY_INGOT.toStack(), CEUtils.ONE_MILLI_CE * 2, 400, 6);

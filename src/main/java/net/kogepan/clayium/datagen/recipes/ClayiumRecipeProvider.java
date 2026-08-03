@@ -26,6 +26,8 @@ public class ClayiumRecipeProvider extends RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
+        OriginalCraftingRecipeProvider.buildRecipes(recipeOutput);
+        MachineCraftingRecipeProvider.buildRecipes(recipeOutput);
         ClayWorkTableRecipeProvider.buildRecipes(recipeOutput);
         BendingMachineRecipeProvider.buildRecipes(recipeOutput);
         WireDrawingMachineRecipeProvider.buildRecipes(recipeOutput);
@@ -41,6 +43,7 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         ElectrolysisReactorRecipeProvider.buildRecipes(recipeOutput);
         InscriberRecipeProvider.buildRecipes(recipeOutput);
         AssemblerRecipeProvider.buildRecipes(recipeOutput);
+        AssemblerMachineRecipeProvider.buildRecipes(recipeOutput);
         SmelterRecipeProvider.buildRecipes(recipeOutput);
         ClayBlastFurnaceRecipeProvider.buildRecipes(recipeOutput);
         QuartzCrucibleRecipeProvider.buildRecipes(recipeOutput);

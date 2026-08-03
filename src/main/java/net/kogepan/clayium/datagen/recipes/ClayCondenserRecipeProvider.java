@@ -41,6 +41,10 @@ public class ClayCondenserRecipeProvider {
                 ClayiumItems.ADVANCED_INDUSTRIAL_CLAY_SHARD.toStack(4),
                 ClayiumBlocks.COMPRESSED_CLAYS.get(3).asItem().getDefaultInstance(),
                 CEUtils.TEN_MICRO_CE, 9, 0);
+        create(recipeOutput, "clay_dust_to_block", ClayiumItems.CLAY_DUST.toStack(),
+                Blocks.CLAY.asItem().getDefaultInstance(), CEUtils.TEN_MICRO_CE, 3, 0);
+        create(recipeOutput, "dense_clay_dust_to_block", ClayiumItems.DENSE_CLAY_DUST.toStack(),
+                ClayiumBlocks.COMPRESSED_CLAYS.get(0).asItem().getDefaultInstance(), CEUtils.TEN_MICRO_CE, 6, 0);
 
         // Tier 0 - Block condensation
         create(recipeOutput, "clay_to_compressed_0", new ItemStack(Blocks.CLAY, 9),

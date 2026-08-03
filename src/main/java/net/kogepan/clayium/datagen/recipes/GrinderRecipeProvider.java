@@ -177,6 +177,24 @@ public class GrinderRecipeProvider {
         create(recipeOutput, "zk60a_alloy_ingot", ClayiumItems.ZK60A_ALLOY_INGOT.toStack(),
                 ClayiumItems.ZK60A_ALLOY_DUST.toStack(), CEUtils.ONE_MILLI_CE, 20, 4);
 
+        // Tier 0 - Material plate recycling
+        create(recipeOutput, "impure_silicon_plate", ClayiumItems.IMPURE_SILICON_PLATE.toStack(), ClayiumItems.IMPURE_SILICON_DUST.toStack(), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+        create(recipeOutput, "large_impure_silicon_plate", ClayiumItems.LARGE_IMPURE_SILICON_PLATE.toStack(), ClayiumItems.IMPURE_SILICON_DUST.toStack(4), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+        create(recipeOutput, "silicon_plate", ClayiumItems.SILICON_PLATE.toStack(), ClayiumItems.SILICON_DUST.toStack(), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+        create(recipeOutput, "large_silicon_plate", ClayiumItems.LARGE_SILICON_PLATE.toStack(), ClayiumItems.SILICON_DUST.toStack(4), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+        create(recipeOutput, "silicone_plate", ClayiumItems.SILICONE_PLATE.toStack(), ClayiumItems.SILICONE_DUST.toStack(), CEUtils.ONE_MILLI_CE / 4, 4, 0);
+        create(recipeOutput, "large_silicone_plate", ClayiumItems.LARGE_SILICONE_PLATE.toStack(), ClayiumItems.SILICONE_DUST.toStack(4), CEUtils.ONE_MILLI_CE / 4, 4, 0);
+        create(recipeOutput, "aluminium_plate", ClayiumItems.ALUMINIUM_PLATE.toStack(), ClayiumItems.ALUMINIUM_DUST.toStack(), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+        create(recipeOutput, "large_aluminium_plate", ClayiumItems.LARGE_ALUMINIUM_PLATE.toStack(), ClayiumItems.ALUMINIUM_DUST.toStack(4), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+        create(recipeOutput, "impure_aluminium_plate", ClayiumItems.IMPURE_ALUMINIUM_PLATE.toStack(), ClayiumItems.IMPURE_ALUMINIUM_DUST.toStack(), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+        create(recipeOutput, "large_impure_aluminium_plate", ClayiumItems.LARGE_IMPURE_ALUMINIUM_PLATE.toStack(), ClayiumItems.IMPURE_ALUMINIUM_DUST.toStack(4), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+        create(recipeOutput, "clay_steel_plate", ClayiumItems.CLAY_STEEL_PLATE.toStack(), ClayiumItems.CLAY_STEEL_DUST.toStack(), CEUtils.ONE_MILLI_CE / 4, 60, 0);
+        create(recipeOutput, "large_clay_steel_plate", ClayiumItems.LARGE_CLAY_STEEL_PLATE.toStack(), ClayiumItems.CLAY_STEEL_DUST.toStack(4), CEUtils.ONE_MILLI_CE / 4, 60, 0);
+        create(recipeOutput, "az91d_alloy_plate", ClayiumItems.AZ91D_ALLOY_PLATE.toStack(), ClayiumItems.AZ91D_ALLOY_DUST.toStack(), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+        create(recipeOutput, "large_az91d_alloy_plate", ClayiumItems.LARGE_AZ91D_ALLOY_PLATE.toStack(), ClayiumItems.AZ91D_ALLOY_DUST.toStack(4), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+        create(recipeOutput, "zk60a_alloy_plate", ClayiumItems.ZK60A_ALLOY_PLATE.toStack(), ClayiumItems.ZK60A_ALLOY_DUST.toStack(), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+        create(recipeOutput, "large_zk60a_alloy_plate", ClayiumItems.LARGE_ZK60A_ALLOY_PLATE.toStack(), ClayiumItems.ZK60A_ALLOY_DUST.toStack(4), CEUtils.ONE_MILLI_CE / 4, 20, 0);
+
         //// Vanilla compatibility
         create(recipeOutput, "stone_to_cobblestone", Blocks.STONE.asItem().getDefaultInstance(),
                 Blocks.COBBLESTONE.asItem().getDefaultInstance(), CEUtils.TEN_MICRO_CE, 3, 0);
