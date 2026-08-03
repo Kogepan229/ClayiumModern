@@ -1,0 +1,148 @@
+{
+  "type": "clayium:weighted_machine",
+  "ce_per_tick": 5000,
+  "duration": 40,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:industrial_clay_dust"
+      }
+    }
+  ],
+  "recipe_tier": 6,
+  "weighted_outputs": [
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_aluminium_dust"
+      },
+      "weight": 200
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_manganese_dust"
+      },
+      "weight": 80
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_magnesium_dust"
+      },
+      "weight": 60
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_sodium_dust"
+      },
+      "weight": 40
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_calcium_dust"
+      },
+      "weight": 20
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_potassium_dust"
+      },
+      "weight": 15
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_nickel_dust"
+      },
+      "weight": 13
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_zinc_dust"
+      },
+      "weight": 10
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_iron_dust"
+      },
+      "weight": 9
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_beryllium_dust"
+      },
+      "weight": 8
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_lithium_dust"
+      },
+      "weight": 7
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_lead_dust"
+      },
+      "weight": 6
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_zirconium_dust"
+      },
+      "weight": 5
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_hafnium_dust"
+      },
+      "weight": 4
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_chrome_dust"
+      },
+      "weight": 3
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_titanium_dust"
+      },
+      "weight": 3
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_strontium_dust"
+      },
+      "weight": 2
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_barium_dust"
+      },
+      "weight": 2
+    },
+    {
+      "result": {
+        "count": 1,
+        "id": "clayium:impure_copper_dust"
+      },
+      "weight": 1
+    }
+  ]
+}

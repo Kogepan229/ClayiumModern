@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T17:33:47.641226429	Loot Tables
+// 1.21.1	2026-08-03T18:02:14.423160309	Loot Tables
 1ac3e13377b179fa98ca4ee15ed27da063c60007 data/clayium/loot_table/blocks/activator.json
 5bfffa4a0446d3f12e10d757aa42ea04bd808410 data/clayium/loot_table/blocks/alloy_smelter_6.json
 464cecdb1cea9558a73ec9d43ffbfe00caecb8e7 data/clayium/loot_table/blocks/assembler_10.json
@@ -21,6 +21,7 @@ c818155e7c293fdc6a788a3e929ae077e2e72fe2 data/clayium/loot_table/blocks/centrifu
 9457bca3a3bef4a2b626157f7af23d663f87e27d data/clayium/loot_table/blocks/centrifuge_4.json
 a53371318348338c8fa2dc067c91f25f7f1a43bc data/clayium/loot_table/blocks/centrifuge_5.json
 6baa76b601046f54edfc3c771e774a7b8c9c1633 data/clayium/loot_table/blocks/centrifuge_6.json
+b923db62e1afb0539197a6d101a00cc3e3729a23 data/clayium/loot_table/blocks/chemical_metal_separator.json
 f01173e402ea50f53529a96db0122ec6c69812f9 data/clayium/loot_table/blocks/chemical_reactor_4.json
 7e88e0196663dc5b5f02f02e2d16a015bdac6e84 data/clayium/loot_table/blocks/chemical_reactor_5.json
 118ac81472fff6e2bf193e56290cb8eb82ca8932 data/clayium/loot_table/blocks/chemical_reactor_8.json

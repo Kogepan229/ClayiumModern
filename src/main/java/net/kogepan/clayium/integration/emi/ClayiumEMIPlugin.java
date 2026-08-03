@@ -1,5 +1,6 @@
 package net.kogepan.clayium.integration.emi;
 
+import net.kogepan.clayium.integration.XEIChemicalMetalSeparatorRecipeCategory;
 import net.kogepan.clayium.integration.XEIMachineRecipeCategory;
 import net.kogepan.clayium.integration.XEISaltExtractorRecipeCategory;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
@@ -64,6 +65,13 @@ public class ClayiumEMIPlugin implements EmiPlugin {
             registry.addWorkstation(EMISaltExtractorRecipe.CATEGORY, EmiStack.of(recipe.machine()));
             registry.addRecipe(new EMISaltExtractorRecipe(recipe));
         }
+
+        registry.addCategory(EMIChemicalMetalSeparatorRecipe.CATEGORY);
+        registry.addWorkstation(EMIChemicalMetalSeparatorRecipe.CATEGORY,
+                EmiStack.of(ClayiumBlocks.CHEMICAL_METAL_SEPARATOR));
+        XEIChemicalMetalSeparatorRecipeCategory.getRecipes(registry.getRecipeManager()).stream()
+                .map(EMIChemicalMetalSeparatorRecipe::new)
+                .forEach(registry::addRecipe);
     }
 
     private static <C extends RecipeInput, T extends Recipe<C>> void adaptRecipeType(EmiRegistry registry,

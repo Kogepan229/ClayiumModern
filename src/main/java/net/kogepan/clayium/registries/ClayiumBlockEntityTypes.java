@@ -18,6 +18,7 @@ import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BlockBreakerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CentrifugeBlockEntity;
+import net.kogepan.clayium.blockentities.machine.ChemicalMetalSeparatorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChemicalReactorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChunkLoaderBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayBlastFurnaceBlockEntity;
@@ -256,6 +257,12 @@ public class ClayiumBlockEntityTypes {
                         .of(ChemicalReactorBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ChemicalMetalSeparatorBlockEntity>> CHEMICAL_METAL_SEPARATOR_BLOCK_ENTITY = registerClayContainer(
+            "chemical_metal_separator_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(ChemicalMetalSeparatorBlockEntity::new, ClayiumBlocks.CHEMICAL_METAL_SEPARATOR.get())
+                    .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<DecomposerBlockEntity>> DECOMPOSER_BLOCK_ENTITY = registerClayContainer(
             "decomposer_block_entity",

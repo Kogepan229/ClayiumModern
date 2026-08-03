@@ -77,6 +77,8 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation GRINDER_TEXTURE = Clayium.id("block/machine/grinder");
     private static final ResourceLocation CENTRIFUGE_TEXTURE = Clayium.id("block/machine/centrifuge");
     private static final ResourceLocation CHEMICAL_REACTOR_TEXTURE = Clayium.id("block/machine/chemical_reactor");
+    private static final ResourceLocation CHEMICAL_METAL_SEPARATOR_TEXTURE = Clayium
+            .id("block/machine/chemical_metal_separator");
     private static final ResourceLocation DECOMPOSER_TEXTURE = Clayium.id("block/machine/decomposer");
     private static final ResourceLocation ELECTROLYSIS_REACTOR_TEXTURE = Clayium
             .id("block/machine/electrolysis_reactor");
@@ -208,6 +210,8 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         for (var entry : ClayiumBlocks.CHEMICAL_REACTOR_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CHEMICAL_REACTOR_TEXTURE);
         }
+        registerSingleMachine(ClayiumBlocks.CHEMICAL_METAL_SEPARATOR.get(), 6,
+                CHEMICAL_METAL_SEPARATOR_TEXTURE);
         for (var entry : ClayiumBlocks.DECOMPOSER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), DECOMPOSER_TEXTURE);
         }

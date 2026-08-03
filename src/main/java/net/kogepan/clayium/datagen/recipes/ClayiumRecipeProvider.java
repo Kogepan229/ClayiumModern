@@ -40,6 +40,7 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         GrinderRecipeProvider.buildRecipes(recipeOutput);
         CentrifugeRecipeProvider.buildRecipes(recipeOutput);
         ChemicalReactorRecipeProvider.buildRecipes(recipeOutput);
+        ChemicalMetalSeparatorRecipeProvider.buildRecipes(recipeOutput);
         DecomposerRecipeProvider.buildRecipes(recipeOutput);
         ElectrolysisReactorRecipeProvider.buildRecipes(recipeOutput);
         InscriberRecipeProvider.buildRecipes(recipeOutput);

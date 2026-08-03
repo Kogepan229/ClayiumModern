@@ -21,6 +21,7 @@ import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.BlockBreakerBlock;
 import net.kogepan.clayium.blocks.machine.CentrifugeBlock;
+import net.kogepan.clayium.blocks.machine.ChemicalMetalSeparatorBlock;
 import net.kogepan.clayium.blocks.machine.ChemicalReactorBlock;
 import net.kogepan.clayium.blocks.machine.ChunkLoaderBlock;
 import net.kogepan.clayium.blocks.machine.ClayBlastFurnaceBlock;
@@ -338,6 +339,13 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("chemical_reactor", i, ChemicalReactorBlock::new));
         }
         CHEMICAL_REACTOR_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final DeferredBlock<ChemicalMetalSeparatorBlock> CHEMICAL_METAL_SEPARATOR = BLOCKS.register(
+            "chemical_metal_separator", ChemicalMetalSeparatorBlock::new);
+    static {
+        ClayiumItems.ITEMS.register("chemical_metal_separator",
+                () -> new TieredBlockItem(CHEMICAL_METAL_SEPARATOR.get(), new Item.Properties(), 6));
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> DECOMPOSER_BLOCKS;

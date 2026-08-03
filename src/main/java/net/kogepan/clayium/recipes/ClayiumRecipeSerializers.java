@@ -7,10 +7,12 @@ import net.kogepan.clayium.recipes.recipes.LaserIrradiationRecipe;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.recipes.recipes.QuartzCrucibleRecipe;
 import net.kogepan.clayium.recipes.recipes.StorageContainerUpgradeRecipe;
+import net.kogepan.clayium.recipes.recipes.WeightedMachineRecipe;
 import net.kogepan.clayium.recipes.serializers.ClayWorkTableRecipeSerializer;
 import net.kogepan.clayium.recipes.serializers.LaserIrradiationRecipeSerializer;
 import net.kogepan.clayium.recipes.serializers.MachineRecipeSerializer;
 import net.kogepan.clayium.recipes.serializers.QuartzCrucibleRecipeSerializer;
+import net.kogepan.clayium.recipes.serializers.WeightedMachineRecipeSerializer;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
@@ -28,6 +30,9 @@ public class ClayiumRecipeSerializers {
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<MachineRecipe>> MACHINE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
             .register("machine", MachineRecipeSerializer::new);
+
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<WeightedMachineRecipe>> WEIGHTED_MACHINE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
+            .register("weighted_machine", WeightedMachineRecipeSerializer::new);
 
     public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<QuartzCrucibleRecipe>> QUARTZ_CRUCIBLE_RECIPE_SERIALIZER = RECIPE_SERIALIZERS
             .register("quartz_crucible", QuartzCrucibleRecipeSerializer::new);

@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T17:33:47.627857201	Block States: clayium
+// 1.21.1	2026-08-03T18:02:14.411314049	Block States: clayium
 5fa6addad5b9437d4f362a76df96c9299a80fb76 assets/clayium/blockstates/activator.json
 0a951ef22b4c8cf4cc6dfa69c463ad79e34078be assets/clayium/blockstates/alloy_smelter_6.json
 3f559b0d6dc8509619ef881bb7656e7de7c0d86c assets/clayium/blockstates/assembler_10.json
@@ -21,6 +21,7 @@ fa4f48485511cef402a6f073ec2f17d4725d2aa6 assets/clayium/blockstates/bending_mach
 5709be232fe0b368f1af1b38a94777304f0b8ef3 assets/clayium/blockstates/centrifuge_4.json
 b04745c10e308425bc30656237e36d6ba66628e2 assets/clayium/blockstates/centrifuge_5.json
 214e21f8b6632a0c25e1c3ef886cb1fa92e9e65c assets/clayium/blockstates/centrifuge_6.json
+5979d51ed6731992fc82ea3e4033aa10c2cf40a2 assets/clayium/blockstates/chemical_metal_separator.json
 40f8d01af3cc2ad2248ea4885869aa7afb37fa9c assets/clayium/blockstates/chemical_reactor_4.json
 b22dd6d1003ed99a1faf3628855a27d2bde694bd assets/clayium/blockstates/chemical_reactor_5.json
 4a634b0070b083e5f7b3e29a04fe7869ab5f9ee9 assets/clayium/blockstates/chemical_reactor_8.json
@@ -189,6 +190,7 @@ cf1741227ef77cd6e263216835e0491a3bee6262 assets/clayium/models/block/bending_mac
 b908dfcf34d63d5f4e2b901d3747c28dac3026d0 assets/clayium/models/block/centrifuge_4.json
 fd6feb72446a2c56c29b63f61dbd0c34f9f9e7c0 assets/clayium/models/block/centrifuge_5.json
 100b393ab2bf537ca68ed2098c4bf2a577cda94a assets/clayium/models/block/centrifuge_6.json
+eff7eab6f069f02f3fbe087fc841062c58c374e7 assets/clayium/models/block/chemical_metal_separator.json
 f4e3f2fef29eea17c25d5eaaa7a0d9cb7f357e13 assets/clayium/models/block/chemical_reactor_4.json
 c0878645854a2d8c9a182bd2122e8967bbc4bfaf assets/clayium/models/block/chemical_reactor_5.json
 45e71e61e9e9816137de6f1cd3e36696b4fe9583 assets/clayium/models/block/chemical_reactor_8.json
@@ -359,6 +361,7 @@ fff5624b82aa2fae4af5e35c70a1687aaf4f2ab3 assets/clayium/models/item/block_breake
 cfccd8c2ef02a9ea4c7037f71f79f7273a021ca9 assets/clayium/models/item/centrifuge_4.json
 09611fdea28e751abd74adf4bcc45912b5bf22fc assets/clayium/models/item/centrifuge_5.json
 4e7d6a5455d3e0b6d5e44c3589264b193641cba0 assets/clayium/models/item/centrifuge_6.json
+4bdcad43018b5cc6c2ace3ee3ede29d638a8e588 assets/clayium/models/item/chemical_metal_separator.json
 e4e438fed71e033fd36cf759f70b3d8490ab4633 assets/clayium/models/item/chemical_reactor_4.json
 4e7261eb5ca58f06c36c999505705de79e1ff2bc assets/clayium/models/item/chemical_reactor_5.json
 831ceb461f2df9bed7e02da8ca042b1200466d74 assets/clayium/models/item/chemical_reactor_8.json

@@ -39,14 +39,14 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
     protected ResourceLocation pendingRecipeId = null;
     protected long currentProgress = 0;
     protected boolean canProgress = false; // TODO: onFIrstTick
-    protected final RecipeType<MachineRecipe> recipeType;
+    protected final RecipeType<?> recipeType;
 
     protected boolean isInvalidInputsForRecipes = false;
     protected boolean noEnoughOutputSpace = false;
     protected boolean isInputItemInventoryChanged = true;
     protected boolean isOutputItemInventoryChanged = true;
 
-    public AbstractRecipeLogic(@NotNull ClayContainerBlockEntity blockEntity, RecipeType<MachineRecipe> recipeType) {
+    public AbstractRecipeLogic(@NotNull ClayContainerBlockEntity blockEntity, RecipeType<?> recipeType) {
         super(blockEntity, TRAIT_ID);
         this.recipeType = recipeType;
     }
@@ -239,7 +239,7 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
 
     protected boolean prepareRecipe(RecipeHolder<?> holder, List<ItemStack> inventoryStacks) {
         if (!this.drawEnergy(getRecipeCEPerTick(holder), true)) return false;
-        if (!TransferUtils.simulateInsertItemsToHandler(blockEntity.getOutputInventory(), getRecipeOutputs(holder))) {
+        if (!hasEnoughOutputSpace(holder)) {
             noEnoughOutputSpace = true;
             return false;
         }
@@ -267,7 +267,16 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         }
 
         processingRecipeHolder = holder;
-        currentProgress = getProgressPerTick();
+        currentProgress = getInitialProgress();
+        return true;
+    }
+
+    protected boolean hasEnoughOutputSpace(RecipeHolder<?> recipeHolder) {
+        return TransferUtils.simulateInsertItemsToHandler(blockEntity.getOutputInventory(),
+                getRecipeOutputs(recipeHolder));
+    }
+
+    protected boolean canContinueProcessing(RecipeHolder<?> recipeHolder) {
         return true;
     }
 
@@ -281,8 +290,16 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         return 1;
     }
 
+    protected long getInitialProgress() {
+        return getProgressPerTick();
+    }
+
     protected void updateWorkingProgress() {
         if (processingRecipeHolder == null) {
+            return;
+        }
+
+        if (!canContinueProcessing(processingRecipeHolder)) {
             return;
         }
 

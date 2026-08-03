@@ -5,6 +5,7 @@ import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
 import net.kogepan.clayium.recipes.recipes.LaserIrradiationRecipe;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.recipes.recipes.QuartzCrucibleRecipe;
+import net.kogepan.clayium.recipes.recipes.WeightedMachineRecipe;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
@@ -39,6 +40,9 @@ public class ClayiumRecipeTypes {
 
     public static final DeferredHolder<RecipeType<?>, RecipeType<LaserIrradiationRecipe>> LASER_IRRADIATION_RECIPE_TYPE = RECIPE_TYPES
             .register("laser_irradiation", RecipeType::simple);
+
+    public static final DeferredHolder<RecipeType<?>, RecipeType<WeightedMachineRecipe>> CHEMICAL_METAL_SEPARATOR_RECIPE_TYPE = RECIPE_TYPES
+            .register("chemical_metal_separator", RecipeType::simple);
 
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> BENDING_MACHINE_RECIPE_TYPE = registerSimpleMachineType(
             "bending_machine", 1, 1);
