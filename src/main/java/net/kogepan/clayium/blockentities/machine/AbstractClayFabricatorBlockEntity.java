@@ -1,5 +1,6 @@
 package net.kogepan.clayium.blockentities.machine;
 
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
@@ -7,7 +8,6 @@ import net.kogepan.clayium.client.ldlib.elements.LargeItemSlot;
 import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
 import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
 import net.kogepan.clayium.utils.CEUtils;
-import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

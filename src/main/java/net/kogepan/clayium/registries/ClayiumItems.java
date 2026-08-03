@@ -1,7 +1,11 @@
 package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.api.configuration.ConfigurationToolItem;
+import net.kogepan.clayium.items.ClayConfiguratorItem;
 import net.kogepan.clayium.items.ClayCoreItem;
+import net.kogepan.clayium.items.ClayWrenchItem;
+import net.kogepan.clayium.items.MemoryCardItem;
 import net.kogepan.clayium.items.RawClayFilterRemoverItem;
 import net.kogepan.clayium.items.SynchronizerItem;
 import net.kogepan.clayium.items.SynchronousPartsItem;
@@ -36,9 +40,13 @@ public class ClayiumItems {
     // spotless:off
 
     // Clay Tools
-    public static final DeferredItem<Item> CLAY_ROLLING_PIN = ITEMS.registerItem("clay_rolling_pin", p -> new Item(p.durability(ProgressionRates.multiplyInt(60))));
-    public static final DeferredItem<Item> CLAY_SPATULA = ITEMS.registerItem("clay_spatula", p -> new Item(p.durability(ProgressionRates.multiplyInt(36))));
-    public static final DeferredItem<Item> CLAY_SLICER = ITEMS.registerItem("clay_slicer", p -> new Item(p.durability(ProgressionRates.multiplyInt(60))));
+    public static final DeferredItem<Item> CLAY_ROLLING_PIN = ITEMS.registerItem("clay_rolling_pin", p -> new ConfigurationToolItem(p.durability(ProgressionRates.multiplyInt(60))));
+    public static final DeferredItem<Item> CLAY_SPATULA = ITEMS.registerItem("clay_spatula", p -> new ConfigurationToolItem(p.durability(ProgressionRates.multiplyInt(36))));
+    public static final DeferredItem<Item> CLAY_SLICER = ITEMS.registerItem("clay_slicer", p -> new ConfigurationToolItem(p.durability(ProgressionRates.multiplyInt(60))));
+    public static final DeferredItem<Item> CLAY_WRENCH = ITEMS.registerItem("clay_wrench", ClayWrenchItem::new);
+    public static final DeferredItem<Item> CLAY_IO_CONFIGURATOR = ITEMS.registerItem("clay_io_configurator", ClayConfiguratorItem::new);
+    public static final DeferredItem<Item> CLAY_PIPING_CONFIGURATOR = ITEMS.registerItem("clay_piping_configurator", ClayConfiguratorItem::new);
+    public static final DeferredItem<Item> MEMORY_CARD = ITEMS.registerItem("memory_card", MemoryCardItem::new);
 
     // Circuits and boards
     public static final DeferredItem<Item> CLAY_CIRCUIT_BOARD = ITEMS.registerItem("clay_circuit_board", p -> new TieredItem(p, 2));

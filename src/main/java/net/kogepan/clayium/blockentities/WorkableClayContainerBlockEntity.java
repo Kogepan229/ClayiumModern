@@ -1,12 +1,12 @@
 package net.kogepan.clayium.blockentities;
 
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.trait.AbstractRecipeLogic;
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.client.ldlib.textures.SlotTextures;
 import net.kogepan.clayium.inventory.NotifiableItemStackHandler;
-import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

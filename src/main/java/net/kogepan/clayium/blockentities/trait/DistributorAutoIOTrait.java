@@ -1,7 +1,7 @@
 package net.kogepan.clayium.blockentities.trait;
 
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.machine.DistributorBlockEntity;
-import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;

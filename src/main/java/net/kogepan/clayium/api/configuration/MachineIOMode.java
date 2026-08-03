@@ -1,5 +1,6 @@
-package net.kogepan.clayium.utils;
+package net.kogepan.clayium.api.configuration;
 
+import com.mojang.serialization.Codec;
 import lombok.Getter;
 import org.jetbrains.annotations.NotNull;
 
@@ -21,6 +22,9 @@ public enum MachineIOMode {
     M_5(205),
     M_6(206),
     ;
+
+    public static final Codec<MachineIOMode> CODEC = Codec.INT.xmap(MachineIOMode::fromMode,
+            MachineIOMode::getMode);
 
     @Getter
     private final int mode;

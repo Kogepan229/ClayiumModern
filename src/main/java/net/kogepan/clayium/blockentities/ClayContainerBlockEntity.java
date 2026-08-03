@@ -1,5 +1,11 @@
 package net.kogepan.clayium.blockentities;
 
+import net.kogepan.clayium.api.configuration.ConfigurationToolAction;
+import net.kogepan.clayium.api.configuration.ConfigurationToolUseHelper;
+import net.kogepan.clayium.api.configuration.IMachineConfigurable;
+import net.kogepan.clayium.api.configuration.MachineIOConfiguration;
+import net.kogepan.clayium.api.configuration.MachineIOMode;
+import net.kogepan.clayium.api.configuration.MachineIOModes;
 import net.kogepan.clayium.blockentities.trait.ClayContainerTrait;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
@@ -10,8 +16,6 @@ import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.inventory.FilteredItemHandler;
 import net.kogepan.clayium.inventory.MachineIOInventoryWrapper;
-import net.kogepan.clayium.utils.MachineIOMode;
-import net.kogepan.clayium.utils.MachineIOModes;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -27,11 +31,14 @@ import net.minecraft.world.Containers;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.component.CustomData;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.phys.Vec3;
 import net.neoforged.neoforge.capabilities.BlockCapabilityCache;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.client.model.data.ModelData;
@@ -67,7 +74,7 @@ import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DA
 import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_FRONT_OVERLAY_VARIANT;
 import static net.kogepan.clayium.client.model.block.ClayContainerModel.MODEL_DATA_IMPORT;
 
-public abstract class ClayContainerBlockEntity extends BlockEntity {
+public abstract class ClayContainerBlockEntity extends BlockEntity implements IMachineConfigurable {
 
     @Getter
     protected final MachineIOModes inputModes = new MachineIOModes();
@@ -226,6 +233,173 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
             level.sendBlockUpdated(this.getBlockPos(), this.getBlockState(), this.getBlockState(),
                     Block.UPDATE_ALL | Block.UPDATE_KNOWN_SHAPE);
         }
+    }
+
+    public boolean canApplyIOModes(@NotNull MachineIOModes inputModes, @NotNull MachineIOModes outputModes) {
+        for (Direction direction : Direction.values()) {
+            if (!this.getCycleValidInputModes(direction).contains(inputModes.getMode(direction)) ||
+                    !this.getCycleValidOutputModes(direction).contains(outputModes.getMode(direction))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public boolean applyIOModes(@NotNull MachineIOModes inputModes, @NotNull MachineIOModes outputModes) {
+        if (!this.canApplyIOModes(inputModes, outputModes)) {
+            return false;
+        }
+        for (Direction direction : Direction.values()) {
+            this.inputModes.setMode(direction, inputModes.getMode(direction));
+            this.outputModes.setMode(direction, outputModes.getMode(direction));
+        }
+        if (level != null && !level.isClientSide()) {
+            setChanged();
+            this.invalidateItemHandlerCapability();
+            level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(),
+                    Block.UPDATE_ALL | Block.UPDATE_KNOWN_SHAPE);
+        }
+        return true;
+    }
+
+    @Override
+    public boolean canConfigure(@NotNull ConfigurationToolAction action, @NotNull UseOnContext context) {
+        return action != ConfigurationToolAction.FILTER_REMOVER || this.getConfigurationFilterTarget() != null;
+    }
+
+    @Override
+    public void configure(@NotNull ConfigurationToolAction action, @NotNull UseOnContext context) {
+        Level contextLevel = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        BlockState state = contextLevel.getBlockState(pos);
+        if (contextLevel.isClientSide() || !(state.getBlock() instanceof ClayContainerBlock containerBlock)) {
+            return;
+        }
+
+        Direction clickedSide = this.getConfigurationHitDirection(context, state);
+        switch (action) {
+            case INSERTION -> this.cycleInputMode(clickedSide);
+            case EXTRACTION -> this.cycleOutputMode(clickedSide);
+            case PIPING -> this.togglePipe(contextLevel, pos, state);
+            case ROTATION -> this.rotateFromSide(contextLevel, pos, state, containerBlock.getFacingProperty(),
+                    clickedSide);
+            case FILTER_REMOVER -> {
+                IItemFilterApplicatable filterTarget = this.getConfigurationFilterTarget();
+                if (filterTarget != null) {
+                    filterTarget.clearFilter(clickedSide);
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean supportsConfigurationMemory(@NotNull UseOnContext context) {
+        return context.getLevel().getBlockState(context.getClickedPos()).getBlock() instanceof ClayContainerBlock;
+    }
+
+    @Override
+    @Nullable
+    public MachineIOConfiguration captureConfiguration(@NotNull UseOnContext context) {
+        BlockState state = context.getLevel().getBlockState(context.getClickedPos());
+        if (!(state.getBlock() instanceof ClayContainerBlock containerBlock)) {
+            return null;
+        }
+
+        List<MachineIOMode> capturedInputModes = new ArrayList<>(Direction.values().length);
+        List<MachineIOMode> capturedOutputModes = new ArrayList<>(Direction.values().length);
+        for (Direction direction : Direction.values()) {
+            capturedInputModes.add(this.getInputMode(direction));
+            capturedOutputModes.add(this.getOutputMode(direction));
+        }
+        DirectionProperty facingProperty = containerBlock.getFacingProperty();
+        boolean supportsVerticalFacing = facingProperty.getPossibleValues().contains(Direction.UP);
+        return new MachineIOConfiguration(capturedInputModes, capturedOutputModes,
+                state.getValue(facingProperty), supportsVerticalFacing, state.getValue(ClayContainerBlock.PIPE));
+    }
+
+    @Override
+    public boolean applyConfiguration(@NotNull UseOnContext context,
+                                      @NotNull MachineIOConfiguration configuration) {
+        Level contextLevel = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        BlockState state = contextLevel.getBlockState(pos);
+        if (contextLevel.isClientSide() || !(state.getBlock() instanceof ClayContainerBlock containerBlock)) {
+            return false;
+        }
+
+        DirectionProperty facingProperty = containerBlock.getFacingProperty();
+        boolean supportsVerticalFacing = facingProperty.getPossibleValues().contains(Direction.UP);
+        if (supportsVerticalFacing != configuration.supportsVerticalFacing() ||
+                !facingProperty.getPossibleValues().contains(configuration.facing())) {
+            return false;
+        }
+
+        MachineIOModes configuredInputModes = configuration.createInputModes();
+        MachineIOModes configuredOutputModes = configuration.createOutputModes();
+        if (!this.canApplyIOModes(configuredInputModes, configuredOutputModes)) {
+            return false;
+        }
+
+        BlockState configuredState = state
+                .setValue(facingProperty, configuration.facing())
+                .setValue(ClayContainerBlock.PIPE, configuration.pipe());
+        for (Direction direction : Direction.values()) {
+            configuredState = configuredState.setValue(ClayContainerBlock.getProperty(direction), false);
+        }
+        if (configuration.pipe()) {
+            configuredState = this.updatePipeConnectionState(configuredState);
+        }
+
+        contextLevel.setBlock(pos, configuredState, Block.UPDATE_ALL);
+        return this.applyIOModes(configuredInputModes, configuredOutputModes);
+    }
+
+    @NotNull
+    private Direction getConfigurationHitDirection(@NotNull UseOnContext context, @NotNull BlockState state) {
+        if (!state.getValue(ClayContainerBlock.PIPE)) {
+            return context.getClickedFace();
+        }
+
+        Vec3 localHit = context.getClickLocation().subtract(
+                context.getClickedPos().getX(), context.getClickedPos().getY(), context.getClickedPos().getZ());
+        if (ClayContainerBlock.ARM_NORTH.bounds().contains(localHit)) return Direction.NORTH;
+        if (ClayContainerBlock.ARM_SOUTH.bounds().contains(localHit)) return Direction.SOUTH;
+        if (ClayContainerBlock.ARM_WEST.bounds().contains(localHit)) return Direction.WEST;
+        if (ClayContainerBlock.ARM_EAST.bounds().contains(localHit)) return Direction.EAST;
+        if (ClayContainerBlock.ARM_UP.bounds().contains(localHit)) return Direction.UP;
+        if (ClayContainerBlock.ARM_DOWN.bounds().contains(localHit)) return Direction.DOWN;
+        return context.getClickedFace();
+    }
+
+    private void togglePipe(@NotNull Level contextLevel, @NotNull BlockPos pos, BlockState state) {
+        if (state.getValue(ClayContainerBlock.PIPE)) {
+            state = state.setValue(ClayContainerBlock.PIPE, false);
+            for (Direction direction : Direction.values()) {
+                state = state.setValue(ClayContainerBlock.getProperty(direction), false);
+            }
+            contextLevel.setBlock(pos, state, Block.UPDATE_CLIENTS);
+            return;
+        }
+
+        state = state.setValue(ClayContainerBlock.PIPE, true);
+        contextLevel.setBlock(pos, this.updatePipeConnectionState(state), Block.UPDATE_ALL);
+    }
+
+    private void rotateFromSide(@NotNull Level contextLevel, @NotNull BlockPos pos, @NotNull BlockState state,
+                                @NotNull DirectionProperty facingProperty, @NotNull Direction clickedSide) {
+        BlockState rotatedState = ConfigurationToolUseHelper.rotateFacingFromSide(state, facingProperty, clickedSide);
+        if (rotatedState != state) {
+            contextLevel.setBlock(pos, rotatedState, Block.UPDATE_ALL);
+        }
+    }
+
+    @Nullable
+    private IItemFilterApplicatable getConfigurationFilterTarget() {
+        if (this instanceof ClayInterfaceBlockEntity clayInterface && !clayInterface.hasValidTarget()) {
+            return null;
+        }
+        ClayContainerTrait trait = this.getTrait(ItemFilterHolderTrait.TRAIT_ID);
+        return trait instanceof IItemFilterApplicatable applicatable ? applicatable : null;
     }
 
     public abstract IItemHandlerModifiable getInputInventory();

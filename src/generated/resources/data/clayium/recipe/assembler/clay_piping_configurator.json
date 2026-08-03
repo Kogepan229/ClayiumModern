@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000,
+  "duration": 20,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:clay_spatula"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:clay_wrench"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:clay_piping_configurator"
+    }
+  ],
+  "recipe_tier": 6,
+  "recipe_type": "clayium:assembler"
+}

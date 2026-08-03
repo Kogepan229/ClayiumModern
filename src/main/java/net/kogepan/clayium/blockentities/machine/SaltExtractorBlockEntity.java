@@ -1,5 +1,6 @@
 package net.kogepan.clayium.blockentities.machine;
 
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
@@ -8,7 +9,6 @@ import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumItems;
 import net.kogepan.clayium.utils.CEUtils;
-import net.kogepan.clayium.utils.MachineIOMode;
 import net.kogepan.clayium.utils.ProgressionRates;
 
 import net.minecraft.core.BlockPos;

@@ -1,11 +1,11 @@
 package net.kogepan.clayium.blockentities.machine;
 
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.capability.IClayEnergyHolder;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
-import net.kogepan.clayium.utils.MachineIOMode;
 import net.kogepan.clayium.utils.ProgressionRates;
 
 import net.minecraft.core.BlockPos;

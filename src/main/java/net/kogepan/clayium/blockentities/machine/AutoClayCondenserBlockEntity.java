@@ -1,5 +1,6 @@
 package net.kogepan.clayium.blockentities.machine;
 
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
 import net.kogepan.clayium.client.ldlib.elements.PhantomItemSlot;
@@ -7,7 +8,6 @@ import net.kogepan.clayium.client.ldlib.textures.SlotTextures;
 import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.utils.ClayTierUtil;
-import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

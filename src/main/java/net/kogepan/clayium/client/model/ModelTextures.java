@@ -1,7 +1,7 @@
 package net.kogepan.clayium.client.model;
 
 import net.kogepan.clayium.Clayium;
-import net.kogepan.clayium.utils.MachineIOMode;
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;

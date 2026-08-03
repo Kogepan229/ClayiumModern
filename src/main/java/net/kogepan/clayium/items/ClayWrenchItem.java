@@ -10,19 +10,17 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-/**
- * Raw clay tool that removes side filters from machines.
- */
-public class RawClayFilterRemoverItem extends ConfigurationToolItem {
+/** Rotates Clay machines and other blocks that expose a rotatable block state. */
+public class ClayWrenchItem extends ConfigurationToolItem {
 
-    public RawClayFilterRemoverItem(Properties properties) {
-        super(properties);
+    public ClayWrenchItem(Properties properties) {
+        super(properties.stacksTo(1));
     }
 
     @Override
     public void appendHoverText(@NotNull ItemStack stack, @NotNull TooltipContext context,
                                 @NotNull List<Component> tooltipComponents, @NotNull TooltipFlag tooltipFlag) {
-        tooltipComponents.add(Component.translatable("item.clayium.filter_remover.tooltip1"));
+        tooltipComponents.add(Component.translatable("item.clayium.clay_wrench.tooltip"));
         super.appendHoverText(stack, context, tooltipComponents, tooltipFlag);
     }
 }

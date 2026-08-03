@@ -1,9 +1,9 @@
 package net.kogepan.clayium.blockentities.machine;
 
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.registries.ClayiumTags;
 import net.kogepan.clayium.utils.ClayTierUtil;
-import net.kogepan.clayium.utils.MachineIOMode;
 import net.kogepan.clayium.utils.ProgressionRates;
 
 import net.minecraft.core.BlockPos;

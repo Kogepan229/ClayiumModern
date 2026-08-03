@@ -1,4 +1,4 @@
-package net.kogepan.clayium.utils;
+package net.kogepan.clayium.api.configuration;
 
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderLookup;

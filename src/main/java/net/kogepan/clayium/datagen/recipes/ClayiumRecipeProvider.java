@@ -61,6 +61,15 @@ public class ClayiumRecipeProvider extends RecipeProvider {
                 .define('S', ClayiumItems.DENSE_CLAY_STICK.get())
                 .unlockedBy("has_dense_clay_plate", has(ClayiumItems.DENSE_CLAY_PLATE.get()))
                 .save(recipeOutput, Clayium.id("clay_pickaxe"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ClayiumItems.CLAY_WRENCH.get())
+                .pattern("B B")
+                .pattern(" C ")
+                .pattern(" S ")
+                .define('B', ClayiumItems.DENSE_CLAY_BLADE.get())
+                .define('C', ClayiumItems.DENSE_CLAY_SPINDLE.get())
+                .define('S', ClayiumItems.DENSE_CLAY_STICK.get())
+                .unlockedBy("has_dense_clay_blade", has(ClayiumItems.DENSE_CLAY_BLADE.get()))
+                .save(recipeOutput, Clayium.id("clay_wrench"));
 
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.CLAY_CRAFTING_BOARD.get())
                 .pattern("DDD")

@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "B": {
+      "item": "clayium:dense_clay_blade"
+    },
+    "C": {
+      "item": "clayium:dense_clay_spindle"
+    },
+    "S": {
+      "item": "clayium:dense_clay_stick"
+    }
+  },
+  "pattern": [
+    "B B",
+    " C ",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:clay_wrench"
+  }
+}

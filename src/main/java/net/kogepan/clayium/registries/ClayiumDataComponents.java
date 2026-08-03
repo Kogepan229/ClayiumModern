@@ -1,6 +1,7 @@
 package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.api.configuration.MachineIOConfiguration;
 import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 import net.kogepan.clayium.capability.filter.data.ItemFilterDataCodecs;
 import net.kogepan.clayium.items.filter.component.FilterSlotsData;
@@ -62,6 +63,12 @@ public class ClayiumDataComponents {
                     () -> DataComponentType.<GlobalPos>builder()
                             .persistent(GlobalPos.CODEC)
                             .networkSynchronized(ByteBufCodecs.fromCodecWithRegistries(GlobalPos.CODEC))
+                            .build());
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<MachineIOConfiguration>> MACHINE_IO_CONFIGURATION = DATA_COMPONENTS
+            .register("machine_io_configuration",
+                    () -> DataComponentType.<MachineIOConfiguration>builder()
+                            .persistent(MachineIOConfiguration.CODEC)
                             .build());
 
     private ClayiumDataComponents() {}

@@ -61,6 +61,9 @@ public class AssemblerRecipeProvider {
         create(recipeOutput, "assembler_6_from_basic_assembler", new ItemStack(ClayiumBlocks.ASSEMBLER_BLOCKS.get(4).get()), ClayiumItems.PRECISION_CIRCUIT.toStack(), new ItemStack(ClayiumBlocks.ASSEMBLER_BLOCKS.get(6).get()), CEUtils.milliCeToLong(100), 40, 4);
 
         // Tier 6
+        create(recipeOutput, "clay_io_configurator", ClayiumItems.CLAY_ROLLING_PIN.toStack(), ClayiumItems.CLAY_SLICER.toStack(), ClayiumItems.CLAY_IO_CONFIGURATOR.toStack(), CEUtils.milliCeToLong(100), 20, 6);
+        create(recipeOutput, "clay_piping_configurator", ClayiumItems.CLAY_SPATULA.toStack(), ClayiumItems.CLAY_WRENCH.toStack(), ClayiumItems.CLAY_PIPING_CONFIGURATOR.toStack(), CEUtils.milliCeToLong(100), 20, 6);
+        create(recipeOutput, "memory_card", ClayiumItems.CLAY_IO_CONFIGURATOR.toStack(), ClayiumItems.PRECISION_CIRCUIT.toStack(2), ClayiumItems.MEMORY_CARD.toStack(), CEUtils.milliCeToLong(100), 20, 6);
         create(recipeOutput, "synchronizer", ClayiumItems.AZ91D_ALLOY_PLATE.toStack(3), ClayiumItems.SYNCHRONOUS_PARTS.toStack(2), ClayiumItems.SYNCHRONIZER.toStack(), CEUtils.milliCeToLong(100), 20, 6);
         create(recipeOutput, "integrated_circuit", ClayiumItems.PRECISION_CIRCUIT.toStack(), ClayiumItems.ENERGIZED_CLAY_DUST.toStack(32), ClayiumItems.INTEGRATED_CIRCUIT.toStack(), CEUtils.milliCeToLong(100), 1200, 6);
         create(recipeOutput, "synchronous_parts", ClayiumItems.BERYLLIUM_DUST.toStack(8), ClayiumItems.INTEGRATED_CIRCUIT.toStack(), ClayiumItems.SYNCHRONOUS_PARTS.toStack(), CEUtils.milliCeToLong(100), 432000, 6);

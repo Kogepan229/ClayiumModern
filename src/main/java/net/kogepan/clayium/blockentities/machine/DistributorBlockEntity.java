@@ -1,5 +1,6 @@
 package net.kogepan.clayium.blockentities.machine;
 
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.trait.DistributorAutoIOTrait;
 import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
@@ -10,7 +11,6 @@ import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
 import net.kogepan.clayium.inventory.FilteredItemHandler;
 import net.kogepan.clayium.inventory.MachineIOInventoryWrapper;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
-import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

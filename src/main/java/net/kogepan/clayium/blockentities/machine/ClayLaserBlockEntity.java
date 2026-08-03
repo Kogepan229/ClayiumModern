@@ -1,6 +1,7 @@
 package net.kogepan.clayium.blockentities.machine;
 
 import net.kogepan.clayium.Config;
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
@@ -11,7 +12,6 @@ import net.kogepan.clayium.laser.ClayLaserIrradiator;
 import net.kogepan.clayium.laser.Laser;
 import net.kogepan.clayium.laser.LaserIrradiationRecipeHandler;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
-import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T12:36:55.89352222	Recipes
+// 1.21.1	2026-08-03T12:50:39.808103619	Recipes
 4abcfafc6487315216fcb6d2eabb76704cefe700 data/clayium/advancement/recipes/building_blocks/clay_crafting_board_to_dense_clay.json
 6a064323df01ce4b3142fbd0b8b9c411d8f534ad data/clayium/advancement/recipes/misc/assembler_3.json
 183d460a4ab831f076777bb82f22da56af3bed52 data/clayium/advancement/recipes/misc/assembler_4.json
@@ -25,6 +25,7 @@ c5d73db916f58aedfe890ec3838b86650b26b6f2 data/clayium/advancement/recipes/misc/s
 153fd84cce0861c6c70337d85898197967a3fb48 data/clayium/advancement/recipes/misc/salt_extractor_7.json
 d114318f3e2be975d6dd0cf61479d3318129296c data/clayium/advancement/recipes/tools/clay_pickaxe.json
 3fd5e3ae0f5c0ba9c7934ebea2d96cbd1d226933 data/clayium/advancement/recipes/tools/clay_shovel.json
+920fd4eb13e00836ac4b14fd93f54e030dd0734f data/clayium/advancement/recipes/tools/clay_wrench.json
 88aa60d2ec7e31d0033e47c9ca50f4750ff41d36 data/clayium/recipe/assembler/assembler_10.json
 487ce9c16aeb7c1f21b8ba785d3a3bb9ed75dce7 data/clayium/recipe/assembler/assembler_3_from_machine_hull.json
 afc80332c3b47db6692e2d86ec15fb07300574bd data/clayium/recipe/assembler/assembler_4_from_machine_hull.json
@@ -34,6 +35,8 @@ cd64d26cfb031bcf2886b98852def9a9aac8615b data/clayium/recipe/assembler/clay_cutt
 f40d55bf2ec61c070d58b28f160433eb9bc124e4 data/clayium/recipe/assembler/clay_gear_from_short_sticks.json
 f0c808efc6abf84cb167722905426d99b8f0379a data/clayium/recipe/assembler/clay_gear_from_sticks.json
 e4429f4c64767b5192d6a92cd92c9e663dbd77e1 data/clayium/recipe/assembler/clay_grinding_head.json
+84c6e95229a53f4ef9bc36c6ad99ad8152c0e5c7 data/clayium/recipe/assembler/clay_io_configurator.json
+dbdc98513447eb725389965f952706935f342f85 data/clayium/recipe/assembler/clay_piping_configurator.json
 09e222673f197ed4010988c72d92d43a614c86bf data/clayium/recipe/assembler/clay_spindle.json
 fbb30c2f3b3441364190870f1785144e60d68b49 data/clayium/recipe/assembler/dense_clay_cutting_head.json
 bece9055bf254f160a39119b50017fddcfc65b8d data/clayium/recipe/assembler/dense_clay_gear_from_short_sticks.json
@@ -42,6 +45,7 @@ c69f2310da57e55f04ecd5441e3f8cfce1032573 data/clayium/recipe/assembler/dense_cla
 468e34f59c1e52c70bfab69106b8f88cae961251 data/clayium/recipe/assembler/dense_clay_spindle.json
 3119bf9a44ee7b5586e0674f2faa42afeb877f85 data/clayium/recipe/assembler/fazy_item_filter.json
 e0715cd204dd13bf44f433fb836d93cf892f019e data/clayium/recipe/assembler/integrated_circuit.json
+8b12a7905ace40c557e0e30f1a5a790be53bba53 data/clayium/recipe/assembler/memory_card.json
 e008a677c3d36d30748cf52292f67209fd1c9367 data/clayium/recipe/assembler/mossy_stone_bricks.json
 77a6d58cb1244dd10d9527c8d6192ae7c9ce0bae data/clayium/recipe/assembler/name_tag.json
 8b985db3f87a49095065b884a5e4bac1d8e78904 data/clayium/recipe/assembler/quartz_crucible.json
@@ -159,6 +163,7 @@ ba5329e78b976e6633018245173dd413d4aef66d data/clayium/recipe/clay_work_table/4/c
 726d478397bdafd43421d6bf4628eec3ec1a00b9 data/clayium/recipe/clay_work_table/4/small_clay_ring.json
 b9e661f63ecc59e0ab1355c61cece4dde9c3ab1d data/clayium/recipe/clay_work_table/5/clay_stick.json
 3ae8ba267f232276631bad56c31d250ac3522651 data/clayium/recipe/clay_work_table/5/small_clay_disc.json
+62d86b407cdf283dd198e7baf53c8b00d66f3c4e data/clayium/recipe/clay_wrench.json
 8c631ff5187e73631c3c97914d8064b909c29409 data/clayium/recipe/cutting_machine/clay_cylinder_to_small_disc.json
 25a6504fe34654b001cbfda4910eef0a8c29e8a4 data/clayium/recipe/cutting_machine/clay_large_ball_to_disc.json
 638267fd85ca5ff9f56ea01bf138ded6dbb8e855 data/clayium/recipe/cutting_machine/clay_large_plate_to_disc.json

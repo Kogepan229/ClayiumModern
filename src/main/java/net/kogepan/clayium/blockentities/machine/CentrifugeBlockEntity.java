@@ -1,11 +1,11 @@
 package net.kogepan.clayium.blockentities.machine;
 
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.WorkableClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.trait.CentrifugeRecipeLogic;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
-import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.block.state.BlockState;

@@ -1,4 +1,4 @@
-// 1.21.1	2026-04-25T00:55:31.581380177	Item Models: clayium
+// 1.21.1	2026-08-03T12:50:39.824822067	Item Models: clayium
 99062d5c019a425dbcc8fc7c8fad74fe2e568b88 assets/clayium/models/item/advanced_circuit.json
 b053cb23d79938f5988a137a12fa465fef616833 assets/clayium/models/item/advanced_industrial_clay_dust.json
 a849708aabf7090c02ef1ae2c9565dd40fb618ce assets/clayium/models/item/advanced_industrial_clay_plate.json
@@ -34,9 +34,11 @@ f57baf8229f87beb9190fa1f685c2f0243ad56c4 assets/clayium/models/item/clay_disc.js
 9298cb291551b6e9588b51190160ed77fde657be assets/clayium/models/item/clay_dust.json
 e8ff61c963d7690933c079798e42c4dfe18070b9 assets/clayium/models/item/clay_gear.json
 21b58e275b981f1453bd5d4d3f9e40066e293f22 assets/clayium/models/item/clay_grinding_head.json
+4ce9d0d34ec85501852f9a591717861bd65d0588 assets/clayium/models/item/clay_io_configurator.json
 143ba4974ec02ce7e3abb12303964d976bdda19a assets/clayium/models/item/clay_needle.json
 8dcd4a47f506ecdf1d599f7a9a08b4b561ebe7d9 assets/clayium/models/item/clay_pickaxe.json
 7a42ec419d18e66e5a6a0c42e57f6d94fb8b3cb1 assets/clayium/models/item/clay_pipe.json
+b09104599e544f4e0adddccacc3475d42a63bf7d assets/clayium/models/item/clay_piping_configurator.json
 69278bda67fabcb320b6d34d976fd8d196a82746 assets/clayium/models/item/clay_plate.json
 8d00ed5a0e7b88bb68edf1ea2f75a8c933bf89fd assets/clayium/models/item/clay_psyche.json
 ac01b3d4bd32ef676155c6d923d74215ecd03ea8 assets/clayium/models/item/clay_ring.json
@@ -54,6 +56,7 @@ e2848ab8a6698eb281f82e82c0ea3c9a583fa338 assets/clayium/models/item/clay_spindle
 edc01f279949b457b020665b6ab975837b54a65f assets/clayium/models/item/clay_steel_shovel.json
 1c86ca7a0fe90778bd28995de845d3ef3cb3ea64 assets/clayium/models/item/clay_stick.json
 bd306f83f385204533b74e522d84e980c850df5b assets/clayium/models/item/clay_wheel.json
+97b8d6fba388634980607dd34bc54b66db434316 assets/clayium/models/item/clay_wrench.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/clayium_dust.json
 03bc045bdaf16acca33b4fab04f9470122c1ebd0 assets/clayium/models/item/clayium_ingot.json
 30052ef2299a06fee6bdff0ea34288df1197fe1b assets/clayium/models/item/clayium_plate.json
@@ -144,6 +147,7 @@ b7891ff66c8fbc73e97983a7362a5293cba41915 assets/clayium/models/item/large_indust
 03bc045bdaf16acca33b4fab04f9470122c1ebd0 assets/clayium/models/item/lithium_ingot.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/magnesium_dust.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/manganese_dust.json
+8df1c8a6630cd10c4861e98e2737bfc4e40bbe2e assets/clayium/models/item/memory_card.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/nickel_dust.json
 30052ef2299a06fee6bdff0ea34288df1197fe1b assets/clayium/models/item/octuple_energetic_clay_plate.json
 4611e7594a8a4b0bb59160a8606ae4dcf1794ff2 assets/clayium/models/item/octuple_pure_antimatter_dust.json

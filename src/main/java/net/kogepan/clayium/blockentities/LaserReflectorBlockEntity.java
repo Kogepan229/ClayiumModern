@@ -1,6 +1,9 @@
 package net.kogepan.clayium.blockentities;
 
 import net.kogepan.clayium.Config;
+import net.kogepan.clayium.api.configuration.ConfigurationToolAction;
+import net.kogepan.clayium.api.configuration.ConfigurationToolUseHelper;
+import net.kogepan.clayium.api.configuration.IMachineConfigurable;
 import net.kogepan.clayium.blocks.LaserReflectorBlock;
 import net.kogepan.clayium.capability.IClayLaserAcceptor;
 import net.kogepan.clayium.capability.IClayLaserSource;
@@ -16,7 +19,9 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -32,7 +37,8 @@ import java.util.Map;
  * Accepts laser from multiple faces, merges them (age &lt; 10: sum RGB; age &gt;= 10: max per channel),
  * and re-emits in the facing direction.
  */
-public class LaserReflectorBlockEntity extends BlockEntity implements IClayLaserSource, IClayLaserAcceptor {
+public class LaserReflectorBlockEntity extends BlockEntity
+                                       implements IClayLaserSource, IClayLaserAcceptor, IMachineConfigurable {
 
     private final Map<Direction, Laser> receivedLasers = new EnumMap<>(Direction.class);
     private final ClayLaserIrradiator irradiator;
@@ -100,6 +106,28 @@ public class LaserReflectorBlockEntity extends BlockEntity implements IClayLaser
     @Override
     public int getLength() {
         return this.length;
+    }
+
+    @Override
+    public boolean canConfigure(@NotNull ConfigurationToolAction action, @NotNull UseOnContext context) {
+        return action == ConfigurationToolAction.ROTATION;
+    }
+
+    @Override
+    public void configure(@NotNull ConfigurationToolAction action, @NotNull UseOnContext context) {
+        Level contextLevel = context.getLevel();
+        BlockPos pos = context.getClickedPos();
+        BlockState state = contextLevel.getBlockState(pos);
+        if (contextLevel.isClientSide() || action != ConfigurationToolAction.ROTATION ||
+                !(state.getBlock() instanceof LaserReflectorBlock)) {
+            return;
+        }
+
+        BlockState rotatedState = ConfigurationToolUseHelper.rotateFacingFromSide(
+                state, LaserReflectorBlock.FACING, context.getClickedFace());
+        if (rotatedState != state) {
+            contextLevel.setBlock(pos, rotatedState, Block.UPDATE_ALL);
+        }
     }
 
     @Override

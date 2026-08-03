@@ -1,8 +1,8 @@
 package net.kogepan.clayium.client.model;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.client.utils.StaticFaceBakery;
-import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.client.renderer.block.model.BakedQuad;
 import net.minecraft.client.renderer.block.model.BlockElementFace;

@@ -1,8 +1,8 @@
 package net.kogepan.clayium.blockentities.trait;
 
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.client.utils.TierUtils;
-import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.ItemStack;

@@ -1,6 +1,8 @@
 package net.kogepan.clayium.capability;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.api.configuration.IConfigurationTool;
+import net.kogepan.clayium.api.configuration.IMachineConfigurable;
 import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 
 import net.minecraft.core.Direction;
@@ -14,6 +16,16 @@ import org.jetbrains.annotations.Nullable;
  * Capabilities for Clayium mod.
  */
 public final class ClayiumCapabilities {
+
+    /** Capability exposed by items that request machine configuration operations. */
+    public static final ItemCapability<IConfigurationTool, Void> CONFIGURATION_TOOL = ItemCapability
+            .createVoid(ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "configuration_tool"),
+                    IConfigurationTool.class);
+
+    /** Capability exposed by blocks that accept machine configuration operations. */
+    public static final BlockCapability<IMachineConfigurable, Void> MACHINE_CONFIGURABLE = BlockCapability
+            .createVoid(ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "machine_configurable"),
+                    IMachineConfigurable.class);
 
     /**
      * Capability for serializable item filter data, used when applying filters to ClayContainer sides.

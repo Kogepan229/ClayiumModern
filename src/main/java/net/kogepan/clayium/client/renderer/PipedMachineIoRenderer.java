@@ -1,11 +1,11 @@
 package net.kogepan.clayium.client.renderer;
 
+import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.client.model.PipeOverlayQuads;
 import net.kogepan.clayium.client.utils.ModelUtils;
-import net.kogepan.clayium.registries.ClayiumItems;
-import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -220,7 +220,8 @@ public class PipedMachineIoRenderer implements BlockEntityRenderer<ClayContainer
     }
 
     static boolean isPipingTool(@NotNull ItemStack stack) {
-        return stack.is(ClayiumItems.CLAY_SPATULA.get());
+        var configurationTool = stack.getCapability(ClayiumCapabilities.CONFIGURATION_TOOL);
+        return configurationTool != null && configurationTool.rendersMachineIOOverlay();
     }
 
     // offset to prevent z-fighting

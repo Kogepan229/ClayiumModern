@@ -1,16 +1,11 @@
 package net.kogepan.clayium.blocks;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
-import net.kogepan.clayium.capability.ClayiumCapabilities;
-import net.kogepan.clayium.registries.ClayiumItems;
-import net.kogepan.clayium.registries.ClayiumTags;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -34,7 +29,6 @@ import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.phys.BlockHitResult;
-import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -142,52 +136,6 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
 
     @Override
     @NotNull
-    protected ItemInteractionResult useItemOn(@NotNull ItemStack stack, @NotNull BlockState state, @NotNull Level level,
-                                              @NotNull BlockPos pos, @NotNull Player player,
-                                              @NotNull InteractionHand hand, @NotNull BlockHitResult hitResult) {
-        if (level.isClientSide()) {
-            return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-        }
-
-        Direction clickedSide = this.getHitDirection(state, pos, hitResult);
-
-        if (stack.is(ClayiumItems.CLAY_ROLLING_PIN)) {
-            BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof ClayContainerBlockEntity container) {
-                container.cycleInputMode(clickedSide);
-                return ItemInteractionResult.SUCCESS;
-            }
-        }
-        if (stack.is(ClayiumItems.CLAY_SLICER)) {
-            BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof ClayContainerBlockEntity container) {
-                container.cycleOutputMode(clickedSide);
-                return ItemInteractionResult.SUCCESS;
-            }
-        }
-        if (stack.is(ClayiumItems.CLAY_SPATULA)) {
-            this.togglePipe(level, pos, state);
-            return ItemInteractionResult.SUCCESS;
-        }
-        if (stack.is(ClayiumTags.ITEM_FILTER_REMOVERS)) {
-            BlockEntity be = level.getBlockEntity(pos);
-            var applicatable = ClayiumCapabilities.ITEM_FILTER_APPLICATABLE.getCapability(
-                    level,
-                    pos,
-                    state,
-                    be,
-                    clickedSide);
-            if (applicatable != null) {
-                applicatable.clearFilter(clickedSide);
-                return ItemInteractionResult.SUCCESS;
-            }
-        }
-
-        return ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION;
-    }
-
-    @Override
-    @NotNull
     protected InteractionResult useWithoutItem(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos,
                                                @NotNull Player player, @NotNull BlockHitResult hitResult) {
         if (level.isClientSide()) {
@@ -218,42 +166,6 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
         }
 
         super.onRemove(state, level, pos, newState, movedByPiston);
-    }
-
-    @NotNull
-    private Direction getHitDirection(@NotNull BlockState state, @NotNull BlockPos pos,
-                                      @NotNull BlockHitResult hitResult) {
-        if (!state.getValue(PIPE)) {
-            return hitResult.getDirection();
-        }
-
-        Direction armDirection = getHitArm(hitResult.getLocation(), pos);
-        if (armDirection != null) {
-            return armDirection;
-        }
-
-        return hitResult.getDirection();
-    }
-
-    private void togglePipe(@NotNull Level level,
-                            @NotNull BlockPos pos, BlockState state) {
-        if (state.getValue(PIPE)) {
-            state = state.setValue(PIPE, false);
-            for (Direction direction : Direction.values()) {
-                state = state.setValue(
-                        ClayContainerBlock.getProperty(direction),
-                        false);
-            }
-            level.setBlock(pos, state, Block.UPDATE_CLIENTS);
-        } else {
-            BlockEntity be = level.getBlockEntity(pos);
-            if (be instanceof ClayContainerBlockEntity container) {
-                state = state.setValue(PIPE, true);
-                state = container.updatePipeConnectionState(state);
-
-                level.setBlock(pos, state, Block.UPDATE_ALL);
-            }
-        }
     }
 
     @Override
@@ -300,20 +212,6 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
     @Override
     protected boolean useShapeForLightOcclusion(@NotNull BlockState state) {
         return state.getValue(PIPE);
-    }
-
-    @Nullable
-    private Direction getHitArm(@NotNull Vec3 hit, @NotNull BlockPos pos) {
-        Vec3 local = hit.subtract(pos.getX(), pos.getY(), pos.getZ());
-
-        if (ARM_NORTH.bounds().contains(local)) return Direction.NORTH;
-        if (ARM_SOUTH.bounds().contains(local)) return Direction.SOUTH;
-        if (ARM_WEST.bounds().contains(local)) return Direction.WEST;
-        if (ARM_EAST.bounds().contains(local)) return Direction.EAST;
-        if (ARM_UP.bounds().contains(local)) return Direction.UP;
-        if (ARM_DOWN.bounds().contains(local)) return Direction.DOWN;
-
-        return null; // core
     }
 
     public static BooleanProperty getProperty(Direction dir) {
