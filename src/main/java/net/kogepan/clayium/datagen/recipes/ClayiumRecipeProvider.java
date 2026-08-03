@@ -44,6 +44,23 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         QuartzCrucibleRecipeProvider.buildRecipes(recipeOutput);
         LaserIrradiationRecipeProvider.buildRecipes(recipeOutput);
 
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ClayiumItems.CLAY_SHOVEL.get())
+                .pattern("P")
+                .pattern("S")
+                .pattern("S")
+                .define('P', ClayiumItems.CLAY_PLATE.get())
+                .define('S', ClayiumItems.CLAY_STICK.get())
+                .unlockedBy("has_clay_plate", has(ClayiumItems.CLAY_PLATE.get()))
+                .save(recipeOutput, Clayium.id("clay_shovel"));
+        ShapedRecipeBuilder.shaped(RecipeCategory.TOOLS, ClayiumItems.CLAY_PICKAXE.get())
+                .pattern("PPP")
+                .pattern(" S ")
+                .pattern(" S ")
+                .define('P', ClayiumItems.DENSE_CLAY_PLATE.get())
+                .define('S', ClayiumItems.DENSE_CLAY_STICK.get())
+                .unlockedBy("has_dense_clay_plate", has(ClayiumItems.DENSE_CLAY_PLATE.get()))
+                .save(recipeOutput, Clayium.id("clay_pickaxe"));
+
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.CLAY_CRAFTING_BOARD.get())
                 .pattern("DDD")
                 .define('D', ClayiumBlocks.COMPRESSED_CLAYS.get(0).get())

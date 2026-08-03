@@ -1,5 +1,8 @@
 {
   "values": [
+    "minecraft:clay",
+    "clayium:clay_crafting_board",
+    "clayium:raw_clay_machine_hull",
     "clayium:compressed_clay_0",
     "clayium:compressed_clay_1",
     "clayium:compressed_clay_2",
@@ -12,8 +15,6 @@
     "clayium:compressed_clay_9",
     "clayium:compressed_clay_10",
     "clayium:compressed_clay_11",
-    "clayium:compressed_clay_12",
-    "clayium:clay_crafting_board",
-    "clayium:raw_clay_machine_hull"
+    "clayium:compressed_clay_12"
   ]
 }

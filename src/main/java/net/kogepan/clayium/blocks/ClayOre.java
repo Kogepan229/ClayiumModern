@@ -57,7 +57,9 @@ public class ClayOre extends Block {
         int fortuneLevel = EnchantmentHelper.getTagEnchantmentLevel(
                 fortune, tool);
 
-        if (tool.is(ClayiumItems.CLAY_PICKAXE) || tool.is(ClayiumItems.CLAY_STEEL_PICKAXE)) {
+        if (tool.is(ClayiumItems.CLAY_SHOVEL)) {
+            fortuneLevel = (fortuneLevel + 1) * 3;
+        } else if (tool.is(ClayiumItems.CLAY_PICKAXE)) {
             fortuneLevel = (fortuneLevel + 1) * 4;
         }
 

@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "P": {
+      "item": "clayium:dense_clay_plate"
+    },
+    "S": {
+      "item": "clayium:dense_clay_stick"
+    }
+  },
+  "pattern": [
+    "PPP",
+    " S ",
+    " S "
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:clay_pickaxe"
+  }
+}

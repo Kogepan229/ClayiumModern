@@ -174,6 +174,10 @@
   "block.clayium.clay_leaves": "Clay Leaves",
   "block.clayium.quartz_crucible": "Quartz Crucible",
 
+  "item.clayium.clay_shovel": "Clay Shovel",
+  "item.clayium.clay_shovel.tooltip": "Can dig Clay Ores and increase drops.",
+  "item.clayium.clay_pickaxe": "Clay Pickaxe",
+  "item.clayium.clay_pickaxe.tooltip": "Can harvest Clay Ores so fast and increase drops.",
   "item.clayium.compressed_clay_shard": "Compressed Clay Shard",
   "item.clayium.industrial_clay_shard": "Industrial Clay Shard",
   "item.clayium.advanced_industrial_clay_shard": "Advanced Industrial Clay Shard",

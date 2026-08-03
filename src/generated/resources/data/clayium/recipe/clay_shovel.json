@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "P": {
+      "item": "clayium:clay_plate"
+    },
+    "S": {
+      "item": "clayium:clay_stick"
+    }
+  },
+  "pattern": [
+    "P",
+    "S",
+    "S"
+  ],
+  "result": {
+    "count": 1,
+    "id": "clayium:clay_shovel"
+  }
+}

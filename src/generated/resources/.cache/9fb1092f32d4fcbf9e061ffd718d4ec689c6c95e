@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-02T13:35:59.926929578	Recipes
+// 1.21.1	2026-08-03T11:58:38.07488873	Recipes
 4abcfafc6487315216fcb6d2eabb76704cefe700 data/clayium/advancement/recipes/building_blocks/clay_crafting_board_to_dense_clay.json
 3dbe7dd47d57bd754e05636b105fb30612729669 data/clayium/advancement/recipes/misc/centrifuge_3.json
 24cd27ecb334fc3e4fe9f41cb2932f87abf6c297 data/clayium/advancement/recipes/misc/centrifuge_4.json
@@ -21,6 +21,8 @@ d608bb2942fb2258824d64596dcfe030a891c710 data/clayium/advancement/recipes/misc/s
 dde4a3627eee8452dc44aeef64b7b12561f48364 data/clayium/advancement/recipes/misc/salt_extractor_5.json
 c5d73db916f58aedfe890ec3838b86650b26b6f2 data/clayium/advancement/recipes/misc/salt_extractor_6.json
 153fd84cce0861c6c70337d85898197967a3fb48 data/clayium/advancement/recipes/misc/salt_extractor_7.json
+d114318f3e2be975d6dd0cf61479d3318129296c data/clayium/advancement/recipes/tools/clay_pickaxe.json
+3fd5e3ae0f5c0ba9c7934ebea2d96cbd1d226933 data/clayium/advancement/recipes/tools/clay_shovel.json
 f5623d1a9bc85993b5a084eece21287828c7f083 data/clayium/recipe/bending_machine/advanced_industrial_clay_plate.json
 732d450af977ce5a24aa12afaedc3151597ce86a data/clayium/recipe/bending_machine/advanced_industrial_clay_plate_from_dust.json
 1f1f8c9d12fb17f7135cfe989670cab74a4eb298 data/clayium/recipe/bending_machine/aluminium_plate.json
@@ -111,6 +113,8 @@ c6eda14f14a61c744bbe574457473f14f212c1dd data/clayium/recipe/clay_condenser/comp
 e16588218b9bc0d58ece632f402a6e897e052597 data/clayium/recipe/clay_condenser/industrial_clay_shard_to_block.json
 23c7ad8b871a78fc732bdf8b71a6a174de6560f8 data/clayium/recipe/clay_crafting_board.json
 ae65572494e2cf6c9347082300cfee7134795e85 data/clayium/recipe/clay_crafting_board_to_dense_clay.json
+bcea1ea0a3a2b783820604d57cc9764c7145583d data/clayium/recipe/clay_pickaxe.json
+0433c2c53aef29fb52922ecdecb1c29cf71c33e8 data/clayium/recipe/clay_shovel.json
 9848c6b0ab97dc2bf9f0aeb4151f5d080f9fb2c0 data/clayium/recipe/clay_work_table/0/clay_cylinder.json
 0338c3cbf445d81b9fff3e2e2034cdaa63454547 data/clayium/recipe/clay_work_table/0/clay_needle.json
 9fd3b6ae853623e32735e265c76895802715c4eb data/clayium/recipe/clay_work_table/0/clay_stick.json

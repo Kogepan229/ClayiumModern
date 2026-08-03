@@ -7,6 +7,7 @@ import net.kogepan.clayium.registries.ClayiumTags;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.tags.BlockTags;
+import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.BlockTagsProvider;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -25,11 +26,23 @@ public class ClayiumBlockTagsProvider extends BlockTagsProvider {
 
     @Override
     protected void addTags(@NotNull HolderLookup.Provider provider) {
-        tag(ClayiumTags.CLAY_TOOLS_BONUS_BLOCK)
+        Block[] clayOres = {
+                ClayiumBlocks.CLAY_ORE.get(),
+                ClayiumBlocks.DENSE_CLAY_ORE.get(),
+                ClayiumBlocks.LARGE_DENSE_CLAY_ORE.get()
+        };
+        tag(ClayiumTags.CLAY_ORES).add(clayOres);
+        tag(ClayiumTags.CLAY_SHOVEL_MINEABLE_ORES).add(clayOres);
+
+        var clayShovelFastBlocks = tag(ClayiumTags.CLAY_SHOVEL_FAST_BLOCKS)
                 .add(Blocks.CLAY)
-                .add(ClayiumBlocks.CLAY_ORE.get())
-                .add(ClayiumBlocks.DENSE_CLAY_ORE.get())
-                .add(ClayiumBlocks.LARGE_DENSE_CLAY_ORE.get());
+                .add(ClayiumBlocks.CLAY_CRAFTING_BOARD.get())
+                .add(ClayiumBlocks.RAW_CLAY_MACHINE_HULL.get());
+        for (int tier = 0; tier <= 12; tier++) {
+            clayShovelFastBlocks.add(ClayiumBlocks.COMPRESSED_CLAYS.get(tier).get());
+        }
+
+        tag(BlockTags.INCORRECT_FOR_WOODEN_TOOL).add(clayOres);
 
         tag(BlockTags.LOGS).add(ClayiumBlocks.CLAY_LOG.get());
         tag(BlockTags.LEAVES).add(ClayiumBlocks.CLAY_LEAVES.get());
@@ -44,7 +57,8 @@ public class ClayiumBlockTagsProvider extends BlockTagsProvider {
                 tag(BlockTags.MINEABLE_WITH_SHOVEL).add(block.get());
                 continue;
             }
-            if (block.get() == ClayiumBlocks.CLAY_CRAFTING_BOARD.get()) {
+            if (block.get() == ClayiumBlocks.CLAY_CRAFTING_BOARD.get() ||
+                    block.get() == ClayiumBlocks.RAW_CLAY_MACHINE_HULL.get()) {
                 tag(BlockTags.MINEABLE_WITH_SHOVEL).add(block.get());
                 continue;
             }
