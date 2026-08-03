@@ -76,6 +76,7 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
     private final Map<String, ClayContainerTrait> traits = new LinkedHashMap<>();
     private final Map<Direction, BlockCapabilityCache<ResourceHandler<ItemResource>, @Nullable Direction>> neighborItemHandlerCaches = new EnumMap<>(
             Direction.class);
+    private boolean pipeConnectionsNeedRefresh;
 
     protected ClayContainerBlockEntity(
                                        BlockEntityType<?> type,
@@ -106,6 +107,10 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
     }
 
     protected void tick() {
+        if (this.pipeConnectionsNeedRefresh) {
+            this.pipeConnectionsNeedRefresh = false;
+            this.refreshPipeConnections();
+        }
         for (ClayContainerTrait trait : this.getTraitsSnapshot()) {
             trait.tick();
         }
@@ -158,12 +163,13 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
 
     @Override
     public boolean canConfigure(ConfigurationToolAction action, UseOnContext context) {
-        Direction clickedSide = context.getClickedFace();
+        Direction clickedSide = this.getConfigurationSide(context);
         return switch (action) {
             case INSERTION -> !this.getCycleValidInputModes(clickedSide).isEmpty();
             case EXTRACTION -> !this.getCycleValidOutputModes(clickedSide).isEmpty();
             case FILTER_REMOVER -> this.getTrait(ItemFilterHolderTrait.TRAIT_ID) instanceof ItemFilterHolderTrait;
-            case PIPING, ROTATION -> false;
+            case PIPING -> true;
+            case ROTATION -> false;
         };
     }
 
@@ -173,16 +179,17 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
             return;
         }
 
-        Direction clickedSide = context.getClickedFace();
+        Direction clickedSide = this.getConfigurationSide(context);
         switch (action) {
             case INSERTION -> this.cycleInputMode(clickedSide);
             case EXTRACTION -> this.cycleOutputMode(clickedSide);
+            case PIPING -> this.togglePipeMode();
             case FILTER_REMOVER -> {
                 if (this.getTrait(ItemFilterHolderTrait.TRAIT_ID) instanceof ItemFilterHolderTrait filterHolder) {
                     filterHolder.clearFilter(clickedSide);
                 }
             }
-            case PIPING, ROTATION -> {}
+            case ROTATION -> {}
         }
     }
 
@@ -243,6 +250,22 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
         BlockCapabilityCache<ResourceHandler<ItemResource>, @Nullable Direction> cache = this.neighborItemHandlerCaches
                 .get(direction);
         return cache != null ? cache.getCapability() : null;
+    }
+
+    public final boolean canConnectTo(Direction direction) {
+        return this.getNeighborItemHandler(direction) != null;
+    }
+
+    public final BlockState updatePipeConnectionState(BlockState state) {
+        if (!state.getValue(ClayContainerBlock.PIPE)) {
+            return state;
+        }
+        for (Direction direction : Direction.values()) {
+            state = state.setValue(
+                    ClayContainerBlock.getConnectionProperty(direction),
+                    this.canConnectTo(direction));
+        }
+        return state;
     }
 
     public @Nullable ResourceHandler<ItemResource> getExposedItemHandler(@Nullable Direction side) {
@@ -327,8 +350,11 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
                                 Capabilities.Item.BLOCK,
                                 serverLevel,
                                 this.worldPosition.relative(direction),
-                                direction.getOpposite()));
+                                direction.getOpposite(),
+                                () -> !this.isRemoved(),
+                                () -> this.pipeConnectionsNeedRefresh = true));
             }
+            this.pipeConnectionsNeedRefresh = true;
         }
         for (ClayContainerTrait trait : this.getTraitsSnapshot()) {
             trait.onLoad();
@@ -489,5 +515,45 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
     private static MachineIOMode nextMode(MachineIOMode current, List<MachineIOMode> validModes) {
         int currentIndex = validModes.indexOf(current);
         return currentIndex >= 0 ? validModes.get((currentIndex + 1) % validModes.size()) : validModes.getFirst();
+    }
+
+    private Direction getConfigurationSide(UseOnContext context) {
+        return ClayContainerBlock.getConfigurationSide(
+                this.getBlockState(),
+                this.worldPosition,
+                context.getClickLocation(),
+                context.getClickedFace());
+    }
+
+    private void togglePipeMode() {
+        Level currentLevel = this.level;
+        if (currentLevel == null || currentLevel.isClientSide()) {
+            return;
+        }
+
+        BlockState state = this.getBlockState();
+        boolean pipe = !state.getValue(ClayContainerBlock.PIPE);
+        state = state.setValue(ClayContainerBlock.PIPE, pipe);
+        if (pipe) {
+            state = this.updatePipeConnectionState(state);
+        } else {
+            for (Direction direction : Direction.values()) {
+                state = state.setValue(ClayContainerBlock.getConnectionProperty(direction), false);
+            }
+        }
+        currentLevel.setBlock(this.worldPosition, state, Block.UPDATE_ALL);
+    }
+
+    private void refreshPipeConnections() {
+        Level currentLevel = this.level;
+        if (currentLevel == null || currentLevel.isClientSide()) {
+            return;
+        }
+
+        BlockState state = this.getBlockState();
+        BlockState updatedState = this.updatePipeConnectionState(state);
+        if (updatedState != state) {
+            currentLevel.setBlock(this.worldPosition, updatedState, Block.UPDATE_ALL);
+        }
     }
 }

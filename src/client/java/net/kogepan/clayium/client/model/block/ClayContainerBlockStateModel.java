@@ -6,16 +6,19 @@ import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.utils.MachineIOMode;
 
 import net.minecraft.client.renderer.block.BlockAndTintGetter;
+import net.minecraft.client.renderer.block.dispatch.BlockModelRotation;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModel;
 import net.minecraft.client.renderer.block.dispatch.BlockStateModelPart;
 import net.minecraft.client.renderer.block.dispatch.Variant;
 import net.minecraft.client.resources.model.ModelBaker;
+import net.minecraft.client.resources.model.cuboid.FaceBakery;
 import net.minecraft.client.resources.model.geometry.BakedQuad;
 import net.minecraft.client.resources.model.sprite.Material;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.Identifier;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.TriState;
 import net.minecraft.world.level.block.state.BlockState;
 import net.neoforged.neoforge.client.model.DynamicBlockStateModel;
 import net.neoforged.neoforge.client.model.block.CustomUnbakedBlockStateModel;
@@ -25,6 +28,7 @@ import com.mojang.serialization.Codec;
 import com.mojang.serialization.DataResult;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import org.joml.Vector3f;
 import org.jspecify.annotations.Nullable;
 
 import java.util.EnumMap;
@@ -40,17 +44,20 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
     private final Map<MachineIOMode, Map<Direction, BlockStateModelPart>> importOverlays;
     private final Map<MachineIOMode, Map<Direction, BlockStateModelPart>> exportOverlays;
     private final Map<Direction, BlockStateModelPart> filterOverlays;
+    private final Map<Direction, PipeParts> pipeParts;
     private final int materialFlags;
 
     private ClayContainerBlockStateModel(
                                          Map<Direction, BlockStateModelPart> baseModels,
                                          Map<MachineIOMode, Map<Direction, BlockStateModelPart>> importOverlays,
                                          Map<MachineIOMode, Map<Direction, BlockStateModelPart>> exportOverlays,
-                                         Map<Direction, BlockStateModelPart> filterOverlays) {
+                                         Map<Direction, BlockStateModelPart> filterOverlays,
+                                         Map<Direction, PipeParts> pipeParts) {
         this.baseModels = baseModels;
         this.importOverlays = importOverlays;
         this.exportOverlays = exportOverlays;
         this.filterOverlays = filterOverlays;
+        this.pipeParts = pipeParts;
         int flags = 0;
         for (BlockStateModelPart part : baseModels.values()) {
             flags |= part.materialFlags();
@@ -68,6 +75,14 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
         for (BlockStateModelPart part : filterOverlays.values()) {
             flags |= part.materialFlags();
         }
+        for (PipeParts parts : pipeParts.values()) {
+            for (BlockStateModelPart part : parts.coreFaces.values()) {
+                flags |= part.materialFlags();
+            }
+            for (BlockStateModelPart part : parts.arms.values()) {
+                flags |= part.materialFlags();
+            }
+        }
         this.materialFlags = flags;
     }
 
@@ -77,11 +92,14 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
                                     BlockPos pos,
                                     BlockState state,
                                     RandomSource random) {
-        ClayContainerModelData data = level.getModelData(pos).get(ClayContainerModelData.PROPERTY);
+        boolean pipe = state.getValue(ClayContainerBlock.PIPE);
+        ClayContainerModelData data = pipe ? ClayContainerModelData.EMPTY :
+                level.getModelData(pos).get(ClayContainerModelData.PROPERTY);
         return new GeometryKey(
                 this,
                 data != null ? data : ClayContainerModelData.EMPTY,
-                state.getValue(ClayContainerBlock.FACING));
+                state.getValue(ClayContainerBlock.FACING),
+                pipeConnectionMask(state));
     }
 
     @Override
@@ -91,6 +109,18 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
                              BlockState state,
                              RandomSource random,
                              List<BlockStateModelPart> parts) {
+        if (state.getValue(ClayContainerBlock.PIPE)) {
+            PipeParts selectedPipeParts = this.pipeParts.get(state.getValue(ClayContainerBlock.FACING));
+            for (Direction side : DIRECTIONS) {
+                if (state.getValue(ClayContainerBlock.getConnectionProperty(side))) {
+                    parts.add(selectedPipeParts.arms.get(side));
+                } else {
+                    parts.add(selectedPipeParts.coreFaces.get(side));
+                }
+            }
+            return;
+        }
+
         parts.add(this.baseModels.get(state.getValue(ClayContainerBlock.FACING)));
         ClayContainerModelData data = level.getModelData(pos).get(ClayContainerModelData.PROPERTY);
         if (data == null) {
@@ -125,7 +155,31 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
     private record GeometryKey(
                                ClayContainerBlockStateModel model,
                                ClayContainerModelData data,
-                               Direction facing) {}
+                               Direction facing,
+                               int pipeConnectionMask) {}
+
+    private record PipeParts(
+                             Map<Direction, BlockStateModelPart> coreFaces,
+                             Map<Direction, BlockStateModelPart> arms) {}
+
+    private record PipePart(
+                            List<BakedQuad> quads,
+                            Material.Baked particleMaterial,
+                            TriState ambientOcclusion,
+                            int materialFlags)
+            implements BlockStateModelPart {
+
+        @Override
+        public List<BakedQuad> getQuads(@Nullable Direction direction) {
+            return direction == null ? this.quads : List.of();
+        }
+
+        @Override
+        @SuppressWarnings("deprecation")
+        public boolean useAmbientOcclusion() {
+            return this.ambientOcclusion != TriState.FALSE;
+        }
+    }
 
     public record Unbaked(
                           Identifier baseModel,
@@ -164,11 +218,13 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
 
         @Override
         public BlockStateModel bake(ModelBaker baker) {
+            Map<Direction, BlockStateModelPart> baseModels = bakeForHorizontalSides(this.baseModel, baker);
             return new ClayContainerBlockStateModel(
-                    bakeForHorizontalSides(this.baseModel, baker),
+                    baseModels,
                     bakeOverlays(this.importOverlays, baker),
                     bakeOverlays(this.exportOverlays, baker),
-                    bakeForAllSides(this.filterOverlay, baker));
+                    bakeForAllSides(this.filterOverlay, baker),
+                    bakePipeParts(baseModels, baker));
         }
 
         private static Map<Direction, BlockStateModelPart> bakeForHorizontalSides(
@@ -205,6 +261,96 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
 
         private static BlockStateModelPart bake(Variant variant, ModelBaker baker) {
             return baker.compute(new BakedVariantKey(variant));
+        }
+
+        private static Map<Direction, PipeParts> bakePipeParts(
+                                                               Map<Direction, BlockStateModelPart> baseModels,
+                                                               ModelBaker baker) {
+            Map<Direction, PipeParts> byFacing = new EnumMap<>(Direction.class);
+            baseModels.forEach((facing, base) -> {
+                Map<Direction, BlockStateModelPart> coreFaces = new EnumMap<>(Direction.class);
+                Map<Direction, BlockStateModelPart> arms = new EnumMap<>(Direction.class);
+                for (Direction side : DIRECTIONS) {
+                    Vector3f[] armBounds = armBounds(side);
+                    coreFaces.put(
+                            side,
+                            bakeCuboidPart(
+                                    new Vector3f(5, 5, 5),
+                                    new Vector3f(11, 11, 11),
+                                    List.of(side),
+                                    base,
+                                    baker));
+                    arms.put(
+                            side,
+                            bakeCuboidPart(
+                                    armBounds[0],
+                                    armBounds[1],
+                                    java.util.Arrays.stream(DIRECTIONS)
+                                            .filter(face -> face != side.getOpposite())
+                                            .toList(),
+                                    base,
+                                    baker));
+                }
+                byFacing.put(facing, new PipeParts(Map.copyOf(coreFaces), Map.copyOf(arms)));
+            });
+            return Map.copyOf(byFacing);
+        }
+
+        private static BlockStateModelPart bakeCuboidPart(
+                                                          Vector3f from,
+                                                          Vector3f to,
+                                                          List<Direction> includedFaces,
+                                                          BlockStateModelPart base,
+                                                          ModelBaker baker) {
+            List<BakedQuad> quads = new java.util.ArrayList<>();
+            int flags = 0;
+            for (Direction face : DIRECTIONS) {
+                if (!includedFaces.contains(face)) {
+                    continue;
+                }
+                BakedQuad baseQuad = findFaceQuad(base, face);
+                if (baseQuad == null) {
+                    continue;
+                }
+                BakedQuad quad = FaceBakery.bakeQuad(
+                        baker.interner(),
+                        from,
+                        to,
+                        FaceBakery.defaultFaceUV(from, to, face),
+                        Quadrant.R0,
+                        baseQuad.materialInfo(),
+                        face,
+                        BlockModelRotation.IDENTITY,
+                        null,
+                        net.neoforged.neoforge.client.model.ExtraFaceData.DEFAULT);
+                quads.add(quad);
+                flags |= quad.materialInfo().flags();
+            }
+            return new PipePart(List.copyOf(quads), base.particleMaterial(), base.ambientOcclusion(), flags);
+        }
+
+        private static @Nullable BakedQuad findFaceQuad(BlockStateModelPart part, Direction face) {
+            List<BakedQuad> culledQuads = part.getQuads(face);
+            if (!culledQuads.isEmpty()) {
+                return culledQuads.getFirst();
+            }
+            for (BakedQuad quad : part.getQuads(null)) {
+                if (quad.direction() == face) {
+                    return quad;
+                }
+            }
+            return null;
+        }
+
+        private static Vector3f[] armBounds(Direction side) {
+            return switch (side) {
+                case DOWN -> new Vector3f[] { new Vector3f(5, 0, 5), new Vector3f(11, 5, 11) };
+                case UP -> new Vector3f[] { new Vector3f(5, 11, 5), new Vector3f(11, 16, 11) };
+                case NORTH -> new Vector3f[] { new Vector3f(5, 5, 0), new Vector3f(11, 11, 5) };
+                case SOUTH -> new Vector3f[] { new Vector3f(5, 5, 11), new Vector3f(11, 11, 16) };
+                case WEST -> new Vector3f[] { new Vector3f(0, 5, 5), new Vector3f(5, 11, 11) };
+                case EAST -> new Vector3f[] { new Vector3f(11, 5, 5), new Vector3f(16, 11, 11) };
+            };
         }
 
         @Override
@@ -255,5 +401,18 @@ public final class ClayContainerBlockStateModel implements DynamicBlockStateMode
                 this.model.resolveDependencies(resolver);
             }
         }
+    }
+
+    private static int pipeConnectionMask(BlockState state) {
+        if (!state.getValue(ClayContainerBlock.PIPE)) {
+            return -1;
+        }
+        int mask = 0;
+        for (Direction side : DIRECTIONS) {
+            if (state.getValue(ClayContainerBlock.getConnectionProperty(side))) {
+                mask |= 1 << side.get3DDataValue();
+            }
+        }
+        return mask;
     }
 }
