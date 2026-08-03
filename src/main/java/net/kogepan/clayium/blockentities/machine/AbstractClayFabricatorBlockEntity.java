@@ -3,6 +3,7 @@ package net.kogepan.clayium.blockentities.machine;
 import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
+import net.kogepan.clayium.blockentities.trait.OverclockHandler;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.client.ldlib.elements.LargeItemSlot;
 import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
@@ -44,6 +45,7 @@ public abstract class AbstractClayFabricatorBlockEntity extends ClayContainerBlo
 
     protected final ClayiumItemStackHandler inputInventory;
     protected final ClayiumItemStackHandler outputInventory;
+    protected final OverclockHandler overclockHandler;
 
     protected ItemStack processingStack = ItemStack.EMPTY;
     protected long craftProgress;
@@ -65,6 +67,8 @@ public abstract class AbstractClayFabricatorBlockEntity extends ClayContainerBlo
         };
         this.outputInventory = new ClayiumItemStackHandler(this, 1);
 
+        this.overclockHandler = new OverclockHandler(this);
+        this.addTrait(this.overclockHandler);
         this.addTrait(new AutoIOTrait.Combined(this, this.tier, false));
     }
 
@@ -73,6 +77,26 @@ public abstract class AbstractClayFabricatorBlockEntity extends ClayContainerBlo
     protected abstract void tryStartCraft();
 
     protected abstract void advanceCraft();
+
+    /**
+     * Advances the active craft by up to the requested number of virtual ticks.
+     *
+     * <p>
+     * The default implementation preserves per-tick hooks for external subclasses. Built-in
+     * fabricators override this method to batch side-effect-free progress between craft
+     * boundaries.
+     *
+     * @return the number of virtual ticks consumed
+     */
+    protected int advanceCrafts(int maxVirtualTicks) {
+        for (int virtualTick = 0; virtualTick < maxVirtualTicks; virtualTick++) {
+            this.advanceCraft();
+            if (this.processingStack.isEmpty()) {
+                return virtualTick + 1;
+            }
+        }
+        return maxVirtualTicks;
+    }
 
     protected boolean canCraftAtCurrentPosition() {
         return true;
@@ -102,10 +126,21 @@ public abstract class AbstractClayFabricatorBlockEntity extends ClayContainerBlo
             return;
         }
 
-        if (this.processingStack.isEmpty()) {
-            this.tryStartCraft();
-        } else {
-            this.advanceCraft();
+        int remainingOperations = this.overclockHandler.getOperationsThisTick();
+        while (remainingOperations > 0) {
+            if (this.processingStack.isEmpty()) {
+                this.tryStartCraft();
+                remainingOperations--;
+                if (this.processingStack.isEmpty()) {
+                    break;
+                }
+            } else {
+                int consumedOperations = this.advanceCrafts(remainingOperations);
+                if (consumedOperations <= 0 || consumedOperations > remainingOperations) {
+                    throw new IllegalStateException("Invalid number of consumed virtual ticks");
+                }
+                remainingOperations -= consumedOperations;
+            }
         }
     }
 
@@ -116,7 +151,7 @@ public abstract class AbstractClayFabricatorBlockEntity extends ClayContainerBlo
     protected void startProcessing(@NotNull ItemStack stack, long duration) {
         this.processingStack = stack;
         this.craftProgress = 0L;
-        this.craftDuration = Math.max(1L, duration);
+        this.craftDuration = this.overclockHandler.applyDuration(duration);
         this.displayCraftEnergy = 0L;
         this.setChanged();
     }
@@ -217,6 +252,7 @@ public abstract class AbstractClayFabricatorBlockEntity extends ClayContainerBlo
                         .remoteSetter(v -> this.craftDuration = v)
                         .build()));
         root.addChild(progressLabel);
+        root.addChild(this.overclockHandler.createFactorUIElement());
     }
 
     private String formatProgressText() {

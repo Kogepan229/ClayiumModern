@@ -89,6 +89,11 @@ public class AssemblerRecipeProvider {
         create(recipeOutput, "gadget_flight_mk1", ClayiumItems.CLAY_GADGET_PARTS.toStack(), ClayiumItems.CLAY_ANIMA.toStack(16), ClayiumItems.GADGET_FLIGHT_MK1.toStack(), CEUtils.ceToLong(100000), 120, 10);
         create(recipeOutput, "gadget_flight_mk2", ClayiumItems.GADGET_FLIGHT_MK1.toStack(), ClayiumItems.CLAY_PSYCHE.toStack(16), ClayiumItems.GADGET_FLIGHT_MK2.toStack(), CEUtils.ceToLong(1000000), 1200, 10);
         create(recipeOutput, "gadget_health_mk3", ClayiumItems.GADGET_HEALTH_MK2.toStack(), ClayiumItems.CLAY_ANIMA.toStack(4), ClayiumItems.GADGET_HEALTH_MK3.toStack(), CEUtils.ceToLong(100000), 120, 10);
+        create(recipeOutput, "gadget_overclocker_mk1", ClayiumItems.CLAY_GADGET_PARTS.toStack(), new ItemStack(ClayiumBlocks.OVERCLOCKERS.get(10).get()), ClayiumItems.GADGET_OVERCLOCKER_MK1.toStack(), CEUtils.ceToLong(1000), 120, 10);
+        create(recipeOutput, "gadget_overclocker_mk2", ClayiumItems.GADGET_OVERCLOCKER_MK1.toStack(), new ItemStack(ClayiumBlocks.OVERCLOCKERS.get(11).get()), ClayiumItems.GADGET_OVERCLOCKER_MK2.toStack(), CEUtils.ceToLong(10000), 120, 10);
+        create(recipeOutput, "gadget_overclocker_mk3", ClayiumItems.GADGET_OVERCLOCKER_MK2.toStack(), new ItemStack(ClayiumBlocks.OVERCLOCKERS.get(12).get()), ClayiumItems.GADGET_OVERCLOCKER_MK3.toStack(), CEUtils.ceToLong(100000), 120, 10);
+        create(recipeOutput, "gadget_overclocker_mk4", ClayiumItems.GADGET_OVERCLOCKER_MK3.toStack(), new ItemStack(ClayiumBlocks.OVERCLOCKERS.get(13).get()), ClayiumItems.GADGET_OVERCLOCKER_MK4.toStack(), CEUtils.ceToLong(1000000), 120, 10);
+        create(recipeOutput, "gadget_flight_mk3", ClayiumItems.GADGET_FLIGHT_MK2.toStack(), new ItemStack(ClayiumBlocks.OVERCLOCKERS.get(13).get(), 16), ClayiumItems.GADGET_FLIGHT_MK3.toStack(), CEUtils.ceToLong(10000000), 12000, 10);
         create(recipeOutput, "gadget_repeatedly_attack", ClayiumItems.GADGET_OVERCLOCKER_MK1.toStack(), ClayiumItems.CLAY_SPIRIT.toStack(4), ClayiumItems.GADGET_REPEATEDLY_ATTACK.toStack(), CEUtils.ceToLong(1000), 120, 10);
 
         // spotless:on

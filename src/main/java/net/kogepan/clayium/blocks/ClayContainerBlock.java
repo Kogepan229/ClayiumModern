@@ -171,6 +171,17 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
     }
 
     @Override
+    protected void neighborChanged(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos,
+                                   @NotNull Block neighborBlock, @NotNull BlockPos neighborPos,
+                                   boolean movedByPiston) {
+        super.neighborChanged(state, level, pos, neighborBlock, neighborPos, movedByPiston);
+        if (!level.isClientSide() &&
+                level.getBlockEntity(pos) instanceof ClayContainerBlockEntity container) {
+            container.refreshOverclockFactor();
+        }
+    }
+
+    @Override
     @NotNull
     protected BlockState updateShape(@NotNull BlockState state, @NotNull Direction direction,
                                      @NotNull BlockState neighborState, @NotNull LevelAccessor level,

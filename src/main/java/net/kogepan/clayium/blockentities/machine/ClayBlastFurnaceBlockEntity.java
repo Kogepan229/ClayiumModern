@@ -2,6 +2,7 @@ package net.kogepan.clayium.blockentities.machine;
 
 import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.trait.MultiblockRecipeLogic;
+import net.kogepan.clayium.blocks.OverclockerBlock;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
@@ -82,6 +83,10 @@ public class ClayBlastFurnaceBlockEntity extends AbstractMultiblockMachineBlockE
     }
 
     private int getPartTier(@NotNull BlockState partState, BlockEntity partBlockEntity) {
+        if (partState.getBlock() instanceof OverclockerBlock overclocker && overclocker.getTier() >= 5 &&
+                overclocker.getTier() <= 13) {
+            return overclocker.getTier();
+        }
         int hullTier = ClayiumBlocks.getMachineHullTier(partState.getBlock());
         if (hullTier >= 5) {
             return hullTier;

@@ -1,0 +1,27 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1000000000000,
+  "duration": 1000000000000000000,
+  "inputs": [
+    {
+      "amount": 64,
+      "ingredient": {
+        "item": "clayium:clay_fabricator_9"
+      }
+    },
+    {
+      "amount": 16,
+      "ingredient": {
+        "item": "clayium:overclocker_13"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:clay_fabricator_13"
+    }
+  ],
+  "recipe_tier": 13,
+  "recipe_type": "clayium:clay_reactor"
+}

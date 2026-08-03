@@ -68,6 +68,7 @@ public final class ClayReactorRecipeProvider {
 
         create(output, "clay_fabricator_mk1", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(8).get()), new ItemStack(ClayiumBlocks.SOLAR_CLAY_FABRICATOR_BLOCKS.get(7).get()), new ItemStack(ClayiumBlocks.CLAY_FABRICATOR_BLOCKS.get(8).get()), 3.0D, 100_000_000L, 8);
         create(output, "clay_fabricator_mk2", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(9).get()), new ItemStack(ClayiumBlocks.SOLAR_CLAY_FABRICATOR_BLOCKS.get(7).get()), new ItemStack(ClayiumBlocks.CLAY_FABRICATOR_BLOCKS.get(9).get()), 3.0D, 100_000_000_000L, 9);
+        create(output, "clay_fabricator_mk3", new ItemStack(ClayiumBlocks.CLAY_FABRICATOR_BLOCKS.get(9).get(), 64), new ItemStack(ClayiumBlocks.OVERCLOCKERS.get(13).get(), 16), new ItemStack(ClayiumBlocks.CLAY_FABRICATOR_BLOCKS.get(13).get()), 10.0D, 1_000_000_000_000_000_000L, 13);
 
         // spotless:on
     }

@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T20:51:44.338050846	Loot Tables
+// 1.21.1	2026-08-03T23:02:51.552876936	Loot Tables
 1ac3e13377b179fa98ca4ee15ed27da063c60007 data/clayium/loot_table/blocks/activator.json
 5bfffa4a0446d3f12e10d757aa42ea04bd808410 data/clayium/loot_table/blocks/alloy_smelter_6.json
 464cecdb1cea9558a73ec9d43ffbfe00caecb8e7 data/clayium/loot_table/blocks/assembler_10.json
@@ -149,6 +149,10 @@ e293aa9e81b8c5df016bd98f32159cc780d24b26 data/clayium/loot_table/blocks/multi_tr
 f52d61cd8a8d1c1c343699cb696733cae2b89015 data/clayium/loot_table/blocks/multi_track_buffer_7.json
 8bf32057a63271322114cb3f428a006e1232cb41 data/clayium/loot_table/blocks/multi_track_buffer_8.json
 d39e72684d6035308f12e97c90704b8cbabe1f9f data/clayium/loot_table/blocks/multi_track_buffer_9.json
+0e7e0f243622ee608269e2a6380da92ccd4061f4 data/clayium/loot_table/blocks/overclocker_10.json
+c423c9dfef5b8d9ff222f3801047cfff990b48b8 data/clayium/loot_table/blocks/overclocker_11.json
+2b7033905870d2fdcb14696722b46ba2c6ee1535 data/clayium/loot_table/blocks/overclocker_12.json
+eee3774ad850a9379067b52bd8b70c4e5c3da157 data/clayium/loot_table/blocks/overclocker_13.json
 d92b501a707a126b8eec3277498d52bc5bdc83f8 data/clayium/loot_table/blocks/pipe_drawing_machine_1.json
 b6e02fb669ad8f5542bdb8aaceb439194d17f2ed data/clayium/loot_table/blocks/pipe_drawing_machine_2.json
 62641800a132324d3d693be35f85346d1bf49261 data/clayium/loot_table/blocks/pipe_drawing_machine_3.json

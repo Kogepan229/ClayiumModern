@@ -125,13 +125,20 @@ public class SolarClayFabricatorBlockEntity extends AbstractClayFabricatorBlockE
 
     @Override
     protected void advanceCraft() {
+        this.advanceCrafts(1);
+    }
+
+    @Override
+    protected int advanceCrafts(int maxVirtualTicks) {
         int matTier = getSolarMaterialTier(this.processingStack);
         if (matTier < 0) {
             this.abortProcessing(true);
-            return;
+            return 1;
         }
 
-        this.craftProgress++;
+        int progressTicks = (int) Math.min(maxVirtualTicks,
+                Math.max(1L, this.craftDuration - this.craftProgress));
+        this.craftProgress += progressTicks;
         this.displayCraftEnergy = (long) (Math.pow(10.0D, matTier + 1.0D) * (double) this.craftProgress /
                 (double) this.craftDuration);
 
@@ -140,12 +147,13 @@ public class SolarClayFabricatorBlockEntity extends AbstractClayFabricatorBlockE
             ItemStack leftover = ItemHandlerHelper.insertItemStacked(this.outputInventory, result, false);
             if (!leftover.isEmpty()) {
                 this.craftProgress = this.craftDuration - 1;
-                return;
+                return progressTicks;
             }
             this.finishProcessing();
         }
 
         this.setChanged();
+        return progressTicks;
     }
 
     private int getSolarMaterialTier(@NotNull ItemStack stack) {

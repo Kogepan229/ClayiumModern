@@ -88,14 +88,21 @@ public class ClayFabricatorBlockEntity extends AbstractClayFabricatorBlockEntity
 
     @Override
     protected void advanceCraft() {
+        this.advanceCrafts(1);
+    }
+
+    @Override
+    protected int advanceCrafts(int maxVirtualTicks) {
         int clayTier = ClayTierUtil.getClayTier(this.processingStack);
         if (clayTier < 0) {
             this.abortProcessing(false);
-            return;
+            return 1;
         }
 
         int count = this.processingStack.getCount();
-        this.craftProgress++;
+        int progressTicks = (int) Math.min(maxVirtualTicks,
+                Math.max(1L, this.craftDuration - this.craftProgress));
+        this.craftProgress += progressTicks;
         this.displayCraftEnergy = (long) (Math.pow(10.0D, clayTier) * (double) count * (double) this.craftProgress /
                 (double) this.craftDuration);
 
@@ -104,11 +111,12 @@ public class ClayFabricatorBlockEntity extends AbstractClayFabricatorBlockEntity
             ItemStack leftover = ItemHandlerHelper.insertItemStacked(this.outputInventory, result, false);
             if (!leftover.isEmpty()) {
                 this.craftProgress = this.craftDuration - 1;
-                return;
+                return progressTicks;
             }
             this.finishProcessing();
         }
 
         this.setChanged();
+        return progressTicks;
     }
 }

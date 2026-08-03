@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100000000000,
+  "duration": 120,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:gadget_overclocker_mk3"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:overclocker_13"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:gadget_overclocker_mk4"
+    }
+  ],
+  "recipe_tier": 10,
+  "recipe_type": "clayium:assembler"
+}

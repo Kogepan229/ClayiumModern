@@ -4,6 +4,7 @@ import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.trait.AbstractRecipeLogic;
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
+import net.kogepan.clayium.blockentities.trait.OverclockHandler;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.client.ldlib.textures.SlotTextures;
 import net.kogepan.clayium.inventory.NotifiableItemStackHandler;
@@ -40,6 +41,8 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
     protected final AbstractRecipeLogic recipeLogic;
     @Getter
     protected final ClayEnergyHolder energyHolder;
+    @Getter
+    protected final OverclockHandler overclockHandler;
 
     public WorkableClayContainerBlockEntity(@NotNull BlockEntityType<?> type,
                                             @NotNull BlockPos pos,
@@ -55,6 +58,8 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
         this.outputItemInventory = new NotifiableItemStackHandler(this, outputSize, false);
         this.recipeType = recipeType;
         this.energyHolder = new ClayEnergyHolder(this);
+        this.overclockHandler = new OverclockHandler(this);
+        this.addTrait(this.overclockHandler);
         this.recipeLogic = recipeLogicProvider.apply(this);
 
         this.addTrait(new AutoIOTrait.Combined(this, this.tier, false));
@@ -148,6 +153,7 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
                     .addChild(this.energyHolder.createEnergyButtonElement()));
         }
         mainUI.addChild(this.energyHolder.createEnergyTextUIElement().textStyle(style -> style.adaptiveWidth(true)));
+        mainUI.addChild(this.overclockHandler.createFactorUIElement());
 
         root.addChild(mainUI);
     }

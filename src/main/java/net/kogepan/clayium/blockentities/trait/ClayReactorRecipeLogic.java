@@ -33,6 +33,11 @@ public class ClayReactorRecipeLogic extends MultiblockRecipeLogic {
     }
 
     @Override
+    protected long getProgressPerTick(int virtualTick) {
+        return virtualTick == 0 ? getProgressPerTick() : 1L;
+    }
+
+    @Override
     protected long getInitialProgress() {
         return 0L;
     }

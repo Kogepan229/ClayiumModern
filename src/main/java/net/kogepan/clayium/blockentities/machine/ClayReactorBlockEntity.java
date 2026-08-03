@@ -3,6 +3,7 @@ package net.kogepan.clayium.blockentities.machine;
 import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.LaserInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.trait.ClayReactorRecipeLogic;
+import net.kogepan.clayium.blocks.OverclockerBlock;
 import net.kogepan.clayium.capability.IClayLaserAcceptor;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.laser.Laser;
@@ -128,6 +129,10 @@ public class ClayReactorBlockEntity extends AbstractMultiblockMachineBlockEntity
         }
         if (blockEntity instanceof LaserInterfaceBlockEntity) {
             return -1;
+        }
+        if (state.getBlock() instanceof OverclockerBlock overclocker && overclocker.getTier() >= 7 &&
+                overclocker.getTier() <= 13) {
+            return overclocker.getTier();
         }
         int hullTier = ClayiumBlocks.getMachineHullTier(state.getBlock());
         if (hullTier >= 7 && hullTier <= 13) {

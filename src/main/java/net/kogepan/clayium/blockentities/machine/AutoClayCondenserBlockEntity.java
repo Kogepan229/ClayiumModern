@@ -3,6 +3,7 @@ package net.kogepan.clayium.blockentities.machine;
 import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
+import net.kogepan.clayium.blockentities.trait.OverclockHandler;
 import net.kogepan.clayium.client.ldlib.elements.PhantomItemSlot;
 import net.kogepan.clayium.client.ldlib.textures.SlotTextures;
 import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
@@ -43,6 +44,7 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
     private final ClayiumItemStackHandler mainInventory;
     private final ClayiumItemStackHandler configInventory;
     private final AutoClayCondenserItemHandler exposedHandler;
+    private final OverclockHandler overclockHandler;
 
     /** Tier of the 9 items currently being compressed (-1 if none). */
     private int workInProgressTier = -1;
@@ -70,6 +72,8 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
         };
         this.exposedHandler = new AutoClayCondenserItemHandler();
 
+        this.overclockHandler = new OverclockHandler(this);
+        this.addTrait(this.overclockHandler);
         this.addTrait(new AutoIOTrait.Combined(this, this.tier, false));
     }
 
@@ -98,22 +102,37 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
             return;
         }
 
-        // Time-based compression; Mk II can process multiple crafts per tick.
-        int maxIterations = this.tier >= 7 ? 256 : 2;
-        for (int iter = 0; iter < maxIterations; iter++) {
-            if (this.workInProgressTier >= 0) {
-                this.craftTicksRemaining--;
-                if (this.craftTicksRemaining <= 0) {
-                    produceClay(this.workInProgressTier + 1, 1);
-                    sortInventory();
-                    this.workInProgressTier = -1;
+        this.runVirtualTicks(this.overclockHandler.getOperationsThisTick());
+    }
+
+    private void runVirtualTicks(int virtualTicks) {
+        int iterationsPerVirtualTick = this.tier >= 7 ? 256 : 2;
+        int remainingIterations = iterationsPerVirtualTick * virtualTicks;
+
+        while (remainingIterations > 0) {
+            if (this.workInProgressTier < 0) {
+                if (!tryStartCraft()) {
+                    return;
                 }
-            }
-            if (this.workInProgressTier >= 0) {
+                remainingIterations--;
                 continue;
             }
+
+            int ticksUntilCompletion = Math.max(1, this.craftTicksRemaining);
+            if (ticksUntilCompletion > remainingIterations) {
+                this.craftTicksRemaining -= remainingIterations;
+                return;
+            }
+
+            this.craftTicksRemaining -= ticksUntilCompletion;
+            remainingIterations -= ticksUntilCompletion;
+            produceClay(this.workInProgressTier + 1, 1);
+            sortInventory();
+            this.workInProgressTier = -1;
+
+            // The previous loop could start the next craft during the completion iteration.
             if (!tryStartCraft()) {
-                break;
+                return;
             }
         }
     }
@@ -131,7 +150,8 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
         }
         consumeClay(consumedTier, 9);
         this.workInProgressTier = consumedTier;
-        this.craftTicksRemaining = getCraftTicks();
+        this.craftTicksRemaining = (int) Math.min(Integer.MAX_VALUE,
+                this.overclockHandler.applyDuration(getCraftTicks()));
         return true;
     }
 
@@ -330,6 +350,7 @@ public class AutoClayCondenserBlockEntity extends ClayContainerBlockEntity {
         configSlotWrapper.addChild(PhantomItemSlot.create(this.configInventory, CONFIG_SLOT).slotStyle(
                 style -> style.slotOverlay(SlotTextures.PHANTOM_ITEM_SLOT_OVERLAY).showSlotOverlayOnlyEmpty(true)));
         rightBlock.addChild(configSlotWrapper);
+        root.addChild(this.overclockHandler.createFactorUIElement());
     }
 
     private class AutoClayCondenserItemHandler implements IItemHandlerModifiable {

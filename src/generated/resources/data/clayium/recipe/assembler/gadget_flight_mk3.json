@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1000000000000,
+  "duration": 12000,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:gadget_flight_mk2"
+      }
+    },
+    {
+      "amount": 16,
+      "ingredient": {
+        "item": "clayium:overclocker_13"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:gadget_flight_mk3"
+    }
+  ],
+  "recipe_tier": 10,
+  "recipe_type": "clayium:assembler"
+}

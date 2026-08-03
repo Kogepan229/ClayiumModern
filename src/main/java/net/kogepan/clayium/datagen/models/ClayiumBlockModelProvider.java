@@ -147,6 +147,9 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         for (var entry : ClayiumBlocks.MACHINE_HULLS.values()) {
             simpleBlockAndItem(entry.get());
         }
+        for (var entry : ClayiumBlocks.OVERCLOCKERS.values()) {
+            simpleBlockAndItem(entry.get());
+        }
         simpleBlockAndItem(ClayiumBlocks.AZ91D_ALLOY_HULL.get());
         simpleBlockAndItem(ClayiumBlocks.ZK60A_ALLOY_HULL.get());
 

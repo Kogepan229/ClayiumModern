@@ -9,6 +9,7 @@ import net.kogepan.clayium.api.configuration.MachineIOModes;
 import net.kogepan.clayium.blockentities.trait.ClayContainerTrait;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
+import net.kogepan.clayium.blockentities.trait.OverclockHandler;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.capability.IClayEnergyHolder;
 import net.kogepan.clayium.capability.IItemFilterApplicatable;
@@ -152,6 +153,19 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
     @Nullable
     public ClayContainerTrait getTrait(String id) {
         return this.traits.get(id);
+    }
+
+    @Nullable
+    public OverclockHandler getOverclockHandler() {
+        ClayContainerTrait trait = this.getTrait(OverclockHandler.TRAIT_ID);
+        return trait instanceof OverclockHandler handler ? handler : null;
+    }
+
+    public void refreshOverclockFactor() {
+        OverclockHandler handler = this.getOverclockHandler();
+        if (handler != null) {
+            handler.refreshOverclockFactor();
+        }
     }
 
     public void notifyItemInputInventoryChanged() {

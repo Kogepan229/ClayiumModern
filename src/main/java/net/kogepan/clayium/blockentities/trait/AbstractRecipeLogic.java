@@ -9,6 +9,7 @@ import net.kogepan.clayium.utils.TransferUtils;
 
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -39,8 +40,12 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
     @Nullable
     protected ResourceLocation pendingRecipeId = null;
     protected long currentProgress = 0;
+    protected long processingCEPerTick = 0;
+    protected long processingDuration = 0;
+    protected boolean effectiveRecipeValuesLoaded = false;
     protected boolean canProgress = false; // TODO: onFIrstTick
     protected final RecipeType<?> recipeType;
+    protected final OverclockHandler overclockHandler;
 
     protected boolean isInvalidInputsForRecipes = false;
     protected boolean noEnoughOutputSpace = false;
@@ -50,6 +55,11 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
     public AbstractRecipeLogic(@NotNull ClayContainerBlockEntity blockEntity, RecipeType<?> recipeType) {
         super(blockEntity, TRAIT_ID);
         this.recipeType = recipeType;
+        OverclockHandler handler = blockEntity.getOverclockHandler();
+        if (handler == null) {
+            throw new IllegalStateException("Recipe logic requires an OverclockHandler");
+        }
+        this.overclockHandler = handler;
     }
 
     @Override
@@ -61,12 +71,15 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
 
         if (!canProgress) return;
 
-        if (processingRecipeHolder == null && shouldSearchForRecipe()) {
-            tryPrepareNewRecipe();
-        }
+        int operations = this.overclockHandler.getOperationsThisTick();
+        for (int virtualTick = 0; virtualTick < operations; virtualTick++) {
+            if (processingRecipeHolder == null && shouldSearchForRecipe()) {
+                tryPrepareNewRecipe();
+            }
 
-        if (processingRecipeHolder != null) {
-            updateWorkingProgress();
+            if (processingRecipeHolder != null) {
+                updateWorkingProgress(virtualTick);
+            }
         }
     }
 
@@ -89,7 +102,9 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         processingRecipeHolder = resolveRecipeHolderFromId(level, pendingRecipeId);
 
         if (processingRecipeHolder == null) {
-            currentProgress = 0;
+            clearProcessingState();
+        } else if (!this.effectiveRecipeValuesLoaded) {
+            restoreBaseRecipeValues(processingRecipeHolder);
         }
         pendingRecipeId = null;
     }
@@ -106,6 +121,8 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         tag.putLong("progress", currentProgress);
         if (processingRecipeHolder != null) {
             tag.putString("recipeId", processingRecipeHolder.id().toString());
+            tag.putLong("processingCEPerTick", this.processingCEPerTick);
+            tag.putLong("processingDuration", this.processingDuration);
         }
     }
 
@@ -114,7 +131,16 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         currentProgress = tag.getLong("progress");
         processingRecipeHolder = null;
         pendingRecipeId = null;
+        this.processingCEPerTick = 0L;
+        this.processingDuration = 0L;
+        this.effectiveRecipeValuesLoaded = tag.contains("processingCEPerTick", Tag.TAG_LONG) &&
+                tag.contains("processingDuration", Tag.TAG_LONG);
+        if (this.effectiveRecipeValuesLoaded) {
+            this.processingCEPerTick = Math.max(0L, tag.getLong("processingCEPerTick"));
+            this.processingDuration = Math.max(1L, tag.getLong("processingDuration"));
+        }
         if (!tag.contains("recipeId")) {
+            clearProcessingState();
             return;
         }
         ResourceLocation recipeId = ResourceLocation.parse(tag.getString("recipeId"));
@@ -122,7 +148,9 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         if (level != null) {
             processingRecipeHolder = resolveRecipeHolderFromId(level, recipeId);
             if (processingRecipeHolder == null) {
-                currentProgress = 0;
+                clearProcessingState();
+            } else if (!this.effectiveRecipeValuesLoaded) {
+                restoreBaseRecipeValues(processingRecipeHolder);
             }
         } else {
             pendingRecipeId = recipeId;
@@ -242,7 +270,9 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         List<ItemIngredientStack> recipeInputs = getRecipeInputs(holder);
         int[] matchedSlots = MachineRecipeMatcher.findMatches(recipeInputs, inventoryStacks);
         if (matchedSlots == null) return false;
-        if (!this.drawEnergy(getRecipeCEPerTick(holder), true)) return false;
+        long effectiveCEPerTick = this.overclockHandler.applyCEPerTick(getRecipeCEPerTick(holder));
+        long effectiveDuration = this.overclockHandler.applyDuration(getRecipeDuration(holder));
+        if (!this.drawEnergy(effectiveCEPerTick, true)) return false;
         if (!hasEnoughOutputSpace(holder)) {
             noEnoughOutputSpace = true;
             return false;
@@ -256,6 +286,9 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         }
 
         processingRecipeHolder = holder;
+        this.processingCEPerTick = effectiveCEPerTick;
+        this.processingDuration = effectiveDuration;
+        this.effectiveRecipeValuesLoaded = true;
         currentProgress = getInitialProgress();
         return true;
     }
@@ -279,11 +312,15 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         return 1;
     }
 
+    protected long getProgressPerTick(int virtualTick) {
+        return getProgressPerTick();
+    }
+
     protected long getInitialProgress() {
         return getProgressPerTick();
     }
 
-    protected void updateWorkingProgress() {
+    protected void updateWorkingProgress(int virtualTick) {
         if (processingRecipeHolder == null) {
             return;
         }
@@ -292,32 +329,45 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
             return;
         }
 
-        if (!drawEnergy(getRecipeCEPerTick(processingRecipeHolder), false)) {
+        if (!drawEnergy(this.processingCEPerTick, false)) {
             return;
         }
 
-        currentProgress += getProgressPerTick();
-        if (currentProgress >= getRecipeDuration(processingRecipeHolder)) {
+        currentProgress += getProgressPerTick(virtualTick);
+        if (currentProgress >= this.processingDuration) {
             completeWork();
         }
     }
 
     protected void completeWork() {
-        currentProgress = 0;
-
         IItemHandler outputInventory = blockEntity.getOutputInventory();
         assert this.processingRecipeHolder != null;
         for (ItemStack stack : getCopiedRecipeOutputs(processingRecipeHolder)) {
             ItemHandlerHelper.insertItem(outputInventory, stack, false);
         }
+        clearProcessingState();
+    }
+
+    private void restoreBaseRecipeValues(@NotNull RecipeHolder<?> holder) {
+        this.processingCEPerTick = Math.max(0L, getRecipeCEPerTick(holder));
+        this.processingDuration = Math.max(1L, getRecipeDuration(holder));
+        this.effectiveRecipeValuesLoaded = true;
+    }
+
+    private void clearProcessingState() {
         this.processingRecipeHolder = null;
+        this.pendingRecipeId = null;
+        this.currentProgress = 0L;
+        this.processingCEPerTick = 0L;
+        this.processingDuration = 0L;
+        this.effectiveRecipeValuesLoaded = false;
     }
 
     public UIElement createProgressUIElement() {
         return new ProgressArrow()
                 .bind(DataBindingBuilder
                         .floatValS2C(() -> this.processingRecipeHolder != null ?
-                                (float) this.currentProgress / getRecipeDuration(processingRecipeHolder) : 0)
+                                (float) this.currentProgress / this.processingDuration : 0)
                         .build())
                 .layout(layout -> layout.width(22));
     }

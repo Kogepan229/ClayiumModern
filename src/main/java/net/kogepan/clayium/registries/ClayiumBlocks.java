@@ -11,6 +11,7 @@ import net.kogepan.clayium.blocks.ClaySaplingBlock;
 import net.kogepan.clayium.blocks.ClayWorkTableBlock;
 import net.kogepan.clayium.blocks.LaserReflectorBlock;
 import net.kogepan.clayium.blocks.MultitrackBufferBlock;
+import net.kogepan.clayium.blocks.OverclockerBlock;
 import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
 import net.kogepan.clayium.blocks.StorageContainerBlock;
 import net.kogepan.clayium.blocks.VacuumContainerBlock;
@@ -54,6 +55,7 @@ import net.kogepan.clayium.items.blockitem.DistributorBlockItem;
 import net.kogepan.clayium.items.blockitem.EnergeticClayCondenserBlockItem;
 import net.kogepan.clayium.items.blockitem.LaserInterfaceBlockItem;
 import net.kogepan.clayium.items.blockitem.LaserReflectorBlockItem;
+import net.kogepan.clayium.items.blockitem.OverclockerBlockItem;
 import net.kogepan.clayium.items.blockitem.QuartzCrucibleBlockItem;
 import net.kogepan.clayium.items.blockitem.StorageContainerBlockItem;
 import net.kogepan.clayium.items.blockitem.TieredBlockItem;
@@ -101,6 +103,14 @@ public class ClayiumBlocks {
                 (t) -> new Block(BlockBehaviour.Properties.of().destroyTime(1)
                         .explosionResistance(1).sound(SoundType.GRAVEL).requiresCorrectToolForDrops()));
         COMPRESSED_CLAYS.put(tier, block);
+    }
+
+    private static DeferredBlock<OverclockerBlock> registerOverclocker(int tier, double factor) {
+        String name = "overclocker_" + tier;
+        DeferredBlock<OverclockerBlock> block = BLOCKS.register(name, () -> new OverclockerBlock(tier, factor));
+        ClayiumItems.ITEMS.register(name,
+                () -> new OverclockerBlockItem(block.get(), new Item.Properties()));
+        return block;
     }
 
     public static final DeferredBlock<ClayOre> CLAY_ORE = register("clay_ore", ClayOre::new);
@@ -164,6 +174,16 @@ public class ClayiumBlocks {
                             .requiresCorrectToolForDrops())));
         }
         MACHINE_HULLS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<OverclockerBlock>> OVERCLOCKERS;
+    static {
+        Int2ObjectMap<DeferredBlock<OverclockerBlock>> map = new Int2ObjectOpenHashMap<>();
+        map.put(10, registerOverclocker(10, 1.5D));
+        map.put(11, registerOverclocker(11, 2.3D));
+        map.put(12, registerOverclocker(12, 3.5D));
+        map.put(13, registerOverclocker(13, 5.0D));
+        OVERCLOCKERS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final DeferredBlock<Block> AZ91D_ALLOY_HULL = BLOCKS.register("az91d_alloy_hull",
