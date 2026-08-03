@@ -1,0 +1,21 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1000,
+  "duration": 20,
+  "inputs": [
+    {
+      "amount": 16,
+      "ingredient": {
+        "item": "clayium:quartz_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:quartz_crucible"
+    }
+  ],
+  "recipe_tier": 0,
+  "recipe_type": "clayium:assembler"
+}

@@ -1,0 +1,27 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100000000,
+  "duration": 6000,
+  "inputs": [
+    {
+      "amount": 4,
+      "ingredient": {
+        "item": "minecraft:leather"
+      }
+    },
+    {
+      "amount": 16,
+      "ingredient": {
+        "item": "minecraft:string"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:saddle"
+    }
+  ],
+  "recipe_tier": 10,
+  "recipe_type": "clayium:assembler"
+}

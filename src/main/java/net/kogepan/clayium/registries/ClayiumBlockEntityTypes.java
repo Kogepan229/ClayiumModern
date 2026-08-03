@@ -11,6 +11,7 @@ import net.kogepan.clayium.blockentities.MultitrackBufferBlockEntity;
 import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
 import net.kogepan.clayium.blockentities.StorageContainerBlockEntity;
 import net.kogepan.clayium.blockentities.VacuumContainerBlockEntity;
+import net.kogepan.clayium.blockentities.machine.AssemblerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CentrifugeBlockEntity;
@@ -279,6 +280,16 @@ public class ClayiumBlockEntityTypes {
                         .map(DeferredHolder::get).toList());
                 return BlockEntityType.Builder
                         .of(InscriberBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AssemblerBlockEntity>> ASSEMBLER_BLOCK_ENTITY = registerClayContainer(
+            "assembler_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.ASSEMBLER_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(AssemblerBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
 

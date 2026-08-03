@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10,
+  "duration": 20,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:large_clay_plate"
+      }
+    },
+    {
+      "amount": 8,
+      "ingredient": {
+        "item": "clayium:clay_plate"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:clay_cutting_head"
+    }
+  ],
+  "recipe_tier": 3,
+  "recipe_type": "clayium:assembler"
+}

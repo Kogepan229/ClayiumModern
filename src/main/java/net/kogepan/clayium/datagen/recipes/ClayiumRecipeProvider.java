@@ -39,6 +39,7 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         DecomposerRecipeProvider.buildRecipes(recipeOutput);
         ElectrolysisReactorRecipeProvider.buildRecipes(recipeOutput);
         InscriberRecipeProvider.buildRecipes(recipeOutput);
+        AssemblerRecipeProvider.buildRecipes(recipeOutput);
         SmelterRecipeProvider.buildRecipes(recipeOutput);
         ClayBlastFurnaceRecipeProvider.buildRecipes(recipeOutput);
         QuartzCrucibleRecipeProvider.buildRecipes(recipeOutput);
@@ -105,6 +106,20 @@ public class ClayiumRecipeProvider extends RecipeProvider {
                     .define('*', ClayiumItems.DENSE_CLAY_GEAR.get())
                     .unlockedBy("has_machine_hull", has(ClayiumBlocks.MACHINE_HULLS.get(tier).get()))
                     .save(recipeOutput, Clayium.id("centrifuge_" + tier));
+        }
+
+        // Assembler (tiers 3 and 4): *C* / o#o / *C*
+        for (int tier : new int[] { 3, 4 }) {
+            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, ClayiumBlocks.ASSEMBLER_BLOCKS.get(tier).get())
+                    .pattern("*C*")
+                    .pattern("o#o")
+                    .pattern("*C*")
+                    .define('#', ClayiumBlocks.MACHINE_HULLS.get(tier).get())
+                    .define('o', ClayiumItems.DENSE_CLAY_SPINDLE.get())
+                    .define('*', ClayiumItems.DENSE_CLAY_GEAR.get())
+                    .define('C', tier == 3 ? ClayiumItems.SIMPLE_CIRCUIT.get() : ClayiumItems.BASIC_CIRCUIT.get())
+                    .unlockedBy("has_machine_hull", has(ClayiumBlocks.MACHINE_HULLS.get(tier).get()))
+                    .save(recipeOutput, Clayium.id("assembler_" + tier));
         }
 
         // Chemical Reactor (tiers 4, 5, 8): *o* / o#o / *o* — # = machine hull, o = spindle, * = gear

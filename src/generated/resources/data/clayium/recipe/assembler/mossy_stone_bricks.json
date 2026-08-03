@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000,
+  "duration": 20,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "minecraft:stone_bricks"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "minecraft:vine"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:mossy_stone_bricks"
+    }
+  ],
+  "recipe_tier": 6,
+  "recipe_type": "clayium:assembler"
+}

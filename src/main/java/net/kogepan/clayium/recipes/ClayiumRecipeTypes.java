@@ -68,6 +68,8 @@ public class ClayiumRecipeTypes {
             "electrolysis_reactor", 1, 1);
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> INSCRIBER_RECIPE_TYPE = registerSimpleMachineType(
             "inscriber", 2, 1);
+    public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> ASSEMBLER_RECIPE_TYPE = registerSimpleMachineType(
+            "assembler", 2, 1);
     public static final DeferredHolder<RecipeType<?>, SimpleMachineRecipeType<MachineRecipe>> CHEMICAL_REACTOR_RECIPE_TYPE = registerSimpleMachineType(
             "chemical_reactor", 2, 2);
 }

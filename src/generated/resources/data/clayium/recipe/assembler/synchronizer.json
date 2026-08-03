@@ -1,0 +1,27 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000,
+  "duration": 20,
+  "inputs": [
+    {
+      "amount": 3,
+      "ingredient": {
+        "item": "clayium:az91d_alloy_plate"
+      }
+    },
+    {
+      "amount": 2,
+      "ingredient": {
+        "item": "clayium:synchronous_parts"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:synchronizer"
+    }
+  ],
+  "recipe_tier": 6,
+  "recipe_type": "clayium:assembler"
+}

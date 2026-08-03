@@ -1,4 +1,8 @@
-// 1.21.1	2026-08-02T13:35:59.925023196	Loot Tables
+// 1.21.1	2026-08-03T12:36:55.890736456	Loot Tables
+464cecdb1cea9558a73ec9d43ffbfe00caecb8e7 data/clayium/loot_table/blocks/assembler_10.json
+dbcebc8087ac47ea656064dc17084726e13770f6 data/clayium/loot_table/blocks/assembler_3.json
+e5eb738a9ec9b65c0af4a662bbfc43de6885fe76 data/clayium/loot_table/blocks/assembler_4.json
+af96b4e78fcfe8f92d3ada7ea09c215a2da95e1d data/clayium/loot_table/blocks/assembler_6.json
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json

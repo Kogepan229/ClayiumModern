@@ -1,0 +1,21 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10,
+  "duration": 20,
+  "inputs": [
+    {
+      "amount": 5,
+      "ingredient": {
+        "item": "clayium:clay_stick"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:clay_gear"
+    }
+  ],
+  "recipe_tier": 3,
+  "recipe_type": "clayium:assembler"
+}

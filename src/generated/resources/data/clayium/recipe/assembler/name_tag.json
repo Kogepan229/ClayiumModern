@@ -1,0 +1,27 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100000000,
+  "duration": 600,
+  "inputs": [
+    {
+      "amount": 2,
+      "ingredient": {
+        "item": "minecraft:paper"
+      }
+    },
+    {
+      "amount": 4,
+      "ingredient": {
+        "item": "minecraft:string"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:name_tag"
+    }
+  ],
+  "recipe_tier": 10,
+  "recipe_type": "clayium:assembler"
+}

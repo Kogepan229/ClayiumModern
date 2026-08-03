@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100,
+  "duration": 20,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:dense_large_clay_plate"
+      }
+    },
+    {
+      "amount": 8,
+      "ingredient": {
+        "item": "clayium:compressed_clay_0"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:dense_clay_grinding_head"
+    }
+  ],
+  "recipe_tier": 3,
+  "recipe_type": "clayium:assembler"
+}

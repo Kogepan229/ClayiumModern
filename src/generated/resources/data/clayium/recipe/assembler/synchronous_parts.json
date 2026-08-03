@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000,
+  "duration": 432000,
+  "inputs": [
+    {
+      "amount": 8,
+      "ingredient": {
+        "item": "clayium:beryllium_dust"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:integrated_circuit"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:synchronous_parts"
+    }
+  ],
+  "recipe_tier": 6,
+  "recipe_type": "clayium:assembler"
+}
