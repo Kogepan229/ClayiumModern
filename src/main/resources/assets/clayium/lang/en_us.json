@@ -413,12 +413,6 @@
   "gui.clayium.clay_interface.target_unloaded": "Linked target is not loaded.",
   "gui.clayium.clay_interface.target_invalid": "Linked target is invalid.",
   "gui.clayium.clay_interface.target_pos": "Target: %s (%d, %d, %d)",
-  "gui.clayium.jade.laser_energy": "Laser Energy: %s",
-
-  "config.jade.plugin_clayium.clay_laser_source_energy": "Laser energy (CE)",
-
-  "xei.clayium.tier": "Tier: %d",
-  "xei.clayium.items_per_tick": "%.2f Items/t",
 
   "clayium.configuration.title": "Clayium Configs",
   "clayium.configuration.section.clayium.common.toml": "Clayium Configs",
@@ -438,5 +432,33 @@
   "item.clayium.unlocalized_name_item_filter": "Unlocalized Name Item Filter",
   "item.clayium.unlocalized_name_item_filter.tooltip": "Right-click to configure. Regex match on item translation key.",
   "item.clayium.unlocalized_name_item_filter.copy": "Unlocalized Name Item Filter (Copy)",
-  "item.clayium.filter_remover.tooltip1": "Deletes filters applied to machines."
+  "item.clayium.filter_remover.tooltip1": "Deletes filters applied to machines.",
+
+  "gui.clayium.jade.laser_energy": "Laser Energy: %s",
+  "config.jade.plugin_clayium.clay_laser_source_energy": "Laser energy (CE)",
+
+  "xei.clayium.tier": "Tier: %d",
+  "xei.clayium.items_per_tick": "%.2f Items/t",
+
+  "emi.category.clayium.clay_work_table": "Clay Work Table",
+  "emi.category.clayium.bending_machine": "Clay Bending Machine",
+  "emi.category.clayium.wire_drawing_machine": "Clay Wire Drawing Machine",
+  "emi.category.clayium.pipe_drawing_machine": "Clay Pipe Drawing Machine",
+  "emi.category.clayium.cutting_machine": "Clay Cutting Machine",
+  "emi.category.clayium.lathe": "Clay Lathe",
+  "emi.category.clayium.milling_machine": "Clay Milling Machine",
+  "emi.category.clayium.clay_condenser": "Clay Condenser",
+  "emi.category.clayium.energetic_clay_condenser": "Energetic Clay Condenser",
+  "emi.category.clayium.grinder": "Clay Grinder",
+  "emi.category.clayium.centrifuge": "Clay Centrifuge",
+  "emi.category.clayium.chemical_reactor": "Clay Chemical Reactor",
+  "emi.category.clayium.decomposer": "Clay Decomposer",
+  "emi.category.clayium.electrolysis_reactor": "Clay Electrolysis Reactor",
+  "emi.category.clayium.inscriber": "Clay Inscriber",
+  "emi.category.clayium.assembler": "Clay Assembler",
+  "emi.category.clayium.smelter": "Clay Smelter",
+  "emi.category.clayium.alloy_smelter": "Alloy Smelter",
+  "emi.category.clayium.clay_blast_furnace": "Clay Blast Furnace",
+  "emi.category.clayium.salt_extractor": "Salt Extractor",
+  "emi.category.clayium.chemical_metal_separator": "Chemical Metal Separator"
 }
