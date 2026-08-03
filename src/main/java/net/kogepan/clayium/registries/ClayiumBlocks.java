@@ -132,7 +132,7 @@ public class ClayiumBlocks {
 
     public static final DeferredBlock<Block> RAW_CLAY_MACHINE_HULL = BLOCKS.register("raw_clay_machine_hull",
             () -> new Block(BlockBehaviour.Properties.of()
-                    .destroyTime(2.0f)
+                    .destroyTime(1.0f)
                     .explosionResistance(6.0f)
                     .sound(SoundType.STONE)
                     .requiresCorrectToolForDrops()));
@@ -147,7 +147,7 @@ public class ClayiumBlocks {
         for (int i = 1; i <= 13; i++) {
             map.put(i, registerTiered("machine_hull", i,
                     (t) -> new Block(BlockBehaviour.Properties.of()
-                            .destroyTime(3.0f)
+                            .destroyTime(2.0f)
                             .explosionResistance(10.0f)
                             .sound(SoundType.METAL)
                             .requiresCorrectToolForDrops())));
@@ -157,13 +157,13 @@ public class ClayiumBlocks {
 
     public static final DeferredBlock<Block> AZ91D_ALLOY_HULL = BLOCKS.register("az91d_alloy_hull",
             () -> new Block(BlockBehaviour.Properties.of()
-                    .destroyTime(3.0f)
+                    .destroyTime(2.0f)
                     .explosionResistance(10.0f)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));
     public static final DeferredBlock<Block> ZK60A_ALLOY_HULL = BLOCKS.register("zk60a_alloy_hull",
             () -> new Block(BlockBehaviour.Properties.of()
-                    .destroyTime(3.0f)
+                    .destroyTime(2.0f)
                     .explosionResistance(10.0f)
                     .sound(SoundType.METAL)
                     .requiresCorrectToolForDrops()));

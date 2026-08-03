@@ -42,7 +42,7 @@ public class ClayiumBlockTagsProvider extends BlockTagsProvider {
             clayShovelFastBlocks.add(ClayiumBlocks.COMPRESSED_CLAYS.get(tier).get());
         }
 
-        tag(BlockTags.INCORRECT_FOR_WOODEN_TOOL).add(clayOres);
+        tag(BlockTags.NEEDS_STONE_TOOL).add(clayOres);
 
         tag(BlockTags.LOGS).add(ClayiumBlocks.CLAY_LOG.get());
         tag(BlockTags.LEAVES).add(ClayiumBlocks.CLAY_LEAVES.get());
@@ -68,6 +68,10 @@ public class ClayiumBlockTagsProvider extends BlockTagsProvider {
             }
             if (block.get() == ClayiumBlocks.CLAY_LEAVES.get()) {
                 tag(BlockTags.MINEABLE_WITH_HOE).add(block.get());
+                continue;
+            }
+            if (block.get() == ClayiumBlocks.CLAY_SAPLING.get() ||
+                    block.get() == ClayiumBlocks.QUARTZ_CRUCIBLE.get()) {
                 continue;
             }
 

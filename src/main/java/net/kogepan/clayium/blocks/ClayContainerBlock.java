@@ -59,7 +59,9 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
     public int tier;
 
     public ClayContainerBlock(int tier) {
-        this(tier, BlockBehaviour.Properties.of());
+        this(tier, BlockBehaviour.Properties.of()
+                .destroyTime(2.0f)
+                .requiresCorrectToolForDrops());
     }
 
     protected ClayContainerBlock(int tier, BlockBehaviour.Properties properties) {

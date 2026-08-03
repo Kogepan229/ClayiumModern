@@ -28,7 +28,8 @@ public class CreativeCESourceBlock extends Block implements EntityBlock {
     public CreativeCESourceBlock() {
         super(BlockBehaviour.Properties.of()
                 .sound(SoundType.METAL)
-                .strength(2.0f, 6.0f));
+                .strength(2.0f, 6.0f)
+                .requiresCorrectToolForDrops());
     }
 
     @Override

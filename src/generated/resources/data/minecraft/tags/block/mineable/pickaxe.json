@@ -4,7 +4,6 @@
     "clayium:dense_clay_ore",
     "clayium:large_dense_clay_ore",
     "clayium:clay_work_table",
-    "clayium:quartz_crucible",
     "clayium:machine_hull_1",
     "clayium:machine_hull_2",
     "clayium:machine_hull_3",
@@ -146,7 +145,6 @@
     "clayium:clay_laser_10",
     "clayium:laser_reflector",
     "clayium:creative_ce_source",
-    "clayium:clay_sapling",
     "clayium:chunk_loader"
   ]
 }
