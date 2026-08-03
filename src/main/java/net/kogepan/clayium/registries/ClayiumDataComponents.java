@@ -3,6 +3,7 @@ package net.kogepan.clayium.registries;
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 import net.kogepan.clayium.items.filter.component.FilterSlotsData;
+import net.kogepan.clayium.items.tools.ClaySteelToolData;
 
 import net.minecraft.core.GlobalPos;
 import net.minecraft.core.component.DataComponentType;
@@ -48,6 +49,11 @@ public final class ClayiumDataComponents {
             .registerComponentType("synchronizer_target", builder -> builder
                     .persistent(GlobalPos.CODEC)
                     .networkSynchronized(GlobalPos.STREAM_CODEC));
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<ClaySteelToolData>> CLAY_STEEL_TOOL_DATA = DATA_COMPONENTS
+            .registerComponentType("clay_steel_tool_data", builder -> builder
+                    .persistent(ClaySteelToolData.CODEC)
+                    .networkSynchronized(ClaySteelToolData.STREAM_CODEC));
 
     private ClayiumDataComponents() {}
 }

@@ -9,9 +9,17 @@
   "item.clayium.clay_slicer.tooltip": "搬出口設定ツール",
   "item.clayium.clay_spatula": "粘土へら",
   "item.clayium.clay_steel_pickaxe": "粘土鋼ツルハシ",
+  "item.clayium.clay_steel_pickaxe.tooltip": "採掘面に沿った範囲をまとめて採掘します。",
   "item.clayium.clay_steel_shovel": "粘土鋼シャベル",
+  "item.clayium.clay_steel_shovel.tooltip": "採掘面に沿った範囲をまとめて掘削します。",
+  "item.clayium.clay_steel_tool.mode": "採掘モード: %s",
+  "item.clayium.clay_steel_tool.area.square": "採掘範囲: %sx%s",
+  "item.clayium.clay_steel_tool.area.custom": "任意採掘範囲: %sブロック",
+  "item.clayium.clay_steel_tool.configure": "ブロックを右クリックするとモードを変更します。任意範囲モードでは、粘土ブロックを右クリックすると形状を記録し、スニーク右クリックで粘土ブロックを設置します。",
   "item.clayium.raw_clay_rolling_pin": "生の粘土めん棒",
   "item.clayium.raw_clay_slicer": "生の粘土スライサー",
   "item.clayium.raw_clay_spatula": "生の粘土へら",
-  "item.clayium.filter_remover.tooltip": "機械側面に適用されたフィルターを消去します。"
+  "item.clayium.filter_remover.tooltip": "機械側面に適用されたフィルターを消去します。",
+  "message.clayium.clay_steel_tool.mode": "採掘モードを%sに設定しました。",
+  "message.clayium.clay_steel_tool.customized": "%sブロックの採掘範囲を記録しました。"
 }

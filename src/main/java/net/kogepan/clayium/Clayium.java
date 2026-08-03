@@ -5,6 +5,7 @@ import net.kogepan.clayium.api.configuration.IConfigurationTool;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.datagen.ClayiumDataGenerators;
+import net.kogepan.clayium.items.tools.ClaySteelToolMining;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.display.ClayiumRecipeBookCategories;
@@ -21,12 +22,14 @@ import net.kogepan.clayium.registries.ClayiumItems;
 import net.kogepan.clayium.registries.ClayiumMenuTypes;
 
 import net.minecraft.resources.Identifier;
+import net.neoforged.bus.api.EventPriority;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.ModContainer;
 import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.capabilities.Capabilities;
 import net.neoforged.neoforge.capabilities.RegisterCapabilitiesEvent;
+import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.registries.datamaps.RegisterDataMapTypesEvent;
 
 import com.mojang.logging.LogUtils;
@@ -74,7 +77,12 @@ public final class Clayium {
         modEventBus.addListener(Clayium::registerDataMapTypes);
         modEventBus.addListener(Clayium::registerCapabilities);
 
-        modContainer.registerConfig(ModConfig.Type.COMMON, Config.SPEC);
+        NeoForge.EVENT_BUS.addListener(ClaySteelToolMining::onLeftClickBlock);
+        NeoForge.EVENT_BUS.addListener(EventPriority.LOWEST, ClaySteelToolMining::onBreakSpeed);
+        NeoForge.EVENT_BUS.addListener(ClaySteelToolMining::onServerTick);
+
+        modContainer.registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
+        modContainer.registerConfig(ModConfig.Type.SERVER, Config.SERVER_SPEC);
     }
 
     private static void registerDataMapTypes(RegisterDataMapTypesEvent event) {

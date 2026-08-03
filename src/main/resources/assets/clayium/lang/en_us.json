@@ -11,7 +11,13 @@
   "item.clayium.clay_slicer.tooltip": "Machine Output Configurator",
   "item.clayium.clay_spatula": "Clay Spatula",
   "item.clayium.clay_steel_pickaxe": "Clay Steel Pickaxe",
+  "item.clayium.clay_steel_pickaxe.tooltip": "Mines an area aligned to the struck face.",
   "item.clayium.clay_steel_shovel": "Clay Steel Shovel",
+  "item.clayium.clay_steel_shovel.tooltip": "Digs an area aligned to the struck face.",
+  "item.clayium.clay_steel_tool.mode": "Mining mode: %s",
+  "item.clayium.clay_steel_tool.area.square": "Mining area: %sx%s",
+  "item.clayium.clay_steel_tool.area.custom": "Custom mining area: %s blocks",
+  "item.clayium.clay_steel_tool.configure": "Right-click a block to change modes; in the custom mode, right-click Clay Blocks to capture their shape and sneak-right-click to place Clay Blocks.",
   "item.clayium.raw_clay_rolling_pin": "Raw Clay Rolling Pin",
   "item.clayium.raw_clay_slicer": "Raw Clay Slicer",
   "item.clayium.raw_clay_spatula": "Raw Clay Spatula",
@@ -30,5 +36,7 @@
   "tooltip.clayium.tier": "Tier %d",
   "gui.clayium.machine.energy": "Energy: %s",
   "gui.clayium.machine.progress": "Processing progress",
-  "gui.clayium.machine.add_energy": "Add %s"
+  "gui.clayium.machine.add_energy": "Add %s",
+  "message.clayium.clay_steel_tool.mode": "Set mining mode to %s.",
+  "message.clayium.clay_steel_tool.customized": "Customized the mining area with %s blocks."
 }
