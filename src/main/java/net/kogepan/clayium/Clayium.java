@@ -1,5 +1,7 @@
 package net.kogepan.clayium;
 
+import net.kogepan.clayium.api.configuration.ConfigurationToolAction;
+import net.kogepan.clayium.api.configuration.IConfigurationTool;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.datagen.ClayiumDataGenerators;
@@ -36,6 +38,23 @@ public final class Clayium {
     public static final String MODID = "clayium";
     public static final Logger LOGGER = LogUtils.getLogger();
 
+    private static final IConfigurationTool INSERTION_TOOL = new BuiltInConfigurationTool(
+            ConfigurationToolAction.INSERTION,
+            ConfigurationToolAction.INSERTION,
+            false);
+    private static final IConfigurationTool EXTRACTION_TOOL = new BuiltInConfigurationTool(
+            ConfigurationToolAction.EXTRACTION,
+            ConfigurationToolAction.EXTRACTION,
+            false);
+    private static final IConfigurationTool PIPING_TOOL = new BuiltInConfigurationTool(
+            ConfigurationToolAction.PIPING,
+            ConfigurationToolAction.PIPING,
+            true);
+    private static final IConfigurationTool FILTER_REMOVER_TOOL = new BuiltInConfigurationTool(
+            ConfigurationToolAction.FILTER_REMOVER,
+            ConfigurationToolAction.FILTER_REMOVER,
+            false);
+
     public Clayium(IEventBus modEventBus, ModContainer modContainer) {
         ClayiumBlocks.BLOCKS.register(modEventBus);
         ClayiumItems.ITEMS.register(modEventBus);
@@ -63,6 +82,34 @@ public final class Clayium {
     }
 
     private static void registerCapabilities(RegisterCapabilitiesEvent event) {
+        event.registerItem(
+                ClayiumCapabilities.CONFIGURATION_TOOL,
+                (stack, context) -> INSERTION_TOOL,
+                ClayiumItems.CLAY_ROLLING_PIN.get());
+        event.registerItem(
+                ClayiumCapabilities.CONFIGURATION_TOOL,
+                (stack, context) -> EXTRACTION_TOOL,
+                ClayiumItems.CLAY_SLICER.get());
+        event.registerItem(
+                ClayiumCapabilities.CONFIGURATION_TOOL,
+                (stack, context) -> PIPING_TOOL,
+                ClayiumItems.CLAY_SPATULA.get());
+        event.registerItem(
+                ClayiumCapabilities.CONFIGURATION_TOOL,
+                (stack, context) -> FILTER_REMOVER_TOOL,
+                ClayiumItems.RAW_CLAY_ROLLING_PIN.get(),
+                ClayiumItems.RAW_CLAY_SPATULA.get(),
+                ClayiumItems.RAW_CLAY_SLICER.get());
+
+        event.registerBlockEntity(
+                ClayiumCapabilities.MACHINE_CONFIGURABLE,
+                ClayiumBlockEntityTypes.BENDING_MACHINE_BLOCK_ENTITY.get(),
+                (blockEntity, context) -> blockEntity);
+        event.registerBlockEntity(
+                ClayiumCapabilities.MACHINE_CONFIGURABLE,
+                ClayiumBlockEntityTypes.CLAY_BUFFER_BLOCK_ENTITY.get(),
+                (blockEntity, context) -> blockEntity);
+
         event.registerBlockEntity(
                 Capabilities.Item.BLOCK,
                 ClayiumBlockEntityTypes.BENDING_MACHINE_BLOCK_ENTITY.get(),
@@ -79,5 +126,17 @@ public final class Clayium {
 
     public static Identifier id(String path) {
         return Identifier.fromNamespaceAndPath(MODID, path);
+    }
+
+    private record BuiltInConfigurationTool(
+                                            ConfigurationToolAction primaryAction,
+                                            ConfigurationToolAction secondaryAction,
+                                            boolean rendersMachineIOOverlay)
+            implements IConfigurationTool {
+
+        @Override
+        public ConfigurationToolAction getAction(boolean secondaryUse) {
+            return secondaryUse ? this.secondaryAction : this.primaryAction;
+        }
     }
 }

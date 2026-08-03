@@ -1,0 +1,17 @@
+{
+  "item.clayium.clay_pickaxe": "粘土ツルハシ",
+  "item.clayium.clay_pickaxe.tooltip": "粘土鉱石を素早く採掘し、そのドロップ数を上昇させます。",
+  "item.clayium.clay_rolling_pin": "粘土めん棒",
+  "item.clayium.clay_rolling_pin.tooltip": "搬入口設定ツール",
+  "item.clayium.clay_shovel": "粘土シャベル",
+  "item.clayium.clay_shovel.tooltip": "粘土鉱石を採掘でき、そのドロップ数を上昇させます。",
+  "item.clayium.clay_slicer": "粘土スライサー",
+  "item.clayium.clay_slicer.tooltip": "搬出口設定ツール",
+  "item.clayium.clay_spatula": "粘土へら",
+  "item.clayium.clay_steel_pickaxe": "粘土鋼ツルハシ",
+  "item.clayium.clay_steel_shovel": "粘土鋼シャベル",
+  "item.clayium.raw_clay_rolling_pin": "生の粘土めん棒",
+  "item.clayium.raw_clay_slicer": "生の粘土スライサー",
+  "item.clayium.raw_clay_spatula": "生の粘土へら",
+  "item.clayium.filter_remover.tooltip": "機械側面に適用されたフィルターを消去します。"
+}

@@ -1,6 +1,8 @@
 package net.kogepan.clayium.blockentities;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.api.configuration.ConfigurationToolAction;
+import net.kogepan.clayium.api.configuration.IMachineConfigurable;
 import net.kogepan.clayium.blockentities.trait.ClayContainerTrait;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
@@ -21,6 +23,7 @@ import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.util.ProblemReporter;
 import net.minecraft.world.Containers;
+import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -58,7 +61,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-public abstract class ClayContainerBlockEntity extends BlockEntity {
+public abstract class ClayContainerBlockEntity extends BlockEntity implements IMachineConfigurable {
 
     private static final String INPUT_MODES_KEY = "inputModes";
     private static final String OUTPUT_MODES_KEY = "outputModes";
@@ -151,6 +154,36 @@ public abstract class ClayContainerBlockEntity extends BlockEntity {
         }
         this.outputModes.setMode(direction, nextMode(this.outputModes.getMode(direction), validModes));
         this.notifyTransferConfigurationChanged();
+    }
+
+    @Override
+    public boolean canConfigure(ConfigurationToolAction action, UseOnContext context) {
+        Direction clickedSide = context.getClickedFace();
+        return switch (action) {
+            case INSERTION -> !this.getCycleValidInputModes(clickedSide).isEmpty();
+            case EXTRACTION -> !this.getCycleValidOutputModes(clickedSide).isEmpty();
+            case FILTER_REMOVER -> this.getTrait(ItemFilterHolderTrait.TRAIT_ID) instanceof ItemFilterHolderTrait;
+            case PIPING, ROTATION -> false;
+        };
+    }
+
+    @Override
+    public void configure(ConfigurationToolAction action, UseOnContext context) {
+        if (context.getLevel().isClientSide() || !this.canConfigure(action, context)) {
+            return;
+        }
+
+        Direction clickedSide = context.getClickedFace();
+        switch (action) {
+            case INSERTION -> this.cycleInputMode(clickedSide);
+            case EXTRACTION -> this.cycleOutputMode(clickedSide);
+            case FILTER_REMOVER -> {
+                if (this.getTrait(ItemFilterHolderTrait.TRAIT_ID) instanceof ItemFilterHolderTrait filterHolder) {
+                    filterHolder.clearFilter(clickedSide);
+                }
+            }
+            case PIPING, ROTATION -> {}
+        }
     }
 
     protected List<MachineIOMode> getCycleValidInputModes(Direction direction) {

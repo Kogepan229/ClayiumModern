@@ -1,2 +1,8 @@
-// 26.1.2	2026-08-03T02:41:20.698642256	Clayium Recipes
+// 26.1.2	2026-08-03T14:26:29.062743173	Clayium Recipes
+2469c508ff756fffb78a1bc41777fe579a442e2f data/clayium/advancement/recipes/tools/clay_rolling_pin_from_smelting.json
+997a3705fea62eac134d6563e80bdd07ed14761c data/clayium/advancement/recipes/tools/clay_slicer_from_smelting.json
+66f2bfe1f03b025a1de7f06a11f2137b4a0cf9fa data/clayium/advancement/recipes/tools/clay_spatula_from_smelting.json
 478651526f1790327b0658c0170295016b8d9438 data/clayium/recipe/bending_machine/clay_plate.json
+a05c06fafce68e2d5bae2c59ad312f05c3d4dbb7 data/clayium/recipe/clay_rolling_pin_from_smelting.json
+2a3db9a98d7c72111333659001de8774a51313d4 data/clayium/recipe/clay_slicer_from_smelting.json
+da9ea3bea2d0a7ed3f44889cf89628651b6d026c data/clayium/recipe/clay_spatula_from_smelting.json

@@ -10,12 +10,16 @@ import net.kogepan.clayium.utils.CEUtils;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.SimpleCookingRecipeBuilder;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.ItemStackTemplate;
+import net.minecraft.world.item.crafting.CookingBookCategory;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.item.crafting.Recipe;
+import net.minecraft.world.level.ItemLike;
 import net.minecraft.world.level.block.Blocks;
 
 import java.util.List;
@@ -40,6 +44,26 @@ public final class ClayiumRecipeProvider extends RecipeProvider {
                 Registries.RECIPE,
                 Clayium.id("bending_machine/clay_plate"));
         this.output.accept(id, clayPlate, null);
+
+        this.smelting(
+                ClayiumItems.RAW_CLAY_ROLLING_PIN.get(),
+                ClayiumItems.CLAY_ROLLING_PIN.get(),
+                "clay_rolling_pin_from_smelting");
+        this.smelting(
+                ClayiumItems.RAW_CLAY_SLICER.get(),
+                ClayiumItems.CLAY_SLICER.get(),
+                "clay_slicer_from_smelting");
+        this.smelting(
+                ClayiumItems.RAW_CLAY_SPATULA.get(),
+                ClayiumItems.CLAY_SPATULA.get(),
+                "clay_spatula_from_smelting");
+    }
+
+    private void smelting(ItemLike ingredient, ItemLike result, String path) {
+        SimpleCookingRecipeBuilder.smelting(
+                Ingredient.of(ingredient), RecipeCategory.TOOLS, CookingBookCategory.MISC, result, 0.1F, 200)
+                .unlockedBy("has_" + path, this.has(ingredient))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Clayium.id(path)));
     }
 
     public static final class Runner extends RecipeProvider.Runner {

@@ -11,7 +11,9 @@ import net.minecraft.world.level.block.Block;
 
 public final class ClayiumTags {
 
-    public static final TagKey<Block> CLAY_TOOLS_BONUS_BLOCK = blockTag("clay_tools_bonus_block");
+    public static final TagKey<Block> CLAY_ORES = blockTag("clay_ores");
+    public static final TagKey<Block> CLAY_SHOVEL_MINEABLE_ORES = blockTag("clay_shovel_mineable_ores");
+    public static final TagKey<Block> CLAY_SHOVEL_FAST_BLOCKS = blockTag("clay_shovel_fast_blocks");
     public static final TagKey<Item> ITEM_FILTER_REMOVERS = itemTag("item_filter_removers");
     public static final TagKey<Item> LITHIUM_INGOTS = ItemTags.create(
             Identifier.fromNamespaceAndPath("c", "ingots/lithium"));
