@@ -12,7 +12,7 @@ import java.util.function.IntSupplier;
 import java.util.function.LongSupplier;
 
 /** Recipe logic for a formed Clay Reactor with laser-driven processing speed. */
-public class ClayReactorRecipeLogic extends BlastFurnaceRecipeLogic {
+public class ClayReactorRecipeLogic extends MultiblockRecipeLogic {
 
     private final LongSupplier laserEnergySupplier;
 

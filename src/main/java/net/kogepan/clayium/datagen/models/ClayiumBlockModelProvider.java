@@ -1,8 +1,7 @@
 package net.kogepan.clayium.datagen.models;
 
 import net.kogepan.clayium.Clayium;
-import net.kogepan.clayium.blockentities.machine.ClayBlastFurnaceBlockEntity;
-import net.kogepan.clayium.blockentities.machine.ClayReactorBlockEntity;
+import net.kogepan.clayium.blockentities.machine.AbstractMultiblockMachineBlockEntity;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 
 import net.minecraft.client.renderer.RenderType;
@@ -244,10 +243,12 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), ALLOY_SMELTER_TEXTURE);
         }
         registerSingleMachine(ClayiumBlocks.CLAY_BLAST_FURNACE.get(), 6, CLAY_BLAST_FURNACE_TEXTURE_UNFORMED,
-                Map.of(ClayBlastFurnaceBlockEntity.FRONT_OVERLAY_VARIANT_FORMED, CLAY_BLAST_FURNACE_TEXTURE_FORMED),
+                Map.of(AbstractMultiblockMachineBlockEntity.FRONT_OVERLAY_VARIANT_FORMED,
+                        CLAY_BLAST_FURNACE_TEXTURE_FORMED),
                 false, false);
         registerSingleMachine(ClayiumBlocks.CLAY_REACTOR.get(), 7, CLAY_REACTOR_TEXTURE_UNFORMED,
-                Map.of(ClayReactorBlockEntity.FRONT_OVERLAY_VARIANT_FORMED, CLAY_REACTOR_TEXTURE_FORMED),
+                Map.of(AbstractMultiblockMachineBlockEntity.FRONT_OVERLAY_VARIANT_FORMED,
+                        CLAY_REACTOR_TEXTURE_FORMED),
                 false, false);
 
         for (var entry : ClayiumBlocks.CLAY_INTERFACE_BLOCKS.int2ObjectEntrySet()) {

@@ -14,20 +14,17 @@ import java.util.List;
 import java.util.function.BooleanSupplier;
 import java.util.function.IntSupplier;
 
-/**
- * Recipe logic for Clay Blast Furnace.
- * Processing is available only when the multiblock structure is formed.
- */
-public class BlastFurnaceRecipeLogic extends EnergyRecipeLogic {
+/** Recipe logic for processing that requires a formed multiblock structure. */
+public class MultiblockRecipeLogic extends EnergyRecipeLogic {
 
     private final BooleanSupplier structureFormedSupplier;
     private final IntSupplier structureTierSupplier;
 
-    public BlastFurnaceRecipeLogic(@NotNull ClayContainerBlockEntity blockEntity,
-                                   @NotNull RecipeType<MachineRecipe> recipeType,
-                                   @NotNull ClayEnergyHolder energyHolder,
-                                   @NotNull BooleanSupplier structureFormedSupplier,
-                                   @NotNull IntSupplier structureTierSupplier) {
+    public MultiblockRecipeLogic(@NotNull ClayContainerBlockEntity blockEntity,
+                                 @NotNull RecipeType<MachineRecipe> recipeType,
+                                 @NotNull ClayEnergyHolder energyHolder,
+                                 @NotNull BooleanSupplier structureFormedSupplier,
+                                 @NotNull IntSupplier structureTierSupplier) {
         super(blockEntity, recipeType, energyHolder);
         this.structureFormedSupplier = structureFormedSupplier;
         this.structureTierSupplier = structureTierSupplier;
@@ -70,10 +67,13 @@ public class BlastFurnaceRecipeLogic extends EnergyRecipeLogic {
         return null;
     }
 
-    public void invalidateProgress() {
+    public boolean invalidateProgress() {
+        boolean persistedStateChanged = this.processingRecipeHolder != null || this.pendingRecipeId != null ||
+                this.currentProgress != 0;
         this.processingRecipeHolder = null;
         this.pendingRecipeId = null;
         this.currentProgress = 0;
         this.canProgress = false;
+        return persistedStateChanged;
     }
 }
