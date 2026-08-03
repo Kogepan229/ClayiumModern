@@ -110,6 +110,12 @@ public class ClayLaserBlockEntity extends ClayContainerBlockEntity implements IC
         }
     }
 
+    @Override
+    public void setRemoved() {
+        this.irradiator.stopIrradiation();
+        super.setRemoved();
+    }
+
     public static boolean shouldIrradiate(boolean hasRedstoneSignal, boolean invertRsCondition) {
         return invertRsCondition ? hasRedstoneSignal : !hasRedstoneSignal;
     }

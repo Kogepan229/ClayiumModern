@@ -1,0 +1,27 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1000000,
+  "duration": 50000,
+  "inputs": [
+    {
+      "amount": 8,
+      "ingredient": {
+        "item": "clayium:advanced_industrial_clay_dust"
+      }
+    },
+    {
+      "amount": 4,
+      "ingredient": {
+        "item": "clayium:lithium_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 8,
+      "id": "clayium:clayium_dust"
+    }
+  ],
+  "recipe_tier": 7,
+  "recipe_type": "clayium:clay_reactor"
+}

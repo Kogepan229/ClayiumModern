@@ -59,6 +59,7 @@ public class LaserReflectorBlockEntity extends BlockEntity
         }
 
         Laser merged = Laser.merge(blockEntity.receivedLasers.values());
+        blockEntity.receivedLasers.clear();
         int prevLength = blockEntity.length;
         Laser prevLaser = blockEntity.irradiatingLaser;
 
@@ -76,6 +77,13 @@ public class LaserReflectorBlockEntity extends BlockEntity
             blockEntity.setChanged();
             level.sendBlockUpdated(pos, state, state, net.minecraft.world.level.block.Block.UPDATE_CLIENTS);
         }
+    }
+
+    @Override
+    public void setRemoved() {
+        this.irradiator.stopIrradiation();
+        this.receivedLasers.clear();
+        super.setRemoved();
     }
 
     @Override
@@ -97,8 +105,8 @@ public class LaserReflectorBlockEntity extends BlockEntity
     @NotNull
     public Direction getDirection() {
         BlockState state = this.getBlockState();
-        if (state.getBlock() instanceof LaserReflectorBlock reflectorBlock) {
-            return state.getValue(reflectorBlock.FACING);
+        if (state.getBlock() instanceof LaserReflectorBlock) {
+            return state.getValue(LaserReflectorBlock.FACING);
         }
         return Direction.NORTH;
     }

@@ -72,10 +72,13 @@ public class ClayLaserIrradiator {
         BlockPos targetPos = this.owner.getBlockPos().relative(direction, length);
         Direction targetSide = direction.getOpposite();
 
-        BlockEntity newTargetBlockEntity = level.getBlockEntity(targetPos);
+        BlockState targetState = level.getBlockState(targetPos);
+        BlockEntity newTargetBlockEntity = targetState.hasBlockEntity() ? level.getBlockEntity(targetPos) : null;
         IClayLaserAcceptor newTargetAcceptor = level.getCapability(
                 ClayiumCapabilities.CLAY_LASER_ACCEPTOR,
                 targetPos,
+                targetState,
+                newTargetBlockEntity,
                 targetSide);
 
         BlockEntity previousTargetBlockEntity = this.previousTarget != null ? this.previousTarget.get() : null;
@@ -85,10 +88,8 @@ public class ClayLaserIrradiator {
 
         if (previousTargetBlockEntity != null && previousTargetBlockEntity != newTargetBlockEntity) {
             Direction previousTargetSide = this.lastDirection.getOpposite();
-            IClayLaserAcceptor previousAcceptor = level.getCapability(
-                    ClayiumCapabilities.CLAY_LASER_ACCEPTOR,
-                    previousTargetBlockEntity.getBlockPos(),
-                    previousTargetSide);
+            IClayLaserAcceptor previousAcceptor = this.getLoadedAcceptor(
+                    level, previousTargetBlockEntity, previousTargetSide);
             if (previousAcceptor != null) {
                 previousAcceptor.acceptLaser(previousTargetSide, null);
             }
@@ -117,10 +118,7 @@ public class ClayLaserIrradiator {
         BlockEntity previousTargetBlockEntity = this.previousTarget != null ? this.previousTarget.get() : null;
         if (previousTargetBlockEntity != null) {
             Direction targetSide = this.lastDirection.getOpposite();
-            IClayLaserAcceptor previousAcceptor = level.getCapability(
-                    ClayiumCapabilities.CLAY_LASER_ACCEPTOR,
-                    previousTargetBlockEntity.getBlockPos(),
-                    targetSide);
+            IClayLaserAcceptor previousAcceptor = this.getLoadedAcceptor(level, previousTargetBlockEntity, targetSide);
             if (previousAcceptor != null) {
                 previousAcceptor.acceptLaser(targetSide, null);
             }
@@ -128,6 +126,17 @@ public class ClayLaserIrradiator {
 
         this.previousTarget = null;
         this.resetBlockIrradiationState();
+    }
+
+    @Nullable
+    private IClayLaserAcceptor getLoadedAcceptor(@NotNull Level level, @NotNull BlockEntity blockEntity,
+                                                 @NotNull Direction targetSide) {
+        BlockPos targetPos = blockEntity.getBlockPos();
+        if (blockEntity.isRemoved() || !level.isLoaded(targetPos)) {
+            return null;
+        }
+        return level.getCapability(ClayiumCapabilities.CLAY_LASER_ACCEPTOR,
+                targetPos, blockEntity.getBlockState(), blockEntity, targetSide);
     }
 
     public long getTotalEnergyIrradiated() {

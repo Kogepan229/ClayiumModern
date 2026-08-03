@@ -2,6 +2,7 @@ package net.kogepan.clayium.datagen.models;
 
 import net.kogepan.clayium.Clayium;
 import net.kogepan.clayium.blockentities.machine.ClayBlastFurnaceBlockEntity;
+import net.kogepan.clayium.blockentities.machine.ClayReactorBlockEntity;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 
 import net.minecraft.client.renderer.RenderType;
@@ -91,8 +92,13 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
             .id("block/machine/clay_blast_furnace_unformed");
     private static final ResourceLocation CLAY_BLAST_FURNACE_TEXTURE_FORMED = Clayium
             .id("block/machine/clay_blast_furnace_formed");
+    private static final ResourceLocation CLAY_REACTOR_TEXTURE_UNFORMED = Clayium
+            .id("block/machine/clay_reactor_unformed");
+    private static final ResourceLocation CLAY_REACTOR_TEXTURE_FORMED = Clayium
+            .id("block/machine/clay_reactor_formed");
     private static final ResourceLocation CHUNK_LOADER_TEXTURE = Clayium.id("block/machine/chunk_loader");
     private static final ResourceLocation CLAY_INTERFACE_TEXTURE = Clayium.id("block/machine/clay_interface");
+    private static final ResourceLocation LASER_INTERFACE_TEXTURE = Clayium.id("block/machine/laser_interface");
     private static final ResourceLocation CLAY_LASER_TEXTURE = Clayium.id("block/machine/clay_laser");
     private static final ResourceLocation BLOCK_BREAKER_TEXTURE = Clayium.id("block/machine/block_breaker");
     private static final ResourceLocation BLOCK_BREAKER_ACTIVE_TEXTURE = Clayium
@@ -240,10 +246,16 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         registerSingleMachine(ClayiumBlocks.CLAY_BLAST_FURNACE.get(), 6, CLAY_BLAST_FURNACE_TEXTURE_UNFORMED,
                 Map.of(ClayBlastFurnaceBlockEntity.FRONT_OVERLAY_VARIANT_FORMED, CLAY_BLAST_FURNACE_TEXTURE_FORMED),
                 false, false);
+        registerSingleMachine(ClayiumBlocks.CLAY_REACTOR.get(), 7, CLAY_REACTOR_TEXTURE_UNFORMED,
+                Map.of(ClayReactorBlockEntity.FRONT_OVERLAY_VARIANT_FORMED, CLAY_REACTOR_TEXTURE_FORMED),
+                false, false);
 
         for (var entry : ClayiumBlocks.CLAY_INTERFACE_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CLAY_INTERFACE_TEXTURE, OVERLAY_ALL_MODEL,
                     false, false);
+        }
+        for (var entry : ClayiumBlocks.LASER_INTERFACE_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), LASER_INTERFACE_TEXTURE);
         }
 
         registerFilteredContainers();

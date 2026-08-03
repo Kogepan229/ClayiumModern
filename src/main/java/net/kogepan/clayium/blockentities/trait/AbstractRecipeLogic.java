@@ -3,6 +3,7 @@ package net.kogepan.clayium.blockentities.trait;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
 import net.kogepan.clayium.recipes.ItemIngredientStack;
+import net.kogepan.clayium.recipes.MachineRecipeMatcher;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.utils.TransferUtils;
 
@@ -238,6 +239,9 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
     }
 
     protected boolean prepareRecipe(RecipeHolder<?> holder, List<ItemStack> inventoryStacks) {
+        List<ItemIngredientStack> recipeInputs = getRecipeInputs(holder);
+        int[] matchedSlots = MachineRecipeMatcher.findMatches(recipeInputs, inventoryStacks);
+        if (matchedSlots == null) return false;
         if (!this.drawEnergy(getRecipeCEPerTick(holder), true)) return false;
         if (!hasEnoughOutputSpace(holder)) {
             noEnoughOutputSpace = true;
@@ -246,24 +250,9 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
 
         IItemHandlerModifiable machineInventory = blockEntity.getInputInventory();
 
-        // Consume ingredients;
-        for (var ingredient : getRecipeInputs(holder)) {
-            for (var inventoryStack : inventoryStacks) {
-                if (!ingredient.test(inventoryStack)) continue;
-                ItemStack stackToConsume = inventoryStack.copy();
-                stackToConsume.setCount(ingredient.getAmount());
-
-                for (int i = 0; i < machineInventory.getSlots(); i++) {
-                    ItemStack machineStack = machineInventory.getStackInSlot(i);
-                    if (machineStack.isEmpty() || !machineStack.is(stackToConsume.getItem())) continue;
-
-                    ItemStack extracted = machineInventory.extractItem(i, stackToConsume.getCount(), false);
-                    stackToConsume.setCount(stackToConsume.getCount() - extracted.getCount());
-                    if (stackToConsume.isEmpty()) {
-                        break;
-                    }
-                }
-            }
+        for (int ingredientIndex = 0; ingredientIndex < recipeInputs.size(); ingredientIndex++) {
+            machineInventory.extractItem(matchedSlots[ingredientIndex],
+                    recipeInputs.get(ingredientIndex).getAmount(), false);
         }
 
         processingRecipeHolder = holder;

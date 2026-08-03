@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T18:02:14.423160309	Loot Tables
+// 1.21.1	2026-08-03T20:51:44.338050846	Loot Tables
 1ac3e13377b179fa98ca4ee15ed27da063c60007 data/clayium/loot_table/blocks/activator.json
 5bfffa4a0446d3f12e10d757aa42ea04bd808410 data/clayium/loot_table/blocks/alloy_smelter_6.json
 464cecdb1cea9558a73ec9d43ffbfe00caecb8e7 data/clayium/loot_table/blocks/assembler_10.json
@@ -62,6 +62,7 @@ f63893cdb8b6a95179033e9995ee46d070e6c137 data/clayium/loot_table/blocks/clay_int
 5876d2330f46c7df3570226b37809e764d5349f4 data/clayium/loot_table/blocks/clay_leaves.json
 f565aa074c31229ac3194159246e9cd728a01c54 data/clayium/loot_table/blocks/clay_log.json
 97bf0fefd2cc82ad71b870c24c8856aa9c556750 data/clayium/loot_table/blocks/clay_ore.json
+91716242971537c69a102859ac4d31445aced669 data/clayium/loot_table/blocks/clay_reactor.json
 ebf6b55b72963d28003699bc74f9e8fe16d4aa50 data/clayium/loot_table/blocks/clay_sapling.json
 289f2435fb39b54cab3a9f657fc896b59a259580 data/clayium/loot_table/blocks/clay_work_table.json
 e5ecea24145919f4cd7bc4f32528d2882d689d9a data/clayium/loot_table/blocks/cobblestone_generator_1.json
@@ -110,6 +111,13 @@ b8de2e847afe808615318524bf931907c03cefcb data/clayium/loot_table/blocks/grinder_
 9beda566987bc5dcbe8057c51da5e730eff1965a data/clayium/loot_table/blocks/inscriber_3.json
 2db4632962f952d5851afdc5be6c41a2f62bfa36 data/clayium/loot_table/blocks/inscriber_4.json
 4f977e91fd1a23ccb931077c55f086e5a3ddda13 data/clayium/loot_table/blocks/large_dense_clay_ore.json
+0ac023d38a462dd2e775549c316434116459d2d6 data/clayium/loot_table/blocks/laser_interface_10.json
+42d68d44c0cdf3d142403abf8441ce041de3ea6c data/clayium/loot_table/blocks/laser_interface_11.json
+fc77fa9794f9a50b5b9fb3116d6b3549c551d446 data/clayium/loot_table/blocks/laser_interface_12.json
+5f2d8ec1aae071a80082e93193b06f5f3639e4d4 data/clayium/loot_table/blocks/laser_interface_13.json
+b74b7fb950444dd205382d7910bde77ed9f010a9 data/clayium/loot_table/blocks/laser_interface_7.json
+3512b9a262ffbefa592875563d1d99cd3b6b201a data/clayium/loot_table/blocks/laser_interface_8.json
+f4ba9aa3489dd885c0c939307fdc6695c8f2b06a data/clayium/loot_table/blocks/laser_interface_9.json
 080ada3fcba7f09a36d82ce49a109c2687b78571 data/clayium/loot_table/blocks/laser_reflector.json
 5a813f520e03d5f5db49f206163b12cdeec9b002 data/clayium/loot_table/blocks/lathe_1.json
 7dd534db941044ab16a9aa0b43a5e78d00d5b1d9 data/clayium/loot_table/blocks/lathe_2.json

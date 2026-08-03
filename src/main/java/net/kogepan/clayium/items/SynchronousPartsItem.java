@@ -1,6 +1,6 @@
 package net.kogepan.clayium.items;
 
-import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
+import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.capability.ISynchronizedInterface;
 
 import net.minecraft.network.chat.Component;
@@ -26,11 +26,16 @@ public class SynchronousPartsItem extends TieredItem {
     @Override
     public InteractionResult onItemUseFirst(@NotNull ItemStack stack, @NotNull UseOnContext context) {
         var level = context.getLevel();
-        var clickedBlockEntity = level.getBlockEntity(context.getClickedPos());
-        if (!(clickedBlockEntity instanceof ClayInterfaceBlockEntity)) {
-            return InteractionResult.PASS;
-        }
-        if (!(clickedBlockEntity instanceof ISynchronizedInterface synchronizedInterface)) {
+        var clickedPos = context.getClickedPos();
+        var clickedState = level.getBlockState(clickedPos);
+        var clickedBlockEntity = clickedState.hasBlockEntity() ? level.getBlockEntity(clickedPos) : null;
+        ISynchronizedInterface synchronizedInterface = level.getCapability(
+                ClayiumCapabilities.SYNCHRONIZED_INTERFACE,
+                clickedPos,
+                clickedState,
+                clickedBlockEntity,
+                context.getClickedFace());
+        if (synchronizedInterface == null) {
             return InteractionResult.PASS;
         }
         if (level.isClientSide()) {

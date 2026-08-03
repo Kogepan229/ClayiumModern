@@ -165,5 +165,8 @@ public final class ColoredDustTints {
         int[] impureGlowstone = { 0xFF979746, 0xFF3D3D1E, 0xFFCCCC66 };
         register(ClayiumItems.IMPURE_REDSTONE_DUST, impureRedstone[0], impureRedstone[1], impureRedstone[2]);
         register(ClayiumItems.IMPURE_GLOWSTONE_DUST, impureGlowstone[0], impureGlowstone[1], impureGlowstone[2]);
+
+        // Organic Clay (Original: 136,144,173 / 106,44,43 / 146,164,183)
+        register(ClayiumItems.ORGANIC_CLAY_DUST, 0xFF8890AD, 0xFF6A2C2B, 0xFF92A4B7);
     }
 }

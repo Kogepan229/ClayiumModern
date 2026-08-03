@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1000,
+  "duration": 200,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:clay_log"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:organic_clay_dust"
+    }
+  ],
+  "recipe_tier": 5,
+  "recipe_type": "clayium:grinder"
+}

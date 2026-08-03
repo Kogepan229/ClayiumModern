@@ -197,12 +197,12 @@ public class Clayium {
                 ClayiumBlockEntityTypes.CLAY_CRAFTING_BOARD_BLOCK_ENTITY.get(),
                 (blockEntity, side) -> ((ClayCraftingBoardBlockEntity) blockEntity).getInventory());
 
-        event.registerBlockEntity(
-                ClayiumCapabilities.SYNCHRONIZED_INTERFACE,
-                ClayiumBlockEntityTypes.CLAY_INTERFACE_BLOCK_ENTITY.get(),
-                (blockEntity, side) -> blockEntity instanceof ISynchronizedInterface sync ? sync : null);
-
         for (DeferredHolder<BlockEntityType<?>, ?> type : ClayiumBlockEntityTypes.BLOCK_ENTITY_TYPES.getEntries()) {
+            event.registerBlockEntity(
+                    ClayiumCapabilities.SYNCHRONIZED_INTERFACE,
+                    type.get(),
+                    (blockEntity, side) -> blockEntity instanceof ISynchronizedInterface sync ? sync : null);
+
             event.registerBlockEntity(
                     ClayiumCapabilities.CLAY_LASER_SOURCE,
                     type.get(),

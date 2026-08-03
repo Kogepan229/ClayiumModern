@@ -51,6 +51,8 @@ public class GrinderRecipeProvider {
         create(recipeOutput, "large_dense_clay_ore",
                 ClayiumBlocks.LARGE_DENSE_CLAY_ORE.get().asItem().getDefaultInstance(),
                 ClayiumItems.DENSE_CLAY_DUST.toStack(5), CEUtils.TEN_MICRO_CE, 9, 2);
+        create(recipeOutput, "clay_log_to_organic_clay", new ItemStack(ClayiumBlocks.CLAY_LOG.get()),
+                ClayiumItems.ORGANIC_CLAY_DUST.toStack(), CEUtils.ONE_MILLI_CE * 10, 200, 5);
 
         // Clay block grinding
         create(recipeOutput, "clay_block", Blocks.CLAY.asItem().getDefaultInstance(),

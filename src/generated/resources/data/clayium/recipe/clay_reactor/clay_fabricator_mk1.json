@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 3000000,
+  "duration": 100000000,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:machine_hull_8"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:solar_clay_fabricator_7"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:clay_fabricator_8"
+    }
+  ],
+  "recipe_tier": 8,
+  "recipe_type": "clayium:clay_reactor"
+}

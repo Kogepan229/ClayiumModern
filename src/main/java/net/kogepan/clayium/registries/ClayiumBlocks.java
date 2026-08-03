@@ -29,6 +29,7 @@ import net.kogepan.clayium.blocks.machine.ClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.ClayFabricatorBlock;
 import net.kogepan.clayium.blocks.machine.ClayInterfaceBlock;
 import net.kogepan.clayium.blocks.machine.ClayLaserBlock;
+import net.kogepan.clayium.blocks.machine.ClayReactorBlock;
 import net.kogepan.clayium.blocks.machine.CobblestoneGeneratorBlock;
 import net.kogepan.clayium.blocks.machine.CreativeCESourceBlock;
 import net.kogepan.clayium.blocks.machine.CuttingMachineBlock;
@@ -38,6 +39,7 @@ import net.kogepan.clayium.blocks.machine.ElectrolysisReactorBlock;
 import net.kogepan.clayium.blocks.machine.EnergeticClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.GrinderBlock;
 import net.kogepan.clayium.blocks.machine.InscriberBlock;
+import net.kogepan.clayium.blocks.machine.LaserInterfaceBlock;
 import net.kogepan.clayium.blocks.machine.LatheBlock;
 import net.kogepan.clayium.blocks.machine.MillingMachineBlock;
 import net.kogepan.clayium.blocks.machine.PipeDrawingMachineBlock;
@@ -47,8 +49,10 @@ import net.kogepan.clayium.blocks.machine.SolarClayFabricatorBlock;
 import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
 import net.kogepan.clayium.blocks.machine.WireDrawingMachineBlock;
 import net.kogepan.clayium.items.blockitem.ActivatorBlockItem;
+import net.kogepan.clayium.items.blockitem.ClayReactorBlockItem;
 import net.kogepan.clayium.items.blockitem.DistributorBlockItem;
 import net.kogepan.clayium.items.blockitem.EnergeticClayCondenserBlockItem;
+import net.kogepan.clayium.items.blockitem.LaserInterfaceBlockItem;
 import net.kogepan.clayium.items.blockitem.LaserReflectorBlockItem;
 import net.kogepan.clayium.items.blockitem.QuartzCrucibleBlockItem;
 import net.kogepan.clayium.items.blockitem.StorageContainerBlockItem;
@@ -421,6 +425,13 @@ public class ClayiumBlocks {
                 () -> new TieredBlockItem(CLAY_BLAST_FURNACE.get(), new Item.Properties(), 6));
     }
 
+    public static final DeferredBlock<ClayReactorBlock> CLAY_REACTOR = BLOCKS.register(
+            "clay_reactor", ClayReactorBlock::new);
+    static {
+        ClayiumItems.ITEMS.register("clay_reactor",
+                () -> new ClayReactorBlockItem(CLAY_REACTOR.get(), new Item.Properties()));
+    }
+
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CLAY_INTERFACE_BLOCKS;
     static {
         Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
@@ -428,6 +439,21 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("clay_interface", i, ClayInterfaceBlock::new));
         }
         CLAY_INTERFACE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<LaserInterfaceBlock>> LASER_INTERFACE_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<LaserInterfaceBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int tier = 7; tier <= 13; tier++) {
+            int currentTier = tier;
+            String name = "laser_interface_" + currentTier;
+            DeferredBlock<LaserInterfaceBlock> block = BLOCKS.register(name,
+                    () -> new LaserInterfaceBlock(currentTier));
+            ClayiumItems.ITEMS.register(name,
+                    () -> new LaserInterfaceBlockItem(block.get(), new Item.Properties(), currentTier));
+            map.put(currentTier, block);
+        }
+        LASER_INTERFACE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> AUTO_CLAY_CONDENSER_BLOCKS;

@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000000,
+  "duration": 1000000000,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:advanced_industrial_clay_dust"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:impure_ultimate_alloy_ingot"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:ultimate_alloy_ingot"
+    }
+  ],
+  "recipe_tier": 8,
+  "recipe_type": "clayium:clay_reactor"
+}

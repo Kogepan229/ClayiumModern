@@ -249,7 +249,11 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
     protected void saveAdditional(@NotNull CompoundTag tag, HolderLookup.@NotNull Provider provider) {
         super.saveAdditional(tag, provider);
         tag.putBoolean(CAN_SYNCHRONIZE_TAG, this.canSynchronize);
-        this.writeLinkedTargetTag(tag, provider, true);
+        if (this.linkSource == LinkSource.MULTIBLOCK) {
+            tag.putBoolean(LINKED_TARGET_PRESENT_TAG, false);
+        } else {
+            this.writeLinkedTargetTag(tag, provider, true);
+        }
     }
 
     @Override
@@ -620,8 +624,9 @@ public class ClayInterfaceBlockEntity extends ClayContainerBlockEntity implement
 
     private void markLinkStateChanged() {
         this.setChanged();
-        if (this.level != null && !this.level.isClientSide()) {
-            this.level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(),
+        Level level = this.level;
+        if (level != null && !level.isClientSide()) {
+            level.sendBlockUpdated(this.worldPosition, this.getBlockState(), this.getBlockState(),
                     Block.UPDATE_CLIENTS | Block.UPDATE_KNOWN_SHAPE);
         }
     }

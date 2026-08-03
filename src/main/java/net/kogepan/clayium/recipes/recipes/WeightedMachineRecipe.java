@@ -3,6 +3,7 @@ package net.kogepan.clayium.recipes.recipes;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.ItemIngredientStack;
+import net.kogepan.clayium.recipes.MachineRecipeMatcher;
 import net.kogepan.clayium.recipes.WeightedItemStack;
 import net.kogepan.clayium.recipes.inputs.MachineRecipeInput;
 import net.kogepan.clayium.utils.ProgressionRates;
@@ -46,19 +47,7 @@ public record WeightedMachineRecipe(
     }
 
     public boolean matchesItems(@NotNull List<ItemStack> inputItems) {
-        for (ItemIngredientStack ingredient : this.inputs) {
-            boolean matched = false;
-            for (ItemStack inputItem : inputItems) {
-                if (ingredient.test(inputItem) && inputItem.getCount() >= ingredient.getAmount()) {
-                    matched = true;
-                    break;
-                }
-            }
-            if (!matched) {
-                return false;
-            }
-        }
-        return true;
+        return MachineRecipeMatcher.matches(this.inputs, inputItems);
     }
 
     public int totalWeight() {

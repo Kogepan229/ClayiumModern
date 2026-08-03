@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000,
+  "duration": 2000,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:impure_redstone_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:redstone"
+    }
+  ],
+  "recipe_tier": 7,
+  "recipe_type": "clayium:clay_reactor"
+}

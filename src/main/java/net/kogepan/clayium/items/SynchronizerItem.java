@@ -1,7 +1,7 @@
 package net.kogepan.clayium.items;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
-import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
+import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.capability.ISynchronizedInterface;
 import net.kogepan.clayium.registries.ClayiumDataComponents;
 
@@ -31,13 +31,19 @@ public class SynchronizerItem extends Item {
     public InteractionResult onItemUseFirst(@NotNull ItemStack stack, @NotNull UseOnContext context) {
         var level = context.getLevel();
         var clickedPos = context.getClickedPos();
-        var clickedBlockEntity = level.getBlockEntity(clickedPos);
+        var clickedState = level.getBlockState(clickedPos);
+        var clickedBlockEntity = clickedState.hasBlockEntity() ? level.getBlockEntity(clickedPos) : null;
+        ISynchronizedInterface targetInterface = level.getCapability(
+                ClayiumCapabilities.SYNCHRONIZED_INTERFACE,
+                clickedPos,
+                clickedState,
+                clickedBlockEntity,
+                context.getClickedFace());
 
         boolean isContainerTarget = clickedBlockEntity instanceof ClayContainerBlockEntity container &&
-                !(clickedBlockEntity instanceof ClayInterfaceBlockEntity) &&
+                targetInterface == null &&
                 container.acceptsClayInterfaceSynchronization();
-        boolean isInterfaceTarget = clickedBlockEntity instanceof ClayInterfaceBlockEntity;
-        if (!isContainerTarget && !isInterfaceTarget) {
+        if (!isContainerTarget && targetInterface == null) {
             return InteractionResult.PASS;
         }
         if (level.isClientSide()) {
@@ -56,32 +62,32 @@ public class SynchronizerItem extends Item {
             return InteractionResult.SUCCESS;
         }
 
-        if (isInterfaceTarget && clickedBlockEntity instanceof ClayInterfaceBlockEntity targetInterface) {
-            GlobalPos savedTarget = stack.get(ClayiumDataComponents.SYNCHRONIZER_TARGET.get());
-            if (savedTarget == null) {
-                targetInterface.clearLinkedTarget();
-                player.displayClientMessage(Component.translatable("item.clayium.synchronizer.unlinked"), true);
-                return InteractionResult.SUCCESS;
-            }
-            if (!targetInterface.canSynchronize()) {
-                player.displayClientMessage(
-                        Component.translatable("item.clayium.synchronizer.requires_synchronous_parts"),
-                        true);
-                return InteractionResult.SUCCESS;
-            }
+        if (targetInterface == null) {
+            return InteractionResult.PASS;
+        }
 
-            boolean linked = targetInterface.setLinkedTarget(savedTarget, ISynchronizedInterface.LinkSource.MANUAL);
-            if (linked) {
-                stack.remove(ClayiumDataComponents.SYNCHRONIZER_TARGET.get());
-                player.displayClientMessage(createTargetMessage("item.clayium.synchronizer.linked", savedTarget), true);
-            } else {
-                player.displayClientMessage(createTargetMessage("item.clayium.synchronizer.link_failed", savedTarget),
-                        true);
-            }
+        GlobalPos savedTarget = stack.get(ClayiumDataComponents.SYNCHRONIZER_TARGET.get());
+        if (savedTarget == null) {
+            targetInterface.clearLinkedTarget();
+            player.displayClientMessage(Component.translatable("item.clayium.synchronizer.unlinked"), true);
+            return InteractionResult.SUCCESS;
+        }
+        if (!targetInterface.canSynchronize()) {
+            player.displayClientMessage(
+                    Component.translatable("item.clayium.synchronizer.requires_synchronous_parts"),
+                    true);
             return InteractionResult.SUCCESS;
         }
 
-        return InteractionResult.PASS;
+        boolean linked = targetInterface.setLinkedTarget(savedTarget, ISynchronizedInterface.LinkSource.MANUAL);
+        if (linked) {
+            stack.remove(ClayiumDataComponents.SYNCHRONIZER_TARGET.get());
+            player.displayClientMessage(createTargetMessage("item.clayium.synchronizer.linked", savedTarget), true);
+        } else {
+            player.displayClientMessage(createTargetMessage("item.clayium.synchronizer.link_failed", savedTarget),
+                    true);
+        }
+        return InteractionResult.SUCCESS;
     }
 
     @Override

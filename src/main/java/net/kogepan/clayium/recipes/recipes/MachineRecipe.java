@@ -6,6 +6,7 @@ import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
 import net.kogepan.clayium.client.ldlib.textures.XEITextures;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ItemIngredientStack;
+import net.kogepan.clayium.recipes.MachineRecipeMatcher;
 import net.kogepan.clayium.recipes.SimpleMachineRecipeType;
 import net.kogepan.clayium.recipes.inputs.MachineRecipeInput;
 import net.kogepan.clayium.utils.CEUtils;
@@ -85,24 +86,7 @@ public record MachineRecipe(
      * @return true if all ingredients match
      */
     public boolean matchesItems(@NotNull List<ItemStack> inputItems) {
-        for (ItemIngredientStack ingredient : this.inputs) {
-            boolean isMatched = false;
-            for (int i = 0; i < inputItems.size(); i++) {
-                ItemStack itemStack = inputItems.get(i);
-
-                // Check if this slot matches the ingredient (both item type and amount)
-                if (ingredient.test(itemStack) && itemStack.getCount() >= ingredient.getAmount()) {
-                    isMatched = true;
-                    break;
-                }
-            }
-            // If one of the ingredients is not matched, return false
-            if (!isMatched) {
-                return false;
-            }
-        }
-        // All ingredients are matched
-        return true;
+        return MachineRecipeMatcher.matches(this.inputs, inputItems);
     }
 
     /**

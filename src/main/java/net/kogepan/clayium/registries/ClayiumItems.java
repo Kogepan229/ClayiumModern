@@ -68,6 +68,7 @@ public class ClayiumItems {
     public static final DeferredItem<Item> ADVANCED_CIRCUIT = ITEMS.registerItem("advanced_circuit", p -> new TieredItem(p, 5));
     public static final DeferredItem<Item> PRECISION_CIRCUIT = ITEMS.registerItem("precision_circuit", p -> new TieredItem(p, 6));
     public static final DeferredItem<Item> INTEGRATED_CIRCUIT = ITEMS.registerItem("integrated_circuit", p -> new TieredItem(p, 7));
+    public static final DeferredItem<Item> LASER_PARTS = ITEMS.registerItem("laser_parts", p -> new TieredItem(p, 7));
     public static final DeferredItem<Item> CLAY_CORE = ITEMS.registerItem("clay_core", ClayCoreItem::new);
     public static final DeferredItem<Item> CLAY_BRAIN = ITEMS.registerItem("clay_brain", p -> new TieredItem(p, 9));
     public static final DeferredItem<Item> CLAY_SPIRIT = ITEMS.registerItem("clay_spirit", p -> new TieredItem(p, 10));
@@ -133,6 +134,8 @@ public class ClayiumItems {
     public static final DeferredItem<Item> INDUSTRIAL_CLAY_DUST = ITEMS.registerItem("industrial_clay_dust", p -> new TieredItem(p, 3));
     public static final DeferredItem<Item> ADVANCED_INDUSTRIAL_CLAY_DUST = ITEMS.registerItem("advanced_industrial_clay_dust", p -> new TieredItem(p, 4));
     public static final DeferredItem<Item> ENERGIZED_CLAY_DUST = ITEMS.registerItem("energized_clay_dust", p -> new TieredItem(p, 3));
+    public static final DeferredItem<Item> EXCITED_CLAY_DUST = ITEMS.registerItem("excited_clay_dust", p -> new TieredItem(p, 7));
+    public static final DeferredItem<Item> ORGANIC_CLAY_DUST = ITEMS.registerItem("organic_clay_dust", p -> new TieredItem(p, 10));
     public static final DeferredItem<Item> INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("industrial_clay_plate", p -> new TieredItem(p, 3));
     public static final DeferredItem<Item> LARGE_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("large_industrial_clay_plate", p -> new TieredItem(p, 3));
     public static final DeferredItem<Item> ADVANCED_INDUSTRIAL_CLAY_PLATE = ITEMS.registerItem("advanced_industrial_clay_plate", p -> new TieredItem(p, 4));
@@ -219,6 +222,8 @@ public class ClayiumItems {
     // Antimatter matter (gem)
     public static final DeferredItem<Item> ANTIMATTER_MATTER = ITEMS.registerItem("antimatter_matter", p -> new TieredItem(p, 10));
     public static final DeferredItem<Item> PURE_ANTIMATTER_MATTER = ITEMS.registerItem("pure_antimatter_matter", p -> new TieredItem(p, 11));
+    public static final DeferredItem<Item> ANTIMATTER_SEED = ITEMS.registerItem("antimatter_seed", p -> new TieredItem(p, 9));
+    public static final DeferredItem<Item> TELEPORTATION_PARTS = ITEMS.registerItem("teleportation_parts", p -> new TieredItem(p, 11));
     public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_1 = ITEMS.registerItem("compressed_pure_antimatter_1", p -> new TieredItem(p, 11));
     public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_2 = ITEMS.registerItem("compressed_pure_antimatter_2", p -> new TieredItem(p, 11));
     public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_3 = ITEMS.registerItem("compressed_pure_antimatter_3", p -> new TieredItem(p, 11));

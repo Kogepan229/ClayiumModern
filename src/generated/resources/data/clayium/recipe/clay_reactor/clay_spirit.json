@@ -1,0 +1,27 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100000000,
+  "duration": 10000000000000,
+  "inputs": [
+    {
+      "amount": 6,
+      "ingredient": {
+        "item": "clayium:clay_brain"
+      }
+    },
+    {
+      "amount": 32,
+      "ingredient": {
+        "item": "clayium:excited_clay_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:clay_spirit"
+    }
+  ],
+  "recipe_tier": 9,
+  "recipe_type": "clayium:clay_reactor"
+}

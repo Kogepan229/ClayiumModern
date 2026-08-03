@@ -74,6 +74,11 @@ public class AssemblerRecipeProvider {
         create(recipeOutput, "activator", new ItemStack(ClayiumBlocks.AZ91D_ALLOY_HULL.get()), ClayiumItems.ADVANCED_CIRCUIT.toStack(), new ItemStack(ClayiumBlocks.ACTIVATOR.get()), CEUtils.milliCeToLong(100), 60, 6);
         create(recipeOutput, "synchronizer", ClayiumItems.AZ91D_ALLOY_PLATE.toStack(3), ClayiumItems.SYNCHRONOUS_PARTS.toStack(2), ClayiumItems.SYNCHRONIZER.toStack(), CEUtils.milliCeToLong(100), 20, 6);
         create(recipeOutput, "integrated_circuit", ClayiumItems.PRECISION_CIRCUIT.toStack(), ClayiumItems.ENERGIZED_CLAY_DUST.toStack(32), ClayiumItems.INTEGRATED_CIRCUIT.toStack(), CEUtils.milliCeToLong(100), 1200, 6);
+        create(recipeOutput, "laser_parts", ClayiumItems.CLAY_ENERGY_EXCITOR.toStack(), ClayiumItems.INTEGRATED_CIRCUIT.toStack(), ClayiumItems.LASER_PARTS.toStack(), CEUtils.milliCeToLong(100), 20, 6);
+        for (int tier = 7; tier <= 13; tier++) {
+            create(recipeOutput, "laser_interface_" + tier, new ItemStack(ClayiumBlocks.CLAY_BUFFERS.get(tier).get()), ClayiumItems.LASER_PARTS.toStack(), new ItemStack(ClayiumBlocks.LASER_INTERFACE_BLOCKS.get(tier).get()), CEUtils.ceToLong(Math.pow(10.0D, tier - 7)), 120, 6);
+        }
+        create(recipeOutput, "clay_reactor", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(7).get()), new ItemStack(ClayiumBlocks.LASER_INTERFACE_BLOCKS.get(7).get()), new ItemStack(ClayiumBlocks.CLAY_REACTOR.get()), CEUtils.ceToLong(1), 1200, 6);
         create(recipeOutput, "synchronous_parts", ClayiumItems.BERYLLIUM_DUST.toStack(8), ClayiumItems.INTEGRATED_CIRCUIT.toStack(), ClayiumItems.SYNCHRONOUS_PARTS.toStack(), CEUtils.milliCeToLong(100), 432000, 6);
         create(recipeOutput, "assembler_10", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(10).get()), new ItemStack(ClayiumBlocks.ASSEMBLER_BLOCKS.get(6).get()), new ItemStack(ClayiumBlocks.ASSEMBLER_BLOCKS.get(10).get()), CEUtils.ceToLong(1000), 40, 6);
         create(recipeOutput, "mossy_stone_bricks", new ItemStack(Blocks.STONE_BRICKS), new ItemStack(Blocks.VINE), new ItemStack(Blocks.MOSSY_STONE_BRICKS), CEUtils.milliCeToLong(100), 20, 6);
