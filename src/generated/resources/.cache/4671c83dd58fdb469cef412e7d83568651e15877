@@ -1,5 +1,6 @@
-// 1.21.1	2026-08-03T17:09:01.383602036	Block States: clayium
+// 1.21.1	2026-08-03T17:33:47.627857201	Block States: clayium
 5fa6addad5b9437d4f362a76df96c9299a80fb76 assets/clayium/blockstates/activator.json
+0a951ef22b4c8cf4cc6dfa69c463ad79e34078be assets/clayium/blockstates/alloy_smelter_6.json
 3f559b0d6dc8509619ef881bb7656e7de7c0d86c assets/clayium/blockstates/assembler_10.json
 05f42d589023a9caa0b4c6ba3de08f0c2f4d7201 assets/clayium/blockstates/assembler_3.json
 4fc90db89efbc74ba7f7080e35295db1c4b1c152 assets/clayium/blockstates/assembler_4.json
@@ -167,6 +168,7 @@ bfed7736530ab9ab3c5dba989859780517708448 assets/clayium/blockstates/wire_drawing
 b193a4c406648d11ea756e6134eb86386ca647bb assets/clayium/blockstates/wire_drawing_machine_4.json
 a6156bb8f7c116bb8f386134ed4f86fb9ecced62 assets/clayium/blockstates/zk60a_alloy_hull.json
 77778d27a966cb7b539a9f56a077d42c47d845e3 assets/clayium/models/block/activator.json
+e1cc526794a89e0346545bebf0e9f5ebc78a75d3 assets/clayium/models/block/alloy_smelter_6.json
 788231520324ec2c3861c6c23976fe920adc72a3 assets/clayium/models/block/assembler_10.json
 9b5f335daea9368e45ba9f6592cd8c9e489323b2 assets/clayium/models/block/assembler_3.json
 290b123b5a5a7a6f084addcc86ad8c22aad65cac assets/clayium/models/block/assembler_4.json
@@ -336,6 +338,7 @@ de6797a0a88beffb3bcf99c6be58ff966cc1bc53 assets/clayium/models/block/wire_drawin
 9b5057eaff19a23ecfa76dd25d94bc3e5feb34fe assets/clayium/models/block/wire_drawing_machine_4.json
 a21639b3c2b5434193461f0c8657e8d6bbbf6bf9 assets/clayium/models/block/zk60a_alloy_hull.json
 f5f0f0a5b7a421d70b36e7af979ca41f5cb0e1e3 assets/clayium/models/item/activator.json
+857330a78995b3969575c42e53b720e6832233c5 assets/clayium/models/item/alloy_smelter_6.json
 9bb550e8767559df287330f53d872b3cebe67c47 assets/clayium/models/item/assembler_10.json
 d06ff20875948acaaaa5e23b369abab1117cdb4d assets/clayium/models/item/assembler_3.json
 7d766f267f27d5ece624bb9d6a87ab49ee7ec352 assets/clayium/models/item/assembler_4.json

@@ -202,7 +202,10 @@ public class ClayiumItems {
     // Additional ingots (3-layer tinted)
     public static final DeferredItem<Item> SILICONE_INGOT = ITEMS.registerItem("silicone_ingot", Item::new);
     public static final DeferredItem<Item> ALUMINIUM_INGOT = ITEMS.registerItem("aluminium_ingot", Item::new);
+    public static final DeferredItem<Item> MAGNESIUM_INGOT = ITEMS.registerItem("magnesium_ingot", Item::new);
     public static final DeferredItem<Item> LITHIUM_INGOT = ITEMS.registerItem("lithium_ingot", Item::new);
+    public static final DeferredItem<Item> ZIRCONIUM_INGOT = ITEMS.registerItem("zirconium_ingot", Item::new);
+    public static final DeferredItem<Item> ZINC_INGOT = ITEMS.registerItem("zinc_ingot", Item::new);
     public static final DeferredItem<Item> IMPURE_ALUMINIUM_INGOT = ITEMS.registerItem("impure_aluminium_ingot", Item::new);
     public static final DeferredItem<Item> CLAY_STEEL_INGOT = ITEMS.registerItem("clay_steel_ingot", Item::new);
     public static final DeferredItem<Item> CLAYIUM_INGOT = ITEMS.registerItem("clayium_ingot", Item::new);
@@ -210,6 +213,8 @@ public class ClayiumItems {
     public static final DeferredItem<Item> IMPURE_ULTIMATE_ALLOY_INGOT = ITEMS.registerItem("impure_ultimate_alloy_ingot", Item::new);
     public static final DeferredItem<Item> AZ91D_ALLOY_INGOT = ITEMS.registerItem("az91d_alloy_ingot", Item::new);
     public static final DeferredItem<Item> ZK60A_ALLOY_INGOT = ITEMS.registerItem("zk60a_alloy_ingot", Item::new);
+    public static final DeferredItem<Item> ZINCALMINIUM_ALLOY_INGOT = ITEMS.registerItem("zincalminium_alloy_ingot", Item::new);
+    public static final DeferredItem<Item> ZINCONIUM_ALLOY_INGOT = ITEMS.registerItem("zinconium_alloy_ingot", Item::new);
 
     // Antimatter matter (gem)
     public static final DeferredItem<Item> ANTIMATTER_MATTER = ITEMS.registerItem("antimatter_matter", p -> new TieredItem(p, 10));

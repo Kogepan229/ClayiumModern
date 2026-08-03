@@ -64,7 +64,10 @@ public final class ColoredIngotTints {
         register(ClayiumItems.SILICON_INGOT, 0xFF281C28, 0xFF060406, 0xFFFFFFFF);
         register(ClayiumItems.SILICONE_INGOT, 0xFFD2D2D2, 0xFFB4B4B4, 0xFFF0F0F0);
         register(ClayiumItems.ALUMINIUM_INGOT, 0xFFBEC8CA, 0xFF1F2121, 0xFFFFFFFF);
+        register(ClayiumItems.MAGNESIUM_INGOT, 0xFF96D296, 0xFF787878, 0xFFFFFFFF);
         register(ClayiumItems.LITHIUM_INGOT, 0xFFD2D296, 0xFF787878, 0xFFFFFFFF);
+        register(ClayiumItems.ZIRCONIUM_INGOT, 0xFFBEAA7A, 0xFF787878, 0xFFFFFFFF);
+        register(ClayiumItems.ZINC_INGOT, 0xFFE6AAAA, 0xFF787878, 0xFFFFFFFF);
         register(ClayiumItems.IMPURE_ALUMINIUM_INGOT, 0xFFBEC8CA, 0xFF78783C, 0xFFDCDCDC);
         register(ClayiumItems.CLAY_STEEL_INGOT, 0xFF8890AD, 0xFF16181C, 0xFFFFFFFF);
         register(ClayiumItems.CLAYIUM_INGOT, 0xFF5AF0D2, 0xFF3F4855, 0xFFFFCDC8);
@@ -72,5 +75,7 @@ public final class ColoredIngotTints {
         register(ClayiumItems.IMPURE_ULTIMATE_ALLOY_INGOT, 0xFF55CD55, 0xFFF5FFFF, 0xFFF5A0FF);
         register(ClayiumItems.AZ91D_ALLOY_INGOT, 0xFF828C87, 0xFF0A280A, 0xFFFFFFFF);
         register(ClayiumItems.ZK60A_ALLOY_INGOT, 0xFF4B5550, 0xFF0A280A, 0xFFFFFFFF);
+        register(ClayiumItems.ZINCALMINIUM_ALLOY_INGOT, 0xFFF0BEDC, 0xFFA00000, 0xFFFFFFFF);
+        register(ClayiumItems.ZINCONIUM_ALLOY_INGOT, 0xFFE6AA8C, 0xFF780000, 0xFFFFFFFF);
     }
 }

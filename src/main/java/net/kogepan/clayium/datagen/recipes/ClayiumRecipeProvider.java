@@ -46,6 +46,7 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         AssemblerRecipeProvider.buildRecipes(recipeOutput);
         AssemblerMachineRecipeProvider.buildRecipes(recipeOutput);
         SmelterRecipeProvider.buildRecipes(recipeOutput);
+        AlloySmelterRecipeProvider.buildRecipes(recipeOutput);
         ClayBlastFurnaceRecipeProvider.buildRecipes(recipeOutput);
         QuartzCrucibleRecipeProvider.buildRecipes(recipeOutput);
         LaserIrradiationRecipeProvider.buildRecipes(recipeOutput);

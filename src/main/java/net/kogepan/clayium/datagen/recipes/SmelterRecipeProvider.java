@@ -28,15 +28,21 @@ public class SmelterRecipeProvider {
         // Explicit smelter recipes only (same as Original recipeSmelter.addRecipe).
         // Vanilla furnace recipes will be supported by Smelter in a later implementation.
 
-        // Tier 5: ALUMINIUM, IMPURE_ALUMINIUM (Original also has SODIUM, ZINC, NICKEL, ALUMINIUM_OD - not in ClayiumModern)
+        // Tier 5: ALUMINIUM, ZINC, IMPURE_ALUMINIUM (Original also has SODIUM, NICKEL, ALUMINIUM_OD - not in ClayiumModern)
         create(recipeOutput, "aluminium_dust", ClayiumItems.ALUMINIUM_DUST.toStack(),
                 ClayiumItems.ALUMINIUM_INGOT.toStack(), CEUtils.ONE_MILLI_CE, 200, 5);
+        create(recipeOutput, "zinc_dust", ClayiumItems.ZINC_DUST.toStack(), ClayiumItems.ZINC_INGOT.toStack(),
+                CEUtils.ONE_MILLI_CE, 200, 5);
         create(recipeOutput, "impure_aluminium_dust", ClayiumItems.IMPURE_ALUMINIUM_DUST.toStack(),
                 ClayiumItems.IMPURE_ALUMINIUM_INGOT.toStack(), CEUtils.ONE_MILLI_CE, 200, 5);
 
-        // Tier 6: LITHIUM, AZ91D_ALLOY, ZK60A_ALLOY (Original also has MAGNESIUM, ZIRCONIUM, ZINCALMINIUM_ALLOY, ZINCONIUM_ALLOY - not in ClayiumModern)
+        // Tier 6: MAGNESIUM, LITHIUM, ZIRCONIUM, AZ91D_ALLOY, ZK60A_ALLOY
         create(recipeOutput, "lithium_dust", ClayiumItems.LITHIUM_DUST.toStack(),
                 ClayiumItems.LITHIUM_INGOT.toStack(), CEUtils.ONE_MILLI_CE * 20, 400, 6);
+        create(recipeOutput, "magnesium_dust", ClayiumItems.MAGNESIUM_DUST.toStack(),
+                ClayiumItems.MAGNESIUM_INGOT.toStack(), CEUtils.ONE_MILLI_CE * 20, 400, 6);
+        create(recipeOutput, "zirconium_dust", ClayiumItems.ZIRCONIUM_DUST.toStack(),
+                ClayiumItems.ZIRCONIUM_INGOT.toStack(), CEUtils.ONE_MILLI_CE * 20, 400, 6);
         create(recipeOutput, "az91d_alloy_dust", ClayiumItems.AZ91D_ALLOY_DUST.toStack(),
                 ClayiumItems.AZ91D_ALLOY_INGOT.toStack(), CEUtils.ONE_MILLI_CE * 2, 400, 6);
         create(recipeOutput, "zk60a_alloy_dust", ClayiumItems.ZK60A_ALLOY_DUST.toStack(),

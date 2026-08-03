@@ -12,6 +12,7 @@ import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
 import net.kogepan.clayium.blockentities.StorageContainerBlockEntity;
 import net.kogepan.clayium.blockentities.VacuumContainerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ActivatorBlockEntity;
+import net.kogepan.clayium.blockentities.machine.AlloySmelterBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AssemblerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
@@ -303,6 +304,16 @@ public class ClayiumBlockEntityTypes {
                         .map(DeferredHolder::get).toList());
                 return BlockEntityType.Builder
                         .of(AssemblerBlockEntity::new, blocks.toArray(Block[]::new))
+                        .build(null);
+            });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AlloySmelterBlockEntity>> ALLOY_SMELTER_BLOCK_ENTITY = registerClayContainer(
+            "alloy_smelter_block_entity",
+            () -> {
+                List<Block> blocks = new ArrayList<>(ClayiumBlocks.ALLOY_SMELTER_BLOCKS.values().stream()
+                        .map(DeferredHolder::get).toList());
+                return BlockEntityType.Builder
+                        .of(AlloySmelterBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
 

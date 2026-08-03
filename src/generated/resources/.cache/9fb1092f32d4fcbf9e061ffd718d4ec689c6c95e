@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T17:09:01.394146237	Recipes
+// 1.21.1	2026-08-03T17:33:47.642775989	Recipes
 4abcfafc6487315216fcb6d2eabb76704cefe700 data/clayium/advancement/recipes/building_blocks/clay_crafting_board_to_dense_clay.json
 43cf5f4ed64357de0480c696d4c28651aa88df0e data/clayium/advancement/recipes/building_blocks/compressed_clay.json
 7117d0c8a85096bc046fda4abc2cf81448149ab6 data/clayium/advancement/recipes/building_blocks/compressed_clay_to_dense_clay.json
@@ -114,7 +114,12 @@ fec42e5525f61dc08435b579ff014809c94a6aaa data/clayium/advancement/recipes/tools/
 920fd4eb13e00836ac4b14fd93f54e030dd0734f data/clayium/advancement/recipes/tools/clay_wrench.json
 57cffed8b9fab61feb7fe02c898753ce8ff0ec14 data/clayium/advancement/recipes/tools/raw_clay_rolling_pin.json
 1eb8305b38897d11d375bb60cf5e5b1f6bca40ca data/clayium/advancement/recipes/tools/raw_clay_spatula.json
+e8db82b38856fc2c5bb2e5dcbbca43e2ce327f09 data/clayium/recipe/alloy_smelter/az91d_alloy_ingot.json
+f9cf6bc90bd3cede4c4b13bc56ecc29227526226 data/clayium/recipe/alloy_smelter/zincalminium_alloy_ingot.json
+09f226672177334b805dbf4a04c94492fbc780fd data/clayium/recipe/alloy_smelter/zinconium_alloy_ingot.json
+f9c474b69d12f077f88a4e41dd27311f5abb90a1 data/clayium/recipe/alloy_smelter/zk60a_alloy_ingot.json
 c797fbbde74462deea2464f6e5d1e73af79bd986 data/clayium/recipe/assembler/activator.json
+e39c8ef879cac645c8a74e4c227ceaf7ce53e2a0 data/clayium/recipe/assembler/alloy_smelter_6.json
 88aa60d2ec7e31d0033e47c9ca50f4750ff41d36 data/clayium/recipe/assembler/assembler_10.json
 487ce9c16aeb7c1f21b8ba785d3a3bb9ed75dce7 data/clayium/recipe/assembler/assembler_3_from_machine_hull.json
 afc80332c3b47db6692e2d86ec15fb07300574bd data/clayium/recipe/assembler/assembler_4_from_machine_hull.json
@@ -614,6 +619,9 @@ b9f88040dc50de044abdaf3f5ede1fb5c64e5b19 data/clayium/recipe/small_clay_ring_fro
 20b1fe87510ab1628e102212bc9429107f75aa05 data/clayium/recipe/smelter/az91d_alloy_dust.json
 b4773530deb8de73070148a2bee96838156dd4f0 data/clayium/recipe/smelter/impure_aluminium_dust.json
 9aff0e2f0a756a74113e8458b899ec1fc4f486c6 data/clayium/recipe/smelter/lithium_dust.json
+198675da654fb42eef705efdf92e1ae295866960 data/clayium/recipe/smelter/magnesium_dust.json
+ec38e1ece22035cddc34587dbe41c0c6d04f65c4 data/clayium/recipe/smelter/zinc_dust.json
+10ce5a3bc594d7fbe65131f19ff232f3f878302d data/clayium/recipe/smelter/zirconium_dust.json
 6b4ad143d5fbcdf1984c10a369cb2dcd1ad7753e data/clayium/recipe/smelter/zk60a_alloy_dust.json
 fde5b09f2404eeac0287d2d898c84b05ec43a4a7 data/clayium/recipe/storage_container_upgrade.json
 f78150a6f4ae037b5330e47fb0b71a4f0c61f58a data/clayium/recipe/waterwheel_1.json

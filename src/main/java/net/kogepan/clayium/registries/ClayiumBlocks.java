@@ -15,6 +15,7 @@ import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
 import net.kogepan.clayium.blocks.StorageContainerBlock;
 import net.kogepan.clayium.blocks.VacuumContainerBlock;
 import net.kogepan.clayium.blocks.machine.ActivatorBlock;
+import net.kogepan.clayium.blocks.machine.AlloySmelterBlock;
 import net.kogepan.clayium.blocks.machine.AssemblerBlock;
 import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
@@ -387,6 +388,13 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("assembler", i, AssemblerBlock::new));
         }
         ASSEMBLER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> ALLOY_SMELTER_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        map.put(6, registerTiered("alloy_smelter", 6, AlloySmelterBlock::new));
+        ALLOY_SMELTER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> SMELTER_BLOCKS;

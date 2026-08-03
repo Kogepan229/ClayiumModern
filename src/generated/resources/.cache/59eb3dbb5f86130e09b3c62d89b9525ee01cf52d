@@ -1,5 +1,6 @@
-// 1.21.1	2026-08-03T17:09:01.391862328	Loot Tables
+// 1.21.1	2026-08-03T17:33:47.641226429	Loot Tables
 1ac3e13377b179fa98ca4ee15ed27da063c60007 data/clayium/loot_table/blocks/activator.json
+5bfffa4a0446d3f12e10d757aa42ea04bd808410 data/clayium/loot_table/blocks/alloy_smelter_6.json
 464cecdb1cea9558a73ec9d43ffbfe00caecb8e7 data/clayium/loot_table/blocks/assembler_10.json
 dbcebc8087ac47ea656064dc17084726e13770f6 data/clayium/loot_table/blocks/assembler_3.json
 e5eb738a9ec9b65c0af4a662bbfc43de6885fe76 data/clayium/loot_table/blocks/assembler_4.json

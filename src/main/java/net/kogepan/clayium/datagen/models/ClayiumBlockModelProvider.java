@@ -84,6 +84,7 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation INSCRIBER_TEXTURE = Clayium.id("block/machine/inscriber");
     private static final ResourceLocation ASSEMBLER_TEXTURE = Clayium.id("block/machine/assembler");
     private static final ResourceLocation SMELTER_TEXTURE = Clayium.id("block/machine/smelter");
+    private static final ResourceLocation ALLOY_SMELTER_TEXTURE = Clayium.id("block/machine/alloy_smelter");
     private static final ResourceLocation CLAY_BLAST_FURNACE_TEXTURE_UNFORMED = Clayium
             .id("block/machine/clay_blast_furnace_unformed");
     private static final ResourceLocation CLAY_BLAST_FURNACE_TEXTURE_FORMED = Clayium
@@ -228,6 +229,9 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         registerAdjacentWorker(ClayiumBlocks.ACTIVATOR.get(), ACTIVATOR_TEXTURE, ACTIVATOR_ACTIVE_TEXTURE);
         for (var entry : ClayiumBlocks.SMELTER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), SMELTER_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.ALLOY_SMELTER_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), ALLOY_SMELTER_TEXTURE);
         }
         registerSingleMachine(ClayiumBlocks.CLAY_BLAST_FURNACE.get(), 6, CLAY_BLAST_FURNACE_TEXTURE_UNFORMED,
                 Map.of(ClayBlastFurnaceBlockEntity.FRONT_OVERLAY_VARIANT_FORMED, CLAY_BLAST_FURNACE_TEXTURE_FORMED),

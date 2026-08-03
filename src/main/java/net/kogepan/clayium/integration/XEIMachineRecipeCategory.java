@@ -75,6 +75,8 @@ public class XEIMachineRecipeCategory {
                 ClayiumBlocks.ASSEMBLER_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.SMELTER_RECIPE_TYPE,
                 ClayiumBlocks.SMELTER_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.ALLOY_SMELTER_RECIPE_TYPE,
+                ClayiumBlocks.ALLOY_SMELTER_BLOCKS.values()));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.CLAY_BLAST_FURNACE_RECIPE_TYPE,
                 castWorkstations(ClayiumBlocks.CLAY_BLAST_FURNACE)));
 

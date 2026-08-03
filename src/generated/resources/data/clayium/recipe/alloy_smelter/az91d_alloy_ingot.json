@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100000,
+  "duration": 500,
+  "inputs": [
+    {
+      "amount": 9,
+      "ingredient": {
+        "item": "clayium:magnesium_ingot"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:zincalminium_alloy_ingot"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 10,
+      "id": "clayium:az91d_alloy_ingot"
+    }
+  ],
+  "recipe_tier": 6,
+  "recipe_type": "clayium:alloy_smelter"
+}

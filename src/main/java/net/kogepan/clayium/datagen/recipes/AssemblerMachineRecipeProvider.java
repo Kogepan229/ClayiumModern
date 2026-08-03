@@ -137,6 +137,9 @@ public final class AssemblerMachineRecipeProvider {
         create(output, "electrolysis_reactor_6", new ItemStack(ClayiumBlocks.CHEMICAL_REACTOR_BLOCKS.get(5).get()),
                 ClayiumItems.PRECISION_CIRCUIT.toStack(),
                 new ItemStack(ClayiumBlocks.ELECTROLYSIS_REACTOR_BLOCKS.get(6).get()), energyForTier(6), 40);
+        create(output, "alloy_smelter_6", new ItemStack(ClayiumBlocks.SMELTER_BLOCKS.get(6).get()),
+                ClayiumItems.PRECISION_CIRCUIT.toStack(),
+                new ItemStack(ClayiumBlocks.ALLOY_SMELTER_BLOCKS.get(6).get()), energyForTier(6), 40);
         create(output, "solar_clay_fabricator_6", machineHull(6), ClayiumItems.SILICON_PLATE.toStack(16),
                 new ItemStack(ClayiumBlocks.SOLAR_CLAY_FABRICATOR_BLOCKS.get(6).get()), energyForTier(6), 120);
         create(output, "clay_blast_furnace", new ItemStack(ClayiumBlocks.SMELTER_BLOCKS.get(6).get()),
