@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T14:20:12.588872414	Recipes
+// 1.21.1	2026-08-03T15:51:34.347463163	Recipes
 4abcfafc6487315216fcb6d2eabb76704cefe700 data/clayium/advancement/recipes/building_blocks/clay_crafting_board_to_dense_clay.json
 6a064323df01ce4b3142fbd0b8b9c411d8f534ad data/clayium/advancement/recipes/misc/assembler_3.json
 183d460a4ab831f076777bb82f22da56af3bed52 data/clayium/advancement/recipes/misc/assembler_4.json
@@ -26,11 +26,13 @@ c5d73db916f58aedfe890ec3838b86650b26b6f2 data/clayium/advancement/recipes/misc/s
 d114318f3e2be975d6dd0cf61479d3318129296c data/clayium/advancement/recipes/tools/clay_pickaxe.json
 3fd5e3ae0f5c0ba9c7934ebea2d96cbd1d226933 data/clayium/advancement/recipes/tools/clay_shovel.json
 920fd4eb13e00836ac4b14fd93f54e030dd0734f data/clayium/advancement/recipes/tools/clay_wrench.json
+c797fbbde74462deea2464f6e5d1e73af79bd986 data/clayium/recipe/assembler/activator.json
 88aa60d2ec7e31d0033e47c9ca50f4750ff41d36 data/clayium/recipe/assembler/assembler_10.json
 487ce9c16aeb7c1f21b8ba785d3a3bb9ed75dce7 data/clayium/recipe/assembler/assembler_3_from_machine_hull.json
 afc80332c3b47db6692e2d86ec15fb07300574bd data/clayium/recipe/assembler/assembler_4_from_machine_hull.json
 be22275c6cdbbc32fb4a50b1f04d2e616334dbae data/clayium/recipe/assembler/assembler_6_from_basic_assembler.json
 2d7c0513fdd4ebacded4cd6a45c136a728256ec3 data/clayium/recipe/assembler/assembler_6_from_machine_hull.json
+4fec8ab50f58bd4216ff12a3afd2b8876972ba00 data/clayium/recipe/assembler/block_breaker.json
 cd64d26cfb031bcf2886b98852def9a9aac8615b data/clayium/recipe/assembler/clay_cutting_head.json
 1e2561300fd8c0b3055f7c62d53fdf6f2e079aa6 data/clayium/recipe/assembler/clay_gadget_holder.json
 d296c22c4fd647ff5468bf0523350cbef87b1d66 data/clayium/recipe/assembler/clay_gadget_parts.json

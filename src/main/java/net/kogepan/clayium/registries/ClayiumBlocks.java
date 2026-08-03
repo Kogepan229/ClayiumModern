@@ -14,9 +14,11 @@ import net.kogepan.clayium.blocks.MultitrackBufferBlock;
 import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
 import net.kogepan.clayium.blocks.StorageContainerBlock;
 import net.kogepan.clayium.blocks.VacuumContainerBlock;
+import net.kogepan.clayium.blocks.machine.ActivatorBlock;
 import net.kogepan.clayium.blocks.machine.AssemblerBlock;
 import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
+import net.kogepan.clayium.blocks.machine.BlockBreakerBlock;
 import net.kogepan.clayium.blocks.machine.CentrifugeBlock;
 import net.kogepan.clayium.blocks.machine.ChemicalReactorBlock;
 import net.kogepan.clayium.blocks.machine.ChunkLoaderBlock;
@@ -41,6 +43,7 @@ import net.kogepan.clayium.blocks.machine.SmelterBlock;
 import net.kogepan.clayium.blocks.machine.SolarClayFabricatorBlock;
 import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
 import net.kogepan.clayium.blocks.machine.WireDrawingMachineBlock;
+import net.kogepan.clayium.items.blockitem.ActivatorBlockItem;
 import net.kogepan.clayium.items.blockitem.DistributorBlockItem;
 import net.kogepan.clayium.items.blockitem.LaserReflectorBlockItem;
 import net.kogepan.clayium.items.blockitem.QuartzCrucibleBlockItem;
@@ -453,6 +456,19 @@ public class ClayiumBlocks {
     static {
         ClayiumItems.ITEMS.register("chunk_loader",
                 () -> new TieredBlockItem(CHUNK_LOADER.get(), new Item.Properties(), 6));
+    }
+
+    public static final DeferredBlock<BlockBreakerBlock> BLOCK_BREAKER = BLOCKS.register(
+            "block_breaker", BlockBreakerBlock::new);
+    static {
+        ClayiumItems.ITEMS.register("block_breaker",
+                () -> new TieredBlockItem(BLOCK_BREAKER.get(), new Item.Properties(), 6));
+    }
+
+    public static final DeferredBlock<ActivatorBlock> ACTIVATOR = BLOCKS.register("activator", ActivatorBlock::new);
+    static {
+        ClayiumItems.ITEMS.register("activator",
+                () -> new ActivatorBlockItem(ACTIVATOR.get(), new Item.Properties()));
     }
 
     public static int getMachineHullTier(@NotNull Block block) {

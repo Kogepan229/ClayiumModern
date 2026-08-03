@@ -1,4 +1,5 @@
-// 1.21.1	2026-08-03T12:36:55.880553074	Block States: clayium
+// 1.21.1	2026-08-03T15:51:34.336619893	Block States: clayium
+5fa6addad5b9437d4f362a76df96c9299a80fb76 assets/clayium/blockstates/activator.json
 3f559b0d6dc8509619ef881bb7656e7de7c0d86c assets/clayium/blockstates/assembler_10.json
 05f42d589023a9caa0b4c6ba3de08f0c2f4d7201 assets/clayium/blockstates/assembler_3.json
 4fc90db89efbc74ba7f7080e35295db1c4b1c152 assets/clayium/blockstates/assembler_4.json
@@ -14,6 +15,7 @@ cf427b0b7f1ae41b9380716a7ab0c338538ef482 assets/clayium/blockstates/bending_mach
 cc7bedc4ea97c6ddf89855364ac5b1bf8c316a7c assets/clayium/blockstates/bending_machine_6.json
 ba589906635a5ed11f6297b7956bf8669d130443 assets/clayium/blockstates/bending_machine_7.json
 fa4f48485511cef402a6f073ec2f17d4725d2aa6 assets/clayium/blockstates/bending_machine_9.json
+95e848e29d2f8351a5188717f215be266ca300a5 assets/clayium/blockstates/block_breaker.json
 5d5b3da0a2d43f80aa4c264e0e3eb197eafc4d8d assets/clayium/blockstates/centrifuge_3.json
 5709be232fe0b368f1af1b38a94777304f0b8ef3 assets/clayium/blockstates/centrifuge_4.json
 b04745c10e308425bc30656237e36d6ba66628e2 assets/clayium/blockstates/centrifuge_5.json
@@ -163,6 +165,7 @@ b118737c904d6c7521430318fe8c2456a112afd9 assets/clayium/blockstates/vacuum_conta
 bfed7736530ab9ab3c5dba989859780517708448 assets/clayium/blockstates/wire_drawing_machine_3.json
 b193a4c406648d11ea756e6134eb86386ca647bb assets/clayium/blockstates/wire_drawing_machine_4.json
 a6156bb8f7c116bb8f386134ed4f86fb9ecced62 assets/clayium/blockstates/zk60a_alloy_hull.json
+77778d27a966cb7b539a9f56a077d42c47d845e3 assets/clayium/models/block/activator.json
 788231520324ec2c3861c6c23976fe920adc72a3 assets/clayium/models/block/assembler_10.json
 9b5f335daea9368e45ba9f6592cd8c9e489323b2 assets/clayium/models/block/assembler_3.json
 290b123b5a5a7a6f084addcc86ad8c22aad65cac assets/clayium/models/block/assembler_4.json
@@ -178,6 +181,7 @@ a6156bb8f7c116bb8f386134ed4f86fb9ecced62 assets/clayium/blockstates/zk60a_alloy_
 97248007d0903d266350febcbd74482a44cd2c9d assets/clayium/models/block/bending_machine_6.json
 cf1741227ef77cd6e263216835e0491a3bee6262 assets/clayium/models/block/bending_machine_7.json
 092ea90297d7ee03490dd2da78ea53ec1cb15159 assets/clayium/models/block/bending_machine_9.json
+61abe1cdb56a45805c2818e9453c94389937e2ae assets/clayium/models/block/block_breaker.json
 98ef299fab999c8fbed7f36b009acc4039cd5447 assets/clayium/models/block/centrifuge_3.json
 b908dfcf34d63d5f4e2b901d3747c28dac3026d0 assets/clayium/models/block/centrifuge_4.json
 fd6feb72446a2c56c29b63f61dbd0c34f9f9e7c0 assets/clayium/models/block/centrifuge_5.json
@@ -329,6 +333,7 @@ de6797a0a88beffb3bcf99c6be58ff966cc1bc53 assets/clayium/models/block/wire_drawin
 4120a982df37872894064912469e93ffe17acc5f assets/clayium/models/block/wire_drawing_machine_3.json
 9b5057eaff19a23ecfa76dd25d94bc3e5feb34fe assets/clayium/models/block/wire_drawing_machine_4.json
 a21639b3c2b5434193461f0c8657e8d6bbbf6bf9 assets/clayium/models/block/zk60a_alloy_hull.json
+f5f0f0a5b7a421d70b36e7af979ca41f5cb0e1e3 assets/clayium/models/item/activator.json
 9bb550e8767559df287330f53d872b3cebe67c47 assets/clayium/models/item/assembler_10.json
 d06ff20875948acaaaa5e23b369abab1117cdb4d assets/clayium/models/item/assembler_3.json
 7d766f267f27d5ece624bb9d6a87ab49ee7ec352 assets/clayium/models/item/assembler_4.json
@@ -344,6 +349,7 @@ d90468f5ffd59da72beb686c5ac5b6c032177bca assets/clayium/models/item/bending_mach
 604f4ca41555fe7c8535a93676232d6a52f799b7 assets/clayium/models/item/bending_machine_6.json
 47bed6c7d5e4b6501edfb3ced1b7646af1f2ec8a assets/clayium/models/item/bending_machine_7.json
 db6f4279eb649337c2ca7f24097429d57a5458d8 assets/clayium/models/item/bending_machine_9.json
+fff5624b82aa2fae4af5e35c70a1687aaf4f2ab3 assets/clayium/models/item/block_breaker.json
 571f708c452c099be5118c90a8efb97e82cc4a2c assets/clayium/models/item/centrifuge_3.json
 cfccd8c2ef02a9ea4c7037f71f79f7273a021ca9 assets/clayium/models/item/centrifuge_4.json
 09611fdea28e751abd74adf4bcc45912b5bf22fc assets/clayium/models/item/centrifuge_5.json

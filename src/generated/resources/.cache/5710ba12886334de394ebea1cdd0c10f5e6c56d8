@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-03T14:53:55.690610435	Tags for minecraft:block mod id clayium
+// 1.21.1	2026-08-03T15:51:34.345157616	Tags for minecraft:block mod id clayium
 37364788ff81686e17a5dce82815140c0129e7a0 data/clayium/tags/block/clay_ores.json
 0f0267a39d9544347cc53297117c81ccd381272f data/clayium/tags/block/clay_shovel_fast_blocks.json
 37364788ff81686e17a5dce82815140c0129e7a0 data/clayium/tags/block/clay_shovel_mineable_ores.json
@@ -6,6 +6,6 @@
 b87107c99bb1bbbb29a38f3b6bd5a884887673f8 data/minecraft/tags/block/logs.json
 b87107c99bb1bbbb29a38f3b6bd5a884887673f8 data/minecraft/tags/block/mineable/axe.json
 39f8c088abb72871901f774ed6b582af8005e9fc data/minecraft/tags/block/mineable/hoe.json
-cc2d818a285cb4d683382f778f7719e160e3af93 data/minecraft/tags/block/mineable/pickaxe.json
+1b90da34b7231c8349d8df9a5110af4ae0a4b48c data/minecraft/tags/block/mineable/pickaxe.json
 308142b00d799c287f6ec3e95c4c147fd3b41027 data/minecraft/tags/block/mineable/shovel.json
 37364788ff81686e17a5dce82815140c0129e7a0 data/minecraft/tags/block/needs_stone_tool.json

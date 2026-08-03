@@ -1,4 +1,5 @@
-// 1.21.1	2026-08-03T12:36:55.890736456	Loot Tables
+// 1.21.1	2026-08-03T15:51:34.345810632	Loot Tables
+1ac3e13377b179fa98ca4ee15ed27da063c60007 data/clayium/loot_table/blocks/activator.json
 464cecdb1cea9558a73ec9d43ffbfe00caecb8e7 data/clayium/loot_table/blocks/assembler_10.json
 dbcebc8087ac47ea656064dc17084726e13770f6 data/clayium/loot_table/blocks/assembler_3.json
 e5eb738a9ec9b65c0af4a662bbfc43de6885fe76 data/clayium/loot_table/blocks/assembler_4.json
@@ -14,6 +15,7 @@ e5458742e656f82e4c43cc6b624a7bed0e25e981 data/clayium/loot_table/blocks/bending_
 7d21b0bd7283ff48a44ccd35eb0abfa0786c559f data/clayium/loot_table/blocks/bending_machine_6.json
 f9ad3c23ccc3230377644375c8291223868699e6 data/clayium/loot_table/blocks/bending_machine_7.json
 3a394b3c9de1182bd9725d513238da457330cd4f data/clayium/loot_table/blocks/bending_machine_9.json
+46f7c4a83c8930362bf65308b7aedf618374d17f data/clayium/loot_table/blocks/block_breaker.json
 c818155e7c293fdc6a788a3e929ae077e2e72fe2 data/clayium/loot_table/blocks/centrifuge_3.json
 9457bca3a3bef4a2b626157f7af23d663f87e27d data/clayium/loot_table/blocks/centrifuge_4.json
 a53371318348338c8fa2dc067c91f25f7f1a43bc data/clayium/loot_table/blocks/centrifuge_5.json

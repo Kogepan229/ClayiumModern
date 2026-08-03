@@ -29,6 +29,7 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation OVERLAY_MODEL = Clayium.id("block/overlay");
     private static final ResourceLocation OVERLAY_TOP_MODEL = Clayium.id("block/overlay_top");
     private static final ResourceLocation OVERLAY_ALL_MODEL = Clayium.id("block/overlay_all");
+    private static final ResourceLocation OVERLAY_FRONT_BACK_MODEL = Clayium.id("block/overlay_front_back");
     private static final ResourceLocation INPUT_ALL_OVERLAY_TEXTURE = Clayium.id("block/overlay/import_all");
     private static final ResourceLocation AZ91D_ALLOY_HULL_TEXTURE = Clayium.id("block/az91d_alloy_hull");
 
@@ -88,6 +89,13 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation CHUNK_LOADER_TEXTURE = Clayium.id("block/machine/chunk_loader");
     private static final ResourceLocation CLAY_INTERFACE_TEXTURE = Clayium.id("block/machine/clay_interface");
     private static final ResourceLocation CLAY_LASER_TEXTURE = Clayium.id("block/machine/clay_laser");
+    private static final ResourceLocation BLOCK_BREAKER_TEXTURE = Clayium.id("block/machine/block_breaker");
+    private static final ResourceLocation BLOCK_BREAKER_ACTIVE_TEXTURE = Clayium
+            .id("block/machine/block_breaker_active");
+    private static final ResourceLocation ACTIVATOR_TEXTURE = Clayium.id("block/machine/activator");
+    private static final ResourceLocation ACTIVATOR_ACTIVE_TEXTURE = Clayium.id("block/machine/activator_active");
+    private static final ResourceLocation ADJACENT_WORKER_BACK_TEXTURE = Clayium
+            .id("block/machine/adjacent_worker_back");
 
     public ClayiumBlockModelProvider(PackOutput output, ExistingFileHelper exFileHelper) {
         super(output, Clayium.MODID, exFileHelper);
@@ -210,6 +218,9 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         for (var entry : ClayiumBlocks.ASSEMBLER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), ASSEMBLER_TEXTURE);
         }
+        registerAdjacentWorker(ClayiumBlocks.BLOCK_BREAKER.get(), BLOCK_BREAKER_TEXTURE,
+                BLOCK_BREAKER_ACTIVE_TEXTURE);
+        registerAdjacentWorker(ClayiumBlocks.ACTIVATOR.get(), ACTIVATOR_TEXTURE, ACTIVATOR_ACTIVE_TEXTURE);
         for (var entry : ClayiumBlocks.SMELTER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), SMELTER_TEXTURE);
         }
@@ -483,6 +494,28 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
 
         BlockModelBuilder model = builder.end();
 
+        this.simpleBlock(block, model);
+        this.simpleBlockItem(block, model);
+    }
+
+    private void registerAdjacentWorker(Block block, ResourceLocation frontTexture,
+                                        ResourceLocation activeFrontTexture) {
+        BlockModelBuilder overlayModel = models().nested()
+                .parent(models().getExistingFile(OVERLAY_FRONT_BACK_MODEL))
+                .texture("overlay_front", frontTexture)
+                .texture("overlay_back", ADJACENT_WORKER_BACK_TEXTURE);
+        BlockModelBuilder activeOverlayModel = models().nested()
+                .parent(models().getExistingFile(OVERLAY_FRONT_BACK_MODEL))
+                .texture("overlay_front", activeFrontTexture)
+                .texture("overlay_back", ADJACENT_WORKER_BACK_TEXTURE);
+        BlockModelBuilder model = models().getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
+                .customLoader(ClayContainerModelBuilder::new)
+                .baseModel(models().nested().parent(models().getExistingFile(models().mcLoc("block/cube_all")))
+                        .texture("all", AZ91D_ALLOY_HULL_TEXTURE))
+                .overlayModel(overlayModel)
+                .overlayModelVariant("active", activeOverlayModel)
+                .rotateVertical(true)
+                .end();
         this.simpleBlock(block, model);
         this.simpleBlockItem(block, model);
     }

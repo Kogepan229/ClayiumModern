@@ -6,6 +6,7 @@ import net.kogepan.clayium.client.model.ModelTextures;
 import net.kogepan.clayium.client.model.PipeOverlayQuads;
 import net.kogepan.clayium.client.model.block.ClayContainerModelLoader;
 import net.kogepan.clayium.client.model.block.LaserReflectorGeometryLoader;
+import net.kogepan.clayium.client.renderer.AdjacentWorkerTargetRenderer;
 import net.kogepan.clayium.client.renderer.ClayContainerRenderer;
 import net.kogepan.clayium.client.renderer.ClayInterfaceTargetHighlightRenderer;
 import net.kogepan.clayium.client.renderer.ClayLaserRenderer;
@@ -152,7 +153,7 @@ public class ClayiumClient {
 
     /**
      * Renders world-space client overlays at AFTER_BLOCK_ENTITIES stage.
-     * Includes laser beams and Clay Interface linked-target highlights.
+     * Includes laser beams, adjacent-worker targets, and Clay Interface linked-target highlights.
      */
     @SubscribeEvent
     public static void onRenderLevelStage(RenderLevelStageEvent event) {
@@ -183,6 +184,7 @@ public class ClayiumClient {
             poseStack.popPose();
         });
 
+        AdjacentWorkerTargetRenderer.render(event, bufferSource);
         ClayInterfaceTargetHighlightRenderer.render(event, bufferSource);
     }
 

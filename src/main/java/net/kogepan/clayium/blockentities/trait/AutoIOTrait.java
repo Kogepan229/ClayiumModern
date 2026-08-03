@@ -31,15 +31,30 @@ public abstract class AutoIOTrait extends ClayContainerTrait {
     protected int exportIntervalCount = 0;
 
     protected AutoIOTrait(String id, @NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer) {
+        this(id, blockEntity, tier, isBuffer,
+                isBuffer ? TierUtils.getBufferAutoImportInterval(tier) :
+                        TierUtils.getMachineAutoImportInterval(tier),
+                isBuffer ? TierUtils.getBufferAutoExportInterval(tier) :
+                        TierUtils.getMachineAutoExportInterval(tier),
+                isBuffer ? TierUtils.getBufferAutoImportMax(tier) : TierUtils.getMachineAutoImportMax(tier),
+                isBuffer ? TierUtils.getBufferAutoExportMax(tier) : TierUtils.getMachineAutoExportMax(tier));
+    }
+
+    protected AutoIOTrait(String id, @NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer,
+                          int importInterval, int exportInterval, int importMax, int exportMax) {
         super(blockEntity, id);
+        if (importInterval <= 0 || exportInterval <= 0) {
+            throw new IllegalArgumentException("Auto I/O intervals must be positive");
+        }
+        if (importMax < 0 || exportMax < 0) {
+            throw new IllegalArgumentException("Auto I/O limits must not be negative");
+        }
         this.tier = tier;
         this.isBuffer = isBuffer;
-        this.importInterval = isBuffer ? TierUtils.getBufferAutoImportInterval(tier) :
-                TierUtils.getMachineAutoImportInterval(tier);
-        this.exportInterval = isBuffer ? TierUtils.getBufferAutoExportInterval(tier) :
-                TierUtils.getMachineAutoExportInterval(tier);
-        this.importMax = isBuffer ? TierUtils.getBufferAutoImportMax(tier) : TierUtils.getMachineAutoImportMax(tier);
-        this.exportMax = isBuffer ? TierUtils.getBufferAutoExportMax(tier) : TierUtils.getMachineAutoExportMax(tier);
+        this.importInterval = importInterval;
+        this.exportInterval = exportInterval;
+        this.importMax = importMax;
+        this.exportMax = exportMax;
     }
 
     @Override
@@ -144,6 +159,11 @@ public abstract class AutoIOTrait extends ClayContainerTrait {
             super(TRAIT_ID, blockEntity, tier, isBuffer);
         }
 
+        public Expoter(@NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer,
+                       int exportInterval, int exportMax) {
+            super(TRAIT_ID, blockEntity, tier, isBuffer, 1, exportInterval, 0, exportMax);
+        }
+
         @Override
         protected void importItemsFromNeighbors(int amount) {}
     }
@@ -152,6 +172,11 @@ public abstract class AutoIOTrait extends ClayContainerTrait {
 
         public Combined(@NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer) {
             super(TRAIT_ID, blockEntity, tier, isBuffer);
+        }
+
+        public Combined(@NotNull ClayContainerBlockEntity blockEntity, int tier, boolean isBuffer,
+                        int importInterval, int exportInterval, int importMax, int exportMax) {
+            super(TRAIT_ID, blockEntity, tier, isBuffer, importInterval, exportInterval, importMax, exportMax);
         }
     }
 

@@ -1,0 +1,26 @@
+{
+  "base_model": {
+    "parent": "minecraft:block/cube_all",
+    "textures": {
+      "all": "clayium:block/az91d_alloy_hull"
+    }
+  },
+  "loader": "clayium:clay_container_model_loader",
+  "overlay_model": {
+    "parent": "clayium:block/overlay_front_back",
+    "textures": {
+      "overlay_back": "clayium:block/machine/adjacent_worker_back",
+      "overlay_front": "clayium:block/machine/block_breaker"
+    }
+  },
+  "overlay_models": {
+    "active": {
+      "parent": "clayium:block/overlay_front_back",
+      "textures": {
+        "overlay_back": "clayium:block/machine/adjacent_worker_back",
+        "overlay_front": "clayium:block/machine/block_breaker_active"
+      }
+    }
+  },
+  "rotate_vertical": true
+}

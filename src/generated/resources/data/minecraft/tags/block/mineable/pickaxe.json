@@ -145,6 +145,8 @@
     "clayium:clay_laser_10",
     "clayium:laser_reflector",
     "clayium:creative_ce_source",
-    "clayium:chunk_loader"
+    "clayium:chunk_loader",
+    "clayium:block_breaker",
+    "clayium:activator"
   ]
 }

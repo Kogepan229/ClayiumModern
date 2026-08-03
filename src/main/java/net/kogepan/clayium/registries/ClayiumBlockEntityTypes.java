@@ -11,9 +11,11 @@ import net.kogepan.clayium.blockentities.MultitrackBufferBlockEntity;
 import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
 import net.kogepan.clayium.blockentities.StorageContainerBlockEntity;
 import net.kogepan.clayium.blockentities.VacuumContainerBlockEntity;
+import net.kogepan.clayium.blockentities.machine.ActivatorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AssemblerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
+import net.kogepan.clayium.blockentities.machine.BlockBreakerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CentrifugeBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChemicalReactorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChunkLoaderBlockEntity;
@@ -327,6 +329,18 @@ public class ClayiumBlockEntityTypes {
                         .of(ClayLaserBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<BlockBreakerBlockEntity>> BLOCK_BREAKER_BLOCK_ENTITY = registerClayContainer(
+            "block_breaker",
+            () -> BlockEntityType.Builder
+                    .of(BlockBreakerBlockEntity::new, ClayiumBlocks.BLOCK_BREAKER.get())
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ActivatorBlockEntity>> ACTIVATOR_BLOCK_ENTITY = registerClayContainer(
+            "activator",
+            () -> BlockEntityType.Builder
+                    .of(ActivatorBlockEntity::new, ClayiumBlocks.ACTIVATOR.get())
+                    .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<SolarClayFabricatorBlockEntity>> SOLAR_CLAY_FABRICATOR_BLOCK_ENTITY = registerClayContainer(
             "solar_clay_fabricator_block_entity",

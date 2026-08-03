@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000,
+  "duration": 60,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:az91d_alloy_hull"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:precision_circuit"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:block_breaker"
+    }
+  ],
+  "recipe_tier": 6,
+  "recipe_type": "clayium:assembler"
+}
