@@ -35,6 +35,7 @@ import dev.vfyjxf.taffy.style.AlignItems;
 import dev.vfyjxf.taffy.style.FlexDirection;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractClayFabricatorBlockEntity extends ClayContainerBlockEntity {
@@ -116,6 +117,29 @@ public abstract class AbstractClayFabricatorBlockEntity extends ClayContainerBlo
     @Override
     public IItemHandlerModifiable getOutputInventory() {
         return this.outputInventory;
+    }
+
+    @Override
+    @NotNull
+    public List<ItemStack> getInventoryContentsForDisplay() {
+        List<ItemStack> contents = new ArrayList<>(super.getInventoryContentsForDisplay());
+        if (!this.processingStack.isEmpty()) {
+            contents.add(this.processingStack.copy());
+        }
+        return contents;
+    }
+
+    @Override
+    public boolean hasProcessingProgress() {
+        return !this.processingStack.isEmpty() && this.craftDuration > 0L;
+    }
+
+    @Override
+    public float getProcessingProgress() {
+        if (!this.hasProcessingProgress()) {
+            return 0.0F;
+        }
+        return Math.clamp((float) this.craftProgress / this.craftDuration, 0.0F, 1.0F);
     }
 
     @Override
@@ -230,8 +254,7 @@ public abstract class AbstractClayFabricatorBlockEntity extends ClayContainerBlo
                 slot -> slot.bind(new ItemHandlerSlot(this.inputInventory, 0))));
         row.addChild(new ProgressArrow()
                 .bind(DataBindingBuilder
-                        .floatValS2C(() -> this.craftDuration > 0 ?
-                                (float) this.craftProgress / this.craftDuration : 0.0f)
+                        .floatValS2C(this::getProcessingProgress)
                         .build())
                 .layout(layout -> layout.width(22)));
         row.addChild(new LargeItemSlot().itemSlot(slot -> slot.bind(

@@ -1,6 +1,7 @@
 package net.kogepan.clayium.integration.jade;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.LaserReflectorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ClayLaserBlockEntity;
 
@@ -19,10 +20,14 @@ public class ClayiumJadePlugin implements IWailaPlugin {
         registration.registerBlockDataProvider(ClayLaserSourceComponentProvider.INSTANCE, ClayLaserBlockEntity.class);
         registration.registerBlockDataProvider(ClayLaserSourceComponentProvider.INSTANCE,
                 LaserReflectorBlockEntity.class);
+        registration.registerItemStorage(ClayiumItemStorageProvider.INSTANCE, ClayContainerBlockEntity.class);
+        registration.registerProgress(ClayiumProgressProvider.INSTANCE, ClayContainerBlockEntity.class);
     }
 
     @Override
     public void registerClient(IWailaClientRegistration registration) {
         registration.registerBlockComponent(ClayLaserSourceComponentProvider.INSTANCE, Block.class);
+        registration.registerItemStorageClient(ClayiumItemStorageProvider.INSTANCE);
+        registration.registerProgressClient(ClayiumProgressProvider.INSTANCE);
     }
 }

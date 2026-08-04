@@ -378,6 +378,17 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         return this.workedThisTick;
     }
 
+    public boolean isProcessingRecipe() {
+        return this.processingRecipeHolder != null;
+    }
+
+    public float getProgressFraction() {
+        if (!this.isProcessingRecipe() || this.processingDuration <= 0L) {
+            return 0.0F;
+        }
+        return Math.clamp((float) this.currentProgress / this.processingDuration, 0.0F, 1.0F);
+    }
+
     private void restoreBaseRecipeValues(@NotNull RecipeHolder<?> holder) {
         this.processingCEPerTick = Math.max(0L, getRecipeCEPerTick(holder));
         this.processingDuration = Math.max(1L, getRecipeDuration(holder));
@@ -396,8 +407,7 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
     public UIElement createProgressUIElement() {
         return new ProgressArrow()
                 .bind(DataBindingBuilder
-                        .floatValS2C(() -> this.processingRecipeHolder != null ?
-                                (float) this.currentProgress / this.processingDuration : 0)
+                        .floatValS2C(this::getProgressFraction)
                         .build())
                 .layout(layout -> layout.width(22));
     }

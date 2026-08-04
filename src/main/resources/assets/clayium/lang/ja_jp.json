@@ -635,6 +635,8 @@
 
   "gui.clayium.jade.laser_energy": "レーザーエネルギー: %s",
   "config.jade.plugin_clayium.clay_laser_source_energy": "レーザーエネルギー (CE)",
+  "config.jade.plugin_clayium.machine_item_storage": "機械のインベントリ内容",
+  "config.jade.plugin_clayium.machine_progress": "機械の処理進捗",
 
   "xei.clayium.tier": "Tier: %d",
   "xei.clayium.items_per_tick": "%.2f アイテム/t",

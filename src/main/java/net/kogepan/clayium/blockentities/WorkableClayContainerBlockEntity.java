@@ -42,6 +42,7 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
     protected final NotifiableItemStackHandler outputItemInventory;
 
     protected final RecipeType<?> recipeType;
+    @Getter
     protected final AbstractRecipeLogic recipeLogic;
     @Getter
     protected final ClayEnergyHolder energyHolder;
@@ -93,6 +94,16 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
     @Override
     public IItemHandlerModifiable getOutputInventory() {
         return this.outputItemInventory;
+    }
+
+    @Override
+    public boolean hasProcessingProgress() {
+        return this.recipeLogic.isProcessingRecipe();
+    }
+
+    @Override
+    public float getProcessingProgress() {
+        return this.recipeLogic.getProgressFraction();
     }
 
     @Override

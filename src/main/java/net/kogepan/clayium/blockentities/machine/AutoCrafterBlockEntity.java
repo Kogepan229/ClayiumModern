@@ -189,6 +189,28 @@ public class AutoCrafterBlockEntity extends ClayContainerBlockEntity {
     }
 
     @Override
+    @NotNull
+    protected List<IItemHandler> getInventoryHandlersForDisplay() {
+        List<IItemHandler> inventories = new ArrayList<>(super.getInventoryHandlersForDisplay());
+        inventories.add(this.processingInventory);
+        inventories.add(this.remainderInventory);
+        return inventories;
+    }
+
+    @Override
+    public boolean hasProcessingProgress() {
+        return !isEmpty(this.processingInventory) && this.activeRecipeId != null;
+    }
+
+    @Override
+    public float getProcessingProgress() {
+        if (!this.hasProcessingProgress()) {
+            return 0.0F;
+        }
+        return Math.clamp((float) this.progress / REQUIRED_PROGRESS[tierIndex()], 0.0F, 1.0F);
+    }
+
+    @Override
     protected void tick() {
         super.tick();
 

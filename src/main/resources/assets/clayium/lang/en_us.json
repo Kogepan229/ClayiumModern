@@ -635,6 +635,8 @@
 
   "gui.clayium.jade.laser_energy": "Laser Energy: %s",
   "config.jade.plugin_clayium.clay_laser_source_energy": "Laser energy (CE)",
+  "config.jade.plugin_clayium.machine_item_storage": "Machine inventory contents",
+  "config.jade.plugin_clayium.machine_progress": "Machine processing progress",
 
   "xei.clayium.tier": "Tier: %d",
   "xei.clayium.items_per_tick": "%.2f Items/t",

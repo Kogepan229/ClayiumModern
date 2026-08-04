@@ -425,6 +425,45 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
 
     public abstract IItemHandlerModifiable getOutputInventory();
 
+    @NotNull
+    public List<ItemStack> getInventoryContentsForDisplay() {
+        List<ItemStack> contents = new ArrayList<>();
+        Set<IItemHandler> visitedInventories = Collections.newSetFromMap(new IdentityHashMap<>());
+        for (IItemHandler inventory : this.getInventoryHandlersForDisplay()) {
+            if (!visitedInventories.add(inventory)) {
+                continue;
+            }
+            for (int slot = 0; slot < inventory.getSlots(); slot++) {
+                ItemStack stack = inventory.getStackInSlot(slot);
+                if (!stack.isEmpty()) {
+                    contents.add(stack.copy());
+                }
+            }
+        }
+        return contents;
+    }
+
+    @NotNull
+    protected List<IItemHandler> getInventoryHandlersForDisplay() {
+        List<IItemHandler> inventories = new ArrayList<>();
+        inventories.add(this.getInputInventory());
+        inventories.add(this.getOutputInventory());
+
+        ClayContainerTrait energyTrait = this.getTrait(ClayEnergyHolder.TRAIT_ID);
+        if (energyTrait instanceof ClayEnergyHolder energyHolder) {
+            inventories.add(energyHolder.getEnergizedClayItemHandler());
+        }
+        return inventories;
+    }
+
+    public boolean hasProcessingProgress() {
+        return false;
+    }
+
+    public float getProcessingProgress() {
+        return 0.0F;
+    }
+
     public void dropInventoryContents(@NotNull Level level) {
         Set<IItemHandler> droppedInventories = Collections.newSetFromMap(new IdentityHashMap<>());
         for (IItemHandler inventory : this.getInventoryHandlersForDrops()) {
