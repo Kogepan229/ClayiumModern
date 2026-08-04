@@ -12,6 +12,7 @@ import net.kogepan.clayium.datagen.worldgen.ClayiumWorldgen;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.DataGenerator;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.structures.SnbtToNbt;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
@@ -30,6 +31,9 @@ public class ClayiumDataGenerators {
         CompletableFuture<HolderLookup.Provider> registries = event.getLookupProvider();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
         PackOutput output = generator.getPackOutput();
+
+        // Structures
+        generator.addProvider(event.includeServer(), new SnbtToNbt(output, event.getInputs()));
 
         // World generation
         generator.addProvider(event.includeServer(), new DatapackBuiltinEntriesProvider(
