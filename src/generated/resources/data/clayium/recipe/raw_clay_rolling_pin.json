@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "key": {
+    "C": "clayium:clay_cylinder",
+    "S": "clayium:short_clay_stick"
+  },
+  "pattern": [
+    "SCS"
+  ],
+  "result": {
+    "id": "clayium:raw_clay_rolling_pin"
+  }
+}

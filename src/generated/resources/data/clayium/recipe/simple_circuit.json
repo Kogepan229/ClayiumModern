@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": "clayium:clay_circuit_board",
+    "E": "clayium:energized_clay_dust"
+  },
+  "pattern": [
+    "EEE",
+    "EBE",
+    "EEE"
+  ],
+  "result": {
+    "id": "clayium:simple_circuit"
+  }
+}

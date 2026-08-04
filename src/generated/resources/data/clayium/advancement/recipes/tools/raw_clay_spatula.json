@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_clay_blade": {
+      "conditions": {
+        "items": [
+          {
+            "items": "clayium:clay_blade"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "clayium:raw_clay_spatula"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_clay_blade"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "clayium:raw_clay_spatula"
+    ]
+  }
+}

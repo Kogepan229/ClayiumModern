@@ -57,6 +57,54 @@ public final class ClayiumRecipeProvider extends RecipeProvider {
                 ClayiumItems.RAW_CLAY_SPATULA.get(),
                 ClayiumItems.CLAY_SPATULA.get(),
                 "clay_spatula_from_smelting");
+
+        this.shaped(RecipeCategory.MISC, ClayiumItems.CLAY_CIRCUIT.get())
+                .pattern("DGD")
+                .pattern("RBR")
+                .pattern("DGD")
+                .define('D', ClayiumItems.DENSE_CLAY_STICK.get())
+                .define('G', ClayiumItems.DENSE_CLAY_GEAR.get())
+                .define('R', ClayiumItems.DENSE_CLAY_RING.get())
+                .define('B', ClayiumItems.CLAY_CIRCUIT_BOARD.get())
+                .unlockedBy("has_clay_circuit_board", this.has(ClayiumItems.CLAY_CIRCUIT_BOARD.get()))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Clayium.id("clay_circuit")));
+        this.shaped(RecipeCategory.MISC, ClayiumItems.SIMPLE_CIRCUIT.get())
+                .pattern("EEE")
+                .pattern("EBE")
+                .pattern("EEE")
+                .define('E', ClayiumItems.ENERGIZED_CLAY_DUST.get())
+                .define('B', ClayiumItems.CLAY_CIRCUIT_BOARD.get())
+                .unlockedBy("has_clay_circuit_board", this.has(ClayiumItems.CLAY_CIRCUIT_BOARD.get()))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Clayium.id("simple_circuit")));
+
+        this.shaped(RecipeCategory.TOOLS, ClayiumItems.RAW_CLAY_ROLLING_PIN.get())
+                .pattern("SCS")
+                .define('S', ClayiumItems.SHORT_CLAY_STICK.get())
+                .define('C', ClayiumItems.CLAY_CYLINDER.get())
+                .unlockedBy("has_clay_cylinder", this.has(ClayiumItems.CLAY_CYLINDER.get()))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Clayium.id("raw_clay_rolling_pin")));
+        this.shaped(RecipeCategory.TOOLS, ClayiumItems.RAW_CLAY_SPATULA.get())
+                .pattern("SB")
+                .define('S', ClayiumItems.SHORT_CLAY_STICK.get())
+                .define('B', ClayiumItems.CLAY_BLADE.get())
+                .unlockedBy("has_clay_blade", this.has(ClayiumItems.CLAY_BLADE.get()))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Clayium.id("raw_clay_spatula")));
+        this.shaped(RecipeCategory.TOOLS, ClayiumItems.CLAY_SHOVEL.get())
+                .pattern("P")
+                .pattern("S")
+                .pattern("S")
+                .define('P', ClayiumItems.CLAY_PLATE.get())
+                .define('S', ClayiumItems.CLAY_STICK.get())
+                .unlockedBy("has_clay_plate", this.has(ClayiumItems.CLAY_PLATE.get()))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Clayium.id("clay_shovel")));
+        this.shaped(RecipeCategory.TOOLS, ClayiumItems.CLAY_PICKAXE.get())
+                .pattern("PPP")
+                .pattern(" S ")
+                .pattern(" S ")
+                .define('P', ClayiumItems.DENSE_CLAY_PLATE.get())
+                .define('S', ClayiumItems.DENSE_CLAY_STICK.get())
+                .unlockedBy("has_dense_clay_plate", this.has(ClayiumItems.DENSE_CLAY_PLATE.get()))
+                .save(this.output, ResourceKey.create(Registries.RECIPE, Clayium.id("clay_pickaxe")));
     }
 
     private void smelting(ItemLike ingredient, ItemLike result, String path) {
