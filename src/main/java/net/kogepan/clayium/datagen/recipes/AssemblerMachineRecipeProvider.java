@@ -22,9 +22,14 @@ public final class AssemblerMachineRecipeProvider {
 
     private static void create(RecipeOutput output, String name, ItemStack input1, ItemStack input2,
                                ItemStack result, long energy, long duration) {
+        create(output, name, input1, input2, result, energy, duration, 4);
+    }
+
+    private static void create(RecipeOutput output, String name, ItemStack input1, ItemStack input2,
+                               ItemStack result, long energy, long duration, int recipeTier) {
         MachineRecipe recipe = new MachineRecipe(ClayiumRecipeTypes.ASSEMBLER_RECIPE_TYPE.get(),
                 List.of(ItemIngredientStack.of(input1), ItemIngredientStack.of(input2)), List.of(result), duration,
-                energy, 4);
+                energy, recipeTier);
         output.accept(Clayium.id("assembler/" + name), recipe, null);
     }
 
@@ -155,6 +160,13 @@ public final class AssemblerMachineRecipeProvider {
         create(output, "storage_container", new ItemStack(ClayiumBlocks.AZ91D_ALLOY_HULL.get(), 4),
                 new ItemStack(ClayiumBlocks.CLAY_INTERFACE_BLOCKS.get(5).get()), storageContainers, energyForTier(6),
                 120);
+
+        for (int tier = 10; tier <= 13; tier++) {
+            create(output, "ca_reactor_core_" + tier, machineHull(tier),
+                    new ItemStack(ClayiumBlocks.CLAY_REACTOR.get(), 16),
+                    new ItemStack(ClayiumBlocks.CA_REACTOR_CORE_BLOCKS.get(tier).get()),
+                    CEUtils.ceToLong(Math.pow(10.0D, tier - 7)), 120, 10);
+        }
     }
 
     private static ItemStack machineHull(int tier) {

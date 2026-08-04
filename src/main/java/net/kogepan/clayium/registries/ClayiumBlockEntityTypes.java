@@ -20,6 +20,7 @@ import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BlockBreakerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CACondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CAInjectorBlockEntity;
+import net.kogepan.clayium.blockentities.machine.CAReactorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CentrifugeBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChemicalMetalSeparatorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChemicalReactorBlockEntity;
@@ -377,6 +378,14 @@ public class ClayiumBlockEntityTypes {
             "clay_reactor_block_entity",
             () -> BlockEntityType.Builder
                     .of(ClayReactorBlockEntity::new, ClayiumBlocks.CLAY_REACTOR.get())
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CAReactorBlockEntity>> CA_REACTOR_BLOCK_ENTITY = registerClayContainer(
+            "ca_reactor_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(CAReactorBlockEntity::new, ClayiumBlocks.CA_REACTOR_CORE_BLOCKS.values().stream()
+                            .map(DeferredHolder::get)
+                            .toArray(Block[]::new))
                     .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ClayInterfaceBlockEntity>> CLAY_INTERFACE_BLOCK_ENTITY = registerClayContainer(

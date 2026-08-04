@@ -42,6 +42,10 @@ public class Config {
             .comment("Maximum length of clay laser beam in blocks.")
             .defineInRange("maxClayLaserLength", 32, 1, 256);
 
+    public static final ModConfigSpec.BooleanValue CA_REACTOR_GLITTERING = BUILDER
+            .comment("Whether a working CA Reactor renders its glittering hull effect.")
+            .define("caReactorGlittering", true);
+
     public static final ModConfigSpec.BooleanValue INTERFACE_TARGET_HIGHLIGHT_OUTLINE = BUILDER
             .comment("Whether Clay Interface target highlight renders a box outline.")
             .define("interfaceTargetHighlightOutline", true);

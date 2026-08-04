@@ -1,0 +1,23 @@
+{
+  "base_model": {
+    "parent": "minecraft:block/cube_all",
+    "textures": {
+      "all": "clayium:block/tier/tier10"
+    }
+  },
+  "loader": "clayium:clay_container_model_loader",
+  "overlay_model": {
+    "parent": "clayium:block/overlay",
+    "textures": {
+      "overlay_front": "clayium:block/machine/ca_reactor_core_unformed"
+    }
+  },
+  "overlay_models": {
+    "formed": {
+      "parent": "clayium:block/overlay",
+      "textures": {
+        "overlay_front": "clayium:block/machine/ca_reactor_core_formed"
+      }
+    }
+  }
+}

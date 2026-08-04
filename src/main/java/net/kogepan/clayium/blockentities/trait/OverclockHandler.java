@@ -65,6 +65,13 @@ public class OverclockHandler extends ClayContainerTrait {
             return;
         }
 
+        if (!this.blockEntity.canUseOverclockers()) {
+            this.totalFactor = 1.0D;
+            this.accelerationFactor = 1.0D;
+            this.compensationFactor = 1.0D;
+            return;
+        }
+
         BlockPos machinePos = this.blockEntity.getBlockPos();
         double factor = 1.0D;
         for (Direction direction : Direction.values()) {

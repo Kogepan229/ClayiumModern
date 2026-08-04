@@ -1,6 +1,7 @@
 package net.kogepan.clayium.client.renderer;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.blockentities.machine.CAReactorBlockEntity;
 import net.kogepan.clayium.capability.IClayLaserSource;
 
 import net.minecraft.client.renderer.MultiBufferSource;
@@ -9,6 +10,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
 import net.minecraft.world.phys.AABB;
+import net.minecraft.world.phys.Vec3;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import org.jetbrains.annotations.NotNull;
@@ -40,6 +42,10 @@ public class ClayContainerRenderer implements BlockEntityRenderer<ClayContainerB
         // Render the stored or filtered item on specialized container fronts.
         this.filteredContainerRenderer.render(blockEntity, poseStack, buffer, packedLight, packedOverlay);
 
+        if (blockEntity instanceof CAReactorBlockEntity reactor) {
+            CAReactorRenderer.render(reactor, poseStack);
+        }
+
         // Render pipe IO icons
         pipeRenderer.render(blockEntity, partialTick, poseStack, buffer, packedLight, packedOverlay);
     }
@@ -47,6 +53,9 @@ public class ClayContainerRenderer implements BlockEntityRenderer<ClayContainerB
     @Override
     @NotNull
     public AABB getRenderBoundingBox(@NotNull ClayContainerBlockEntity blockEntity) {
+        if (blockEntity instanceof CAReactorBlockEntity reactor) {
+            return CAReactorRenderer.getRenderBoundingBox(reactor);
+        }
         if (blockEntity instanceof IClayLaserSource source && source.getIrradiatingLaser() != null) {
             int length = source.getLength();
             if (length > 0) {
@@ -62,5 +71,17 @@ public class ClayContainerRenderer implements BlockEntityRenderer<ClayContainerB
             }
         }
         return BlockEntityRenderer.super.getRenderBoundingBox(blockEntity);
+    }
+
+    @Override
+    public boolean shouldRender(@NotNull ClayContainerBlockEntity blockEntity, @NotNull Vec3 cameraPosition) {
+        if (blockEntity instanceof CAReactorBlockEntity reactor && reactor.isReactorWorking()) {
+            double viewDistance = this.getViewDistance();
+            if (reactor.getReactorRenderBoundingBox().distanceToSqr(cameraPosition) <
+                    viewDistance * viewDistance) {
+                return true;
+            }
+        }
+        return BlockEntityRenderer.super.shouldRender(blockEntity, cameraPosition);
     }
 }

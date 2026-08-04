@@ -1,6 +1,8 @@
 package net.kogepan.clayium.registries;
 
 import net.kogepan.clayium.Clayium;
+import net.kogepan.clayium.blocks.CAReactorCoilBlock;
+import net.kogepan.clayium.blocks.CAReactorHullBlock;
 import net.kogepan.clayium.blocks.ClayBufferBlock;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
 import net.kogepan.clayium.blocks.ClayCraftingBoardBlock;
@@ -24,6 +26,7 @@ import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.BlockBreakerBlock;
 import net.kogepan.clayium.blocks.machine.CACondenserBlock;
 import net.kogepan.clayium.blocks.machine.CAInjectorBlock;
+import net.kogepan.clayium.blocks.machine.CAReactorBlock;
 import net.kogepan.clayium.blocks.machine.CentrifugeBlock;
 import net.kogepan.clayium.blocks.machine.ChemicalMetalSeparatorBlock;
 import net.kogepan.clayium.blocks.machine.ChemicalReactorBlock;
@@ -55,6 +58,9 @@ import net.kogepan.clayium.blocks.machine.SolarClayFabricatorBlock;
 import net.kogepan.clayium.blocks.machine.WaterwheelBlock;
 import net.kogepan.clayium.blocks.machine.WireDrawingMachineBlock;
 import net.kogepan.clayium.items.blockitem.ActivatorBlockItem;
+import net.kogepan.clayium.items.blockitem.CAReactorBlockItem;
+import net.kogepan.clayium.items.blockitem.CAReactorCoilBlockItem;
+import net.kogepan.clayium.items.blockitem.CAReactorHullBlockItem;
 import net.kogepan.clayium.items.blockitem.ClayReactorBlockItem;
 import net.kogepan.clayium.items.blockitem.DistributorBlockItem;
 import net.kogepan.clayium.items.blockitem.EnergeticClayCondenserBlockItem;
@@ -124,6 +130,31 @@ public class ClayiumBlocks {
         String name = "resonator_" + tier;
         DeferredBlock<ResonatorBlock> block = BLOCKS.register(name, () -> new ResonatorBlock(tier, factor));
         ClayiumItems.ITEMS.register(name, () -> new ResonatorBlockItem(block.get(), new Item.Properties()));
+        return block;
+    }
+
+    private static DeferredBlock<ClayContainerBlock> registerCAReactorCore(int tier) {
+        String name = "ca_reactor_core_" + tier;
+        DeferredBlock<ClayContainerBlock> block = BLOCKS.register(name, () -> new CAReactorBlock(tier));
+        ClayiumItems.ITEMS.register(name,
+                () -> new CAReactorBlockItem(block.get(), new Item.Properties(), tier));
+        return block;
+    }
+
+    private static DeferredBlock<CAReactorCoilBlock> registerCAReactorCoil(int tier) {
+        String name = "ca_reactor_coil_" + tier;
+        DeferredBlock<CAReactorCoilBlock> block = BLOCKS.register(name, () -> new CAReactorCoilBlock(tier));
+        ClayiumItems.ITEMS.register(name,
+                () -> new CAReactorCoilBlockItem(block.get(), new Item.Properties(), tier));
+        return block;
+    }
+
+    private static DeferredBlock<CAReactorHullBlock> registerCAReactorHull(int rank) {
+        String name = "ca_reactor_hull_" + rank;
+        DeferredBlock<CAReactorHullBlock> block = BLOCKS.register(name, () -> new CAReactorHullBlock(rank));
+        int tier = getCAReactorHullTier(rank);
+        ClayiumItems.ITEMS.register(name,
+                () -> new CAReactorHullBlockItem(block.get(), new Item.Properties(), tier, rank));
         return block;
     }
 
@@ -456,6 +487,33 @@ public class ClayiumBlocks {
         ASSEMBLER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CA_REACTOR_CORE_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int tier = 10; tier <= 13; tier++) {
+            map.put(tier, registerCAReactorCore(tier));
+        }
+        CA_REACTOR_CORE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<CAReactorCoilBlock>> CA_REACTOR_COILS;
+    static {
+        Int2ObjectMap<DeferredBlock<CAReactorCoilBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int tier = 10; tier <= 13; tier++) {
+            map.put(tier, registerCAReactorCoil(tier));
+        }
+        CA_REACTOR_COILS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<CAReactorHullBlock>> CA_REACTOR_HULLS;
+    static {
+        Int2ObjectMap<DeferredBlock<CAReactorHullBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int rank = 1; rank <= 10; rank++) {
+            map.put(rank, registerCAReactorHull(rank));
+        }
+        CA_REACTOR_HULLS = Int2ObjectMaps.unmodifiable(map);
+    }
+
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> MATTER_TRANSFORMER_BLOCKS;
     static {
         Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
@@ -633,5 +691,18 @@ public class ClayiumBlocks {
             }
         }
         return -1;
+    }
+
+    private static int getCAReactorHullTier(int rank) {
+        if (rank == 1) {
+            return 10;
+        }
+        if (rank <= 5) {
+            return 11;
+        }
+        if (rank <= 9) {
+            return 12;
+        }
+        return 13;
     }
 }

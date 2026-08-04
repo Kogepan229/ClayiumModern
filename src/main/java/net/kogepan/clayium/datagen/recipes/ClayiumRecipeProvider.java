@@ -50,6 +50,7 @@ public class ClayiumRecipeProvider extends RecipeProvider {
         AlloySmelterRecipeProvider.buildRecipes(recipeOutput);
         ClayBlastFurnaceRecipeProvider.buildRecipes(recipeOutput);
         ClayReactorRecipeProvider.buildRecipes(recipeOutput);
+        CAReactorRecipeProvider.buildRecipes(recipeOutput);
         CAInjectorRecipeProvider.buildRecipes(recipeOutput);
         CACondenserRecipeProvider.buildRecipes(recipeOutput);
         MatterTransformerRecipeProvider.buildRecipes(recipeOutput);

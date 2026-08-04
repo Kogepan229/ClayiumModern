@@ -119,5 +119,21 @@ public final class ClayiumRenderTypes {
                     .setDepthTestState(RenderStateShard.NO_DEPTH_TEST)
                     .createCompositeState(false));
 
+    /** Unlit translucent color-only geometry for the cached CA Reactor hull glow mesh. */
+    public static final RenderType CA_REACTOR_HULL_GLOW = RenderType.create(
+            "clayium_ca_reactor_hull_glow",
+            DefaultVertexFormat.POSITION_COLOR,
+            VertexFormat.Mode.TRIANGLE_STRIP,
+            1536,
+            false,
+            false,
+            RenderType.CompositeState.builder()
+                    .setShaderState(RenderStateShard.POSITION_COLOR_SHADER)
+                    .setTransparencyState(RenderStateShard.TRANSLUCENT_TRANSPARENCY)
+                    .setDepthTestState(RenderStateShard.LEQUAL_DEPTH_TEST)
+                    .setWriteMaskState(RenderStateShard.COLOR_WRITE)
+                    .setCullState(RenderStateShard.CULL)
+                    .createCompositeState(false));
+
     private ClayiumRenderTypes() {}
 }

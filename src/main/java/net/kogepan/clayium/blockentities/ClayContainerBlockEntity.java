@@ -168,6 +168,11 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
         }
     }
 
+    /** Returns whether adjacent overclocker blocks may accelerate this container. */
+    public boolean canUseOverclockers() {
+        return true;
+    }
+
     public void notifyItemInputInventoryChanged() {
         for (ClayContainerTrait trait : this.getTraitsSnapshot()) {
             trait.notifyItemInputInventoryChanged();
