@@ -1,0 +1,21 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 1000,
+  "duration": 100,
+  "inputs": [
+    {
+      "amount": 8,
+      "ingredient": {
+        "tag": "c:storage_blocks/coal"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:diamond"
+    }
+  ],
+  "recipe_tier": 5,
+  "recipe_type": "clayium:clay_condenser"
+}

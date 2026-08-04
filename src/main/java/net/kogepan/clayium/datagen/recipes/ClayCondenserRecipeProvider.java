@@ -10,7 +10,10 @@ import net.kogepan.clayium.utils.CEUtils;
 
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Blocks;
+import net.neoforged.neoforge.common.Tags;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -20,8 +23,13 @@ public class ClayCondenserRecipeProvider {
 
     private static void create(RecipeOutput output, String name, ItemStack ingredient, ItemStack result, long energy,
                                long duration, int tier) {
+        create(output, name, ItemIngredientStack.of(ingredient), result, energy, duration, tier);
+    }
+
+    private static void create(RecipeOutput output, String name, ItemIngredientStack ingredient, ItemStack result,
+                               long energy, long duration, int tier) {
         MachineRecipe machineRecipe = new MachineRecipe(ClayiumRecipeTypes.CLAY_CONDENSER_RECIPE_TYPE.get(),
-                List.of(ItemIngredientStack.of(ingredient)), List.of(result), duration, energy, tier);
+                List.of(ingredient), List.of(result), duration, energy, tier);
         output.accept(Clayium.id("clay_condenser/" + name), machineRecipe, null);
     }
 
@@ -100,6 +108,22 @@ public class ClayCondenserRecipeProvider {
                 new ItemStack(ClayiumBlocks.COMPRESSED_CLAYS.get(11).asItem(), 9),
                 ClayiumBlocks.COMPRESSED_CLAYS.get(12).asItem().getDefaultInstance(),
                 CEUtils.ceToLong(10000), 25, 5);
+
+        // Tier 5
+        create(recipeOutput, "coal_blocks_to_diamond", ItemIngredientStack.of(Ingredient.of(Tags.Items.STORAGE_BLOCKS_COAL), 8), new ItemStack(Items.DIAMOND), CEUtils.ONE_MILLI_CE * 10, 100, 5);
+
+        // Tier 10
+        create(recipeOutput, "antimatter_dust_to_matter", ClayiumItems.ANTIMATTER_DUST.toStack(), ClayiumItems.ANTIMATTER_MATTER.toStack(), CEUtils.ceToLong(25), 80, 10);
+        create(recipeOutput, "pure_antimatter_dust_to_matter", ClayiumItems.PURE_ANTIMATTER_DUST.toStack(), ClayiumItems.PURE_ANTIMATTER_MATTER.toStack(), CEUtils.ceToLong(250), 80, 10);
+        create(recipeOutput, "octuple_pure_antimatter_dust_to_matter", ClayiumItems.OCTUPLE_PURE_ANTIMATTER_DUST.toStack(), ClayiumItems.COMPRESSED_PURE_ANTIMATTER_8.toStack(), CEUtils.ceToLong(25_000), 80, 10);
+        create(recipeOutput, "pure_antimatter_to_compressed_1", ClayiumItems.PURE_ANTIMATTER_MATTER.toStack(9), ClayiumItems.COMPRESSED_PURE_ANTIMATTER_1.toStack(), CEUtils.ceToLong(100), 6, 10);
+        create(recipeOutput, "compressed_pure_antimatter_1_to_2", ClayiumItems.COMPRESSED_PURE_ANTIMATTER_1.toStack(9), ClayiumItems.COMPRESSED_PURE_ANTIMATTER_2.toStack(), CEUtils.ceToLong(100), 6, 10);
+        create(recipeOutput, "compressed_pure_antimatter_2_to_3", ClayiumItems.COMPRESSED_PURE_ANTIMATTER_2.toStack(9), ClayiumItems.COMPRESSED_PURE_ANTIMATTER_3.toStack(), CEUtils.ceToLong(100), 6, 10);
+        create(recipeOutput, "compressed_pure_antimatter_3_to_4", ClayiumItems.COMPRESSED_PURE_ANTIMATTER_3.toStack(9), ClayiumItems.COMPRESSED_PURE_ANTIMATTER_4.toStack(), CEUtils.ceToLong(100), 6, 10);
+        create(recipeOutput, "compressed_pure_antimatter_4_to_5", ClayiumItems.COMPRESSED_PURE_ANTIMATTER_4.toStack(9), ClayiumItems.COMPRESSED_PURE_ANTIMATTER_5.toStack(), CEUtils.ceToLong(100), 6, 10);
+        create(recipeOutput, "compressed_pure_antimatter_5_to_6", ClayiumItems.COMPRESSED_PURE_ANTIMATTER_5.toStack(9), ClayiumItems.COMPRESSED_PURE_ANTIMATTER_6.toStack(), CEUtils.ceToLong(100), 6, 10);
+        create(recipeOutput, "compressed_pure_antimatter_6_to_7", ClayiumItems.COMPRESSED_PURE_ANTIMATTER_6.toStack(9), ClayiumItems.COMPRESSED_PURE_ANTIMATTER_7.toStack(), CEUtils.ceToLong(100), 6, 10);
+        create(recipeOutput, "compressed_pure_antimatter_7_to_8", ClayiumItems.COMPRESSED_PURE_ANTIMATTER_7.toStack(9), ClayiumItems.COMPRESSED_PURE_ANTIMATTER_8.toStack(), CEUtils.ceToLong(100), 6, 10);
 
         // spotless:on
     }

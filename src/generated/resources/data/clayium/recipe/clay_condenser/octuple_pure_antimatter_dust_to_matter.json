@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 2500000000,
+  "duration": 80,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:octuple_pure_antimatter_dust"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:compressed_pure_antimatter_8"
+    }
+  ],
+  "recipe_tier": 10,
+  "recipe_type": "clayium:clay_condenser"
+}
