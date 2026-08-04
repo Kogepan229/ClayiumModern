@@ -1,6 +1,7 @@
 package net.kogepan.clayium.blockentities.trait;
 
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
+import net.kogepan.clayium.blockentities.WorkableClayContainerBlockEntity;
 import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
 import net.kogepan.clayium.recipes.ItemIngredientStack;
 import net.kogepan.clayium.recipes.MachineRecipeMatcher;
@@ -44,6 +45,7 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
     protected long processingDuration = 0;
     protected boolean effectiveRecipeValuesLoaded = false;
     protected boolean canProgress = false; // TODO: onFIrstTick
+    protected boolean workedThisTick;
     protected final RecipeType<?> recipeType;
     protected final OverclockHandler overclockHandler;
 
@@ -64,8 +66,14 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
 
     @Override
     public void tick() {
+        this.workedThisTick = false;
         Level level = this.blockEntity.getLevel();
         if (level == null || level.isClientSide()) return;
+
+        if (this.blockEntity instanceof WorkableClayContainerBlockEntity workable &&
+                !workable.canRunExternallyControlledWork()) {
+            return;
+        }
 
         // if (metaTileEntity.offsetTimer % 20 == 0L) checkCanProgress()
 
@@ -333,6 +341,7 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
             return;
         }
 
+        this.workedThisTick = true;
         currentProgress += getProgressPerTick(virtualTick);
         if (currentProgress >= this.processingDuration) {
             completeWork();
@@ -346,6 +355,27 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
             ItemHandlerHelper.insertItem(outputInventory, stack, false);
         }
         clearProcessingState();
+        if (this.blockEntity instanceof WorkableClayContainerBlockEntity workable) {
+            workable.onExternallyControlledWorkCompleted();
+        }
+    }
+
+    /** Returns whether a recipe is processing or the current inputs can schedule one. */
+    public boolean hasWorkScheduled() {
+        if (this.processingRecipeHolder != null || this.pendingRecipeId != null) {
+            return true;
+        }
+        Level level = this.blockEntity.getLevel();
+        if (level == null) {
+            return false;
+        }
+        RecipeHolder<?> matchedRecipe = getMatchedRecipe(level, getList(this.blockEntity.getInputInventory()));
+        return matchedRecipe != null && hasEnoughOutputSpace(matchedRecipe);
+    }
+
+    /** Returns whether this recipe logic performed work during its latest tick. */
+    public boolean workedThisTick() {
+        return this.workedThisTick;
     }
 
     private void restoreBaseRecipeValues(@NotNull RecipeHolder<?> holder) {

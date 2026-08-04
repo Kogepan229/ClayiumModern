@@ -2,6 +2,7 @@ package net.kogepan.clayium.blockentities.machine;
 
 import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.LaserInterfaceBlockEntity;
+import net.kogepan.clayium.blockentities.RedstoneInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.trait.ClayReactorRecipeLogic;
 import net.kogepan.clayium.blocks.OverclockerBlock;
 import net.kogepan.clayium.capability.IClayLaserAcceptor;
@@ -107,6 +108,7 @@ public class ClayReactorBlockEntity extends AbstractMultiblockMachineBlockEntity
                         return StructureCheckResult.invalid();
                     }
                     if (blockEntity instanceof ClayInterfaceBlockEntity ||
+                            blockEntity instanceof RedstoneInterfaceBlockEntity ||
                             blockEntity instanceof LaserInterfaceBlockEntity) {
                         interfacePositions.add(partPos.immutable());
                     }
@@ -141,6 +143,10 @@ public class ClayReactorBlockEntity extends AbstractMultiblockMachineBlockEntity
         if (blockEntity instanceof ClayInterfaceBlockEntity clayInterface &&
                 clayInterface.tier >= 7 && clayInterface.tier <= 13) {
             return clayInterface.tier;
+        }
+        if (blockEntity instanceof RedstoneInterfaceBlockEntity redstoneInterface &&
+                redstoneInterface.tier >= 7 && redstoneInterface.tier <= 13) {
+            return redstoneInterface.tier;
         }
         return -1;
     }

@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-04T17:02:41.248351858	Loot Tables
+// 1.21.1	2026-08-04T22:36:30.250131789	Loot Tables
 1ac3e13377b179fa98ca4ee15ed27da063c60007 data/clayium/loot_table/blocks/activator.json
 5bfffa4a0446d3f12e10d757aa42ea04bd808410 data/clayium/loot_table/blocks/alloy_smelter_6.json
 464cecdb1cea9558a73ec9d43ffbfe00caecb8e7 data/clayium/loot_table/blocks/assembler_10.json
@@ -191,6 +191,15 @@ b6e02fb669ad8f5542bdb8aaceb439194d17f2ed data/clayium/loot_table/blocks/pipe_dra
 91d0c60235d8c98e7e8a45bf89862ed95517b7a3 data/clayium/loot_table/blocks/pipe_drawing_machine_4.json
 2f3748ca83c05d13bcbd4becc7afc8e06a7301dd data/clayium/loot_table/blocks/quartz_crucible.json
 94c029895a33c067fa38ffdb7771cd9ec865d55d data/clayium/loot_table/blocks/raw_clay_machine_hull.json
+973cf4ecf4ac75426393d97b3ee63c80ef90a15f data/clayium/loot_table/blocks/redstone_interface_10.json
+20695c5e122dfa5346f8e2dcee9ab3a62255e282 data/clayium/loot_table/blocks/redstone_interface_11.json
+8788778f6bca8cd31763a4122ccf5da27fa2c073 data/clayium/loot_table/blocks/redstone_interface_12.json
+776b3dd5794a1b6e9a55a6161682c04c539c8ec9 data/clayium/loot_table/blocks/redstone_interface_13.json
+38ad1ed313ef802050d8a2d9a9320e8185bfd459 data/clayium/loot_table/blocks/redstone_interface_5.json
+abad47534b79688db140520183e43eec2e5bd2d5 data/clayium/loot_table/blocks/redstone_interface_6.json
+9bea8be7dde487bdac2d4e8c56a0f6e6d0c0bdb1 data/clayium/loot_table/blocks/redstone_interface_7.json
+8a708b67ef03bb16fb4aaaed9cb4578c7753e615 data/clayium/loot_table/blocks/redstone_interface_8.json
+35191324b7f1eb501693ab8951e73fd7ecc07aa9 data/clayium/loot_table/blocks/redstone_interface_9.json
 307a6ce6b8b883295dabd4e8155fe705d66fb633 data/clayium/loot_table/blocks/resonating_collector.json
 27462956db15261d39071d0b12d9431acce1c442 data/clayium/loot_table/blocks/resonator_10.json
 dd67a89d027648a846e91f855acb38543d5a2e69 data/clayium/loot_table/blocks/resonator_11.json

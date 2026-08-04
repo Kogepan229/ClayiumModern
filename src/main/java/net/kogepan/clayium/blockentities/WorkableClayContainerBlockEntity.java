@@ -1,11 +1,13 @@
 package net.kogepan.clayium.blockentities;
 
 import net.kogepan.clayium.api.configuration.MachineIOMode;
+import net.kogepan.clayium.blockentities.machine.AbstractMultiblockMachineBlockEntity;
 import net.kogepan.clayium.blockentities.trait.AbstractRecipeLogic;
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.blockentities.trait.OverclockHandler;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.capability.IExternalControl;
 import net.kogepan.clayium.client.ldlib.textures.SlotTextures;
 import net.kogepan.clayium.inventory.NotifiableItemStackHandler;
 
@@ -32,7 +34,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.function.Function;
 
-public abstract class WorkableClayContainerBlockEntity extends ClayContainerBlockEntity {
+public abstract class WorkableClayContainerBlockEntity extends ClayContainerBlockEntity implements IExternalControl {
+
+    private static final String EXTERNAL_CONTROL_STATE_TAG = "externalControlState";
 
     protected final NotifiableItemStackHandler inputItemInventory;
     protected final NotifiableItemStackHandler outputItemInventory;
@@ -43,6 +47,9 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
     protected final ClayEnergyHolder energyHolder;
     @Getter
     protected final OverclockHandler overclockHandler;
+
+    /** Zero enables continuous work, negative values stop work, and positive values queue operations. */
+    private int externalControlState;
 
     public WorkableClayContainerBlockEntity(@NotNull BlockEntityType<?> type,
                                             @NotNull BlockPos pos,
@@ -93,6 +100,7 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
         super.saveAdditional(tag, provider);
         tag.put("inputItemInventory", this.inputItemInventory.serializeNBT(provider));
         tag.put("outputItemInventory", this.outputItemInventory.serializeNBT(provider));
+        tag.putInt(EXTERNAL_CONTROL_STATE_TAG, this.externalControlState);
     }
 
     @Override
@@ -104,6 +112,61 @@ public abstract class WorkableClayContainerBlockEntity extends ClayContainerBloc
         if (tag.contains("outputItemInventory")) {
             this.outputItemInventory.deserializeNBT(provider, tag.getCompound("outputItemInventory"));
         }
+        if (tag.contains(EXTERNAL_CONTROL_STATE_TAG)) {
+            this.externalControlState = tag.getInt(EXTERNAL_CONTROL_STATE_TAG);
+        }
+    }
+
+    /** Returns whether recipe logic is currently allowed to progress. */
+    public boolean canRunExternallyControlledWork() {
+        return this.externalControlState >= 0;
+    }
+
+    /** Consumes one queued operation after recipe completion. */
+    public void onExternallyControlledWorkCompleted() {
+        if (this.externalControlState <= 0) {
+            return;
+        }
+        this.externalControlState--;
+        if (this.externalControlState == 0) {
+            this.externalControlState = -1;
+        }
+        this.setChanged();
+    }
+
+    @Override
+    public void doWorkOnce() {
+        this.externalControlState = this.externalControlState > 0 ? this.externalControlState + 1 : 1;
+        this.setChanged();
+    }
+
+    @Override
+    public void startWork() {
+        if (this.externalControlState != 0) {
+            this.externalControlState = 0;
+            this.setChanged();
+        }
+    }
+
+    @Override
+    public void stopWork() {
+        if (this.externalControlState != -1) {
+            this.externalControlState = -1;
+            this.setChanged();
+        }
+    }
+
+    @Override
+    public boolean isScheduled() {
+        if (this instanceof AbstractMultiblockMachineBlockEntity multiblock && !multiblock.isStructureFormed()) {
+            return false;
+        }
+        return this.recipeLogic.hasWorkScheduled();
+    }
+
+    @Override
+    public boolean isDoingWork() {
+        return this.recipeLogic.workedThisTick();
     }
 
     private static final List<List<MachineIOMode>> VALID_INPUT_MODES_LISTS = List.of(

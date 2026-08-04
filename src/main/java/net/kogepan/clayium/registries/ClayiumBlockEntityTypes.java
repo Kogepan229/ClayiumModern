@@ -10,6 +10,7 @@ import net.kogepan.clayium.blockentities.LaserInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.LaserReflectorBlockEntity;
 import net.kogepan.clayium.blockentities.MultitrackBufferBlockEntity;
 import net.kogepan.clayium.blockentities.QuartzCrucibleBlockEntity;
+import net.kogepan.clayium.blockentities.RedstoneInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.StorageContainerBlockEntity;
 import net.kogepan.clayium.blockentities.VacuumContainerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ActivatorBlockEntity;
@@ -393,6 +394,15 @@ public class ClayiumBlockEntityTypes {
             () -> BlockEntityType.Builder
                     .of(ClayInterfaceBlockEntity::new,
                             ClayiumBlocks.CLAY_INTERFACE_BLOCKS.values().stream()
+                                    .map(DeferredHolder::get)
+                                    .toArray(Block[]::new))
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<RedstoneInterfaceBlockEntity>> REDSTONE_INTERFACE_BLOCK_ENTITY = registerClayContainer(
+            "redstone_interface_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(RedstoneInterfaceBlockEntity::new,
+                            ClayiumBlocks.REDSTONE_INTERFACE_BLOCKS.values().stream()
                                     .map(DeferredHolder::get)
                                     .toArray(Block[]::new))
                     .build(null));

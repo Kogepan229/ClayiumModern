@@ -4,6 +4,7 @@ import net.kogepan.clayium.api.configuration.MachineIOMode;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.trait.AutoIOTrait;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.capability.IExternalControl;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
 import net.kogepan.clayium.inventory.ClayiumItemStackHandler;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
@@ -37,7 +38,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public class CobblestoneGeneratorBlockEntity extends ClayContainerBlockEntity {
+public class CobblestoneGeneratorBlockEntity extends ClayContainerBlockEntity implements IExternalControl {
+
+    private static final String EXTERNAL_CONTROL_STATE_TAG = "externalControlState";
 
     /** Progress units per one cobblestone. */
     public static final int PROGRESS_MAX = 100;
@@ -76,6 +79,8 @@ public class CobblestoneGeneratorBlockEntity extends ClayContainerBlockEntity {
     private final int progressEfficiency;
 
     private int progress;
+    private int externalControlState;
+    private boolean doingWork;
 
     public CobblestoneGeneratorBlockEntity(@NotNull BlockPos pos, @NotNull BlockState blockState) {
         super(ClayiumBlockEntityTypes.COBBLESTONE_GENERATOR_BLOCK_ENTITY.get(), pos, blockState,
@@ -107,7 +112,9 @@ public class CobblestoneGeneratorBlockEntity extends ClayContainerBlockEntity {
             return;
         }
 
-        if (canProduce()) {
+        this.doingWork = false;
+
+        if (this.externalControlState >= 0 && canProduce()) {
             progress += progressEfficiency;
             setChanged();
         }
@@ -119,6 +126,13 @@ public class CobblestoneGeneratorBlockEntity extends ClayContainerBlockEntity {
             if (!remainder.isEmpty()) {
                 progress = Math.min(progress, PROGRESS_MAX);
                 break;
+            }
+            this.doingWork = true;
+            if (this.externalControlState > 0) {
+                this.externalControlState--;
+                if (this.externalControlState == 0) {
+                    this.externalControlState = -1;
+                }
             }
             setChanged();
         }
@@ -165,6 +179,7 @@ public class CobblestoneGeneratorBlockEntity extends ClayContainerBlockEntity {
         super.saveAdditional(tag, provider);
         tag.put("outputInventory", this.outputInventory.serializeNBT(provider));
         tag.putInt("progress", this.progress);
+        tag.putInt(EXTERNAL_CONTROL_STATE_TAG, this.externalControlState);
     }
 
     @Override
@@ -176,6 +191,41 @@ public class CobblestoneGeneratorBlockEntity extends ClayContainerBlockEntity {
         if (tag.contains("progress")) {
             this.progress = tag.getInt("progress");
         }
+        if (tag.contains(EXTERNAL_CONTROL_STATE_TAG)) {
+            this.externalControlState = tag.getInt(EXTERNAL_CONTROL_STATE_TAG);
+        }
+    }
+
+    @Override
+    public void doWorkOnce() {
+        this.externalControlState = this.externalControlState > 0 ? this.externalControlState + 1 : 1;
+        this.setChanged();
+    }
+
+    @Override
+    public void startWork() {
+        if (this.externalControlState != 0) {
+            this.externalControlState = 0;
+            this.setChanged();
+        }
+    }
+
+    @Override
+    public void stopWork() {
+        if (this.externalControlState != -1) {
+            this.externalControlState = -1;
+            this.setChanged();
+        }
+    }
+
+    @Override
+    public boolean isScheduled() {
+        return this.canProduce();
+    }
+
+    @Override
+    public boolean isDoingWork() {
+        return this.doingWork;
     }
 
     @Override

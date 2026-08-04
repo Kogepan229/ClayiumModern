@@ -107,6 +107,8 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
             .id("block/machine/clay_reactor_formed");
     private static final ResourceLocation CHUNK_LOADER_TEXTURE = Clayium.id("block/machine/chunk_loader");
     private static final ResourceLocation CLAY_INTERFACE_TEXTURE = Clayium.id("block/machine/clay_interface");
+    private static final ResourceLocation REDSTONE_INTERFACE_TEXTURE = Clayium
+            .id("block/machine/redstone_interface");
     private static final ResourceLocation LASER_INTERFACE_TEXTURE = Clayium.id("block/machine/laser_interface");
     private static final ResourceLocation CLAY_LASER_TEXTURE = Clayium.id("block/machine/clay_laser");
     private static final ResourceLocation BLOCK_BREAKER_TEXTURE = Clayium.id("block/machine/block_breaker");
@@ -293,6 +295,10 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         for (var entry : ClayiumBlocks.CLAY_INTERFACE_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CLAY_INTERFACE_TEXTURE, OVERLAY_ALL_MODEL,
                     false, false);
+        }
+        for (var entry : ClayiumBlocks.REDSTONE_INTERFACE_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), REDSTONE_INTERFACE_TEXTURE,
+                    OVERLAY_ALL_MODEL, false, false);
         }
         for (var entry : ClayiumBlocks.LASER_INTERFACE_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), LASER_INTERFACE_TEXTURE);

@@ -133,6 +133,12 @@ public final class AssemblerMachineRecipeProvider {
                     ClayiumItems.DENSE_CLAY_PLATE.toStack((tier - 4) * 3),
                     new ItemStack(ClayiumBlocks.BENDING_MACHINE_BLOCKS.get(tier).get()), energyForTier(tier), 120);
         }
+        for (int tier = 5; tier <= 13; tier++) {
+            create(output, "redstone_interface_" + tier,
+                    new ItemStack(ClayiumBlocks.CLAY_INTERFACE_BLOCKS.get(tier).get()),
+                    ClayiumItems.ENERGIZED_CLAY_DUST.toStack(16),
+                    new ItemStack(ClayiumBlocks.REDSTONE_INTERFACE_BLOCKS.get(tier).get()), energyForTier(tier), 40);
+        }
 
         create(output, "solar_clay_fabricator_5", machineHull(5), ClayiumItems.SILICON_PLATE.toStack(8),
                 new ItemStack(ClayiumBlocks.SOLAR_CLAY_FABRICATOR_BLOCKS.get(5).get()), energyForTier(5), 120);
@@ -160,6 +166,9 @@ public final class AssemblerMachineRecipeProvider {
         create(output, "storage_container", new ItemStack(ClayiumBlocks.AZ91D_ALLOY_HULL.get(), 4),
                 new ItemStack(ClayiumBlocks.CLAY_INTERFACE_BLOCKS.get(5).get()), storageContainers, energyForTier(6),
                 120);
+        create(output, "vacuum_container", new ItemStack(ClayiumBlocks.AZ91D_ALLOY_HULL.get(), 4),
+                new ItemStack(ClayiumBlocks.REDSTONE_INTERFACE_BLOCKS.get(5).get()),
+                new ItemStack(ClayiumBlocks.VACUUM_CONTAINER.get(), 4), energyForTier(6), 120);
 
         for (int tier = 10; tier <= 13; tier++) {
             create(output, "ca_reactor_core_" + tier, machineHull(tier),
@@ -214,7 +223,12 @@ public final class AssemblerMachineRecipeProvider {
             case 4 -> CEUtils.ONE_MILLI_CE;
             case 5 -> CEUtils.ONE_MILLI_CE * 10;
             case 6 -> CEUtils.ONE_MILLI_CE * 100;
-            default -> throw new IllegalArgumentException("Unsupported machine tier: " + tier);
+            default -> {
+                if (tier >= 7 && tier <= 13) {
+                    yield CEUtils.ceToLong(Math.pow(10.0D, tier - 7));
+                }
+                throw new IllegalArgumentException("Unsupported machine tier: " + tier);
+            }
         };
     }
 }

@@ -51,6 +51,7 @@ import net.kogepan.clayium.blocks.machine.LatheBlock;
 import net.kogepan.clayium.blocks.machine.MatterTransformerBlock;
 import net.kogepan.clayium.blocks.machine.MillingMachineBlock;
 import net.kogepan.clayium.blocks.machine.PipeDrawingMachineBlock;
+import net.kogepan.clayium.blocks.machine.RedstoneInterfaceBlock;
 import net.kogepan.clayium.blocks.machine.ResonatingCollectorBlock;
 import net.kogepan.clayium.blocks.machine.SaltExtractorBlock;
 import net.kogepan.clayium.blocks.machine.SmelterBlock;
@@ -69,6 +70,7 @@ import net.kogepan.clayium.items.blockitem.LaserReflectorBlockItem;
 import net.kogepan.clayium.items.blockitem.MachineDescriptionBlockItem;
 import net.kogepan.clayium.items.blockitem.OverclockerBlockItem;
 import net.kogepan.clayium.items.blockitem.QuartzCrucibleBlockItem;
+import net.kogepan.clayium.items.blockitem.RedstoneInterfaceBlockItem;
 import net.kogepan.clayium.items.blockitem.ResonatorBlockItem;
 import net.kogepan.clayium.items.blockitem.StorageContainerBlockItem;
 import net.kogepan.clayium.items.blockitem.TieredBlockItem;
@@ -589,6 +591,21 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("clay_interface", i, ClayInterfaceBlock::new));
         }
         CLAY_INTERFACE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<RedstoneInterfaceBlock>> REDSTONE_INTERFACE_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<RedstoneInterfaceBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int tier = 5; tier <= 13; tier++) {
+            int currentTier = tier;
+            String name = "redstone_interface_" + currentTier;
+            DeferredBlock<RedstoneInterfaceBlock> block = BLOCKS.register(name,
+                    () -> new RedstoneInterfaceBlock(currentTier));
+            ClayiumItems.ITEMS.register(name,
+                    () -> new RedstoneInterfaceBlockItem(block.get(), new Item.Properties(), currentTier));
+            map.put(currentTier, block);
+        }
+        REDSTONE_INTERFACE_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<LaserInterfaceBlock>> LASER_INTERFACE_BLOCKS;

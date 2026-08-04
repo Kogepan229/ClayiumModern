@@ -12,6 +12,7 @@ import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
 import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.capability.IClayLaserAcceptor;
 import net.kogepan.clayium.capability.IClayLaserSource;
+import net.kogepan.clayium.capability.IExternalControl;
 import net.kogepan.clayium.capability.IItemFilterApplicatable;
 import net.kogepan.clayium.capability.ISynchronizedInterface;
 import net.kogepan.clayium.capability.filter.data.ItemFilterData;
@@ -212,6 +213,11 @@ public class Clayium {
                     ClayiumCapabilities.CLAY_LASER_ACCEPTOR,
                     type.get(),
                     (blockEntity, side) -> blockEntity instanceof IClayLaserAcceptor acceptor ? acceptor : null);
+
+            event.registerBlockEntity(
+                    ClayiumCapabilities.EXTERNAL_CONTROL,
+                    type.get(),
+                    (blockEntity, side) -> blockEntity instanceof IExternalControl control ? control : null);
         }
 
         // Serializable filter data capability for item-side persistence.

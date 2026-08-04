@@ -83,4 +83,10 @@ public final class ClayiumCapabilities {
             .createSided(
                     ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "synchronized_interface"),
                     ISynchronizedInterface.class);
+
+    /** Capability exposed by machines that can be controlled through a Redstone Interface. */
+    public static final BlockCapability<IExternalControl, @Nullable Direction> EXTERNAL_CONTROL = BlockCapability
+            .createSided(
+                    ResourceLocation.fromNamespaceAndPath(Clayium.MODID, "external_control"),
+                    IExternalControl.class);
 }

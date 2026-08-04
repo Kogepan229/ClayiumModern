@@ -86,6 +86,7 @@ public final class CAInjectorRecipeProvider {
         upgradeFamily(output, ClayiumBlocks.ALLOY_SMELTER_BLOCKS);
         upgradeFamily(output, ClayiumBlocks.SMELTER_BLOCKS);
         upgradeFamily(output, ClayiumBlocks.CLAY_INTERFACE_BLOCKS);
+        upgradeFamily(output, ClayiumBlocks.REDSTONE_INTERFACE_BLOCKS);
         upgradeFamily(output, ClayiumBlocks.LASER_INTERFACE_BLOCKS);
         upgradeFamily(output, ClayiumBlocks.AUTO_CLAY_CONDENSER_BLOCKS);
         upgradeFamily(output, ClayiumBlocks.SOLAR_CLAY_FABRICATOR_BLOCKS);

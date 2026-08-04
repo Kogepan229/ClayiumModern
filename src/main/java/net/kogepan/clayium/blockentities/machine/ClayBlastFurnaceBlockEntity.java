@@ -1,6 +1,7 @@
 package net.kogepan.clayium.blockentities.machine;
 
 import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
+import net.kogepan.clayium.blockentities.RedstoneInterfaceBlockEntity;
 import net.kogepan.clayium.blockentities.trait.MultiblockRecipeLogic;
 import net.kogepan.clayium.blocks.OverclockerBlock;
 import net.kogepan.clayium.client.ldlib.elements.CLabel;
@@ -67,7 +68,8 @@ public class ClayBlastFurnaceBlockEntity extends AbstractMultiblockMachineBlockE
                         return StructureCheckResult.invalid();
                     }
 
-                    if (blockEntity instanceof ClayInterfaceBlockEntity) {
+                    if (blockEntity instanceof ClayInterfaceBlockEntity ||
+                            blockEntity instanceof RedstoneInterfaceBlockEntity) {
                         interfacePositions.add(partPos.immutable());
                     }
 
@@ -93,6 +95,12 @@ public class ClayBlastFurnaceBlockEntity extends AbstractMultiblockMachineBlockE
         }
         if (partBlockEntity instanceof ClayInterfaceBlockEntity clayInterface) {
             int interfaceTier = clayInterface.tier;
+            if (interfaceTier >= 5 && interfaceTier <= 13) {
+                return interfaceTier;
+            }
+        }
+        if (partBlockEntity instanceof RedstoneInterfaceBlockEntity redstoneInterface) {
+            int interfaceTier = redstoneInterface.tier;
             if (interfaceTier >= 5 && interfaceTier <= 13) {
                 return interfaceTier;
             }
