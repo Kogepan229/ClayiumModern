@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 3,
+  "duration": 4000,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:wire_drawing_machine_1"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:antimatter_matter"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:wire_drawing_machine_2"
+    }
+  ],
+  "recipe_tier": 2,
+  "recipe_type": "clayium:ca_injector"
+}

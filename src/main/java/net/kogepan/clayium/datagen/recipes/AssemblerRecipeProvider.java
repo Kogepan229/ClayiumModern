@@ -83,6 +83,22 @@ public class AssemblerRecipeProvider {
         create(recipeOutput, "assembler_10", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(10).get()), new ItemStack(ClayiumBlocks.ASSEMBLER_BLOCKS.get(6).get()), new ItemStack(ClayiumBlocks.ASSEMBLER_BLOCKS.get(10).get()), CEUtils.ceToLong(1000), 40, 6);
         create(recipeOutput, "mossy_stone_bricks", new ItemStack(Blocks.STONE_BRICKS), new ItemStack(Blocks.VINE), new ItemStack(Blocks.MOSSY_STONE_BRICKS), CEUtils.milliCeToLong(100), 20, 6);
 
+        create(recipeOutput, "ca_injector_9", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(9).get()), new ItemStack(ClayiumBlocks.CLAY_REACTOR.get(), 16), new ItemStack(ClayiumBlocks.CA_INJECTOR_BLOCKS.get(9).get()), originalEnergy(1.0D, 9), 480, 6);
+        for (int tier = 10; tier <= 13; tier++) {
+            create(recipeOutput, "ca_injector_" + tier, new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(tier).get()), new ItemStack(ClayiumBlocks.CA_INJECTOR_BLOCKS.get(tier - 1).get(), 2), new ItemStack(ClayiumBlocks.CA_INJECTOR_BLOCKS.get(tier).get()), originalEnergy(1.0D, tier), 480, 10);
+        }
+
+        for (int tier = 7; tier <= 9; tier++) {
+            create(recipeOutput, "matter_transformer_" + tier, new ItemStack(ClayiumBlocks.CLAY_REACTOR.get()), new ItemStack(ClayiumBlocks.ELECTROLYSIS_REACTOR_BLOCKS.get(tier).get()), new ItemStack(ClayiumBlocks.MATTER_TRANSFORMER_BLOCKS.get(tier).get()), originalEnergy(1.0D, tier), 120, 6);
+        }
+        for (int tier = 10; tier <= 12; tier++) {
+            create(recipeOutput, "matter_transformer_" + tier, new ItemStack(ClayiumBlocks.CLAY_REACTOR.get()), new ItemStack(ClayiumBlocks.CA_INJECTOR_BLOCKS.get(tier).get()), new ItemStack(ClayiumBlocks.MATTER_TRANSFORMER_BLOCKS.get(tier).get()), originalEnergy(1.0D, tier), 120, 10);
+        }
+        for (int tier = 9; tier <= 11; tier++) {
+            int recipeTier = tier == 9 ? 6 : 10;
+            create(recipeOutput, "ca_condenser_" + tier, new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(tier).get()), new ItemStack(ClayiumBlocks.MATTER_TRANSFORMER_BLOCKS.get(tier).get(), 16), new ItemStack(ClayiumBlocks.CA_CONDENSER_BLOCKS.get(tier).get()), originalEnergy(1.0D, tier), 480, recipeTier);
+        }
+
         // Tier 10
         create(recipeOutput, "saddle", new ItemStack(Items.LEATHER, 4), new ItemStack(Items.STRING, 16), new ItemStack(Items.SADDLE), CEUtils.ceToLong(1000), 6000, 10);
         create(recipeOutput, "name_tag", new ItemStack(Items.PAPER, 2), new ItemStack(Items.STRING, 4), new ItemStack(Items.NAME_TAG), CEUtils.ceToLong(1000), 600, 10);
@@ -97,5 +113,9 @@ public class AssemblerRecipeProvider {
         create(recipeOutput, "gadget_repeatedly_attack", ClayiumItems.GADGET_OVERCLOCKER_MK1.toStack(), ClayiumItems.CLAY_SPIRIT.toStack(4), ClayiumItems.GADGET_REPEATEDLY_ATTACK.toStack(), CEUtils.ceToLong(1000), 120, 10);
 
         // spotless:on
+    }
+
+    private static long originalEnergy(double factor, int tier) {
+        return (long) (factor * 100.0D * Math.pow(10.0D, tier - 4));
     }
 }

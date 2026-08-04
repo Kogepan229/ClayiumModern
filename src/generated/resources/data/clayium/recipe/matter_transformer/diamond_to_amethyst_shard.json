@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 200000000,
+  "duration": 200,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "minecraft:diamond"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:amethyst_shard"
+    }
+  ],
+  "recipe_tier": 10,
+  "recipe_type": "clayium:matter_transformer"
+}

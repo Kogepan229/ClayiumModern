@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 30000,
+  "duration": 4000,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:centrifuge_5"
+      }
+    },
+    {
+      "amount": 4,
+      "ingredient": {
+        "item": "clayium:antimatter_matter"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:centrifuge_6"
+    }
+  ],
+  "recipe_tier": 6,
+  "recipe_type": "clayium:ca_injector"
+}

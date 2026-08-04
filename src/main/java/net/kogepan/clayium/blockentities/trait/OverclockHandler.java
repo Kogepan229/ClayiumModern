@@ -14,6 +14,7 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import com.lowdragmc.lowdraglib2.gui.sync.bindings.impl.DataBindingBuilder;
 import com.lowdragmc.lowdraglib2.gui.ui.UIElement;
+import com.lowdragmc.lowdraglib2.gui.ui.elements.BindableValue;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Locale;
@@ -126,9 +127,14 @@ public class OverclockHandler extends ClayContainerTrait {
 
     /** Creates the server-to-client bound multiplier label shared by supported machine UIs. */
     public UIElement createFactorUIElement() {
-        return new CLabel().bind(DataBindingBuilder.componentS2C(() -> Component.translatable(
+        CLabel label = new CLabel();
+        label.bind(DataBindingBuilder.componentS2C(() -> Component.translatable(
                 "gui.clayium.overclock",
                 String.format(Locale.ROOT, "%.3g", this.totalFactor))).build());
+        label.addChild(new BindableValue<Boolean>().bind(DataBindingBuilder.boolS2C(() -> this.totalFactor != 1.0D)
+                .remoteSetter(label::setDisplay)
+                .build()));
+        return label;
     }
 
     @Override

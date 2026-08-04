@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100000,
+  "duration": 1000,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "minecraft:gravel"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:flint"
+    }
+  ],
+  "recipe_tier": 7,
+  "recipe_type": "clayium:matter_transformer"
+}

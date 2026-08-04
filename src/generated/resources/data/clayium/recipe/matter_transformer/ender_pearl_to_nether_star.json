@@ -1,0 +1,21 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000000000,
+  "duration": 200,
+  "inputs": [
+    {
+      "amount": 16,
+      "ingredient": {
+        "item": "minecraft:ender_pearl"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:nether_star"
+    }
+  ],
+  "recipe_tier": 12,
+  "recipe_type": "clayium:matter_transformer"
+}

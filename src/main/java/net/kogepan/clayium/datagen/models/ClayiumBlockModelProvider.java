@@ -85,6 +85,12 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation DISTRIBUTOR_TEXTURE = Clayium.id("block/machine/distributor");
     private static final ResourceLocation INSCRIBER_TEXTURE = Clayium.id("block/machine/inscriber");
     private static final ResourceLocation ASSEMBLER_TEXTURE = Clayium.id("block/machine/assembler");
+    private static final ResourceLocation MATTER_TRANSFORMER_TEXTURE = Clayium
+            .id("block/machine/matter_transformer");
+    private static final ResourceLocation CA_INJECTOR_TEXTURE = Clayium.id("block/machine/ca_injector");
+    private static final ResourceLocation CA_CONDENSER_TEXTURE = Clayium.id("block/machine/ca_condenser");
+    private static final ResourceLocation RESONATING_COLLECTOR_TEXTURE = Clayium
+            .id("block/machine/resonating_collector");
     private static final ResourceLocation SMELTER_TEXTURE = Clayium.id("block/machine/smelter");
     private static final ResourceLocation ALLOY_SMELTER_TEXTURE = Clayium.id("block/machine/alloy_smelter");
     private static final ResourceLocation CLAY_BLAST_FURNACE_TEXTURE_UNFORMED = Clayium
@@ -148,6 +154,9 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
             simpleBlockAndItem(entry.get());
         }
         for (var entry : ClayiumBlocks.OVERCLOCKERS.values()) {
+            simpleBlockAndItem(entry.get());
+        }
+        for (var entry : ClayiumBlocks.RESONATORS.values()) {
             simpleBlockAndItem(entry.get());
         }
         simpleBlockAndItem(ClayiumBlocks.AZ91D_ALLOY_HULL.get());
@@ -236,6 +245,17 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         for (var entry : ClayiumBlocks.ASSEMBLER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), ASSEMBLER_TEXTURE);
         }
+        for (var entry : ClayiumBlocks.MATTER_TRANSFORMER_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), MATTER_TRANSFORMER_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.CA_INJECTOR_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CA_INJECTOR_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.CA_CONDENSER_BLOCKS.int2ObjectEntrySet()) {
+            registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CA_CONDENSER_TEXTURE);
+        }
+        registerSingleMachine(ClayiumBlocks.RESONATING_COLLECTOR.get(), 10, RESONATING_COLLECTOR_TEXTURE,
+                true, false);
         registerAdjacentWorker(ClayiumBlocks.BLOCK_BREAKER.get(), BLOCK_BREAKER_TEXTURE,
                 BLOCK_BREAKER_ACTIVE_TEXTURE);
         registerAdjacentWorker(ClayiumBlocks.ACTIVATOR.get(), ACTIVATOR_TEXTURE, ACTIVATOR_ACTIVE_TEXTURE);

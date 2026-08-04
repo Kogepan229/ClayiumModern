@@ -70,6 +70,11 @@ public final class ClayReactorRecipeProvider {
         create(output, "clay_fabricator_mk2", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(9).get()), new ItemStack(ClayiumBlocks.SOLAR_CLAY_FABRICATOR_BLOCKS.get(7).get()), new ItemStack(ClayiumBlocks.CLAY_FABRICATOR_BLOCKS.get(9).get()), 3.0D, 100_000_000_000L, 9);
         create(output, "clay_fabricator_mk3", new ItemStack(ClayiumBlocks.CLAY_FABRICATOR_BLOCKS.get(9).get(), 64), new ItemStack(ClayiumBlocks.OVERCLOCKERS.get(13).get(), 16), new ItemStack(ClayiumBlocks.CLAY_FABRICATOR_BLOCKS.get(13).get()), 10.0D, 1_000_000_000_000_000_000L, 13);
 
+        create(output, "overclocker_10", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(10).get()), new ItemStack(ClayiumBlocks.RESONATORS.get(10).get(), 8), new ItemStack(ClayiumBlocks.OVERCLOCKERS.get(10).get()), 5.0D, 10_000_000_000_000L, 10);
+        create(output, "overclocker_11", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(11).get(), 4), new ItemStack(ClayiumBlocks.RESONATORS.get(11).get(), 16), new ItemStack(ClayiumBlocks.OVERCLOCKERS.get(11).get()), 5.0D, 100_000_000_000_000L, 11);
+        create(output, "overclocker_12", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(12).get(), 16), new ItemStack(ClayiumBlocks.RESONATORS.get(12).get(), 32), new ItemStack(ClayiumBlocks.OVERCLOCKERS.get(12).get()), 5.0D, 1_000_000_000_000_000L, 12);
+        create(output, "overclocker_13", new ItemStack(ClayiumBlocks.MACHINE_HULLS.get(13).get(), 64), new ItemStack(ClayiumBlocks.RESONATORS.get(13).get(), 64), new ItemStack(ClayiumBlocks.OVERCLOCKERS.get(13).get()), 5.0D, 1_000_000_000_000_000L, 13);
+
         // spotless:on
     }
 }

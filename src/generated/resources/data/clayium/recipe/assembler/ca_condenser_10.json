@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100000000,
+  "duration": 480,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:machine_hull_10"
+      }
+    },
+    {
+      "amount": 16,
+      "ingredient": {
+        "item": "clayium:matter_transformer_10"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:ca_condenser_10"
+    }
+  ],
+  "recipe_tier": 10,
+  "recipe_type": "clayium:assembler"
+}

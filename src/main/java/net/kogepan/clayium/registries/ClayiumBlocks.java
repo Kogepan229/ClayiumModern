@@ -13,6 +13,7 @@ import net.kogepan.clayium.blocks.LaserReflectorBlock;
 import net.kogepan.clayium.blocks.MultitrackBufferBlock;
 import net.kogepan.clayium.blocks.OverclockerBlock;
 import net.kogepan.clayium.blocks.QuartzCrucibleBlock;
+import net.kogepan.clayium.blocks.ResonatorBlock;
 import net.kogepan.clayium.blocks.StorageContainerBlock;
 import net.kogepan.clayium.blocks.VacuumContainerBlock;
 import net.kogepan.clayium.blocks.machine.ActivatorBlock;
@@ -21,6 +22,8 @@ import net.kogepan.clayium.blocks.machine.AssemblerBlock;
 import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.BlockBreakerBlock;
+import net.kogepan.clayium.blocks.machine.CACondenserBlock;
+import net.kogepan.clayium.blocks.machine.CAInjectorBlock;
 import net.kogepan.clayium.blocks.machine.CentrifugeBlock;
 import net.kogepan.clayium.blocks.machine.ChemicalMetalSeparatorBlock;
 import net.kogepan.clayium.blocks.machine.ChemicalReactorBlock;
@@ -42,8 +45,10 @@ import net.kogepan.clayium.blocks.machine.GrinderBlock;
 import net.kogepan.clayium.blocks.machine.InscriberBlock;
 import net.kogepan.clayium.blocks.machine.LaserInterfaceBlock;
 import net.kogepan.clayium.blocks.machine.LatheBlock;
+import net.kogepan.clayium.blocks.machine.MatterTransformerBlock;
 import net.kogepan.clayium.blocks.machine.MillingMachineBlock;
 import net.kogepan.clayium.blocks.machine.PipeDrawingMachineBlock;
+import net.kogepan.clayium.blocks.machine.ResonatingCollectorBlock;
 import net.kogepan.clayium.blocks.machine.SaltExtractorBlock;
 import net.kogepan.clayium.blocks.machine.SmelterBlock;
 import net.kogepan.clayium.blocks.machine.SolarClayFabricatorBlock;
@@ -55,8 +60,10 @@ import net.kogepan.clayium.items.blockitem.DistributorBlockItem;
 import net.kogepan.clayium.items.blockitem.EnergeticClayCondenserBlockItem;
 import net.kogepan.clayium.items.blockitem.LaserInterfaceBlockItem;
 import net.kogepan.clayium.items.blockitem.LaserReflectorBlockItem;
+import net.kogepan.clayium.items.blockitem.MachineDescriptionBlockItem;
 import net.kogepan.clayium.items.blockitem.OverclockerBlockItem;
 import net.kogepan.clayium.items.blockitem.QuartzCrucibleBlockItem;
+import net.kogepan.clayium.items.blockitem.ResonatorBlockItem;
 import net.kogepan.clayium.items.blockitem.StorageContainerBlockItem;
 import net.kogepan.clayium.items.blockitem.TieredBlockItem;
 import net.kogepan.clayium.items.blockitem.VacuumContainerBlockItem;
@@ -110,6 +117,23 @@ public class ClayiumBlocks {
         DeferredBlock<OverclockerBlock> block = BLOCKS.register(name, () -> new OverclockerBlock(tier, factor));
         ClayiumItems.ITEMS.register(name,
                 () -> new OverclockerBlockItem(block.get(), new Item.Properties()));
+        return block;
+    }
+
+    private static DeferredBlock<ResonatorBlock> registerResonator(int tier, double factor) {
+        String name = "resonator_" + tier;
+        DeferredBlock<ResonatorBlock> block = BLOCKS.register(name, () -> new ResonatorBlock(tier, factor));
+        ClayiumItems.ITEMS.register(name, () -> new ResonatorBlockItem(block.get(), new Item.Properties()));
+        return block;
+    }
+
+    private static <B extends Block> DeferredBlock<B> registerDescribedMachine(String name, int tier,
+                                                                               Function<Integer, ? extends B> factory,
+                                                                               String descriptionKey) {
+        String registryName = name + "_" + tier;
+        DeferredBlock<B> block = BLOCKS.register(registryName, () -> factory.apply(tier));
+        ClayiumItems.ITEMS.register(registryName, () -> new MachineDescriptionBlockItem(block.get(),
+                new Item.Properties(), tier, descriptionKey));
         return block;
     }
 
@@ -184,6 +208,16 @@ public class ClayiumBlocks {
         map.put(12, registerOverclocker(12, 3.5D));
         map.put(13, registerOverclocker(13, 5.0D));
         OVERCLOCKERS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ResonatorBlock>> RESONATORS;
+    static {
+        Int2ObjectMap<DeferredBlock<ResonatorBlock>> map = new Int2ObjectOpenHashMap<>();
+        map.put(10, registerResonator(10, 1.08D));
+        map.put(11, registerResonator(11, 1.1D));
+        map.put(12, registerResonator(12, 2.0D));
+        map.put(13, registerResonator(13, 20.0D));
+        RESONATORS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final DeferredBlock<Block> AZ91D_ALLOY_HULL = BLOCKS.register("az91d_alloy_hull",
@@ -420,6 +454,44 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("assembler", i, AssemblerBlock::new));
         }
         ASSEMBLER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> MATTER_TRANSFORMER_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int tier = 7; tier <= 12; tier++) {
+            map.put(tier, registerDescribedMachine("matter_transformer", tier, MatterTransformerBlock::new,
+                    "tooltip.clayium.matter_transformer"));
+        }
+        MATTER_TRANSFORMER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CA_INJECTOR_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int tier = 9; tier <= 13; tier++) {
+            map.put(tier, registerDescribedMachine("ca_injector", tier, CAInjectorBlock::new,
+                    "tooltip.clayium.ca_injector"));
+        }
+        CA_INJECTOR_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CA_CONDENSER_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int tier = 9; tier <= 11; tier++) {
+            map.put(tier, registerDescribedMachine("ca_condenser", tier, CACondenserBlock::new,
+                    "tooltip.clayium.ca_condenser"));
+        }
+        CA_CONDENSER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final DeferredBlock<ResonatingCollectorBlock> RESONATING_COLLECTOR = BLOCKS.register(
+            "resonating_collector", ResonatingCollectorBlock::new);
+    static {
+        ClayiumItems.ITEMS.register("resonating_collector",
+                () -> new MachineDescriptionBlockItem(RESONATING_COLLECTOR.get(), new Item.Properties(), 10,
+                        "tooltip.clayium.resonating_collector"));
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> ALLOY_SMELTER_BLOCKS;

@@ -18,6 +18,8 @@ import net.kogepan.clayium.blockentities.machine.AssemblerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BlockBreakerBlockEntity;
+import net.kogepan.clayium.blockentities.machine.CACondenserBlockEntity;
+import net.kogepan.clayium.blockentities.machine.CAInjectorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CentrifugeBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChemicalMetalSeparatorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.ChemicalReactorBlockEntity;
@@ -37,8 +39,10 @@ import net.kogepan.clayium.blockentities.machine.EnergeticClayCondenserBlockEnti
 import net.kogepan.clayium.blockentities.machine.GrinderBlockEntity;
 import net.kogepan.clayium.blockentities.machine.InscriberBlockEntity;
 import net.kogepan.clayium.blockentities.machine.LatheBlockEntity;
+import net.kogepan.clayium.blockentities.machine.MatterTransformerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.MillingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.PipeDrawingMachineBlockEntity;
+import net.kogepan.clayium.blockentities.machine.ResonatingCollectorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.SaltExtractorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.SmelterBlockEntity;
 import net.kogepan.clayium.blockentities.machine.SolarClayFabricatorBlockEntity;
@@ -315,6 +319,33 @@ public class ClayiumBlockEntityTypes {
                         .of(AssemblerBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MatterTransformerBlockEntity>> MATTER_TRANSFORMER_BLOCK_ENTITY = registerClayContainer(
+            "matter_transformer_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(MatterTransformerBlockEntity::new, ClayiumBlocks.MATTER_TRANSFORMER_BLOCKS.values().stream()
+                            .map(DeferredHolder::get).toArray(Block[]::new))
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CAInjectorBlockEntity>> CA_INJECTOR_BLOCK_ENTITY = registerClayContainer(
+            "ca_injector_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(CAInjectorBlockEntity::new, ClayiumBlocks.CA_INJECTOR_BLOCKS.values().stream()
+                            .map(DeferredHolder::get).toArray(Block[]::new))
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<CACondenserBlockEntity>> CA_CONDENSER_BLOCK_ENTITY = registerClayContainer(
+            "ca_condenser_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(CACondenserBlockEntity::new, ClayiumBlocks.CA_CONDENSER_BLOCKS.values().stream()
+                            .map(DeferredHolder::get).toArray(Block[]::new))
+                    .build(null));
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<ResonatingCollectorBlockEntity>> RESONATING_COLLECTOR_BLOCK_ENTITY = registerClayContainer(
+            "resonating_collector_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(ResonatingCollectorBlockEntity::new, ClayiumBlocks.RESONATING_COLLECTOR.get())
+                    .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AlloySmelterBlockEntity>> ALLOY_SMELTER_BLOCK_ENTITY = registerClayContainer(
             "alloy_smelter_block_entity",

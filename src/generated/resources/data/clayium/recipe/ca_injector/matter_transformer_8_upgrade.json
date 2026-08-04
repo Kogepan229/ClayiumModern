@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 3000000,
+  "duration": 4000,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:matter_transformer_7"
+      }
+    },
+    {
+      "amount": 8,
+      "ingredient": {
+        "item": "clayium:antimatter_matter"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:matter_transformer_8"
+    }
+  ],
+  "recipe_tier": 8,
+  "recipe_type": "clayium:ca_injector"
+}

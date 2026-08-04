@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 200000000,
+  "duration": 60,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "minecraft:oak_sapling"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:antimatter_matter"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:oak_leaves"
+    }
+  ],
+  "recipe_tier": 10,
+  "recipe_type": "clayium:ca_injector"
+}

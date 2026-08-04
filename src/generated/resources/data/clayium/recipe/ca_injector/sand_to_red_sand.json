@@ -1,0 +1,25 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 200000000,
+  "duration": 60,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "minecraft:sand"
+      }
+    },
+    {
+      "ingredient": {
+        "item": "clayium:antimatter_matter"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:red_sand"
+    }
+  ],
+  "recipe_tier": 10,
+  "recipe_type": "clayium:ca_injector"
+}

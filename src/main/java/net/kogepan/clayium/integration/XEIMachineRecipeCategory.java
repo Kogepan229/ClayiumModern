@@ -81,6 +81,12 @@ public class XEIMachineRecipeCategory {
                 castWorkstations(ClayiumBlocks.CLAY_BLAST_FURNACE)));
         categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.CLAY_REACTOR_RECIPE_TYPE,
                 castWorkstations(ClayiumBlocks.CLAY_REACTOR)));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.CA_INJECTOR_RECIPE_TYPE,
+                ClayiumBlocks.CA_INJECTOR_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.CA_CONDENSER_RECIPE_TYPE,
+                ClayiumBlocks.CA_CONDENSER_BLOCKS.values()));
+        categories.add(new XEIMachineRecipeCategory(ClayiumRecipeTypes.MATTER_TRANSFORMER_RECIPE_TYPE,
+                ClayiumBlocks.MATTER_TRANSFORMER_BLOCKS.values()));
 
         return categories;
     }

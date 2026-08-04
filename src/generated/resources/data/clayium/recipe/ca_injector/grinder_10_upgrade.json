@@ -1,0 +1,26 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 300000000,
+  "duration": 4000,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "clayium:grinder_6"
+      }
+    },
+    {
+      "amount": 37,
+      "ingredient": {
+        "item": "clayium:antimatter_matter"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "clayium:grinder_10"
+    }
+  ],
+  "recipe_tier": 10,
+  "recipe_type": "clayium:ca_injector"
+}

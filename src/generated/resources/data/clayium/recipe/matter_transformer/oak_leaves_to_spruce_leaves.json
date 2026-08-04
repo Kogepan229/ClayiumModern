@@ -1,0 +1,20 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 100000,
+  "duration": 20,
+  "inputs": [
+    {
+      "ingredient": {
+        "item": "minecraft:oak_leaves"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:spruce_leaves"
+    }
+  ],
+  "recipe_tier": 7,
+  "recipe_type": "clayium:matter_transformer"
+}

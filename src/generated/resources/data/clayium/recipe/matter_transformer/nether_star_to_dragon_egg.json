@@ -1,0 +1,21 @@
+{
+  "type": "clayium:machine",
+  "ce_per_tick": 10000000000,
+  "duration": 200,
+  "inputs": [
+    {
+      "amount": 64,
+      "ingredient": {
+        "item": "minecraft:nether_star"
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "count": 1,
+      "id": "minecraft:dragon_egg"
+    }
+  ],
+  "recipe_tier": 12,
+  "recipe_type": "clayium:matter_transformer"
+}
