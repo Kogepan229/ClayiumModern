@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-04T22:36:30.250131789	Loot Tables
+// 1.21.1	2026-08-04T23:51:04.20814217	Loot Tables
 1ac3e13377b179fa98ca4ee15ed27da063c60007 data/clayium/loot_table/blocks/activator.json
 5bfffa4a0446d3f12e10d757aa42ea04bd808410 data/clayium/loot_table/blocks/alloy_smelter_6.json
 464cecdb1cea9558a73ec9d43ffbfe00caecb8e7 data/clayium/loot_table/blocks/assembler_10.json
@@ -7,6 +7,11 @@ e5eb738a9ec9b65c0af4a662bbfc43de6885fe76 data/clayium/loot_table/blocks/assemble
 af96b4e78fcfe8f92d3ada7ea09c215a2da95e1d data/clayium/loot_table/blocks/assembler_6.json
 c0c314ca56dea93afeed768d88abbd9cdd38ff2e data/clayium/loot_table/blocks/auto_clay_condenser_5.json
 c423d791b89da2d3e375bbed7e57e4914a8b6e73 data/clayium/loot_table/blocks/auto_clay_condenser_7.json
+e10ec72172a9e8e809b410630579f11fabcaec3b data/clayium/loot_table/blocks/auto_crafter_5.json
+abb604c909f058ca54dc9688b97d7130422c3a8e data/clayium/loot_table/blocks/auto_crafter_6.json
+e3246dd62fd5058d369848852d00e3cec187ef28 data/clayium/loot_table/blocks/auto_crafter_7.json
+e2d13bc4390616890b3962f5c7867215ed8fa9d6 data/clayium/loot_table/blocks/auto_crafter_8.json
+4151b9baa3a1ab7c909d75d9f2b37ee48aceba05 data/clayium/loot_table/blocks/auto_crafter_9.json
 97e4ecf58234b7e47c49dcd3b8c6eb8eae97180e data/clayium/loot_table/blocks/az91d_alloy_hull.json
 0897080755d66020606439b4962ffdbc984745df data/clayium/loot_table/blocks/bending_machine_1.json
 3fb7788ed2907cf9d728f21fc4e68560a14a9d30 data/clayium/loot_table/blocks/bending_machine_2.json

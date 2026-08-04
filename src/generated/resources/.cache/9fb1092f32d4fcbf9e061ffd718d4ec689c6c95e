@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-04T22:36:30.253214549	Recipes
+// 1.21.1	2026-08-04T23:51:04.224716014	Recipes
 4abcfafc6487315216fcb6d2eabb76704cefe700 data/clayium/advancement/recipes/building_blocks/clay_crafting_board_to_dense_clay.json
 43cf5f4ed64357de0480c696d4c28651aa88df0e data/clayium/advancement/recipes/building_blocks/compressed_clay.json
 7117d0c8a85096bc046fda4abc2cf81448149ab6 data/clayium/advancement/recipes/building_blocks/compressed_clay_to_dense_clay.json
@@ -126,6 +126,11 @@ afc80332c3b47db6692e2d86ec15fb07300574bd data/clayium/recipe/assembler/assembler
 be22275c6cdbbc32fb4a50b1f04d2e616334dbae data/clayium/recipe/assembler/assembler_6_from_basic_assembler.json
 2d7c0513fdd4ebacded4cd6a45c136a728256ec3 data/clayium/recipe/assembler/assembler_6_from_machine_hull.json
 8917a11879d32c0b486727c1c492864092b400f1 data/clayium/recipe/assembler/auto_clay_condenser_5.json
+1f48c801c0bb944094a981de0a8e6096c3b18dc7 data/clayium/recipe/assembler/auto_crafter_5.json
+a9739dcce10e325819cd84a31d53c54fcdcdee3d data/clayium/recipe/assembler/auto_crafter_6.json
+3dcabaade4c49f0aeb426aacddb51e77d22fdf93 data/clayium/recipe/assembler/auto_crafter_7.json
+e1eb6a8cce41d63d76d606d5483588677d392ae6 data/clayium/recipe/assembler/auto_crafter_8.json
+425da703280e95e17129fe0328f20452b5f45581 data/clayium/recipe/assembler/auto_crafter_9.json
 7e2da12096bd00f7fd6423dd383a90e2ba21e7f9 data/clayium/recipe/assembler/az91d_alloy_hull.json
 cf12d3a29ed3d6b30c349fd80e42f8e113d8ae7d data/clayium/recipe/assembler/bending_machine_1_from_machine_hull.json
 c9ec3c4be5650422e6a49e233c01babb559a65ac data/clayium/recipe/assembler/bending_machine_2_from_machine_hull.json

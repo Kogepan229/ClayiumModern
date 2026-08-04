@@ -1,0 +1,83 @@
+{
+  "base_model": {
+    "parent": "minecraft:block/cube_all",
+    "textures": {
+      "all": "clayium:block/tier/tier9"
+    }
+  },
+  "loader": "clayium:clay_container_model_loader",
+  "overlay_model": {
+    "parent": "minecraft:block/block",
+    "elements": [
+      {
+        "faces": {
+          "east": {
+            "cullface": "east",
+            "texture": "#side",
+            "uv": [
+              0.0,
+              0.0,
+              16.0,
+              16.0
+            ]
+          },
+          "north": {
+            "cullface": "north",
+            "texture": "#front",
+            "uv": [
+              0.0,
+              0.0,
+              16.0,
+              16.0
+            ]
+          },
+          "south": {
+            "cullface": "south",
+            "texture": "#side",
+            "uv": [
+              0.0,
+              0.0,
+              16.0,
+              16.0
+            ]
+          },
+          "up": {
+            "cullface": "up",
+            "texture": "#top",
+            "uv": [
+              0.0,
+              0.0,
+              16.0,
+              16.0
+            ]
+          },
+          "west": {
+            "cullface": "west",
+            "texture": "#side",
+            "uv": [
+              0.0,
+              0.0,
+              16.0,
+              16.0
+            ]
+          }
+        },
+        "from": [
+          -0.01,
+          -0.01,
+          -0.01
+        ],
+        "to": [
+          16.01,
+          16.01,
+          16.01
+        ]
+      }
+    ],
+    "textures": {
+      "front": "clayium:block/machine/auto_crafter_side",
+      "side": "clayium:block/machine/auto_crafter_side",
+      "top": "clayium:block/machine/auto_crafter_top"
+    }
+  }
+}

@@ -85,6 +85,10 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
     private static final ResourceLocation DISTRIBUTOR_TEXTURE = Clayium.id("block/machine/distributor");
     private static final ResourceLocation INSCRIBER_TEXTURE = Clayium.id("block/machine/inscriber");
     private static final ResourceLocation ASSEMBLER_TEXTURE = Clayium.id("block/machine/assembler");
+    private static final ResourceLocation AUTO_CRAFTER_SIDE_TEXTURE = Clayium
+            .id("block/machine/auto_crafter_side");
+    private static final ResourceLocation AUTO_CRAFTER_TOP_TEXTURE = Clayium
+            .id("block/machine/auto_crafter_top");
     private static final ResourceLocation MATTER_TRANSFORMER_TEXTURE = Clayium
             .id("block/machine/matter_transformer");
     private static final ResourceLocation CA_INJECTOR_TEXTURE = Clayium.id("block/machine/ca_injector");
@@ -250,6 +254,9 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
         }
         for (var entry : ClayiumBlocks.ASSEMBLER_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), ASSEMBLER_TEXTURE);
+        }
+        for (var entry : ClayiumBlocks.AUTO_CRAFTER_BLOCKS.int2ObjectEntrySet()) {
+            registerAutoCrafter(entry.getValue().get(), entry.getIntKey());
         }
         for (var entry : ClayiumBlocks.CA_REACTOR_CORE_BLOCKS.int2ObjectEntrySet()) {
             registerSingleMachine(entry.getValue().get(), entry.getIntKey(), CA_REACTOR_CORE_TEXTURE_UNFORMED,
@@ -519,6 +526,22 @@ public class ClayiumBlockModelProvider extends BlockStateProvider {
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay) {
         registerSingleMachine(block, tier, overlay, false, false);
+    }
+
+    private void registerAutoCrafter(Block block, int tier) {
+        BlockModelBuilder model = models().getBuilder(BuiltInRegistries.BLOCK.getKey(block).getPath())
+                .customLoader(ClayContainerModelBuilder::new)
+                .baseModel(models().nested().parent(models().getExistingFile(models().mcLoc("block/cube_all")))
+                        .texture("all", TIER_BASE_TEXTURES[tier - 1]))
+                .overlayModel(containerOverlayModel(
+                        AUTO_CRAFTER_SIDE_TEXTURE,
+                        AUTO_CRAFTER_SIDE_TEXTURE,
+                        AUTO_CRAFTER_TOP_TEXTURE,
+                        false,
+                        null))
+                .end();
+        this.simpleBlock(block, model);
+        this.simpleBlockItem(block, model);
     }
 
     private void registerSingleMachine(Block block, int tier, @Nullable ResourceLocation overlay,

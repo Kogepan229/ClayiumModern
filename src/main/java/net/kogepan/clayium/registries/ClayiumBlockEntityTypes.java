@@ -17,6 +17,7 @@ import net.kogepan.clayium.blockentities.machine.ActivatorBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AlloySmelterBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AssemblerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.AutoClayCondenserBlockEntity;
+import net.kogepan.clayium.blockentities.machine.AutoCrafterBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BendingMachineBlockEntity;
 import net.kogepan.clayium.blockentities.machine.BlockBreakerBlockEntity;
 import net.kogepan.clayium.blockentities.machine.CACondenserBlockEntity;
@@ -321,6 +322,13 @@ public class ClayiumBlockEntityTypes {
                         .of(AssemblerBlockEntity::new, blocks.toArray(Block[]::new))
                         .build(null);
             });
+
+    public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<AutoCrafterBlockEntity>> AUTO_CRAFTER_BLOCK_ENTITY = registerClayContainer(
+            "auto_crafter_block_entity",
+            () -> BlockEntityType.Builder
+                    .of(AutoCrafterBlockEntity::new, ClayiumBlocks.AUTO_CRAFTER_BLOCKS.values().stream()
+                            .map(DeferredHolder::get).toArray(Block[]::new))
+                    .build(null));
 
     public static final DeferredHolder<BlockEntityType<?>, BlockEntityType<MatterTransformerBlockEntity>> MATTER_TRANSFORMER_BLOCK_ENTITY = registerClayContainer(
             "matter_transformer_block_entity",

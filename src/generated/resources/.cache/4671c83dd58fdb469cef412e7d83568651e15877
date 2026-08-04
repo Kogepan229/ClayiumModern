@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-04T22:36:30.235762013	Block States: clayium
+// 1.21.1	2026-08-04T23:51:04.189689348	Block States: clayium
 5fa6addad5b9437d4f362a76df96c9299a80fb76 assets/clayium/blockstates/activator.json
 0a951ef22b4c8cf4cc6dfa69c463ad79e34078be assets/clayium/blockstates/alloy_smelter_6.json
 3f559b0d6dc8509619ef881bb7656e7de7c0d86c assets/clayium/blockstates/assembler_10.json
@@ -7,6 +7,11 @@
 512c19c4ad65f3fad2d6002b9a1016446e6855b6 assets/clayium/blockstates/assembler_6.json
 9af3eeecc3a5dd9da5d8811470dfe88077713f8a assets/clayium/blockstates/auto_clay_condenser_5.json
 56787533e8a5f65dad98e3b1187cf038dc768031 assets/clayium/blockstates/auto_clay_condenser_7.json
+a2d7a4e35550a95fe7b29e52c23f9260ea4e7946 assets/clayium/blockstates/auto_crafter_5.json
+4740e307c49c9fee75bb3f92d810777ed97bc56a assets/clayium/blockstates/auto_crafter_6.json
+f01acbda53eb99925fccb0623c8e11730f92691d assets/clayium/blockstates/auto_crafter_7.json
+242f8609af53d6bdc5909f6242dafb4e0f0eaaca assets/clayium/blockstates/auto_crafter_8.json
+f53b7bddbf243db6231f27ee76516c77c105f4f4 assets/clayium/blockstates/auto_crafter_9.json
 f7477e18086f4bf4472303e18b2bb352667e6094 assets/clayium/blockstates/az91d_alloy_hull.json
 59a8cbf5691d0619fce4e61af85d4b071774605e assets/clayium/blockstates/bending_machine_1.json
 cf427b0b7f1ae41b9380716a7ab0c338538ef482 assets/clayium/blockstates/bending_machine_2.json
@@ -234,6 +239,11 @@ e1cc526794a89e0346545bebf0e9f5ebc78a75d3 assets/clayium/models/block/alloy_smelt
 9183479736da4e975e880dcb7501a03e1756d178 assets/clayium/models/block/assembler_6.json
 5a46d3b0a608a8bda584737168be799f14767b53 assets/clayium/models/block/auto_clay_condenser_5.json
 76f6271a4d526e5861e1a47b4c59ce715ee86859 assets/clayium/models/block/auto_clay_condenser_7.json
+9d6ab1ddaf1ea236b7c50c888083aaa95c06107c assets/clayium/models/block/auto_crafter_5.json
+61483488de785f415e5a129d972cf32100375744 assets/clayium/models/block/auto_crafter_6.json
+ceb622f90fbcc89c2784d612555bfdba09394b0d assets/clayium/models/block/auto_crafter_7.json
+d95bd28253c9a9259e6e58a9eb6b43541da537d8 assets/clayium/models/block/auto_crafter_8.json
+c0336690ad2acc303dfe154c52a9105f0f2a3d67 assets/clayium/models/block/auto_crafter_9.json
 87585e0cffc201ca7e29b200135c06f494153da1 assets/clayium/models/block/az91d_alloy_hull.json
 34159bff4160e78c9e6828607bcab37fa1f5ea59 assets/clayium/models/block/bending_machine_1.json
 0d4939f5e060b5bc9f872436ee7f2874e5b852a3 assets/clayium/models/block/bending_machine_2.json
@@ -463,6 +473,11 @@ d06ff20875948acaaaa5e23b369abab1117cdb4d assets/clayium/models/item/assembler_3.
 4cfb29ea20cb323427bdabdb05340c4584a760bf assets/clayium/models/item/assembler_6.json
 6cd0f73b21efc97ad47ae8617dc9a408afdb2280 assets/clayium/models/item/auto_clay_condenser_5.json
 36b1935ca2c09fb94050eed5453f6456dad1ea49 assets/clayium/models/item/auto_clay_condenser_7.json
+08efa20ce33645de06d789bbf45dbf37d4c62e1d assets/clayium/models/item/auto_crafter_5.json
+d1853248c364856ad744228c411f882332115d76 assets/clayium/models/item/auto_crafter_6.json
+d46f9e552825a12a6f501c8906c27efa4af718b9 assets/clayium/models/item/auto_crafter_7.json
+7929cc11ac6d307cd45612d56668f8bdc9ba69e6 assets/clayium/models/item/auto_crafter_8.json
+b2d5f399ee4ca51bc669f47d818267c0274998f9 assets/clayium/models/item/auto_crafter_9.json
 458f91945044f253addf5a101b3b18712fe608fc assets/clayium/models/item/az91d_alloy_hull.json
 d90468f5ffd59da72beb686c5ac5b6c032177bca assets/clayium/models/item/bending_machine_1.json
 36c332094498e15a7883475dcaa7e9ee736c777a assets/clayium/models/item/bending_machine_2.json

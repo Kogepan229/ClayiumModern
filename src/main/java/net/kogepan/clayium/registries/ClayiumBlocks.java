@@ -22,6 +22,7 @@ import net.kogepan.clayium.blocks.machine.ActivatorBlock;
 import net.kogepan.clayium.blocks.machine.AlloySmelterBlock;
 import net.kogepan.clayium.blocks.machine.AssemblerBlock;
 import net.kogepan.clayium.blocks.machine.AutoClayCondenserBlock;
+import net.kogepan.clayium.blocks.machine.AutoCrafterBlock;
 import net.kogepan.clayium.blocks.machine.BendingMachineBlock;
 import net.kogepan.clayium.blocks.machine.BlockBreakerBlock;
 import net.kogepan.clayium.blocks.machine.CACondenserBlock;
@@ -487,6 +488,15 @@ public class ClayiumBlocks {
             map.put(i, registerTiered("assembler", i, AssemblerBlock::new));
         }
         ASSEMBLER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
+    }
+
+    public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> AUTO_CRAFTER_BLOCKS;
+    static {
+        Int2ObjectMap<DeferredBlock<ClayContainerBlock>> map = new Int2ObjectOpenHashMap<>();
+        for (int i = 5; i <= 9; i++) {
+            map.put(i, registerTiered("auto_crafter", i, AutoCrafterBlock::new));
+        }
+        AUTO_CRAFTER_BLOCKS = Int2ObjectMaps.unmodifiable(map);
     }
 
     public static final Int2ObjectMap<DeferredBlock<ClayContainerBlock>> CA_REACTOR_CORE_BLOCKS;

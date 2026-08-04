@@ -145,6 +145,13 @@ public final class AssemblerMachineRecipeProvider {
         create(output, "auto_clay_condenser_5", new ItemStack(ClayiumBlocks.CLAY_BUFFERS.get(5).get()),
                 ClayiumItems.ADVANCED_CIRCUIT.toStack(),
                 new ItemStack(ClayiumBlocks.AUTO_CLAY_CONDENSER_BLOCKS.get(5).get()), energyForTier(5), 40);
+        create(output, "auto_crafter_5", new ItemStack(ClayiumBlocks.ASSEMBLER_BLOCKS.get(4).get()), machineHull(5),
+                new ItemStack(ClayiumBlocks.AUTO_CRAFTER_BLOCKS.get(5).get()), energyForTier(5), 40);
+        for (int tier = 6; tier <= 9; tier++) {
+            create(output, "auto_crafter_" + tier,
+                    new ItemStack(ClayiumBlocks.AUTO_CRAFTER_BLOCKS.get(tier - 1).get()), machineHull(tier),
+                    new ItemStack(ClayiumBlocks.AUTO_CRAFTER_BLOCKS.get(tier).get()), energyForTier(tier), 40);
+        }
         create(output, "electrolysis_reactor_6", new ItemStack(ClayiumBlocks.CHEMICAL_REACTOR_BLOCKS.get(5).get()),
                 ClayiumItems.PRECISION_CIRCUIT.toStack(),
                 new ItemStack(ClayiumBlocks.ELECTROLYSIS_REACTOR_BLOCKS.get(6).get()), energyForTier(6), 40);
