@@ -32,21 +32,45 @@ jobs:
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
 
-      - name: Resolve release version
+      - name: Resolve release versions
         id: release_version
         env:
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
-          release_version="$RELEASE_TAG"
-          if [ -z "$release_version" ]; then
+          if [ -z "$RELEASE_TAG" ]; then
             echo "The release tag must contain a version." >&2
             exit 1
           fi
-          echo "value=$release_version" >> "$GITHUB_OUTPUT"
+
+          minecraft_version="$(sed -n 's/^minecraft_version=//p' gradle.properties)"
+          if [ -z "$minecraft_version" ]; then
+            echo "The Minecraft version is missing from gradle.properties." >&2
+            exit 1
+          fi
+
+          version_prefix="mc${minecraft_version}-"
+          case "$RELEASE_TAG" in
+            "$version_prefix"*) mod_version="${RELEASE_TAG#"$version_prefix"}" ;;
+            *)
+              echo "The release tag must use the format ${version_prefix}<mod-version>." >&2
+              exit 1
+              ;;
+          esac
+
+          case "$mod_version" in
+            [0-9]*) ;;
+            *)
+              echo "The mod version must start with a digit." >&2
+              exit 1
+              ;;
+          esac
+
+          echo "release_tag=$RELEASE_TAG" >> "$GITHUB_OUTPUT"
+          echo "mod_version=$mod_version" >> "$GITHUB_OUTPUT"
 
       - name: Build with Gradle
         env:
-          MOD_VERSION: ${{ steps.release_version.outputs.value }}
+          MOD_VERSION: ${{ steps.release_version.outputs.mod_version }}
         run: ./gradlew build "-Pmod_version=$MOD_VERSION"
 
       - name: Publish GitHub release
@@ -55,4 +79,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           github-generate-changelog: true
           files: 'build/libs/!(*-@(dev|sources|javadoc)).jar'
-          version: ${{ steps.release_version.outputs.value }}
+          version: ${{ steps.release_version.outputs.release_tag }}
