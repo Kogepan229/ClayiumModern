@@ -44,7 +44,8 @@ public record ClayWorkTableRecipe(@NotNull ItemIngredientStack ingredient,
 
     @Override
     public boolean matches(@NotNull SingleRecipeInput input, @NotNull Level level) {
-        return false;
+        ItemStack stack = input.item();
+        return this.ingredient.test(stack) && stack.getCount() >= this.ingredient.getAmount();
     }
 
     @Override

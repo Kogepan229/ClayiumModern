@@ -5,6 +5,7 @@ import net.kogepan.clayium.client.ldlib.elements.ClayWorkTableButton;
 import net.kogepan.clayium.client.ldlib.elements.LargeItemSlot;
 import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
 import net.kogepan.clayium.client.ldlib.textures.ClayWorkTableButtonTextures;
+import net.kogepan.clayium.integration.xei.XEIRecipeViewer;
 import net.kogepan.clayium.inventory.DroppableItemStackHandler;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
@@ -15,6 +16,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
+import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
@@ -100,13 +102,13 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
 
         ItemStack ingredient = this.inventory.getStackInSlot(INGREDIENT_SLOT);
         if (ingredient.isEmpty()) return;
+        var input = new SingleRecipeInput(ingredient);
 
         var recipes = level.getRecipeManager()
                 .getAllRecipesFor(ClayiumRecipeTypes.CLAY_WORK_TABLE_RECIPE_TYPE.get());
 
         validButtons.addAll(recipes.stream().map(RecipeHolder::value)
-                .filter(r -> r.ingredient().test(ingredient) &&
-                        ingredient.getCount() >= r.adjustedCost() &&
+                .filter(r -> r.matches(input, level) &&
                         this.inventory.insertItem(RESULT_SLOT, r.result(), true).isEmpty() &&
                         this.inventory.insertItem(BYPRODUCT_SLOT, r.byproduct(), true).isEmpty())
                 .map(ClayWorkTableRecipe::button).distinct().filter(this::checkTool).toList());
@@ -145,6 +147,7 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
 
             ItemStack ingredient = this.inventory.getStackInSlot(INGREDIENT_SLOT);
             if (ingredient.isEmpty()) return;
+            var input = new SingleRecipeInput(ingredient);
 
             var recipes = level.getRecipeManager()
                     .getAllRecipesFor(ClayiumRecipeTypes.CLAY_WORK_TABLE_RECIPE_TYPE.get());
@@ -152,8 +155,7 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
             var foundRecipeHolder = recipes.stream()
                     .filter(holder -> {
                         var r = holder.value();
-                        return r.ingredient().test(ingredient) && ingredient.getCount() >= r.adjustedCost() &&
-                                r.button() == button;
+                        return r.matches(input, level) && r.button() == button;
                     })
                     .findFirst();
 
@@ -189,10 +191,20 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
         ClayWorkTableButton button = new ClayWorkTableButton(texture);
         button.bind(DataBindingBuilder.boolS2C(() -> validButtons.contains(index)).build());
         button.addServerEventListener(UIEvents.CLICK, e -> {
-            ModularUI ui = e.target.getModularUI();
+            ModularUI ui = e.currentElement.getModularUI();
             this.onClickButton(index, ui != null ? ui.player : null);
         });
         return button;
+    }
+
+    private UIElement createProgressArrow() {
+        return XEIRecipeViewer.makeRecipeCategoryClickable(
+                new ProgressArrow().bind(
+                        DataBindingBuilder.floatValS2C(() -> this.processingRecipeHolder != null ?
+                                (float) progress / this.processingRecipeHolder.value().adjustedCost() : 0)
+                                .build())
+                        .layout(layout -> layout.width(80)),
+                ClayiumRecipeTypes.CLAY_WORK_TABLE_RECIPE_TYPE.getId());
     }
 
     public ModularUI createUI(BlockUIMenuType.BlockUIHolder holder) {
@@ -211,11 +223,7 @@ public class ClayWorkTableBlockEntity extends BlockEntity implements ISyncPersis
                                 .layout(layout -> layout.flexDirection(FlexDirection.ROW)
                                         .justifyContent(AlignContent.CENTER))
                                 .addChild(new ItemSlot().bind(inventory, 3)))
-                        .addChild(new ProgressArrow().bind(
-                                DataBindingBuilder.floatValS2C(() -> this.processingRecipeHolder != null ?
-                                        (float) progress / this.processingRecipeHolder.value().adjustedCost() : 0)
-                                        .build())
-                                .layout(layout -> layout.width(80)))
+                        .addChild(createProgressArrow())
                         .addChild(new UIElement()
                                 .layout(layout -> layout.flexDirection(FlexDirection.ROW)
                                         .justifyContent(AlignContent.CENTER).marginTop(5))
