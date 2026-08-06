@@ -1,4 +1,4 @@
-// 1.21.1	2026-08-04T23:51:04.224716014	Recipes
+// 1.21.1	2026-08-06T19:15:16.874706609	Recipes
 4abcfafc6487315216fcb6d2eabb76704cefe700 data/clayium/advancement/recipes/building_blocks/clay_crafting_board_to_dense_clay.json
 43cf5f4ed64357de0480c696d4c28651aa88df0e data/clayium/advancement/recipes/building_blocks/compressed_clay.json
 7117d0c8a85096bc046fda4abc2cf81448149ab6 data/clayium/advancement/recipes/building_blocks/compressed_clay_to_dense_clay.json
@@ -47,6 +47,7 @@ fcf2e410127abaa4863ecb20ed984834f7b9b6cb data/clayium/advancement/recipes/misc/c
 aa65f537595bebc47c595b854a00e972f3df7902 data/clayium/advancement/recipes/misc/decomposer_2.json
 48d5a0787230e075049a909d7e2f6e9390132547 data/clayium/advancement/recipes/misc/decomposer_3.json
 e1a1af2bdf269d8879be87db3b03720e2eafa680 data/clayium/advancement/recipes/misc/decomposer_4.json
+d49ceebf5204e98dc98acd59f0ab588b12edb885 data/clayium/advancement/recipes/misc/dense_clay_bearing_crafting.json
 c59c0228be6ada7fb900f6fc21a67a7ac3736bd8 data/clayium/advancement/recipes/misc/dense_clay_cutting_head_crafting.json
 279d934b38423d5ec6e69a576f81a7cf723694c6 data/clayium/advancement/recipes/misc/dense_clay_gear_crafting.json
 5243371bc380e74e1b61a92c3c7fd265ed1f452e data/clayium/advancement/recipes/misc/dense_clay_grinding_head_crafting.json
@@ -640,6 +641,7 @@ e321db59d079885e2789a78527631d56d3b8360f data/clayium/recipe/decomposer/compress
 d3c61c3e87bd9f3d54eaa2008a85274060d37738 data/clayium/recipe/decomposer_3.json
 d19e1b520dcfe618bfc41ef2dfd3d2c33d002e13 data/clayium/recipe/decomposer_4.json
 5142cd1b531e8f66a9a7e067b1d8c87df9b33560 data/clayium/recipe/dense_clay.json
+f5f3dad4266b2c9f760cec512edde4447c26355b data/clayium/recipe/dense_clay_bearing_crafting.json
 a3ce5588ec831f814fd416ceb345210b6e9a019f data/clayium/recipe/dense_clay_cutting_head_crafting.json
 e4adc51d18093736aee898204c3ce9252144fdc2 data/clayium/recipe/dense_clay_gear_crafting.json
 c44b5468f53e0ecdea1965ee5ae9313271cccbc7 data/clayium/recipe/dense_clay_grinding_head_crafting.json

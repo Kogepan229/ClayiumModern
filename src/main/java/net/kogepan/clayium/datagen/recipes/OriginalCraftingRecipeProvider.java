@@ -99,14 +99,15 @@ public final class OriginalCraftingRecipeProvider {
                 ClayiumItems.CLAY_NEEDLE.get(), net.minecraft.world.item.Items.CLAY_BALL,
                 ClayiumItems.CLAY_BEARING.get(), ClayiumItems.CLAY_SPINDLE.get(),
                 ClayiumItems.CLAY_CUTTING_HEAD.get(), ClayiumItems.CLAY_GRINDING_HEAD.get(),
-                ClayiumItems.CLAY_WHEEL.get(), true);
+                ClayiumItems.CLAY_WHEEL.get());
         buildComponentRecipes(output, "dense_clay", ClayiumItems.DENSE_CLAY_PLATE.get(),
                 ClayiumItems.DENSE_CLAY_STICK.get(), ClayiumItems.DENSE_SHORT_CLAY_STICK.get(),
                 ClayiumItems.DENSE_CLAY_RING.get(), ClayiumItems.DENSE_SMALL_CLAY_RING.get(),
                 ClayiumItems.DENSE_CLAY_GEAR.get(), ClayiumItems.DENSE_CLAY_BLADE.get(),
-                ClayiumItems.DENSE_CLAY_NEEDLE.get(), null, ClayiumItems.DENSE_CLAY_BEARING.get(),
-                ClayiumItems.DENSE_CLAY_SPINDLE.get(), ClayiumItems.DENSE_CLAY_CUTTING_HEAD.get(),
-                ClayiumItems.DENSE_CLAY_GRINDING_HEAD.get(), ClayiumItems.DENSE_CLAY_WHEEL.get(), false);
+                ClayiumItems.DENSE_CLAY_NEEDLE.get(), net.minecraft.world.item.Items.CLAY_BALL,
+                ClayiumItems.DENSE_CLAY_BEARING.get(), ClayiumItems.DENSE_CLAY_SPINDLE.get(),
+                ClayiumItems.DENSE_CLAY_CUTTING_HEAD.get(), ClayiumItems.DENSE_CLAY_GRINDING_HEAD.get(),
+                ClayiumItems.DENSE_CLAY_WHEEL.get());
 
         ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, net.minecraft.world.item.Items.CLAY_BALL, 3)
                 .requires(ClayiumItems.CLAY_RING.get())
@@ -130,7 +131,7 @@ public final class OriginalCraftingRecipeProvider {
                                               ItemLike shortStick, ItemLike ring, ItemLike smallRing, ItemLike gear,
                                               ItemLike blade, ItemLike needle, ItemLike ball, ItemLike bearing,
                                               ItemLike spindle, ItemLike cuttingHead, ItemLike grindingHead,
-                                              ItemLike wheel, boolean buildBearing) {
+                                              ItemLike wheel) {
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, gear)
                 .pattern("iii")
                 .pattern("ioi")
@@ -147,16 +148,14 @@ public final class OriginalCraftingRecipeProvider {
                 .define('o', ring)
                 .unlockedBy("has_blade", has(blade))
                 .save(output, Clayium.id(prefix + "_cutting_head_crafting"));
-        if (buildBearing) {
-            ShapedRecipeBuilder.shaped(RecipeCategory.MISC, bearing)
-                    .pattern("iii")
-                    .pattern("ioi")
-                    .pattern("iii")
-                    .define('i', ball)
-                    .define('o', ring)
-                    .unlockedBy("has_ball", has(ball))
-                    .save(output, Clayium.id(prefix + "_bearing_crafting"));
-        }
+        ShapedRecipeBuilder.shaped(RecipeCategory.MISC, bearing)
+                .pattern("iii")
+                .pattern("ioi")
+                .pattern("iii")
+                .define('i', ball)
+                .define('o', ring)
+                .unlockedBy("has_ball", has(ball))
+                .save(output, Clayium.id(prefix + "_bearing_crafting"));
         ShapedRecipeBuilder.shaped(RecipeCategory.MISC, spindle)
                 .pattern("0#0")
                 .pattern("ioO")
