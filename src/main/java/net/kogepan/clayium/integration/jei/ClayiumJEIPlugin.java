@@ -6,6 +6,7 @@ import net.kogepan.clayium.integration.XEIChemicalMetalSeparatorRecipeCategory.X
 import net.kogepan.clayium.integration.XEIMachineRecipeCategory;
 import net.kogepan.clayium.integration.XEISaltExtractorRecipeCategory;
 import net.kogepan.clayium.integration.XEISaltExtractorRecipeCategory.XEISaltExtractorRecipe;
+import net.kogepan.clayium.integration.xei.JEIRecipeViewer;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
 import net.kogepan.clayium.recipes.recipes.ClayWorkTableRecipe;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
@@ -29,6 +30,7 @@ import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
+import mezz.jei.api.runtime.IJeiRuntime;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -49,6 +51,16 @@ public final class ClayiumJEIPlugin implements IModPlugin {
     @Override
     public ResourceLocation getPluginUid() {
         return Clayium.id("jei_plugin");
+    }
+
+    @Override
+    public void onRuntimeAvailable(IJeiRuntime jeiRuntime) {
+        JEIRecipeViewer.onRuntimeAvailable(jeiRuntime);
+    }
+
+    @Override
+    public void onRuntimeUnavailable() {
+        JEIRecipeViewer.onRuntimeUnavailable();
     }
 
     @Override

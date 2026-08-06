@@ -507,6 +507,7 @@
   "tooltip.clayium.tier": "Tier %d",
 
   "gui.clayium.inventory": "インベントリ",
+  "gui.clayium.xei.recipes": "レシピ",
   "gui.clayium.overclock": "オーバークロック: x%s",
   "gui.clayium.resonance": "共鳴率: x%s",
   "gui.clayium.resonating_collector.progress": "進捗: %d / %d",

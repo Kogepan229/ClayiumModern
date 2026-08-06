@@ -507,6 +507,7 @@
   "tooltip.clayium.tier":  "Tier %d",
 
   "gui.clayium.inventory": "Inventory",
+  "gui.clayium.xei.recipes": "Recipes",
   "gui.clayium.overclock": "Overclock: x%s",
   "gui.clayium.resonance": "Resonance: x%s",
   "gui.clayium.resonating_collector.progress": "Progress: %d / %d",

@@ -3,12 +3,14 @@ package net.kogepan.clayium.blockentities.trait;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.WorkableClayContainerBlockEntity;
 import net.kogepan.clayium.client.ldlib.elements.ProgressArrow;
+import net.kogepan.clayium.integration.xei.XEIRecipeViewer;
 import net.kogepan.clayium.recipes.ItemIngredientStack;
 import net.kogepan.clayium.recipes.MachineRecipeMatcher;
 import net.kogepan.clayium.recipes.recipes.MachineRecipe;
 import net.kogepan.clayium.utils.TransferUtils;
 
 import net.minecraft.core.HolderLookup;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.resources.ResourceLocation;
@@ -405,10 +407,16 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
     }
 
     public UIElement createProgressUIElement() {
-        return new ProgressArrow()
-                .bind(DataBindingBuilder
-                        .floatValS2C(this::getProgressFraction)
-                        .build())
-                .layout(layout -> layout.width(22));
+        ProgressArrow progressArrow = new ProgressArrow();
+        progressArrow.bind(DataBindingBuilder
+                .floatValS2C(this::getProgressFraction)
+                .build());
+        progressArrow.layout(layout -> layout.width(22));
+
+        ResourceLocation recipeTypeId = BuiltInRegistries.RECIPE_TYPE.getKey(this.recipeType);
+        if (recipeTypeId != null) {
+            XEIRecipeViewer.makeRecipeCategoryClickable(progressArrow, recipeTypeId);
+        }
+        return progressArrow;
     }
 }
