@@ -244,5 +244,290 @@ public final class ClayiumItems {
             "large_advanced_industrial_clay_plate",
             properties -> new TieredItem(properties, 4));
 
+    public static final DeferredItem<Item> CALCAREOUS_CLAY_DUST = ITEMS.registerItem(
+            "calcareous_clay_dust",
+            properties -> new TieredItem(properties, 4));
+    public static final DeferredItem<Item> SALT_DUST = ITEMS.registerItem(
+            "salt_dust",
+            properties -> new TieredItem(properties, 4));
+    public static final DeferredItem<Item> SODIUM_CARBONATE_DUST = ITEMS.registerItem(
+            "sodium_carbonate_dust",
+            properties -> new TieredItem(properties, 4));
+    public static final DeferredItem<Item> CALCIUM_CHLORIDE_DUST = ITEMS.registerItem(
+            "calcium_chloride_dust",
+            properties -> new TieredItem(properties, 4));
+    public static final DeferredItem<Item> QUARTZ_DUST = ITEMS.registerItem(
+            "quartz_dust",
+            properties -> new TieredItem(properties, 4));
+    public static final DeferredItem<Item> SILICON_DUST = ITEMS.registerItem(
+            "silicon_dust",
+            properties -> new TieredItem(properties, 5));
+    public static final DeferredItem<Item> SILICONE_DUST = ITEMS.registerItem(
+            "silicone_dust",
+            properties -> new TieredItem(properties, 5));
+    public static final DeferredItem<Item> ALUMINIUM_DUST = ITEMS.registerItem(
+            "aluminium_dust",
+            properties -> new TieredItem(properties, 6));
+    public static final DeferredItem<Item> MAGNESIUM_DUST = ITEMS.registerItem(
+            "magnesium_dust",
+            Item::new);
+    public static final DeferredItem<Item> SODIUM_DUST = ITEMS.registerItem(
+            "sodium_dust",
+            Item::new);
+    public static final DeferredItem<Item> LITHIUM_DUST = ITEMS.registerItem(
+            "lithium_dust",
+            Item::new);
+    public static final DeferredItem<Item> ZIRCONIUM_DUST = ITEMS.registerItem(
+            "zirconium_dust",
+            Item::new);
+    public static final DeferredItem<Item> ZINC_DUST = ITEMS.registerItem(
+            "zinc_dust",
+            Item::new);
+    public static final DeferredItem<Item> MANGANESE_DUST = ITEMS.registerItem(
+            "manganese_dust",
+            Item::new);
+    public static final DeferredItem<Item> POTASSIUM_DUST = ITEMS.registerItem(
+            "potassium_dust",
+            Item::new);
+    public static final DeferredItem<Item> HAFNIUM_DUST = ITEMS.registerItem(
+            "hafnium_dust",
+            Item::new);
+    public static final DeferredItem<Item> STRONTIUM_DUST = ITEMS.registerItem(
+            "strontium_dust",
+            Item::new);
+    public static final DeferredItem<Item> BARIUM_DUST = ITEMS.registerItem(
+            "barium_dust",
+            Item::new);
+    public static final DeferredItem<Item> CALCIUM_DUST = ITEMS.registerItem(
+            "calcium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IRON_DUST = ITEMS.registerItem(
+            "iron_dust",
+            Item::new);
+    public static final DeferredItem<Item> LEAD_DUST = ITEMS.registerItem(
+            "lead_dust",
+            Item::new);
+    public static final DeferredItem<Item> COPPER_DUST = ITEMS.registerItem(
+            "copper_dust",
+            Item::new);
+    public static final DeferredItem<Item> NICKEL_DUST = ITEMS.registerItem(
+            "nickel_dust",
+            Item::new);
+    public static final DeferredItem<Item> BERYLLIUM_DUST = ITEMS.registerItem(
+            "beryllium_dust",
+            Item::new);
+    public static final DeferredItem<Item> CHROME_DUST = ITEMS.registerItem(
+            "chrome_dust",
+            Item::new);
+    public static final DeferredItem<Item> TITANIUM_DUST = ITEMS.registerItem(
+            "titanium_dust",
+            Item::new);
+    public static final DeferredItem<Item> CLAY_STEEL_DUST = ITEMS.registerItem(
+            "clay_steel_dust",
+            properties -> new TieredItem(properties, 7));
+    public static final DeferredItem<Item> CLAYIUM_DUST = ITEMS.registerItem(
+            "clayium_dust",
+            properties -> new TieredItem(properties, 8));
+    public static final DeferredItem<Item> ULTIMATE_ALLOY_DUST = ITEMS.registerItem(
+            "ultimate_alloy_dust",
+            properties -> new TieredItem(properties, 9));
+    public static final DeferredItem<Item> AZ91D_ALLOY_DUST = ITEMS.registerItem(
+            "az91d_alloy_dust",
+            properties -> new TieredItem(properties, 6));
+    public static final DeferredItem<Item> ZK60A_ALLOY_DUST = ITEMS.registerItem(
+            "zk60a_alloy_dust",
+            properties -> new TieredItem(properties, 6));
+    public static final DeferredItem<Item> ANTIMATTER_DUST = ITEMS.registerItem(
+            "antimatter_dust",
+            properties -> new TieredItem(properties, 10));
+    public static final DeferredItem<Item> PURE_ANTIMATTER_DUST = ITEMS.registerItem(
+            "pure_antimatter_dust",
+            properties -> new TieredItem(properties, 11));
+    public static final DeferredItem<Item> OCTUPLE_PURE_ANTIMATTER_DUST = ITEMS.registerItem(
+            "octuple_pure_antimatter_dust",
+            properties -> new TieredItem(properties, 13));
+    public static final DeferredItem<Item> IMPURE_SILICON_DUST = ITEMS.registerItem(
+            "impure_silicon_dust",
+            properties -> new TieredItem(properties, 5));
+    public static final DeferredItem<Item> IMPURE_ALUMINIUM_DUST = ITEMS.registerItem(
+            "impure_aluminium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_MAGNESIUM_DUST = ITEMS.registerItem(
+            "impure_magnesium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_SODIUM_DUST = ITEMS.registerItem(
+            "impure_sodium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_LITHIUM_DUST = ITEMS.registerItem(
+            "impure_lithium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_ZIRCONIUM_DUST = ITEMS.registerItem(
+            "impure_zirconium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_ZINC_DUST = ITEMS.registerItem(
+            "impure_zinc_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_MANGANESE_DUST = ITEMS.registerItem(
+            "impure_manganese_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_POTASSIUM_DUST = ITEMS.registerItem(
+            "impure_potassium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_HAFNIUM_DUST = ITEMS.registerItem(
+            "impure_hafnium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_STRONTIUM_DUST = ITEMS.registerItem(
+            "impure_strontium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_BARIUM_DUST = ITEMS.registerItem(
+            "impure_barium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_CALCIUM_DUST = ITEMS.registerItem(
+            "impure_calcium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_IRON_DUST = ITEMS.registerItem(
+            "impure_iron_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_LEAD_DUST = ITEMS.registerItem(
+            "impure_lead_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_COPPER_DUST = ITEMS.registerItem(
+            "impure_copper_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_NICKEL_DUST = ITEMS.registerItem(
+            "impure_nickel_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_BERYLLIUM_DUST = ITEMS.registerItem(
+            "impure_beryllium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_CHROME_DUST = ITEMS.registerItem(
+            "impure_chrome_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_TITANIUM_DUST = ITEMS.registerItem(
+            "impure_titanium_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_REDSTONE_DUST = ITEMS.registerItem(
+            "impure_redstone_dust",
+            Item::new);
+    public static final DeferredItem<Item> IMPURE_GLOWSTONE_DUST = ITEMS.registerItem(
+            "impure_glowstone_dust",
+            Item::new);
+
+    public static final DeferredItem<Item> ANTIMATTER_MATTER = ITEMS.registerItem(
+            "antimatter_matter",
+            properties -> new TieredItem(properties, 10));
+    public static final DeferredItem<Item> PURE_ANTIMATTER_MATTER = ITEMS.registerItem(
+            "pure_antimatter_matter",
+            properties -> new TieredItem(properties, 11));
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_1 = ITEMS.registerItem(
+            "compressed_pure_antimatter_1",
+            properties -> new TieredItem(properties, 11));
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_2 = ITEMS.registerItem(
+            "compressed_pure_antimatter_2",
+            properties -> new TieredItem(properties, 11));
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_3 = ITEMS.registerItem(
+            "compressed_pure_antimatter_3",
+            properties -> new TieredItem(properties, 11));
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_4 = ITEMS.registerItem(
+            "compressed_pure_antimatter_4",
+            properties -> new TieredItem(properties, 12));
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_5 = ITEMS.registerItem(
+            "compressed_pure_antimatter_5",
+            properties -> new TieredItem(properties, 12));
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_6 = ITEMS.registerItem(
+            "compressed_pure_antimatter_6",
+            properties -> new TieredItem(properties, 12));
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_7 = ITEMS.registerItem(
+            "compressed_pure_antimatter_7",
+            properties -> new TieredItem(properties, 12));
+    public static final DeferredItem<Item> COMPRESSED_PURE_ANTIMATTER_8 = ITEMS.registerItem(
+            "compressed_pure_antimatter_8",
+            properties -> new TieredItem(properties, 13));
+
+    public static final DeferredItem<Item> IMPURE_SILICON_PLATE = ITEMS.registerItem(
+            "impure_silicon_plate",
+            properties -> new TieredItem(properties, 5));
+    public static final DeferredItem<Item> LARGE_IMPURE_SILICON_PLATE = ITEMS.registerItem(
+            "large_impure_silicon_plate",
+            properties -> new TieredItem(properties, 5));
+    public static final DeferredItem<Item> SILICONE_PLATE = ITEMS.registerItem(
+            "silicone_plate",
+            properties -> new TieredItem(properties, 5));
+    public static final DeferredItem<Item> LARGE_SILICONE_PLATE = ITEMS.registerItem(
+            "large_silicone_plate",
+            properties -> new TieredItem(properties, 5));
+    public static final DeferredItem<Item> SILICON_PLATE = ITEMS.registerItem(
+            "silicon_plate",
+            properties -> new TieredItem(properties, 5));
+    public static final DeferredItem<Item> LARGE_SILICON_PLATE = ITEMS.registerItem(
+            "large_silicon_plate",
+            properties -> new TieredItem(properties, 5));
+    public static final DeferredItem<Item> ALUMINIUM_PLATE = ITEMS.registerItem(
+            "aluminium_plate",
+            properties -> new TieredItem(properties, 6));
+    public static final DeferredItem<Item> LARGE_ALUMINIUM_PLATE = ITEMS.registerItem(
+            "large_aluminium_plate",
+            properties -> new TieredItem(properties, 6));
+    public static final DeferredItem<Item> IMPURE_ALUMINIUM_PLATE = ITEMS.registerItem(
+            "impure_aluminium_plate",
+            Item::new);
+    public static final DeferredItem<Item> LARGE_IMPURE_ALUMINIUM_PLATE = ITEMS.registerItem(
+            "large_impure_aluminium_plate",
+            Item::new);
+    public static final DeferredItem<Item> CLAY_STEEL_PLATE = ITEMS.registerItem(
+            "clay_steel_plate",
+            properties -> new TieredItem(properties, 7));
+    public static final DeferredItem<Item> LARGE_CLAY_STEEL_PLATE = ITEMS.registerItem(
+            "large_clay_steel_plate",
+            properties -> new TieredItem(properties, 7));
+    public static final DeferredItem<Item> CLAYIUM_PLATE = ITEMS.registerItem(
+            "clayium_plate",
+            properties -> new TieredItem(properties, 8));
+    public static final DeferredItem<Item> LARGE_CLAYIUM_PLATE = ITEMS.registerItem(
+            "large_clayium_plate",
+            properties -> new TieredItem(properties, 8));
+    public static final DeferredItem<Item> ULTIMATE_ALLOY_PLATE = ITEMS.registerItem(
+            "ultimate_alloy_plate",
+            properties -> new TieredItem(properties, 9));
+    public static final DeferredItem<Item> LARGE_ULTIMATE_ALLOY_PLATE = ITEMS.registerItem(
+            "large_ultimate_alloy_plate",
+            properties -> new TieredItem(properties, 9));
+    public static final DeferredItem<Item> ANTIMATTER_PLATE = ITEMS.registerItem(
+            "antimatter_plate",
+            properties -> new TieredItem(properties, 10));
+    public static final DeferredItem<Item> LARGE_ANTIMATTER_PLATE = ITEMS.registerItem(
+            "large_antimatter_plate",
+            properties -> new TieredItem(properties, 10));
+    public static final DeferredItem<Item> PURE_ANTIMATTER_PLATE = ITEMS.registerItem(
+            "pure_antimatter_plate",
+            properties -> new TieredItem(properties, 11));
+    public static final DeferredItem<Item> LARGE_PURE_ANTIMATTER_PLATE = ITEMS.registerItem(
+            "large_pure_antimatter_plate",
+            properties -> new TieredItem(properties, 11));
+    public static final DeferredItem<Item> OCTUPLE_ENERGETIC_CLAY_PLATE = ITEMS.registerItem(
+            "octuple_energetic_clay_plate",
+            properties -> new TieredItem(properties, 12));
+    public static final DeferredItem<Item> LARGE_OCTUPLE_ENERGETIC_CLAY_PLATE = ITEMS.registerItem(
+            "large_octuple_energetic_clay_plate",
+            properties -> new TieredItem(properties, 12));
+    public static final DeferredItem<Item> OCTUPLE_PURE_ANTIMATTER_PLATE = ITEMS.registerItem(
+            "octuple_pure_antimatter_plate",
+            properties -> new TieredItem(properties, 13));
+    public static final DeferredItem<Item> LARGE_OCTUPLE_PURE_ANTIMATTER_PLATE = ITEMS.registerItem(
+            "large_octuple_pure_antimatter_plate",
+            properties -> new TieredItem(properties, 13));
+    public static final DeferredItem<Item> AZ91D_ALLOY_PLATE = ITEMS.registerItem(
+            "az91d_alloy_plate",
+            properties -> new TieredItem(properties, 6));
+    public static final DeferredItem<Item> LARGE_AZ91D_ALLOY_PLATE = ITEMS.registerItem(
+            "large_az91d_alloy_plate",
+            properties -> new TieredItem(properties, 6));
+    public static final DeferredItem<Item> ZK60A_ALLOY_PLATE = ITEMS.registerItem(
+            "zk60a_alloy_plate",
+            properties -> new TieredItem(properties, 6));
+    public static final DeferredItem<Item> LARGE_ZK60A_ALLOY_PLATE = ITEMS.registerItem(
+            "large_zk60a_alloy_plate",
+            properties -> new TieredItem(properties, 6));
+
     private ClayiumItems() {}
 }
