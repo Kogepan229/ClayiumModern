@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "clayium:item/unlocalized_name_item_filter",
+    "layer1": "clayium:item/filter_copy"
+  }
+}

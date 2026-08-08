@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "clayium:item/fazy_item_filter",
+    "layer1": "clayium:item/filter_copy"
+  }
+}

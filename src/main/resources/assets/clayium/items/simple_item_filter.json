@@ -1,0 +1,16 @@
+{
+  "model": {
+    "type": "minecraft:condition",
+    "component": "clayium:filter_copy_flag",
+    "ignore_default": true,
+    "on_false": {
+      "type": "minecraft:model",
+      "model": "clayium:item/simple_item_filter"
+    },
+    "on_true": {
+      "type": "minecraft:model",
+      "model": "clayium:item/simple_item_filter_copy"
+    },
+    "property": "minecraft:has_component"
+  }
+}

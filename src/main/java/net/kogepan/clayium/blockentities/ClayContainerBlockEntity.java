@@ -7,6 +7,7 @@ import net.kogepan.clayium.blockentities.trait.ClayContainerTrait;
 import net.kogepan.clayium.blockentities.trait.ClayEnergyHolder;
 import net.kogepan.clayium.blockentities.trait.ItemFilterHolderTrait;
 import net.kogepan.clayium.blocks.ClayContainerBlock;
+import net.kogepan.clayium.capability.IItemFilterApplicatable;
 import net.kogepan.clayium.capability.energy.ClayEnergyHandler;
 import net.kogepan.clayium.capability.filter.data.ItemFilterData;
 import net.kogepan.clayium.inventory.MachineIOItemResourceHandler;
@@ -61,7 +62,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
-public abstract class ClayContainerBlockEntity extends BlockEntity implements IMachineConfigurable {
+public abstract class ClayContainerBlockEntity extends BlockEntity
+                                               implements IMachineConfigurable, IItemFilterApplicatable {
 
     private static final String INPUT_MODES_KEY = "inputModes";
     private static final String OUTPUT_MODES_KEY = "outputModes";
@@ -289,13 +291,35 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
     }
 
     protected final @Nullable ItemFilterData getFilterForSide(Direction side) {
-        ClayContainerTrait trait = this.getTrait(ItemFilterHolderTrait.TRAIT_ID);
-        return trait instanceof ItemFilterHolderTrait filterHolder ? filterHolder.getFilter(side) : null;
+        return this.getFilter(side);
+    }
+
+    @Override
+    public final void setFilter(Direction side, ItemFilterData filterData) {
+        this.getItemFilterHolder().setFilter(side, filterData);
+    }
+
+    @Override
+    public final @Nullable ItemFilterData getFilter(Direction side) {
+        return this.getItemFilterHolder().getFilter(side);
+    }
+
+    @Override
+    public final void clearFilter(Direction side) {
+        this.getItemFilterHolder().clearFilter(side);
+    }
+
+    private ItemFilterHolderTrait getItemFilterHolder() {
+        return (ItemFilterHolderTrait) this.getTrait(ItemFilterHolderTrait.TRAIT_ID);
     }
 
     public abstract ResourceHandler<ItemResource> getInputInventory();
 
     public abstract ResourceHandler<ItemResource> getOutputInventory();
+
+    public boolean acceptsClayInterfaceSynchronization() {
+        return true;
+    }
 
     protected abstract void createMainUI(BlockUIMenuType.BlockUIHolder holder, UIElement root);
 

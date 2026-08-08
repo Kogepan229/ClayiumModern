@@ -26,5 +26,11 @@ public final class ClayiumCapabilities {
     public static final ItemCapability<ItemFilterData, @Nullable Void> ITEM_FILTER_DATA = ItemCapability
             .createVoid(Clayium.id("item_filter_data"), ItemFilterData.class);
 
+    public static final BlockCapability<IItemFilterApplicatable, @Nullable Direction> ITEM_FILTER_APPLICATABLE = BlockCapability
+            .createSided(Clayium.id("item_filter_applicatable"), IItemFilterApplicatable.class);
+
+    public static final BlockCapability<ISynchronizedInterface, @Nullable Void> SYNCHRONIZED_INTERFACE = BlockCapability
+            .createVoid(Clayium.id("synchronized_interface"), ISynchronizedInterface.class);
+
     private ClayiumCapabilities() {}
 }

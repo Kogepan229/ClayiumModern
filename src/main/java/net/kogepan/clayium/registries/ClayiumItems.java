@@ -5,7 +5,12 @@ import net.kogepan.clayium.api.configuration.ConfigurationToolItem;
 import net.kogepan.clayium.items.ClayConfigurationToolItem;
 import net.kogepan.clayium.items.ClayCoreItem;
 import net.kogepan.clayium.items.RawClayToolItem;
+import net.kogepan.clayium.items.SynchronizerItem;
+import net.kogepan.clayium.items.SynchronousPartsItem;
 import net.kogepan.clayium.items.TieredItem;
+import net.kogepan.clayium.items.filter.FazyItemFilterItem;
+import net.kogepan.clayium.items.filter.SimpleItemFilterItem;
+import net.kogepan.clayium.items.filter.UnlocalizedNameItemFilterItem;
 import net.kogepan.clayium.items.tools.ClayPickaxe;
 import net.kogepan.clayium.items.tools.ClayShovel;
 import net.kogepan.clayium.items.tools.ClaySteelPickaxe;
@@ -528,6 +533,22 @@ public final class ClayiumItems {
     public static final DeferredItem<Item> LARGE_ZK60A_ALLOY_PLATE = ITEMS.registerItem(
             "large_zk60a_alloy_plate",
             properties -> new TieredItem(properties, 6));
+
+    public static final DeferredItem<SimpleItemFilterItem> SIMPLE_ITEM_FILTER = ITEMS.registerItem(
+            "simple_item_filter",
+            SimpleItemFilterItem::new);
+    public static final DeferredItem<FazyItemFilterItem> FAZY_ITEM_FILTER = ITEMS.registerItem(
+            "fazy_item_filter",
+            FazyItemFilterItem::new);
+    public static final DeferredItem<UnlocalizedNameItemFilterItem> UNLOCALIZED_NAME_ITEM_FILTER = ITEMS.registerItem(
+            "unlocalized_name_item_filter",
+            UnlocalizedNameItemFilterItem::new);
+    public static final DeferredItem<SynchronousPartsItem> SYNCHRONOUS_PARTS = ITEMS.registerItem(
+            "synchronous_parts",
+            SynchronousPartsItem::new);
+    public static final DeferredItem<SynchronizerItem> SYNCHRONIZER = ITEMS.registerItem(
+            "synchronizer",
+            SynchronizerItem::new);
 
     private ClayiumItems() {}
 }

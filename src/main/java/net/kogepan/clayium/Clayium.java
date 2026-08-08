@@ -5,6 +5,8 @@ import net.kogepan.clayium.api.configuration.IConfigurationTool;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.capability.ClayiumCapabilities;
 import net.kogepan.clayium.datagen.ClayiumDataGenerators;
+import net.kogepan.clayium.items.filter.FilterItemHelper;
+import net.kogepan.clayium.items.filter.ItemFilterBase;
 import net.kogepan.clayium.items.tools.ClaySteelToolMining;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
@@ -119,6 +121,15 @@ public final class Clayium {
                 (blockEntity, context) -> blockEntity);
 
         event.registerBlockEntity(
+                ClayiumCapabilities.ITEM_FILTER_APPLICATABLE,
+                ClayiumBlockEntityTypes.BENDING_MACHINE_BLOCK_ENTITY.get(),
+                (blockEntity, context) -> blockEntity);
+        event.registerBlockEntity(
+                ClayiumCapabilities.ITEM_FILTER_APPLICATABLE,
+                ClayiumBlockEntityTypes.CLAY_BUFFER_BLOCK_ENTITY.get(),
+                (blockEntity, context) -> blockEntity);
+
+        event.registerBlockEntity(
                 Capabilities.Item.BLOCK,
                 ClayiumBlockEntityTypes.BENDING_MACHINE_BLOCK_ENTITY.get(),
                 ClayContainerBlockEntity::getExposedItemHandler);
@@ -130,6 +141,20 @@ public final class Clayium {
                 Capabilities.Item.BLOCK,
                 ClayiumBlockEntityTypes.CLAY_BUFFER_BLOCK_ENTITY.get(),
                 ClayContainerBlockEntity::getExposedItemHandler);
+
+        event.registerItem(
+                ClayiumCapabilities.ITEM_FILTER_DATA,
+                (stack, context) -> {
+                    var copied = FilterItemHelper.getCopiedFilterData(stack);
+                    if (copied != null) {
+                        return copied;
+                    }
+                    return stack.getItem() instanceof ItemFilterBase filterItem ? filterItem.createFilterData(stack) :
+                            null;
+                },
+                ClayiumItems.SIMPLE_ITEM_FILTER.get(),
+                ClayiumItems.FAZY_ITEM_FILTER.get(),
+                ClayiumItems.UNLOCALIZED_NAME_ITEM_FILTER.get());
     }
 
     public static Identifier id(String path) {
