@@ -667,5 +667,15 @@
   "emi.category.clayium.ca_condenser": "CA Condenser",
   "emi.category.clayium.matter_transformer": "Matter Transformer",
   "emi.category.clayium.salt_extractor": "Salt Extractor",
-  "emi.category.clayium.chemical_metal_separator": "Chemical Metal Separator"
+  "emi.category.clayium.chemical_metal_separator": "Chemical Metal Separator",
+  "tooltip.clayium.machine_replacement": "Sprint + Right-click: Replace a compatible machine",
+  "message.clayium.machine_replacement.busy": "This machine is already being replaced.",
+  "message.clayium.machine_replacement.block_entity_data": "Machines with stored block data cannot be used for replacement.",
+  "message.clayium.machine_replacement.incompatible": "These machines are not compatible.",
+  "message.clayium.machine_replacement.same_machine": "The machine is already this type.",
+  "message.clayium.machine_replacement.active_recipe_tier": "The target tier cannot continue the active recipe.",
+  "message.clayium.machine_replacement.invalid_structure": "The target machine would invalidate the active multiblock.",
+  "message.clayium.machine_replacement.canceled": "Machine replacement was canceled.",
+  "message.clayium.machine_replacement.changed": "The machine or held item changed before replacement.",
+  "message.clayium.machine_replacement.failed": "Machine replacement failed; the original machine was restored."
 }

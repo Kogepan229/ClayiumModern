@@ -163,7 +163,8 @@ public abstract class ClayContainerBlock extends Block implements EntityBlock, B
     protected void onRemove(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos,
                             @NotNull BlockState newState, boolean movedByPiston) {
         if (!level.isClientSide() && !state.is(newState.getBlock()) &&
-                level.getBlockEntity(pos) instanceof ClayContainerBlockEntity container) {
+                level.getBlockEntity(pos) instanceof ClayContainerBlockEntity container &&
+                !container.areReplacementInventoryDropsSuppressed()) {
             container.dropInventoryContents(level);
         }
 

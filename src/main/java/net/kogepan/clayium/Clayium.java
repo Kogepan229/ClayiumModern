@@ -2,6 +2,8 @@ package net.kogepan.clayium;
 
 import net.kogepan.clayium.api.configuration.ConfigurationToolAction;
 import net.kogepan.clayium.api.configuration.IConfigurationTool;
+import net.kogepan.clayium.api.machine.replacement.DefaultMachineReplacementAdapter;
+import net.kogepan.clayium.api.machine.replacement.MachineReplacementApi;
 import net.kogepan.clayium.blockentities.ClayContainerBlockEntity;
 import net.kogepan.clayium.blockentities.ClayCraftingBoardBlockEntity;
 import net.kogepan.clayium.blockentities.ClayInterfaceBlockEntity;
@@ -23,6 +25,7 @@ import net.kogepan.clayium.items.gadget.ClayGadgetHolderItem;
 import net.kogepan.clayium.items.gadget.ClayGadgetItem;
 import net.kogepan.clayium.recipes.ClayiumRecipeSerializers;
 import net.kogepan.clayium.recipes.ClayiumRecipeTypes;
+import net.kogepan.clayium.registries.ClayiumAttachments;
 import net.kogepan.clayium.registries.ClayiumBlockEntityTypes;
 import net.kogepan.clayium.registries.ClayiumBlocks;
 import net.kogepan.clayium.registries.ClayiumDataComponents;
@@ -108,6 +111,7 @@ public class Clayium {
 
         ClayiumItems.ITEMS.register(modEventBus);
         ClayiumBlocks.BLOCKS.register(modEventBus);
+        ClayiumAttachments.register(modEventBus);
         ClayiumDataComponents.DATA_COMPONENTS.register(modEventBus);
         ClayiumBlockEntityTypes.BLOCK_ENTITY_TYPES.register(modEventBus);
         ClayiumRecipeTypes.RECIPE_TYPES.register(modEventBus);
@@ -134,6 +138,12 @@ public class Clayium {
     }
 
     private void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(() -> {
+            for (DeferredHolder<BlockEntityType<?>, ?> holder : ClayiumBlockEntityTypes.CLAY_CONTAINER_BLOCK_ENTITY_TYPES) {
+                MachineReplacementApi.register(holder.get(), new DefaultMachineReplacementAdapter(holder.getId()));
+            }
+        });
+
         // Some common setup code
         LOGGER.info("HELLO FROM COMMON SETUP");
 

@@ -667,5 +667,15 @@
   "emi.category.clayium.ca_condenser": "CA 凝縮機",
   "emi.category.clayium.matter_transformer": "粘土物質変換装置",
   "emi.category.clayium.salt_extractor": "塩析出装置",
-  "emi.category.clayium.chemical_metal_separator": "粘土金属分離機"
+  "emi.category.clayium.chemical_metal_separator": "粘土金属分離機",
+  "tooltip.clayium.machine_replacement": "スプリントキー＋右クリック：互換性のある機械に置き換える",
+  "message.clayium.machine_replacement.busy": "この機械はすでに置換処理中です。",
+  "message.clayium.machine_replacement.block_entity_data": "ブロックデータを保持した機械は置換に使用できません。",
+  "message.clayium.machine_replacement.incompatible": "これらの機械には置換互換性がありません。",
+  "message.clayium.machine_replacement.same_machine": "すでに同じ機械が設置されています。",
+  "message.clayium.machine_replacement.active_recipe_tier": "置換先のTierでは実行中のレシピを継続できません。",
+  "message.clayium.machine_replacement.invalid_structure": "置換すると稼働中のマルチブロック構造が無効になります。",
+  "message.clayium.machine_replacement.canceled": "機械の置換がキャンセルされました。",
+  "message.clayium.machine_replacement.changed": "置換前に機械または手持ちアイテムが変化しました。",
+  "message.clayium.machine_replacement.failed": "機械の置換に失敗したため、元の機械を復元しました。"
 }

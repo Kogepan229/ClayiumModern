@@ -91,6 +91,8 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
     protected final Map<@NotNull Direction, BlockCapabilityCache<IItemHandler, @Nullable Direction>> neighborsItemHandlerCache = new EnumMap<>(
             Direction.class);
 
+    private boolean replacementInventoryDropsSuppressed;
+
     public ClayContainerBlockEntity(@NotNull BlockEntityType<?> type, @NotNull BlockPos pos,
                                     @NotNull BlockState blockState,
                                     @NotNull List<MachineIOMode> validInputModes,
@@ -189,7 +191,8 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
 
     @Nullable
     public IItemHandler getNeighborItemHandler(@NotNull Direction direction) {
-        return this.neighborsItemHandlerCache.get(direction).getCapability();
+        BlockCapabilityCache<IItemHandler, @Nullable Direction> cache = this.neighborsItemHandlerCache.get(direction);
+        return cache == null ? null : cache.getCapability();
     }
 
     @NotNull
@@ -481,6 +484,19 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
     }
 
     @NotNull
+    public final List<IItemHandler> getReplacementInventoryHandlers() {
+        return List.copyOf(this.getInventoryHandlersForDrops());
+    }
+
+    public final boolean areReplacementInventoryDropsSuppressed() {
+        return this.replacementInventoryDropsSuppressed;
+    }
+
+    public final void setReplacementInventoryDropsSuppressed(boolean suppressed) {
+        this.replacementInventoryDropsSuppressed = suppressed;
+    }
+
+    @NotNull
     protected List<IItemHandler> getInventoryHandlersForDrops() {
         List<IItemHandler> inventories = new ArrayList<>();
         inventories.add(this.getInputInventory());
@@ -577,6 +593,22 @@ public abstract class ClayContainerBlockEntity extends BlockEntity implements IM
                     state,
                     Block.UPDATE_CLIENTS);
         }
+    }
+
+    public void finishMachineReplacement() {
+        for (Direction direction : Direction.values()) {
+            if (!this.getCycleValidInputModes(direction).contains(this.inputModes.getMode(direction))) {
+                this.inputModes.setMode(direction, MachineIOMode.NONE);
+            }
+            if (!this.getCycleValidOutputModes(direction).contains(this.outputModes.getMode(direction))) {
+                this.outputModes.setMode(direction, MachineIOMode.NONE);
+            }
+        }
+        this.invalidateItemHandlerCapability();
+        this.notifyItemInputInventoryChanged();
+        this.notifyItemOutputInventoryChanged();
+        this.refreshOverclockFactor();
+        this.setChanged();
     }
 
     public boolean acceptsClayInterfaceSynchronization() {

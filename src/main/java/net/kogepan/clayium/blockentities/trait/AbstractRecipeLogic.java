@@ -384,6 +384,11 @@ public abstract class AbstractRecipeLogic extends ClayContainerTrait {
         return this.processingRecipeHolder != null;
     }
 
+    @Nullable
+    public RecipeHolder<?> getProcessingRecipeHolder() {
+        return this.processingRecipeHolder;
+    }
+
     public float getProgressFraction() {
         if (!this.isProcessingRecipe() || this.processingDuration <= 0L) {
             return 0.0F;
